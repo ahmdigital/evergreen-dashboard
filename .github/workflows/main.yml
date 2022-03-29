@@ -1,0 +1,87 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  PR_lint:
+    name: Pull Request style check
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Pull Request Style Check
+        # You may pin to the exact commit or the version.
+        # uses: maximbircu/pull-request-checkstyle@c28d5560bc74eb67e7a6fd431c3169f5908b8682
+        uses: maximbircu/pull-request-checkstyle@v1.0.0
+        with:
+          # Regex to validate the commit message title (Validates just the first line of the commit message)
+          commit-message-title-regex: ".*" # optional, default is .*
+          # Min commit message title length (Validates just the first line of the commit message)
+          commit-message-title-min-length: 5 # optional, default is 10
+          # Max commit message title length (Validates just the first line of the commit message)
+          commit-message-title-max-length: 180 # optional, default is 72
+          # Regex to validate the branch name
+          branch-name-regex: 'develop|[a-zA-Z0-9-_]+\/[a-zA-Z0-9-_]+' # optional, default is .*
+          # Min branch name length
+          branch-name-min-length: 5 # optional, default is 10
+          # Max branch name length
+          branch-name-max-length: 38 # optional, default is 72
+
+  code_lint:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # VALIDATE_JAVASCRIPT_ES: true
+          VALIDATE_JAVASCRIPT_STANDARD: false
+          VALIDATE_TYPESCRIPT_STANDARD: false
+          VALIDATE_MARKDOWN: false
+          VALIDATE_SQL: false
+          FILTER_REGEX_EXCLUDE: .*.husky.*
+          # Flag to have the linter complete with exit code 0 even if errors were detected.
+          # DISABLE_ERRORS: true
+
+  build:
+    name: Builds and test app
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['14', '16' ]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+
