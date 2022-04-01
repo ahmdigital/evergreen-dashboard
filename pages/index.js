@@ -104,6 +104,34 @@ function depsToJSXList(dependencies, dependencyMap) {
 	return [sortedDeps, minRank];
 };
 
+function depsToInverseJSXList(version, dependencies, dependencyMap) {
+	let deps = [];
+	for (const data of dependencies) {
+		const dependencyData = dependencyMap[data[0]];
+		const str = dependencyData[0] + ": " + data[1];
+		const [colour, borderColour, rank] = getDepColour(data[1], version);
+		const dep = (
+			<li key={str}>
+				<div style={{backgroundColor: colour, padding: 5, border: borderColour}}>
+					{str}
+				</div>
+			</li>
+		);
+		deps.push([rank, dep]);
+	}
+
+	//Sort based on rank, so more out of date repositiories appear near the top
+	deps.sort();
+	let sortedDeps = [];
+	for (const [rank, depList] of deps) {
+		sortedDeps.push(depList);
+	}
+
+	const minRank = deps[0][0]
+
+	return [sortedDeps, minRank];
+};
+
 function repoToJSXList(name, dependencies, dependencyMap) {
 	const [deps, rank] = depsToJSXList(dependencies, dependencyMap);
 	const [colour, borderColour] = rankToDepColour(rank);
@@ -129,6 +157,23 @@ function repoToJSXList(name, dependencies, dependencyMap) {
 		);
 	}
 	return [ret, rank];
+};
+
+function repoToInverseJSXList(id, dependencies, dependencyMap) {
+	const [name, version] = dependencyMap[id]
+	const [deps, rank] = depsToInverseJSXList(version, dependencies, dependencyMap);
+	const [colour, borderColour] = rankToDepColour(rank);
+	let ret = (
+		<li key={name}>
+			<div style={{backgroundColor: colour, padding: 5, border: borderColour}}>
+				<span className={styles.caret}>{name + ", " + deps.length + " user"+ (deps.length == 1 ? "" : "s") +" (" + version + ")"}</span>
+			</div>
+			<ul className={styles.nested}>
+				{deps}
+			</ul>
+		</li>
+	);
+	return [rank, ret];
 };
 
 function jsonToTreeView(cachedData) {
@@ -170,12 +215,34 @@ function jsonToInverseTreeView(cachedData){
 		internalDependencies.add(data.dep);
 	}
 
-	let inverseDeps = Map()
+	let inverseDeps = new Map()
 	for (const data of cachedData[1]) {
-		inverseDeps.
-		internalDependencies.add(data.dep);
+		for(const [depId, depVersion] of data.dependencies){
+			if(!inverseDeps.has(depId)){ inverseDeps.set(depId, []) }
+			inverseDeps.get(depId).push([data.dep, depVersion])
+		}
 	}
-	
+
+	let repos = []
+	for (const [key, value] of inverseDeps) {
+		repos.push(repoToInverseJSXList(key, value, cachedData[0]))
+	}
+
+	repos.sort()
+	let sortedRepos = []
+	for (const data of repos) {
+		sortedRepos.push(data[1])
+	}
+
+	return (
+		<ul className={styles.treeView}>
+			<li><span className={styles.caret}>Inverse</span>
+				<ul className={styles.nested}>
+					{sortedRepos}
+				</ul>
+			</li>
+		</ul>
+	);
 }
 
 export default function Home() {
@@ -203,13 +270,21 @@ export default function Home() {
 			<Head>
 				<title>Evergreen dashboard</title>
 			</Head>
-			<main>
+			<main style={{padding: 10}}>
 				<h1 className="title" style={{padding: 10}}>
 					evergreen
 				</h1>
 				<Layout>
-					<div style={{height: "max-content", width: "calc(100vw - 64px)", border: ".5rem solid #000", padding: 10}}>
+					<div style={{justifyContent: "center", height: "max-content", width: "calc(100vw - 64px)", border: ".5rem solid #000",  borderBottom: "none", padding: 10}}>
 						{jsonToTreeView(cachedData)}
+					</div>
+				</Layout>
+				<Layout>
+				<div style={{justifyContent: "center", height: "max-content", width: "calc(100vw - 32px - 0.25rem)", border: ".25rem solid #000"}}></div>
+				</Layout>
+				<Layout>
+					<div style={{justifyContent: "center", height: "max-content", width: "calc(100vw - 64px)", border: ".5rem solid #000",  borderTop: "none", padding: 10}}>
+						{jsonToInverseTreeView(cachedData)}
 					</div>
 				</Layout>
 			</main>

@@ -1,7 +1,6 @@
 .main {
 	display: flex;
 	justify-content: center;
-	height: calc(100vh - 64px);
 	background-color: white;
   }
   
