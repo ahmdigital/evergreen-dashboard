@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Layout from '../components/layout'
+import Layout from '../components/layout';
 import Script from "next/script";
 import styles from '../components/treeView.module.css';
 import React from 'react';
@@ -83,14 +83,14 @@ function depsToJSXList(dependencies, dependencyMap) {
 	internalDeps.sort();
 	externalDeps.sort();
 	let sortedDeps = [];
-	if(internalDeps.length > 0){
-		sortedDeps.push(<li>Internal:</li>)
+	if (internalDeps.length > 0) {
+		sortedDeps.push(<li key="Internal">Internal:</li>);
 		for (const [rank, depList] of internalDeps) {
 			sortedDeps.push(depList);
 		}
 	}
-	if(externalDeps.length > 0){
-		sortedDeps.push(<li>External:</li>)
+	if (externalDeps.length > 0) {
+		sortedDeps.push(<li key="External">External:</li>);
 		for (const [rank, depList] of externalDeps) {
 			sortedDeps.push(depList);
 		}
@@ -111,7 +111,7 @@ function depsToInverseJSXList(version, dependencies, dependencyMap) {
 		const str = dependencyData[0] + ": " + data[1];
 		const [colour, borderColour, rank] = getDepColour(data[1], version);
 		const dep = (
-			<li key={str}>
+			<li key={"inverse" + str}>
 				<div style={{backgroundColor: colour, padding: 5, border: borderColour}}>
 					{str}
 				</div>
@@ -127,7 +127,7 @@ function depsToInverseJSXList(version, dependencies, dependencyMap) {
 		sortedDeps.push(depList);
 	}
 
-	const minRank = deps[0][0]
+	const minRank = deps[0][0];
 
 	return [sortedDeps, minRank];
 };
@@ -160,13 +160,13 @@ function repoToJSXList(name, dependencies, dependencyMap) {
 };
 
 function repoToInverseJSXList(id, dependencies, dependencyMap) {
-	const [name, version] = dependencyMap[id]
+	const [name, version] = dependencyMap[id];
 	const [deps, rank] = depsToInverseJSXList(version, dependencies, dependencyMap);
 	const [colour, borderColour] = rankToDepColour(rank);
 	let ret = (
-		<li key={name}>
+		<li key={"inverse" + name}>
 			<div style={{backgroundColor: colour, padding: 5, border: borderColour}}>
-				<span className={styles.caret}>{name + ", " + deps.length + " user"+ (deps.length == 1 ? "" : "s") +" (" + version + ")"}</span>
+				<span className={styles.caret}>{name + ", " + deps.length + " user" + (deps.length == 1 ? "" : "s") + " (" + version + ")"}</span>
 			</div>
 			<ul className={styles.nested}>
 				{deps}
@@ -209,29 +209,29 @@ function jsonToTreeView(cachedData) {
 	);
 }
 
-function jsonToInverseTreeView(cachedData){
+function jsonToInverseTreeView(cachedData) {
 	//Populate internal dependencies, which is used for sorting at lower levels
 	for (const data of cachedData[1]) {
 		internalDependencies.add(data.dep);
 	}
 
-	let inverseDeps = new Map()
+	let inverseDeps = new Map();
 	for (const data of cachedData[1]) {
-		for(const [depId, depVersion] of data.dependencies){
-			if(!inverseDeps.has(depId)){ inverseDeps.set(depId, []) }
-			inverseDeps.get(depId).push([data.dep, depVersion])
+		for (const [depId, depVersion] of data.dependencies) {
+			if (!inverseDeps.has(depId)) {inverseDeps.set(depId, []);}
+			inverseDeps.get(depId).push([data.dep, depVersion]);
 		}
 	}
 
-	let repos = []
+	let repos = [];
 	for (const [key, value] of inverseDeps) {
-		repos.push(repoToInverseJSXList(key, value, cachedData[0]))
+		repos.push(repoToInverseJSXList(key, value, cachedData[0]));
 	}
 
-	repos.sort()
-	let sortedRepos = []
+	repos.sort();
+	let sortedRepos = [];
 	for (const data of repos) {
-		sortedRepos.push(data[1])
+		sortedRepos.push(data[1]);
 	}
 
 	return (
@@ -239,6 +239,91 @@ function jsonToInverseTreeView(cachedData){
 			<li><span className={styles.caret}>Inverse</span>
 				<ul className={styles.nested}>
 					{sortedRepos}
+				</ul>
+			</li>
+		</ul>
+	);
+}
+
+function jsonToDualTreeView(cachedData) {
+	//Populate internal dependencies, which is used for sorting at lower levels
+	let depTree = new Map();
+	for (const data of cachedData[1]) {
+		internalDependencies.add(data.dep);
+		depTree.set(data.dep,
+			{
+				up: [],
+				down: []
+			}
+		);
+	}
+
+	let inverseDeps = new Map();
+	for (const data of cachedData[1]) {
+		for (const [depId, depVersion] of data.dependencies) {
+			if (!inverseDeps.has(depId)) {inverseDeps.set(depId, []);}
+			inverseDeps.get(depId).push([data.dep, depVersion]);
+		}
+	}
+
+	for (const [key, value] of inverseDeps) {
+		const [name, version] = cachedData[0][key];
+		const [deps, rank] = depsToInverseJSXList(version, value, cachedData[0]);
+		if (!depTree.has(key)) {
+			depTree.set(key,
+				{
+					up: [],
+					down: []
+				}
+			);
+		}
+		depTree.get(key).up = deps;
+		//reposI.push(repoToInverseJSXList(key, value, cachedData[0]))
+	}
+
+	for (const data of cachedData[1]) {
+		const [deps, rank] = depsToJSXList(data.dependencies, cachedData[0]);
+		if (!depTree.has(data.dep)) {
+			depTree.set(key,
+				{
+					up: [],
+					down: []
+				}
+			);
+		}
+		depTree.get(data.dep).down = deps;
+	}
+
+	let htmlDepTree = [];
+	for (const [key, val] of depTree) {
+		const name = cachedData[0][key];
+		//<div style={{backgroundColor: colour, padding: 5, border: borderColour}}>
+		htmlDepTree.push(
+			<li key={"depTree" + name}>
+				<div>
+					<span className={styles.caret}>{name}</span>
+				</div>
+				<ul className={styles.nested}>
+					<div style={{display: "flex", padding: "10px"}}>
+						<div style={{width: "calc(45vw - 64px)"}}>
+							{val.down}
+						</div>
+						<div style={{width: "64px"}}></div>
+						<div style={{width: "calc(45vw - 64px)"}}>
+							<li key="Users">Users:</li>
+							{val.up}
+						</div>
+					</div>
+				</ul>
+			</li>
+		)
+	}
+
+	return (
+		<ul className={styles.treeView}>
+			<li><span className={styles.caret}>Both</span>
+				<ul className={styles.nested}>
+					{htmlDepTree}
 				</ul>
 			</li>
 		</ul>
@@ -266,25 +351,33 @@ export default function Home() {
 					})
 				}
 			`}</Script>
-			
+
 			<Head>
 				<title>Evergreen dashboard</title>
 			</Head>
 			<main style={{padding: 10}}>
-				<h1 className="title" style={{padding: 10}}>
+				<h1 className="title" style={{padding: 10, fontWeight: 600}}>
 					evergreen
 				</h1>
 				<Layout>
-					<div style={{justifyContent: "center", height: "max-content", width: "calc(100vw - 64px)", border: ".5rem solid #000",  borderBottom: "none", padding: 10}}>
+					<div style={{justifyContent: "center", height: "max-content", width: "calc(100vw - 64px)", border: ".5rem solid #000", borderBottom: "none", padding: 10}}>
 						{jsonToTreeView(cachedData)}
 					</div>
 				</Layout>
 				<Layout>
-				<div style={{justifyContent: "center", height: "max-content", width: "calc(100vw - 32px - 0.25rem)", border: ".25rem solid #000"}}></div>
+					<div style={{justifyContent: "center", height: "max-content", width: "calc(100vw - 32px - 0.25rem)", border: ".25rem solid #000"}}></div>
 				</Layout>
 				<Layout>
-					<div style={{justifyContent: "center", height: "max-content", width: "calc(100vw - 64px)", border: ".5rem solid #000",  borderTop: "none", padding: 10}}>
+					<div style={{justifyContent: "center", height: "max-content", width: "calc(100vw - 64px)", border: ".5rem solid #000", borderTop: "none", borderBottom: "none", padding: 10}}>
 						{jsonToInverseTreeView(cachedData)}
+					</div>
+				</Layout>
+				<Layout>
+					<div style={{justifyContent: "center", height: "max-content", width: "calc(100vw - 32px - 0.25rem)", border: ".25rem solid #000"}}></div>
+				</Layout>
+				<Layout>
+					<div style={{justifyContent: "center", height: "max-content", width: "calc(100vw - 64px)", border: ".5rem solid #000", borderTop: "none", padding: 10}}>
+						{jsonToDualTreeView(cachedData)}
 					</div>
 				</Layout>
 			</main>
