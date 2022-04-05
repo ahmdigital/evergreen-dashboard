@@ -28,10 +28,15 @@ jobs:
         with:
           terraform_wrapper: false
 
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: nextjs-build
+          path: .next/
+          
       - name: run bootstrap script
         run: |
-          chmod +x "${GITHUB_WORKSPACE}/terraform/bootstrap.sh"
-          "${GITHUB_WORKSPACE}/terraform/bootstrap.sh"
+          zip -ur --must-match ../eb_app.zip ../package.json ../.next
         shell: bash
 
       - name: Terraform fmt
