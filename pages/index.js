@@ -63,8 +63,8 @@ function depsToJSXList(dependencies, dependencyMap) {
 	let externalDeps = [];
 	for (const data of dependencies) {
 		const dependencyData = dependencyMap[data[0]];
-		const str = dependencyData[0] + ": " + data[1] + ' -> ' + dependencyData[1];
-		const [colour, borderColour, rank] = getDepColour(data[1], dependencyData[1]);
+		const str = dependencyData.name + ": " + data[1] + ' -> ' + dependencyData.version;
+		const [colour, borderColour, rank] = getDepColour(data[1], dependencyData.version);
 		const dep = (
 			<li key={str}>
 				<div style={{backgroundColor: colour, padding: 5, border: borderColour}}>
@@ -108,7 +108,7 @@ function depsToInverseJSXList(version, dependencies, dependencyMap) {
 	let deps = [];
 	for (const data of dependencies) {
 		const dependencyData = dependencyMap[data[0]];
-		const str = dependencyData[0] + ": " + data[1];
+		const str = dependencyData.name + ": " + data[1];
 		const [colour, borderColour, rank] = getDepColour(data[1], version);
 		const dep = (
 			<li key={"inverse" + str}>
@@ -160,13 +160,13 @@ function repoToJSXList(name, dependencies, dependencyMap) {
 };
 
 function repoToInverseJSXList(id, dependencies, dependencyMap) {
-	const [name, version] = dependencyMap[id];
-	const [deps, rank] = depsToInverseJSXList(version, dependencies, dependencyMap);
+	const data = dependencyMap[id];
+	const [deps, rank] = depsToInverseJSXList(data.version, dependencies, dependencyMap);
 	const [colour, borderColour] = rankToDepColour(rank);
 	let ret = (
-		<li key={"inverse" + name}>
+		<li key={"inverse" + data.name}>
 			<div style={{backgroundColor: colour, padding: 5, border: borderColour}}>
-				<span className={styles.caret}>{name + ", " + deps.length + " user" + (deps.length == 1 ? "" : "s") + " (" + version + ")"}</span>
+				<span className={styles.caret}>{data.name + ", " + deps.length + " user" + (deps.length == 1 ? "" : "s") + " (" + data.version + ")"}</span>
 			</div>
 			<ul className={styles.nested}>
 				{deps}
@@ -185,7 +185,7 @@ function jsonToTreeView(cachedData) {
 	let repos = [];
 	let ranks = [0, 0, 0];
 	for (const data of cachedData[1]) {
-		const [repoList, rank] = repoToJSXList(cachedData[0][data.dep][0], data.dependencies, cachedData[0]);
+		const [repoList, rank] = repoToJSXList(cachedData[0][data.dep].name, data.dependencies, cachedData[0]);
 		repos.push([rank, repoList]);
 		ranks[rank] += 1;
 	}
@@ -267,8 +267,8 @@ function jsonToDualTreeView(cachedData) {
 	}
 
 	for (const [key, value] of inverseDeps) {
-		const [name, version] = cachedData[0][key];
-		const [deps, rank] = depsToInverseJSXList(version, value, cachedData[0]);
+		const data = cachedData[0][key];
+		const [deps, rank] = depsToInverseJSXList(data.version, value, cachedData[0]);
 		if (!depTree.has(key)) {
 			depTree.set(key,
 				{
@@ -296,7 +296,7 @@ function jsonToDualTreeView(cachedData) {
 
 	let htmlDepTree = [];
 	for (const [key, val] of depTree) {
-		const name = cachedData[0][key];
+		const name = cachedData[0][key].name;
 		//<div style={{backgroundColor: colour, padding: 5, border: borderColour}}>
 		htmlDepTree.push(
 			<li key={"depTree" + name}>
