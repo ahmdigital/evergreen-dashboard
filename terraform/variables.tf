@@ -1,19 +1,19 @@
 # varaibles can change at runtime
 
 variable "region" {
-    description = "Amazon region"
-    type = string
-    default = "ap-southeast-2"
+  description = "Amazon region"
+  type        = string
+  default     = "ap-southeast-2"
 }
 
 variable "app_name" {
-    type = string
-    default = "ever-green"
+  type    = string
+  default = "ever-green"
 }
 
 variable "app_description" {
-    type = string
-    default = "Monitorign Github orgnization health"
+  type    = string
+  default = "Monitorign Github orgnization health"
 }
 
 variable "instance_type" {
