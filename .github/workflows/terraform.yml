@@ -34,7 +34,8 @@ jobs:
           
       - name: run bootstrap script
         run: |
-          zip -ur --must-match ../eb_app.zip ../package.json ../.next
+          zip -ur --must-match eb_app.zip ../package.json ../.next
+          ls -lha
         shell: bash
 
       - name: Terraform fmt
