@@ -82,7 +82,7 @@ resource "aws_s3_object" "eb_app" {
   source = local.achive_path
 }
 
-resource "aws_s3_bucket_versioning" "versioning_example" {
+resource "aws_s3_bucket_versioning" "this" {
   bucket = aws_s3_bucket.eb_app.id
   versioning_configuration {
     status = "Enabled"
