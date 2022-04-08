@@ -1,8 +1,9 @@
 import React from 'react'
+import CollapsibleTable from '../components/CollapsibleTable'
 
 const home = () => {
   return (
-    <div>HOME</div>
+    <div><CollapsibleTable/></div>
   )
 }
 
