@@ -1,0 +1,12 @@
+#__next {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+  }
+  
+  body {
+	margin: 0;
+	font-size: 20px;
+	font-family: proxima-nova, 'Helvetica Neue', 'Helvetica Arial',
+	  Arial, sans-serif, 'Segoe UI', 'Segoe UI Symbol';
+  }

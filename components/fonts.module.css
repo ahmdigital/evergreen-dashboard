@@ -1,0 +1,48 @@
+@font-face {
+	font-display: fallback;
+	font-family: 'proxima-nova';
+	font-style: normal;
+	font-weight: 100;
+	src: url('proximanova-thin.woff2') format('woff2'), url('proximanova-thin.woff') format('woff');
+  }
+  
+  @font-face {
+	font-display: fallback;
+	font-family: 'proxima-nova';
+	font-style: normal;
+	font-weight: 400;
+	src: url('proximanova-regular.woff2') format('woff2'), url('proximanova-regular.woff') format('woff');
+  }
+  
+  @font-face {
+	font-display: fallback;
+	font-family: 'proxima-nova';
+	font-style: italic;
+	font-weight: 400;
+	src: url('proximanova-regularit.woff2') format('woff2'), url('proximanova-regularit.woff') format('woff');
+  }
+  
+  @font-face {
+	font-display: fallback;
+	font-family: 'proxima-nova';
+	font-style: normal;
+	font-weight: 800;
+	src: url('proximanova-extrabold.woff2') format('woff2'), url('proximanova-extrabold.woff') format('woff');
+  }
+  
+  @font-face {
+	font-display: fallback;
+	font-family: 'simple-bit';
+	font-style: normal;
+	font-weight: 400;
+	src: url('simplebit-regular.woff2') format('woff2'), url('simplebit-regular.woff') format('woff');
+  }
+  
+  @font-face {
+	font-display: fallback;
+	font-family: 'simple-bit';
+	font-style: normal;
+	font-weight: 700;
+	src: url('simplebit-bold.woff2') format('woff2'), url('simplebit-bold.woff') format('woff');
+  }
+  
