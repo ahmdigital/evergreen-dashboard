@@ -8,7 +8,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -50,6 +49,7 @@ const rows = [
   ),
 ];
 
+// Creates each invidial row
 const Row = (props: { row: ReturnType<typeof createData> }) => {
   const { row } = props;
   const [open, setOpen] = useState(false);
@@ -97,18 +97,13 @@ const Row = (props: { row: ReturnType<typeof createData> }) => {
   );
 };
 
+// Creates the whole table based on sample data 
 const CollapsibleTable = () => {
   return (
     <div>
       <TableContainer component={Paper}>
         <Table aria-label="collapsible table">
           <TableHead>
-            <TableRow>
-              <TableCell align="left"></TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Version</TableCell>
-              <TableCell align="right">Link</TableCell>
-            </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row) => (
