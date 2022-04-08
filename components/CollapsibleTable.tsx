@@ -17,46 +17,6 @@ import Tabs from "./Tabs";
 
 import Row from "./Row"
 
-// function createData(name: string, version: string, link: string) {
-// 	{
-// 		return {
-// 			name,
-// 			version,
-// 			link,
-// 		};
-// 	}
-// }
-
-// // Sample data for the table
-// const rows = [
-// 	createData(
-// 		"@octokit/app",
-// 		"12.0.5",
-// 		"https://github.com/octokit/app.js/tree/master"
-// 	),
-// 	createData(
-// 		"@octokit/core",
-// 		"3.6.0",
-// 		"https://github.com/octokit/core.js/tree/master"
-// 	),
-// 	createData(
-// 		"@octokit/oauth-app",
-// 		"3.6.0",
-// 		"https://github.com/octokit/oauth-app.js/tree/master"
-// 	),
-// 	createData(
-// 		"@octokit/plugin-paginate-rest",
-// 		"2.17.0",
-// 		"https://github.com/octokit/plugin-paginate-rest.js/tree/master"
-// 	),
-// ];
-
-// // Creates the whole table based on sample data 
-// const CollapsibleTable = () => {
-// 	const x = rows.map((row) => (<Row key={row.name} row={row} />))
-// 	return makeCollapsibleTable(x)
-// };
-
 // Creates the whole table based on sample data 
 const CollapsibleTable = (rows: JSX.Element[]) => {
 	return (
