@@ -45,9 +45,9 @@ function externalLinkJSX(data){
 function getDepColour(usedVersion, currentVersion) {
 	const used = semVerFromString(usedVersion);
 	const current = semVerFromString(currentVersion);
-	if (used.major + 2 < current.major) {
+	if (used.major < current.major) {
 		return [Colours.red, Colours.redBorder, 0];
-	} else if (used.major < current.major || used.minor + 5 < current.minor) {
+	} else if (used.minor + 5 < current.minor) {
 		return [Colours.orange, Colours.orangeBorder, 1];
 	}
 	return [Colours.green, Colours.greenBorder, 2];
