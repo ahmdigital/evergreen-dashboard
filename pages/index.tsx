@@ -38,12 +38,16 @@ function semVerFromString(semVer) {
 	};
 }
 
+function externalLinkJSX(data){
+	return <span style={{float: "right"}}>(<a target="_blank" href={data.link}>GitHub</a>)</span>
+}
+
 function getDepColour(usedVersion, currentVersion) {
 	const used = semVerFromString(usedVersion);
 	const current = semVerFromString(currentVersion);
-	if (used.major + 2 < current.major) {
+	if (used.major < current.major) {
 		return [Colours.red, Colours.redBorder, 0];
-	} else if (used.major < current.major || used.minor + 5 < current.minor) {
+	} else if (used.minor + 5 < current.minor) {
 		return [Colours.orange, Colours.orangeBorder, 1];
 	}
 	return [Colours.green, Colours.greenBorder, 2];
@@ -132,15 +136,17 @@ function depsToInverseJSXList(version, dependencies, dependencyMap) {
 	return [sortedDeps, minRank];
 };
 
-function repoToJSXList(name, dependencies, dependencyMap) {
+function repoToJSXList(data, dependencies, dependencyMap) {
 	const [deps, rank] = depsToJSXList(dependencies, dependencyMap);
 	const [colour, borderColour] = rankToDepColour(rank);
+	const name = data.name;
 	let ret;
 	if (deps.length != 0) {
 		ret = (
 			<li key={name}>
 				<div style={{backgroundColor: colour, padding: 5, border: borderColour}}>
 					<span className={styles.caret}>{name}</span>
+					{externalLinkJSX(data)}
 				</div>
 				<ul className={styles.nested}>
 					{deps}
@@ -151,7 +157,8 @@ function repoToJSXList(name, dependencies, dependencyMap) {
 		ret = (
 			<li key={name}>
 				<div style={{backgroundColor: Colours.green, padding: 5, border: Colours.greenBorder}}>
-					<ul>{name}</ul>
+					<span style={{margin:0}}>{name}</span>
+					{externalLinkJSX(data)}
 				</div>
 			</li>
 		);
@@ -167,6 +174,7 @@ function repoToInverseJSXList(id, dependencies, dependencyMap) {
 		<li key={"inverse" + data.name}>
 			<div style={{backgroundColor: colour, padding: 5, border: borderColour}}>
 				<span className={styles.caret}>{data.name + ", " + deps.length + " user" + (deps.length == 1 ? "" : "s") + " (" + data.version + ")"}</span>
+				{externalLinkJSX(data)}
 			</div>
 			<ul className={styles.nested}>
 				{deps}
@@ -185,7 +193,7 @@ function jsonToTreeView(cachedData) {
 	let repos = [];
 	let ranks = [0, 0, 0];
 	for (const data of cachedData[1]) {
-		const [repoList, rank] = repoToJSXList(cachedData[0][data.dep].name, data.dependencies, cachedData[0]);
+		const [repoList, rank] = repoToJSXList(cachedData[0][data.dep], data.dependencies, cachedData[0]);
 		repos.push([rank, repoList]);
 		ranks[rank] += 1;
 	}
@@ -296,12 +304,14 @@ function jsonToDualTreeView(cachedData) {
 
 	let htmlDepTree = [];
 	for (const [key, val] of depTree) {
-		const name = cachedData[0][key].name;
+		const data = cachedData[0][key]
+		const name = data.name;
 		//<div style={{backgroundColor: colour, padding: 5, border: borderColour}}>
 		htmlDepTree.push(
 			<li key={"depTree" + name}>
 				<div>
 					<span className={styles.caret}>{name}</span>
+					{externalLinkJSX(data)}
 				</div>
 				<ul className={styles.nested}>
 					<div style={{display: "flex", padding: "10px"}}>
