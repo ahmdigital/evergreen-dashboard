@@ -17,10 +17,12 @@ const useStyles = makeStyles({
 		fontWeight: 'normal',
 		fontSize: 20,
     fontFamily: 'Noto Sans, sans-serif',
-    borderBottom: 'rgb(161 161 161)',
+    
 	},
   tableRow:{
     width: "100vw",
+    backgroundColor: '#FFA9A9',
+    borderBottom: '#AAAAAA'
   }
 })
 

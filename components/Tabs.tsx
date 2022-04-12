@@ -31,17 +31,18 @@ const theme = createTheme({
         textColorPrimary: {
           "&.Mui-selected": {
             color: "#000000",
-          }
+          },
         },
         root: {
-          textTransform: 'none',
+          textTransform: "none",
           fontWeight: "bold",
-        fontSize: 20,
-        fontFamily: "Noto Sans, sans-serif",
-         },
+          fontSize: 20,
+          fontFamily: "Noto Sans, sans-serif",
+        },
         textColorSecondary: {
           color: "#eeeee4",
-          textTransform: 'none',
+          textTransform: "none",
+          fontWeight: "normal",
         },
       },
     },
