@@ -19,23 +19,24 @@ const Borders = {
 
 const DividingBar = (
 	<Layout>
-		<div style={{ justifyContent: "center", height: "max-content", width: "100vw", border: Borders.blackHalved }}></div>
+		<div style={{ justifyContent: "center", height: "max-content", width: "85.5vw", border: Borders.blackHalved }}></div>
 	</Layout>
 )
 
 const TopBarStyle = {
 	justifyContent: "center",
 	height: "max-content",
-	width: "100vw",
+	width: "85vw",
 	border: Borders.black,
 	borderBottom: "none",
-	padding: 0
+	padding: 0,
+	marginTop: '2rem'
 }
 
 const MiddleBarStyle = {
 	justifyContent: "center",
 	height: "max-content",
-	width: "100vw",
+	width: "85vw",
 	border: Borders.black,
 	borderTop: "none",
 	borderBottom: "none",
@@ -45,7 +46,7 @@ const MiddleBarStyle = {
 const BottomBarStyle = {
 	justifyContent: "center",
 	height: "max-content",
-	width: "100vw",
+	width: "85vw",
 	border: Borders.black,
 	borderTop: "none",
 	padding: 0

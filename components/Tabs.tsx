@@ -84,7 +84,6 @@ const Tabs = () => {
             onChange={handleChange}
             aria-label="basic tabs example"
             TabIndicatorProps={{ className: classes.indicator }}
-            className={classes.tabValue}
           >
             <Tab label="Internal" />
             <Tab label="External" />
