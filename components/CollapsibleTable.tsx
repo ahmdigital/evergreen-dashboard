@@ -17,6 +17,8 @@ import Tabs from "./Tabs";
 
 import Row from "./Row"
 
+import {ID, DependencyData} from "./dataProcessing"
+
 // Creates the whole table based on sample data 
 const CollapsibleTable = (rows: JSX.Element[]) => {
 	return (
@@ -46,9 +48,30 @@ const CollapsibleTable = (rows: JSX.Element[]) => {
 	);
 };
 
-const makeCollapsibleTable = (JSObject: [Map<number, any>, any] ) => {
+const makeCollapsibleTable = (JSObject: DependencyData) => {
 	//TODO: Rather than taking in the raw objet, take a structure that can be directly converted into JSX
-	return CollapsibleTable( Object.entries(JSObject[0]).map(([id, row]) => (<Row key={row.name} row={row} />)));
+	const depInfos = JSObject.depMap
+	let rowList = []
+	depInfos.forEach(element => rowList.push(<Row key={element.name} row={element} />))
+	
+return CollapsibleTable(rowList);
+	// return CollapsibleTable( 
+	// 	Object.entries(JSObject.depMap).map(([id, row]) => (<Row key={row.name} row={row} />)));
+	
+		
+	// console.log(JSObject)
+	
+	// const row = {
+	// 	name: "@octokit/core",
+	// 	version: "3.6.0",
+	// 	link: "https://github.com/octokit/core.js/tree/master",
+	// 	internal: true,
+	// 	archived: false,
+	//   }
+	// return (
+	// CollapsibleTable([<Row key={"d"} row={row}/>])
+	// )
+	
 };
 
 export default makeCollapsibleTable;

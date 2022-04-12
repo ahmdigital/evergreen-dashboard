@@ -69,7 +69,8 @@ const TabPanel = (props: TabPanelProps) => {
   );
 };
 
-const Tabs = () => {
+const Tabs = (props) => {
+  const {external, internal} = props;
   const [tabVal, setTabVal] = useState(0);
   const classes = useStyles();
   const handleChange = (event: SyntheticEvent, newValue: number) => {
@@ -92,10 +93,10 @@ const Tabs = () => {
         </ThemeProvider>
       </Box>
       <TabPanel value={tabVal} index={0}>
-        Some Internal data
+        {internal}
       </TabPanel>
       <TabPanel value={tabVal} index={1}>
-        Some External data
+        {external}
       </TabPanel>
     </Box>
   );

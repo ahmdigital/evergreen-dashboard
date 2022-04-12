@@ -1,39 +1,46 @@
 import React from 'react'
+import { json } from 'stream/consumers';
 import styles from '../components/treeView.module.css';
 import { Colours } from './Colours';
 
-let internalDependencies = new Set();
+let internalDependencies = new Set<ID>();
 
-//TODO: (Entier file) Split the JSX from the structure creation
+//TODO: (Entire file) Split the JSX from the structure creation
 
-function semVerFromString(semVer) {
-	let skipMinor = false;
-	let skipBug = false;
+export type SemVer = {
+	major: number;
+	minor: number;
+	bug: number;
+	skipMinor: boolean;
+	skipBug: boolean;
+};
+
+export function semVerFromString(semVer: string): SemVer {
+	let skipMinor = false
+	let skipBug = false
 	if (semVer[0] == '^') {
 		semVer = semVer.substring(1);
-		skipMinor = true;
-		skipBug = true;
+		skipMinor = true
+		skipBug = true
 	} else if (semVer[0] == '~') {
-		semVer = semVer.substring(1);
-		skipBug = true;
+		semVer = semVer.substring(1)
+		skipBug = true
 	}
-	semVer = semVer.split(".");
+	const parts = semVer.split(".")
 	return {
 		major: parseInt(semVer[0]),
 		minor: parseInt(semVer[1]),
 		bug: parseInt(semVer[2]),
 		skipMinor: skipMinor,
 		skipBug: skipBug
-	};
+	}
 }
 
-function externalLinkJSX(data) {
+function externalLinkJSX(data: any): JSX.Element {
 	return <span style={{ float: "right" }}>(<a target="_blank" href={data.link}>GitHub</a>)</span>
 }
 
-function getDepColour(usedVersion, currentVersion) {
-	const used = semVerFromString(usedVersion);
-	const current = semVerFromString(currentVersion);
+function getDepColour(used: SemVer, current: SemVer): [string, string, number] {
 	if (used.major < current.major) {
 		return [Colours.red, Colours.redBorder, 0];
 	} else if (used.minor + 5 < current.minor) {
@@ -42,7 +49,7 @@ function getDepColour(usedVersion, currentVersion) {
 	return [Colours.green, Colours.greenBorder, 2];
 }
 
-function rankToDepColour(rank) {
+function rankToDepColour(rank: number): [string, string, number] {
 	if (rank == 0) {
 		return [Colours.red, Colours.redBorder, 0];
 	} else if (rank == 1) {
@@ -51,12 +58,12 @@ function rankToDepColour(rank) {
 	return [Colours.green, Colours.greenBorder, 2];
 }
 
-function depsToJSXList(dependencies, dependencyMap) {
+function depsToJSXList(dependencies: DependencyList, dependencyMap: DependencyMap) {
 	let internalDeps = [];
 	let externalDeps = [];
 	for (const data of dependencies) {
-		const dependencyData = dependencyMap[data[0]];
-		const str = dependencyData.name + ": " + data[1] + ' -> ' + dependencyData.version;
+		const dependencyData = dependencyMap[data.id]
+		const str = dependencyData.name + ": " + data[1] + ' -> ' + dependencyData.version
 		const [colour, borderColour, rank] = getDepColour(data[1], dependencyData.version);
 		const dep = (
 			<li key={str}>
@@ -125,6 +132,9 @@ function depsToInverseJSXList(version, dependencies, dependencyMap) {
 	return [sortedDeps, minRank];
 };
 
+// LIBRARY SECTION: list all libraries and the internal and external dependencies it has/ depends on 
+// INVERSE SECTION: list all libraries and what other libs/dependencies that use this dependency - the inverse tab section
+
 function repoToJSXList(data, dependencies, dependencyMap) {
 	const [deps, rank] = depsToJSXList(dependencies, dependencyMap);
 	const [colour, borderColour] = rankToDepColour(rank);
@@ -155,7 +165,7 @@ function repoToJSXList(data, dependencies, dependencyMap) {
 	return [ret, rank];
 };
 
-function repoToInverseJSXList(id, dependencies, dependencyMap) {
+function repoToInverseJSXList(id: ID, dependencies: DependencyList, dependencyMap: DependencyMap) {
 	const data = dependencyMap[id];
 	const [deps, rank] = depsToInverseJSXList(data.version, dependencies, dependencyMap);
 	const [colour, borderColour] = rankToDepColour(rank);
@@ -172,17 +182,19 @@ function repoToInverseJSXList(id, dependencies, dependencyMap) {
 	);
 	return [rank, ret];
 };
+// All libraries - all repos table
 
-export function jsonToTreeView(cachedData) {
+
+export function jsonToTreeView(cachedData: DependencyData) {
 	//Populate internal dependencies, which is used for sorting at lower levels
-	for (const data of cachedData[1]) {
-		internalDependencies.add(data.dep);
+	for (const data of cachedData.deps) {
+		internalDependencies.add(data.id);
 	}
 
 	let repos = [];
 	let ranks = [0, 0, 0];
-	for (const data of cachedData[1]) {
-		const [repoList, rank] = repoToJSXList(cachedData[0][data.dep], data.dependencies, cachedData[0]);
+	for (const data of cachedData.deps) {
+		const [repoList, rank] = repoToJSXList(cachedData.depMap[data.id], data.dependencies, cachedData.depMap);
 		repos.push([rank, repoList]);
 		ranks[rank] += 1;
 	}
@@ -203,26 +215,28 @@ export function jsonToTreeView(cachedData) {
 				</ul>
 			</li>
 		</ul>
-	);
+	)
+// Inverse deps - finds the users of a dependency/library
+// goes through cache data and loops through each ID	);
 }
 
-export function jsonToInverseTreeView(cachedData) {
+export function jsonToInverseTreeView(cachedData: DependencyData) {
 	//Populate internal dependencies, which is used for sorting at lower levels
-	for (const data of cachedData[1]) {
-		internalDependencies.add(data.dep);
+	for (const data of cachedData.deps) {
+		internalDependencies.add(data.id);
 	}
 
-	let inverseDeps = new Map();
-	for (const data of cachedData[1]) {
-		for (const [depId, depVersion] of data.dependencies) {
-			if (!inverseDeps.has(depId)) { inverseDeps.set(depId, []); }
-			inverseDeps.get(depId).push([data.dep, depVersion]);
+	let inverseDeps = new Map<ID, any>();
+	for (const data of cachedData.deps) {
+		for (const v of data.dependencies) {
+			if (!inverseDeps.has(v.id)) { inverseDeps.set(v.id, []); }
+			inverseDeps.get(v.id).push([data.id, v.version]);
 		}
 	}
 
 	let repos = [];
 	for (const [key, value] of inverseDeps) {
-		repos.push(repoToInverseJSXList(key, value, cachedData[0]));
+		repos.push(repoToInverseJSXList(key, value, cachedData.depMap));
 	}
 
 	repos.sort();
@@ -238,8 +252,10 @@ export function jsonToInverseTreeView(cachedData) {
 					{sortedRepos}
 				</ul>
 			</li>
-		</ul>
-	);
+	
+	</ul>
+	)
+// BOTH SECTION: LIST ALL libraries and includes both Library and INVERSE View 	);
 }
 
 export function jsonToDualTreeView(cachedData) {
@@ -329,11 +345,55 @@ export function jsonToDualTreeView(cachedData) {
 	);
 }
 
-export function JSObjectFromJSON(jsonData): [Map<number, any>, any] {
+export type ID = number & { __brand: "ID"}
+
+// Parameter: jsonData JSON cachesdata format
+// Return: 
+export function JSObjectFromJSON(jsonData0: Map<number, any>, jsonData1: {dep: number, dependencies: [number, string][]}[]):
+{
+	depMap: Map<ID,  {name: string, version: SemVer, link: string, internal: boolean, archived: boolean}>,
+	deps: {id: ID, dependencies: {id: ID, version: SemVer}[]}[]
+}{
 	/*
 		TODO: Give the dependency map and the dependency array proper names (currently these are index 0 and 1 respectively)
-		TODO: Look into demapping the dependencies (I think JavaScript/TypeScript will use references. If it makes copies then we have to leave demapping until right before display).
+		(This is indeed the case): Look into demapping the dependencies (I think JavaScript/TypeScript will use references. If it makes copies then we have to leave demapping until right before display).
 	*/
 
-	return jsonData;
+	// CREATING NEW DEPENDENCY MAP
+	let betterMap = new Map<ID, any>();
+	for(const [id, data] of jsonData0 as Map<number, any>){
+		betterMap.set(id as ID, data)
+	}
+
+	// DEPENDENCIES
+	let newArray = []
+	for(const element of jsonData1){
+		const dependenciesArray = element.dependencies
+
+		
+		const newDependenciesArray = [ ]
+		for (const i of dependenciesArray){
+			const depID  = i[0] as ID
+			const depVer =  semVerFromString(i[1])
+			newDependenciesArray.push({
+				id: depID,
+				version: depVer
+			})
+		}
+
+		
+		newArray.push({
+			id: element.dep as ID,
+			dependencies: newDependenciesArray
+		})
+	}
+	
+	return{
+		depMap: betterMap,
+		deps: newArray
+	}
 };
+
+export type DependencyData = ReturnType<typeof JSObjectFromJSON>
+export type DependencyMap = ReturnType<typeof JSObjectFromJSON>["depMap"]
+export type DependencyList = ReturnType<typeof JSObjectFromJSON>["deps"]

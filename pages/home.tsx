@@ -1,20 +1,66 @@
-import React from 'react'
-import makeCollapsibleTable from '../components/CollapsibleTable'
-import Row from '../components/Row'
+import React from "react";
+import makeCollapsibleTable from "../components/CollapsibleTable";
+import { semVerFromString, ID } from "../components/dataProcessing";
+import Row from "../components/Row";
 
 const home = () => {
-	return (
-		<div>
-			{
-				// CollapsibleTable(
-				// 	[
-				// 		<Row key={"a"} row={{ name: "1", version: "2", link: "3" }} />,
-				// 		<Row key={"B"} row={{ name: "4", version: "5", link: "6" }} />
-				// 	]
-				// )
-			}
-		</div>
-	)
-}
+  const dummyData = () => {
+    let dummyDepMap = new Map();
 
-export default home
+    dummyDepMap.set(1 as ID, {
+      name: "@octokit/core",
+      version: "3.6.0",
+      link: "https://github.com/octokit/core.js/tree/master",
+      internal: true,
+      archived: false,
+    });
+    dummyDepMap.set(2 as ID, {
+      name: "@octokit/core",
+      version: "3.6.0",
+      link: "https://github.com/octokit/core.js/tree/master",
+      internal: true,
+      archived: false,
+    });
+    let dummyDepsArray = [
+      {
+        id: 1 as ID,
+        dependencies: [
+          {
+            id: 2 as ID,
+            version: semVerFromString("^3.5.1"),
+          },
+        ],
+      },
+      {
+        id: 2 as ID,
+        dependencies: [
+          {
+            id: 1 as ID,
+            version: semVerFromString("^0.5.3"),
+          },
+        ],
+      },
+    ];
+
+    let dummyJSObject = {
+      depMap: dummyDepMap,
+      deps: dummyDepsArray,
+    };
+
+    return dummyJSObject;
+  };
+
+  
+
+
+
+  return (
+    <div>
+      {
+		  makeCollapsibleTable(dummyData())
+	  }
+    </div>
+  );
+};
+
+export default home;

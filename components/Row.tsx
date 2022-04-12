@@ -27,8 +27,9 @@ const useStyles = makeStyles({
 })
 
 // Creates each invidial row
-const Row = (props: { row: { name: string; version: string; link: string }; }) => {
-  const { row } = props;
+const Row = (props) => {
+  const {row} = props
+  const {name, version, link, internal, archived} = row
   const [open, setOpen] = useState(false);
   const classes = useStyles();
 
@@ -67,7 +68,7 @@ const Row = (props: { row: { name: string; version: string; link: string }; }) =
                 <TableHead>
                   <TableRow>
                     <TableCell>
-                      <Tabs></Tabs>
+                      <Tabs ></Tabs>
                     </TableCell>
                   </TableRow>
                 </TableHead>
