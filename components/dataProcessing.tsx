@@ -137,8 +137,10 @@ function depsToJSXList(dependencies, dependencyMap: DependencyMap) {
 	const minRankInternal = internalDeps && internalDeps[0] ? internalDeps[0][0] : 2;
 	const minRankExternal = externalDeps && externalDeps[0] ? externalDeps[0][0] : 2;
 	const minRank = minRankInternal < minRankExternal ? minRankInternal : minRankExternal;
+	console.log(internalDeps)
 
-	return [sortedDeps, minRank];
+	//return [sortedDeps, minRank];
+	return [internalDeps, externalDeps]
 };
 
 function depsToInverseJSXList(version: SemVer, dependencies: DependencyListSingleDep[], dependencyMap: DependencyMap) {
@@ -423,7 +425,7 @@ export function JSObjectFromJSON(jsonData0: any, jsonData1: {dep: number, depend
 			inverseDeps.get(depID).push({id: mainID, version: depVer});
 		}
 	}
-
+	
 	// DEPENDENCIES
 	let newArray: DependencyList = []
 	for(const element of jsonData1){
