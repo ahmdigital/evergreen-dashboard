@@ -1,10 +1,12 @@
+// import colours from '../global.css';
+
 export const Colours = {
-	green: "#cfc" as any,
-	greenBorder: "1px solid green" as any,
-	orange: "#ffc" as any,
-	orangeBorder: "1px solid orange" as any,
-	red: "#fcc" as any,
-	redBorder: "1px solid red" as any,
+	green: "var(--rank-green)",
+	greenBorder: "var(--rank-green-border)" as any,
+	orange: "var(--rank-orange)" as any,
+	orangeBorder: "var(--rank-orange-border)" as any,
+	red: "var(--rank-red)" as any,
+	redBorder: "var(--rank-red-border)" as any,
 	ahmThinBar: "#ccc" as any,
 	ahmLeftTable: "#f6f6f6" as any,
 	ahmBlack: "#000" as any,

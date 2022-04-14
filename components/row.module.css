@@ -1,0 +1,20 @@
+.tableRow_plain {
+	width:  100vw;
+	background-color: #FFA9A9;
+	border-bottom: #AAAAAA;
+}
+.tableRow_red {
+	width:  100vw;
+	background-color: var(--rank-red);
+	border-bottom: var(--rank-red-border);
+}
+.tableRow_orange {
+	width:  100vw;
+	background-color: var(--rank-orange);
+	border-bottom: var(--rank-orange-border);
+}
+.tableRow_green {
+	width:  100vw;
+	background-color: var(--rank-green);
+	border-bottom: var(--rank-green-border);
+}

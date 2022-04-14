@@ -10,3 +10,12 @@
 	font-family: proxima-nova, 'Helvetica Neue', 'Helvetica Arial',
 	  Arial, sans-serif, 'Segoe UI', 'Segoe UI Symbol';
   }
+
+  :root {
+	--rank-green: #cfc;
+	--rank-green-border: 1px solid green;
+	--rank-orange: #ffc;
+	--rank-orange-border: 1px solid orange;
+	--rank-red: #fcc;
+	--rank-red-border: 1px solid red;
+  }
