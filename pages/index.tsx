@@ -55,7 +55,10 @@ const BottomBarStyle = {
 export default function Home() {
 	//Converts the raw loaded data into a more useable form
 	//This is what all functions should use, rather than relying on any specifics of the JSON represetnation (which is not stable).
-	//const JSObject = JSObjectFromJSON(cachedData[0], cachedData[1])
+	const JSObject = JSObjectFromJSON(cachedData[0], cachedData[1])
+
+	
+	
 
 	
 
@@ -93,9 +96,9 @@ export default function Home() {
 					</div>
 				</Layout>
 				{DividingBar}
-				<Layout>
+				{/* <Layout>
 					<div style={MiddleBarStyle}> {makeCollapsibleTable(JSObject)} </div>
-				</Layout>
+				</Layout> */}
 				{DividingBar}
 				<Layout>
 					<div style={MiddleBarStyle}><div style={{ padding: 10 }}>

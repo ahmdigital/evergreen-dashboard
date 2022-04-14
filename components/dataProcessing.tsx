@@ -58,7 +58,7 @@ function rankToDepColour(rank: number): [string, string, number] {
 	return [Colours.green, Colours.greenBorder, 2];
 }
 
-function depsToJSXList(dependencies: DependencyList, dependencyMap: DependencyMap) {
+export function depsToJSXList(dependencies: DependencyList, dependencyMap: DependencyMap) {
 	let internalDeps = [];
 	let externalDeps = [];
 	for (const data of dependencies) {
@@ -100,8 +100,10 @@ function depsToJSXList(dependencies: DependencyList, dependencyMap: DependencyMa
 	const minRankInternal = internalDeps && internalDeps[0] ? internalDeps[0][0] : 2;
 	const minRankExternal = externalDeps && externalDeps[0] ? externalDeps[0][0] : 2;
 	const minRank = minRankInternal < minRankExternal ? minRankInternal : minRankExternal;
+	console.log(internalDeps)
 
-	return [sortedDeps, minRank];
+	//return [sortedDeps, minRank];
+	return [internalDeps, externalDeps]
 };
 
 function depsToInverseJSXList(version, dependencies, dependencyMap) {
@@ -349,7 +351,7 @@ export type ID = number & { __brand: "ID"}
 
 // Parameter: jsonData JSON cachesdata format
 // Return: 
-export function JSObjectFromJSON(jsonData0: Map<number, any>, jsonData1: {dep: number, dependencies: [number, string][]}[]):
+export function JSObjectFromJSON(jsonData0: any, jsonData1: any):
 {
 	depMap: Map<ID,  {name: string, version: SemVer, link: string, internal: boolean, archived: boolean}>,
 	deps: {id: ID, dependencies: {id: ID, version: SemVer}[]}[]
@@ -361,16 +363,16 @@ export function JSObjectFromJSON(jsonData0: Map<number, any>, jsonData1: {dep: n
 
 	// CREATING NEW DEPENDENCY MAP
 	let betterMap = new Map<ID, any>();
-	for(const [id, data] of jsonData0 as Map<number, any>){
-		betterMap.set(id as ID, data)
+	for (const key in jsonData0){
+		// Obj is properties inside the key
+		const obj = jsonData0[key]
+		betterMap.set(+key as ID, obj)
 	}
-
+	
 	// DEPENDENCIES
 	let newArray = []
 	for(const element of jsonData1){
 		const dependenciesArray = element.dependencies
-
-		
 		const newDependenciesArray = [ ]
 		for (const i of dependenciesArray){
 			const depID  = i[0] as ID
@@ -380,8 +382,6 @@ export function JSObjectFromJSON(jsonData0: Map<number, any>, jsonData1: {dep: n
 				version: depVer
 			})
 		}
-
-		
 		newArray.push({
 			id: element.dep as ID,
 			dependencies: newDependenciesArray
