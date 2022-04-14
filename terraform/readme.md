@@ -1,4 +1,4 @@
-Make sure you have terraform installed, to deploy follow these steps: 
+Make sure you have terraform installed, to deploy follow these steps:
 
 1. `terraform init`
 2. `bootstrap.sh`, works on linux
