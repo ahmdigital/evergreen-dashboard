@@ -85,7 +85,8 @@ const makeCollapsibleTable = (JSObject: DependencyData) => {
 		let minRank = 2
 
 		for(const i of dep.dependencies){
-			const rank = findRank(i.version, data.version);
+			const iData = JSObject.depMap.get(i.id);
+			const rank = findRank(i.version, iData.version);
 
 			const depData = JSObject.depMap.get(i.id);
 			if(depData.internal){
