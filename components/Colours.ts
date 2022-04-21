@@ -9,5 +9,5 @@ export const Colours = {
 	redBorder: "var(--rank-red-border)" as any,
 	ahmThinBar: "#ccc" as any,
 	ahmLeftTable: "#f6f6f6" as any,
-	ahmBlack: "#000" as any,
+	ahmBlack: "var(--colour-black)" as any,
 }

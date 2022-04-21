@@ -34,3 +34,23 @@ ul.nested {
 ul.active {
 	display: block;
 }
+
+/* Adds the thick black bars around each section, but without a border at the bottom */
+div.topBarStyle {
+	justify-content: center;
+	height: max-content;
+	width: 85vw;
+	border: var(--border-thick);
+	border-bottom: none;
+	padding: 0;
+	margin-top: 2rem;
+}
+
+/* Adds the thick black bars around each section */
+div.barStyle {
+	justify-content: center;
+	height: max-content;
+	width: 85vw;
+	border: var(--border-thick);
+	padding: 0;
+}
