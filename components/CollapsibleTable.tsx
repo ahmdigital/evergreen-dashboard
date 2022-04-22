@@ -36,7 +36,7 @@ const CollapsibleTable = (rows: JSX.Element[]) => {
 							<TableCell></TableCell>
 							<TableCell>Name</TableCell>
 							<TableCell>Version</TableCell>
-							<TableCell></TableCell>
+							<TableCell>Link</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
