@@ -88,11 +88,11 @@ function getDepColour(used: SemVer, current: SemVer): [string, string, number] {
 
 export function rankToDepColour(rank: number): [string, string, number] {
 	if (rank == 0) {
-		return [Colours.red, Colours.redBorder, 0];
+		return ['red', Colours.redBorder, 0];
 	} else if (rank == 1) {
-		return [Colours.orange, Colours.orangeBorder, 1];
+		return ['orange', Colours.orangeBorder, 1];
 	}
-	return [Colours.green, Colours.greenBorder, 2];
+	return ['green', Colours.greenBorder, 2];
 }
 
 function depsToJSXList(dependencies, dependencyMap: DependencyMap) {

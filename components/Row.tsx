@@ -24,6 +24,7 @@ const useStyles = makeStyles({
   tableCell: {
     fontWeight: "normal",
     fontFamily: "Noto Sans, sans-serif",
+    fontSize: "large",
   },
 });
 
@@ -64,6 +65,7 @@ export default function Row(props: {
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
+            style={{color: 'gray'}}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
@@ -74,7 +76,7 @@ export default function Row(props: {
 							<circle cx="20" cy="20" r="20"/>
 						</svg>
 				</TableCell> */}
-        <TableCell className={classes.tableCell} component="th" scope="row">
+        <TableCell>
           <Circle
             sx={
               rank == 0
@@ -86,9 +88,11 @@ export default function Row(props: {
                 : { color: "white", paddingRight: "5px" }
             }
           />
-		  {row.name}
         </TableCell>
-        <TableCell className={classes.tableCell} align="right">
+        <TableCell className={classes.tableCell} component="th" scope="row">
+          {row.name}
+        </TableCell>
+        <TableCell className={classes.tableCell} align="left">
           {semVerToString(row.version)}
         </TableCell>
         <TableCell className={classes.tableCell} align="right">
