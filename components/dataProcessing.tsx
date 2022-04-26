@@ -139,8 +139,7 @@ function depsToJSXList(dependencies, dependencyMap: DependencyMap) {
 	const minRank = minRankInternal < minRankExternal ? minRankInternal : minRankExternal;
 	console.log(internalDeps)
 
-	//return [sortedDeps, minRank];
-	return [internalDeps, externalDeps]
+	return [sortedDeps, minRank];
 };
 
 function depsToInverseJSXList(version: SemVer, dependencies: DependencyListSingleDep[], dependencyMap: DependencyMap) {
