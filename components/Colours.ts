@@ -1,5 +1,3 @@
-// import colours from '../global.css';
-
 export const Colours = {
 	green: "var(--rank-green)",
 	greenBorder: "var(--rank-green-border)" as any,

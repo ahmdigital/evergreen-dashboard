@@ -69,6 +69,7 @@ const TabPanel = (props: TabPanelProps) => {
 };
 
 const Tabs = (props) => {
+	// Creates the tab menu & displays the internal/external data
 	const internal = props.subRows.internal
 	const external = props.subRows.external
 	const user = props.subRows.user

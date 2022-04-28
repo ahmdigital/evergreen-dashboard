@@ -9,15 +9,12 @@ import TableRow from "@mui/material/TableRow";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { makeStyles } from "@mui/styles";
-
-import { Colours } from "./Colours";
+import { Circle } from "@mui/icons-material";
+import { Typography } from "@mui/material";
 
 import Tabs from "./Tabs";
 import { DependencyData, semVerToString } from "./dataProcessing";
-
 import styles from "../components/row.module.css";
-import { Circle } from "@mui/icons-material";
-import { Typography } from "@mui/material";
 
 //This doesn't get applied until a partial refresh.
 const useStyles = makeStyles({
@@ -49,33 +46,17 @@ export default function Row(props: {
 
   return (
     <>
-      <TableRow
-      // className={
-      //   rank == 0
-      //     ? Styles.red
-      //     : rank == 1
-      //     ? Styles.orange
-      //     : rank == 2
-      //     ? Styles.green
-      //     : Styles.plain
-      // }
-      >
+      <TableRow>
         <TableCell>
           <IconButton
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
-            style={{color: 'gray'}}
+            style={{ color: "gray" }}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        {/* //The circle
-				<TableCell>
-						<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-							<circle cx="20" cy="20" r="20"/>
-						</svg>
-				</TableCell> */}
         <TableCell>
           <Circle
             sx={

@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,11 +6,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-
-import styles from "./CollapsibleTable.module.css";
-import Tabs from "./Tabs";
 
 import Row from "./Row";
 
@@ -29,7 +21,7 @@ import {
 } from "./dataProcessing";
 import { Circle } from "@mui/icons-material";
 
-// Creates the whole table based on sample data
+// Creates the whole table
 const CollapsibleTable = (rows: JSX.Element[]) => {
   return (
     <div>
@@ -59,11 +51,14 @@ const CollapsibleTable = (rows: JSX.Element[]) => {
 };
 
 function makeSubRow(
+  // Creates the collapsible rows for internal/external dependencies
   data: DependencyListSingleDep,
   rank: number,
   dependencyMap: DependencyMap
 ) {
+  // dependencyData contains all the packages and its props (name, version, link etc)
   const dependencyData = dependencyMap.get(data.id);
+  console.log(dependencyData)
   const str =
     dependencyData.name +
     ": " +
