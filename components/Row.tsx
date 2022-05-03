@@ -13,7 +13,8 @@ import { Circle } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 
 import Tabs from "./Tabs";
-import { DependencyData, semVerToString } from "./dataProcessing";
+import { DependencyData} from "./dataProcessing";
+import {semVerToString} from "./semVer";
 import styles from "../components/row.module.css";
 
 //This doesn't get applied until a partial refresh.

@@ -1,98 +1,15 @@
 import React from 'react'
 import { json } from 'stream/consumers';
 import styles from '../components/treeView.module.css';
+import { getDepColour, rankToDepColour, SemVer, semVerFromString } from "./semVer";
 import { Colours } from './Colours';
 
 let internalDependencies = new Set<ID>();
 
 //TODO: (Entire file) Split the JSX from the structure creation
 
-export type SemVer = {
-	major: number;
-	minor: number;
-	bug: number;
-	rest: string;
-	skipMinor: boolean;
-	skipBug: boolean;
-};
-
-export function semVerToString(semVer: SemVer): string{
-	let res: string = ""
-	if(semVer.skipMinor){
-		res += '^'
-	} else if(semVer.skipBug){
-		res += '~'
-	}
-	res += semVer.major + "." + semVer.minor + "." + semVer.bug
-	if(semVer.rest !== ""){
-		res += "-" + semVer.rest
-	}
-	return res
-}
-
-export function semVerFromString(semVer: string): SemVer {
-	let skipMinor = false
-	let skipBug = false
-	if (semVer[0] == '^') {
-		semVer = semVer.substring(1);
-		skipMinor = true
-		skipBug = true
-	} else if (semVer[0] == '~') {
-		semVer = semVer.substring(1)
-		skipBug = true
-	}
-	const parts = semVer.split(".", 3)
-	if(parts.length < 3){
-		return {
-			major: 0,
-			minor: 0,
-			bug: 0,
-			rest: "",
-			skipMinor: skipMinor,
-			skipBug: skipBug
-		}
-	}
-
-	const bugAndRest = parts[2].split("-")
-	return {
-		major: parseInt(parts[0]),
-		minor: parseInt(parts[1]),
-		bug: parseInt(bugAndRest[0]),
-		rest: bugAndRest[1] ? bugAndRest[1] : "",
-		skipMinor: skipMinor,
-		skipBug: skipBug
-	}
-}
-
 function externalLinkJSX(data: any): JSX.Element {
 	return <span style={{ float: "right" }}>(<a target="_blank" href={data.link}>GitHub</a>)</span>
-}
-
-export function findRank(used: SemVer, current: SemVer): number {
-	if (used.major < current.major) {
-		return 0;
-	} else if (used.minor + 5 < current.minor) {
-		return 1;
-	}
-	return 2;
-}
-
-function getDepColour(used: SemVer, current: SemVer): [string, string, number] {
-	if (used.major < current.major) {
-		return [Colours.red, Colours.redBorder, 0];
-	} else if (used.minor + 5 < current.minor) {
-		return [Colours.orange, Colours.orangeBorder, 1];
-	}
-	return [Colours.green, Colours.greenBorder, 2];
-}
-
-export function rankToDepColour(rank: number): [string, string, number] {
-	if (rank == 0) {
-		return ['red', Colours.redBorder, 0];
-	} else if (rank == 1) {
-		return ['orange', Colours.orangeBorder, 1];
-	}
-	return ['green', Colours.greenBorder, 2];
 }
 
 function depsToJSXList(dependencies, dependencyMap: DependencyMap) {
@@ -453,3 +370,4 @@ export function JSObjectFromJSON(jsonData0: any, jsonData1: {dep: number, depend
 		deps: newArray
 	}
 };
+

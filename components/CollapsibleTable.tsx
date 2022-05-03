@@ -6,20 +6,16 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Circle } from "@mui/icons-material";
 
 import Row from "./Row";
-
 import {
   ID,
   DependencyData,
   DependencyMap,
   DependencyListSingleDep,
-  findRank,
-  rankToDepColour,
-  semVerToString,
-  SemVer,
 } from "./dataProcessing";
-import { Circle } from "@mui/icons-material";
+import {findRank, rankToDepColour, semVerToString, SemVer} from "./semVer";
 
 // Creates the whole table
 const CollapsibleTable = (rows: JSX.Element[]) => {

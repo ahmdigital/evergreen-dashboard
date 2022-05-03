@@ -5,13 +5,8 @@ import Layout from '../components/layout';
 import Script from "next/script";
 import styles from '../components/treeView.module.css';
 import cachedData from "../cachedData.json";
-import {ID, DependencyMap, DependencyData, JSObjectFromJSON, jsonToDualTreeView, jsonToInverseTreeView, jsonToTreeView, semVerFromString } from "../components/dataProcessing";
-import { Colours } from '../components/Colours';
-// const DividingBar = (
-//  <Layout>
-//      <div style={{ justifyContent: "center", height: "max-content", width: "85.5vw", border: Borders.blackHalved }}></div>
-//  </Layout>
-// )
+import {JSObjectFromJSON} from "../components/dataProcessing";
+
 export default function Home() {
     //Converts the raw loaded data into a more useable form
     //This is what all functions should use, rather than relying on any specifics of the JSON represetnation (which is not stable).
@@ -52,21 +47,6 @@ export default function Home() {
                     <div className={Styles.barStyle}> {makeCollapsibleTable(JSObject)} </div>
                     
                 </Layout>
-                {/* <Layout>
-                    <div style={Styles.barStyle}><div style={{ padding: 10 }}>
-                        {jsonToTreeView(JSObject)}
-                    </div></div>
-                </Layout>
-                <Layout>
-                    <div style={Styles.barStyle}><div style={{ padding: 10 }}>
-                        {jsonToInverseTreeView(JSObject)}
-                    </div></div>
-                </Layout>
-                <Layout>
-                    <div style={Styles.barStyle}><div style={{ padding: 10 }}>
-                        {jsonToDualTreeView(JSObject)}
-                    </div></div>
-                </Layout> */}
             </main>
         </div>
     );
