@@ -1,4 +1,4 @@
-name: "Terraform"
+name: Terraform
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     uses: ./.github/workflows/build.yml
 
   terraform:
-    name: "Terraform"
+    name: Terraform
     needs: build
     runs-on: ubuntu-latest
     defaults:
