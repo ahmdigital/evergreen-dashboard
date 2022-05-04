@@ -30,7 +30,7 @@ jobs:
           # Min branch name length
           branch-name-min-length: 5 # optional, default is 10
           # Max branch name length
-          branch-name-max-length: 38 # optional, default is 72
+          branch-name-max-length: 72 # optional, default is 72
 
   code_lint:
     name: Lint Code Base
