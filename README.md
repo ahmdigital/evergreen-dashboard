@@ -1,4 +1,4 @@
-# EverGreen DashBoard
+# 🌲 Evergreen Dashboard
 
 ## Repository Setup
 
