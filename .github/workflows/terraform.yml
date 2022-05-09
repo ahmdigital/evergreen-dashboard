@@ -1,4 +1,4 @@
-name: "Terraform"
+name: Terraform
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     uses: ./.github/workflows/build.yml
 
   terraform:
-    name: "Terraform"
+    name: Terraform
     needs: build
     runs-on: ubuntu-latest
     defaults:
@@ -31,7 +31,7 @@ jobs:
         with:
           name: nextjs-build
           path: .next/
-          
+
       - name: run bootstrap script
         run: |
           zip -ur --must-match eb_app.zip ../package.json ../.next
@@ -86,7 +86,7 @@ jobs:
             </details>
 
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
-              
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
