@@ -311,12 +311,18 @@ export type DependencyData = {depMap: DependencyMap, deps: DependencyList}
 
 // Parameter: jsonData JSON cachesdata format
 // Return: 
-export function JSObjectFromJSON(jsonData0: any, jsonData1: {dep: number, dependencies: (string | number)[][]}[]): DependencyData{
+export function JSObjectFromJSON(jsonData: [any, {dep: number, dependencies: (string | number)[][]}[]] | never[]): DependencyData{
+	if(jsonData == [] || jsonData.length == 0){
+		return{
+			depMap: new Map(),
+			deps: []
+		}
+	}
 
 	// CREATING NEW DEPENDENCY MAP
 	let betterMap: DependencyMap = new Map();
-	for(const id in Object.keys(jsonData0)){
-		const data = jsonData0[id]
+	for(const id in Object.keys(jsonData[0])){
+		const data = jsonData[0][id]
 		const semVerVer = semVerFromString(data.version as string)
 		betterMap.set(
 			parseInt(id) as ID,
@@ -332,7 +338,7 @@ export function JSObjectFromJSON(jsonData0: any, jsonData1: {dep: number, depend
 
 	//Inverted dependencies
 	let inverseDeps = new Map<ID, DependencyListSingleDep[]>();
-	for (const data of jsonData1) {
+	for (const data of jsonData[1]) {
 		const mainID  = data.dep as ID
 		for (const dep of data.dependencies) {
 			const depID  = dep[0] as ID
@@ -344,7 +350,7 @@ export function JSObjectFromJSON(jsonData0: any, jsonData1: {dep: number, depend
 	
 	// DEPENDENCIES
 	let newArray: DependencyList = []
-	for(const element of jsonData1){
+	for(const element of jsonData[1]){
 		const dependenciesArray = element.dependencies
 
 		
