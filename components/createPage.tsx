@@ -31,17 +31,16 @@ export function createPage(JSObject: DependencyData){
 			<Head>
 				<title>Evergreen dashboard</title>
 			</Head>
-			<main style={{ padding: 0 }}>
+			<main style={{ padding: 0}}>
 				<Layout>
 					<div className={Styles.topBarStyle}>
-						<h1 className="title" style={{ padding: "0 32px", fontWeight: 600 }}>
+						<h1 className="title" style={{ padding: "0 32px", fontWeight: 600, color: "var(--colour-font)" }}>
 							evergreen
 						</h1>
 					</div>
 				</Layout>
 				<Layout>
-					<div className={Styles.barStyle}> {makeCollapsibleTable(JSObject)} </div>
-					
+					<div className={Styles.barStyle}> {makeCollapsibleTable(JSObject)} </div>	
 				</Layout>
 			</main>
 		</div>

@@ -1,7 +1,7 @@
 .main {
 	display: flex;
 	justify-content: center;
-	background-color: white;
+	background-color: var(--colour-background);
   }
   
   .main > section {

@@ -22,22 +22,22 @@ import {findRank, rankToDepColour, semVerToString, SemVer} from "./semVer";
 const CollapsibleTable = (rows: JSX.Element[]) => {
   return (
     <div>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)"}}>
         <Table size="small" aria-label="collapsible table">
           <colgroup>
-            <col style={{ width: "0%", backgroundColor: "#f6f6f6" }} />
-            <col style={{ width: "0%" }} />
-            <col style={{ width: "75%" }} />
-            <col style={{ width: "25%" }} />
-            <col style={{ width: "0%" }} />
+            <col style={{ width: "0%", backgroundColor: "var(--table-left-edge)" }} />
+            <col style={{ width: "0%", backgroundColor: "var(--colour-background)" }} />
+            <col style={{ width: "75%", backgroundColor: "var(--colour-background)" }} />
+            <col style={{ width: "25%", backgroundColor: "var(--colour-background)" }} />
+            <col style={{ width: "0%", backgroundColor: "var(--colour-background)" }} />
           </colgroup>
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
               <TableCell></TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Version</TableCell>
-              <TableCell>Link</TableCell>
+              <TableCell style={{ color: "var(--colour-text)" }}>Name</TableCell>
+              <TableCell style={{ color: "var(--colour-text)" }}>Version</TableCell>
+              <TableCell style={{ color: "var(--colour-text)" }}>Link</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>{rows}</TableBody>
@@ -63,13 +63,13 @@ function makeSubRow(
     semVerToString(dependencyData.version);
   const [colour, borderColour, colourIndex] = rankToDepColour(rank);
   const dep = (
-    <TableRow>
+    <TableRow style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>
       <col style={{ width: "0%" }} />
       <col style={{ width: "75%" }} />
       <TableCell>
         <Circle style={{ color: colour }} />
       </TableCell>
-      <TableCell>{str}</TableCell>
+      <TableCell style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>{str}</TableCell>
     </TableRow>
   );
   return dep;
@@ -82,15 +82,15 @@ function makeInverseSubRow(
 ) {
   const dependencyData = dependencyMap.get(data.id) as DependencyMapElement
   const str = dependencyData.name + ": " + semVerToString(data.version);
-  const [colour, borderColour, colourIndex] = rankToDepColour(rank);
+  const colour = rankToDepColour(rank)[0]
   const dep = (
-    <TableRow>
+    <TableRow style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>
       <col style={{ width: "0%" }} />
       <col style={{ width: "75%" }} />
-      <TableCell>
+      <TableCell >
         <Circle style={{ color: colour }} />
       </TableCell>
-      <TableCell>{str}</TableCell>
+      <TableCell style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>{str}</TableCell>
     </TableRow>
   );
   return dep;

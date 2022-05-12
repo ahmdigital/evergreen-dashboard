@@ -8,4 +8,5 @@ export const Colours = {
 	ahmThinBar: "#ccc" as any,
 	ahmLeftTable: "#f6f6f6" as any,
 	ahmBlack: "var(--colour-black)" as any,
+	ahmTableLeftEdge: "var(--table-left-edge)" as any,
 }

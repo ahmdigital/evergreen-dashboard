@@ -82,21 +82,23 @@ const Tabs = (props: Props) => {
 		setTabVal(newValue);
 	};
 
-	let tabLabels = [<Tab key='internal' label="Internal" />, <Tab key='internal' label="External" />];
+	let tabLabels = [
+		<Tab key="internal" label="Internal" style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}/>,
+		<Tab key="external" label="External" style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}/>];
 
 	let tabPanels = [
-		<TabPanel key='internal' value={tabVal} index={0}>
+		<TabPanel key="internal" value={tabVal} index={0}>
 			{internal}
 		</TabPanel>,
-		<TabPanel key='internal' value={tabVal} index={1}>
+		<TabPanel key="external" value={tabVal} index={1}>
 			{external}
 		</TabPanel>
 	]
 
 	if(!final){
-		tabLabels.push(<Tab label="Users" />)
+		tabLabels.push(<Tab key="users" label="Users" style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}/>)
 		tabPanels.push(
-			<TabPanel value={tabVal} index={2}>
+			<TabPanel key="users" value={tabVal} index={2}>
 				{user}
 			</TabPanel>
 		)

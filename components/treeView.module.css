@@ -44,6 +44,7 @@ div.topBarStyle {
 	border-bottom: none;
 	padding: 0;
 	margin-top: 2rem;
+	background-color: var(--colour-background);
 }
 
 /* Adds the thick black bars around each section */
@@ -53,4 +54,5 @@ div.barStyle {
 	width: 85vw;
 	border: var(--border-thick);
 	padding: 0;
+	background-color: var(--colour-background);
 }

@@ -12,13 +12,19 @@
   }
 
   :root {
-	--rank-green: #cfc;
+	--rank-green: green;
+	--rank-light-green: #cfc;
 	--rank-green-border: 1px solid green;
-	--rank-orange: #ffc;
+	--rank-orange: orange;
+	--rank-light-orange: #ffc;
 	--rank-orange-border: 1px solid orange;
-	--rank-red: #fcc;
+	--rank-red: red;
+	--rank-light-red: #fcc;
 	--rank-red-border: 1px solid red;
+	--colour-font: #000;
+	--colour-background: #fff;
 	--colour-black: #000;
 	--border-thick: .5rem solid  var(--colour-black);
 	--border-thick-halved: .25rem solid  var(--colour-black);
+	--table-left-edge: #f6f6f6;
   }
