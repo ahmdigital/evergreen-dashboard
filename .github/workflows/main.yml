@@ -26,7 +26,7 @@ jobs:
           # Max commit message title length (Validates just the first line of the commit message)
           commit-message-title-max-length: 180 # optional, default is 72
           # Regex to validate the branch name
-          branch-name-regex: '^dependabot\/npm_and_yarn\/.+|^[a-zA-Z0-9-_]+(\/){1}[a-zA-Z0-9-_]+$' # optional, default is .*
+          branch-name-regex: '^dependabot\/.+|^[a-zA-Z0-9-_]+(\/){1}[a-zA-Z0-9-_]+$' # optional, default is .*
           # Min branch name length
           branch-name-min-length: 5 # optional, default is 10
           # Max branch name length
