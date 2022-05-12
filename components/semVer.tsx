@@ -23,21 +23,49 @@ export function semVerToString(semVer: SemVer): string {
 	return res
 }
 
+/* 
+* Converts a string to a SemVer (semantic version) object
+* String should be of the form:
+*		[^|=|~|(~>)] *N.N[.N[-.*]]
+*/
 export function semVerFromString(semVer: string): SemVer {
 	let skipMinor = false
 	let skipBug = false
-	if (semVer[0] == '^') {
-		semVer = semVer.substring(1);
-		skipMinor = true
-		skipBug = true
-	} else if (semVer[0] == '~') {
-		semVer = semVer.substring(1)
-		skipBug = true
-	} else if (semVer[0] == '=') {
-		semVer = semVer.substring(1)
+
+	let rubyGemsSkipLast = false
+
+	for(;;){
+		if (semVer[0] == '^') {
+			semVer = semVer.substring(1);
+			skipMinor = true
+			skipBug = true
+		} else if (semVer[0] == '~') {
+			if(semVer[1] == '>'){
+				rubyGemsSkipLast = true
+				semVer = semVer.substring(2)
+			}
+			semVer = semVer.substring(1)
+			skipBug = true
+		} else if (semVer[0] == '=') {
+			semVer = semVer.substring(1)
+		} else{
+			break
+		}
 	}
 
 	const parts = semVer.split(".", 3)
+
+	if (parts.length == 2) {
+		return {
+			major: parseInt(parts[0]),
+			minor: parseInt(parts[1]),
+			bug: 0,
+			rest: "",
+			skipMinor: rubyGemsSkipLast || skipMinor,
+			skipBug: true
+		}
+	}
+
 	if (parts.length < 3) {
 		return {
 			major: 0,
@@ -56,7 +84,7 @@ export function semVerFromString(semVer: string): SemVer {
 		bug: parseInt(bugAndRest[0]),
 		rest: bugAndRest[1] ? bugAndRest[1] : "",
 		skipMinor: skipMinor,
-		skipBug: skipBug
+		skipBug: rubyGemsSkipLast || skipBug
 	}
 }
 
