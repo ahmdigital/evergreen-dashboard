@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Props } from "./Row";
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -68,7 +69,7 @@ const TabPanel = (props: TabPanelProps) => {
 	);
 };
 
-const Tabs = (props) => {
+const Tabs = (props: Props) => {
 	// Creates the tab menu & displays the internal/external data
 	const internal = props.subRows.internal
 	const external = props.subRows.external

@@ -26,12 +26,12 @@ const useStyles = makeStyles({
   },
 });
 
+export type Props = {
+	subRows: { internal: JSX.Element[], external: JSX.Element[], user: JSX.Element[], final: boolean }
+}
+
 // Creates each invidial row
-export default function Row(props: {
-  rank: number;
-  row: any;
-  subRows: { internal: any[]; external: any[]; user: any[]; final: boolean };
-}) {
+export default function Row(props: {rank: number, row: any} & Props) {
   const { rank, row, subRows } = props;
   const [open, setOpen] = useState(false);
 

@@ -14,6 +14,7 @@ import {
   DependencyData,
   DependencyMap,
   DependencyListSingleDep,
+  DependencyMapElement,
 } from "./dataProcessing";
 import {findRank, rankToDepColour, semVerToString, SemVer} from "./semVer";
 
@@ -53,8 +54,7 @@ function makeSubRow(
   dependencyMap: DependencyMap
 ) {
   // dependencyData contains all the packages and its props (name, version, link etc)
-  const dependencyData = dependencyMap.get(data.id);
-  console.log(dependencyData)
+  const dependencyData = dependencyMap.get(data.id) as DependencyMapElement
   const str =
     dependencyData.name +
     ": " +
@@ -80,7 +80,7 @@ function makeInverseSubRow(
   rank: number,
   dependencyMap: DependencyMap
 ) {
-  const dependencyData = dependencyMap.get(data.id);
+  const dependencyData = dependencyMap.get(data.id) as DependencyMapElement
   const str = dependencyData.name + ": " + semVerToString(data.version);
   const [colour, borderColour, colourIndex] = rankToDepColour(rank);
   const dep = (
@@ -101,7 +101,7 @@ const makeCollapsibleTable = (JSObject: DependencyData) => {
   let rowList: JSX.Element[] = [];
 
   for (const dep of JSObject.deps) {
-    const data = JSObject.depMap.get(dep.id);
+    const data = JSObject.depMap.get(dep.id) as DependencyMapElement
     let internalSubRows: JSX.Element[] = [];
     let externalSubRows: JSX.Element[] = [];
     let userSubRows: JSX.Element[] = [];
@@ -109,10 +109,10 @@ const makeCollapsibleTable = (JSObject: DependencyData) => {
     let minRank = 2;
 
     for (const i of dep.dependencies) {
-      const iData = JSObject.depMap.get(i.id);
+      const iData = JSObject.depMap.get(i.id) as DependencyMapElement
       const rank = findRank(i.version, iData.version);
 
-      const depData = JSObject.depMap.get(i.id);
+      const depData = JSObject.depMap.get(i.id) as DependencyMapElement
       if (depData.internal) {
         internalSubRows.push(makeSubRow(i, rank, JSObject.depMap));
       } else {
