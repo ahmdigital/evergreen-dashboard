@@ -17,7 +17,7 @@ import {
 } from "./dataProcessing";
 import {findRank, rankToDepColour, semVerToString, SemVer} from "./semVer";
 
-// Creates the whole table
+// Creates the whole table 
 const CollapsibleTable = (rows: JSX.Element[]) => {
   return (
     <div>
