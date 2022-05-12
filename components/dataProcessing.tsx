@@ -9,10 +9,10 @@ let internalDependencies = new Set<ID>();
 //TODO: (Entire file) Split the JSX from the structure creation
 
 function externalLinkJSX(data: any): JSX.Element {
-	return <span style={{ float: "right" }}>(<a target="_blank" href={data.link}>GitHub</a>)</span>
+	return <span style={{ float: "right" }}>(<a target="_blank" rel="noreferrer" href={data.link}>GitHub</a>)</span>
 }
 
-function depsToJSXList(dependencies, dependencyMap: DependencyMap) {
+function depsToJSXList(dependencies: any, dependencyMap: DependencyMap) {
 	let internalDeps = [];
 	let externalDeps = [];
 	for (const data of dependencies) {

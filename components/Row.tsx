@@ -79,7 +79,7 @@ export default function Row(props: {
         </TableCell>
         <TableCell className={classes.tableCell} align="right">
           (
-          <a href={row.link} target="_blank">
+          <a href={row.link} rel="noreferrer" target="_blank">
             GitHub
           </a>
           )

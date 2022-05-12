@@ -81,13 +81,13 @@ const Tabs = (props) => {
 		setTabVal(newValue);
 	};
 
-	let tabLabels = [<Tab label="Internal" />, <Tab label="External" />];
+	let tabLabels = [<Tab key='internal' label="Internal" />, <Tab key='internal' label="External" />];
 
 	let tabPanels = [
-		<TabPanel value={tabVal} index={0}>
+		<TabPanel key='internal' value={tabVal} index={0}>
 			{internal}
 		</TabPanel>,
-		<TabPanel value={tabVal} index={1}>
+		<TabPanel key='internal' value={tabVal} index={1}>
 			{external}
 		</TabPanel>
 	]
