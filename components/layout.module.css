@@ -1,0 +1,9 @@
+.main {
+	display: flex;
+	justify-content: center;
+	background-color: var(--colour-background);
+  }
+
+  .main > section {
+	padding: 32px;
+  }
