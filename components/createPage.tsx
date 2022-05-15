@@ -40,7 +40,7 @@ export function createPage(JSObject: DependencyData){
 					</div>
 				</Layout>
 				<Layout>
-					<div className={Styles.barStyle}> {makeCollapsibleTable(JSObject)} </div>	
+					<div className={Styles.barStyle}> {makeCollapsibleTable(JSObject)} </div>
 				</Layout>
 			</main>
 		</div>

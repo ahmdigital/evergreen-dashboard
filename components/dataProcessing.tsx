@@ -15,7 +15,7 @@ export type DependencyList = DependencyListElement[]
 export type DependencyData = {depMap: DependencyMap, deps: DependencyList}
 
 // Parameter: jsonData JSON cachesdata format
-// Return: 
+// Return:
 export function JSObjectFromJSON(jsonData: [any, {dep: number, dependencies: (string | number)[][]}[]] | never[]): DependencyData{
 	if(jsonData == [] || jsonData.length == 0){
 		return{
@@ -52,13 +52,13 @@ export function JSObjectFromJSON(jsonData: [any, {dep: number, dependencies: (st
 			inverseDeps.get(depID)?.push({id: mainID, version: depVer});
 		}
 	}
-	
+
 	// DEPENDENCIES
 	let newArray: DependencyList = []
 	for(const element of jsonData[1]){
 		const dependenciesArray = element.dependencies
 
-		
+
 		let newDependenciesArray: DependencyListSingleDep[] = []
 		for (const i of dependenciesArray){
 			const depID  = i[0] as ID
@@ -68,17 +68,16 @@ export function JSObjectFromJSON(jsonData: [any, {dep: number, dependencies: (st
 				version: depVer
 			})
 		}
-		
+
 		newArray.push({
 			id: element.dep as ID,
 			dependencies: newDependenciesArray,
 			users: inverseDeps.get(element.dep as ID) ?? []
 		})
 	}
-	
+
 	return{
 		depMap: betterMap,
 		deps: newArray
 	}
 };
-

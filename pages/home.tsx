@@ -3,7 +3,7 @@ import makeCollapsibleTable from "../components/CollapsibleTable";
 import Row from "../components/Row";
 import cachedData from "../cachedData.json";
 import { Box } from "@mui/material";
- 
+
 
 const home = () => {
   return (

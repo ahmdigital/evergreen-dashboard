@@ -23,7 +23,7 @@ export function semVerToString(semVer: SemVer): string {
 	return res
 }
 
-/* 
+/*
 * Converts a string to a SemVer (semantic version) object
 * String should be of the form:
 *		[^|=|~|(~>)] *N.N[.N[-.*]]
@@ -114,4 +114,3 @@ export function rankToDepColour(rank: number): [string, string, number] {
 export function getDepColour(used: SemVer, current: SemVer): [string, string, number] {
 	return rankToDepColour(findRank(used, current));
 }
-

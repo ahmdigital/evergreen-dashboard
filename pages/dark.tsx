@@ -17,7 +17,7 @@ export default function Home() {
 		root?.style.setProperty("--colour-font", "#fff")
 		console.log("Test")}
 	}>Dark Mode</button>
-	
+
 
 	return [script, page]
 }
