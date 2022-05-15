@@ -125,7 +125,7 @@ resource "aws_elastic_beanstalk_application_version" "this" {
 resource "aws_elastic_beanstalk_environment" "this" {
   name                = "${var.app_name}-env"
   application         = aws_elastic_beanstalk_application.this.name
-  solution_stack_name = "64bit Amazon Linux 2 v5.5.0 running Node.js 16"
+  solution_stack_name = "64bit Amazon Linux 2 v5.5.2 running Node.js 16"
   version_label       = aws_elastic_beanstalk_application_version.this.name
   cname_prefix        = "${local.prefix}-app"
 
@@ -154,12 +154,6 @@ resource "aws_elastic_beanstalk_environment" "this" {
   }
 
   setting {
-    namespace = "aws:ec2:vpc"
-    name      = "ELBScheme"
-    value     = "internet facing"
-  }
-
-  setting {
     namespace = "aws:elasticbeanstalk:environment:process:default"
     name      = "MatcherHTTPCode"
     value     = 200
@@ -168,7 +162,7 @@ resource "aws_elastic_beanstalk_environment" "this" {
   setting {
     namespace = "aws:elasticbeanstalk:environment:process:default"
     name      = "HealthCheckPath"
-    value     = "/docs"
+    value     = "/"
   }
 
 }
