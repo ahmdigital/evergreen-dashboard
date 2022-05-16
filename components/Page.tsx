@@ -1,11 +1,16 @@
 import React, { useEffect } from 'react'
-import makeCollapsibleTable from '../components/CollapsibleTable'
+import makeCollapsibleTable from './CollapsibleTable'
 import Head from 'next/head';
-import Layout from '../components/layout';
+import Layout from './layout';
 import styles from '../components/treeView.module.css';
 import { DependencyData } from './dataProcessing';
 
-export function createPage(JSObject: DependencyData){
+export type PageProps = {
+	JSObject: DependencyData
+}
+
+
+export function Page(props: PageProps) {
 
 	return (
 		<div className="container">
@@ -21,7 +26,7 @@ export function createPage(JSObject: DependencyData){
 					</div>
 				</Layout>
 				<Layout>
-					<div className={styles.barStyle}> {makeCollapsibleTable(JSObject)} </div>
+					<div className={styles.barStyle}> {makeCollapsibleTable(props.JSObject)} </div>
 				</Layout>
 			</main>
 		</div>
