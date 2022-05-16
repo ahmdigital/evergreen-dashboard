@@ -16,7 +16,8 @@ export function createPage(JSObject: DependencyData){
 		topBarStyle: styles.topBarStyle,
 		barStyle: styles.barStyle,
 	};
-	var res = (
+
+	return (
 		<div className="container">
 			<Script id="toggle-treeview">{`
 				var toggler = document.getElementsByClassName("${Styles.caret}")
@@ -45,5 +46,4 @@ export function createPage(JSObject: DependencyData){
 			</main>
 		</div>
 	);
-	return res;
 }
