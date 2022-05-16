@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import makeCollapsibleTable from '../components/CollapsibleTable'
 import Head from 'next/head';
 import Layout from '../components/layout';
@@ -19,16 +19,6 @@ export function createPage(JSObject: DependencyData){
 
 	return (
 		<div className="container">
-			<Script id="toggle-treeview">{`
-				var toggler = document.getElementsByClassName("${Styles.caret}")
-				var i__
-				for (i = 0; i < toggler.length; i++) {
-					toggler[i].addEventListener("click", function () {
-						this.parentElement.parentElement.querySelector(".${Styles.nested}").classList.toggle("${Styles.active}");
-						this.classList.toggle("${Styles.caret_down}");
-					})
-				}
-			`}</Script>
 			<Head>
 				<title>Evergreen dashboard</title>
 			</Head>
