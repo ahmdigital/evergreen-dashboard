@@ -22,7 +22,7 @@ export type Props = {
 	subRows: { internal: JSX.Element[], external: JSX.Element[], user: JSX.Element[], final: boolean }
 }
 
-// Creates each invidial row
+// Creates each individual row
 export default function Row(props: {rank: number, row: any} & Props) {
   const { rank, row, subRows } = props;
   const [open, setOpen] = useState(false);
