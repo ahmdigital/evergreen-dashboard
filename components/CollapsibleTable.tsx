@@ -52,22 +52,24 @@ const CollapsibleTable = (props: CollapsibleTableProps) => {
   );
 };
 
-function makeSubRow(
-  // Creates the collapsible rows for internal/external dependencies
-  data: DependencyListSingleDep,
-  rank: number,
-  dependencyMap: DependencyMap
-) {
+type SubRowProps = {
+	data: DependencyListSingleDep
+  	rank: number
+  	dependencyMap: DependencyMap
+}
+
+// Creates the collapsible rows for internal/external dependencies
+function SubRow(props: SubRowProps) {
   // dependencyData contains all the packages and its props (name, version, link etc)
-  const dependencyData = dependencyMap.get(data.id) as DependencyMapElement
+  const dependencyData = props.dependencyMap.get(props.data.id) as DependencyMapElement
   const str =
     dependencyData.name +
     ": " +
-    semVerToString(data.version) +
+    semVerToString(props.data.version) +
     " -> " +
     semVerToString(dependencyData.version);
-  const [colour, borderColour, colourIndex] = rankToDepColour(rank);
-  const dep = (
+  const [colour, borderColour, colourIndex] = rankToDepColour(props.rank);
+  return (
     <TableRow style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>
       <col style={{ width: "0%" }} />
       <col style={{ width: "75%" }} />
@@ -77,18 +79,13 @@ function makeSubRow(
       <TableCell style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>{str}</TableCell>
     </TableRow>
   );
-  return dep;
 }
 
-function makeInverseSubRow(
-  data: DependencyListSingleDep,
-  rank: number,
-  dependencyMap: DependencyMap
-) {
-  const dependencyData = dependencyMap.get(data.id) as DependencyMapElement
-  const str = dependencyData.name + ": " + semVerToString(data.version);
-  const colour = rankToDepColour(rank)[0]
-  const dep = (
+function InverseSubRow(props:SubRowProps) {
+  const dependencyData = props.dependencyMap.get(props.data.id) as DependencyMapElement
+  const str = dependencyData.name + ": " + semVerToString(props.data.version);
+  const colour = rankToDepColour(props.rank)[0]
+  return (
     <TableRow style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>
       <col style={{ width: "0%" }} />
       <col style={{ width: "75%" }} />
@@ -98,7 +95,6 @@ function makeInverseSubRow(
       <TableCell style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>{str}</TableCell>
     </TableRow>
   );
-  return dep;
 }
 
 const makeCollapsibleTable = (JSObject: DependencyData) => {
@@ -119,9 +115,9 @@ const makeCollapsibleTable = (JSObject: DependencyData) => {
 
       const depData = JSObject.depMap.get(i.id) as DependencyMapElement
       if (depData.internal) {
-        internalSubRows.push(makeSubRow(i, rank, JSObject.depMap));
+        internalSubRows.push(<SubRow data={i} rank={rank} dependencyMap={JSObject.depMap}/>);
       } else {
-        externalSubRows.push(makeSubRow(i, rank, JSObject.depMap));
+        externalSubRows.push(<SubRow data={i} rank={rank} dependencyMap={JSObject.depMap}/>);
       }
 
       minRank = rank < minRank ? rank : minRank;
@@ -130,7 +126,7 @@ const makeCollapsibleTable = (JSObject: DependencyData) => {
     for (const i of dep.users) {
       const rank = findRank(i.version, data.version);
 
-      userSubRows.push(makeInverseSubRow(i, rank, JSObject.depMap));
+      userSubRows.push(<InverseSubRow data={i} rank={rank} dependencyMap={JSObject.depMap}/>);
     }
 
     rowList.push(
