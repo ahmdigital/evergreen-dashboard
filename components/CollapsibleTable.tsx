@@ -7,6 +7,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Circle } from "@mui/icons-material";
+import styles from './CollapsibleTable.module.css';
+import helpIcon from "./images/helpIcon.png";
+import HelpScreen from "./HelpScreen";
 
 import Row from "./Row";
 import {
@@ -16,9 +19,11 @@ import {
   DependencyMapElement,
 } from "./dataProcessing";
 import { findRank, rankToDepColour, semVerToString, SemVer } from "./semVer";
+import Image from "next/image";
 
 // Creates the whole table
 const CollapsibleTable = (rows: JSX.Element[]) => {
+  const [openHelp, setOpenHelp] = useState<boolean>(false);
   return (
     <div>
       <TableContainer
@@ -61,7 +66,18 @@ const CollapsibleTable = (rows: JSX.Element[]) => {
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
-              <TableCell></TableCell>
+              <TableCell><div className={styles.help}>
+              <Image
+                className={styles.helpBtn}
+                
+                alt="help"
+                src={helpIcon}
+                onClick={() => {
+                  setOpenHelp(true);
+                }}
+              />
+              {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
+            </div></TableCell>
               <TableCell style={{ color: "var(--colour-text)" }}>
                 Name
               </TableCell>

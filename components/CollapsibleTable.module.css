@@ -1,0 +1,9 @@
+.help{
+	margin-top: 1px;
+    margin-right: 1px;
+    align-items: center;
+}
+
+.helpBtn {
+  cursor: pointer;
+}

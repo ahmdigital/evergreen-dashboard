@@ -26,7 +26,7 @@ const HelpScreen = ({
           />
         </div>
         <div className={styles.title}>
-          <h2>Light Status Legend</h2>
+          <h1>Light Status Legend</h1>
         </div>
         <div className={styles.legend}>
           <Image className={styles.legend} alt="legend" src={legend} />
