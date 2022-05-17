@@ -38,9 +38,9 @@ export function Page(props: PageProps) {
 									rank={row.minRank}
 									row={row}
 									subRows={{
-										internal: row.internalSubRows.map(i => <SubRow dependency={i} />),
-										external: row.externalSubRows.map(i => <SubRow dependency={i} />),
-										user: row.userSubRows.map(i => <InverseSubRow user={i} />),
+										internal: row.internalSubRows.map(i => <SubRow key={i.name} dependency={i} />),
+										external: row.externalSubRows.map(i => <SubRow key={i.name} dependency={i} />),
+										user: row.userSubRows.map(i => <InverseSubRow key={i.name} user={i} />),
 										final: row.userSubRows.length === 0,
 									}}
 								/>)
