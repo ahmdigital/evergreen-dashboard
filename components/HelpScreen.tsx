@@ -1,8 +1,5 @@
-import React, { useState } from "react";
 import closeIcon from "./images/closeIcon.png";
 import legend from "./images/legend.png";
-import { Button } from "@mui/material";
-import { width } from "@mui/system";
 import styles from "./HelpScreen.module.css";
 import Image from "next/image";
 

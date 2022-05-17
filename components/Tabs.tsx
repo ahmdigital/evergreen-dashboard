@@ -30,9 +30,6 @@ const theme = createTheme({
 		MuiTab: {
 			styleOverrides: {
 				textColorPrimary: {
-					"&.Mui-disabled":{
-						color: "#bdbdbd"
-					},
 					"&.Mui-selected": {
 						color: "#000000",
 					},
@@ -101,7 +98,7 @@ const Tabs = (props: Props) => {
 	]
 
 	if(!final){
-		tabLabels.push(<Tab key="users" label="Users" style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}/>)
+		tabLabels.push(<Tab key="users" label="Users"/>)
 		tabPanels.push(
 			<TabPanel key="users" value={tabVal} index={2}>
 				{user}
