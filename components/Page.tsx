@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { CollapsibleTable } from './CollapsibleTable'
 import { InverseSubRow } from "./InverseSubRow";
 import { SubRow } from "./SubRow";
 import Head from 'next/head';
-import Layout from './layout';
 import styles from '../components/treeView.module.css';
 import { DependencyData } from './dataProcessing';
 import { useProcessDependencyData } from '../hooks/useProcessDependencyData';
 import Row from './Row';
+import { Layout } from './Layout';
 
 export type PageProps = {
 	JSObject: DependencyData
