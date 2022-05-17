@@ -24,12 +24,15 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-// Using createTheme for customising Tabs text colors
+//Using createTheme for customising Tabs text colors
 const theme = createTheme({
 	components: {
 		MuiTab: {
 			styleOverrides: {
 				textColorPrimary: {
+					"&.Mui-disabled":{
+						color: "#bdbdbd"
+					},
 					"&.Mui-selected": {
 						color: "#000000",
 					},
@@ -75,6 +78,8 @@ const Tabs = (props: Props) => {
 	const external = props.subRows.external
 	const user = props.subRows.user
 	const final = props.subRows.final
+	var disableInternal = false
+	var disableExternal = false
 
 	const [tabVal, setTabVal] = useState(0);
 	const classes = useStyles();
@@ -83,15 +88,15 @@ const Tabs = (props: Props) => {
 	};
 
 	let tabLabels = [
-		<Tab key="internal" label="Internal" style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}/>,
-		<Tab key="external" label="External" style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}/>];
+		<Tab key="internal" label="Internal" />,
+		<Tab key="external" label="External" />];
 
 	let tabPanels = [
 		<TabPanel key="internal" value={tabVal} index={0}>
-			{internal}
+			{internal.length > 0 ? internal : "No depedencies found"}
 		</TabPanel>,
 		<TabPanel key="external" value={tabVal} index={1}>
-			{external}
+			{external.length > 0 ? external : "No depedencies found"}
 		</TabPanel>
 	]
 
