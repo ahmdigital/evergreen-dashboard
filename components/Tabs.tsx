@@ -62,7 +62,7 @@ const TabPanel = (props: TabPanelProps) => {
 		>
 			{value === index && (
 				<Box sx={{ p: 3 }}>
-					<Typography>{children}</Typography>
+					{children}
 				</Box>
 			)}
 		</div>
@@ -87,20 +87,14 @@ const Tabs = (props: Props) => {
 		<Tab key="external" label="External" style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}/>];
 
 	let tabPanels = [
-		<TabPanel key="internal" value={tabVal} index={0}>
-			{internal}
-		</TabPanel>,
-		<TabPanel key="external" value={tabVal} index={1}>
-			{external}
-		</TabPanel>
+		<TabPanel aria-label="internal tab panel" key="internal" value={tabVal} index={0}>{internal}</TabPanel>,
+		<TabPanel aria-label="external tab panel" key="external" value={tabVal} index={1}>{external}</TabPanel>
 	]
 
 	if(!final){
 		tabLabels.push(<Tab key="users" label="Users" style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}/>)
 		tabPanels.push(
-			<TabPanel key="users" value={tabVal} index={2}>
-				{user}
-			</TabPanel>
+			<TabPanel aria-label="user tab panel" key="users" value={tabVal} index={2}>{user}</TabPanel>
 		)
 	}
 

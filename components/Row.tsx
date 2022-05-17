@@ -30,7 +30,7 @@ export default function Row(props: {rank: number, row: any} & Props) {
   let colour = rankToDepColour(rank)[0]
 
   return (
-    <>
+    <React.Fragment>
       <TableRow style={{ color: "var(--colour-font)" }}>
         <TableCell>
           <IconButton
@@ -79,6 +79,6 @@ export default function Row(props: {rank: number, row: any} & Props) {
           </Collapse>
         </TableCell>
       </TableRow>
-    </>
+    </React.Fragment>
   );
 }
