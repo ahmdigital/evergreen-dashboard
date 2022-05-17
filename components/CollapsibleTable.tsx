@@ -18,8 +18,13 @@ import {
 } from "./dataProcessing";
 import {findRank, rankToDepColour, semVerToString, SemVer} from "./semVer";
 
+
+type CollapsibleTableProps = {
+	children: React.ReactNode	//ment to be a list of rows
+}
+
 // Creates the whole table
-const CollapsibleTable = (rows: JSX.Element[]) => {
+const CollapsibleTable = (props: CollapsibleTableProps) => {
   return (
     <div>
       <TableContainer component={Paper} style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)"}}>
@@ -40,7 +45,7 @@ const CollapsibleTable = (rows: JSX.Element[]) => {
               <TableCell style={{ color: "var(--colour-text)" }}>Link</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>{rows}</TableBody>
+          <TableBody>{props.children}</TableBody>
         </Table>
       </TableContainer>
     </div>
@@ -142,7 +147,8 @@ const makeCollapsibleTable = (JSObject: DependencyData) => {
       />
     );
   }
-  return CollapsibleTable(rowList);
+  
+  return <CollapsibleTable>{rowList}</CollapsibleTable>;
 };
 
 export default makeCollapsibleTable;
