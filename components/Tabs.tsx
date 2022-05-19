@@ -4,7 +4,6 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Badge from "@mui/material/Badge";
-import styles from "./Tabs.module.css";
 
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -111,6 +110,14 @@ const Tabs = (props: Props) => {
         </Badge>
       }
     />,
+    <Tab
+        key="users"
+        label={
+          <Badge badgeContent={user.length} color="primary" showZero>
+            Users
+          </Badge>
+        }
+      />
   ];
 
   let tabPanels = [
@@ -120,25 +127,10 @@ const Tabs = (props: Props) => {
     <TabPanel key="external" value={tabVal} index={1}>
       {external.length > 0 ? external : "No depedencies found"}
     </TabPanel>,
+    <TabPanel key="users" value={tabVal} index={2}>
+    {user.length > 0 ? user : "No users found"}
+  </TabPanel>
   ];
-
-  if (!final) {
-    tabLabels.push(
-      <Tab
-        key="users"
-        label={
-          <Badge badgeContent={user.length} color="primary" showZero>
-            Users
-          </Badge>
-        }
-      />
-    );
-    tabPanels.push(
-      <TabPanel key="users" value={tabVal} index={2}>
-        {user}
-      </TabPanel>
-    );
-  }
 
   return (
     <Box sx={{ width: "100%" }}>
