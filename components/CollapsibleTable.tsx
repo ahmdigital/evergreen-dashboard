@@ -172,7 +172,6 @@ function makeInverseSubRow(
 const makeCollapsibleTable = (JSObject: DependencyData) => {
   //TODO: Rather than taking in the raw objet, take a structure that can be directly converted into JSX
   let rowList: JSX.Element[] = [];
-  console.log(JSObject)
 
   for (const dep of JSObject.deps) {
     const data = JSObject.depMap.get(dep.id) as DependencyMapElement;
