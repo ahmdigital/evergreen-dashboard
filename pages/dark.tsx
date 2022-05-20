@@ -1,5 +1,5 @@
 import cachedData from "../cachedData.json";
-import { createPage } from "../components/createPage";
+import { Page } from "../components/Page";
 import {JSObjectFromJSON} from "../components/dataProcessing";
 
 export default function Home() {
@@ -7,7 +7,7 @@ export default function Home() {
     //This is what all functions should use, rather than relying on any specifics of the JSON represetnation (which is not stable).
     const JSObject = JSObjectFromJSON(cachedData.npm as [any, {dep: number, dependencies: (string | number)[][]}[]] | never[])
 
-	let page = createPage(JSObject)
+	let page = <Page  JSObject={JSObject} />
 
 	let script = <button onClick= {function callback(){
 		var root = document.querySelector(":root") as {style: any} | null

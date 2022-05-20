@@ -7,37 +7,86 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Circle } from "@mui/icons-material";
+import styles from './CollapsibleTable.module.css';
+import helpIcon from "./images/helpIcon.png";
+import HelpScreen from "./HelpScreen";
 
 import Row from "./Row";
 import {
-  ID,
   DependencyData,
   DependencyMap,
   DependencyListSingleDep,
   DependencyMapElement,
 } from "./dataProcessing";
-import {findRank, rankToDepColour, semVerToString, SemVer} from "./semVer";
+import { findRank, rankToDepColour, semVerToString, SemVer } from "./semVer";
+import Image from "next/image";
 
 // Creates the whole table
 const CollapsibleTable = (rows: JSX.Element[]) => {
+  const [openHelp, setOpenHelp] = useState<boolean>(false);
   return (
     <div>
-      <TableContainer component={Paper} style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)"}}>
+      <TableContainer
+        component={Paper}
+        style={{
+          backgroundColor: "var(--colour-background)",
+          color: "var(--colour-font)",
+        }}
+      >
         <Table size="small" aria-label="collapsible table">
           <colgroup>
-            <col style={{ width: "0%", backgroundColor: "var(--table-left-edge)" }} />
-            <col style={{ width: "0%", backgroundColor: "var(--colour-background)" }} />
-            <col style={{ width: "75%", backgroundColor: "var(--colour-background)" }} />
-            <col style={{ width: "25%", backgroundColor: "var(--colour-background)" }} />
-            <col style={{ width: "0%", backgroundColor: "var(--colour-background)" }} />
+            <col
+              style={{ width: "0%", backgroundColor: "var(--table-left-edge)" }}
+            />
+            <col
+              style={{
+                width: "0%",
+                backgroundColor: "var(--colour-background)",
+              }}
+            />
+            <col
+              style={{
+                width: "75%",
+                backgroundColor: "var(--colour-background)",
+              }}
+            />
+            <col
+              style={{
+                width: "25%",
+                backgroundColor: "var(--colour-background)",
+              }}
+            />
+            <col
+              style={{
+                width: "0%",
+                backgroundColor: "var(--colour-background)",
+              }}
+            />
           </colgroup>
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
-              <TableCell></TableCell>
-              <TableCell style={{ color: "var(--colour-text)" }}>Name</TableCell>
-              <TableCell style={{ color: "var(--colour-text)" }}>Version</TableCell>
-              <TableCell style={{ color: "var(--colour-text)" }}>Link</TableCell>
+              <TableCell><div className={styles.help}>
+              <Image
+                className={styles.helpBtn}
+                
+                alt="help"
+                src={helpIcon}
+                onClick={() => {
+                  setOpenHelp(true);
+                }}
+              />
+              {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
+            </div></TableCell>
+              <TableCell style={{ color: "var(--colour-text)" }}>
+                Name
+              </TableCell>
+              <TableCell style={{ color: "var(--colour-text)" }}>
+                Version
+              </TableCell>
+              <TableCell style={{ color: "var(--colour-text)" }}>
+                Link
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>{rows}</TableBody>
@@ -54,22 +103,34 @@ function makeSubRow(
   dependencyMap: DependencyMap
 ) {
   // dependencyData contains all the packages and its props (name, version, link etc)
-  const dependencyData = dependencyMap.get(data.id) as DependencyMapElement
+  const dependencyData = dependencyMap.get(data.id) as DependencyMapElement;
   const str =
     dependencyData.name +
     ": " +
     semVerToString(data.version) +
     " -> " +
     semVerToString(dependencyData.version);
-  const [colour, borderColour, colourIndex] = rankToDepColour(rank);
+  const [colour] = rankToDepColour(rank);
   const dep = (
-    <TableRow style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>
+    <TableRow
+      style={{
+        backgroundColor: "var(--colour-background)",
+        color: "var(--colour-font)",
+      }}
+    >
       <col style={{ width: "0%" }} />
       <col style={{ width: "75%" }} />
       <TableCell>
         <Circle style={{ color: colour }} />
       </TableCell>
-      <TableCell style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>{str}</TableCell>
+      <TableCell
+        style={{
+          backgroundColor: "var(--colour-background)",
+          color: "var(--colour-font)",
+        }}
+      >
+        {str}
+      </TableCell>
     </TableRow>
   );
   return dep;
@@ -80,17 +141,29 @@ function makeInverseSubRow(
   rank: number,
   dependencyMap: DependencyMap
 ) {
-  const dependencyData = dependencyMap.get(data.id) as DependencyMapElement
+  const dependencyData = dependencyMap.get(data.id) as DependencyMapElement;
   const str = dependencyData.name + ": " + semVerToString(data.version);
-  const colour = rankToDepColour(rank)[0]
+  const colour = rankToDepColour(rank)[0];
   const dep = (
-    <TableRow style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>
+    <TableRow
+      style={{
+        backgroundColor: "var(--colour-background)",
+        color: "var(--colour-font)",
+      }}
+    >
       <col style={{ width: "0%" }} />
       <col style={{ width: "75%" }} />
-      <TableCell >
+      <TableCell>
         <Circle style={{ color: colour }} />
       </TableCell>
-      <TableCell style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>{str}</TableCell>
+      <TableCell
+        style={{
+          backgroundColor: "var(--colour-background)",
+          color: "var(--colour-font)",
+        }}
+      >
+        {str}
+      </TableCell>
     </TableRow>
   );
   return dep;
@@ -101,7 +174,7 @@ const makeCollapsibleTable = (JSObject: DependencyData) => {
   let rowList: JSX.Element[] = [];
 
   for (const dep of JSObject.deps) {
-    const data = JSObject.depMap.get(dep.id) as DependencyMapElement
+    const data = JSObject.depMap.get(dep.id) as DependencyMapElement;
     let internalSubRows: JSX.Element[] = [];
     let externalSubRows: JSX.Element[] = [];
     let userSubRows: JSX.Element[] = [];
@@ -109,10 +182,10 @@ const makeCollapsibleTable = (JSObject: DependencyData) => {
     let minRank = 2;
 
     for (const i of dep.dependencies) {
-      const iData = JSObject.depMap.get(i.id) as DependencyMapElement
+      const iData = JSObject.depMap.get(i.id) as DependencyMapElement;
       const rank = findRank(i.version, iData.version);
 
-      const depData = JSObject.depMap.get(i.id) as DependencyMapElement
+      const depData = JSObject.depMap.get(i.id) as DependencyMapElement;
       if (depData.internal) {
         internalSubRows.push(makeSubRow(i, rank, JSObject.depMap));
       } else {
