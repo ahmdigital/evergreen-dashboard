@@ -129,6 +129,13 @@ resource "aws_elastic_beanstalk_environment" "this" {
   version_label       = aws_elastic_beanstalk_application_version.this.name
   cname_prefix        = "${local.prefix}-app"
 
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "NPM_CONFIG_PRODUCTION"
+    value     = true
+  }
+  
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "IamInstanceProfile"
