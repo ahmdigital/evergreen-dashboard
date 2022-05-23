@@ -9,7 +9,7 @@ export type PageProps = {
   JSObject: DependencyData;
 };
 
-export function Page(props: PageProps) {
+export default function Page(props: PageProps) {
   return (
     <div className="container">
       <Head>

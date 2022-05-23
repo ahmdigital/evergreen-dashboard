@@ -1,5 +1,5 @@
 import cachedData from "../cachedData.json";
-import { Page } from "../components/Page";
+import Page from "../components/Page";
 import {JSObjectFromJSON} from "../components/dataProcessing";
 
 export default function Home() {
