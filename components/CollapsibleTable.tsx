@@ -25,11 +25,11 @@ import Image from "next/image";
 const CollapsibleTable = (rows: JSX.Element[]) => {
   const [openHelp, setOpenHelp] = useState<boolean>(false);
   return (
-    <div>
+    <div style = {{width: "100%"}}>
       <TableContainer
         component={Paper}
         style={{
-          backgroundColor: "var(--colour-background)",
+          backgroundColor: "var(--colour-container-background)",
           color: "var(--colour-font)",
         }}
       >
@@ -41,25 +41,25 @@ const CollapsibleTable = (rows: JSX.Element[]) => {
             <col
               style={{
                 width: "0%",
-                backgroundColor: "var(--colour-background)",
+                backgroundColor: "var(--colour-container-background)",
               }}
             />
             <col
               style={{
                 width: "75%",
-                backgroundColor: "var(--colour-background)",
+                backgroundColor: "var(--colour-container-background)",
               }}
             />
             <col
               style={{
                 width: "25%",
-                backgroundColor: "var(--colour-background)",
+                backgroundColor: "var(--colour-container-background)",
               }}
             />
             <col
               style={{
                 width: "0%",
-                backgroundColor: "var(--colour-background)",
+                backgroundColor: "var(--colour-container-background)",
               }}
             />
           </colgroup>
@@ -114,7 +114,7 @@ function makeSubRow(
   const dep = (
     <TableRow
       style={{
-        backgroundColor: "var(--colour-background)",
+        backgroundColor: "var(--colour-container-background)",
         color: "var(--colour-font)",
       }}
     >
@@ -125,7 +125,7 @@ function makeSubRow(
       </TableCell>
       <TableCell
         style={{
-          backgroundColor: "var(--colour-background)",
+          backgroundColor: "var(--colour-container-background)",
           color: "var(--colour-font)",
         }}
       >
@@ -147,7 +147,7 @@ function makeInverseSubRow(
   const dep = (
     <TableRow
       style={{
-        backgroundColor: "var(--colour-background)",
+        backgroundColor: "var(--colour-container-background)",
         color: "var(--colour-font)",
       }}
     >
@@ -158,7 +158,7 @@ function makeInverseSubRow(
       </TableCell>
       <TableCell
         style={{
-          backgroundColor: "var(--colour-background)",
+          backgroundColor: "var(--colour-container-background)",
           color: "var(--colour-font)",
         }}
       >
