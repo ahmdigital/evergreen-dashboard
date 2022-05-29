@@ -40,7 +40,6 @@ div.topBarStyle {
   justify-content: center;
   height: max-content;
   width: 85vw;
-  border: var(--border-thick);
   border-bottom: none;
   padding: 0;
   margin-top: 2rem;
@@ -52,7 +51,6 @@ div.barStyle {
   justify-content: center;
   height: max-content;
   width: 85vw;
-  border: var(--border-thick);
   padding: 0;
   background-color: var(--colour-background);
 }

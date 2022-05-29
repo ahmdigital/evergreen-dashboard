@@ -32,8 +32,7 @@ export function Page(props: PageProps) {
         </Layout>
         <Layout>
           <div className={styles.barStyle}>
-            {" "}
-            {makeCollapsibleTable(props.JSObject)}{" "}
+            {makeCollapsibleTable(props.JSObject)}
           </div>
         </Layout>
       </main>
