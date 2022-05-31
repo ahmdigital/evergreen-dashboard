@@ -11,6 +11,9 @@ const CachePath = path.resolve("./dynamicCache.json")
 //TODO: Move to config file
 const timeUntilRefresh = 5 * 60 * 1000 // 5 minutes in milliseconds
 
+let waitingPromise: Promise<void> | null = null
+let promiseResolve: any = null
+
 function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
     return o[propertyName];
 }
@@ -39,17 +42,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	try {
 		var stats = fs.statSync(CachePath);
 		var mtimeMs = stats.mtimeMs;
-
-		cachedData = JSON.parse(fs.readFileSync(CachePath, 'utf8'))
-
+		
 		const dif = current - mtimeMs
 
-		//console.log("Now: " + current + "\nLast Edit: " + mtimeMs + "Dif: " + dif)
-
 		if(dif > timeUntilRefresh){
-			console.log("Cache file is too old. Recreating...")
-			cachedData = null
-		}
+			if(waitingPromise != null){
+				await waitingPromise
+				cachedData = JSON.parse(await fs.promises.readFile(CachePath, 'utf8'))
+			} else{
+				console.log("Cache file is too old. Recreating...")
+				cachedData = null
+				waitingPromise = new Promise(function(resolve, reject){
+					promiseResolve = resolve;
+				});
+			}
+		} else{
+			cachedData = JSON.parse(await fs.promises.readFile(CachePath, 'utf8'))
+		}	
+
+		//console.log("Now: " + current + "\nLast Edit: " + mtimeMs + "Dif: " + dif)
 	} catch (error) {
 		console.log("Cache file does not exist. Intialising...")
 	}
@@ -67,7 +78,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		// Store data in cache files
 		// this always rewrites/overwrites the previous file
 		try {
-			fs.writeFileSync(CachePath, data)
+			await fs.promises.writeFile(CachePath, data)
+			promiseResolve()
+			waitingPromise = null
 			console.log("Recreated cache")
 		} catch (error) {
 			console.log("Failed to create cache. ", error)
