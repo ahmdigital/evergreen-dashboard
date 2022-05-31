@@ -14,8 +14,6 @@ export function InverseSubRow(props: InverseSubRowProps) {
 	const colour = rankToDepColour(props.user.rank)[0];
 	return (
 		<TableRow style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>
-			<col style={{ width: "0%" }} />
-			<col style={{ width: "75%" }} />
 			<TableCell>
 				<Circle style={{ color: colour }} />
 			</TableCell>
