@@ -2,7 +2,7 @@
 import { semVerToString, semVerFromString, findRank } from '../components/semVer';
 
 
-/*  
+/*
     *****************************************************
     unit tests for ToString semantic versioning function
     *****************************************************
@@ -22,7 +22,7 @@ describe('tests for semVerToString function', function () {
         console.log(semVerString);
         expect(semVerString).toBe('1.0.0');
     });
-    
+
     test('semantic versioning string minor release', () => {
         const patchReleaseSemVer = {
             major: 1,
@@ -36,7 +36,7 @@ describe('tests for semVerToString function', function () {
         console.log(semVerString);
         expect(semVerString).toBe('^1.1.0');
     });
-    
+
     test('semantic versioning string bug release', () => {
         const patchReleaseSemVer = {
             major: 1,
@@ -53,7 +53,7 @@ describe('tests for semVerToString function', function () {
 
 });
 
-/*  
+/*
     *******************************************************
     unit tests for FromString semantic versioning function
     *******************************************************
@@ -86,7 +86,7 @@ describe('tests for semVerFromString function', function () {
             skipBug: false,
         });
     });
-    
+
     test('semantic versioning from string minor release', () => {
         const firstReleaseSemVerStr = '^1.1.0';
         const semVer = semVerFromString(firstReleaseSemVerStr);
@@ -100,7 +100,7 @@ describe('tests for semVerFromString function', function () {
             skipBug: true,
         });
     });
-    
+
     test('semantic versioning from string patch release', () => {
         const patchReleaseSemVerStr = '^1.0.1';
         const semVer = semVerFromString(patchReleaseSemVerStr);
@@ -159,7 +159,7 @@ describe('tests for semVerFromString function', function () {
 });
 
 
-/*  
+/*
     *******************************************************
     unit tests for findRank function
     *******************************************************

@@ -15,7 +15,7 @@ export type ProcessedDependencyData = (DependencyMapElement & {
 })[]
 
 
-export function useProcessDependencyData(JSObject: DependencyData) {	
+export function useProcessDependencyData(JSObject: DependencyData) {
 	const rowList: ProcessedDependencyData = [];
 
 	for (const dep of JSObject.deps) {

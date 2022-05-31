@@ -135,7 +135,7 @@ resource "aws_elastic_beanstalk_environment" "this" {
     name      = "NPM_CONFIG_PRODUCTION"
     value     = true
   }
-  
+
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "IamInstanceProfile"
