@@ -1397,5 +1397,5 @@
 		]
 	],
 	"PyPI": [],
-	"RubyGems": []
+	"RubyGems": [{"0": {"name": "rake","version": "13.0.6","link": "","internal": false,"archived": false}, "1": {"name": "rubocop","version": "1.29.0","link": "","internal": false,"archived": false}, "2": {"name": "webmock","version": "3.14.0","link": "","internal": false,"archived": false}, "3": {"name": "ruby(kubernetes/)","version": "","link": "https://github.com/kubernetes-client/ruby","internal": true,"archived": false}},[{"dep":3,"dependencies":[[0,"~> 13.0.1"],[1,"~> 0.65.0"],[2,"~> 3.5.1"]]}]]
 }
