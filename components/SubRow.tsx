@@ -19,8 +19,6 @@ export function SubRow(props: SubRowProps) {
 	const [colour, borderColour, colourIndex] = rankToDepColour(props.dependency.rank);
 	return (
 		<TableRow style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>
-			<col style={{ width: "0%" }} />
-			<col style={{ width: "75%" }} />
 			<TableCell>
 				<Circle style={{ color: colour }} />
 			</TableCell>
