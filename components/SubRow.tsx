@@ -1,7 +1,7 @@
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { Circle } from "@mui/icons-material";
-import { rankToDepColour, semVerToString } from "./semVer";
+import { rankToDepColour, semVerToString } from "../src/semVer";
 import { PackageData } from "../hooks/useProcessDependencyData";
 
 export type SubRowProps = {

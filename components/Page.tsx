@@ -4,7 +4,7 @@ import { InverseSubRow } from "./InverseSubRow";
 import { SubRow } from "./SubRow";
 import Head from 'next/head';
 import styles from '../components/treeView.module.css';
-import { DependencyData } from './dataProcessing';
+import { DependencyData } from '../src/dataProcessing';
 import { useProcessDependencyData } from '../hooks/useProcessDependencyData';
 import Row from './Row';
 import { Layout } from './Layout';

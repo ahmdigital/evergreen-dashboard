@@ -1,5 +1,5 @@
-import { DependencyData, DependencyMapElement, ID } from "../components/dataProcessing";
-import { findRank, SemVer } from "../components/semVer";
+import { DependencyData, DependencyMapElement, ID } from "../src/dataProcessing";
+import { findRank, SemVer } from "../src/semVer";
 
 export type PackageData = DependencyMapElement & {
 	rank: number;

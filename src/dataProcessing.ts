@@ -2,7 +2,7 @@ import React from 'react'
 import { json } from 'stream/consumers';
 import styles from '../components/treeView.module.css';
 import { getDepColour, rankToDepColour, SemVer, semVerFromString } from "./semVer";
-import { Colours } from './Colours';
+import { Colours } from '../components/Colours';
 
 let internalDependencies = new Set<ID>();
 export type ID = number & { __brand: "ID"}

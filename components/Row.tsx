@@ -13,7 +13,7 @@ import { Circle } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 
 import Tabs from "./Tabs";
-import {semVerToString, rankToDepColour} from "./semVer";
+import {semVerToString, rankToDepColour} from "../src/semVer";
 import styles from "../components/row.module.css";
 
 import {Colours} from "../components/Colours"
