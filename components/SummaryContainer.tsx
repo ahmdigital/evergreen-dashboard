@@ -6,6 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Grid from "@mui/material/Grid";
 import ReposOverviewTable from "../components/summary_components/ReposOverviewTable";
+import UrgentRepos from "../components/summary_components/UrgentRepos";
 
 export default function SummaryContainer() {
     return (
@@ -21,11 +22,13 @@ export default function SummaryContainer() {
                 <Grid item xs={12} sm={4}>
                     <div className={styles.summaryComponent}>
                         <h3 className={styles.summaryStyle}>Repos Overview</h3>
+                        <ReposOverviewTable/>
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={4}>
                     <div className={styles.summaryComponent}>
                         <h3 className={styles.summaryStyle}>Urgent Repos</h3>
+                        <UrgentRepos/>
                     </div>
                 </Grid>
             </Grid>
