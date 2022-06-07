@@ -133,7 +133,7 @@ resource "aws_elastic_beanstalk_environment" "this" {
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "NPM_CONFIG_PRODUCTION"
-    value     = true
+    value     = false
   }
   
   setting {
