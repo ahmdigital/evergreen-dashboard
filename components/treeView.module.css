@@ -60,6 +60,7 @@ h3.h3ContainerStyle {
   color: "var(--colour-font)"
 }
 
+
 /* -----------------END: SHARED SECTION CONTAINERS CSS ------------------- */
 
 /* -----------------START: HEADER CONTAINER CSS ------------------- */
@@ -100,7 +101,37 @@ div.summaryStyle {
   align-items: flex-start;
 }
 
+div.summaryComponent {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  height: max-content;
+  width: 100%;
+  max-width: 85vw; /*is probably redundant*/
+  background-color: rgb(242, 240, 238);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 1.5rem 2rem 2rem 2rem;
+  margin: 1.1rem;
+  box-sizing: border-box;
+}
 
+h2.percentStyle {
+  color: rgba(31, 162, 25, 0.8);
+  font-size: 60px;
+  font-weight: 500;
+  text-align: left;
+}
+
+div.percentComponent {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
 
 div.summaryHeader {
   width: 100%;
@@ -138,8 +169,8 @@ div.searchBar:focus-within{
 /* removes blue outline */
 div.searchBar input[type=text]:focus{
   outline: none;
-  
 }
+
 div.searchBar input{
   padding: 0.65rem;
   background: #FFFFFF;

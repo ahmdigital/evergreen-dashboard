@@ -9,9 +9,7 @@ export default function SearchBar() {
             <div className={styles.searchBar}>
                 <input type="text" placeholder="Search Repository..." />
                 <Image src={magnifyingGlass}  width={24} height={26}/>
-                
             </div>
 
-    
     )
 }
