@@ -20,7 +20,7 @@ function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
 	return o[propertyName];
 }
 
-async function getDataFromAPI(api: "test" | "loadLatest", request: "npm" | "PyPI" | "RubyGems"){
+async function getDataFromAPI(api: "loadNew" | "loadLatest", request: "npm" | "PyPI" | "RubyGems"){
 	console.log("Start")
 	let JSObject = await fetch("api/" + api)
 	let retries = 10
@@ -39,7 +39,7 @@ async function getDataFromAPI(api: "test" | "loadLatest", request: "npm" | "PyPI
 }
 
 async function getNewVersion(request: "npm" | "PyPI" | "RubyGems"){
-	return getDataFromAPI("test", request)
+	return getDataFromAPI("loadNew", request)
 }
 
 async function getCurrentVersion(request: "npm" | "PyPI" | "RubyGems"){
