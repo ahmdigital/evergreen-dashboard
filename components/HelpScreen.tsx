@@ -3,18 +3,18 @@ import legend from "./images/legend.png";
 import styles from "./HelpScreen.module.css";
 import Image from "next/image";
 
-const HelpScreen = ({
-  closeHelp,
-}: {
-  closeHelp: (value: boolean | ((prev: boolean) => boolean)) => void;
-}) => {
+export type HelpScreenProps = {
+	closeHelp: (_value: boolean | ((_prev: boolean) => boolean)) => void
+}
+
+export default function HelpScreen(props: HelpScreenProps) {
   return (
     <div className={styles.modalBg}>
       <div className={styles.modalContainer}>
         <div
           className={styles.closeHelpScreen}
           onClick={() => {
-            closeHelp(false);
+            props.closeHelp(false);
           }}
         >
           <Image
@@ -35,5 +35,3 @@ const HelpScreen = ({
     </div>
   );
 };
-
-export default HelpScreen;

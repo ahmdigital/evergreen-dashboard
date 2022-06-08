@@ -1,4 +1,4 @@
-import { Colours } from './Colours';
+import { Colours } from '../components/Colours';
 
 export type SemVer = {
 	major: number;
