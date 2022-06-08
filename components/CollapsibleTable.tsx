@@ -7,7 +7,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-
 type CollapsibleTableProps = {
 	children: ReactNode	//ment to be a list of rows
 }

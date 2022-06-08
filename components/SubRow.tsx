@@ -16,7 +16,7 @@ export function SubRow(props: SubRowProps) {
 		semVerToString(props.dependency.usedVersion) +
 		" -> " +
 		semVerToString(props.dependency.version);
-	const [colour, borderColour, colourIndex] = rankToDepColour(props.dependency.rank);
+	const [colour] = rankToDepColour(props.dependency.rank);
 	return (
 		<TableRow style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>
 			<TableCell>

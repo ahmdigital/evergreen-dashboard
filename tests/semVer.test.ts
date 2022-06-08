@@ -1,5 +1,5 @@
 // testing file for the dataProcessing component
-import { semVerToString, semVerFromString, findRank } from '../components/semVer';
+import { semVerToString, semVerFromString, findRank } from '../src/semVer';
 
 
 /*

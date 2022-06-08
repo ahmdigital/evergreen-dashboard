@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -8,15 +8,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { makeStyles } from "@mui/styles";
 import { Circle } from "@mui/icons-material";
-import { Typography } from "@mui/material";
 
 import Tabs from "./Tabs";
 import {semVerToString, rankToDepColour} from "../src/semVer";
 import styles from "../components/row.module.css";
-
-import {Colours} from "../components/Colours"
 
 export type Props = {
 	subRows: { internal: JSX.Element[], external: JSX.Element[], user: JSX.Element[], final: boolean }
