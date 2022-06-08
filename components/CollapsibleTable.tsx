@@ -18,7 +18,7 @@ import {
   DependencyListSingleDep,
   DependencyMapElement,
 } from "./dataProcessing";
-import { findRank, rankToDepColour, semVerToString, SemVer } from "./semVer";
+import { findRank, rankToDepColour, semVerToString } from "./semVer";
 import Image from "next/image";
 
 // Creates the whole table

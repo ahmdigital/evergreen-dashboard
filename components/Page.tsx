@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import makeCollapsibleTable from "./CollapsibleTable";
 import Head from "next/head";
 import CircularProgress from '@mui/material/CircularProgress';

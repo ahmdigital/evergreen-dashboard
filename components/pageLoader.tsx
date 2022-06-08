@@ -10,11 +10,11 @@ import Box from '@mui/material/Box';
 enum Mode{
 	Frontend,
 	StandaloneBackend,
-	IntegratedBacked
+	IntegratedBackend
 }
 
 //TODO: Move to config file
-const mode: Mode = Mode.IntegratedBacked
+const mode: Mode = Mode.IntegratedBackend
 
 function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
 	return o[propertyName];
@@ -82,7 +82,7 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 				setData(JSObject as any)
 				setLoading(false)
 			} break;
-			case(Mode.IntegratedBacked): {
+			case(Mode.IntegratedBackend): {
 				getCurrentVersion(request).then((result) => {
 					setData({oldVersion: true, data: result as any} as any)
 				}).then(async () => {
@@ -96,7 +96,7 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 	}, [])
 
 	if (isLoading) {
-		if(mode == Mode.IntegratedBacked){
+		if(mode == Mode.IntegratedBackend){
 			//TODO: Support overwriting current page data rather than recreating the whole page.
 			//TODO: Alternatively, copy the state (i.e. which tabs are open) to the new page
 			if(data != null && (data! as {oldVersion: boolean, data: any}).oldVersion){
