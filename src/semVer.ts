@@ -1,4 +1,5 @@
 import { Colours } from '../components/Colours';
+import config from "../config.json"
 
 export type SemVer = {
 	major: number;
@@ -8,6 +9,14 @@ export type SemVer = {
 	skipMinor: boolean;
 	skipBug: boolean;
 };
+
+function semVerToArray(semVer: SemVer): number[]{
+	return [semVer.major, semVer.minor, semVer.bug];
+}
+
+function semVerToSkipArray(semVer: SemVer): boolean[]{
+	return [false, semVer.skipMinor, semVer.skipBug];
+}
 
 export function semVerToString(semVer: SemVer): string {
 	let res: string = ""
@@ -78,6 +87,12 @@ export function semVerFromString(semVer: string): SemVer {
 	}
 
 	const bugAndRest = parts[2].split("-")
+	//Handle negative number
+	if(bugAndRest[0] == ""){
+		bugAndRest.shift();
+		bugAndRest[0] = '-' + bugAndRest[0];
+	}
+
 	return {
 		major: parseInt(parts[0]),
 		minor: parseInt(parts[1]),
@@ -88,16 +103,36 @@ export function semVerFromString(semVer: string): SemVer {
 	}
 }
 
+function compareWithCutoff(used: SemVer, current: SemVer, allowance: SemVer, ignoreSkips: boolean = true): boolean{
+	const U = semVerToArray(used);
+	const S = semVerToSkipArray(used);
+	const C = semVerToArray(current);
+	const A = semVerToArray(allowance);
+
+	let pass = true;
+	for(let i = 0; i != U.length; ++i){
+		if(A[i] == -1){ continue; }
+		pass &&= (U[i] + A[i] >= C[i]) || (S[i] && ignoreSkips);
+	}
+
+	return pass;
+}
+
 export function findRank(used: SemVer, current: SemVer): number {
 	//I think this is correct? This actually raises an issue, as most projects will enable downloading the newest minor version, but
 	//there's no enforcement of the newest version being used, nor does it reflect what is currently deployed. Currently, ^ will lower the rank by one.
-	if (used.major < current.major) {
+	// if (used.major < current.major) {
+	// 	return 0;
+	// } else if(used.minor + 5 < current.minor){
+	// 	return used.skipMinor ? 1 : 0;
+	// } else if (used.minor < current.minor) {
+	// 	return used.skipMinor ? 2 : 1;
+	// }
+	if(!compareWithCutoff(used, current, semVerFromString(config.rankCutoff.major))){
 		return 0;
-	} else if(used.minor + 5 < current.minor){
-		return used.skipMinor ? 1 : 0;
-	} else if (used.minor < current.minor) {
-		return used.skipMinor ? 2 : 1;
-	}
+	} else if(!compareWithCutoff(used, current, semVerFromString(config.rankCutoff.major), false) || !compareWithCutoff(used, current, semVerFromString(config.rankCutoff.minor))){
+		return 1;
+	} 
 	return 2;
 }
 
