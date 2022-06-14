@@ -1,6 +1,6 @@
 import cachedData from "../cachedData.json";
 import { Page } from "../components/Page";
-import {JSObjectFromJSON} from "../components/dataProcessing";
+import {JSObjectFromJSON} from "../src/dataProcessing";
 
 export default function Home() {
     //Converts the raw loaded data into a more useable form
