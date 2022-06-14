@@ -153,7 +153,7 @@ describe('tests for semVerFromString function', function () {
             bug: 1,
             rest: "",
             skipMinor: false,
-            skipBug: true,
+            skipBug: false,
         });
     });
 });
@@ -188,7 +188,7 @@ describe('tests for findRank function', function () {
     });
 
     // Testing for rank 0: red  5 = minors behind
-    test('Testing for rank 0: red  5 = minors behind', () => {
+    test('Testing for rank 0: red  >5 = minors behind', () => {
         const used = {
             major: 3,
             minor: 0,
@@ -199,7 +199,7 @@ describe('tests for findRank function', function () {
         }
         const curr = {
             major: 3,
-            minor: 5,
+            minor: 6,
             bug: 0,
             rest: "",
             skipMinor: false,
