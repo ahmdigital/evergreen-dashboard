@@ -121,13 +121,6 @@ function compareWithCutoff(used: SemVer, current: SemVer, allowance: SemVer, ign
 export function findRank(used: SemVer, current: SemVer): number {
 	//I think this is correct? This actually raises an issue, as most projects will enable downloading the newest minor version, but
 	//there's no enforcement of the newest version being used, nor does it reflect what is currently deployed. Currently, ^ will lower the rank by one.
-	// if (used.major < current.major) {
-	// 	return 0;
-	// } else if(used.minor + 5 < current.minor){
-	// 	return used.skipMinor ? 1 : 0;
-	// } else if (used.minor < current.minor) {
-	// 	return used.skipMinor ? 2 : 1;
-	// }
 	if(!compareWithCutoff(used, current, semVerFromString(config.rankCutoff.major))){
 		return 0;
 	} else if(!compareWithCutoff(used, current, semVerFromString(config.rankCutoff.major), false) || !compareWithCutoff(used, current, semVerFromString(config.rankCutoff.minor))){
