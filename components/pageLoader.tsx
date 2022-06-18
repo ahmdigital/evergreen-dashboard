@@ -1,6 +1,6 @@
 import cachedData from "../cachedData.json";
-import Page from "../components/Page";
-import { JSObjectFromJSON } from "../components/dataProcessing";
+import Page from "./Page";
+import { JSObjectFromJSON } from "../src/dataProcessing";
 import { getJsonStructure } from "repocrawler/src/index"
 import config from "repocrawler/config.json"
 import { useEffect, useState } from "react";
@@ -60,7 +60,7 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 
 	useEffect(() => {
 		setLoading(true)
-		
+
 		switch(mode){
 			case(Mode.Frontend): {
 				const accessToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN!
@@ -75,7 +75,7 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 					setData(result as any)
 					setLoading(false)
 				})
-			} break; 
+			} break;
 			case(Mode.StandaloneBackend): {
 				const data = getProperty((cachedData as { npm: any, PyPI: any, RubyGems: any })!, request)
 				let JSObject = JSObjectFromJSON(data)

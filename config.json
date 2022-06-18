@@ -1,3 +1,7 @@
 {
-	"targetOrganisation": "kubernetes-client"
+	"targetOrganisation": "kubernetes-client",
+	"rankCutoff": {
+		"major": "0.5.-1",
+		"minor": "0.0.-1"
+	}
 }
