@@ -11,7 +11,7 @@ Some test cases to consider:
   i.e. test makeSubRow inputs rank and dependencyMap
 - Testing output of functions are correct type,
   i.e. test makeSubRow returns JSX.Element
-- 
+-
 */
 
 

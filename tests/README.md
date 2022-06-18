@@ -7,10 +7,10 @@ To get more testing data in tabulated format run the commands:
 ```
 npm test -- --coverage
 ```
-*Note that this will take longer than the other test command. 
+*Note that this will take longer than the other test command.
 
 Currently tests are included for:
 * semantic versioning file functions
 * Collapsible Table rendering
 
-More to be added. 
+More to be added.

@@ -16,7 +16,7 @@ interface TabPanelProps {
 }
 
 // Using createTheme for customising Tabs text
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((_) => ({
   indicator: {
     backgroundColor: "black",
     height: "10px",
@@ -85,7 +85,7 @@ const Tabs = (props: Props) => {
   const internal = props.subRows.internal;
   const external = props.subRows.external;
   const user = props.subRows.user;
-  const final = props.subRows.final;
+  //const final = props.subRows.final;
 
   const [tabVal, setTabVal] = useState(0);
   const classes = useStyles();
