@@ -1,6 +1,6 @@
 import cachedData from "../cachedData.json";
-import Page from "../components/Page";
-import { JSObjectFromJSON } from "../components/dataProcessing";
+import Page from "./Page";
+import { JSObjectFromJSON } from "../src/dataProcessing";
 import { getJsonStructure } from "evergreen-org-crawler/src/index"
 import config from "evergreen-org-crawler/config.json"
 import { useEffect, useState } from "react";
@@ -10,17 +10,17 @@ import Box from '@mui/material/Box';
 enum Mode{
 	Frontend,
 	StandaloneBackend,
-	IntegratedBacked
+	IntegratedBackend
 }
 
 //TODO: Move to config file
-const mode: Mode = Mode.IntegratedBacked
+const mode: Mode = Mode.IntegratedBackend
 
 function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
 	return o[propertyName];
 }
 
-async function getDataFromAPI(api: "test" | "loadLatest", request: "npm" | "PyPI" | "RubyGems"){
+async function getDataFromAPI(api: "loadNew" | "loadLatest", request: "npm" | "PyPI" | "RubyGems"){
 	console.log("Start")
 	let JSObject = await fetch("api/" + api)
 	let retries = 10
@@ -39,7 +39,7 @@ async function getDataFromAPI(api: "test" | "loadLatest", request: "npm" | "PyPI
 }
 
 async function getNewVersion(request: "npm" | "PyPI" | "RubyGems"){
-	return getDataFromAPI("test", request)
+	return getDataFromAPI("loadNew", request)
 }
 
 async function getCurrentVersion(request: "npm" | "PyPI" | "RubyGems"){
@@ -60,7 +60,7 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 
 	useEffect(() => {
 		setLoading(true)
-		
+
 		switch(mode){
 			case(Mode.Frontend): {
 				const accessToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN!
@@ -75,14 +75,14 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 					setData(result as any)
 					setLoading(false)
 				})
-			} break; 
+			} break;
 			case(Mode.StandaloneBackend): {
 				const data = getProperty((cachedData as { npm: any, PyPI: any, RubyGems: any })!, request)
 				let JSObject = JSObjectFromJSON(data)
 				setData(JSObject as any)
 				setLoading(false)
 			} break;
-			case(Mode.IntegratedBacked): {
+			case(Mode.IntegratedBackend): {
 				getCurrentVersion(request).then((result) => {
 					setData({oldVersion: true, data: result as any} as any)
 				}).then(async () => {
@@ -96,7 +96,7 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 	}, [])
 
 	if (isLoading) {
-		if(mode == Mode.IntegratedBacked){
+		if(mode == Mode.IntegratedBackend){
 			//TODO: Support overwriting current page data rather than recreating the whole page.
 			//TODO: Alternatively, copy the state (i.e. which tabs are open) to the new page
 			if(data != null && (data! as {oldVersion: boolean, data: any}).oldVersion){

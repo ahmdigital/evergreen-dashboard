@@ -307,3 +307,4 @@ $RECYCLE.BIN/
 
 other/*
 dynamicCache.json
+**/*.zip

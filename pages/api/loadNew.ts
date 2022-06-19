@@ -7,6 +7,7 @@ import config from "evergreen-org-crawler/config.json"
 
 // Cache files are stored inside ./next folder
 const CachePath = path.resolve("./dynamicCache.json")
+const EmptyCachePath = path.resolve("./defaultDynamicCache.json")
 
 //TODO: Move to config file
 const timeUntilRefresh = 5 * 60 * 1000 // 5 minutes in milliseconds
@@ -24,7 +25,7 @@ async function createData(request: "npm" | "PyPI" | "RubyGems" | null = null){
 		PyPI: "PYPI",
 		RubyGems: "RUBYGEMS"
 	}
-	
+
 	let api = null
 	if(request != null){
 		api = [getProperty(requestToAPI, request)]
@@ -42,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	try {
 		var stats = fs.statSync(CachePath);
 		var mtimeMs = stats.mtimeMs;
-		
+
 		const dif = current - mtimeMs
 
 		if(dif > timeUntilRefresh){
@@ -58,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			}
 		} else{
 			cachedData = JSON.parse(await fs.promises.readFile(CachePath, 'utf8'))
-		}	
+		}
 
 		//console.log("Now: " + current + "\nLast Edit: " + mtimeMs + "Dif: " + dif)
 	} catch (error) {
@@ -71,22 +72,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		// 	lastEdit: mtimeMs,
 		// 	dif: (current - mtimeMs)
 		// }
-
-		const data = await createData()
-		console.log(data)
-
 		// Store data in cache files
 		// this always rewrites/overwrites the previous file
 		try {
+			const data = await createData()
+			console.log(data)
+
 			await fs.promises.writeFile(CachePath, data)
 			promiseResolve()
 			waitingPromise = null
 			console.log("Recreated cache")
+
+			cachedData = JSON.parse(data)
 		} catch (error) {
 			console.log("Failed to create cache. ", error)
-		}
 
-		cachedData = JSON.parse(data)
+			try {
+				cachedData = JSON.parse(await fs.promises.readFile(CachePath, 'utf8'))
+			} catch {
+				console.log("No cached file exists as a fallback; server will crash.")
+				cachedData = JSON.parse(await fs.promises.readFile(EmptyCachePath, 'utf8'))
+			}
+		}
 	} else{
 		console.log("Served cache")
 	}
