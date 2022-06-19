@@ -1,8 +1,8 @@
 import cachedData from "../cachedData.json";
 import Page from "../components/Page";
 import { JSObjectFromJSON } from "../components/dataProcessing";
-import { getJsonStructure } from "repocrawler/src/index"
-import config from "repocrawler/config.json"
+import { getJsonStructure } from "evergreen-org-crawler/src/index"
+import config from "evergreen-org-crawler/config.json"
 import { useEffect, useState } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';

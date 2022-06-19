@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
 }
-const withTM = require('next-transpile-modules')(['repocrawler']);
+const withTM = require('next-transpile-modules')(['evergreen-org-crawler']);
 
 module.exports = withTM({
   webpack5: true,

@@ -22,7 +22,7 @@
     "query-registry": "^2.5.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "repocrawler": "file:../crawler"
+    "evergreen-org-crawler": "0.0.2"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.13.0",

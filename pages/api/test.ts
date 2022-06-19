@@ -2,8 +2,8 @@ import * as fs from "fs";
 import path from "path";
 import { NextApiRequest, NextApiResponse} from 'next'
 
-import { getJsonStructure } from "repocrawler/src/index"
-import config from "repocrawler/config.json"
+import { getJsonStructure } from "evergreen-org-crawler/src/index"
+import config from "evergreen-org-crawler/config.json"
 
 // Cache files are stored inside ./next folder
 const CachePath = path.resolve("./dynamicCache.json")
