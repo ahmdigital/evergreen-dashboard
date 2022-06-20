@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@emotion/css": "^11.9.0",
-    "@emotion/react": "^11.9.0",
+    "@emotion/react": "^11.9.3",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
