@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import { CollapsibleTable } from "./CollapsibleTable";
 import { InverseSubRow } from "./InverseSubRow";
 import { SubRow } from "./SubRow";
 import styles from "../components/treeView.module.css";
 import { useProcessDependencyData } from "../hooks/useProcessDependencyData";
 import Row from "./Row";
-import { Layout } from "./Layout";
+import Layout from "./Layout";
 import Head from "next/head";
 import DependenciesContainer from "../components/DependenciesContainer";
 import HeaderContainer from "./HeaderContainer";
 import SummaryContainer from "./SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 export type PageProps = {
-  JSObject: DependencyData;
+	JSObject: DependencyData;
+	finalData: boolean
 };
 
 export function Page(props: PageProps) {
@@ -21,6 +23,13 @@ export function Page(props: PageProps) {
   const rows = useProcessDependencyData(props.JSObject);
   const rankArray = { green: 0, red: 0, yellow: 0 };
   const diplayedRows = [];
+
+  let loadingWheel: any = null;
+	if (!props.finalData) {
+		loadingWheel = <Box sx={{ display: "inline-block", float: "right", justifyContent: 'center', alignItems: 'center', width: "10vh" }}>
+			<CircularProgress />
+		</Box>
+	}
 
   const jsxRows = rows.map((row) => (
     <Row
@@ -76,6 +85,7 @@ export function Page(props: PageProps) {
       <main style={{ padding: 0 }}>
         <Layout>
           <HeaderContainer />
+          {loadingWheel}
           <SummaryContainer rankArray={rankArray}/>
           <DependenciesContainer
             JSObject={props.JSObject}
@@ -88,30 +98,3 @@ export function Page(props: PageProps) {
     </div>
   );
 }
-
-// export function Page(props: PageProps) {
-//   return (
-//     <div className="container">
-//       <Head>
-//         <title>Evergreen dashboard</title>
-//       </Head>
-//       <main style={{ padding: 0 }}>
-//         <Layout>
-//           <div className={styles.topBarStyle}>
-//             <h1
-//               className="title"
-//               style={{
-//                 padding: "0 32px",
-//                 fontWeight: 600,
-//                 color: "var(--colour-font)",
-//               }}
-//             >
-//               evergreen
-//             </h1>
-//           </div>
-//         </Layout>
-
-//       </main>
-//     </div>
-//   );
-// }

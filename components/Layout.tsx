@@ -5,7 +5,7 @@ type LayoutProps = {
 	children: ReactNode
 }
 
-export function Layout(props: LayoutProps) {
+export default function Layout(props: LayoutProps) {
 	return <>
 		<main className={styles.main}>
 			{props.children}
