@@ -1,8 +1,8 @@
 // testing file for the dataProcessing component
-import { semVerToString, semVerFromString, findRank } from '../components/semVer';
+import { semVerToString, semVerFromString, findRank } from '../src/semVer';
 
 
-/*  
+/*
     *****************************************************
     unit tests for ToString semantic versioning function
     *****************************************************
@@ -22,7 +22,7 @@ describe('tests for semVerToString function', function () {
         console.log(semVerString);
         expect(semVerString).toBe('1.0.0');
     });
-    
+
     test('semantic versioning string minor release', () => {
         const patchReleaseSemVer = {
             major: 1,
@@ -36,7 +36,7 @@ describe('tests for semVerToString function', function () {
         console.log(semVerString);
         expect(semVerString).toBe('^1.1.0');
     });
-    
+
     test('semantic versioning string bug release', () => {
         const patchReleaseSemVer = {
             major: 1,
@@ -53,7 +53,7 @@ describe('tests for semVerToString function', function () {
 
 });
 
-/*  
+/*
     *******************************************************
     unit tests for FromString semantic versioning function
     *******************************************************
@@ -86,7 +86,7 @@ describe('tests for semVerFromString function', function () {
             skipBug: false,
         });
     });
-    
+
     test('semantic versioning from string minor release', () => {
         const firstReleaseSemVerStr = '^1.1.0';
         const semVer = semVerFromString(firstReleaseSemVerStr);
@@ -100,7 +100,7 @@ describe('tests for semVerFromString function', function () {
             skipBug: true,
         });
     });
-    
+
     test('semantic versioning from string patch release', () => {
         const patchReleaseSemVerStr = '^1.0.1';
         const semVer = semVerFromString(patchReleaseSemVerStr);
@@ -153,13 +153,13 @@ describe('tests for semVerFromString function', function () {
             bug: 1,
             rest: "",
             skipMinor: false,
-            skipBug: true,
+            skipBug: false,
         });
     });
 });
 
 
-/*  
+/*
     *******************************************************
     unit tests for findRank function
     *******************************************************
@@ -188,7 +188,7 @@ describe('tests for findRank function', function () {
     });
 
     // Testing for rank 0: red  5 = minors behind
-    test('Testing for rank 0: red  5 = minors behind', () => {
+    test('Testing for rank 0: red  >5 = minors behind', () => {
         const used = {
             major: 3,
             minor: 0,
@@ -199,7 +199,7 @@ describe('tests for findRank function', function () {
         }
         const curr = {
             major: 3,
-            minor: 5,
+            minor: 6,
             bug: 0,
             rest: "",
             skipMinor: false,
