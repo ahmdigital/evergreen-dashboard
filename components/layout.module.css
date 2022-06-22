@@ -1,7 +1,14 @@
 .main {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 	background-color: var(--colour-background);
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 3.3rem;
+	padding-bottom: 3.3rem;
+	max-height: max-content;
+	
   }
 
   .main > section {

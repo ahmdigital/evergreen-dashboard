@@ -51,13 +51,20 @@ export function semVerFromString(semVer: string): SemVer {
 		} else if (semVer[0] == '~') {
 			if(semVer[1] == '>'){
 				rubyGemsSkipLast = true
-				semVer = semVer.substring(2)
+				semVer = semVer.substring(1)
 			}
 			semVer = semVer.substring(1)
 			skipBug = true
 		} else if (semVer[0] == '=') {
 			semVer = semVer.substring(1)
-		} else{
+		} else if (semVer[0] == '>'){
+			if(semVer[1] == '>'){
+				semVer = semVer.substring(1)
+			}
+			semVer = semVer.substring(1)
+			skipMinor = true
+			skipBug = true
+		}else{
 			break
 		}
 	}
@@ -125,7 +132,7 @@ export function findRank(used: SemVer, current: SemVer): number {
 		return 0;
 	} else if(!compareWithCutoff(used, current, semVerFromString(config.rankCutoff.major), false) || !compareWithCutoff(used, current, semVerFromString(config.rankCutoff.minor))){
 		return 1;
-	} 
+	}
 	return 2;
 }
 

@@ -22,7 +22,8 @@
 	--rank-light-red: #fcc;
 	--rank-red-border: 1px solid red;
 	--colour-font: #000;
-	--colour-background: #fff;
+	--colour-background: #F2F0EE;
+	--colour-container-background: #fff;
 	--colour-black: #000;
 	--border-thick: .5rem solid  var(--colour-black);
 	--border-thick-halved: .25rem solid  var(--colour-black);

@@ -57,13 +57,13 @@ export default function Row(props: {rank: number, row: any} & Props) {
       </TableRow>
       <TableRow>
         <TableCell
-          style={{ paddingBottom: 0, paddingTop: 0, backgroundColor: "var(--colour-background)" }}
+          style={{ paddingBottom: 0, paddingTop: 0, backgroundColor: "var(--colour-container-background)" }}
           colSpan={6}
         >
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Table size="small" aria-label="dependencies">
-                <TableHead style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>
+                <TableHead style={{backgroundColor: "var(--colour-container-background)", color: "var(--colour-font)" }}>
                   <TableRow>
                     <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
                       <Tabs subRows={subRows}></Tabs>

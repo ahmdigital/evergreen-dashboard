@@ -12,7 +12,7 @@ type CollapsibleTableProps = {
 }
 
 // Creates the whole table
-export function CollapsibleTable(props: CollapsibleTableProps){
+export default function CollapsibleTable(props: CollapsibleTableProps){
 	return (
 		<div>
 			<TableContainer component={Paper} style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>

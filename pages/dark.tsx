@@ -1,13 +1,7 @@
-import cachedData from "../cachedData.json";
-import { Page } from "../components/Page";
-import {JSObjectFromJSON} from "../src/dataProcessing";
+import PageLoader from "../components/pageLoader"
 
-export default function Home() {
-    //Converts the raw loaded data into a more useable form
-    //This is what all functions should use, rather than relying on any specifics of the JSON represetnation (which is not stable).
-    const JSObject = JSObjectFromJSON(cachedData.npm as [any, {dep: number, dependencies: (string | number)[][]}[]] | never[])
-
-	let page = <Page  JSObject={JSObject} />
+export default function Profile(){
+	let page = PageLoader("npm")
 
 	let script = <button onClick= {function callback(){
 		var root = document.querySelector(":root") as {style: any} | null
@@ -17,7 +11,6 @@ export default function Home() {
 		root?.style.setProperty("--colour-font", "#fff")
 		console.log("Test")}
 	}>Dark Mode</button>
-
 
 	return [script, page]
 }
