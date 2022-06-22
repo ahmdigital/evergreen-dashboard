@@ -1,9 +1,7 @@
 import React, { ReactNode } from "react";
 import CollapsibleTable from "./CollapsibleTable";
-import { PageProps } from "./Page";
 import styles from "../components/treeView.module.css";
 import SearchBar from "./SearchBar";
-import { useProcessDependencyData } from "../hooks/useProcessDependencyData";
 import { DependencyData } from "../src/dataProcessing";
 
 /* Container includes  Search, Filter, Dependencies Table */
@@ -25,5 +23,7 @@ export default function DependenciesContainer(props: {
         <CollapsibleTable>{props.rows}</CollapsibleTable>
       </div>
     </div>
+
+
   );
 }
