@@ -7,5 +7,5 @@ export default function Home() {
     //This is what all functions should use, rather than relying on any specifics of the JSON represetnation (which is not stable).
     const JSObject = JSObjectFromJSON(cachedData.npm as [any, {dep: number, dependencies: (string | number)[][]}[]] | never[])
 
-	return <Page  JSObject={JSObject} />
+	return <Page JSObject={JSObject} />
 }

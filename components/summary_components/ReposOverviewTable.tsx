@@ -7,7 +7,7 @@ import {Colours} from "../../components/Colours"
 import styles from "../../components/summary_components/ReposOverviewTable.module.css";
 
 
-export default function ReposOverViewTable() {
+export default function ReposOverViewTable(props: {rankArray: any}) {
     return (
         <Table>
             <TableRow>
@@ -15,7 +15,7 @@ export default function ReposOverViewTable() {
                     <Circle style = {{color: Colours.red, paddingRight: "5px"}} />
                 </TableCell>
                 <TableCell className={styles.tableCellStyle}>
-                    <p>23 repos</p>
+                    <p>{props.rankArray.red}</p>
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -23,7 +23,7 @@ export default function ReposOverViewTable() {
                     <Circle style = {{color: Colours.orange, paddingRight: "5px"}} />
                 </TableCell>
                 <TableCell className={styles.tableCellStyle}>
-                    <p>47 repos</p>
+                    <p>{props.rankArray.yellow}</p>
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -31,7 +31,7 @@ export default function ReposOverViewTable() {
                     <Circle style = {{color: Colours.green, paddingRight: "5px"}} />
                 </TableCell>
                 <TableCell className={styles.tableCellStyle}>
-                    <p>19 repos</p>
+                    <p>{props.rankArray.green}</p>
                 </TableCell>
             </TableRow>
         </Table>

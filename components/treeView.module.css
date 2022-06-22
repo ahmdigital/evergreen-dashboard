@@ -107,7 +107,7 @@ div.summaryComponent {
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  height: max-content;
+  height: 100%;/*max-content;*/
   width: 100%;
   max-width: 85vw; /*is probably redundant*/
   background-color: rgb(242, 240, 238);
@@ -119,8 +119,8 @@ div.summaryComponent {
 }
 
 h2.percentStyle {
-  color: rgba(31, 162, 25, 0.8);
-  font-size: 60px;
+  color: white;
+  font-size: 100px;
   font-weight: 500;
   text-align: left;
 }
