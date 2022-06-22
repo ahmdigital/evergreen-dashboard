@@ -1,5 +1,5 @@
 import cachedData from "../cachedData.json";
-import Page from "./Page";
+import {Page} from "./Page";
 import { JSObjectFromJSON } from "../src/dataProcessing";
 import { getJsonStructure } from "evergreen-org-crawler/src/index"
 import config from "evergreen-org-crawler/config.json"
@@ -108,7 +108,7 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 			<CircularProgress />
 		</Box>
 	}
-	if (!data) { return <p>Failed to load data!</p> }
+	if (!data) { return <p></p> } //Failed to load data!
 
 	return <Page JSObject={data} finalData={true}/>
 }
