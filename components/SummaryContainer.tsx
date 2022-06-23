@@ -1,12 +1,7 @@
 import React from "react";
 import styles from "../components/treeView.module.css";
-import Table from "@mui/material/Table";
-import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 import Grid from "@mui/material/Grid";
 import ReposOverviewTable from "../components/summary_components/ReposOverviewTable";
-import UrgentRepos from "../components/summary_components/UrgentRepos";
 
 export default function SummaryContainer(props: { rankArray: any }) {
   const totalRepos =

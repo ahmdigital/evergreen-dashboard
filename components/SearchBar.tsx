@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import styles from "../components/treeView.module.css";
 import magnifyingGlass from "./images/magnifying-glass.svg";

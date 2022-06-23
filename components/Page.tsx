@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { InverseSubRow } from "./InverseSubRow";
 import { SubRow } from "./SubRow";
-import styles from "../components/treeView.module.css";
 import { useProcessDependencyData } from "../hooks/useProcessDependencyData";
 import Row from "./Row";
 import Layout from "./Layout";
@@ -30,6 +29,9 @@ export function Page(props: PageProps) {
 			<CircularProgress />
 		</Box>
 	}
+
+	//Sort alphabetically by name
+	rows.sort((a, b) => a.name.localeCompare(b.name))
 
   const jsxRows = rows.map((row) => (
     <Row
@@ -69,7 +71,7 @@ export function Page(props: PageProps) {
 
     if (
       (searchTerm.length == 0 ||
-        row.name.toLowerCase().includes(searchTerm.toLowerCase())) 
+        row.name.toLowerCase().includes(searchTerm.toLowerCase()))
       // &&checkImageFilterType(currentResult) === true
     ){
       diplayedRows.push(jsx)

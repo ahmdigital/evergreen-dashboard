@@ -76,10 +76,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		// this always rewrites/overwrites the previous file
 		try {
 			const data = await createData()
-			console.log(data)
 
 			await fs.promises.writeFile(CachePath, data)
-			promiseResolve()
+			if(promiseResolve != null){
+				promiseResolve()
+			}
 			waitingPromise = null
 			console.log("Recreated cache")
 
