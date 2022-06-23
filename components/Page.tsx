@@ -9,12 +9,12 @@ import DependenciesContainer from "../components/DependenciesContainer";
 import HeaderContainer from "./HeaderContainer";
 import SummaryContainer from "./SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 export type PageProps = {
-	JSObject: DependencyData;
-	finalData: boolean
+  JSObject: DependencyData;
+  finalData: boolean;
 };
 
 export function Page(props: PageProps) {
@@ -24,14 +24,24 @@ export function Page(props: PageProps) {
   const diplayedRows = [];
 
   let loadingWheel: any = null;
-	if (!props.finalData) {
-		loadingWheel = <Box sx={{ display: "inline-block", float: "right", justifyContent: 'center', alignItems: 'center', width: "10vh" }}>
-			<CircularProgress />
-		</Box>
-	}
+  if (!props.finalData) {
+    loadingWheel = (
+      <Box
+        sx={{
+          display: "inline-block",
+          float: "right",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "10vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
-	//Sort alphabetically by name
-	rows.sort((a, b) => a.name.localeCompare(b.name))
+  //Sort alphabetically by name
+  rows.sort((a, b) => a.name.localeCompare(b.name));
 
   const jsxRows = rows.map((row) => (
     <Row
@@ -70,13 +80,12 @@ export function Page(props: PageProps) {
     let jsx = jsxRows[i];
 
     if (
-      (searchTerm.length == 0 ||
-        row.name.toLowerCase().includes(searchTerm.toLowerCase()))
+      searchTerm.length == 0 ||
+      row.name.toLowerCase().includes(searchTerm.toLowerCase())
       // &&checkImageFilterType(currentResult) === true
-    ){
-      diplayedRows.push(jsx)
+    ) {
+      diplayedRows.push(jsx);
     }
-
   }
 
   return (
@@ -88,7 +97,7 @@ export function Page(props: PageProps) {
         <Layout>
           <HeaderContainer />
           {loadingWheel}
-          <SummaryContainer rankArray={rankArray}/>
+          <SummaryContainer rankArray={rankArray} />
           <DependenciesContainer
             JSObject={props.JSObject}
             rows={diplayedRows}

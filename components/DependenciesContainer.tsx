@@ -23,7 +23,5 @@ export default function DependenciesContainer(props: {
         <CollapsibleTable>{props.rows}</CollapsibleTable>
       </div>
     </div>
-
-
   );
 }

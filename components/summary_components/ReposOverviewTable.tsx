@@ -1,9 +1,11 @@
 import Table from "@mui/material/Table";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import { Circle } from "@mui/icons-material";
-import {Colours} from "../../components/Colours"
 import styles from "../../components/summary_components/ReposOverviewTable.module.css";
+import RedIcon from "../../components/images/redIcon.svg"
+import YellowIcon from "../../components/images/yellowIcon.svg"
+import greenIcon from "../../components/images/greenIcon.svg"
+import Image from 'next/image'
 
 
 export default function ReposOverViewTable(props: {rankArray: any}) {
@@ -11,7 +13,7 @@ export default function ReposOverViewTable(props: {rankArray: any}) {
         <Table>
             <TableRow>
                 <TableCell className={styles.tableCellStyle}>
-                    <Circle style = {{color: Colours.red, paddingRight: "5px"}} />
+                    <Image src={RedIcon} alt='Red' width='40px' height='40px'></Image>
                 </TableCell>
                 <TableCell className={styles.tableCellStyle}>
                     <p>{props.rankArray.red}</p>
@@ -19,7 +21,7 @@ export default function ReposOverViewTable(props: {rankArray: any}) {
             </TableRow>
             <TableRow>
                 <TableCell className={styles.tableCellStyle}>
-                    <Circle style = {{color: Colours.orange, paddingRight: "5px"}} />
+                <Image src={YellowIcon} alt='Yellow' width='40px' height='40px'></Image>
                 </TableCell>
                 <TableCell className={styles.tableCellStyle}>
                     <p>{props.rankArray.yellow}</p>
@@ -27,7 +29,7 @@ export default function ReposOverViewTable(props: {rankArray: any}) {
             </TableRow>
             <TableRow>
                 <TableCell className={styles.tableCellStyle}>
-                    <Circle style = {{color: Colours.green, paddingRight: "5px"}} />
+                <Image src={greenIcon} alt='Green' width='40px' height='40px'></Image>
                 </TableCell>
                 <TableCell className={styles.tableCellStyle}>
                     <p>{props.rankArray.green}</p>

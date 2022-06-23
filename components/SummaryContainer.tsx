@@ -18,6 +18,7 @@ export default function SummaryContainer(props: { rankArray: any }) {
             className={styles.summaryComponent}
             style={{ backgroundColor: "rgba(31, 162, 25, 0.8)" }}
           >
+            <h3 className={styles.overallTtitleStyle}>Overall</h3>
             <h2 className={styles.percentStyle}>{overallPercent}%</h2>
           </div>
           {/* <div className={styles.percentComponent}>
@@ -27,7 +28,11 @@ export default function SummaryContainer(props: { rankArray: any }) {
         <Grid item xs={12} sm={4}>
           <div className={styles.summaryComponent}>
             <h3 className={styles.summaryStyle}>Repos Overview</h3>
-            <ReposOverviewTable rankArray={props.rankArray} />
+            <Grid item xs={8} >
+              <div className={styles.summaryComponent2}>
+                <ReposOverviewTable rankArray={props.rankArray} />
+              </div>
+            </Grid>
           </div>
         </Grid>
         <Grid item xs={12} sm={4}>

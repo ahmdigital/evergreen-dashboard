@@ -19,7 +19,7 @@ export default function CollapsibleTable(props: CollapsibleTableProps){
 				<Table size="small" aria-label="collapsible table">
 					<colgroup>
 						<col style={{ width: "0%", backgroundColor: "var(--table-left-edge)" }} />
-						<col style={{ width: "0%", backgroundColor: "var(--colour-background)" }} />
+						<col style={{ width: "10%", backgroundColor: "var(--colour-background)" }} />
 						<col style={{ width: "75%", backgroundColor: "var(--colour-background)" }} />
 						<col style={{ width: "25%", backgroundColor: "var(--colour-background)" }} />
 						<col style={{ width: "0%", backgroundColor: "var(--colour-background)" }} />

@@ -48,7 +48,7 @@ div.sectionContainer{
   background-color: var(--colour-container-background);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  padding: 1.5rem 2rem 2rem 2rem;
+  padding: 1.5rem 2rem 3rem 2rem;
   margin: 1.1rem;
   /* margin-top: 1rem;
   margin-bottom: 1rem; */
@@ -105,23 +105,40 @@ div.summaryComponent {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
   height: 100%;/*max-content;*/
   width: 100%;
   max-width: 85vw; /*is probably redundant*/
   background-color: rgb(242, 240, 238);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   padding: 1.5rem 2rem 2rem 2rem;
   margin: 1.1rem;
   box-sizing: border-box;
 }
 
+div.summaryComponent2 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 120%;/*max-content;*/
+  width: 150%;
+  max-width: 85vw; /*is probably redundant*/
+  background-color: white;
+  border-radius: 20px;
+  box-sizing: border-box;
+  font-size: 10px;
+  padding: 1rem 1rem 1rem 1rem;
+  margin-bottom: 2rem;
+}
+
 h2.percentStyle {
   color: white;
   font-size: 100px;
   font-weight: 500;
+  text-align: center;
+}
+
+h3.overallTtitleStyle{
+  color: white;
   text-align: left;
 }
 
