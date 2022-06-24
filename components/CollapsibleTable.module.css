@@ -1,9 +1,11 @@
-.help{
-	margin-top: 1px;
-    margin-right: 1px;
-    align-items: center;
-}
-
-.helpBtn {
-  cursor: pointer;
+.tableCellStyle{
+	font-weight: bold;
+  font-family: "Roboto", "Helvetica", "Arial", "Noto Sans", "sans-serif";
+  font-size: large;
+	background-color: var(--colour-container-background);
+	color: var(--colour-font);
+  margin-top: 1rem;
+  line-height: 3rem;
+  border-color: black;
+  border-width: 0.2rem;
 }

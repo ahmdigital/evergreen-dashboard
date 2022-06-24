@@ -55,7 +55,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
   return (
     <React.Fragment>
       <TableRow style={{ color: "var(--colour-font)" }}>
-        <TableCell>
+        <TableCell className={styles.tableCellStyle}>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -65,8 +65,8 @@ export default function Row(props: { rank: number; row: any } & Props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell>
-          <Image src={statusIcon} alt="Repo Priority" width="50px" height="50px"></Image>
+        <TableCell className={styles.tableCellStyle}>
+          <Image src={statusIcon} alt="Repo Priority" width="40px" height="40px" style={{maxWidth: '100%', maxHeight: '100%'}}></Image>
         </TableCell>
         <TableCell className={styles.tableCellStyle} component="th" scope="row">
           {row.name}

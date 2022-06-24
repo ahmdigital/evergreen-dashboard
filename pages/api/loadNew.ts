@@ -2,7 +2,7 @@ import * as fs from "fs";
 import path from "path";
 import { NextApiRequest, NextApiResponse} from 'next'
 
-import { getJsonStructure } from "evergreen-org-crawler/src/index"
+import { getJsonStructure } from "../../../crawler/src/index"
 import config from "../../config.json"
 
 // Cache files are stored inside ./next folder
