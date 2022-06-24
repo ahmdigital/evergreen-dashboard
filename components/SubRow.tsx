@@ -1,6 +1,6 @@
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import { rankToDepColour, semVerToString } from "../src/semVer";
+import { semVerToString } from "../src/semVer";
 import { PackageData } from "../hooks/useProcessDependencyData";
 import styles from "./SubRow.module.css";
 import Image from "next/image";
@@ -16,13 +16,15 @@ export type SubRowProps = {
 
 export function SubRow(props: SubRowProps) {
   // dependencyData contains all the packages and its props (name, version, link etc)
-  const str =
-    props.dependency.name +
-    ": " +
-    semVerToString(props.dependency.usedVersion) +
-    " -> " +
-    semVerToString(props.dependency.version);
-  const [colour] = rankToDepColour(props.dependency.rank);
+  const depName = props.dependency.name;
+  const usedVersion = semVerToString(props.dependency.usedVersion);
+  const latestVersion = semVerToString(props.dependency.version);
+  // const str =
+  //   props.dependency.name +
+  //   ": " +
+  //   semVerToString(props.dependency.usedVersion) +
+  //   " -> " +
+  //   semVerToString(props.dependency.version);
 
   let statusIcon = RedIcon;
 
@@ -42,14 +44,17 @@ export function SubRow(props: SubRowProps) {
       }}
     >
       <TableCell className={styles.tableCellStyle}>
-        {/* <Circle style={{ color: colour }} /> */}
-		<Image src={statusIcon} alt="Repo Priority" width="33px" height="33px" style={{maxWidth: '100%', maxHeight: '100%'}}></Image>
+        <Image
+          src={statusIcon}
+          alt="Repo Priority"
+          width="33px"
+          height="33px"
+          style={{ maxWidth: "100%", maxHeight: "100%" }}
+        ></Image>
       </TableCell>
-      <TableCell
-        className={styles.tableCellStyle}
-      >
-        {str}
-      </TableCell>
+      <TableCell className={styles.tableCellStyle}>{depName}</TableCell>
+      <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
+      <TableCell className={styles.latestVerStyle}>{latestVersion}</TableCell>
     </TableRow>
   );
 }
