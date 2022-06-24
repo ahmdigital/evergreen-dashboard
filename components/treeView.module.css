@@ -80,6 +80,7 @@ div.topBarStyle {
 /* new ver of div.topBarStyle */
 div.headerStyle {
   align-items: center;
+  font-family: 'Work Sans', sans-serif;
 }
 
 /* H1 Title CSS, overrides the default H1 margins */
@@ -99,6 +100,7 @@ p.headerStyle{
 /* -----------------START: SUMMARY CONTAINER CSS ------------------- */
 div.summaryStyle {
   align-items: flex-start;
+  font-family: 'Work Sans', sans-serif;
 }
 
 div.summaryComponent {

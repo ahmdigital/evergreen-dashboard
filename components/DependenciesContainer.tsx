@@ -14,7 +14,7 @@ export default function DependenciesContainer(props: {
 }) {
   return (
     <div className={`${styles.dependenciesStyle} ${styles.sectionContainer}`}>
-      <h3 className={styles.h3ContainerStyle}>Dependencies </h3>
+      <h3 className={styles.h3ContainerStyle}>Repositories </h3>
       <SearchBar
         searchTerm={props.searchTerm}
         setSearchTerm={props.setSearchTerm}

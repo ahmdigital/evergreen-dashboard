@@ -12,15 +12,3 @@ export default function HeaderContainer() {
         
     )
 }
-
-{/* <div className={styles.topBarStyle}>
-<h1
-  className="title"
-  style={{
-    padding: "0 32px",
-    fontWeight: 600,
-    color: "var(--colour-font)",
-  }}
->
-  Evergreen Dashboard
-</h1> */}

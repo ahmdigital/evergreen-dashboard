@@ -1,7 +1,8 @@
 .tableCellStyle{
 	font-weight: bold;
-  font-family: "Roboto", "Helvetica", "Arial", "Noto Sans", "sans-serif";
-  font-size: large;
+  /* font-family: "Roboto", "Helvetica", "Arial", "Noto Sans", "sans-serif"; */
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.4rem;
 	background-color: var(--colour-container-background);
 	color: var(--colour-font);
   margin-top: 1rem;

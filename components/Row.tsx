@@ -12,8 +12,6 @@ import RedIcon from "./images/redIcon.svg";
 import YellowIcon from "./images/yellowIcon.svg";
 import greenIcon from "./images/greenIcon.svg";
 import Image from "next/image";
-// import { withStyles } from "@material-ui/core/styles";
-
 import Tabs from "./Tabs";
 import { semVerToString, rankToDepColour } from "../src/semVer";
 import styles from "../components/row.module.css";
@@ -26,15 +24,6 @@ export type Props = {
     final: boolean;
   };
 };
-
-// const StyledTableCell = withStyles((theme) => ({
-//   root: {
-//     padding: "0px 12px 0px 0px",
-//     "&:hover": {
-//       backgroundColor: "red"
-//     }
-//   }
-// }))(TableCell);
 
 // Creates each individual row
 export default function Row(props: { rank: number; row: any } & Props) {

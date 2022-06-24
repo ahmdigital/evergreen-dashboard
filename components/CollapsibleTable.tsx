@@ -28,10 +28,10 @@ export default function CollapsibleTable(props: CollapsibleTableProps){
 					<TableHead>
 						<TableRow>
 							<TableCell className={styles.tableCellStyle}></TableCell>
-							<TableCell className={styles.tableCellStyle}>Status</TableCell>
-							<TableCell className={styles.tableCellStyle} style={{ color: "var(--colour-text)" }}>Name</TableCell>
-							<TableCell className={styles.tableCellStyle} style={{ color: "var(--colour-text)" }}>Version</TableCell>
-							<TableCell className={styles.tableCellStyle} style={{ color: "var(--colour-text)" }}>Link</TableCell>
+							<TableCell className={styles.tableCellStyle}>status</TableCell>
+							<TableCell className={styles.tableCellStyle} style={{ color: "var(--colour-text)" }}>name</TableCell>
+							<TableCell className={styles.tableCellStyle} style={{ color: "var(--colour-text)" }}>version</TableCell>
+							<TableCell className={styles.tableCellStyle} style={{ color: "var(--colour-text)" }}>link</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>{props.children}</TableBody>

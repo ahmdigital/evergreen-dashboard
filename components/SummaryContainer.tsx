@@ -15,6 +15,7 @@ export default function SummaryContainer(props: { rankArray: any }) {
       <Grid container spacing={3} style={{ paddingRight: 20 }}>
         <Grid item xs={12} sm={4}>
           <div
+          
             className={styles.summaryComponent}
             style={{ backgroundColor: "rgba(31, 162, 25, 0.8)" }}
           >
