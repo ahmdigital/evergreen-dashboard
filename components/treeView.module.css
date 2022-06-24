@@ -119,7 +119,7 @@ div.summaryComponent2 {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  height: 120%;/*max-content;*/
+  max-height: 120%;/*max-content;*/
   width: 150%;
   max-width: 85vw; /*is probably redundant*/
   background-color: white;

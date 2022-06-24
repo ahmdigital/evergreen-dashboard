@@ -6,3 +6,10 @@
 p.reposStyle{
     font-size: medium;
 }
+
+.totalsCellStyle{
+    padding: 4px;
+    border-color: black;
+    line-height: 1rem;
+    font-size: large;
+}
