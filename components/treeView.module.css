@@ -168,7 +168,7 @@ div.dependenciesStyle {
 
 /* -----------------START: SEARCH BAR CONTAINER CSS ------------------- */
 div.searchBar {
-  max-width: 25rem;
+  max-width: 27rem;
   border: 1px solid #000000;
   border-radius: 20px;
   width: 100%;
@@ -176,12 +176,13 @@ div.searchBar {
   flex-direction: row;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-
+  font-family: 'Work Sans', sans-serif;
+  margin-right: 5rem;
 }
 
 div.searchBar:focus-within{
-  border-color: rgb(0, 0, 0);
-  border-width: 1.6px;
+  border-color: rgb(30, 101, 255);
+  border-width: 2px;
 }
 
 
