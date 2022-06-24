@@ -96,8 +96,7 @@ export function Page(props: PageProps) {
       <main style={{ padding: 0 }}>
         <Layout>
           <HeaderContainer />
-          {loadingWheel}
-          <SummaryContainer rankArray={rankArray} />
+          <SummaryContainer rankArray={rankArray} loadingWheel={loadingWheel}/>
           <DependenciesContainer
             JSObject={props.JSObject}
             rows={diplayedRows}

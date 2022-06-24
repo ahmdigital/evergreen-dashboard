@@ -11,17 +11,19 @@
   justify-content: center;
   align-items: center;
   z-index: 2;
+  padding-top: 50px;
 }
 
 .modalContainer {
-  width: 500px;
-  height: 500px;
+  width: 31.25rem;
+  height: 31.25rem;
   border-radius: 12px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
   padding: 25px;
+  margin-bottom: 100px;
 }
 
 .title {

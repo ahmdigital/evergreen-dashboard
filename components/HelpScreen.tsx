@@ -1,11 +1,12 @@
 import closeIcon from "./images/closeIcon.png";
-import legend from "./images/legend.png";
+// import legend from "./images/legend.png";
+import statusLegend from "./images/helpLegend.svg";
 import styles from "./HelpScreen.module.css";
 import Image from "next/image";
 
 export type HelpScreenProps = {
-	closeHelp: (_value: boolean | ((_prev: boolean) => boolean)) => void
-}
+  closeHelp: (_value: boolean | ((_prev: boolean) => boolean)) => void;
+};
 
 export default function HelpScreen(props: HelpScreenProps) {
   return (
@@ -26,12 +27,18 @@ export default function HelpScreen(props: HelpScreenProps) {
           />
         </div>
         <div className={styles.title}>
-          <h1>Light Status Legend</h1>
+          <h2>Light Status Legend</h2>
         </div>
         <div className={styles.legend}>
-          <Image className={styles.legend} alt="legend" src={legend} />
+          <Image
+            className={styles.legend}
+            width="400"
+            height="380"
+            alt="legend"
+            src={statusLegend}
+          />
         </div>
       </div>
     </div>
   );
-};
+}

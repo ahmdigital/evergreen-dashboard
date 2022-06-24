@@ -36,7 +36,7 @@ ul.active {
 }
 /* -----------------START: SHARED SECTION CONTAINERS CSS ------------------- */
 
-div.sectionContainer{
+div.sectionContainer {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -48,18 +48,33 @@ div.sectionContainer{
   background-color: var(--colour-container-background);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  padding: 1.5rem 2rem 3rem 2rem;
+  padding: 1.5rem 2rem 1rem 2rem;
   margin: 1.1rem;
   /* margin-top: 1rem;
   margin-bottom: 1rem; */
   box-sizing: border-box;
-} 
+}
 h3.h3ContainerStyle {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  color: "var(--colour-font)"
+  color: "var(--colour-font)";
 }
 
+div.loadingWheelBox{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  height: 90%; /*max-content;*/
+  width: 100%;
+  max-width: 85vw; /*is probably redundant*/
+  max-height: 100%;
+  background-color: rgb(242, 240, 238);
+  border-radius: 20px;
+  padding: 1.5rem 2rem 2rem 2rem;
+  box-sizing: border-box;
+}
 
 /* -----------------END: SHARED SECTION CONTAINERS CSS ------------------- */
 
@@ -80,17 +95,17 @@ div.topBarStyle {
 /* new ver of div.topBarStyle */
 div.headerStyle {
   align-items: center;
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
 }
 
 /* H1 Title CSS, overrides the default H1 margins */
 h2.headerStyle {
   margin-top: 0;
   margin-bottom: 0;
-  color: "var(--colour-font)"
+  color: "var(--colour-font)";
 }
 
-p.headerStyle{
+p.headerStyle {
   margin-top: 0;
   margin-bottom: 0;
   text-align: center;
@@ -100,20 +115,20 @@ p.headerStyle{
 /* -----------------START: SUMMARY CONTAINER CSS ------------------- */
 div.summaryStyle {
   align-items: flex-start;
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
 }
 
 div.summaryComponent {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
-  height: 100%;/*max-content;*/
+  height: 90%; /*max-content;*/
   width: 100%;
   max-width: 85vw; /*is probably redundant*/
+  max-height: 100%;
   background-color: rgb(242, 240, 238);
   border-radius: 20px;
   padding: 1.5rem 2rem 2rem 2rem;
-  margin: 1.1rem;
   box-sizing: border-box;
 }
 
@@ -121,7 +136,7 @@ div.summaryComponent2 {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  max-height: 120%;/*max-content;*/
+  max-height: 120%; /*max-content;*/
   width: 150%;
   max-width: 85vw; /*is probably redundant*/
   background-color: white;
@@ -139,7 +154,7 @@ h2.percentStyle {
   text-align: center;
 }
 
-h3.overallTtitleStyle{
+h3.overallTtitleStyle {
   color: white;
   text-align: left;
 }
@@ -176,27 +191,26 @@ div.searchBar {
   flex-direction: row;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
   margin-right: 5rem;
 }
 
-div.searchBar:focus-within{
+div.searchBar:focus-within {
   border-color: rgb(30, 101, 255);
   border-width: 2px;
 }
 
-
 /* removes blue outline */
-div.searchBar input[type=text]:focus{
+div.searchBar input[type="text"]:focus {
   outline: none;
 }
 
-div.searchBar input{
+div.searchBar input {
   padding: 0.65rem;
-  background: #FFFFFF;
+  background: #ffffff;
   border: 0px solid rgba(0, 0, 0, 0);
   border-radius: 20px;
- 
+
   width: 100%;
   height: 100%;
   font-weight: 400;
@@ -205,10 +219,10 @@ div.searchBar input{
 }
 /* -----------------END: SEARCH BAR CONTAINER CSS ------------------- */
 
-.help{
-	float: right;
-	margin-top: 30px;
-	margin-right: 10px;
+.help {
+  float: right;
+  margin-top: 30px;
+  margin-right: 10px;
 }
 
 .helpBtn {
