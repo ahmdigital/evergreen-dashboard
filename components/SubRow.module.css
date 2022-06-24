@@ -1,6 +1,6 @@
 .tableCellStyle{
 	font-weight: normal;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: large;
 	background-color: var(--colour-container-background);
 	color: var(--colour-font)

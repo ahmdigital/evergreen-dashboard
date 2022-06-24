@@ -1,10 +1,12 @@
 
 .tableCellStyle{
     padding: 4px;
+    font-size:medium;
+    font-weight: bold;
 }
 
 p.reposStyle{
-    font-size: medium;
+    font-size:medium;
 }
 
 .totalsCellStyle{
@@ -12,5 +14,7 @@ p.reposStyle{
     border-color: black;
     line-height: 1rem;
     font-size: large;
+    font-weight: bold;
     font-family: 'Work Sans', sans-serif;
+
 }
