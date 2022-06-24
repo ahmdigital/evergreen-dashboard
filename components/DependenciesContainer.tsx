@@ -19,10 +19,10 @@ export default function DependenciesContainer(props: {
         searchTerm={props.searchTerm}
         setSearchTerm={props.setSearchTerm}
       />
-
-      <div className={styles.barStyle}>
+      <div className={styles.tableStyle}>
         <CollapsibleTable>{props.rows}</CollapsibleTable>
       </div>
+
     </div>
   );
 }

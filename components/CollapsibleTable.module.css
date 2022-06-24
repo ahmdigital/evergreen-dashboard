@@ -10,3 +10,9 @@
   border-color: black;
   border-width: 0.2rem;
 }
+
+.tableStyle{
+  box-shadow: none;
+  background-color: var(--colour-background);
+  color: var(--colour-font)
+}

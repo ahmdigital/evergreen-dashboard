@@ -15,8 +15,8 @@ type CollapsibleTableProps = {
 // Creates the whole table
 export default function CollapsibleTable(props: CollapsibleTableProps){
 	return (
-		<div>
-			<TableContainer component={Paper} style={{ backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>
+
+			<TableContainer component={Paper} style={{ boxShadow:"none", backgroundColor: "var(--colour-background)", color: "var(--colour-font)" }}>
 				<Table size="small" aria-label="collapsible table">
 					<colgroup>
 						<col style={{ width: "0%", backgroundColor: "var(--table-left-edge)" }} />
@@ -37,6 +37,6 @@ export default function CollapsibleTable(props: CollapsibleTableProps){
 					<TableBody>{props.children}</TableBody>
 				</Table>
 			</TableContainer>
-		</div>
+
 	);
 };
