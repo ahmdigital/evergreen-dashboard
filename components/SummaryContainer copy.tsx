@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../components/treeView.module.css";
+import styles from "./treeView.module.css";
 import Grid from "@mui/material/Grid";
 import ReposOverviewTable from "../components/summary_components/ReposOverviewTable";
 import helpIcon from "./images/helpIcon.png";
@@ -13,23 +13,22 @@ export default function SummaryContainer(props: { rankArray: any, loadingWheel: 
 
   // State for opening the helpLegend
   const [openHelp, setOpenHelp] = useState<boolean>(false);
-
+// backgroundColor: "rgba(31, 162, 25, 0.8)"
   return (
     <div className={`${styles.summaryStyle} ${styles.sectionContainer}`}>
       <h3 className={styles.h3ContainerStyle}>Summary </h3>
-      <div className={styles.container}>
-
+      <Grid container spacing={3} style={{ paddingRight: 20 }}>
+        <Grid item xs={12} sm={4}>
           <div
-            className={`${styles.summaryOverall} ${styles.sharedCompProps}`}
-            style={{backgroundColor: "rgba(31, 162, 25, 0.8)"}}
+            className={styles.summaryOverall}
+            style={{ backgroundColor: "rgba(31, 162, 25, 0.8)"}}
           >
-            <h3 className={styles.overallTtitleStyle}>Repos Up to Date</h3>
+            <h3 className={styles.overallTtitleStyle}>Overall</h3>
             <h2 className={styles.percentStyle} >{overallPercent}%</h2>
           </div>
-
-
-          <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-              <div className={styles.summaryCompHeader}>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <div className={styles.summaryComponent}>
               <h4 className={styles.summaryStyle}>Repos Overview</h4>
               <Image
                 className={styles.helpBtn}
@@ -41,19 +40,18 @@ export default function SummaryContainer(props: { rankArray: any, loadingWheel: 
                   setOpenHelp(true);
                 }}
               />
-              </div>
               {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
-            <div>
+            <Grid item xs={8}>
               <div className={styles.summaryComponent2}>
                 <ReposOverviewTable rankArray={props.rankArray} />
               </div>
-            </div>
+            </Grid>
           </div>
-
-
-          <div className={`${styles.loadingWheelBox} ${styles.sharedCompProps}`}>{props.loadingWheel}</div>
-
-      </div>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <div className={styles.loadingWheelBox}>{props.loadingWheel}</div>
+        </Grid>
+      </Grid>
     </div>
   );
 }

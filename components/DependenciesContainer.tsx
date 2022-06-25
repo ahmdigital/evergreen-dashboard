@@ -1,9 +1,13 @@
 import React, { ReactNode } from "react";
 import CollapsibleTable from "./CollapsibleTable";
-// import styles from "../components/treeView.module.css";
+import styles2 from "../components/treeView.module.css";
 import styles from "./DependenciesContainer.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
+import { display } from "@mui/system";
+import refreshIcon from "../components/images/refresh.svg" ;
+import filterIcon from "../components/images/filter.svg" ;
+import Image from "next/image";
 
 /* Container includes  Search, Filter, Dependencies Table */
 export default function DependenciesContainer(props: {
@@ -12,13 +16,28 @@ export default function DependenciesContainer(props: {
   searchTerm: any;
   setSearchTerm: any;
 }) {
+
   return (
-    <div className={`${styles.dependenciesStyle} ${styles.sectionContainer}`}>
+    <div className={`${styles2.sectionContainer} ${styles.sectionContainer}`}>
       <h3 className={styles.h3ContainerStyle}>Repositories </h3>
-      <SearchBar
-        searchTerm={props.searchTerm}
-        setSearchTerm={props.setSearchTerm}
-      />
+      <div className={styles.depsBarStyle}>
+        <div style={{width:"70%"}}>
+        <SearchBar
+          searchTerm={props.searchTerm}
+          setSearchTerm={props.setSearchTerm}
+        />
+        </div>
+        <div className={styles.btnsContainer} style={{display:"flex", width:"30%", justifyContent:"space-around", marginBottom:"0"}}>
+          <button>
+            <Image src={filterIcon} alt="filter" width="20px" height="20px"></Image>
+            <span>Filter</span>
+          </button>
+          <button>
+          <Image src={refreshIcon} alt="refresh" width="20px" height="20px"></Image>
+          <span>Refresh</span>
+          </button>
+        </div>
+      </div>
       <div className={styles.tableStyle}>
         <CollapsibleTable>{props.rows}</CollapsibleTable>
       </div>

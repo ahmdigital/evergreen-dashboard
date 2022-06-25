@@ -4,18 +4,10 @@
 } */
 
 div.sectionContainer {
-  display: flex;
-  flex-direction: column;
-  height: max-content;
-  width: 100%;
-  max-width: 85vw; /*is probably redundant*/
-  background-color: var(--colour-container-background);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
+
   padding: 1.5rem 2.5rem 3rem 2.5rem;
-  margin: 1.1rem;
-  box-sizing: border-box;
-  font-family: 'Work Sans', sans-serif;
+
+
 }
 
 h3.h3ContainerStyle {
@@ -23,4 +15,38 @@ h3.h3ContainerStyle {
   margin-bottom: 0.5rem;
   color: "var(--colour-font)";
   font-family: 'Work Sans', sans-serif;
+}
+
+div.depsBarStyle{
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+div.btnsContainer{
+
+
+}
+
+div.btnsContainer button{
+  width:8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1rem;
+  background-color: var(--colour-container-background);
+  border: none ;
+  padding: 0.8rem;
+  border-radius: 20px;
+}
+div.btnsContainer button span{
+  margin-left: 0.5rem;
+}
+div.btnsContainer button:hover{
+  cursor: pointer;
+  background-color: lightgray;
+  /* border: 3px black solid; */
 }

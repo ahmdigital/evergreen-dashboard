@@ -44,15 +44,17 @@ div.sectionContainer {
   justify-content: center;
   height: max-content;
   width: 100%;
-  max-width: 85vw; /*is probably redundant*/
+  max-width: 2000px;
+
   background-color: var(--colour-container-background);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  padding: 1.5rem 2rem 1rem 2rem;
+  padding: 1.5rem 2rem 1.5rem 2rem;
   margin: 1.1rem;
   /* margin-top: 1rem;
   margin-bottom: 1rem; */
   box-sizing: border-box;
+  font-family: 'Work Sans', sans-serif;
 }
 h3.h3ContainerStyle {
   margin-top: 0.5rem;
@@ -66,14 +68,9 @@ div.loadingWheelBox{
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  height: 90%; /*max-content;*/
-  width: 100%;
-  max-width: 85vw; /*is probably redundant*/
   max-height: 100%;
   background-color: rgb(242, 240, 238);
-  border-radius: 20px;
-  padding: 1.5rem 2rem 2rem 2rem;
-  box-sizing: border-box;
+
 }
 
 /* -----------------END: SHARED SECTION CONTAINERS CSS ------------------- */
@@ -116,18 +113,14 @@ p.headerStyle {
 div.summaryStyle {
   align-items: flex-start;
   font-family: "Work Sans", sans-serif;
+  min-width: 15rem;
 }
 
 div.summaryOverall{
   text-align: center;
   flex-wrap: wrap;
-  height: 90%; /*max-content;*/
-  width: 100%;
-  max-width: 85vw; /*is probably redundant*/
   max-height: 100%;
   background-color: rgb(242, 240, 238);
-  border-radius: 20px;
-  padding: 1.5rem 2rem 2rem 2rem;
   box-sizing: border-box;
 }
 
@@ -135,34 +128,58 @@ div.summaryComponent {
   /* display: flex;
   flex-direction: row; */
   display: block;
-  flex-wrap: wrap;
-  height: 90%; /*max-content;*/
-  width: 100%;
-  max-width: 85vw; /*is probably redundant*/
   max-height: 100%;
   background-color: rgb(242, 240, 238);
-  border-radius: 20px;
-  padding: 1.5rem 2rem 2rem 2rem;
   box-sizing: border-box;
 }
+div.summaryOverall h3{
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
 
-.summaryComponent {
+div.summaryStyle div.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 
+}
+div.summaryCompHeader h4{
+  margin-top: 0rem;
+  margin-bottom: 0rem;
 }
 
 div.summaryComponent2 {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  max-height: 120%; /*max-content;*/
-  width: 150%;
-  max-width: 85vw; /*is probably redundant*/
+  width: 100%;
   background-color: white;
   border-radius: 20px;
   box-sizing: border-box;
   font-size: 10px;
   padding: 1rem 1rem 1rem 1rem;
-  margin-bottom: 2rem;
+
+}
+
+div.summaryComponent div.summaryCompHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+div.sharedCompProps {
+  width: 31.8%;
+  min-width: 18rem;
+  border-radius: 20px;
+  padding: 1.5rem 2rem 2rem 2rem;
+  box-sizing: border-box;
 }
 
 h2.percentStyle {
@@ -197,20 +214,29 @@ div.dependenciesStyle {
   max-width: 100%;
 }
 
+.depsBarStyle {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+
+}
+
 /* -----------------END: SUMMARY CONTAINER CSS ------------------- */
 
 /* -----------------START: SEARCH BAR CONTAINER CSS ------------------- */
 div.searchBar {
-  max-width: 27rem;
+  /* max-width: 27rem; */
   border: 1px solid #000000;
   border-radius: 20px;
-  width: 100%;
+  width: 70%;
   display: flex;
   flex-direction: row;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   font-family: "Work Sans", sans-serif;
   margin-right: 5rem;
+  padding-right: 0.75rem;
 }
 
 div.searchBar:focus-within {
