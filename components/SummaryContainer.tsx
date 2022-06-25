@@ -21,7 +21,7 @@ export default function SummaryContainer(props: { rankArray: any, loadingWheel: 
       <Grid container spacing={3} style={{ paddingRight: 20 }}>
         <Grid item xs={12} sm={4}>
           <div
-            className={styles.summaryComponent}
+            className={styles.summaryOverall}
             style={{ backgroundColor: "rgba(31, 162, 25, 0.8)"}}
           >
             <h3 className={styles.overallTtitleStyle}>Overall</h3>
@@ -33,13 +33,13 @@ export default function SummaryContainer(props: { rankArray: any, loadingWheel: 
               <h4 className={styles.summaryStyle}>Repos Overview</h4>
               <Image
                 className={styles.helpBtn}
-                width="50px"
+                width="30px"
                 height="30px"
                 alt="help"
                 src={helpIcon}
                 onClick={() => {
                   setOpenHelp(true);
-                }}
+                }} 
               />
               {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
             <Grid item xs={8}>

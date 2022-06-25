@@ -38,8 +38,8 @@ const theme = createTheme({
         root: {
           textTransform: "none",
           fontWeight: "bold",
-          fontFamily: "Noto Sans, sans-serif",
-          width: "12%",
+          fontFamily: "Work Sans, sans-serif",
+          width: "15%",
         },
         textColorSecondary: {
           color: "#eeeee4",

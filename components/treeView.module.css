@@ -118,9 +118,8 @@ div.summaryStyle {
   font-family: "Work Sans", sans-serif;
 }
 
-div.summaryComponent {
-  display: flex;
-  flex-direction: row;
+div.summaryOverall{
+  text-align: center;
   flex-wrap: wrap;
   height: 90%; /*max-content;*/
   width: 100%;
@@ -130,6 +129,25 @@ div.summaryComponent {
   border-radius: 20px;
   padding: 1.5rem 2rem 2rem 2rem;
   box-sizing: border-box;
+}
+
+div.summaryComponent {
+  /* display: flex;
+  flex-direction: row; */
+  display: block;
+  flex-wrap: wrap;
+  height: 90%; /*max-content;*/
+  width: 100%;
+  max-width: 85vw; /*is probably redundant*/
+  max-height: 100%;
+  background-color: rgb(242, 240, 238);
+  border-radius: 20px;
+  padding: 1.5rem 2rem 2rem 2rem;
+  box-sizing: border-box;
+}
+
+.summaryComponent {
+
 }
 
 div.summaryComponent2 {
@@ -151,7 +169,7 @@ h2.percentStyle {
   color: white;
   font-size: 100px;
   font-weight: 500;
-  text-align: center;
+  align-self: center;
 }
 
 h3.overallTtitleStyle {
