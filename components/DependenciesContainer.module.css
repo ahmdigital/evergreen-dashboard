@@ -9,7 +9,7 @@ div.sectionContainer {
   flex-direction: column;
   height: max-content;
   width: 100%;
-  max-width: 85vw; /*is probably redundant*/
+  max-width: 2000px; /*is probably redundant*/
   background-color: var(--colour-container-background);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
