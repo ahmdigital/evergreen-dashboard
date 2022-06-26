@@ -18,7 +18,7 @@ export default function DependenciesContainer(props: {
 }) {
 
   return (
-    <div className={`${styles2.sectionContainer} ${styles.sectionContainer}`}>
+    <div className={`${styles.sectionContainer}`}>
       <h3 className={styles.h3ContainerStyle}>Repositories </h3>
       <div className={styles.depsBarStyle}>
         <div style={{width:"70%"}}>
