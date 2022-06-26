@@ -1,10 +1,8 @@
 import React, { ReactNode } from "react";
 import CollapsibleTable from "./CollapsibleTable";
-import styles2 from "../components/treeView.module.css";
 import styles from "./DependenciesContainer.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
-import { display } from "@mui/system";
 import refreshIcon from "../components/images/refresh.svg" ;
 import filterIcon from "../components/images/filter.svg" ;
 import Image from "next/image";
