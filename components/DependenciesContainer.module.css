@@ -38,7 +38,11 @@ div.depsBarStyle{
   margin-bottom: 0.5rem;
 }
 div.btnsContainer{
-
+  display: flex;
+  /* width: 30%; */
+  justify-content: space-between;
+  margin-bottom: 0 ;
+  width: 17rem;
 
 }
 

@@ -21,13 +21,13 @@ export default function DependenciesContainer(props: {
     <div className={`${styles.sectionContainer}`}>
       <h3 className={styles.h3ContainerStyle}>Repositories </h3>
       <div className={styles.depsBarStyle}>
-        <div style={{width:"70%"}}>
+        <div style={{width:"70%", minWidth: "25rem"}}>
         <SearchBar
           searchTerm={props.searchTerm}
           setSearchTerm={props.setSearchTerm}
         />
         </div>
-        <div className={styles.btnsContainer} style={{display:"flex", width:"30%", justifyContent:"space-around", marginBottom:"0"}}>
+        <div className={styles.btnsContainer}>
           <button>
             <Image src={filterIcon} alt="filter" width="20px" height="20px"></Image>
             <span>Filter</span>

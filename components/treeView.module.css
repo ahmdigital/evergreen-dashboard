@@ -172,6 +172,7 @@ div.summaryComponent div.summaryCompHeader {
   align-items: center;
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
+  width: 12.5rem;
 }
 
 div.sharedCompProps {
@@ -226,7 +227,7 @@ div.dependenciesStyle {
 
 /* -----------------START: SEARCH BAR CONTAINER CSS ------------------- */
 div.searchBar {
-  /* max-width: 27rem; */
+  max-width: 27rem;
   border: 1px solid #000000;
   border-radius: 20px;
   width: 70%;
@@ -235,7 +236,7 @@ div.searchBar {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   font-family: "Work Sans", sans-serif;
-  margin-right: 5rem;
+  /* margin-right: 5rem; */
   padding-right: 0.75rem;
 }
 
