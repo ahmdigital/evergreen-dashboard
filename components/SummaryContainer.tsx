@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "../components/treeView.module.css";
-import Grid from "@mui/material/Grid";
 import ReposOverviewTable from "../components/summary_components/ReposOverviewTable";
 import helpIcon from "./images/helpIcon.png";
 import Image from "next/image";
@@ -23,7 +22,7 @@ export default function SummaryContainer(props: { rankArray: any, loadingWheel: 
             className={`${styles.summaryOverall} ${styles.sharedCompProps}`}
             style={{backgroundColor: "rgba(31, 162, 25, 0.8)"}}
           >
-            <h3 className={styles.overallTtitleStyle}>Repos Up to Date</h3>
+            <h3 className={styles.overallTtitleStyle}>Overall</h3>
             <h2 className={styles.percentStyle} >{overallPercent}%</h2>
           </div>
 

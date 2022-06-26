@@ -19,12 +19,6 @@ export function SubRow(props: SubRowProps) {
   const depName = props.dependency.name;
   const usedVersion = semVerToString(props.dependency.usedVersion);
   const latestVersion = semVerToString(props.dependency.version);
-  // const str =
-  //   props.dependency.name +
-  //   ": " +
-  //   semVerToString(props.dependency.usedVersion) +
-  //   " -> " +
-  //   semVerToString(props.dependency.version);
 
   let statusIcon = RedIcon;
 
@@ -58,3 +52,4 @@ export function SubRow(props: SubRowProps) {
     </TableRow>
   );
 }
+

@@ -3,9 +3,9 @@ import CollapsibleTable from "./CollapsibleTable";
 import styles from "./DependenciesContainer.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
-import refreshIcon from "../components/images/refresh.svg" ;
-import filterIcon from "../components/images/filter.svg" ;
-import Image from "next/image";
+// import refreshIcon from "../components/images/refresh.svg" ;
+// import filterIcon from "../components/images/filter.svg" ;
+// import Image from "next/image";
 
 /* Container includes  Search, Filter, Dependencies Table */
 export default function DependenciesContainer(props: {
@@ -25,7 +25,7 @@ export default function DependenciesContainer(props: {
           setSearchTerm={props.setSearchTerm}
         />
         </div>
-        <div className={styles.btnsContainer}>
+        {/* <div className={styles.btnsContainer}>
           <button>
             <Image src={filterIcon} alt="filter" width="20px" height="20px"></Image>
             <span>Filter</span>
@@ -34,7 +34,7 @@ export default function DependenciesContainer(props: {
           <Image src={refreshIcon} alt="refresh" width="20px" height="20px"></Image>
           <span>Refresh</span>
           </button>
-        </div>
+        </div> */}
       </div>
       <div className={styles.tableStyle}>
         <CollapsibleTable>{props.rows}</CollapsibleTable>
