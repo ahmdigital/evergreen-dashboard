@@ -73,8 +73,8 @@ div.summaryStyle {
 
   h2.percentStyle {
     color: white;
-    font-size: 100px;
-    font-weight: 500;
+    font-size: 6.25rem; /*100px;*/
+    font-weight: var(--font-weight-semibold);
     align-self: center;
   }
 
@@ -102,7 +102,7 @@ div.summaryStyle {
     align-items: center;
     justify-content: center;
     max-height: 100%;
-    background-color: rgb(242, 240, 238);
+    background-color: var(--colour-lightGrey);
 
   }
   /* -----------------END: SUMMARY CONTAINER CSS ------------------- */
