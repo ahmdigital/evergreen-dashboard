@@ -48,7 +48,7 @@ export function SubRow(props: SubRowProps) {
       </TableCell>
       <TableCell className={styles.tableCellStyle}>{depName}</TableCell>
       <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
-      <TableCell className={styles.latestVerStyle}>{latestVersion}</TableCell>
+      <TableCell className={`${styles.tableCellStyle} ${styles.latestVerStyle}`}>{latestVersion}</TableCell>
     </TableRow>
   );
 }

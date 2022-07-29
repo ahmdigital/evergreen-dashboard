@@ -1,15 +1,10 @@
-.tableCellStyle {
-  font-weight: normal;
-  font-family: "Inter", sans-serif;
-  font-size: large;
-  background-color: var(--colour-container-background);
-  color: var(--colour-font);
+.tableCellStyle{
+    font-family: var(--secondary-font-family);
+    font-size: var(--font-size-large);
+	background-color: var(--colour-container-background);
+	color: var(--colour-font)
 }
 
-.latestVerStyle {
-  font-weight: bolder;
-  font-family: "Inter", sans-serif;
-  font-size: large;
-  background-color: var(--colour-container-background);
-  color: var(--colour-font);
+.latestVerStyle{
+	font-weight: var(--font-weight-bold);
 }

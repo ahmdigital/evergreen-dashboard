@@ -19,14 +19,11 @@ export default function SummaryContainer(props: {
 
   return (
     <div className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}>
-      <h3 className={styles.h3ContainerStyle}>Summary </h3>
+      <h3 className={sharedStyles.h3ContainerStyle}>Summary </h3>
       <div className={styles.container}>
-        <div
-          className={`${styles.summaryOverall} ${styles.sharedCompProps}`}
-          style={{ backgroundColor: "rgba(31, 162, 25, 0.8)" }}
-        >
-          <h3 className={styles.overallTtitleStyle}>Overall</h3>
-          <h2 className={styles.percentStyle}>{overallPercent}%</h2>
+      <div className={`${styles.summaryOverall} ${styles.sharedCompProps}`}>
+            <h3 className={styles.overallTitleStyle}>Overall</h3>
+            <h2 className={styles.percentStyle} >{overallPercent}%</h2>
         </div>
 
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>

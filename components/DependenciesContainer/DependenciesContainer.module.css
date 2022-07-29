@@ -3,21 +3,13 @@ div.sectionContainer {
   flex-direction: column;
   height: max-content;
   width: 100%;
-  max-width: 2000px; /*is probably redundant*/
   background-color: var(--colour-container-background);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
+  box-shadow: var(--main-section-boxshadow);
+  border-radius: var(--main-section-border-radius);
   padding: 1.5rem 2.5rem 3rem 2.5rem;
   margin: 1.1rem;
   box-sizing: border-box;
-  font-family: "Work Sans", sans-serif;
-}
-
-h3.h3ContainerStyle {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  color: "var(--colour-font)";
-  font-family: "Work Sans", sans-serif;
+  font-family: var(--primary-font-family);
 }
 
 div.depsBarStyle {
@@ -31,16 +23,17 @@ div.depsBarStyle {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
-div.btnsContainer {
+
+div.btnsContainer{
   display: flex;
   justify-content: space-between;
   margin-bottom: 0;
   width: 17rem;
 }
 
-div.btnsContainer button {
-  width: 8rem;
-  font-family: "Work Sans", sans-serif;
+div.btnsContainer button{
+  width:8rem;
+  font-family: var(--primary-font-family);
   font-size: 1rem;
   background-color: var(--colour-container-background);
   border: none;

@@ -1,34 +1,40 @@
-div.searchBar {
-  max-width: 27rem;
-  border: 1px solid #000000;
-  border-radius: 20px;
-  width: 70%;
-  display: flex;
-  flex-direction: row;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  font-family: "Work Sans", sans-serif;
-  padding-right: 0.75rem;
+/* -----------------START: SEARCH BAR CONTAINER CSS ------------------- */
+div.searchBarWidth {
+  width:70%;
+  min-width: 25rem;
 }
 
-div.searchBar:focus-within {
-  border-color: rgb(30, 101, 255);
-  border-width: 2px;
-}
+div.searchBar {
+    max-width: 27rem;
+    border: 1px solid var(--colour-black);
+    border-radius: 20px;
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--primary-font-family);
+    padding-right: 0.75rem;
+  }
+
+  div.searchBar:focus-within {
+    border-color: var(--colour-blue);
+    border-width: 2px;
+  }
 
 div.searchBar input[type="text"]:focus {
   outline: none;
 }
 
-div.searchBar input {
-  padding: 0.65rem;
-  background: #ffffff;
-  border: 0px solid rgba(0, 0, 0, 0);
-  border-radius: 20px;
-
-  width: 100%;
-  height: 100%;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-}
+  div.searchBar input {
+    padding: 0.65rem;
+    background: var(--colour-container-background);
+    border: 0px solid rgba(0, 0, 0, 0);
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-normal); /*16px*/
+    line-height: 19px;
+  }
+  /* -----------------END: SEARCH BAR CONTAINER CSS ------------------- */

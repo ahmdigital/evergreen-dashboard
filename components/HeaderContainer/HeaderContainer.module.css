@@ -1,16 +1,9 @@
 div.headerStyle {
   align-items: center;
-  font-family: "Work Sans", sans-serif;
-}
-
-h2.headerStyle {
-  margin-top: 0;
-  margin-bottom: 0;
-  color: "var(--colour-font)";
+  font-family: var(--primary-font-family);
 }
 
 p.headerStyle {
-  margin-top: 0;
-  margin-bottom: 0;
   text-align: center;
 }
+  /* -----------------END: HEADER CONTAINER CSS ------------------- */

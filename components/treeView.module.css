@@ -8,18 +8,21 @@ div.sectionContainer {
   justify-content: center;
   height: max-content;
   width: 100%;
-  max-width: 2000px;
-  background-color: var(--colour-container-background);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
+  max-width: 125rem; /*2000px;*/
+  background-color: var(--colour-white);
+  box-shadow: var(--main-section-boxshadow);
+  border-radius: var(--main-section-border-radius);
   padding: 1.5rem 2rem 1.5rem 2rem;
   margin: 1.1rem;
   box-sizing: border-box;
-  font-family: 'Work Sans', sans-serif;
+  font-family: var(--font-family);
 }
+
+
 h3.h3ContainerStyle {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  color: "var(--colour-font)";
+  color: var(--colour-font);
+  font-family: var(--primary-font-family);
 }
 /* -----------------END: SHARED SECTION CONTAINERS CSS ------------------- */
