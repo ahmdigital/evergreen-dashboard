@@ -28,8 +28,6 @@ export function InverseSubRow(props: InverseSubRowProps) {
     statusIcon = YellowIcon;
   }
 
-  // const str = props.user.name + ": " + semVerToString(props.user.version);
-  // const colour = rankToDepColour(props.user.rank)[0];
   return (
     <TableRow
       style={{

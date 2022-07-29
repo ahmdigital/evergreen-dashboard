@@ -1,20 +1,18 @@
-
-.tableCellStyle{
-    padding: 4px;
-    font-size:medium;
-    font-weight: bold;
+.tableCellStyle {
+  padding: 4px;
+  font-size: medium;
+  font-weight: bold;
 }
 
-p.reposStyle{
-    font-size:medium;
+p.reposStyle {
+  font-size: medium;
 }
 
-.totalsCellStyle{
-    padding: 4px;
-    border-color: black;
-    line-height: 0.5rem;
-    font-size: large;
-    font-weight: bold;
-    font-family: 'Work Sans', sans-serif;
-
+.totalsCellStyle {
+  padding: 4px;
+  border-color: black;
+  line-height: 0.5rem;
+  font-size: large;
+  font-weight: bold;
+  font-family: "Work Sans", sans-serif;
 }

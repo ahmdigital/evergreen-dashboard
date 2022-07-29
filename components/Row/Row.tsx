@@ -13,7 +13,7 @@ import YellowIcon from "../images/yellowIcon.svg";
 import greenIcon from "../images/greenIcon.svg";
 import Image from "next/image";
 import Tabs from "../Tab/Tabs";
-import { semVerToString, rankToDepColour } from "../../src/semVer";
+import { semVerToString } from "../../src/semVer";
 import styles from "./Row.module.css";
 
 export type Props = {
@@ -39,8 +39,6 @@ export default function Row(props: { rank: number; row: any } & Props) {
     statusIcon = YellowIcon;
   }
 
-  let colour = rankToDepColour(rank)[0];
-
   return (
     <React.Fragment>
       <TableRow style={{ color: "var(--colour-font)" }}>
@@ -55,7 +53,13 @@ export default function Row(props: { rank: number; row: any } & Props) {
           </IconButton>
         </TableCell>
         <TableCell className={styles.tableCellStyle}>
-          <Image src={statusIcon} alt="Repo Priority" width="40px" height="40px" style={{maxWidth: '100%', maxHeight: '100%'}}></Image>
+          <Image
+            src={statusIcon}
+            alt="Repo Priority"
+            width="40px"
+            height="40px"
+            style={{ maxWidth: "100%", maxHeight: "100%" }}
+          ></Image>
         </TableCell>
         <TableCell className={styles.tableCellStyle} component="th" scope="row">
           {row.name}

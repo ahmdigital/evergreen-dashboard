@@ -1,114 +1,105 @@
-/* -----------------START: SUMMARY CONTAINER CSS ------------------- */
 div.summaryStyle {
-    align-items: flex-start;
-    font-family: "Work Sans", sans-serif;
-    min-width: 15rem;
-  }
+  align-items: flex-start;
+  font-family: "Work Sans", sans-serif;
+  min-width: 15rem;
+}
 
-  div.summaryOverall{
-    text-align: center;
-    flex-wrap: wrap;
-    max-height: 100%;
-    background-color: rgb(242, 240, 238);
-    box-sizing: border-box;
-  }
+div.summaryOverall {
+  text-align: center;
+  flex-wrap: wrap;
+  max-height: 100%;
+  background-color: rgb(242, 240, 238);
+  box-sizing: border-box;
+}
 
+div.summaryComponent {
+  display: block;
+  max-height: 100%;
+  background-color: rgb(242, 240, 238);
+  box-sizing: border-box;
+}
+div.summaryOverall h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
 
-  div.summaryComponent {
-    /* display: flex;
-    flex-direction: row; */
-    display: block;
-    max-height: 100%;
-    background-color: rgb(242, 240, 238);
-    box-sizing: border-box;
-  }
-  div.summaryOverall h3{
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-  }
+div.summaryStyle div.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+div.summaryCompHeader h4 {
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+}
 
-  div.summaryStyle div.container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-between;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+div.summaryComponent2 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: white;
+  border-radius: 20px;
+  box-sizing: border-box;
+  font-size: 10px;
+  padding: 1rem 1rem 1rem 1rem;
+}
 
-  }
-  div.summaryCompHeader h4{
-    margin-top: 0rem;
-    margin-bottom: 0rem;
-  }
+div.summaryComponent div.summaryCompHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  width: 12.5rem;
+}
 
-  div.summaryComponent2 {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 100%;
-    background-color: white;
-    border-radius: 20px;
-    box-sizing: border-box;
-    font-size: 10px;
-    padding: 1rem 1rem 1rem 1rem;
+div.sharedCompProps {
+  width: 31.8%;
+  min-width: 18rem;
+  border-radius: 20px;
+  padding: 1.5rem 2rem 2rem 2rem;
+  box-sizing: border-box;
+}
 
-  }
+h2.percentStyle {
+  color: white;
+  font-size: 100px;
+  font-weight: 500;
+  align-self: center;
+}
 
-  div.summaryComponent div.summaryCompHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
-    width: 12.5rem;
-  }
+h3.overallTtitleStyle {
+  color: white;
+  text-align: left;
+}
 
-  div.sharedCompProps {
-    width: 31.8%;
-    min-width: 18rem;
-    border-radius: 20px;
-    padding: 1.5rem 2rem 2rem 2rem;
-    box-sizing: border-box;
-  }
+div.percentComponent {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
 
-  h2.percentStyle {
-    color: white;
-    font-size: 100px;
-    font-weight: 500;
-    align-self: center;
-  }
+div.summaryHeader {
+  width: 100%;
+}
 
-  h3.overallTtitleStyle {
-    color: white;
-    text-align: left;
-  }
-
-  div.percentComponent {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-  }
-
-  div.summaryHeader {
-    width: 100%;
-  }
-
-  div.loadingWheelBox{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    max-height: 100%;
-    background-color: rgb(242, 240, 238);
-
-  }
-  /* -----------------END: SUMMARY CONTAINER CSS ------------------- */
-
-  .helpBtn {
-    cursor: pointer;
-  }
+div.loadingWheelBox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  max-height: 100%;
+  background-color: rgb(242, 240, 238);
+}
+.helpBtn {
+  cursor: pointer;
+}

@@ -14,18 +14,17 @@ export default function DependenciesContainer(props: {
   searchTerm: any;
   setSearchTerm: any;
 }) {
-
   return (
     <div className={`${styles.sectionContainer}`}>
       <h3 className={styles.h3ContainerStyle}>Repositories </h3>
       <div className={styles.depsBarStyle}>
-        <div style={{width:"70%", minWidth: "25rem"}}>
-        <SearchBar
-          searchTerm={props.searchTerm}
-          setSearchTerm={props.setSearchTerm}
-        />
+        <div style={{ width: "70%", minWidth: "25rem" }}>
+          <SearchBar
+            searchTerm={props.searchTerm}
+            setSearchTerm={props.setSearchTerm}
+          />
         </div>
-        {/* <div className={styles.btnsContainer}>
+        {/* <div className={styles.btnsContainer}> // Filter & Refresh features not yet implemented
           <button>
             <Image src={filterIcon} alt="filter" width="20px" height="20px"></Image>
             <span>Filter</span>
@@ -39,7 +38,6 @@ export default function DependenciesContainer(props: {
       <div className={styles.tableStyle}>
         <CollapsibleTable>{props.rows}</CollapsibleTable>
       </div>
-
     </div>
   );
 }

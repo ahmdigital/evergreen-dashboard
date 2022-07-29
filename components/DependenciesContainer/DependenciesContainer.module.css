@@ -1,6 +1,3 @@
-
-/* -----------------START: Dependencies CONTAINER CSS ------------------- */
-
 div.sectionContainer {
   display: flex;
   flex-direction: column;
@@ -13,17 +10,17 @@ div.sectionContainer {
   padding: 1.5rem 2.5rem 3rem 2.5rem;
   margin: 1.1rem;
   box-sizing: border-box;
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
 }
 
 h3.h3ContainerStyle {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   color: "var(--colour-font)";
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
 }
 
-div.depsBarStyle{
+div.depsBarStyle {
   box-sizing: border-box;
   width: 100%;
   display: flex;
@@ -34,29 +31,26 @@ div.depsBarStyle{
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
-div.btnsContainer{
+div.btnsContainer {
   display: flex;
-  /* width: 30%; */
   justify-content: space-between;
-  margin-bottom: 0 ;
+  margin-bottom: 0;
   width: 17rem;
-
 }
 
-div.btnsContainer button{
-  width:8rem;
-  font-family: 'Work Sans', sans-serif;
+div.btnsContainer button {
+  width: 8rem;
+  font-family: "Work Sans", sans-serif;
   font-size: 1rem;
   background-color: var(--colour-container-background);
-  border: none ;
+  border: none;
   padding: 0.8rem;
   border-radius: 20px;
 }
-div.btnsContainer button span{
+div.btnsContainer button span {
   margin-left: 0.5rem;
 }
-div.btnsContainer button:hover{
+div.btnsContainer button:hover {
   cursor: pointer;
   background-color: lightgray;
-  /* border: 3px black solid; */
 }

@@ -1,16 +1,15 @@
 .main {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: var(--colour-background);
-	padding-left: 10%;
-	padding-right: 10%;
-	padding-top: 3.3rem;
-	padding-bottom: 3.3rem;
-	max-height: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--colour-background);
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 3.3rem;
+  padding-bottom: 3.3rem;
+  max-height: max-content;
+}
 
-  }
-
-  .main > section {
-	padding: 32px;
-  }
+.main > section {
+  padding: 32px;
+}

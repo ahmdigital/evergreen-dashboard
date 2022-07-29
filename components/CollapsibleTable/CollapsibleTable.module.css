@@ -1,18 +1,17 @@
-.tableCellStyle{
-	font-weight: bold;
-  /* font-family: "Roboto", "Helvetica", "Arial", "Noto Sans", "sans-serif"; */
-  font-family: 'Work Sans', sans-serif;
+.tableCellStyle {
+  font-weight: bold;
+  font-family: "Work Sans", sans-serif;
   font-size: 1.4rem;
-	background-color: var(--colour-container-background);
-	color: var(--colour-font);
+  background-color: var(--colour-container-background);
+  color: var(--colour-font);
   margin-top: 1rem;
   line-height: 3rem;
   border-color: black;
   border-width: 0.2rem;
 }
 
-.tableStyle{
+.tableStyle {
   box-shadow: none;
   background-color: var(--colour-background);
-  color: var(--colour-font)
+  color: var(--colour-font);
 }

@@ -85,7 +85,6 @@ const Tabs = (props: Props) => {
   const internal = props.subRows.internal;
   const external = props.subRows.external;
   const user = props.subRows.user;
-  //const final = props.subRows.final;
 
   const [tabVal, setTabVal] = useState(0);
   const classes = useStyles();
@@ -111,13 +110,13 @@ const Tabs = (props: Props) => {
       }
     />,
     <Tab
-        key="users"
-        label={
-          <Badge badgeContent={user.length} color="primary" showZero>
-            Users
-          </Badge>
-        }
-      />
+      key="users"
+      label={
+        <Badge badgeContent={user.length} color="primary" showZero>
+          Users
+        </Badge>
+      }
+    />,
   ];
 
   let tabPanels = [
@@ -128,8 +127,8 @@ const Tabs = (props: Props) => {
       {external.length > 0 ? external : "No depedencies found"}
     </TabPanel>,
     <TabPanel key="users" value={tabVal} index={2}>
-    {user.length > 0 ? user : "No users found"}
-  </TabPanel>
+      {user.length > 0 ? user : "No users found"}
+    </TabPanel>,
   ];
 
   return (
