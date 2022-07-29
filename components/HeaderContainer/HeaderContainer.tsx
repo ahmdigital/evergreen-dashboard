@@ -1,10 +1,11 @@
 import React from "react";
-import styles from "../components/treeView.module.css";
-import org from "../config.json";
+import styles from "./HeaderContainer.module.css";
+import sharedStyles from "../treeView.module.css";
+import org from "../../config.json";
 
 export default function HeaderContainer() {
   return (
-    <div className={`${styles.headerStyle} ${styles.sectionContainer}`}>
+    <div className={`${styles.headerStyle} ${sharedStyles.sectionContainer}`}>
       <h2 className={styles.headerStyle}>Evergreen Dashboard</h2>
       <p className={styles.headerStyle}>
         Monitoring for <b>{org.targetOrganisation}</b> Github Organisation

@@ -8,13 +8,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import RedIcon from "./images/redIcon.svg";
-import YellowIcon from "./images/yellowIcon.svg";
-import greenIcon from "./images/greenIcon.svg";
+import RedIcon from "../images/redIcon.svg";
+import YellowIcon from "../images/yellowIcon.svg";
+import greenIcon from "../images/greenIcon.svg";
 import Image from "next/image";
-import Tabs from "./Tabs";
-import { semVerToString, rankToDepColour } from "../src/semVer";
-import styles from "../components/row.module.css";
+import Tabs from "../Tab/Tabs";
+import { semVerToString, rankToDepColour } from "../../src/semVer";
+import styles from "./Row.module.css";
 
 export type Props = {
   subRows: {

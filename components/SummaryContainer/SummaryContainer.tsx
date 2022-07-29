@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import styles from "../components/treeView.module.css";
-import ReposOverviewTable from "../components/summary_components/ReposOverviewTable";
-import helpIcon from "./images/helpIcon.png";
+import styles from "./SummaryContainer.module.css";
+import sharedStyles from "../treeView.module.css";
+import ReposOverviewTable from "../SummaryComponents/RepoOverviewTable/ReposOverviewTable";
+import helpIcon from "../images/helpIcon.png";
 import Image from "next/image";
-import HelpScreen from "./HelpScreen";
+import HelpScreen from "../HelpScreen/HelpScreen";
 
 export default function SummaryContainer(props: { rankArray: any, loadingWheel: any }) {
   const totalRepos =
@@ -14,7 +15,7 @@ export default function SummaryContainer(props: { rankArray: any, loadingWheel: 
   const [openHelp, setOpenHelp] = useState<boolean>(false);
 
   return (
-    <div className={`${styles.summaryStyle} ${styles.sectionContainer}`}>
+    <div className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}>
       <h3 className={styles.h3ContainerStyle}>Summary </h3>
       <div className={styles.container}>
 

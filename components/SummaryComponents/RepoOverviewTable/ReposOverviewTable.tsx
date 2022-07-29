@@ -1,10 +1,10 @@
 import Table from "@mui/material/Table";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import styles from "../../components/summary_components/ReposOverviewTable.module.css";
-import RedIcon from "../../components/images/redIcon.svg";
-import YellowIcon from "../../components/images/yellowIcon.svg";
-import greenIcon from "../../components/images/greenIcon.svg";
+import styles from "./ReposOverviewTable.module.css";
+import RedIcon from "../../../components/images/redIcon.svg";
+import YellowIcon from "../../../components/images/yellowIcon.svg";
+import greenIcon from "../../../components/images/greenIcon.svg";
 import Image from "next/image";
 
 

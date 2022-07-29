@@ -1,6 +1,5 @@
-import closeIcon from "./images/closeIcon.png";
-// import legend from "./images/legend.png";
-import statusLegend from "./images/helpLegend.svg";
+import closeIcon from "../images/closeIcon.png";
+import statusLegend from "../images/helpLegend.svg";
 import styles from "./HelpScreen.module.css";
 import Image from "next/image";
 

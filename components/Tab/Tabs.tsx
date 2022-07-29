@@ -7,7 +7,7 @@ import Badge from "@mui/material/Badge";
 
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Props } from "./Row";
+import { Props } from "../Row/Row";
 
 interface TabPanelProps {
   children?: React.ReactNode;
