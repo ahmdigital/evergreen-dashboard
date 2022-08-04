@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
-enum Mode{
+enum Mode {
 	Frontend,
 	StandaloneBackend,
 	IntegratedBackend
@@ -108,7 +108,7 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 			<CircularProgress />
 		</Box>
 	}
-	if (!data) { return <p></p> } //Failed to load data!
+	if (!data) { return <p>Failed to load data!</p> }
 
 	return <Page JSObject={data} finalData={true}/>
 }

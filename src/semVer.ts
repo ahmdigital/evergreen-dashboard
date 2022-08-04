@@ -36,6 +36,7 @@ export function semVerToString(semVer: SemVer): string {
 * Converts a string to a SemVer (semantic version) object
 * String should be of the form:
 *		[^|=|~|(~>)] *N.N[.N[-.*]]
+* TODO: https://devhints.io/semver
 */
 export function semVerFromString(semVer: string): SemVer {
 	let skipMinor = false
