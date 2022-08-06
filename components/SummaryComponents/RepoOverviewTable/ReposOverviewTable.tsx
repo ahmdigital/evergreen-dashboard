@@ -12,7 +12,7 @@ export default function ReposOverViewTable(props: { rankArray: any }) {
     <Table>
       <TableRow>
         <TableCell className={styles.totalsCellStyle}>
-          <h3>Total Repos</h3>
+          <h3>Total Repositories</h3>
         </TableCell>
         <TableCell className={styles.totalsCellStyle}>
           <p>

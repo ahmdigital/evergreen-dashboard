@@ -13,7 +13,7 @@ export default function SearchBar(props: {
         <input
           className={styles.searchBar}
           type="text"
-          placeholder="Search Repository..."
+          placeholder="Search..."
           value={props.searchTerm}
           onChange={(e) => props.setSearchTerm(e.target.value)}
         />
