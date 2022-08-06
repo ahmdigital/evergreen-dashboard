@@ -3,8 +3,8 @@ import path from "path";
 import { NextApiRequest, NextApiResponse} from 'next'
 
 // Was not sure which import statement to keep?
-import { getJsonStructure } from "../../../crawler/src/index"
-// import { getJsonStructure } from "evergreen-org-crawler/src/index"
+// import { getJsonStructure } from "../../../crawler/src/index"
+import { getJsonStructure } from "evergreen-org-crawler/src/index"
 
 import config from "../../config.json"
 
