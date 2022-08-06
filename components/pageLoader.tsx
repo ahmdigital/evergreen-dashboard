@@ -1,5 +1,5 @@
 import cachedData from "../cachedData.json";
-import Page from "./Page";
+import {Page} from "./Page";
 import { JSObjectFromJSON } from "../src/dataProcessing";
 import { getJsonStructure } from "evergreen-org-crawler/src/index"
 import config from "evergreen-org-crawler/config.json"
@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
-enum Mode{
+enum Mode {
 	Frontend,
 	StandaloneBackend,
 	IntegratedBackend

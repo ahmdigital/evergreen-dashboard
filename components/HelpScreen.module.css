@@ -11,17 +11,19 @@
   justify-content: center;
   align-items: center;
   z-index: 2;
+  padding-top: 50px;
 }
 
 .modalContainer {
-  width: 500px;
-  height: 500px;
-  border-radius: 12px;
-  background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 31.25rem;
+  height: 31.25rem;
+  border-radius: var(--main-section-border-radius);
+  background-color: var(--colour-container-background);
+  box-shadow: var(--main-section-boxshadow);
   display: flex;
   flex-direction: column;
   padding: 25px;
+  margin-bottom: 100px;
 }
 
 .title {

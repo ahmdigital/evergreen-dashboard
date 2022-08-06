@@ -1,9 +1,17 @@
-.help{
-	margin-top: 1px;
-    margin-right: 1px;
-    align-items: center;
+.tableCellStyle{
+	font-weight: var(--font-weight-bold);
+  font-family: var(--primary-font-family);
+  font-size: 1.4rem;
+	background-color: var(--table-cell-background);
+	color: var(--colour-font);
+  margin-top: 1rem;
+  line-height: 3rem;
+  border-color:  var(--table-cell-border);
+  border-width: 0.2rem;
 }
 
-.helpBtn {
-  cursor: pointer;
+.tableStyle {
+  box-shadow: none;
+  background-color: var(--colour-background);
+  color: var(--colour-font);
 }

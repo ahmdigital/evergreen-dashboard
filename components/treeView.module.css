@@ -1,68 +1,28 @@
-/* Remove default bullets */
-ul.treeView {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
 
-/* Style the caret/arrow */
-span.caret {
-  cursor: pointer;
-  user-select: none;
-  /* Prevent text selection */
-}
-
-/* Create the caret/arrow with a unicode, and style it */
-span.caret::before {
-  content: "\25B6";
-  color: black;
-  display: inline-block;
-  margin-right: 6px;
-}
-
-/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
-span.caret_down::before {
-  transform: rotate(90deg);
-}
-
-/* Hide the nested list */
-ul.nested {
-  display: none;
-}
-
-/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
-ul.active {
-  display: block;
-}
-
-/* Adds the thick black bars around each section, but without a border at the bottom */
-div.topBarStyle {
+/* -----------------START: SHARED SECTION CONTAINERS CSS ------------------- */
+div.sectionContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
   justify-content: center;
   height: max-content;
-  width: 85vw;
-  border: var(--border-thick);
-  border-bottom: none;
-  padding: 0;
-  margin-top: 2rem;
-  background-color: var(--colour-background);
+  width: 100%;
+  max-width: 125rem; /*2000px;*/
+  background-color: var(--colour-white);
+  box-shadow: var(--main-section-boxshadow);
+  border-radius: var(--main-section-border-radius);
+  padding: 1.5rem 2rem 1.5rem 2rem;
+  margin: 1.1rem;
+  box-sizing: border-box;
+  font-family: var(--font-family);
 }
 
-/* Adds the thick black bars around each section */
-div.barStyle {
-  justify-content: center;
-  height: max-content;
-  width: 85vw;
-  border: var(--border-thick);
-  padding: 0;
-  background-color: var(--colour-background);
-}
 
-.help{
-	float: right;
-	margin-top: 30px;
-	margin-right: 10px;
+h3.h3ContainerStyle {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--colour-font);
+  font-family: var(--primary-font-family);
 }
-
-.helpBtn {
-  cursor: pointer;
-}
+/* -----------------END: SHARED SECTION CONTAINERS CSS ------------------- */

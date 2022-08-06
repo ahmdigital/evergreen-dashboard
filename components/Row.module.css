@@ -1,0 +1,8 @@
+
+.tableCellStyle{
+	font-weight: bold;
+    font-family: var(--font-family);
+    font-size: large;
+	background-color: var(--colour-container-background);
+	color: var(--colour-font)
+}

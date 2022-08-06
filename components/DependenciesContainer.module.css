@@ -1,0 +1,49 @@
+div.sectionContainer {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  width: 100%;
+  background-color: var(--colour-container-background);
+  box-shadow: var(--main-section-boxshadow);
+  border-radius: var(--main-section-border-radius);
+  padding: 1.5rem 2.5rem 3rem 2.5rem;
+  margin: 1.1rem;
+  box-sizing: border-box;
+  font-family: var(--primary-font-family);
+}
+
+div.depsBarStyle {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+div.btnsContainer{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0;
+  width: 17rem;
+}
+
+div.btnsContainer button{
+  width:8rem;
+  font-family: var(--primary-font-family);
+  font-size: 1rem;
+  background-color: var(--colour-container-background);
+  border: none;
+  padding: 0.8rem;
+  border-radius: 20px;
+}
+div.btnsContainer button span {
+  margin-left: 0.5rem;
+}
+div.btnsContainer button:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
