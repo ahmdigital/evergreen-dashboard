@@ -1,13 +1,14 @@
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import { semVerToString } from "../../src/semVer";
-import { PackageData } from "../../hooks/useProcessDependencyData";
+import { semVerToString } from "../src/semVer";
+
+import { PackageData } from "../hooks/useProcessDependencyData";
 import styles from "./SubRow.module.css";
 import Image from "next/image";
 
-import RedIcon from "../images/redIcon.svg";
-import YellowIcon from "../images/yellowIcon.svg";
-import GreenIcon from "../images/greenIcon.svg";
+import RedIcon from "./images/redIcon.svg";
+import YellowIcon from "./images/yellowIcon.svg";
+import GreenIcon from "./images/greenIcon.svg";
 
 export type SubRowProps = {
   dependency: PackageData;

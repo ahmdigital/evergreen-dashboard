@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styles from "./SummaryContainer.module.css";
-import sharedStyles from "../treeView.module.css";
-import ReposOverviewTable from "../SummaryComponents/RepoOverviewTable/ReposOverviewTable";
-import helpIcon from "../images/helpIcon.png";
+import sharedStyles from "./treeView.module.css";
+import ReposOverviewTable from "./SummaryComponents/RepoOverviewTable/ReposOverviewTable";
+import helpIcon from "./images/helpIcon.png";
 import Image from "next/image";
-import HelpScreen from "../HelpScreen/HelpScreen";
+import HelpScreen from "./HelpScreen";
 
 export default function SummaryContainer(props: {
   rankArray: any;

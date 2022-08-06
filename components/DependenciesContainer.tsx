@@ -1,9 +1,9 @@
 import React, { ReactNode } from "react";
-import CollapsibleTable from "../CollapsibleTable/CollapsibleTable";
+import CollapsibleTable from "./CollapsibleTable";
 import styles from "./DependenciesContainer.module.css";
-import sharedStyles from "../treeView.module.css";
-import SearchBar from "../SearchBar/SearchBar";
-import { DependencyData } from "../../src/dataProcessing";
+import sharedStyles from "./treeView.module.css";
+import SearchBar from "./SearchBar";
+import { DependencyData } from "../src/dataProcessing";
 // import refreshIcon from "../components/images/refresh.svg" ;
 // import filterIcon from "../components/images/filter.svg" ;
 // import Image from "next/image";
