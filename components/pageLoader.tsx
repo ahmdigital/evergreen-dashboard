@@ -20,7 +20,7 @@ function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
 	return o[propertyName];
 }
 
-async function getDataFromAPI(api: "loadNew" | "loadLatest", request: "npm" | "PyPI" | "RubyGems"){
+async function getDataFromAPI(api: "loadNew" | "loadLatest" | "forceNew", request: "npm" | "PyPI" | "RubyGems"){
 	console.log("Start")
 	let JSObject = await fetch("api/" + api)
 	let retries = 10
@@ -38,6 +38,11 @@ async function getDataFromAPI(api: "loadNew" | "loadLatest", request: "npm" | "P
 	return result
 }
 
+export async function forceNewVersion(request: "npm" | "PyPI" | "RubyGems"){
+	return getDataFromAPI("forceNew", request)
+}
+
+
 async function getNewVersion(request: "npm" | "PyPI" | "RubyGems"){
 	return getDataFromAPI("loadNew", request)
 }
@@ -45,6 +50,12 @@ async function getNewVersion(request: "npm" | "PyPI" | "RubyGems"){
 async function getCurrentVersion(request: "npm" | "PyPI" | "RubyGems"){
 	return getDataFromAPI("loadLatest", request)
 }
+
+export let setLoadingTest: any = null
+export let setDataTest: any = null
+export let currentData: any = null
+
+export let lastRequest: any = null
 
 export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 	const requestToAPI = {
@@ -54,9 +65,13 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 	}
 	let api = getProperty(requestToAPI, request)
 
+	lastRequest = request
 
 	const [data, setData] = useState(null)
 	const [isLoading, setLoading] = useState(false)
+	setLoadingTest = setLoading
+	setDataTest = setData
+	currentData = data
 
 	useEffect(() => {
 		setLoading(true)
@@ -101,6 +116,8 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 			//TODO: Alternatively, copy the state (i.e. which tabs are open) to the new page
 			if(data != null && (data! as {oldVersion: boolean, data: any}).oldVersion){
 				return <Page JSObject={(data as {oldVersion: boolean, data: any}).data}  finalData={false}/>
+			} else if( data != null && (data! as {refreshing: boolean, data: any}).refreshing){
+				return <Page JSObject={(data as {refreshing: boolean, data: any}).data}  finalData={false}/>
 			}
 		}
 
