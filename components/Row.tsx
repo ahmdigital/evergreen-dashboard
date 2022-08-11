@@ -84,7 +84,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
               <Table size="small" aria-label="dependencies">
                 <TableHead className={styles.collapsibleTableHead} >
                   <TableRow>
-                    <TableCell className={styles.collapsibleTableCell}> 
+                    <TableCell className={styles.collapsibleTableCell}>
                       <Tabs subRows={subRows}></Tabs>
                     </TableCell>
                   </TableRow>

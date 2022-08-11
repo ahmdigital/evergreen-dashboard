@@ -4,16 +4,16 @@
     color: var(--colour-font);
 }
 
-.col1{ 
-	width: 0%; 
-	background-color: var(--table-left-edge); 
+.col1{
+	width: 0%;
+	background-color: var(--table-left-edge);
 }
 
 .col2 {
-	width: 6%; 
-	background-color: var(--colour-background); 
+	width: 6%;
+	background-color: var(--colour-background);
 }
- 
+
 .col3 {
 	width: 75%;
 	background-color: var(--colour-background);
@@ -25,8 +25,8 @@
 }
 
 .col5 {
-	width: 0%; 
-	background-color: var(--colour-background); 
+	width: 0%;
+	background-color: var(--colour-background);
 }
 
 .tableCellStyle{
