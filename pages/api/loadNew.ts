@@ -83,6 +83,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			await fs.promises.writeFile(CachePath, data)
 			if(promiseResolve != null){
 				promiseResolve()
+				waitingPromise = null
 			}
 
 			cachedData = JSON.parse(data)
