@@ -51,9 +51,10 @@ async function getCurrentVersion(request: "npm" | "PyPI" | "RubyGems"){
 	return getDataFromAPI("loadLatest", request)
 }
 
-export let setLoadingTest: any = null
-export let setDataTest: any = null
-export let currentData: any = null
+export let PageLoaderSetLoading: any = null
+export let PageLoaderIsLoading: any = null
+export let PageLoaderSetData: any = null
+export let PageLoaderCurrentData: any = null
 
 export let lastRequest: any = null
 
@@ -69,9 +70,10 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 
 	const [data, setData] = useState(null)
 	const [isLoading, setLoading] = useState(false)
-	setLoadingTest = setLoading
-	setDataTest = setData
-	currentData = data
+	PageLoaderSetLoading = setLoading
+	PageLoaderSetData = setData
+	PageLoaderCurrentData = data
+	PageLoaderIsLoading = isLoading
 
 	useEffect(() => {
 		setLoading(true)

@@ -7,7 +7,7 @@ import { DependencyData } from "../src/dataProcessing";
 import refreshIcon from "../components/images/refresh.svg" ;
 //import filterIcon from "../components/images/filter.svg" ;
 import Image from "next/image";
-import { currentData, forceNewVersion, lastRequest, setDataTest, setLoadingTest } from "./pageLoader";
+import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./pageLoader";
 
 let refreshing = false
 
@@ -21,8 +21,10 @@ export default function DependenciesContainer(props: {
 
 	async function callRefresh(){
 		if(refreshing){ return }
-		setLoadingTest(true)
-		setDataTest({refreshing: true, data: currentData as any} as any)
+		if(lastRequest == null){ return; }
+		if(PageLoaderIsLoading){ return; }
+		PageLoaderSetLoading(true)
+		PageLoaderSetData({refreshing: true, data: PageLoaderCurrentData as any} as any)
 
 		refreshing = true
 
@@ -32,8 +34,8 @@ export default function DependenciesContainer(props: {
 		//	case(Mode.StandaloneBackend):break;
 		//	case(Mode.IntegratedBackend): {
 				forceNewVersion(lastRequest).then(async (result) => {
-					setDataTest(result as any)
-					setLoadingTest(false)
+					PageLoaderSetData(result as any)
+					PageLoaderSetLoading(false)
 					refreshing = false
 				})
 		//	} break;
