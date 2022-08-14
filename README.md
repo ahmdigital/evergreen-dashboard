@@ -18,6 +18,13 @@ Please avoid doing this at all cost.
 
 The `-n` allows you to skip git hooks.
 
+### ENV
+
+```
+NEXT_PUBLIC_GITHUB_TOKEN=
+CLIENT_id=
+CLIENT_SECRET=
+```
 ## Provisioning the infrastructure locally
 
 Make sure you have terraform installed, to deploy follow these steps:
