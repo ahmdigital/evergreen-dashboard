@@ -32,7 +32,7 @@ let greenDef = new VersionDefinition("Current minor version behind by < 5 minors
 
 function StatusTable() {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer>
       <Table size="medium" className={styles.tableStyle}>
         <TableHead>
           <TableRow>
