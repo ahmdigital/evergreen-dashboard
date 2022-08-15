@@ -16,7 +16,7 @@
 
 .modalContainer {
   width: 31.25rem;
-  height: 31.25rem;
+  height: 15.00rem;
   border-radius: var(--main-section-border-radius);
   background-color: var(--colour-container-background);
   box-shadow: var(--main-section-boxshadow);
@@ -40,10 +40,20 @@
   cursor: pointer;
 }
 
-.legend {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  width: 80%;
+.tableStyle {
+  box-shadow: none;
+}
+
+.tableHeaderCellStyle {
+  padding: 4px;
+  font-size: medium;
+  font-weight: bold;
+  font-family: var(--primary-font-family);
+}
+
+.tableCellStyle {
+  padding: 4px;
+  font-size: medium;
+  font-weight: normal;
+  font-family: var(--primary-font-family);
 }
