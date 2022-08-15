@@ -46,7 +46,7 @@ async function getCurrentVersion(request: "npm" | "PyPI" | "RubyGems"){
 	return getDataFromAPI("loadLatest", request)
 }
 
-export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
+export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 	const requestToAPI = {
 		npm: "NPM",
 		PyPI: "PYPI",
