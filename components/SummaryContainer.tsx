@@ -21,13 +21,13 @@ export default function SummaryContainer(props: {
 
   return (
     <div className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}>
-      <h2 className="h2NoMargins">Evergreen Dashboard</h2>
-      <p className={headerStyles.headerStyle}>
-        Monitoring for <b>{org.targetOrganisation}</b> Github Organisation
-      </p>
-      <div className={`${styles.loadingWheelBox}`}>
-          {props.loadingWheel}
-      </div>
+        <h2 className="h2NoMargins">Evergreen Dashboard</h2>
+        <p className={headerStyles.headerStyle}>
+          Monitoring for <b>{org.targetOrganisation}</b> Github Organisation
+        </p>
+        <div className={`${styles.loadingWheelBox}`}>
+            {props.loadingWheel}
+        </div>
       <div className={styles.container}>
       <div className={`${styles.summaryOverall} ${styles.sharedCompProps}`}>
             <h3 className={styles.overallTitleStyle}>Overall</h3>
