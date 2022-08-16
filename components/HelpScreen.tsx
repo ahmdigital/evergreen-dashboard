@@ -1,9 +1,7 @@
-import React, { useState } from "react";
 import closeIcon from "./images/closeIcon.png";
 import greenIcon from "./images/greenIcon.svg";
 import yellowIcon from "./images/yellowIcon.svg";
 import redIcon from "./images/redIcon.svg";
-// import statusLegend from "./images/helpLegend.svg";
 import styles from "./HelpScreen.module.css";
 import Image from "next/image";
 import Table from '@mui/material/Table';
@@ -12,12 +10,12 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 
 export type HelpScreenProps = {
   closeHelp: (_value: boolean | ((_prev: boolean) => boolean)) => void;
 };
 
+// class created to make linking of descriptions to config easier later on
 class VersionDefinition {
   description: string;
 
@@ -26,10 +24,12 @@ class VersionDefinition {
   }
 }
 
+// defines red, yellow and green traffic light descriptions
 let redDef = new VersionDefinition("Current major version behind by > 1 major OR > 6 minors.");
 let yellowDef = new VersionDefinition("Current minor version behind by 5 or 6 minors.");
 let greenDef = new VersionDefinition("Current minor version behind by < 5 minors.");
 
+// creates the table for the status definitions
 function StatusTable() {
   return (
     <TableContainer>
@@ -71,6 +71,7 @@ function StatusTable() {
   );
 }
 
+// assembles the pop-up for the light status help
 export default function HelpScreen(props: HelpScreenProps) {
   return (
     <div className={styles.modalBg}>
