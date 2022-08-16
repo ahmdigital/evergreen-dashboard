@@ -6,11 +6,11 @@ import Row from "./Row";
 import Layout from "./Layout";
 import Head from "next/head";
 import DependenciesContainer from "./DependenciesContainer";
-import HeaderContainer from "./HeaderContainer";
+//import HeaderContainer from "./HeaderContainer"; - remove if not using header container anymore
 import SummaryContainer from "./SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
-import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 
 export type PageProps = {
   JSObject: DependencyData;
@@ -32,12 +32,12 @@ export function Page(props: PageProps) {
           float: "right",
           justifyContent: "center",
           alignItems: "center",
-          width: "10vh",
         }}
       >
-        <CircularProgress />
+        <p>Updating Data...</p>
+        <LinearProgress />
       </Box>
-    );
+    )
   }
 
   //Sort alphabetically by name
@@ -95,7 +95,6 @@ export function Page(props: PageProps) {
       </Head>
       <main style={{ padding: 0 }}>
         <Layout>
-          <HeaderContainer />
           <SummaryContainer rankArray={rankArray} loadingWheel={loadingWheel} />
           <DependenciesContainer
             JSObject={props.JSObject}

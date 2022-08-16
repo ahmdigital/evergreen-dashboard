@@ -94,7 +94,7 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 			} break;
 		}
 	}, [])
-
+	// Three states, loading, failed, or loaded
 	if (isLoading) {
 		if(mode == Mode.IntegratedBackend){
 			//TODO: Support overwriting current page data rather than recreating the whole page.
