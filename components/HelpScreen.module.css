@@ -45,7 +45,9 @@
 }
 
 .tableHeaderCellStyle {
-  padding: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 0px;
   font-size: var(--font-size-large);
   font-weight: bold;
   font-family: var(--primary-font-family);
