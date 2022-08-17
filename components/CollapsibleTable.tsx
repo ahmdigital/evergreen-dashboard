@@ -17,58 +17,23 @@ export default function CollapsibleTable(props: CollapsibleTableProps) {
   return (
     <TableContainer
       component={Paper}
-      style={{
-        boxShadow: "none",
-        backgroundColor: "var(--colour-background)",
-        color: "var(--colour-font)",
-      }}
+	  className={styles.tableComponent}
     >
       <Table size="small" aria-label="collapsible table">
         <colgroup>
-          <col
-            style={{ width: "0%", backgroundColor: "var(--table-left-edge)" }}
-          />
-          <col
-            style={{ width: "6%", backgroundColor: "var(--colour-background)" }}
-          />
-          <col
-            style={{
-              width: "75%",
-              backgroundColor: "var(--colour-background)",
-            }}
-          />
-          <col
-            style={{
-              width: "25%",
-              backgroundColor: "var(--colour-background)",
-            }}
-          />
-          <col
-            style={{ width: "0%", backgroundColor: "var(--colour-background)" }}
-          />
+          <col className={styles.col1} />
+          <col className={styles.col2} />
+          <col className={styles.col3} />
+          <col className={styles.col4} />
+          <col className={styles.col5} />
         </colgroup>
         <TableHead>
           <TableRow>
             <TableCell className={styles.tableCellStyle}></TableCell>
             <TableCell className={styles.tableCellStyle}>status</TableCell>
-            <TableCell
-              className={styles.tableCellStyle}
-              style={{ color: "var(--colour-text)" }}
-            >
-              name
-            </TableCell>
-            <TableCell
-              className={styles.tableCellStyle}
-              style={{ color: "var(--colour-text)" }}
-            >
-              version
-            </TableCell>
-            <TableCell
-              className={styles.tableCellStyle}
-              style={{ color: "var(--colour-text)" }}
-            >
-              link
-            </TableCell>
+            <TableCell className={styles.tableCellStyle}>name</TableCell>
+            <TableCell className={styles.tableCellStyle}>version</TableCell>
+            <TableCell className={styles.tableCellStyle}>link</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>{props.children}</TableBody>

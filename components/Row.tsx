@@ -41,13 +41,13 @@ export default function Row(props: { rank: number; row: any } & Props) {
 
   return (
     <React.Fragment>
-      <TableRow style={{ color: "var(--colour-font)" }}>
+      <TableRow>
         <TableCell className={styles.tableCellStyle}>
           <IconButton
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
-            style={{ color: "gray" }}
+			className={styles.rowArrow}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
@@ -58,8 +58,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
             alt="Repo Priority"
             width="40px"
             height="40px"
-            style={{ maxWidth: "100%", maxHeight: "100%" }}
-          ></Image>
+			className={styles.statusIcon}/>
         </TableCell>
         <TableCell className={styles.tableCellStyle} component="th" scope="row">
           {row.name}
@@ -77,24 +76,15 @@ export default function Row(props: { rank: number; row: any } & Props) {
       </TableRow>
       <TableRow>
         <TableCell
-          style={{
-            paddingBottom: 0,
-            paddingTop: 0,
-            backgroundColor: "var(--colour-container-background)",
-          }}
+          className={styles.subRowContainer}
           colSpan={6}
         >
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
+            <Box sx={{ margin: 1}}>
               <Table size="small" aria-label="dependencies">
-                <TableHead
-                  style={{
-                    backgroundColor: "var(--colour-container-background)",
-                    color: "var(--colour-font)",
-                  }}
-                >
+                <TableHead className={styles.collapsibleTableHead} >
                   <TableRow>
-                    <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
+                    <TableCell className={styles.collapsibleTableCell}>
                       <Tabs subRows={subRows}></Tabs>
                     </TableCell>
                   </TableRow>

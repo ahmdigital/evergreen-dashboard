@@ -13,9 +13,7 @@ export default function HelpScreen(props: HelpScreenProps) {
       <div className={styles.modalContainer}>
         <div
           className={styles.closeHelpScreen}
-          onClick={() => {
-            props.closeHelp(false);
-          }}
+          onClick={() => props.closeHelp(false)}
         >
           <Image
             className={styles.closeBtn}
