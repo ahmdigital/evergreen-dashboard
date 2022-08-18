@@ -152,6 +152,10 @@ export function Page(props: PageProps) {
 			<MenuItem value={"name"}>Name</MenuItem>
 			<MenuItem value={"rank"}>Rank</MenuItem>
 			<MenuItem value={"time"}>Time</MenuItem>
+			<MenuItem value={"internal count"}>Internal count</MenuItem>
+			<MenuItem value={"external count"}>External count</MenuItem>
+			<MenuItem value={"total count"}>Total count</MenuItem>
+			<MenuItem value={"user count"}>User count</MenuItem>
 		</Select>
 	</FormControl>
 

@@ -71,7 +71,7 @@ export default function CollapsibleTable(props: CollapsibleTableProps) {
             </TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>{props.children}</TableBody>
+        <TableBody id={"mainTableBody"}>{props.children}</TableBody>
       </Table>
     </TableContainer>
   );

@@ -14,6 +14,42 @@ type InverseSubRowProps = {
   user: SubRowProps["dependency"];
 };
 
+export function testClickFunction(name: string){
+	let mainTableBody = document.getElementById("mainTableBody");
+	if(mainTableBody == null){ return }
+	let children = mainTableBody.children;
+	console.log(children.length)
+	console.log(name)
+
+	var instance = children[1]
+
+	console.log(instance)
+
+	if(instance instanceof HTMLElement){
+
+		if (instance.getAttribute('aria-expanded') == 'false') { // region is collapsed
+
+			// update the aria-expanded attribute of the region
+			instance.setAttribute('aria-expanded', 'true');
+
+			// move focus to the region
+			instance.focus();
+
+			// update the button label
+			//thisObj.$toggle.find('span').html('Hide');
+
+		}
+		else { // region is expanded
+
+			// update the aria-expanded attribute of the region
+			instance.setAttribute('aria-expanded', 'false');
+
+			// update the button label
+			//thisObj.$toggle.find('span').html('Show');
+		}
+	}
+}
+
 export function InverseSubRow(props: InverseSubRowProps) {
   const userName = props.user.name;
   const usedVersion = semVerToString(props.user.version);
@@ -46,6 +82,7 @@ export function InverseSubRow(props: InverseSubRowProps) {
       </TableCell>
       <TableCell className={styles.tableCellStyle}>{userName}</TableCell>
       <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
+	  <button onClick = {() => {testClickFunction(userName)}}> </button>
     </TableRow>
   );
 }
