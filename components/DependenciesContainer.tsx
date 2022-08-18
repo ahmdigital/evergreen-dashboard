@@ -7,7 +7,7 @@ import { DependencyData } from "../src/dataProcessing";
 import refreshIcon from "../components/images/refresh.svg" ;
 //import filterIcon from "../components/images/filter.svg" ;
 import Image from "next/image";
-import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./pageLoader";
+import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
 
 let refreshing = false
 

@@ -58,7 +58,7 @@ export let PageLoaderCurrentData: any = null
 
 export let lastRequest: any = null
 
-export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
+export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 	const requestToAPI = {
 		npm: "NPM",
 		PyPI: "PYPI",
