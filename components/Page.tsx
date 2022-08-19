@@ -11,20 +11,25 @@ import SummaryContainer from "./SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { Checkbox, FormControl, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent } from "@mui/material";
 
 export type PageProps = {
 	JSObject: DependencyData;
 	finalData: boolean;
 };
 
-type Filter = { type: "rank" | "time", level: any, direction: boolean }
+type Filter = { type: "" | "time", level: any, direction: boolean, showRed: boolean, showYellow: boolean, showGreen: boolean }
 
 function applyFilter(row: ProcessedDependencyData[0], filter: Filter): boolean {
+	switch (row.minRank) {
+		case 0: if (!filter.showRed) { return false } break
+		case 1: if (!filter.showYellow) { return false } break
+		case 2: if (!filter.showGreen) { return false } break
+	}
 	switch (filter.type) {
-		case "rank":
-			return filter.direction ? (row.minRank >= filter.level) : (row.minRank <= filter.level)
-			break
+		//case "rank":
+		//return filter.direction ? (row.minRank >= filter.level) : (row.minRank <= filter.level)
+		//break
 		case "time":
 
 			break
@@ -34,8 +39,8 @@ function applyFilter(row: ProcessedDependencyData[0], filter: Filter): boolean {
 
 export function Page(props: PageProps) {
 	const [searchTerm, setSearchTerm] = useState<string>("");
-	const [filterSetting, setFilterSetting] = useState<Filter>({ type: "rank", level: 0, direction: false });
-	const [sortSetting, setSortSetting] = useState<{ type: "name" | "rank" | "time", direction: boolean }>({ type: "rank", direction: true });
+	const [filterSetting, setFilterSetting] = useState<Filter>({ type: "", level: 0, direction: false, showRed: true, showYellow: true, showGreen: true });
+	const [sortSetting, setSortSetting] = useState<{ type: "name" | "rank" | "time" | "internal" | "external" | "total" | "users", direction: boolean }>({ type: "rank", direction: true });
 	const rows = useProcessDependencyData(props.JSObject);
 	const rankArray = { green: 0, red: 0, yellow: 0 };
 	const diplayedRows = [];
@@ -69,9 +74,34 @@ export function Page(props: PageProps) {
 			break
 		case ("time"):
 			//TODO
-			//Sort by name first
+			//Sort by name and rank first
 			rows.sort((a, b) => a.name.localeCompare(b.name))
+			rows.sort((a, b) => a.minRank - b.minRank)
 			throw new Error("Time sorting is not yet implemented")
+			break
+		case ("internal"):
+			//Sort by name and rank first
+			rows.sort((a, b) => a.name.localeCompare(b.name))
+			rows.sort((a, b) => a.minRank - b.minRank)
+			rows.sort((a, b) => a.internalSubRows.length - b.internalSubRows.length)
+			break
+		case ("external"):
+			//Sort by name and rank first
+			rows.sort((a, b) => a.name.localeCompare(b.name))
+			rows.sort((a, b) => a.minRank - b.minRank)
+			rows.sort((a, b) => a.externalSubRows.length - b.externalSubRows.length)
+			break
+		case ("total"):
+			//Sort by name and rank first
+			rows.sort((a, b) => a.name.localeCompare(b.name))
+			rows.sort((a, b) => a.minRank - b.minRank)
+			rows.sort((a, b) => ( a.internalSubRows.length + a.externalSubRows.length) - (b.internalSubRows.length + b.externalSubRows.length))
+			break
+		case ("users"):
+			//Sort by name and rank first
+			rows.sort((a, b) => a.name.localeCompare(b.name))
+			rows.sort((a, b) => a.minRank - b.minRank)
+			rows.sort((a, b) => a.userSubRows.length - b.userSubRows.length)
 			break
 	}
 
@@ -131,13 +161,21 @@ export function Page(props: PageProps) {
 		setSortSetting({ type: sortSetting.type, direction: event.target.value == "ascending" })
 	}
 
-	const handleRankCutoffDirectionChange = (event: SelectChangeEvent) => {
-		setFilterSetting({ type: filterSetting.type, level: filterSetting.level, direction: event.target.value == "ascending" })
+	const handleFilterCutoffDirectionChange = (event: SelectChangeEvent) => {
+		setFilterSetting({ ...filterSetting, direction: event.target.value == "ascending" })
 	}
 
-	const handleRankCutoffChange = (event: SelectChangeEvent) => {
-		setFilterSetting({ type: "rank", level: event.target.value, direction: filterSetting.direction })
+	const handleFilterChange = (event: SelectChangeEvent) => {
+		const sel = event.target.value;
+		if (sel in ["", "time"]) {
+			setFilterSetting({ ...filterSetting, type: sel as "" | "time" })
+		}
 	}
+
+	const handleRankSelectionChange = (event: SelectChangeEvent<string[]>) => {
+		const sel = typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value
+		setFilterSetting({ ...filterSetting, showRed: sel.indexOf("red") != -1, showYellow: sel.includes("yellow"), showGreen: sel.includes("green") })
+	};
 
 	const sortBox = <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
 		<InputLabel>Sort by</InputLabel>
@@ -146,16 +184,14 @@ export function Page(props: PageProps) {
 			onChange={handleSortChange}
 			label="Sort by"
 		>
-			<MenuItem value="">
-				<em>None</em>
-			</MenuItem>
+			<MenuItem value=""> <em>None</em> </MenuItem>
 			<MenuItem value={"name"}>Name</MenuItem>
 			<MenuItem value={"rank"}>Rank</MenuItem>
 			<MenuItem value={"time"}>Time</MenuItem>
-			<MenuItem value={"internal count"}>Internal count</MenuItem>
-			<MenuItem value={"external count"}>External count</MenuItem>
-			<MenuItem value={"total count"}>Total count</MenuItem>
-			<MenuItem value={"user count"}>User count</MenuItem>
+			<MenuItem value={"internal"}>Internal count</MenuItem>
+			<MenuItem value={"external"}>External count</MenuItem>
+			<MenuItem value={"total"}>Total count</MenuItem>
+			<MenuItem value={"users"}>User count</MenuItem>
 		</Select>
 	</FormControl>
 
@@ -171,29 +207,59 @@ export function Page(props: PageProps) {
 		</Select>
 	</FormControl>
 
-	const rankCutoffBox = <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-		<InputLabel>Rank cutoff</InputLabel>
+	const rankSelectionValue = [
+		...(filterSetting.showGreen ? ["green"] : []),
+		...(filterSetting.showYellow ? ["yellow"] : []),
+		...(filterSetting.showRed ? ["red"] : [])
+	]
+
+	const rankSelectionList = <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+		<InputLabel>Rank filter</InputLabel>
 		<Select
-			value={filterSetting.level}
-			onChange={handleRankCutoffChange}
-			label="Rank cutoff"
+			multiple
+			value={rankSelectionValue}
+			onChange={handleRankSelectionChange}
+			renderValue={(selected) => selected.join(', ')}
+			input={<OutlinedInput label="Tag" />}
 		>
-			<MenuItem value={2}>Green</MenuItem>
-			<MenuItem value={1}>Yellow</MenuItem>
-			<MenuItem value={0}>Red</MenuItem>
+			{[
+				<MenuItem value={"green"} key={"green"}>
+					<Checkbox checked={filterSetting.showGreen} />
+					<ListItemText primary={"green"} />
+				</MenuItem>,
+				<MenuItem value={"yellow"} key={"yellow"}>
+					<Checkbox checked={filterSetting.showYellow} />
+					<ListItemText primary={"yellow"} />
+				</MenuItem>,
+				<MenuItem value={"red"} key={"red"}>
+					<Checkbox checked={filterSetting.showRed} />
+					<ListItemText primary={"red"} />
+				</MenuItem>
+			]}
 		</Select>
 	</FormControl>
 
-	const rankCutoffDirectionBox = <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-	<InputLabel>Rank cutoff direction</InputLabel>
-	<Select
-		value={filterSetting.direction ? "ascending" : "descending"}
-		onChange={handleRankCutoffDirectionChange}
-		label="Rank cutoff direction"
-	>
-		<MenuItem value={"ascending"}>ascending</MenuItem>
-		<MenuItem value={"descending"}>descending</MenuItem>
-	</Select>
+	const rankCutoffBox = <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+		<InputLabel>Filters</InputLabel>
+		<Select
+			value={filterSetting.type}
+			onChange={handleFilterChange}
+			label="Filters"
+		>
+			<MenuItem value=""> <em>None</em> </MenuItem>
+		</Select>
+	</FormControl>
+
+	const filterCutoffDirectionBox = <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+		<InputLabel>Rank cutoff direction</InputLabel>
+		<Select
+			value={filterSetting.direction ? "ascending" : "descending"}
+			onChange={handleFilterCutoffDirectionChange}
+			label="Rank cutoff direction"
+		>
+			<MenuItem value={"ascending"}>ascending</MenuItem>
+			<MenuItem value={"descending"}>descending</MenuItem>
+		</Select>
 	</FormControl>
 
 	return (
@@ -205,7 +271,7 @@ export function Page(props: PageProps) {
 				<Layout>
 					<HeaderContainer />
 					<SummaryContainer rankArray={rankArray} loadingWheel={loadingWheel} />
-					<div>{sortBox}{sortDirectionBox}{rankCutoffBox}{rankCutoffDirectionBox}</div>
+					<div>{sortBox}{sortDirectionBox}{rankSelectionList}{rankCutoffBox}{filterCutoffDirectionBox}</div>
 					<DependenciesContainer
 						JSObject={props.JSObject}
 						rows={diplayedRows}
