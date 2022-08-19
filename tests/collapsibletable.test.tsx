@@ -2,8 +2,8 @@
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-// import CollapsibleTable from '../components/CollapsibleTable/CollapsibleTable';
-// import Row from "../components/Row/Row";
+//import CollapsibleTable from '../components/CollapsibleTable/CollapsibleTable';
+//import Row from "../components/Row/Row";
 
 /*
 Some test cases to consider:

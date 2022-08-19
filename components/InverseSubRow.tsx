@@ -65,19 +65,14 @@ export function InverseSubRow(props: InverseSubRowProps) {
   }
 
   return (
-    <TableRow
-      style={{
-        backgroundColor: "var(--colour-background)",
-        color: "var(--colour-font)",
-      }}
-    >
+    <TableRow className={styles.inverseSubRow}    >
       <TableCell className={styles.tableCellStyle}>
         <Image
           src={statusIcon}
           alt="Repo Priority"
           width="33px"
           height="33px"
-          style={{ maxWidth: "100%", maxHeight: "100%" }}
+		  className={styles.inverseSubRowIcon}
         ></Image>
       </TableCell>
       <TableCell className={styles.tableCellStyle}>{userName}</TableCell>

@@ -1,4 +1,4 @@
-import PageLoader from "../components/pageLoader"
+import {PageLoader} from "../components/PageLoader"
 
 export default function Profile(){
 	let page = PageLoader("npm")
