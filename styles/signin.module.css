@@ -1,0 +1,25 @@
+.everGreen{
+	color: green
+}
+
+
+.signinPage {
+	height: 100vh;
+}
+
+.signinContainer {
+	width: 100%;
+	max-width: 400px;
+	min-height: 200px;
+	padding: 1em;
+	
+}
+
+.signinWithGithubButton{
+	background-color: black;
+	width: 100%;
+}
+
+.signinWithGithubButton:hover{
+	background-color: #2e2e2e;
+}
