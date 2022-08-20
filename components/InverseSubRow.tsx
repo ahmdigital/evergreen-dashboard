@@ -17,6 +17,7 @@ type InverseSubRowProps = {
 export function InverseSubRow(props: InverseSubRowProps) {
   const userName = props.user.name;
   const usedVersion = semVerToString(props.user.version);
+  const depLink = props.user.link;
 
   let statusIcon = RedIcon;
 
@@ -41,6 +42,11 @@ export function InverseSubRow(props: InverseSubRowProps) {
       </TableCell>
       <TableCell className={styles.tableCellStyle}>{userName}</TableCell>
       <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
+	  <TableCell className={styles.tableCellStyle}>
+		<a href={depLink} rel="noreferrer" target="_blank">
+          Link
+        </a>
+	  </TableCell>
     </TableRow>
   );
 }
