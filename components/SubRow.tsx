@@ -18,6 +18,7 @@ export type SubRowProps = {
 export function SubRow(props: SubRowProps) {
   // dependencyData contains all the packages and its props (name, version, link etc)
   const depName = props.dependency.name;
+  const depLink = props.dependency.link;
   const usedVersion = semVerToString(props.dependency.usedVersion);
   const latestVersion = semVerToString(props.dependency.version);
 
@@ -45,6 +46,11 @@ export function SubRow(props: SubRowProps) {
       <TableCell className={styles.tableCellStyle}>{depName}</TableCell>
       <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
       <TableCell className={`${styles.tableCellStyle} ${styles.latestVerStyle}`}>{latestVersion}</TableCell>
+      <TableCell className={styles.tableCellStyle}>
+		<a href={depLink} rel="noreferrer" target="_blank">
+          Link
+        </a>
+	  </TableCell>
     </TableRow>
   );
 }
