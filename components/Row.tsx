@@ -16,6 +16,10 @@ import Tabs from "./Tabs";
 import { semVerToString } from "../src/semVer";
 import styles from "./Row.module.css";
 
+const dayjs = require('dayjs')
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
+
 export type Props = {
   subRows: {
     internal: JSX.Element[];
@@ -38,6 +42,9 @@ export default function Row(props: { rank: number; row: any } & Props) {
   if (rank == 1) {
     statusIcon = YellowIcon;
   }
+
+
+  let timeFormatter = new Intl.RelativeTimeFormat(undefined, { style: "narrow" });
 
   return (
     <React.Fragment>
@@ -65,6 +72,9 @@ export default function Row(props: { rank: number; row: any } & Props) {
         </TableCell>
         <TableCell className={styles.tableCellStyle} align="left">
           {semVerToString(row.version)}
+        </TableCell>
+        <TableCell className={styles.tableCellStyle} align="right">
+          {dayjs(row.lastUpdated).fromNow()}
         </TableCell>
         <TableCell className={styles.tableCellStyle} align="right">
           (

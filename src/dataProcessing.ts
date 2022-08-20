@@ -4,6 +4,7 @@ export type ID = number & { __brand: "ID" };
 export type DependencyMapElement = {
   name: string;
   version: SemVer;
+  lastUpdated: string;
   link: string;
   internal: boolean;
   archived: boolean;
@@ -40,6 +41,7 @@ export function JSObjectFromJSON(
     betterMap.set(parseInt(id) as ID, {
       name: data.name,
       version: semVerVer,
+      lastUpdated: data.lastUpdated,
       link: data.link,
       internal: data.internal,
       archived: data.archived,
