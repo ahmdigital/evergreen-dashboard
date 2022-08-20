@@ -12,6 +12,7 @@ import { DependencyData } from "../src/dataProcessing";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { Checkbox, FormControl, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent } from "@mui/material";
+import dayjs from "dayjs";
 
 export type PageProps = {
 	JSObject: DependencyData;
@@ -73,11 +74,10 @@ export function Page(props: PageProps) {
 			rows.sort((a, b) => a.minRank - b.minRank)
 			break
 		case ("time"):
-			//TODO
 			//Sort by name and rank first
 			rows.sort((a, b) => a.name.localeCompare(b.name))
 			rows.sort((a, b) => a.minRank - b.minRank)
-			throw new Error("Time sorting is not yet implemented")
+			rows.sort((a, b) => dayjs(b.lastUpdated).diff(dayjs(a.lastUpdated)))
 			break
 		case ("internal"):
 			//Sort by name and rank first

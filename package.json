@@ -24,7 +24,6 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-	"evergreen-org-crawler": "file:../crawler",
     "@testing-library/dom": "^8.17.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.2",
