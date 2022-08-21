@@ -12,7 +12,7 @@ export default function LoadingBackdrop(props: {
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={props.open}
       >
-        <Box>
+        <Box sx={{ width: '80%' }}>
             <p>Updating Dashboard...</p>
             <LinearProgress />
         </Box>

@@ -1,13 +1,10 @@
-.Box {
-    width: 70%;
+.LinearProgress {
+    border-radius: 5;
+    height: 10;
 }
 
 .Backdrop {
     color: #fff;
-}
-
-.LinearProgress {
-    width: 70%;
 }
 
 .p {
