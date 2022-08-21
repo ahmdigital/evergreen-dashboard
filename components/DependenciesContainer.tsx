@@ -4,9 +4,12 @@ import styles from "./DependenciesContainer.module.css";
 import sharedStyles from "./treeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
-// import refreshIcon from "../components/images/refresh.svg" ;
-// import filterIcon from "../components/images/filter.svg" ;
-// import Image from "next/image";
+import refreshIcon from "../components/images/refresh.svg" ;
+//import filterIcon from "../components/images/filter.svg" ;
+import Image from "next/image";
+import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
+
+let refreshing = false
 
 /* Container includes  Search, Filter, Dependencies Table */
 export default function DependenciesContainer(props: {
@@ -15,6 +18,30 @@ export default function DependenciesContainer(props: {
   searchTerm: any;
   setSearchTerm: any;
 }) {
+
+	async function callRefresh(){
+		if(refreshing){ return }
+		if(lastRequest == null){ return; }
+		if(PageLoaderIsLoading){ return; }
+		PageLoaderSetLoading(true)
+		PageLoaderSetData({refreshing: true, data: PageLoaderCurrentData as any} as any)
+
+		refreshing = true
+
+		//TODO: Support other configuration
+		//switch(mode){
+		//	case(Mode.Frontend): break;
+		//	case(Mode.StandaloneBackend):break;
+		//	case(Mode.IntegratedBackend): {
+				forceNewVersion(lastRequest).then(async (result) => {
+					PageLoaderSetData(result as any)
+					PageLoaderSetLoading(false)
+					refreshing = false
+				})
+		//	} break;
+		//}
+	}
+
   return (
     <div className={`${styles.sectionContainer}`}>
       <h3 className={sharedStyles.h3ContainerStyle}>Repositories </h3>
@@ -24,17 +51,17 @@ export default function DependenciesContainer(props: {
           searchTerm={props.searchTerm}
           setSearchTerm={props.setSearchTerm}
         />
-      {/* commented out refresh and filter buttons */}
-        {/* <div className={styles.btnsContainer}>
-          <button>
+      {/* commented out filter button */}
+        <div className={styles.btnsContainer}>
+          {/* <button>
             <Image src={filterIcon} alt="filter" width="20px" height="20px"></Image>
             <span>Filter</span>
-          </button>
-          <button>
+          </button> */}
+          <button onClick={callRefresh}>
           <Image src={refreshIcon} alt="refresh" width="20px" height="20px"></Image>
           <span>Refresh</span>
           </button>
-        </div> */}
+        </div>
       </div>
       <div className={styles.tableStyle}>
         <CollapsibleTable>{props.rows}</CollapsibleTable>
