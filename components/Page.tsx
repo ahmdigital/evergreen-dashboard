@@ -6,16 +6,15 @@ import Row from "./Row";
 import Layout from "./Layout";
 import Head from "next/head";
 import DependenciesContainer from "./DependenciesContainer";
-//import HeaderContainer from "./HeaderContainer"; - remove if not using header container anymore
 import SummaryContainer from "./SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
-import Box from "@mui/material/Box";
-import LinearProgress from "@mui/material/LinearProgress";
+import LoadingBackdrop from "./LoadingBackdrop";
 
 export type PageProps = {
   JSObject: DependencyData;
   finalData: boolean;
 };
+
 
 export function Page(props: PageProps) {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -23,20 +22,13 @@ export function Page(props: PageProps) {
   const rankArray = { green: 0, red: 0, yellow: 0 };
   const diplayedRows = [];
 
-  let loadingWheel: any = null;
+  let loadingBackdrop: any = null;
+  // If the final data is loading, then set the backdrop open to true
   if (!props.finalData) {
-    loadingWheel = (
-      <Box
-        sx={{
-          display: "inline-block",
-          float: "right",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <p>Updating Data...</p>
-        <LinearProgress />
-      </Box>
+    loadingBackdrop = (
+      <>
+        <LoadingBackdrop open={true}/>
+      </>
     )
   }
 
@@ -95,7 +87,7 @@ export function Page(props: PageProps) {
       </Head>
       <main style={{ padding: 0 }}>
         <Layout>
-          <SummaryContainer rankArray={rankArray} loadingWheel={loadingWheel} />
+          <SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} />
           <DependenciesContainer
             JSObject={props.JSObject}
             rows={diplayedRows}

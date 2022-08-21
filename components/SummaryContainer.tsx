@@ -10,7 +10,7 @@ import org from "../config.json";
 
 export default function SummaryContainer(props: {
   rankArray: any;
-  loadingWheel: any;
+  loadingBackdrop: any;
 }) {
   const totalRepos =
     props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
@@ -25,8 +25,8 @@ export default function SummaryContainer(props: {
         <p className={headerStyles.headerStyle}>
           Monitoring for <b>{org.targetOrganisation}</b> Github Organisation
         </p>
-        <div className={`${styles.loadingWheelBox}`}>
-            {props.loadingWheel}
+        <div>
+            {props.loadingBackdrop}
         </div>
       <div className={styles.container}>
       <div className={`${styles.summaryOverall} ${styles.sharedCompProps}`}>

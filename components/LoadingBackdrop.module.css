@@ -1,0 +1,16 @@
+.Box {
+    width: 70%;
+}
+
+.Backdrop {
+    color: #fff;
+}
+
+.LinearProgress {
+    width: 70%;
+}
+
+.p {
+    font-family: var(--primary-font-family);
+    font-size: var(--font-size-normal);
+}
