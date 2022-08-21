@@ -11,18 +11,18 @@
   justify-content: center;
   align-items: center;
   z-index: 2;
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 .modalContainer {
   width: 31.25rem;
-  height: 31.25rem;
+  height: 20.00rem;
   border-radius: var(--main-section-border-radius);
   background-color: var(--colour-container-background);
   box-shadow: var(--main-section-boxshadow);
   display: flex;
   flex-direction: column;
-  padding: 25px;
+  padding: 15px;
   margin-bottom: 100px;
 }
 
@@ -40,10 +40,22 @@
   cursor: pointer;
 }
 
-.legend {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  width: 80%;
+.tableStyle {
+  box-shadow: none;
+}
+
+.tableHeaderCellStyle {
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 0px;
+  font-size: var(--font-size-large);
+  font-weight: bold;
+  font-family: var(--primary-font-family);
+}
+
+.tableCellStyle {
+  padding: 10px;
+  font-size: var(--font-size-large);
+  font-weight: normal;
+  font-family: var(--primary-font-family);
 }
