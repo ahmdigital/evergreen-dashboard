@@ -6,6 +6,7 @@ import config from "evergreen-org-crawler/config.json"
 import { useEffect, useState } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import ErrorSnackbar from "./FeedbackComponents/ErrorSnackbar";
 
 enum Mode {
 	Frontend,
@@ -127,7 +128,10 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 			<CircularProgress />
 		</Box>
 	}
-	if (!data) { return <p>Failed to load data!</p> }
+	if (!data) { 
+		// If data is unable to load, throw error message to user
+		return <><ErrorSnackbar open={true}/></> 
+	}
 
 	return <Page JSObject={data} finalData={true}/>
 }
