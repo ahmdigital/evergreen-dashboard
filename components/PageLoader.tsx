@@ -4,8 +4,7 @@ import { JSObjectFromJSON } from "../src/dataProcessing";
 import { getJsonStructure } from "evergreen-org-crawler/src/index"
 import config from "evergreen-org-crawler/config.json"
 import { useEffect, useState } from "react";
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import LoadingBackdrop from "./LoadingBackdrop";
 
 enum Mode {
 	Frontend,
@@ -123,9 +122,7 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 			}
 		}
 
-		return <Box sx={{ display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh' }}>
-			<CircularProgress />
-		</Box>
+		return <><LoadingBackdrop open={true}/></>
 	}
 	if (!data) { return <p>Failed to load data!</p> }
 
