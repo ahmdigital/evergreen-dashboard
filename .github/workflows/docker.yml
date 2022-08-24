@@ -1,11 +1,12 @@
 name: Docker
 on:
-  push:
+  workflow_run:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+    workflows:
+      - Build
+    types:
+      - completed
 
 env:
   image_name: "evergreendashboard"
@@ -13,9 +14,8 @@ env:
 
 jobs:
   build_docker_image:
-    name: docker image
-    needs: build
-    if: ${{ github.actor != 'dependabot[bot]' }}
+    name: build docker image
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check Out Repo

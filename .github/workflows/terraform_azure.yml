@@ -1,7 +1,9 @@
 name: Terraform azure
-
+# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_run
 on:
   workflow_run:
+    branches:
+      - main
     workflows:
       - Docker
     types:
