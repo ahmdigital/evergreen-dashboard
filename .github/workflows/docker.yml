@@ -1,4 +1,4 @@
-name: docker
+name: Docker
 on:
   push:
     branches:
@@ -12,9 +12,6 @@ env:
   image_tag: "latest"
 
 jobs:
-  build:
-    uses: ./.github/workflows/build.yml
-
   build_docker_image:
     name: docker image
     needs: build
