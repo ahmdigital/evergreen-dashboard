@@ -1,21 +1,19 @@
-name: Terraform
+name: Terraform aws
 
 on:
-  push:
+  workflow_run:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+    workflows:
+      - Build
+    types:
+      - completed
 
 jobs:
-  build:
-    uses: ./.github/workflows/build.yml
-
   terraform:
     name: Terraform
     needs: build
-    if: ${{ github.actor != 'dependabot[bot]' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -25,7 +23,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v2
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          terraform_wrapper: false
+          terraform_wrapper: true
 
       - name: Download a single artifact
         uses: actions/download-artifact@v3
@@ -120,6 +118,6 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve
+      # - name: Terraform Apply
+      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   run: terraform apply -auto-approve
