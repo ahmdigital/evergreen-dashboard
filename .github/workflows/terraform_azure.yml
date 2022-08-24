@@ -1,43 +1,27 @@
-name: Terraform
-
+name: Terraform azure
+# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_run
 on:
-  push:
+  workflow_run:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+    workflows:
+      - Docker
+    types:
+      - completed
 
 jobs:
-  build:
-    uses: ./.github/workflows/build.yml
-
   terraform:
-    name: Terraform
-    needs: build
-    if: ${{ github.actor != 'dependabot[bot]' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: terraform/
+        working-directory: terraform_azure_docker/
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          terraform_wrapper: false
-
-      - name: Download a single artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: nextjs-build
-          path: .next/
-
-      - name: run bootstrap script
-        run: |
-          zip -ur --must-match eb_app.zip ../package.json ../.next
-          ls -lha
-        shell: bash
+          terraform_wrapper: true
 
       - name: Terraform fmt
         id: fmt
