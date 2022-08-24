@@ -5,7 +5,7 @@ on:
       - main
   pull_request:
     branches:
-      - mt/terraform-azure-docker
+      - main
 
 env:
   image_name: "evergreendashboard"
@@ -13,6 +13,12 @@ env:
 
 jobs:
   build:
+    uses: ./.github/workflows/build.yml
+
+  build_docker_image:
+    name: docker image
+    needs: build
+    if: ${{ github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check Out Repo
@@ -38,7 +44,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.image_name }}:${{ env.image_tag }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.image_name }}:${{ env.image_tag }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
