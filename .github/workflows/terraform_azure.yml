@@ -19,7 +19,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v2
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          terraform_wrapper: true
+          # terraform_wrapper: true
 
       - name: Terraform fmt
         id: fmt
@@ -97,6 +97,7 @@ jobs:
                 body: output
               })
             }
+        continue-on-error: true
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
