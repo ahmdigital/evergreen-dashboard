@@ -7,11 +7,16 @@
     bottom: 24px;
     right: 24px;
     z-index: 10;
-    color: white;
     background-color: #3B5DD9;
+    color: white;
 }
 
 .iconStyle {
     width: 40px;
     height: 40px;
+}
+
+.tooltipStyle {
+    font-family: var(--primary-font-family);
+    font-size: var(--font-size-normal);
 }
