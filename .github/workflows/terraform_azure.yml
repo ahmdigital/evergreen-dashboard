@@ -3,7 +3,7 @@ name: Terraform azure
 on:
   workflow_run:
     # branches: [main]
-    workflows: [Build]
+    workflows: [Docker]
     types: [completed]
 
 jobs:
