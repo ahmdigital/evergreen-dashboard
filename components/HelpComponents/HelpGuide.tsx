@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Fab, Dialog, DialogTitle, DialogActions } from "@mui/material";
+import { Fab, Dialog, DialogTitle, DialogActions, DialogContent, DialogContentText } from "@mui/material";
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import HelpOutline from "@mui/icons-material/HelpOutline";
 import styles from "./HelpGuide.module.css";
@@ -44,6 +44,11 @@ export default function HelpGuide() {
             onClose={handleClose}
         >
             <DialogTitle>Help Guide!</DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    This is a general help guide for the evergreen dashboard.
+                </DialogContentText>
+            </DialogContent>
         </Dialog>
       </>
     );
