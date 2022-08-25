@@ -2,16 +2,13 @@ name: Terraform aws
 
 on:
   workflow_run:
-    branches:
-      - main
-    workflows:
-      - Build
-    types:
-      - completed
+    # branches: [main]
+    workflows: [Build]
+    types: [completed]
 
 jobs:
-  terraform:
-    name: Terraform
+  terraform_aws_zip:
+    name: terraform_aws_zip
     needs: build
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest

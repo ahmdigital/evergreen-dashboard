@@ -7,7 +7,8 @@ on:
     types: [completed]
 
 jobs:
-  terraform:
+  terraform_azure_docker:
+    name: terraform azure docker
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     defaults:
