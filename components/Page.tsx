@@ -11,6 +11,8 @@ import SummaryContainer from "./SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import HelpGuide from "./HelpGuide";
+
 
 export type PageProps = {
   JSObject: DependencyData;
@@ -103,6 +105,7 @@ export function Page(props: PageProps) {
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
           />
+          <HelpGuide />
         </Layout>
       </main>
     </div>

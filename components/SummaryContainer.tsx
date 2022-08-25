@@ -4,7 +4,7 @@ import sharedStyles from "./treeView.module.css";
 import ReposOverviewTable from "./SummaryComponents/RepoOverviewTable/ReposOverviewTable";
 import helpIcon from "./images/helpIcon.png";
 import Image from "next/image";
-import HelpScreen from "./HelpScreen";
+import HelpScreen from "./LightStatus";
 
 export default function SummaryContainer(props: {
   rankArray: any;
