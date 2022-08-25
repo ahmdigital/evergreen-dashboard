@@ -1,12 +1,9 @@
 name: Docker
 on:
   workflow_run:
-    branches:
-      - main
-    workflows:
-      - Build
-    types:
-      - completed
+    branches: [main]
+    workflows: [Build]
+    types: [completed]
 
 env:
   image_name: "evergreendashboard"
