@@ -1,9 +1,11 @@
-import * as React from 'react';
-import { Fab } from "@mui/material";
+import React, { useState } from "react";
+import { Fab, Dialog } from "@mui/material";
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import HelpOutline from "@mui/icons-material/HelpOutline";
 import styles from "./HelpGuide.module.css";
 import { styled } from '@mui/material/styles';
+import HelpGuideDialog from './HelpGuideDialog';
+
 
 // defining style for custom tooltip
 const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
@@ -20,13 +22,28 @@ const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
 
 
 export default function HelpGuide() {
+    // State for opening the help guide
+    const [open, setOpen] = React.useState(false);
+  
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = (value: string) => {
+      setOpen(false);
+    };
+
     return (
       <>
         <LightTooltip title="Help Guide">
-            <Fab className={styles.fabStyle}>
+            <Fab className={styles.fabStyle} onClick={handleClickOpen}>
                 <HelpOutline className={styles.iconStyle}/>
             </Fab>
         </LightTooltip>
+        <HelpGuideDialog
+            open={open}
+            onClose={handleClose}
+        />
       </>
     );
   }

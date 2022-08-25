@@ -11,7 +11,7 @@ import SummaryContainer from "./SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import HelpGuide from "./HelpGuide";
+import HelpGuide from "./HelpComponents/HelpGuide";
 
 
 export type PageProps = {
