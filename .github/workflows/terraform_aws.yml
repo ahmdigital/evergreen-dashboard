@@ -9,7 +9,6 @@ on:
 jobs:
   terraform_aws_zip:
     name: terraform_aws_zip
-    needs: build
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     defaults:
