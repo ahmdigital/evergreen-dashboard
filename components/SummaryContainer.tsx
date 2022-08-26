@@ -7,6 +7,8 @@ import Image from "next/image";
 import HelpScreen from "./LightStatus";
 import headerStyles from "./HeaderContainer.module.css";
 import org from "../config.json";
+import ForestIcon from '@mui/icons-material/Forest';
+
 
 export default function SummaryContainer(props: {
   rankArray: any;
@@ -21,7 +23,7 @@ export default function SummaryContainer(props: {
 
   return (
     <div className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}>
-        <h2 className="h2NoMargins">Evergreen Dashboard</h2>
+        <h2 className="h2NoMargins"><ForestIcon />  Evergreen Dashboard</h2>
         <p className={headerStyles.headerStyle}>
           Monitoring for <b>{org.targetOrganisation}</b> Github Organisation
         </p>
