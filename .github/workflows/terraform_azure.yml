@@ -2,15 +2,13 @@ name: Terraform azure
 # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_run
 on:
   workflow_run:
-    branches:
-      - main
-    workflows:
-      - Docker
-    types:
-      - completed
+    # branches: [main]
+    workflows: [Docker]
+    types: [completed]
 
 jobs:
-  terraform:
+  terraform_azure_docker:
+    name: terraform azure docker
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     defaults:
@@ -21,7 +19,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v2
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          terraform_wrapper: true
+          # terraform_wrapper: true
 
       - name: Terraform fmt
         id: fmt
@@ -99,6 +97,7 @@ jobs:
                 body: output
               })
             }
+        continue-on-error: true
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
