@@ -44,10 +44,10 @@ jobs:
 
       - name: run bootstrap script
         run: |
-          unzip eb_app_full.zip -d .next
-          zip -ur --must-match eb_app.zip ../package.json ../.next
           ls -lha ../..
           ls -lha ..
+          unzip ../eb_app_full.zip -d .next
+          zip -ur --must-match eb_app.zip ../package.json ../.next
           ls -lha
         shell: bash
 
@@ -133,5 +133,5 @@ jobs:
         run: exit 1
 
       # - name: Terraform Apply
-      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   if: github.ref == 'refs/heads/main'
       #   run: terraform apply -auto-approve
