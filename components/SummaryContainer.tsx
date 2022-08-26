@@ -12,13 +12,12 @@ export default function SummaryContainer(props: {
   rankArray: any;
   loadingBackdrop: any;
 }) {
-  // State for whether greying out overall card
+  // Boolean value to determine whether to grey out
   let overallNan = false;
 
   const totalRepos =
     props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
   let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
-  //let overallPercent = NaN;
   let overallPercentStr = overallPercent + "%"
 
   if(isNaN(overallPercent)){
