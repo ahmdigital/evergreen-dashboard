@@ -43,17 +43,25 @@ resource "azurerm_linux_web_app" "this" {
   location            = azurerm_service_plan.this.location
   service_plan_id     = azurerm_service_plan.this.id
   app_settings = {
-    PORT                     = var.port
+    PORT = var.port
+    # azure exposed container port
+    WEBSITES_PORT            = var.port
     NEXT_PUBLIC_GITHUB_TOKEN = var.github_token_scope_read_org
     CLIENT_ID                = var.client_id
     CLIENT_SECRET            = var.client_secret
+    # write permission allowed on /home
+    DYNAMIC_CACHE_PATH = "/home/dynamicCache.json"
+
+    # in case org has changed we don't to read old org data
+    WEBSITES_ENABLE_APP_SERVICE_STORAGE = "false"
   }
   site_config {
     application_stack {
       docker_image     = local.docker_image
       docker_image_tag = local.build_imge_tag
     }
-    always_on     = var.instance_type.sku_name != "F1" ? true : false
-    http2_enabled = true
+    always_on         = var.instance_type.sku_name != "F1" ? true : false
+    health_check_path = "/"
+    http2_enabled     = true
   }
 }
