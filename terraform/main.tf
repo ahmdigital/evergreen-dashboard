@@ -18,7 +18,7 @@ terraform {
     organization = "example-org-76fbff"
 
     workspaces {
-      name = "ever-green-backend"
+      name = "evergreen-aws"
     }
   }
 }

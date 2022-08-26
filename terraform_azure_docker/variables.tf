@@ -51,9 +51,3 @@ variable "instance_type" {
     os_type  = "Linux"
   }
 }
-
-variable "max_instance_count" {
-  type        = number
-  description = "Max instance count in auto scaling group"
-  default     = 1
-}
