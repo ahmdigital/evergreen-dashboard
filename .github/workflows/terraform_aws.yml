@@ -2,7 +2,7 @@ name: Terraform aws
 
 on:
   workflow_run:
-    # branches: [main]
+    branches: [main]
     workflows: [Build]
     types: [completed]
 
@@ -44,11 +44,8 @@ jobs:
 
       - name: run bootstrap script
         run: |
-          ls -lha ../..
-          ls -lha ..
-          unzip ../eb_app_full.zip -d .next
+          unzip ../eb_app_full.zip -d ../.next
           zip -ur --must-match eb_app.zip ../package.json ../.next
-          ls -lha
         shell: bash
 
       - name: Terraform fmt
