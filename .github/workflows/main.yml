@@ -57,5 +57,5 @@ jobs:
           # Flag to have the linter complete with exit code 0 even if errors were detected.
           # DISABLE_ERRORS: true
 
-  build:
-    uses: ./.github/workflows/build.yml
+  # build:
+  #   uses: ./.github/workflows/build.yml
