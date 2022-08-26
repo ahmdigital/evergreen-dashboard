@@ -6,6 +6,9 @@ on:
     workflows: [Docker]
     types: [completed]
 
+# Because we are using workflow_run
+# github.event_name will be workflow_run instead of push
+
 jobs:
   terraform_azure_docker:
     name: terraform azure docker
@@ -104,4 +107,4 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
-        run: echo ${{ github.event_name }} && terraform apply -auto-approve
+        run: terraform apply -auto-approve
