@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: terraform/
+        working-directory: terraform_aws/
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
