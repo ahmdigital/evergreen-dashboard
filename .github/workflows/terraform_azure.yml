@@ -97,12 +97,11 @@ jobs:
                 body: output
               })
             }
-        continue-on-error: true
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve
+        if: github.ref == 'refs/heads/main'
+        run: echo ${{ github.event_name }} && terraform apply -auto-approve

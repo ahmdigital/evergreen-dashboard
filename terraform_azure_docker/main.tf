@@ -24,7 +24,6 @@ locals {
   docker_image   = "docker.io/mtempty/evergreendashboard"
 }
 
-
 resource "azurerm_resource_group" "this" {
   name     = var.app_name
   location = var.location
@@ -44,7 +43,10 @@ resource "azurerm_linux_web_app" "this" {
   location            = azurerm_service_plan.this.location
   service_plan_id     = azurerm_service_plan.this.id
   app_settings = {
-    PORT = var.port
+    PORT                     = var.port
+    NEXT_PUBLIC_GITHUB_TOKEN = var.github_token_scope_read_org
+    CLIENT_ID                = var.client_id
+    CLIENT_SECRET            = var.client_secret
   }
   site_config {
     application_stack {
