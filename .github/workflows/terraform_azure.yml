@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: terraform_azure_docker/
+        working-directory: terraform_azure/
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2

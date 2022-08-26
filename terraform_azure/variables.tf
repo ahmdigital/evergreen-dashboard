@@ -1,11 +1,5 @@
 # varaibles can change at runtime
 
-variable "port" {
-  type        = number
-  description = "application port number"
-  default     = 3000
-}
-
 variable "github_token_scope_read_org" {
   type        = string
   description = "Github token that has a scope read organistaion repositories"
@@ -22,6 +16,18 @@ variable "client_secret" {
   type        = string
   description = "Github evergreen oauth app client secret"
   sensitive   = true
+}
+
+variable "port" {
+  type        = string
+  description = "application port number, azure web app defines port using WEBSITES_PORT"
+  default     = "3000"
+}
+
+variable "dynamic_cache_path" {
+  type        = string
+  description = "Azure ewb app custom container only allows write permission on /home"
+  default     = "/home/dynamicCache.json"
 }
 
 variable "app_name" {
