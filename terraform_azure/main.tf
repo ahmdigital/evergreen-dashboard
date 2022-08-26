@@ -43,14 +43,12 @@ resource "azurerm_linux_web_app" "this" {
   location            = azurerm_service_plan.this.location
   service_plan_id     = azurerm_service_plan.this.id
   app_settings = {
-    PORT = var.port
-    # azure exposed container port
+    PORT                     = var.port
     WEBSITES_PORT            = var.port
     NEXT_PUBLIC_GITHUB_TOKEN = var.github_token_scope_read_org
     CLIENT_ID                = var.client_id
     CLIENT_SECRET            = var.client_secret
-    # write permission allowed on /home
-    DYNAMIC_CACHE_PATH = "/home/dynamicCache.json"
+    DYNAMIC_CACHE_PATH       = var.dynamic_cache_path
 
     # in case org has changed we don't to read old org data
     WEBSITES_ENABLE_APP_SERVICE_STORAGE = "false"
