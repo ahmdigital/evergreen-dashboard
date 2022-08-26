@@ -1,13 +1,9 @@
-.LinearProgress {
-    border-radius: 5;
-    height: 10;
-}
-
-.Backdrop {
-    color: #fff;
-}
 
 .p {
     font-family: var(--primary-font-family);
     font-size: var(--font-size-normal);
+    font-style: italic;
+    font-weight: bold;
+    color: #fff;
+    align-self:center;
 }

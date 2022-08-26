@@ -58,7 +58,7 @@ export default function DependenciesContainer(props: {
             <span>Filter</span>
           </button> */}
           <button onClick={callRefresh}>
-            <Image src={refreshIcon} alt="refresh" width="20px" height="20px"></Image>
+            <Image src={refreshIcon} alt="refresh" width="20rem" height="20rem"></Image>
             <span className={styles.refreshWord}>Refresh</span>
           </button>
         </div>
