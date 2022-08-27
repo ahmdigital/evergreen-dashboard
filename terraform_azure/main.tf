@@ -50,8 +50,9 @@ resource "azurerm_linux_web_app" "this" {
     CLIENT_SECRET            = var.client_secret
     DYNAMIC_CACHE_PATH       = var.dynamic_cache_path
 
-    # in case org has changed we don't to read old org data
-    WEBSITES_ENABLE_APP_SERVICE_STORAGE = "false"
+    # The documentation not very clear on write permission of /home
+    # Also, in case org has changed, old org data must be deleted
+    WEBSITES_ENABLE_APP_SERVICE_STORAGE = true
   }
   site_config {
     application_stack {
