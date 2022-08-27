@@ -26,7 +26,7 @@ export function JSObjectFromJSON(
     | [any, { dep: number; dependencies: (string | number)[][] }[]]
     | never[]
 ): DependencyData {
-  if (jsonData == [] || jsonData.length == 0) {
+  if (jsonData.length == 0) {
     return {
       depMap: new Map(),
       deps: [],

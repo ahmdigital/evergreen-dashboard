@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  output: 'standalone'
 }
 const withTM = require('next-transpile-modules')(['evergreen-org-crawler']);
 

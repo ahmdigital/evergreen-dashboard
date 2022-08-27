@@ -4,11 +4,15 @@
 name: Build
 
 on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main, develop]
   workflow_call:
 
 jobs:
   build:
-    name: Builds the app
+    name: Builds the next.js app
     runs-on: ubuntu-latest
 
     steps:

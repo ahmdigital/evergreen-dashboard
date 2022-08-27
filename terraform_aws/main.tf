@@ -5,20 +5,12 @@ terraform {
       source  = "hashicorp/aws"
       version = "4.6.0"
     }
-    null = {
-      version = "~> 3.0.0"
-    }
-    archive = {
-      source  = "hashicorp/archive"
-      version = "2.2.0"
-    }
-
   }
   cloud {
     organization = "example-org-76fbff"
 
     workspaces {
-      name = "ever-green-backend"
+      name = "evergreen-aws"
     }
   }
 }
@@ -54,7 +46,7 @@ data "aws_iam_policy_document" "permissions" {
 
 locals {
   account_id          = data.aws_caller_identity.current_identity.account_id
-  prefix              = "ever-green"
+  prefix              = "evergreen"
   ecr_repository_name = "${local.prefix}-image-repo"
   build_imge_tag      = "latest"
   achive_path         = "${path.module}/eb_app.zip"

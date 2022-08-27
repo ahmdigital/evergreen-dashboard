@@ -6,13 +6,11 @@ import Row from "./Row";
 import Layout from "./Layout";
 import Head from "next/head";
 import DependenciesContainer from "./DependenciesContainer";
-import HeaderContainer from "./HeaderContainer";
 import SummaryContainer from "./SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-import { Checkbox, FormControl, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent } from "@mui/material";
 import dayjs from "dayjs";
+import LoadingBackdrop from "./LoadingBackdrop";
+import { Checkbox, FormControl, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent } from "@mui/material";
 
 export type PageProps = {
 	JSObject: DependencyData;
@@ -46,21 +44,14 @@ export function Page(props: PageProps) {
 	const rankArray = { green: 0, red: 0, yellow: 0 };
 	const diplayedRows = [];
 
-	let loadingWheel: any = null;
+	let loadingBackdrop: any = null;
+	// If the final data is loading, then set the backdrop open to true
 	if (!props.finalData) {
-		loadingWheel = (
-			<Box
-				sx={{
-					display: "inline-block",
-					float: "right",
-					justifyContent: "center",
-					alignItems: "center",
-					width: "10vh",
-				}}
-			>
-				<CircularProgress />
-			</Box>
-		);
+	  loadingBackdrop = (
+		<>
+		  <LoadingBackdrop open={true}/>
+		</>
+	  )
 	}
 
 	//Sorting. Doing this after filtering would be more efficient
@@ -219,7 +210,7 @@ export function Page(props: PageProps) {
 			multiple
 			value={rankSelectionValue}
 			onChange={handleRankSelectionChange}
-			renderValue={(selected) => selected.join(', ')}
+			renderValue={(selected: string[]) => selected.join(', ')}
 			input={<OutlinedInput label="Tag" />}
 		>
 			{[
@@ -264,22 +255,21 @@ export function Page(props: PageProps) {
 
 	return (
 		<div className="container">
-			<Head>
-				<title>Evergreen dashboard</title>
-			</Head>
-			<main style={{ padding: 0 }}>
-				<Layout>
-					<HeaderContainer />
-					<SummaryContainer rankArray={rankArray} loadingWheel={loadingWheel} />
-					<div>{sortBox}{sortDirectionBox}{rankSelectionList}{rankCutoffBox}{filterCutoffDirectionBox}</div>
-					<DependenciesContainer
-						JSObject={props.JSObject}
-						rows={diplayedRows}
-						searchTerm={searchTerm}
-						setSearchTerm={setSearchTerm}
-					/>
-				</Layout>
-			</main>
+		  <Head>
+			<title>Evergreen dashboard</title>
+		  </Head>
+		  <main style={{ padding: 0 }}>
+			<Layout>
+			  <SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} />
+			  <div>{sortBox}{sortDirectionBox}{rankSelectionList}{rankCutoffBox}{filterCutoffDirectionBox}</div>
+			  <DependenciesContainer
+				JSObject={props.JSObject}
+				rows={diplayedRows}
+				searchTerm={searchTerm}
+				setSearchTerm={setSearchTerm}
+			  />
+			</Layout>
+		  </main>
 		</div>
-	);
+	  );
 }
