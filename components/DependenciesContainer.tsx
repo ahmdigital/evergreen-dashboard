@@ -17,6 +17,8 @@ export default function DependenciesContainer(props: {
   rows: ReactNode;
   searchTerm: any;
   setSearchTerm: any;
+  sortDropdown: any;
+  rankSelection: any;
 }) {
 
 	async function callRefresh(){
@@ -53,6 +55,8 @@ export default function DependenciesContainer(props: {
         />
       {/* commented out filter button */}
         <div className={styles.btnsContainer}>
+		  {props.sortDropdown}
+		  {props.rankSelection}
           {/* <button>
             <Image src={filterIcon} alt="filter" width="20px" height="20px"></Image>
             <span>Filter</span>
