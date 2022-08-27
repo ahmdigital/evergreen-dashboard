@@ -43,14 +43,13 @@ export function SubRow(props: SubRowProps) {
 		  className={styles.inverseSubRowIcon}
         ></Image>
       </TableCell>
-      <TableCell className={styles.tableCellStyle}>{depName}</TableCell>
-      <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
-      <TableCell className={`${styles.tableCellStyle} ${styles.latestVerStyle}`}>{latestVersion}</TableCell>
       <TableCell className={styles.tableCellStyle}>
 		<a href={depLink} rel="noreferrer" target="_blank">
-          Link
+		  {depName}
         </a>
 	  </TableCell>
+      <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
+      <TableCell className={`${styles.tableCellStyle} ${styles.latestVerStyle}`}>{latestVersion}</TableCell>
     </TableRow>
   );
 }

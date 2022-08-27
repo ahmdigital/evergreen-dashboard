@@ -76,14 +76,13 @@ export function InverseSubRow(props: InverseSubRowProps) {
 		  className={styles.inverseSubRowIcon}
         ></Image>
       </TableCell>
-      <TableCell className={styles.tableCellStyle}>{userName}</TableCell>
-      <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
-	  {/* <button onClick = {() => {testClickFunction(userName)}}> </button> */}
-	  <TableCell className={styles.tableCellStyle}>
+      <TableCell className={styles.tableCellStyle}>
 		<a href={depLink} rel="noreferrer" target="_blank">
-          Link
+		  {userName}
         </a>
 	  </TableCell>
+      <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
+	  {/* <button onClick = {() => {testClickFunction(userName)}}> </button> */}
     </TableRow>
   );
 }

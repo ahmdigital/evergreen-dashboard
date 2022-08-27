@@ -68,20 +68,15 @@ export default function Row(props: { rank: number; row: any } & Props) {
 			className={styles.statusIcon}/>
         </TableCell>
         <TableCell className={styles.tableCellStyle} component="th" scope="row">
-          {row.name}
+		  <a href={row.link} rel="noreferrer" target="_blank">
+		    {row.name}
+          </a>
         </TableCell>
         <TableCell className={styles.tableCellStyle} align="left">
           {semVerToString(row.version)}
         </TableCell>
         <TableCell className={styles.tableCellStyle} align="right">
           {dayjs(row.lastUpdated).fromNow()}
-        </TableCell>
-        <TableCell className={styles.tableCellStyle} align="right">
-          (
-          <a href={row.link} rel="noreferrer" target="_blank">
-            GitHub
-          </a>
-          )
         </TableCell>
       </TableRow>
       <TableRow>

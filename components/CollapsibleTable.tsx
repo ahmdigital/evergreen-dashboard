@@ -33,8 +33,7 @@ export default function CollapsibleTable(props: CollapsibleTableProps) {
             <TableCell className={styles.tableCellStyle}>status</TableCell>
             <TableCell className={styles.tableCellStyle}>name</TableCell>
             <TableCell className={styles.tableCellStyle}>version</TableCell>
-            <TableCell className={styles.tableCellStyle}>updated</TableCell>
-            <TableCell className={styles.tableCellStyle}>link</TableCell>
+            <TableCell className={styles.tableCellStyle}>last push</TableCell>
           </TableRow>
         </TableHead>
         <TableBody id={"mainTableBody"}>{props.children}</TableBody>
