@@ -20,3 +20,31 @@
     font-family: var(--primary-font-family);
     font-size: var(--font-size-normal);
 }
+
+.helpTitleStyle {
+    font-size: var(--font-size-large);
+    font-family: var(--primary-font-family);
+    font-weight: bold;
+    align-self: center;
+}
+
+.questionHeaderStyle {
+    font-size: var(--font-size-normal);
+    font-family: var(--primary-font-family);
+    font-style: oblique;
+    font-weight: bold;
+    padding-top: 1rem;
+}
+
+.infoContentStyle {
+    font-size: var(--font-size-normal);
+    font-family: var(--primary-font-family);
+    padding-bottom: 1rem;
+}
+
+.fieldContentStyle {
+    font-size: var(--font-size-normal);
+    font-family: var(--primary-font-family);
+    padding-bottom: 1rem;
+    font-weight: bold;
+}
