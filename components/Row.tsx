@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import Table from "@mui/material/Table";
-import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
+import { Tooltip, TableRow, TableHead, TableCell, Table } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import QuestionMark from "@mui/icons-material/QuestionMark";
 import RedIcon from "./images/redIcon.svg";
 import YellowIcon from "./images/yellowIcon.svg";
 import greenIcon from "./images/greenIcon.svg";
@@ -15,6 +13,8 @@ import Image from "next/image";
 import Tabs from "./Tabs";
 import { semVerToString } from "../src/semVer";
 import styles from "./Row.module.css";
+import { styled } from '@mui/material/styles';
+import { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 
 export type Props = {
   subRows: {
@@ -65,6 +65,12 @@ export default function Row(props: { rank: number; row: any } & Props) {
         </TableCell>
         <TableCell className={styles.tableCellStyle} align="left">
           {semVerToString(row.version)}
+          {
+            (semVerToString(row.version) === "0.0.0-development" || semVerToString(row.version) === "0.0.0") &&
+            <Tooltip title="development">
+              <QuestionMark />
+            </Tooltip>
+          }
         </TableCell>
         <TableCell className={styles.tableCellStyle} align="right">
           (
