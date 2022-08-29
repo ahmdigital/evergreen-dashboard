@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    name: Builds the app
+    name: Builds the next.js app
     runs-on: ubuntu-latest
 
     steps:

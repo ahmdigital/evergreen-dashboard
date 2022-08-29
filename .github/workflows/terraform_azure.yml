@@ -2,9 +2,12 @@ name: Terraform azure
 # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_run
 on:
   workflow_run:
-    # branches: [main]
+    branches: [main]
     workflows: [Docker]
     types: [completed]
+
+# Because we are using workflow_run
+# github.event_name will be workflow_run instead of push
 
 jobs:
   terraform_azure_docker:
@@ -13,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: terraform_azure_docker/
+        working-directory: terraform_azure/
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
@@ -97,12 +100,11 @@ jobs:
                 body: output
               })
             }
-        continue-on-error: true
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve

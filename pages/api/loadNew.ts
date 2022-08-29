@@ -9,7 +9,7 @@ import { getJsonStructure } from "evergreen-org-crawler/src/index"
 import config from "../../config.json"
 
 // Cache files are stored inside ./next folder
-export const CachePath = path.resolve("./dynamicCache.json")
+export const CachePath = path.resolve(process.env.DYNAMIC_CACHE_PATH || "./dynamicCache.json")
 export const EmptyCachePath = path.resolve("./defaultDynamicCache.json")
 
 //TODO: Move to config file
