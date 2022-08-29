@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import { Tooltip, TableRow, TableHead, TableCell, Table } from "@mui/material";
+import { Tooltip, TableRow, TableHead, TableCell, Table, Typography } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import QuestionMark from "@mui/icons-material/QuestionMark";
@@ -24,6 +24,18 @@ export type Props = {
     final: boolean;
   };
 };
+
+const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: '#f5f5f9',
+    color: 'rgba(0, 0, 0, 0.87)',
+    maxWidth: 220,
+    fontSize: 'var(--font-size-normal)',
+    border: '1px solid #dadde9',
+  },
+}));
 
 // Creates each individual row
 export default function Row(props: { rank: number; row: any } & Props) {
@@ -67,8 +79,8 @@ export default function Row(props: { rank: number; row: any } & Props) {
           {semVerToString(row.version)}
           {
             (semVerToString(row.version) === "0.0.0-development" || semVerToString(row.version) === "0.0.0") &&
-            <Tooltip title="development">
-              <QuestionMark />
+            <Tooltip arrow title={<p className={styles.tooltipStyle}>This repository was defined with a default version of 0.0.0</p>}>
+              <QuestionMark className={styles.questionIcon}/>
             </Tooltip>
           }
         </TableCell>
