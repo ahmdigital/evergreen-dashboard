@@ -3,15 +3,14 @@ import { Fab, Dialog, DialogTitle, DialogActions, DialogContent, DialogContentTe
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import HelpOutline from "@mui/icons-material/HelpOutline";
 import styles from "./HelpGuide.module.css";
-import statusStyles from "../LightStatus.module.css";
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import Typography from '@mui/material/Typography';
 import greenIcon from "../images/greenIcon.svg";
 import yellowIcon from "../images/yellowIcon.svg";
 import redIcon from "../images/redIcon.svg";
 import Image from "next/image";
+import Divider from '@mui/material/Divider';
 
 
 // defining style for custom tooltip
@@ -26,16 +25,6 @@ const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
       fontFamily: 'Work Sans',
     },
 }));
-
-// defining style for custom dialog
-const CustomisedDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuiDialogContent-root': {
-    padding: theme.spacing(2),
-  },
-  '& .MuiDialogActions-root': {
-    padding: theme.spacing(1),
-  },
-}))
 
 export interface DialogTitleProps {
   id: string;
@@ -85,36 +74,36 @@ let greenDef = new VersionDefinition("Current minor version behind by less than 
 function StatusTable() {
   return (
     <TableContainer>
-      <Table size="medium" className={statusStyles.tableStyle}>
+      <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell className={statusStyles.tableHeaderCellStyle}>Status</TableCell>
-            <TableCell className={statusStyles.tableHeaderCellStyle}>Definition</TableCell>
+            <TableCell className={styles.fieldContentStyle}>Status</TableCell>
+            <TableCell className={styles.fieldContentStyle}>Definition</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell className={statusStyles.tableCellStyle}>
+            <TableCell>
               <Image src={redIcon} alt="Red" width="40px" height="40px"></Image>
             </TableCell>
-            <TableCell className={statusStyles.tableCellStyle}>
-              <p>{redDef.description}</p>
+            <TableCell className={styles.infoContentStyle}>
+              {redDef.description}
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell className={statusStyles.tableCellStyle}>
+            <TableCell>
               <Image src={yellowIcon} alt="Yellow" width="40px" height="40px"></Image>
             </TableCell>
-            <TableCell className={statusStyles.tableCellStyle}>
-              <p>{yellowDef.description}</p>
+            <TableCell className={styles.infoContentStyle}>
+              {yellowDef.description}
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell className={statusStyles.tableCellStyle}>
+            <TableCell>
               <Image src={greenIcon} alt="Green" width="40px" height="40px"></Image>
             </TableCell>
-            <TableCell className={statusStyles.tableCellStyle}>
-              <p>{greenDef.description}</p>
+            <TableCell className={styles.infoContentStyle}>
+              {greenDef.description}
             </TableCell>
           </TableRow>
         </TableBody>
@@ -160,8 +149,8 @@ function FieldsTable() {
 
 function TabsTable() {
   return (
-    <TableContainer>
-      <Table>
+    <TableContainer className={styles.tableStyle}>
+      <Table className={styles.tableStyle}>
         <TableBody>
           <TableRow>
             <TableCell className={styles.fieldContentStyle}>Internal:</TableCell>
@@ -212,7 +201,9 @@ export default function HelpGuide() {
         >
             <CustomisedDialogTitle id="customised-dialog-title" onClose={handleClose}>Need Help?</CustomisedDialogTitle>
             <DialogContent dividers>
-              Summary
+              <div className={styles.componentStyle}>
+              <DialogContentText className={styles.overallHeaderStyle}>Summary</DialogContentText>
+              <Divider />
               <DialogContentText className={styles.questionHeaderStyle}>
                 What do the light status icons represent?
               </DialogContentText>
@@ -236,9 +227,10 @@ export default function HelpGuide() {
                 The 'Total Repos' card simply displays the number of repositories defined by each
                 light status type; red, yellow, and green.
               </DialogContentText>
-            </DialogContent>
-            <DialogContent dividers>
-              Repositories
+              </div>
+              <div className={styles.componentStyle}>
+              <DialogContentText className={styles.overallHeaderStyle}>Repositories </DialogContentText>
+              <Divider />
               <DialogContentText className={styles.questionHeaderStyle}>
                 Introduction
               </DialogContentText>
@@ -256,6 +248,7 @@ export default function HelpGuide() {
                 What are the Internal, External and Users tabs?
               </DialogContentText>
               <TabsTable />
+              </div>
             </DialogContent>
         </Dialog>
       </>
