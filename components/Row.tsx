@@ -13,8 +13,7 @@ import Image from "next/image";
 import Tabs from "./Tabs";
 import { semVerToString } from "../src/semVer";
 import styles from "./Row.module.css";
-import { styled } from '@mui/material/styles';
-import { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
+import { redDef, yellowDef, greenDef } from "./LightStatus";
 
 export type Props = {
   subRows: {
@@ -25,30 +24,21 @@ export type Props = {
   };
 };
 
-const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: '#f5f5f9',
-    color: 'rgba(0, 0, 0, 0.87)',
-    maxWidth: 220,
-    fontSize: 'var(--font-size-normal)',
-    border: '1px solid #dadde9',
-  },
-}));
-
 // Creates each individual row
 export default function Row(props: { rank: number; row: any } & Props) {
   const { rank, row, subRows } = props;
   const [open, setOpen] = useState(false);
   let statusIcon = RedIcon;
+  let iconDefinition = redDef.description;
 
   // Setting the status
   if (rank == 2) {
     statusIcon = greenIcon;
+    iconDefinition = greenDef.description;
   }
   if (rank == 1) {
     statusIcon = YellowIcon;
+    iconDefinition = yellowDef.description;
   }
 
   return (
@@ -59,18 +49,23 @@ export default function Row(props: { rank: number; row: any } & Props) {
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
-			className={styles.rowArrow}
+			      className={styles.rowArrow}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
         <TableCell className={styles.tableCellStyle}>
-          <Image
-            src={statusIcon}
-            alt="Repo Priority"
-            width="40px"
-            height="40px"
-			className={styles.statusIcon}/>
+        <Tooltip arrow title={<p className={styles.tooltipStyle}>{ iconDefinition }</p>}>
+          <div className={styles.iconContainer}>
+            <Image
+                src={statusIcon}
+                alt="Repo Priority"
+                width="40px"
+                height="40px"
+                className={styles.statusIcon}
+            />
+          </div>
+        </Tooltip>
         </TableCell>
         <TableCell className={styles.tableCellStyle} component="th" scope="row">
           {row.name}

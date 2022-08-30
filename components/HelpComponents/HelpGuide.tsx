@@ -188,7 +188,7 @@ export default function HelpGuide() {
 
     return (
       <>
-        <LightTooltip title="Help Guide">
+        <LightTooltip arrow title="Help Guide">
             <Fab className={styles.fabStyle} onClick={handleClickOpen}>
                 <HelpOutline className={styles.iconStyle}/>
             </Fab>

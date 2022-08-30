@@ -8,6 +8,7 @@ import HelpScreen from "./LightStatus";
 import headerStyles from "./HeaderContainer.module.css";
 import org from "../config.json";
 import ForestIcon from '@mui/icons-material/Forest';
+import Tooltip from "@mui/material/Tooltip";
 
 
 export default function SummaryContainer(props: {
@@ -39,16 +40,20 @@ export default function SummaryContainer(props: {
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
           <div className={styles.summaryCompHeader}>
             <h4 className={styles.summaryStyle}>Repos Overview</h4>
-            <Image
-              className={styles.helpBtn}
-              width="30px"
-              height="30px"
-              alt="help"
-              src={helpIcon}
-              onClick={() => {
-                setOpenHelp(true);
-              }}
-            />
+            <Tooltip arrow title={<p className={styles.tooltipStyle}>Light Status Meanings</p>}>
+              <div>
+              <Image
+                  className={styles.helpBtn}
+                  width="30px"
+                  height="30px"
+                  alt="help"
+                  src={helpIcon}
+                  onClick={() => {
+                    setOpenHelp(true);
+                  }}
+                />
+              </div>
+            </Tooltip>
           </div>
           {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
           <div>

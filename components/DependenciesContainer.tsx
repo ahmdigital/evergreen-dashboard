@@ -4,6 +4,7 @@ import styles from "./DependenciesContainer.module.css";
 import sharedStyles from "./treeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
+import Tooltip from '@mui/material/Tooltip';
 import refreshIcon from "../components/images/refresh.svg" ;
 //import filterIcon from "../components/images/filter.svg" ;
 import Image from "next/image";
@@ -57,10 +58,12 @@ export default function DependenciesContainer(props: {
             <Image src={filterIcon} alt="filter" width="20px" height="20px"></Image>
             <span>Filter</span>
           </button> */}
-          <button onClick={callRefresh}>
-            <Image src={refreshIcon} alt="refresh" width="20rem" height="20rem"></Image>
-            <span className={styles.refreshWord}>Refresh</span>
-          </button>
+          <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
+            <button onClick={callRefresh}>
+              <Image src={refreshIcon} alt="refresh" width="20rem" height="20rem"></Image>
+              <span className={styles.refreshWord}>Refresh</span>
+            </button>
+          </Tooltip>
         </div>
       </div>
       <div className={styles.tableStyle}>
