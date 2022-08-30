@@ -14,6 +14,16 @@ div.summaryStyle {
     text-align: center;
   }
 
+  div.summaryOverallGrey{
+    display: block;
+    max-height: 100%;
+    background-color: gray;
+    box-sizing: border-box;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
   div.summaryComponent {
     display: block;
     max-height: 100%;

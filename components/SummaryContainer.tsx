@@ -12,9 +12,18 @@ export default function SummaryContainer(props: {
   rankArray: any;
   loadingBackdrop: any;
 }) {
+  // Boolean value to determine whether to grey out
+  let overallNan = false;
+
   const totalRepos =
     props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
   let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
+  let overallPercentStr = overallPercent + "%"
+
+  if(isNaN(overallPercent)){
+    overallPercentStr = "N/A"
+    overallNan = true;
+  }
 
   // State for opening the helpLegend
   const [openHelp, setOpenHelp] = useState<boolean>(false);
@@ -29,9 +38,9 @@ export default function SummaryContainer(props: {
             {props.loadingBackdrop}
         </div>
       <div className={styles.container}>
-      <div className={`${styles.summaryOverall} ${styles.sharedCompProps}`}>
+      <div className={`${overallNan == false ? styles.summaryOverall : styles.summaryOverallGrey} ${styles.sharedCompProps} ${styles.summaryOverall}`}>
             <h3 className={styles.overallTitleStyle}>Overall</h3>
-            <h2 className={styles.percentStyle} >{overallPercent}%</h2>
+            <h2 className={styles.percentStyle} >{overallPercentStr}</h2>
         </div>
 
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
