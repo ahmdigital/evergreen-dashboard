@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import { Tooltip, TableRow, TableHead, TableCell, Table, Typography } from "@mui/material";
+import { Tooltip, TableRow, TableHead, TableCell, Table } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import QuestionMark from "@mui/icons-material/QuestionMark";

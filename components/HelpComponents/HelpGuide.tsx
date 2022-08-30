@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Fab, Dialog, DialogTitle, DialogActions, DialogContent, DialogContentText, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import React from "react";
+import { Fab, Dialog, DialogTitle, DialogContent, DialogContentText, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import HelpOutline from "@mui/icons-material/HelpOutline";
 import styles from "./HelpGuide.module.css";
@@ -224,7 +224,7 @@ export default function HelpGuide() {
                 How to read the Total Repositories breakdown card?
               </DialogContentText>
               <DialogContentText className={styles.infoContentStyle}>
-                The 'Total Repos' card simply displays the number of repositories defined by each
+                The Total Repos card simply displays the number of repositories defined by each
                 light status type; red, yellow, and green.
               </DialogContentText>
               </div>
