@@ -19,6 +19,7 @@ export function SortBox(sortSetting: SortSettings, handleSortChange: any) {
 			<MenuItem value={"external"}>External count</MenuItem>
 			<MenuItem value={"total"}>Total count</MenuItem>
 			<MenuItem value={"users"}>User count</MenuItem>
+			<MenuItem value={"mostOutdated"}>Most Outdated Dependency</MenuItem>
 		</Select>
 	</FormControl>
 }

@@ -43,7 +43,7 @@ function rowsToJSX(rows: ProcessedDependencyData){
 export function Page(props: PageProps) {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [sortSetting, setSortSetting] = useState<SortSettings>({ type: "rank", direction: true });
-	const [filterSetting, setFilterSetting] = useState<Filter>({ type: "", level: 0, direction: false, showRed: true, showYellow: true, showGreen: true });
+	const [filterSetting, setFilterSetting] = useState<Filter>({ type: "", level: 0, direction: false, mustHaveDependency: 0, showRed: true, showYellow: true, showGreen: true });
 	const rows = useProcessDependencyData(props.JSObject);
 
 
@@ -99,7 +99,7 @@ export function Page(props: PageProps) {
 		  </Head>
 		  <main style={{ padding: 0 }}>
 			<Layout>
-			  <SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} />
+			  <SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
 			  <div>{sortDirectionBox}</div>
 			  <DependenciesContainer
 				JSObject={props.JSObject}

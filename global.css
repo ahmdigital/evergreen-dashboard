@@ -40,6 +40,7 @@
 	--colour-lightGrey: rgb(242, 240, 238);
 	--colour-blue: rgb(30, 101, 255);
 	--colour-green: rgba(31, 162, 25, 0.8);
+	--colour-table-selected: #98c6db;
 	--border-thick: .5rem solid  var(--colour-black);
 	--border-thick-halved: .25rem solid  var(--colour-black);
 	--table-left-edge: #f6f6f6;
