@@ -7,6 +7,8 @@ import Image from "next/image";
 import HelpScreen from "./HelpScreen";
 import headerStyles from "./HeaderContainer.module.css";
 import org from "../config.json";
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Unstable_Grid2';
 
 export default function SummaryContainer(props: {
   rankArray: any;
@@ -29,7 +31,7 @@ export default function SummaryContainer(props: {
   const [openHelp, setOpenHelp] = useState<boolean>(false);
 
   return (
-    <div className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}>
+    <Box sx={{ flexGrow: 1 }} className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}>
         <h2 className="h2NoMargins">Evergreen Dashboard</h2>
         <p className={headerStyles.headerStyle}>
           Monitoring for <b>{org.targetOrganisation}</b> Github Organisation
@@ -37,12 +39,14 @@ export default function SummaryContainer(props: {
         <div>
             {props.loadingBackdrop}
         </div>
-      <div className={styles.container}>
-      <div className={`${overallNan == false ? styles.summaryOverall : styles.summaryOverallGrey} ${styles.sharedCompProps} ${styles.summaryOverall}`}>
-            <h3 className={styles.overallTitleStyle}>Overall</h3>
-            <h2 className={styles.percentStyle} >{overallPercentStr}</h2>
-        </div>
-
+      <Grid container spacing={1} className={styles.container}>
+        <Grid xs={12} sm={12} md={6} lg={4}>
+          <div className={`${overallNan == false ? styles.summaryOverall : styles.summaryOverallGrey} ${styles.summaryOverall} ${styles.sharedCompProps}`}>
+              <h3 className={styles.overallTitleStyle}>Overall</h3>
+              <h2 className={styles.percentStyle} >{overallPercentStr}</h2>
+          </div>
+        </Grid>
+        <Grid xs={12} sm={12} md={6} lg={4}>
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
           <div className={styles.summaryCompHeader}>
             <h4 className={styles.summaryStyle}>Repos Overview</h4>
@@ -64,12 +68,15 @@ export default function SummaryContainer(props: {
             </div>
           </div>
         </div>
+        </Grid>
+        <Grid xs={12} sm={12} md={6} lg={4}>
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
           <div className={styles.summaryCompHeader}>
             <h4 className={styles.summaryStyle}>Dependent Repos</h4>
           </div>
         </div>
-      </div>
-    </div>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }

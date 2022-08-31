@@ -7,6 +7,7 @@ div.summaryStyle {
   div.summaryOverall{
     display: block;
     max-height: 100%;
+    height: 410px;
     background-color: var(--colour-green);
     box-sizing: border-box;
     margin-top: 1rem;
@@ -26,11 +27,13 @@ div.summaryStyle {
 
   div.summaryComponent {
     display: block;
-    max-height: 100%;
+    height: 410px;
     background-color: var(--colour-lightGrey);
     box-sizing: border-box;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
   }
 
   div.summaryOverall h3{
@@ -67,7 +70,6 @@ div.summaryStyle {
     box-sizing: border-box;
     font-size: 10px;
     padding: 1rem 1rem 1rem 1rem;
-
   }
 
   div.summaryComponent div.summaryCompHeader {
@@ -81,8 +83,6 @@ div.summaryStyle {
   }
 
   div.sharedCompProps {
-    width: 31.8%;
-    min-width: 18rem;
     border-radius: 20px;
     padding: 1.5rem 2rem 2rem 2rem;
     box-sizing: border-box;
