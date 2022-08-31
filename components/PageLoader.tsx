@@ -4,8 +4,7 @@ import { JSObjectFromJSON } from "../src/dataProcessing";
 import { getJsonStructure } from "evergreen-org-crawler/src/index"
 import config from "evergreen-org-crawler/config.json"
 import { useEffect, useState } from "react";
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import LoadingBackdrop from "./LoadingBackdrop";
 
 enum Mode {
 	Frontend,
@@ -20,7 +19,7 @@ function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
 	return o[propertyName];
 }
 
-async function getDataFromAPI(api: "loadNew" | "loadLatest", request: "npm" | "PyPI" | "RubyGems"){
+async function getDataFromAPI(api: "loadNew" | "loadLatest" | "forceNew", request: "npm" | "PyPI" | "RubyGems"){
 	console.log("Start")
 	let JSObject = await fetch("api/" + api)
 	let retries = 10
@@ -38,6 +37,11 @@ async function getDataFromAPI(api: "loadNew" | "loadLatest", request: "npm" | "P
 	return result
 }
 
+export async function forceNewVersion(request: "npm" | "PyPI" | "RubyGems"){
+	return getDataFromAPI("forceNew", request)
+}
+
+
 async function getNewVersion(request: "npm" | "PyPI" | "RubyGems"){
 	return getDataFromAPI("loadNew", request)
 }
@@ -46,7 +50,14 @@ async function getCurrentVersion(request: "npm" | "PyPI" | "RubyGems"){
 	return getDataFromAPI("loadLatest", request)
 }
 
-export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
+export let PageLoaderSetLoading: any = null
+export let PageLoaderIsLoading: any = null
+export let PageLoaderSetData: any = null
+export let PageLoaderCurrentData: any = null
+
+export let lastRequest: any = null
+
+export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 	const requestToAPI = {
 		npm: "NPM",
 		PyPI: "PYPI",
@@ -54,9 +65,14 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 	}
 	let api = getProperty(requestToAPI, request)
 
+	lastRequest = request
 
 	const [data, setData] = useState(null)
 	const [isLoading, setLoading] = useState(false)
+	PageLoaderSetLoading = setLoading
+	PageLoaderSetData = setData
+	PageLoaderCurrentData = data
+	PageLoaderIsLoading = isLoading
 
 	useEffect(() => {
 		setLoading(true)
@@ -94,19 +110,19 @@ export default function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 			} break;
 		}
 	}, [])
-
+	// Three states, loading, failed, or loaded
 	if (isLoading) {
 		if(mode == Mode.IntegratedBackend){
 			//TODO: Support overwriting current page data rather than recreating the whole page.
 			//TODO: Alternatively, copy the state (i.e. which tabs are open) to the new page
 			if(data != null && (data! as {oldVersion: boolean, data: any}).oldVersion){
 				return <Page JSObject={(data as {oldVersion: boolean, data: any}).data}  finalData={false}/>
+			} else if( data != null && (data! as {refreshing: boolean, data: any}).refreshing){
+				return <Page JSObject={(data as {refreshing: boolean, data: any}).data}  finalData={false}/>
 			}
 		}
 
-		return <Box sx={{ display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh' }}>
-			<CircularProgress />
-		</Box>
+		return <><LoadingBackdrop open={true}/></>
 	}
 	if (!data) { return <p>Failed to load data!</p> }
 

@@ -5,26 +5,42 @@ import ReposOverviewTable from "./SummaryComponents/RepoOverviewTable/ReposOverv
 import helpIcon from "./images/helpIcon.png";
 import Image from "next/image";
 import HelpScreen from "./HelpScreen";
+import headerStyles from "./HeaderContainer.module.css";
+import org from "../config.json";
 
 export default function SummaryContainer(props: {
   rankArray: any;
-  loadingWheel: any;
+  loadingBackdrop: any;
 }) {
+  // Boolean value to determine whether to grey out
+  let overallNan = false;
 
   const totalRepos =
     props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
   let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
+  let overallPercentStr = overallPercent + "%"
+
+  if(isNaN(overallPercent)){
+    overallPercentStr = "N/A"
+    overallNan = true;
+  }
 
   // State for opening the helpLegend
   const [openHelp, setOpenHelp] = useState<boolean>(false);
 
   return (
     <div className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}>
-      <h3 className={sharedStyles.h3ContainerStyle}>Summary </h3>
+        <h2 className="h2NoMargins">Evergreen Dashboard</h2>
+        <p className={headerStyles.headerStyle}>
+          Monitoring for <b>{org.targetOrganisation}</b> Github Organisation
+        </p>
+        <div>
+            {props.loadingBackdrop}
+        </div>
       <div className={styles.container}>
-        <div className={`${styles.summaryOverall} ${styles.sharedCompProps}`}>
-          <h3 className={styles.overallTitleStyle}>Overall</h3>
-          <h2 className={styles.percentStyle} >{overallPercent}%</h2>
+      <div className={`${overallNan == false ? styles.summaryOverall : styles.summaryOverallGrey} ${styles.sharedCompProps} ${styles.summaryOverall}`}>
+            <h3 className={styles.overallTitleStyle}>Overall</h3>
+            <h2 className={styles.percentStyle} >{overallPercentStr}</h2>
         </div>
 
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
@@ -48,9 +64,10 @@ export default function SummaryContainer(props: {
             </div>
           </div>
         </div>
-
-        <div className={`${styles.loadingWheelBox} ${styles.sharedCompProps}`}>
-          {props.loadingWheel}
+        <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+          <div className={styles.summaryCompHeader}>
+            <h4 className={styles.summaryStyle}>Dependent Repos</h4>
+          </div>
         </div>
       </div>
     </div>

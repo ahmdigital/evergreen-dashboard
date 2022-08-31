@@ -5,11 +5,23 @@ div.summaryStyle {
   }
 
   div.summaryOverall{
-    text-align: center;
-    flex-wrap: wrap;
+    display: block;
     max-height: 100%;
     background-color: var(--colour-green);
     box-sizing: border-box;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  div.summaryOverallGrey{
+    display: block;
+    max-height: 100%;
+    background-color: gray;
+    box-sizing: border-box;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
   }
 
   div.summaryComponent {
@@ -17,6 +29,8 @@ div.summaryStyle {
     max-height: 100%;
     background-color: var(--colour-lightGrey);
     box-sizing: border-box;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   div.summaryOverall h3{
@@ -32,7 +46,10 @@ div.summaryStyle {
     justify-content: space-between;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
+  }
 
+  div.headerStyle {
+    align-items: center;
   }
 
   div.summaryCompHeader h4{
@@ -102,6 +119,8 @@ div.summaryStyle {
     align-items: center;
     justify-content: center;
     max-height: 100%;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
     background-color: var(--colour-lightGrey);
 
   }

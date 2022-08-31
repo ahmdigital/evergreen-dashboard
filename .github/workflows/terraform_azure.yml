@@ -1,43 +1,28 @@
-name: Terraform
-
+name: Terraform azure
+# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_run
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_run:
+    branches: [main]
+    workflows: [Docker]
+    types: [completed]
+
+# Because we are using workflow_run
+# github.event_name will be workflow_run instead of push
 
 jobs:
-  build:
-    uses: ./.github/workflows/build.yml
-
-  terraform:
-    name: Terraform
-    needs: build
-    if: ${{ github.actor != 'dependabot[bot]' }}
+  terraform_azure_docker:
+    name: terraform azure docker
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: terraform/
+        working-directory: terraform_azure/
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          terraform_wrapper: false
-
-      - name: Download a single artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: nextjs-build
-          path: .next/
-
-      - name: run bootstrap script
-        run: |
-          zip -ur --must-match eb_app.zip ../package.json ../.next
-          ls -lha
-        shell: bash
+          # terraform_wrapper: true
 
       - name: Terraform fmt
         id: fmt
@@ -65,6 +50,17 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            // 1. Retrieve existing bot comments for the PR
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            })
+            const botComment = comments.find(comment => {
+              return comment.user.type === 'Bot' && comment.body.includes('Terraform Format and Style')
+            })
+
+            // 2. Prepare format of the comment
             const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
             #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
             #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
@@ -88,17 +84,27 @@ jobs:
 
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
 
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })
+            // 3. If we have a comment, update it, otherwise create a new one
+            if (botComment) {
+              github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: output
+              })
+            } else {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: output
+              })
+            }
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve

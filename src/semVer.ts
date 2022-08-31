@@ -1,4 +1,4 @@
-import { Colours } from '../components/Colours';
+import { Colours } from './Colours';
 import config from "../config.json"
 
 export type SemVer = {

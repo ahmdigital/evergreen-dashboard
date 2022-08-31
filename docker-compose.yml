@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  evergreendashboard:
+    image: evergreendashboard:latest
+    # image: evergreendashborad.azurecr.io/evergreendashboard:latest
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_GITHUB_TOKEN: ${NEXT_PUBLIC_GITHUB_TOKEN}
+    ports:
+      - 3000:3000
