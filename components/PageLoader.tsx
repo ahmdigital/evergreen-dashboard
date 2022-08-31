@@ -4,8 +4,7 @@ import { JSObjectFromJSON } from "../src/dataProcessing";
 import { getJsonStructure } from "evergreen-org-crawler/src/index"
 import config from "evergreen-org-crawler/config.json"
 import { useEffect, useState } from "react";
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import LoadingBackdrop from "./LoadingBackdrop";
 import ErrorSnackbar from "./FeedbackComponents/ErrorSnackbar";
 
 enum Mode {
@@ -112,7 +111,7 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 			} break;
 		}
 	}, [])
-
+	// Three states, loading, failed, or loaded
 	if (isLoading) {
 		if(mode == Mode.IntegratedBackend){
 			//TODO: Support overwriting current page data rather than recreating the whole page.
@@ -124,9 +123,7 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 			}
 		}
 
-		return <Box sx={{ display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh' }}>
-			<CircularProgress />
-		</Box>
+		return <><LoadingBackdrop open={true}/></>
 	}
 	if (!data) { 
 		// If data is unable to load, throw error message to user
