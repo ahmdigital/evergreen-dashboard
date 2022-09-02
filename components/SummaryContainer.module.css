@@ -52,9 +52,8 @@ div.summaryStyle {
     align-items: center;
   }
 
-  div.summaryCompHeader h4{
-    margin-top: 0rem;
-    margin-bottom: 0rem;
+  div.summaryCompHeader h3{
+    font-size: var(--font-size-normal);
   }
 
   div.summaryComponent2 {
@@ -77,14 +76,14 @@ div.summaryStyle {
     align-items: center;
     margin-top: 0.5rem;
     margin-bottom: 1.5rem;
-    width: 12.5rem;
+    width: 100%;
   }
 
   div.sharedCompProps {
     width: 31.8%;
     min-width: 18rem;
     border-radius: 20px;
-    padding: 1.5rem 2rem 2rem 2rem;
+    padding: 1rem 1.4rem 1.4rem;
     box-sizing: border-box;
   }
 
@@ -98,6 +97,7 @@ div.summaryStyle {
   h3.overallTitleStyle {
     color: white;
     text-align: left;
+    font-size: 1.3rem;
   }
 
   div.percentComponent {

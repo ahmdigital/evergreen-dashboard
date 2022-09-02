@@ -45,7 +45,8 @@ export default function SummaryContainer(props: {
 
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
           <div className={styles.summaryCompHeader}>
-            <h4 className={styles.summaryStyle}>Repos Overview</h4>
+
+          <h3>{`Total Repos (${props.rankArray.green + props.rankArray.yellow + props.rankArray.red})`}</h3>
             <Image
               className={styles.helpBtn}
               width="30px"

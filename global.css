@@ -6,7 +6,7 @@
 
   body {
 	margin: 0;
-	font-size: 20px;
+	font-size: var(--font-size-normal);
 	font-family: var(--primary-font-family);
   }
 
@@ -16,6 +16,10 @@
     color: var(--colour-font);
   }
 
+  h3 {
+	margin-top: 0;
+    margin-bottom: 0;
+  }
 
   p {
     margin-top: 0;
@@ -54,5 +58,6 @@
 	--font-weight-normal: 400;
 	--font-size-large: 1.125rem;
 	--font-size-normal: 1rem; /*16px*/
+	--font-size-body: 0.75rem; /*12px*/
 
   }
