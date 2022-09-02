@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import { Tooltip, TableRow, TableHead, TableCell, Table } from "@mui/material";
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import QuestionMark from "@mui/icons-material/QuestionMark";
@@ -51,7 +52,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
             onClick={() => setOpen(!open)}
 			      className={styles.rowArrow}
           >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            {open ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
           </IconButton>
         </TableCell>
         <TableCell className={styles.tableCellStyle}>
