@@ -54,6 +54,7 @@ p {
   --primary-font-family: "Work Sans", sans-serif;
   --secondary-font-family: "Inter", sans-serif;
   --font-weight-bold: 700;
+  --font-weight-semibolder: 600;
   --font-weight-semibold: 500;
   --font-weight-normal: 400;
   --font-size-large: 1.125rem;

@@ -1,9 +1,8 @@
 .tableCellStyleIcon {
   width: 2.8rem;
   /* padding: 0.625rem 0.625rem 0.625rem 0.25rem;  */
-  padding: 10px 10px 10px 4px;  /* px to rem conversion doesn't seem to render the same*/
+  padding: 10px 10px 10px 4px; /* px to rem conversion doesn't seem to render the same*/
 }
-
 
 .tableCellStyleCount {
   font-size: var(--font-size-normal);
@@ -12,12 +11,15 @@
 
 .tableCellStyleCount p {
   font-size: var(--font-size-large);
-  font-weight: 500;
+  font-weight: var(--font-weight-semibold);
   margin-top: 0;
   margin-bottom: 0;
 }
 
 .statusLabel {
-  padding: 16px 4px 16px 16px;
-  line-height: 1.15rem;
+  padding: 16px 2px 16px 16px;
+  line-height: 1.125rem;
+  letter-spacing: 1%;
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--secondary-font-family);
 }
