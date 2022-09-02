@@ -4,6 +4,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Badge from "@mui/material/Badge";
+import InternalTable from "./InternalTable";
 
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -22,7 +23,7 @@ const useStyles = makeStyles((_) => ({
     height: "0.625rem", //"10px"
     top: "2.813rem", //"45px"
     color: "black",
-    marginTop:  "0.625rem",
+    marginTop: "0.625rem",
   },
 }));
 
@@ -158,13 +159,13 @@ const Tabs = (props: Props) => {
 
   let tabPanels = [
     <TabPanel key="internal" value={tabVal} index={0}>
-      {internal.length > 0 ? internal : "No internal depedencies found"}
+      <InternalTable>{internal}</InternalTable>
     </TabPanel>,
     <TabPanel key="external" value={tabVal} index={1}>
-      {external.length > 0 ? external : "No external depedencies found"}
+      <InternalTable>{external}</InternalTable>
     </TabPanel>,
     <TabPanel key="users" value={tabVal} index={2}>
-      {user.length > 0 ? user : "No dependent repositories found"}
+      <InternalTable>{user}</InternalTable>
     </TabPanel>,
   ];
 

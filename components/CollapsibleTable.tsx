@@ -14,12 +14,12 @@ type CollapsibleTableProps = {
 
 // Creates the whole table
 export default function CollapsibleTable(props: CollapsibleTableProps) {
-  console.log( 'PRINTING')
+  console.log('PRINTING')
   console.log(props.children)
   return (
     <TableContainer
       component={Paper}
-	  className={styles.tableComponent}
+      className={styles.tableComponent}
     >
       <Table size="small" aria-label="collapsible table">
         <colgroup>

@@ -5,7 +5,6 @@ import IconButton from "@mui/material/IconButton";
 import { Tooltip, TableRow, TableHead, TableCell, Table } from "@mui/material";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import QuestionMark from "@mui/icons-material/QuestionMark";
 import RedIcon from "./images/redIcon.svg";
 import YellowIcon from "./images/yellowIcon.svg";
@@ -50,23 +49,23 @@ export default function Row(props: { rank: number; row: any } & Props) {
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
-			      className={styles.rowArrow}
+            className={styles.rowArrow}
           >
             {open ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
           </IconButton>
         </TableCell>
         <TableCell className={styles.tableCellStyle}>
-        <Tooltip arrow title={<p className={styles.tooltipStyle}>{ iconDefinition }</p>}>
-          <div className={styles.iconContainer}>
-            <Image
+          <Tooltip arrow title={<p className={styles.tooltipStyle}>{iconDefinition}</p>}>
+            <div className={styles.iconContainer}>
+              <Image
                 src={statusIcon}
                 alt="Repo Priority"
                 width="40px"
                 height="40px"
                 className={styles.statusIcon}
-            />
-          </div>
-        </Tooltip>
+              />
+            </div>
+          </Tooltip>
         </TableCell>
         <TableCell className={styles.tableCellStyle} component="th" scope="row">
           {row.name}
@@ -76,7 +75,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
           {
             (semVerToString(row.version) === "0.0.0-development" || semVerToString(row.version) === "0.0.0") &&
             <Tooltip arrow title={<p className={styles.tooltipStyle}>This repository was defined with a default version of 0.0.0</p>}>
-              <QuestionMark className={styles.questionIcon}/>
+              <QuestionMark className={styles.questionIcon} />
             </Tooltip>
           }
         </TableCell>
@@ -94,7 +93,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
           colSpan={6}
         >
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1}}>
+            <Box sx={{ margin: 1 }}>
               <Table size="small" aria-label="dependencies">
                 <TableHead className={styles.collapsibleTableHead} >
                   <TableRow>
