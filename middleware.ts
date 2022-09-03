@@ -4,180 +4,124 @@ import type { NextRequest } from 'next/server'
 import path from 'path'
 import fs from 'fs'
 import configFile from "./config.json";
+import fetch from 'node-fetch';
 
+// GitHub will automatically revoke an OAuth token or personal access token when the token hasn't been used in one year.
+// https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/token-expiration-and-revocation#token-expired-due-to-lack-of-use
 
-// expiry is set to the time that the token will in the future
-// so if the token is request at 09:00, expiry will be set to 17:00 (after 8 hours since 09:00 )
-// https://docs.github.com/en/developers/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps#response
-type TokenCookie = {
+export type TokenCookie = {
 	accessToken: string
-	accessTokenExpiry: number
-	refreshToken: string
-	refreshTokenExpiry: number
 }
 
-// default github api expiry values 
-// TODO: these values should be extracted from the response on the frontend and send to the server
-const tokenLifetimeSeconds = 28800
-const refreshTokenLifetimeSeconds = 15811200
-
-
-function encodeBase64(input:string):string{
+function encodeBase64(input: string): string {
 	return Buffer.from(input).toString("base64")
 }
 
-function decodeBase64(input:string):string{
+function decodeBase64(input: string): string {
 	return Buffer.from(input, "base64").toString("ascii")
 }
 
-function encodeTokenCookie(token:TokenCookie):string{
-	return encodeBase64(JSON.stringify(token))
+export function encodeTokenCookie(token: TokenCookie): string {
+	return token.accessToken
 }
 
-function decodeTokenCookie(token:string):TokenCookie{
-	return JSON.parse(decodeBase64(token)) as TokenCookie
+export function decodeTokenCookie(token: string): TokenCookie {
+	return { accessToken: token }
 }
-
-
 
 // This function can be marked `async` if using `await` inside
-export async function CheckAuthenticationBeforeServingData(request: NextRequest) {
-	
-	if(configFile.requireAuthentication == false){
+export default async function CheckAuthenticationBeforeServingData(request: NextRequest) {
+	console.log("Middleware called for: " + request.url)
+	if (configFile.requireAuthentication == false) {
+		console.log("Granting access to user")
 		return NextResponse.next()
 	}
 
-	const tokenString = request.cookies.get("tokens")
+	const tokenString = request.cookies.get("token")
 	if (tokenString == null) {
-		return NextResponse.json({ message: 'Authentication is required' }, { status: 401 })
+		console.log("Token not present")
+		return NextResponse.redirect("localhost:3000/signing?error=Login required")
+		// return NextResponse.json({ message: 'Login required' }, { status: 401 })
 	}
-	try{
+	try {
 
+		console.log("tokenString:", tokenString)
 		const tokenCookie = decodeTokenCookie(tokenString)
-
-		const goToNextHandler = NextResponse.next()
-
-		// if the token expires in less than 1 hour, then we need to request a new one, 
-		// becuase we don't won't to run into the risk of expired token in the middle 
-		// of fetching data from github api 
-		if(tokenCookie.accessTokenExpiry - Date.now()/1000 < 3600 ){
-			//access token expired
-			if(tokenCookie.refreshTokenExpiry < Date.now()/1000){
-				//refresh token expired
-				//TODO: handle this in the frontend, or at some point it will stop working
-				return NextResponse.json({ message: 'Reauthenticate' }, { status: 401 })
-			}
-
-			//TODO: refresh the token
-			//e.g. const newToken = await refreshToken(token.refreshToken)
-			
-			tokenCookie.accessToken = "newToken"
-			tokenCookie.accessTokenExpiry = Date.now()/1000 + newToken.tokenLifetimeSeconds
-			tokenCookie.refreshTokenExpiry = Date.now()/1000 + newToken.refreshTokenLifetimeSeconds
-
-			goToNextHandler.cookies.set("tokens", encodeTokenCookie(tokenCookie), {
-				httpOnly: true,
-				maxAge: tokenCookie.refreshTokenExpiry - Date.now()/1000,
-				sameSite: 'strict',
-				secure: true
-			})
-			
-		}
-
+		console.log("tokenCookie:", tokenCookie)
 
 		const username = await getUsername(tokenCookie.accessToken)
-
+		console.log("Username:", username)
+		
+		console.log(`Checking organisation ${configFile.targetOrganisation}...`)
 		const isMember = await isOrganisationMember(configFile.targetOrganisation, username, tokenCookie.accessToken)
+		console.log("isOrganisationMember:", isMember)
 
-		if(!isMember){
-			return NextResponse.json({ message: 'Not a member' }, { status: 401 })
+		if (!isMember) {
+			console.log(`User ${username} is not a member of ${configFile.targetOrganisation}`)
+			return NextResponse.redirect("localhost:3000/signin?error=Not a member")
+			// return NextResponse.json({ message: `This "${username}" is not a member of the organisation` }, { status: 403 })
 		}
 
-		return goToNextHandler
-	}catch(error){
-		console.log("Error while validating token: " + error)
-		return NextResponse.json({ message: 'Auth required' }, { status: 401 })
-	}
-}
+		console.log(`User ${username} is a member of ${configFile.targetOrganisation}`)
+		return NextResponse.next()
+	} catch (error: any) {
+		console.log("Error while validating token: ", error.message)
 
-async function refreshToken(refreshToken: string) : string {
-	// TODO
-	return ""
+		if (error?.status == 401) {
+			// {
+			//     "message": "Bad credentials",
+			//     "documentation_url": "https://docs.github.com/rest"
+			// }
+			// {
+			//     "message": "Requires authentication",
+			//     "documentation_url": "https://docs.github.com/rest/reference/users#get-the-authenticated-user"
+			// }
+			// return NextResponse.json({ message: 'Login required' }, { status: 401 })
+			return NextResponse.redirect("localhost:3000/signin?error=Login required")
+		}
+
+		return NextResponse.redirect("localhost:3000/signin?error=Unepxected error")
+		// return NextResponse.json({ message: 'Unexpected error' }, { status: 500 })
+	}
 }
 
 
 async function getUsername(authToken: string): Promise<string> {
-	// const octokit = new Octokit({
-	// 	auth: authToken
-	// })
-
-	// Make a request to the GitHub api using these headers using the browser fetch
-	// -H "Accept: application/vnd.github+json" \ 
-	// -H "Authorization: token <TOKEN>" \
-
 	return await fetch(`https://api.github.com/user`, {
 		headers: {
 			"Accept": "application/vnd.github+json",
 			"Authorization": `token ${authToken}`
 		}
 	}).then(response => {
-		return response.json()
-	}).then(jsonResponse => {
-
-		if (jsonResponse.status == 200) {
-			return jsonResponse.login
+		if (response.status == 200) {
+			return response.json()
 		}
-		else {
-			throw new Error(jsonResponse?.message)
-		}
-	}).catch(error => {
-		console.log(error)
-		throw new Error(error)
+		throw response.json()
+	}).then((res) => res.login
+	).catch(error => {
+		throw new Error(error.message)
 	})
 }
 
 async function isOrganisationMember(org: string, username: string, authToken: string): Promise<boolean> {
-	// const octokit = new Octokit({
-	// 	auth: authToken
-	// })
-
-	// Make a request to the GitHub api using these headers using the browser fetch
-	// -H "Accept: application/vnd.github+json" \ 
-	// -H "Authorization: token <TOKEN>" \
-
 	return await fetch(`https://api.github.com/orgs/${org}/members/${username}`, {
 		headers: {
 			"Accept": "application/vnd.github+json",
 			"Authorization": `token ${authToken}`
 		}
 	}).then(response => {
-		return response.json()
-	}).then(jsonResponse => {
-
-		if (jsonResponse.status == 204) {
+		if (response.status == 204) {
 			return true
 		}
-		else if (jsonResponse.status == 304) {
-			console.log(jsonResponse.message)
+		if (response.status == 304) {
 			return false
 		}
-		else if (jsonResponse.status == 404) {
-			console.log(jsonResponse.message)
-			return false
-		}
-		else {
-			// throw exception
-			console.log(jsonResponse.message)
-			return false
-		}
-	}).catch(error => {
-		console.log(error)
-		return false
+		throw response.json()
 	})
 }
 
 
 // See "Matching Paths" below to learn more
 export const config = {
-	matcher: ['/api/loadLatest/', '/api/loadNew/', '/api/forceNew']
+	matcher: ['/api/loadLatest/', '/api/loadNew', '/api/forceNew']
 }

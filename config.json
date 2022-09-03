@@ -1,5 +1,5 @@
 {
-	"targetOrganisation": "octokit",
+	"targetOrganisation": "ahm-monash",
 	"requireAuthentication": true,
 	"rankCutoff": {
 		"major": "0.5.-1",

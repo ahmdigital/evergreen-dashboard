@@ -7,122 +7,21 @@ import * as React from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
 import TrafficIcon from '@mui/icons-material/Traffic';
 
-type AuthResponse = {
-	access_token: string;
-	scope: string;
-	token_type: string;
-};
 
 const client_id = "5cd550d6a19995e8faf0";
-
-const redirect_uri = "http://localhost:3000/";
+const scope = "repo:read"
+const redirect_uri = "http://localhost:3000/signin/";
 
 // get code
 function redirect() {
 	//! TODO: research secure ways to generate it
 	const random_state = (Math.random() + 1).toString(36);
-	window.location.href = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=repo:read&state=${random_state}`;
+	window.location.href = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&state=${random_state}`;
 }
 
 type SignInStatus = "calculating" | "not-signed-in" | "exchanging-code-for-token" | "signed-in" | "error-while-signing-in"
 
-let ID = {
-	isSignedIn: false,
-	token: '',
-	username: ''
-}
-/**
- * Check if user is signed in by looking at any stored tokens
- */
-function isSignedIn() {
-	//TODO: read and check token
-	return ID.isSignedIn;
-}
 
-/**
- * Signs the user in by validating the token and storing it. Throws an error if the token is invalid.
- */
-function signIn(token: string, username: string) {
-	//TODO: validate and store token
-
-	if (token != null) {
-		throw new Error();
-	}
-	ID.token = token;
-	ID.username = username;
-	ID.isSignedIn = true;
-
-}
-
-async function isOrganisationMember(org: string, username: string, authToken: string): Promise<boolean> {
-	// const octokit = new Octokit({
-	// 	auth: authToken
-	// })
-
-	// Make a request to the GitHub api using these headers using the browser fetch
-	// -H "Accept: application/vnd.github+json" \ 
-	// -H "Authorization: token <TOKEN>" \
-
-	return await fetch(`https://api.github.com/orgs/${org}/members/${username}`, {
-		headers: {
-			"Accept": "application/vnd.github+json",
-			"Authorization": `token ${authToken}`
-		}
-	}).then(response => {
-		return response.json()
-	}).then(jsonResponse => {
-
-		if (jsonResponse.status == 204) {
-			return true
-		}
-		else if (jsonResponse.status == 304) {
-			console.log(jsonResponse.message)
-			return false
-		}
-		else if (jsonResponse.status == 404) {
-			console.log(jsonResponse.message)
-			return false
-		}
-		else {
-			// throw exception
-			console.log(jsonResponse.message)
-			return false
-		}
-	}).catch(error => {
-		console.log(error)
-		return false
-	})
-}
-
-async function getUsername(authToken: string): Promise<string> {
-	// const octokit = new Octokit({
-	// 	auth: authToken
-	// })
-
-	// Make a request to the GitHub api using these headers using the browser fetch
-	// -H "Accept: application/vnd.github+json" \ 
-	// -H "Authorization: token <TOKEN>" \
-
-	return await fetch(`https://api.github.com/user`, {
-		headers: {
-			"Accept": "application/vnd.github+json",
-			"Authorization": `token ${authToken}`
-		}
-	}).then(response => {
-		return response.json()
-	}).then(jsonResponse => {
-
-		if (jsonResponse.status == 200) {
-			return jsonResponse.login
-		}
-		else {
-			throw new Error(jsonResponse?.message)
-		}
-	}).catch(error => {
-		console.log(error)
-		throw new Error(error)
-	})
-}
 
 export default function SignIn() {
 
@@ -143,56 +42,38 @@ export default function SignIn() {
 			return
 		}
 
-		if (isSignedIn()) {
-			setSignInStatus('signed-in')
-			return
-		}
-
 		//TODO: account for when the user does not consent and other possible errors
 		const code = router.query.code?.toString()
 		const error = router.query.error?.toString()
 
 		if (error != null) {
 			setSignInStatus('error-while-signing-in')
+			//setSignInMessage("Whatever")
 		} else if (code != null) {
 			setSignInStatus('exchanging-code-for-token')
 			console.log(`code ${code}`);
 
 			//This immediately called function must be defined because useEffect handlers cannot be async
-			const getToken = async () => {
-				const response: Response = await fetch(`/api/authenticate/${encodeURIComponent(code.toString())}/`);
-				console.log(`response ${response}`);
-				const responseObj: AuthResponse = await response.json();
-				console.log(`token ${responseObj}`);
-				console.log(`token ${responseObj.access_token}`);
-				return responseObj.access_token;
+			const isSignedIn = async () => {
+				const response = await fetch(`/api/authenticate/${encodeURIComponent(code.toString())}/`);
+				if (response.status == 200) {
+					return true
+				}
+
+				throw await response.json()
 			};
-			getToken()
-				.then(async token => {
-					const username = await getUsername(token)
-					return { token, username }
-				})
-				.then(async ({ token, username }) => {
-					//TODO: change ahm-monash
-					const isMember = await isOrganisationMember("ahm-monash", username, token)
-					if (isMember) {
-						try{
-							signIn(token, username)
-							setSignInStatus('signed-in')
-						}catch(error){
-							setSignInStatus('error-while-signing-in')
-							throw new Error()
-						}
-					} else {
-						setErrorMessage("You must be a member of this organisation")
-						throw new Error("Not a member")
-					}
+			isSignedIn()
+				.then(async () => {
+					setSignInStatus('signed-in')
 				})
 				.catch((error) => {
+
 					console.log("error while exchanging token", error)
 					setSignInStatus('error-while-signing-in')
 					error?.message && setErrorMessage(error.message)
+
 				});
+
 		} else {
 			setSignInStatus('not-signed-in')
 		}
@@ -206,12 +87,6 @@ export default function SignIn() {
 		router.push("/signin")
 	}
 
-	// const temp = await accessTokenRes.json()
-	// console.log(temp)
-	// const response = await octokit.request('GET /orgs/{org}/members/{username}', {
-	// 	org: org,
-	// 	username: username
-	// })
 
 	return (
 		<>
@@ -248,7 +123,7 @@ export default function SignIn() {
 							<Box sx={{ py: 5 }}>
 								<LoadingButton
 									loading
-									
+
 									variant="outlined"
 								>
 									Almost done
