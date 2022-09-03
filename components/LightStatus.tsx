@@ -2,7 +2,7 @@ import closeIcon from "./images/closeIcon.png";
 import greenIcon from "./images/greenIcon.svg";
 import yellowIcon from "./images/yellowIcon.svg";
 import redIcon from "./images/redIcon.svg";
-import styles from "./HelpScreen.module.css";
+import styles from "./LightStatus.module.css";
 import Image from "next/image";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -25,9 +25,9 @@ class VersionDefinition {
 }
 
 // defines red, yellow and green traffic light descriptions
-let redDef = new VersionDefinition("Current major version behind by more than 1 major or 6 minors.");
-let yellowDef = new VersionDefinition("Current minor version behind by 5 or 6 minors.");
-let greenDef = new VersionDefinition("Current minor version behind by less than 5 minors.");
+export const redDef = new VersionDefinition("Current major version behind by more than 1 major or 6 minors.");
+export const yellowDef = new VersionDefinition("Current minor version behind by 5 or 6 minors.");
+export const greenDef = new VersionDefinition("Current minor version behind by less than 5 minors.");
 
 // creates the table for the status definitions
 function StatusTable() {
