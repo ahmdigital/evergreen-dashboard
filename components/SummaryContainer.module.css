@@ -135,3 +135,33 @@ div.summaryStyle {
 	font-size: var(--font-size-normal);
 	font-family: var(--primary-font-family);
 }
+div.refreshWord {
+  font-family: var(--primary-font-family);
+  font-size: var(--font-size-large);
+}
+
+div.btnsContainer{
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0;
+  width: 17rem;
+}
+
+div.btnsContainer button{
+  width:8rem;
+  font-family: var(--primary-font-family);
+  font-size: var(--font-size-large);
+  background-color: var(--colour-container-background);
+  border: none;
+  padding: 0.8rem;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+}
+div.btnsContainer button span {
+  margin-left: 0.5rem;
+}
+div.btnsContainer button:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}

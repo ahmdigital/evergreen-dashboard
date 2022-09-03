@@ -11,6 +11,10 @@ import ForestIcon from '@mui/icons-material/Forest';
 import Tooltip from "@mui/material/Tooltip";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
+import refreshIcon from "../components/images/refresh.svg" ;
+import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
+
+let refreshing = false
 
 export default function SummaryContainer(props: {
   rankArray: any;
@@ -32,12 +36,49 @@ export default function SummaryContainer(props: {
   // State for opening the helpLegend
   const [openHelp, setOpenHelp] = useState<boolean>(false);
 
+  async function callRefresh(){
+		if(refreshing){ return }
+		if(lastRequest == null){ return; }
+		if(PageLoaderIsLoading){ return; }
+		PageLoaderSetLoading(true)
+		PageLoaderSetData({refreshing: true, data: PageLoaderCurrentData as any} as any)
+
+		refreshing = true
+
+		//TODO: Support other configuration
+		//switch(mode){
+		//	case(Mode.Frontend): break;
+		//	case(Mode.StandaloneBackend):break;
+		//	case(Mode.IntegratedBackend): {
+				forceNewVersion(lastRequest).then(async (result) => {
+					PageLoaderSetData(result as any)
+					PageLoaderSetLoading(false)
+					refreshing = false
+				})
+		//	} break;
+		//}
+	}
+
   return (
     <Box sx={{ flexGrow: 1 }} className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}>
-        <h2 className="h2NoMargins"><ForestIcon /> Evergreen Dashboard</h2>
-        <p className={headerStyles.headerStyle}>
-          Monitoring for <b>{org.targetOrganisation}</b> Github Organisation
-        </p>
+      <Grid container spacing={1} className={styles.container}>
+        <Grid>
+          <h2 className="h2NoMargins"><ForestIcon /> Evergreen Dashboard</h2>
+          <p className={headerStyles.headerStyle}>
+            Monitoring for <b>{org.targetOrganisation}</b> Github Organisation
+          </p>
+        </Grid>
+        <Grid>
+          <div className={styles.btnsContainer}>
+            <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
+              <button onClick={callRefresh}>
+                <Image src={refreshIcon} alt="refresh" width="20rem" height="20rem"></Image>
+                <span className={styles.refreshWord}>Refresh</span>
+              </button>
+            </Tooltip>
+          </div>
+        </Grid>
+      </Grid>
         <div>
             {props.loadingBackdrop}
         </div>

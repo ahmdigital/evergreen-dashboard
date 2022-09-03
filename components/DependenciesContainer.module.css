@@ -49,13 +49,3 @@ div.btnsContainer button:hover {
   cursor: pointer;
   background-color: lightgray;
 }
-
-div.refreshWord {
-  font-family: var(--primary-font-family);
-  font-size: var(--font-size-large);
-}
-
-.tooltipStyle {
-	font-size: var(--font-size-normal);
-	font-family: var(--primary-font-family);
-}
