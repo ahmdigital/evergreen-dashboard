@@ -1,8 +1,9 @@
 .tableCellStyle{
     font-family: var(--secondary-font-family);
-    font-size: var(--font-size-large);
-	background-color: var(--colour-lightGrey);
-	color: var(--colour-font)
+    font-size: 1.1rem;
+	background-color: #f5f5f5;
+	color: var(--colour-font);
+	border-color: #7a7a7a;
 }
 
 .latestVerStyle{

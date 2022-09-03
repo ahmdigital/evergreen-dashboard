@@ -14,8 +14,6 @@ type CollapsibleTableProps = {
 
 // Creates the whole table
 export default function CollapsibleTable(props: CollapsibleTableProps) {
-  console.log('PRINTING')
-  console.log(props.children)
   return (
     <TableContainer
       component={Paper}

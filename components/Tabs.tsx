@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Badge from "@mui/material/Badge";
 import InternalTable from "./InternalTable";
+import UsersTable from './UsersTable'
 
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -124,7 +125,7 @@ const Tabs = (props: Props) => {
 
   const internalTable = <InternalTable>{internal}</InternalTable>;
   const externalTable = <InternalTable>{external}</InternalTable>;
-  const userTable = <InternalTable>{user}</InternalTable>;
+  const userTable = <UsersTable>{user}</UsersTable>;
 
   const [tabVal, setTabVal] = useState(0);
   const classes = useStyles();
