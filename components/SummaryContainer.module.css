@@ -129,3 +129,9 @@ div.summaryStyle {
   .helpBtn {
     cursor: pointer;
   }
+
+
+.tooltipStyle {
+	font-size: var(--font-size-normal);
+	font-family: var(--primary-font-family);
+}
