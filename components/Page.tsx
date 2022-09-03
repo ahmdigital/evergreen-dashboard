@@ -23,6 +23,10 @@ export function Page(props: PageProps) {
   const rows = useProcessDependencyData(props.JSObject);
   const rankArray = { green: 0, red: 0, yellow: 0 };
   const diplayedRows = [];
+  let emptyRows = false;
+
+  // check if there are no rows
+  if (rows.length === 0) { emptyRows = true; }
 
   let loadingBackdrop: any = null;
   // If the final data is loading, then set the backdrop open to true
@@ -95,6 +99,7 @@ export function Page(props: PageProps) {
             rows={diplayedRows}
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
+            emptyRows={emptyRows}
           />
           <HelpGuide />
         </Layout>
