@@ -49,7 +49,7 @@ export default function SummaryContainer(props: {
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
           <div className={styles.summaryCompHeader}>
             <h4 className={styles.summaryStyle}>Repos Overview</h4>
-            <Tooltip arrow title={<p className={styles.tooltipStyle}>Light Status Meanings</p>}>
+            <Tooltip arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
               <div>
               <Image
                   className={styles.helpBtn}
