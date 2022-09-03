@@ -59,3 +59,7 @@ div.refreshWord {
 	font-size: var(--font-size-normal);
 	font-family: var(--primary-font-family);
 }
+
+div.noReposStyle {
+  padding: 2rem;
+}
