@@ -9,6 +9,8 @@ import DependenciesContainer from "./DependenciesContainer";
 import SummaryContainer from "./SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
 import LoadingBackdrop from "./LoadingBackdrop";
+import HelpGuide from "./HelpComponents/HelpGuide";
+
 
 export type PageProps = {
   JSObject: DependencyData;
@@ -94,6 +96,7 @@ export function Page(props: PageProps) {
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
           />
+          <HelpGuide />
         </Layout>
       </main>
     </div>

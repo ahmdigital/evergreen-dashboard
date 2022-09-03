@@ -4,9 +4,11 @@ import sharedStyles from "./treeView.module.css";
 import ReposOverviewTable from "./SummaryComponents/RepoOverviewTable/ReposOverviewTable";
 import helpIcon from "./images/helpIcon.png";
 import Image from "next/image";
-import HelpScreen from "./HelpScreen";
+import HelpScreen from "./LightStatus";
 import headerStyles from "./HeaderContainer.module.css";
 import org from "../config.json";
+import ForestIcon from '@mui/icons-material/Forest';
+import Tooltip from "@mui/material/Tooltip";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 
@@ -32,7 +34,7 @@ export default function SummaryContainer(props: {
 
   return (
     <Box sx={{ flexGrow: 1 }} className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}>
-        <h2 className="h2NoMargins">Evergreen Dashboard</h2>
+        <h2 className="h2NoMargins"><ForestIcon /> Evergreen Dashboard</h2>
         <p className={headerStyles.headerStyle}>
           Monitoring for <b>{org.targetOrganisation}</b> Github Organisation
         </p>
@@ -50,16 +52,20 @@ export default function SummaryContainer(props: {
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
           <div className={styles.summaryCompHeader}>
             <h4 className={styles.summaryStyle}>Repos Overview</h4>
-            <Image
-              className={styles.helpBtn}
-              width="30px"
-              height="30px"
-              alt="help"
-              src={helpIcon}
-              onClick={() => {
-                setOpenHelp(true);
-              }}
-            />
+            <Tooltip arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
+              <div>
+              <Image
+                  className={styles.helpBtn}
+                  width="30px"
+                  height="30px"
+                  alt="help"
+                  src={helpIcon}
+                  onClick={() => {
+                    setOpenHelp(true);
+                  }}
+                />
+              </div>
+            </Tooltip>
           </div>
           {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
           <div>
