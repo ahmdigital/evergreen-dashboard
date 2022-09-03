@@ -7,21 +7,30 @@ div.summaryStyle {
   div.summaryOverall{
     display: block;
     max-height: 100%;
-    background-color: var(--colour-green);
     box-sizing: border-box;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 1rem;
     text-align: center;
   }
 
+  div.summaryOverallGreen{
+    background-color: var(--colour-green);
+  }
+  div.summaryOverallRed{
+    background-color: var(--colour-red);
+  }
   div.summaryOverallGrey{
-    display: block;
-    max-height: 100%;
     background-color: gray;
+  }
+
+  div.smallSharedCompProps {
+    width: 31.8%;
+    min-width: 94%;
+    border-radius: 20px;
+    padding: 1.5rem 2rem 2rem 2rem;
     box-sizing: border-box;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-    text-align: center;
   }
 
   div.summaryComponent {
@@ -38,7 +47,7 @@ div.summaryStyle {
     margin-bottom: 0.5rem;
   }
 
-  div.summaryStyle div.container {
+div.summaryStyle div.container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -46,7 +55,17 @@ div.summaryStyle {
     justify-content: space-between;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
-  }
+}
+
+h4.summaryStylePercent {
+	display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
 
   div.headerStyle {
     align-items: center;
@@ -92,12 +111,27 @@ div.summaryStyle {
     color: white;
     font-size: 6.25rem; /*100px;*/
     font-weight: var(--font-weight-semibold);
+	margin-block-start: 0em;
+	margin-block-end: 0em;
     align-self: center;
   }
 
   h3.overallTitleStyle {
     color: white;
     text-align: left;
+	margin-block-start: 0em;
+	margin-block-end: 0em;
+	margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  h3.overallCentredTitleStyle {
+    color: white;
+    text-align: center;
+	margin-block-start: 0em;
+	margin-block-end: 0em;
+	margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
   }
 
   div.percentComponent {
