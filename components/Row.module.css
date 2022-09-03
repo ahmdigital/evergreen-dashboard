@@ -37,6 +37,7 @@ div.iconContainer{
 .collapsibleTableCell {
 	padding-bottom: 0;
 	padding-top: 0;
+	background-color: var(--colour-lightGrey);
 }
 
 .tooltipStyle {

@@ -1,7 +1,7 @@
 .tableCellStyle{
     font-family: var(--secondary-font-family);
     font-size: var(--font-size-large);
-	background-color: var(--colour-container-background);
+	background-color: var(--colour-lightGrey);
 	color: var(--colour-font)
 }
 
@@ -10,7 +10,7 @@
 }
 
 .inverseSubRow {
-	background-color: var(--colour-background);
+	background-color: var(--colour-lightGrey);
 	color: var(--colour-font);
 }
 

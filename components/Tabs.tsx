@@ -40,6 +40,7 @@ const theme = createTheme({
         root: {
           textTransform: "none",
           fontWeight: "bold",
+          fontSize: '500',
           fontFamily: "Work Sans, sans-serif",
           width: "30%",
           maxWidth: "18.75rem", //"300px"
@@ -47,7 +48,7 @@ const theme = createTheme({
           flexDirection: "row",
         },
         textColorSecondary: {
-          color: "#eeeee4",
+          color: "#9e9b99",
           textTransform: "none",
           fontWeight: "normal",
         },
@@ -121,6 +122,10 @@ const Tabs = (props: Props) => {
   const external = props.subRows.external;
   const user = props.subRows.user;
 
+  const internalTable = <InternalTable>{internal}</InternalTable>;
+  const externalTable = <InternalTable>{external}</InternalTable>;
+  const userTable = <InternalTable>{user}</InternalTable>;
+
   const [tabVal, setTabVal] = useState(0);
   const classes = useStyles();
   const handleChange = (event: SyntheticEvent, newValue: number) => {
@@ -159,13 +164,13 @@ const Tabs = (props: Props) => {
 
   let tabPanels = [
     <TabPanel key="internal" value={tabVal} index={0}>
-      <InternalTable>{internal}</InternalTable>
+      {internal.length > 0 ? internalTable : "No depedencies found"}
     </TabPanel>,
     <TabPanel key="external" value={tabVal} index={1}>
-      <InternalTable>{external}</InternalTable>
+      {external.length > 0 ? externalTable : "No depedencies found"}
     </TabPanel>,
     <TabPanel key="users" value={tabVal} index={2}>
-      <InternalTable>{user}</InternalTable>
+      {user.length > 0 ? userTable : "No dependent repositories found"}
     </TabPanel>,
   ];
 
