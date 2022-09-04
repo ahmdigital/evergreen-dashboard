@@ -41,7 +41,7 @@ export default function SummaryContainer(props: {
         </div>
       <div className={styles.container}>
 		<div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-			<h3 className={styles.summaryStyle}>Target ({config.targetPercentage}%)</h3>
+			<h4 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h4>
 			<div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
 				<h3 className={styles.overallTitleStyle}>Overall</h3>
 				<h2 className={styles.percentStyle} >{overallPercentStr}</h2>
