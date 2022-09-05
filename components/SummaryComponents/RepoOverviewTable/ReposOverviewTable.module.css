@@ -5,7 +5,6 @@
 }
 
 .tableCellStyleCount {
-  font-size: var(--font-size-normal);
   padding: 16px 10px 16px 10px;
 }
 
@@ -20,6 +19,7 @@
   padding: 16px 2px 16px 16px;
   line-height: 1.125rem;
   letter-spacing: 1%;
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-semibolder);
   font-family: var(--secondary-font-family);
+  font-size: var(--font-size-normal);
 }
