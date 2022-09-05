@@ -27,6 +27,7 @@ div.summaryStyle {
 
   div.smallSharedCompProps {
     width: 31.8%;
+    height: 75%;
     min-width: 94%;
     border-radius: 20px;
     padding: 1.5rem 2rem 2rem 2rem;

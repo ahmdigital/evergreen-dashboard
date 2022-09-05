@@ -6,10 +6,9 @@ import helpIcon from "./images/helpIcon.png";
 import Image from "next/image";
 import HelpScreen from "./LightStatus";
 import headerStyles from "./HeaderContainer.module.css";
-import config from "../config.json";
 import ForestIcon from '@mui/icons-material/Forest';
 import Tooltip from "@mui/material/Tooltip";
-
+import config from "../config.json";
 
 export default function SummaryContainer(props: {
   rankArray: any;
@@ -84,3 +83,4 @@ export default function SummaryContainer(props: {
     </div>
   );
 }
+
