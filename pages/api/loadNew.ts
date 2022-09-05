@@ -12,8 +12,7 @@ import config from "../../config.json"
 export const CachePath = path.resolve(process.env.DYNAMIC_CACHE_PATH || "./dynamicCache.json")
 export const EmptyCachePath = path.resolve("./defaultDynamicCache.json")
 
-//TODO: Move to config file
-const timeUntilRefresh = 5 * 60 * 1000 // 5 minutes in milliseconds
+const timeUntilRefresh = config.timeUntilRefresh * 60 * 1000 // minutes to milliseconds
 
 export let waitingPromise: {
 	promise: Promise<void> | null

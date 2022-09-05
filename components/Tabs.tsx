@@ -4,6 +4,8 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Badge from "@mui/material/Badge";
+import InternalTable from "./InternalTable";
+import UsersTable from './UsersTable'
 
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -22,7 +24,7 @@ const useStyles = makeStyles((_) => ({
     height: "0.625rem", //"10px"
     top: "2.813rem", //"45px"
     color: "black",
-    marginTop:  "0.625rem",
+    marginTop: "0.625rem",
   },
 }));
 
@@ -39,6 +41,7 @@ const theme = createTheme({
         root: {
           textTransform: "none",
           fontWeight: "bold",
+          fontSize: '500',
           fontFamily: "Work Sans, sans-serif",
           width: "30%",
           maxWidth: "18.75rem", //"300px"
@@ -46,7 +49,7 @@ const theme = createTheme({
           flexDirection: "row",
         },
         textColorSecondary: {
-          color: "#eeeee4",
+          color: "#9e9b99",
           textTransform: "none",
           fontWeight: "normal",
         },
@@ -120,6 +123,10 @@ const Tabs = (props: Props) => {
   const external = props.subRows.external;
   const user = props.subRows.user;
 
+  const internalTable = <InternalTable>{internal}</InternalTable>;
+  const externalTable = <InternalTable>{external}</InternalTable>;
+  const userTable = <UsersTable>{user}</UsersTable>;
+
   const [tabVal, setTabVal] = useState(0);
   const classes = useStyles();
   const handleChange = (event: SyntheticEvent, newValue: number) => {
@@ -158,13 +165,13 @@ const Tabs = (props: Props) => {
 
   let tabPanels = [
     <TabPanel key="internal" value={tabVal} index={0}>
-      {internal.length > 0 ? internal : "No internal depedencies found"}
+      {internal.length > 0 ? internalTable : "No depedencies found"}
     </TabPanel>,
     <TabPanel key="external" value={tabVal} index={1}>
-      {external.length > 0 ? external : "No external depedencies found"}
+      {external.length > 0 ? externalTable : "No depedencies found"}
     </TabPanel>,
     <TabPanel key="users" value={tabVal} index={2}>
-      {user.length > 0 ? user : "No dependent repositories found"}
+      {user.length > 0 ? userTable : "No dependent repositories found"}
     </TabPanel>,
   ];
 
