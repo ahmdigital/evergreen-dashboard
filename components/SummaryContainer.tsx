@@ -51,21 +51,20 @@ export default function SummaryContainer(props: {
 
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
           <div className={styles.summaryCompHeader}>
-{/* Check the styles.summaryStyle is needed */}
-          <h3 className={styles.summaryStyle}>{`Total Repos (${props.rankArray.green + props.rankArray.yellow + props.rankArray.red})`}</h3>
+            <h4 className={styles.summaryStyle}>Repos Overview</h4>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
               <div>
-            <Image
-              className={styles.helpBtn}
-              width="30px"
-              height="30px"
-              alt="help"
-              src={helpIcon}
-              onClick={() => {
-                setOpenHelp(true);
-              }}
-            />
-             </div>
+              <Image
+                  className={styles.helpBtn}
+                  width="30px"
+                  height="30px"
+                  alt="help"
+                  src={helpIcon}
+                  onClick={() => {
+                    setOpenHelp(true);
+                  }}
+                />
+              </div>
             </Tooltip>
           </div>
           {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
@@ -84,3 +83,4 @@ export default function SummaryContainer(props: {
     </div>
   );
 }
+
