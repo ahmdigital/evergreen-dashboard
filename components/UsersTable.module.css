@@ -1,39 +1,29 @@
 .tableContainer {
 	box-shadow: none;
-	background-color: var(--colour-background);
+	background-color: var(--colour-lightGrey);
 	color: var(--colour-font);
 }
 
 .col1 {
-	width: 0%;
+	width: 20%;
 	background-color: var(--table-left-edge);
 }
 
 .col2 {
-	width: 6%;
+	width: 50%;
 	background-color: var(--colour-background);
 }
 
 .col3 {
-	width: 75%;
-	background-color: var(--colour-background);
-}
-
-.col4 {
-	width: 25%;
-	background-color: var(--colour-background);
-}
-
-.col5 {
-	width: 0%;
+	width: 30%;
 	background-color: var(--colour-background);
 }
 
 .tableCellStyle {
-	font-weight: var(--font-weight-bold);
+	font-weight: bold;
 	font-family: var(--primary-font-family);
-	font-size: 1.4rem;
-	background-color: var(--table-cell-background);
+	font-size: 1.1rem;
+	background-color: #f5f5f5;
 	color: var(--colour-font);
 	margin-top: 1rem;
 	line-height: 3rem;
@@ -44,10 +34,13 @@
 
 .tableStyle {
 	box-shadow: none;
-	background-color: var(--colour-background);
+	background-color: var(--colour-lightGrey);
 	color: var(--colour-font);
 }
 
 .tableComponent{
+	max-height: 20.3rem;
+	overflow: scroll;
+	overflow-x: hidden;
 	box-shadow: none;
 }

@@ -1,7 +1,7 @@
 # 🌲 Evergreen Dashboard
 
-[![Docker](https://github.com/ahm-monash/evergreen/actions/workflows/docker.yml/badge.svg)](https://github.com/ahm-monash/evergreen/actions/workflows/docker.yml)
 [![Build](https://github.com/ahm-monash/evergreen/actions/workflows/build.yml/badge.svg)](https://github.com/ahm-monash/evergreen/actions/workflows/build.yml)
+[![Docker](https://github.com/ahm-monash/evergreen/actions/workflows/docker.yml/badge.svg)](https://github.com/ahm-monash/evergreen/actions/workflows/docker.yml)
 [![Terraform azure](https://github.com/ahm-monash/evergreen/actions/workflows/terraform_azure.yml/badge.svg)](https://github.com/ahm-monash/evergreen/actions/workflows/terraform_azure.yml)
 
 ## Repository Setup
@@ -47,6 +47,6 @@ Because azure web app was not executing the build command, a docker container wa
 1. `terraform init`
 2. `docker-compose build`
 3. `docker tag evergreendashboard:latest <DOCKERHUB_ACCOUNT_NAME>/evergreendashboard:latest`
-4. Change the local variable in the
+4. Change the local docker variable in the main.tf
 5. `terraform apply`, it will ask you to accept the configuration, type `yes` once you have read the plan
 6. Wait until terraform finishes applying the plan, once it's done it will output the url of the website
