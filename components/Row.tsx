@@ -14,6 +14,7 @@ import Tabs from "./Tabs";
 import { semVerToString } from "../src/semVer";
 import styles from "./Row.module.css";
 import { redDef, yellowDef, greenDef } from "./LightStatus";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export type Props = {
   subRows: {
@@ -23,6 +24,23 @@ export type Props = {
     final: boolean;
   };
 };
+
+// Customising the row styling using ThemeProvider
+const theme = createTheme({
+  components: {
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          fontWeight: "bold",
+          fontSize: "large",
+          fontFamily: 'var(--primary-font-family)',
+          backgroundColor: "var(--colour-container-background)",
+          color: "var(--colour-font)",
+        }
+      }
+    }
+  }
+})
 
 // Creates each individual row
 export default function Row(props: { rank: number; row: any } & Props) {
@@ -44,69 +62,74 @@ export default function Row(props: { rank: number; row: any } & Props) {
   return (
     <React.Fragment>
       <TableRow>
-        <TableCell className={styles.tableCellStyle}>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-            className={styles.rowArrow}
-          >
-            {open ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
-          </IconButton>
-        </TableCell>
-        <TableCell className={styles.tableCellStyle}>
-          <Tooltip arrow title={<p className={styles.tooltipStyle}>{iconDefinition}</p>}>
-            <div className={styles.iconContainer}>
-              <Image
-                src={statusIcon}
-                alt="Repo Priority"
-                width="40px"
-                height="40px"
-                className={styles.statusIcon}
-              />
-            </div>
-          </Tooltip>
-        </TableCell>
-        <TableCell className={styles.tableCellStyle} component="th" scope="row">
-          {row.name}
-        </TableCell>
-        <TableCell className={styles.tableCellStyle} align="left">
-          {semVerToString(row.version)}
-          {
-            (semVerToString(row.version) === "0.0.0-development" || semVerToString(row.version) === "0.0.0") &&
-            <Tooltip arrow title={<p className={styles.tooltipStyle}>This repository was defined with a default version of 0.0.0</p>}>
-              <QuestionMark className={styles.questionIcon} />
+        <ThemeProvider theme={theme}>
+          <TableCell>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setOpen(!open)}
+              className={styles.rowArrow}
+            >
+              {open ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
+            </IconButton>
+          </TableCell>
+          <TableCell>
+            <Tooltip arrow title={<p className={styles.tooltipStyle}>{iconDefinition}</p>}>
+              <div className={styles.iconContainer}>
+                <Image
+                  src={statusIcon}
+                  alt="Repo Priority"
+                  width="40px"
+                  height="40px"
+                  className={styles.statusIcon}
+                />
+              </div>
             </Tooltip>
-          }
-        </TableCell>
-        <TableCell className={styles.tableCellStyle} align="right">
-          (
-          <a href={row.link} rel="noreferrer" target="_blank">
-            GitHub
-          </a>
-          )
-        </TableCell>
+          </TableCell>
+          <TableCell component="th" scope="row">
+            {row.name}
+          </TableCell>
+          <TableCell align="left">
+            {semVerToString(row.version)}
+            {
+              (semVerToString(row.version) === "0.0.0-development" || semVerToString(row.version) === "0.0.0") &&
+              <Tooltip arrow title={<p className={styles.tooltipStyle}>This repository was defined with a default version of 0.0.0</p>}>
+                <QuestionMark className={styles.questionIcon} />
+              </Tooltip>
+            }
+          </TableCell>
+          <TableCell align="right">
+            (
+            <a href={row.link} rel="noreferrer" target="_blank">
+              GitHub
+            </a>
+            )
+          </TableCell>
+        </ThemeProvider>
       </TableRow>
       <TableRow>
-        <TableCell
-          className={styles.subRowContainer}
-          colSpan={6}
-        >
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Table size="small" aria-label="dependencies">
-                <TableHead className={styles.collapsibleTableHead} >
-                  <TableRow>
-                    <TableCell className={styles.collapsibleTableCell}>
-                      <Tabs subRows={subRows}></Tabs>
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
+        <ThemeProvider theme={theme}>
+          <TableCell
+            className={styles.subRowContainer}
+            colSpan={6}
+          >
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <Box sx={{ margin: 1 }}>
+                <Table size="small" aria-label="dependencies">
+                  <TableHead className={styles.collapsibleTableHead} >
+                    <TableRow>
+                      <TableCell className={styles.collapsibleTableCell}>
+                        <Tabs subRows={subRows}></Tabs>
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                </Table>
+              </Box>
+            </Collapse>
+          </TableCell>
+        </ThemeProvider>
       </TableRow>
-    </React.Fragment>
+    </React.Fragment >
   );
 }
+

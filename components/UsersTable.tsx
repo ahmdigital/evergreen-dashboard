@@ -7,10 +7,32 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "./InternalTable.module.css";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 type CollapsibleTableProps = {
     children: ReactNode;
 };
+
+// Customising the table styling using ThemeProvider
+const theme = createTheme({
+    components: {
+        MuiTableCell: {
+            styleOverrides: {
+                root: {
+                    fontWeight: "bold",
+                    fontSize: "1.1rem",
+                    fontFamily: 'var(--primary-font-family)',
+                    backgroundColor: "#f5f5f5",
+                    color: "var(--colour-font)",
+                    marginTop: '1rem',
+                    lineHeight: '3rem',
+                    borderColor: "var(--table-cell-border)",
+                    borderWidth: '0.2rem'
+                }
+            }
+        }
+    }
+})
 
 // Creates the interior table
 export default function CollapsibleTable(props: CollapsibleTableProps) {
@@ -27,9 +49,11 @@ export default function CollapsibleTable(props: CollapsibleTableProps) {
                 </colgroup>
                 <TableHead>
                     <TableRow>
-                        <TableCell className={styles.tableCellStyle}>status</TableCell>
-                        <TableCell className={styles.tableCellStyle}>name</TableCell>
-                        <TableCell className={styles.tableCellStyle}>current</TableCell>
+                        <ThemeProvider theme={theme}>
+                            <TableCell >status</TableCell>
+                            <TableCell >name</TableCell>
+                            <TableCell >current</TableCell>
+                        </ThemeProvider>
                     </TableRow>
                 </TableHead>
                 <TableBody>{props.children}</TableBody>
