@@ -9,14 +9,14 @@ import TrafficIcon from '@mui/icons-material/Traffic';
 
 
 const client_id = "5cd550d6a19995e8faf0";
-const scope = "repo:read"
+// const scope = "repo"
 const redirect_uri = "http://localhost:3000/signin/";
 
 // get code
 function redirect() {
 	//! TODO: research secure ways to generate it
 	const random_state = (Math.random() + 1).toString(36);
-	window.location.href = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&state=${random_state}`;
+	window.location.href = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&state=${random_state}`;
 }
 
 type SignInStatus = "calculating" | "not-signed-in" | "exchanging-code-for-token" | "signed-in" | "error-while-signing-in"

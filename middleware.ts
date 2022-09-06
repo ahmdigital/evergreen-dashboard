@@ -51,7 +51,7 @@ export default async function CheckAuthenticationBeforeServingData(request: Next
 
 		const username = await getUsername(tokenCookie.accessToken)
 		console.log("Username:", username)
-		
+
 		console.log(`Checking organisation ${configFile.targetOrganisation}...`)
 		const isMember = await isOrganisationMember(configFile.targetOrganisation, username, tokenCookie.accessToken)
 		console.log("isOrganisationMember:", isMember)
@@ -68,14 +68,6 @@ export default async function CheckAuthenticationBeforeServingData(request: Next
 		console.log("Error while validating token: ", error.message)
 
 		if (error?.status == 401) {
-			// {
-			//     "message": "Bad credentials",
-			//     "documentation_url": "https://docs.github.com/rest"
-			// }
-			// {
-			//     "message": "Requires authentication",
-			//     "documentation_url": "https://docs.github.com/rest/reference/users#get-the-authenticated-user"
-			// }
 			// return NextResponse.json({ message: 'Login required' }, { status: 401 })
 			return NextResponse.redirect("localhost:3000/signin?error=Login required")
 		}
@@ -90,7 +82,7 @@ async function getUsername(authToken: string): Promise<string> {
 	return await fetch(`https://api.github.com/user`, {
 		headers: {
 			"Accept": "application/vnd.github+json",
-			"Authorization": `token ${authToken}`
+			"Authorization": `Bearer ${authToken}`
 		}
 	}).then(response => {
 		if (response.status == 200) {
@@ -107,7 +99,7 @@ async function isOrganisationMember(org: string, username: string, authToken: st
 	return await fetch(`https://api.github.com/orgs/${org}/members/${username}`, {
 		headers: {
 			"Accept": "application/vnd.github+json",
-			"Authorization": `token ${authToken}`
+			"Authorization": `Bearer ${authToken}`
 		}
 	}).then(response => {
 		if (response.status == 204) {
