@@ -48,4 +48,20 @@ div.btnsContainer button span {
 div.btnsContainer button:hover {
   cursor: pointer;
   background-color: lightgray;
+<<<<<<< HEAD
+=======
+}
+
+div.refreshWord {
+  font-family: var(--primary-font-family);
+  font-size: var(--font-size-large);
+}
+
+.tooltipStyle {
+	font-size: var(--font-size-normal);
+	font-family: var(--primary-font-family);
+}
+
+div.noReposStyle {
+  padding: 2rem;
 }

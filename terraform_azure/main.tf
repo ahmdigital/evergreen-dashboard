@@ -20,6 +20,8 @@ provider "azurerm" {
 }
 
 locals {
+  # this should use semantic versioning, otherwise it will
+  # not trigger doployment when a new 'latest' image is pushed
   build_imge_tag = "latest"
   docker_image   = "docker.io/mtempty/evergreendashboard"
 }

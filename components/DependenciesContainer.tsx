@@ -4,6 +4,7 @@ import styles from "./DependenciesContainer.module.css";
 import sharedStyles from "./treeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
+import config from "../config.json";
 //import filterIcon from "../components/images/filter.svg" ;
 import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
 
@@ -15,6 +16,7 @@ export default function DependenciesContainer(props: {
   rows: ReactNode;
   searchTerm: any;
   setSearchTerm: any;
+  emptyRows: boolean;
 }) {
 
 	async function callRefresh(){
@@ -60,6 +62,11 @@ export default function DependenciesContainer(props: {
       <div className={styles.tableStyle}>
         <CollapsibleTable>{props.rows}</CollapsibleTable>
       </div>
+        {props.emptyRows && 
+          <div className={styles.noReposStyle}>
+            <p><b>{config.targetOrganisation}</b> has 0 repositories</p>
+          </div>
+        }
     </div>
   );
 }
