@@ -13,7 +13,6 @@ import Grid from '@mui/material/Unstable_Grid2';
 import refreshIcon from "../components/images/refresh.svg" ;
 import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
 import config from "../config.json";
-import getConfig from "next/config";
 
 let refreshing = false
 
