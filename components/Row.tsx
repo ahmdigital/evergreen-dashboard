@@ -36,6 +36,24 @@ const theme = createTheme({
           fontFamily: 'var(--primary-font-family)',
           backgroundColor: "var(--colour-container-background)",
           color: "var(--colour-font)",
+          borderBottom: "none",
+        }
+      }
+    }
+  }
+})
+
+// Using another theme for collapsible row
+const collapsibleTheme = createTheme({
+  components: {
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          fontWeight: "bold",
+          fontSize: "large",
+          fontFamily: 'var(--primary-font-family)',
+          backgroundColor: "#f5f5f5",
+          color: "var(--colour-font)",
         }
       }
     }
@@ -108,9 +126,8 @@ export default function Row(props: { rank: number; row: any } & Props) {
         </ThemeProvider>
       </TableRow>
       <TableRow>
-        <ThemeProvider theme={theme}>
-          <TableCell
-            className={styles.subRowContainer}
+        <ThemeProvider theme={collapsibleTheme}>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}
             colSpan={6}
           >
             <Collapse in={open} timeout="auto" unmountOnExit>

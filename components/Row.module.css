@@ -1,4 +1,4 @@
-.rowArrow{
+.rowArrow {
 	color: gray;
 }
 
@@ -7,14 +7,14 @@
 	max-height: 100%;
 }
 
-div.iconContainer{
+div.iconContainer {
 	display: grid;
 	max-width: 100%;
 	max-height: 100%;
 	align-items: center;
 }
 
-.subRowContainer{
+.subRowContainer {
 	padding-bottom: 0;
 	padding-top: 0;
 	background-color: var(--colour-container-background);
@@ -23,12 +23,6 @@ div.iconContainer{
 .collapsibleTableHead {
 	background-color: var(--colour-container-background);
 	color: var(--colour-font);
-}
-
-.collapsibleTableCell {
-	padding-bottom: 0;
-	padding-top: 0;
-	background-color: #f5f5f5;
 }
 
 .tooltipStyle {
