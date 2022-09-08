@@ -10,6 +10,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import config from "../config.json";
+import { semVerFromString } from "../src/semVer";
 
 export type HelpScreenProps = {
   closeHelp: (_value: boolean | ((_prev: boolean) => boolean)) => void;
@@ -24,10 +26,15 @@ class VersionDefinition {
   }
 }
 
+// defines the status icon definitions based on rankCutoff configured 
+const upperLimit = semVerFromString(config.rankCutoff.major);
+const lowerLimit = semVerFromString(config.rankCutoff.minor);
+
 // defines red, yellow and green traffic light descriptions
-export const redDef = new VersionDefinition("Current major version behind by more than 1 major or 6 minors.");
-export const yellowDef = new VersionDefinition("Current minor version behind by 5 or 6 minors.");
-export const greenDef = new VersionDefinition("Current minor version behind by less than 5 minors.");
+export const redDef = new VersionDefinition(`Current major version behind by more than 1 major or ${upperLimit.minor} minors.`);
+export const yellowDef = new VersionDefinition(`Current minor version behind by ${lowerLimit.minor} or ${upperLimit.minor} minors.`);
+export const greenDef = new VersionDefinition(`Current minor version behind by less than ${lowerLimit.minor} minors.`);
+
 
 // creates the table for the status definitions
 function StatusTable() {

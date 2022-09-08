@@ -7,6 +7,8 @@ div.summaryStyle {
 div.summaryOverall {
   display: block;
   max-height: 100%;
+  height: 410px;
+  background-color: var(--colour-green);
   box-sizing: border-box;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
@@ -23,8 +25,15 @@ div.summaryOverallRed {
   background-color: var(--colour-red);
 }
 
-div.summaryOverallGrey {
-  background-color: gray;
+div.summaryComponent {
+  display: block;
+  height: 410px;
+  background-color: var(--colour-lightGrey);
+  box-sizing: border-box;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 div.smallSharedCompProps {
@@ -121,10 +130,8 @@ div.summaryComponent div.summaryCompHeader {
 }
 
 div.sharedCompProps {
-  width: 31.8%;
-  min-width: 18rem;
   border-radius: 20px;
-  padding: 1rem 1.4rem 1.4rem;
+  padding: 1.5rem 2rem 2rem 2rem;
   box-sizing: border-box;
 }
 
@@ -201,4 +208,37 @@ div.loadingWheelBox {
 .tooltipStyle {
   font-size: var(--font-size-normal);
   font-family: var(--primary-font-family);
+}
+
+div.refreshWord {
+  font-family: var(--primary-font-family);
+  font-size: var(--font-size-large);
+}
+
+div.btnsContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0;
+  width: 17rem;
+}
+
+div.btnsContainer button {
+  width: 8rem;
+  font-family: var(--primary-font-family);
+  font-size: var(--font-size-large);
+  background-color: var(--colour-container-background);
+  border: none;
+  padding: 0.8rem;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+div.btnsContainer button span {
+  margin-left: 0.5rem;
+}
+
+div.btnsContainer button:hover {
+  cursor: pointer;
+  background-color: lightgray;
 }
