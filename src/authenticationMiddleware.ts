@@ -67,15 +67,14 @@ async function isOrganisationMember(org: string, username: string, authToken: st
 export async function checkAuthorisation(req: NextApiRequest, res: NextApiResponse): Promise<boolean> {
 	console.log("Middleware called for: " + req.url)
 	if (configFile.requireAuthentication == false) {
-		console.log("Granting access to user")
+		console.log("'requireAuthentication' is set to 'true', granting access to user")
 		return true
 	}
-	console.log(req.cookies)
 	const tokenString = (req as any).cookies.token
 
 
 	if (tokenString == null) {
-		console.log("Token not present")
+		console.log("Token not present in client cookie")
 		res.status(401).json({ message: 'Login required' })
 		return false
 	}
