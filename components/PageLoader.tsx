@@ -24,6 +24,12 @@ async function getDataFromAPI(api: "loadNew" | "loadLatest" | "forceNew", reques
 	let JSObject = await fetch("api/" + api)
 	let retries = 10
 	while(!JSObject.ok){
+		//user is not authorised and should be signed in
+		if (JSObject.status == 401 || JSObject.status == 403){
+			const error = await JSObject.json()
+			window.location.href = `/signin?error=${encodeURIComponent(error?.message)}` 	
+		}
+
 		JSObject = await fetch("api/" + api)
 		--retries
 		if(retries == 0){

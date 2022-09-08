@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { serialize } from 'cookie';
-import { encodeTokenCookie, TokenCookie } from "../../../middleware";
+import { encodeTokenCookie, TokenCookie } from "../../../src/authenticationMiddleware";
 
 type AuthResponse = {
 	access_token: string;

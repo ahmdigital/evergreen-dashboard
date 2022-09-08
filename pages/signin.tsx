@@ -6,21 +6,18 @@ import { GitHubIcon } from "../components/GitHubIcon";
 import * as React from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
 import TrafficIcon from '@mui/icons-material/Traffic';
+import config from "../config.json"
 
 
-const client_id = "5cd550d6a19995e8faf0";
-// const scope = "repo"
-const redirect_uri = "http://localhost:3000/signin/";
+const SCOPE = "repo"
 
 // get code
 function redirect() {
-	//! TODO: research secure ways to generate it
-	const random_state = (Math.random() + 1).toString(36);
-	window.location.href = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&state=${random_state}`;
+	const uuid = self.crypto.randomUUID();
+	window.location.href = `https://github.com/login/oauth/authorize?client_id=${config.client_id}&redirect_uri=${config.redirect_uri}&scope=${SCOPE}&state=${uuid}`;
 }
 
 type SignInStatus = "calculating" | "not-signed-in" | "exchanging-code-for-token" | "signed-in" | "error-while-signing-in"
-
 
 
 export default function SignIn() {
@@ -33,22 +30,18 @@ export default function SignIn() {
 
 	const [errorMessage, setErrorMessage] = useState<string>()
 
-	// example of url after redirecting to the callback url
-	// http://localhost:3000/?code=${client_id}&state=${random_state}
 	useEffect(() => {
 		setErrorMessage(undefined as any)
 
 		if (router == null) {
 			return
 		}
-
-		//TODO: account for when the user does not consent and other possible errors
 		const code = router.query.code?.toString()
 		const error = router.query.error?.toString()
 
 		if (error != null) {
 			setSignInStatus('error-while-signing-in')
-			//setSignInMessage("Whatever")
+			error === "access_denied" && setErrorMessage("You have denied access to your GitHub account. Please try again.")
 		} else if (code != null) {
 			setSignInStatus('exchanging-code-for-token')
 			console.log(`code ${code}`);
