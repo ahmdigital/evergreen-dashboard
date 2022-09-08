@@ -31,6 +31,13 @@ const theme = createTheme({
           borderWidth: '0.2rem'
         }
       }
+    },
+    MuiTableContainer: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+        }
+      }
     }
   }
 })
@@ -38,31 +45,32 @@ const theme = createTheme({
 // Creates the whole table
 export default function CollapsibleTable(props: CollapsibleTableProps) {
   return (
-    <TableContainer
-      component={Paper}
-      className={styles.tableComponent}
-    >
-      <Table size="small" aria-label="collapsible table">
-        <colgroup>
-          <col className={styles.col1} />
-          <col className={styles.col2} />
-          <col className={styles.col3} />
-          <col className={styles.col4} />
-          <col className={styles.col5} />
-        </colgroup>
-        <TableHead>
-          <TableRow>
-            <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <TableContainer
+        component={Paper}
+        className={styles.tableComponent}
+      >
+        <Table size="small" aria-label="collapsible table">
+          <colgroup>
+            <col className={styles.col1} />
+            <col className={styles.col2} />
+            <col className={styles.col3} />
+            <col className={styles.col4} />
+            <col className={styles.col5} />
+          </colgroup>
+          <TableHead>
+            <TableRow>
+
               <TableCell ></TableCell>
               <TableCell >status</TableCell>
               <TableCell >name</TableCell>
               <TableCell >version</TableCell>
               <TableCell >link</TableCell>
-            </ThemeProvider>
-          </TableRow>
-        </TableHead>
-        <TableBody>{props.children}</TableBody>
-      </Table>
-    </TableContainer>
+            </TableRow>
+          </TableHead>
+          <TableBody>{props.children}</TableBody>
+        </Table>
+      </TableContainer>
+    </ThemeProvider>
   );
 }
