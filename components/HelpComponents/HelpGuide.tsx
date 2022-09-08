@@ -154,17 +154,17 @@ function TabsTable() {
         <TableBody>
           <TableRow>
             <TableCell className={styles.fieldContentStyle}>Internal:</TableCell>
-            <TableCell className={styles.infoContentStyle}>Displays list of internal libraries used by the main repository, 
+            <TableCell className={styles.infoContentStyle}>Displays list of internal libraries used by the main repository,
             and their properties including status, library, used version and the latest version of the library</TableCell>
           </TableRow>
           <TableRow>
             <TableCell className={styles.fieldContentStyle}>External:</TableCell>
-            <TableCell className={styles.infoContentStyle}>Displays list of external libraries used by main repository, 
+            <TableCell className={styles.infoContentStyle}>Displays list of external libraries used by main repository,
             and their properties including status, library, used version and the latest version of the library</TableCell>
           </TableRow>
           <TableRow>
             <TableCell className={styles.fieldContentStyle}>Users:</TableCell>
-            <TableCell className={styles.infoContentStyle}>Displays list of libraries that uses the main repository, 
+            <TableCell className={styles.infoContentStyle}>Displays list of libraries that uses the main repository,
             and their properties including status, library, used version and the latest version of the library</TableCell>
           </TableRow>
         </TableBody>
@@ -177,11 +177,11 @@ function TabsTable() {
 export default function HelpGuide() {
     // State for opening the help guide
     const [open, setOpen] = React.useState(false);
-  
+
     const handleClickOpen = () => {
       setOpen(true);
     };
-  
+
     const handleClose = () => {
       setOpen(false);
     };
@@ -208,7 +208,7 @@ export default function HelpGuide() {
                 What do the light status icons represent?
               </DialogContentText>
               <DialogContentText className={styles.infoContentStyle}>
-                The application uses 3 types of icons to represent how up-to-date a repository is. 
+                The application uses 3 types of icons to represent how up-to-date a repository is.
                 The status icon is generated based on the semantic versioning of the libraries.
                 Below is a more detailed descripton of each icon:
               </DialogContentText>
@@ -218,7 +218,7 @@ export default function HelpGuide() {
               </DialogContentText>
               <DialogContentText className={styles.infoContentStyle}>
                 The overall percentage represents the number of repositories with a green light
-                status over the total repositories in the organisation as a percentage. 
+                status over the total repositories in the organisation as a percentage.
               </DialogContentText>
               <DialogContentText className={styles.questionHeaderStyle}>
                 How to read the Total Repositories breakdown card?
@@ -235,10 +235,10 @@ export default function HelpGuide() {
                 Introduction
               </DialogContentText>
               <DialogContentText className={styles.infoContentStyle}>
-                The core feature of the application is to keep track of repositories and how-up-to 
-                date the internal libraries are. The repositories section displays a table of 
-                collapsible rows, where each row represents a repository can be expanded to view 
-                its internal libraries. 
+                The core feature of the application is to keep track of repositories and how-up-to
+                date the internal libraries are. The repositories section displays a table of
+                collapsible rows, where each row represents a repository can be expanded to view
+                its internal libraries.
               </DialogContentText>
               <DialogContentText className={styles.questionHeaderStyle}>
                 Repository Table Fields
@@ -254,4 +254,3 @@ export default function HelpGuide() {
       </>
     );
   }
-  

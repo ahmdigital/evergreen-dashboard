@@ -71,7 +71,7 @@ export default function DependenciesContainer(props: {
       <div className={styles.tableStyle}>
         <CollapsibleTable>{props.rows}</CollapsibleTable>
       </div>
-        {props.emptyRows && 
+        {props.emptyRows &&
           <div className={styles.noReposStyle}>
             <p><b>{config.targetOrganisation}</b> has 0 repositories</p>
           </div>

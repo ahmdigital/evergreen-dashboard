@@ -25,12 +25,12 @@ export default function LoadingBackdrop(props: {
   return (
     <div>
       <Backdrop
-        sx={{ 
+        sx={{
           color: '#fff',
           // change opacity and colour of backdrop here:
           backgroundColor: 'rgb(68, 68, 68, 0.98)',
           textAlign: 'center',
-          zIndex: (theme) => theme.zIndex.drawer + 1 
+          zIndex: (theme) => theme.zIndex.drawer + 1
         }}
         open={props.open}
       >

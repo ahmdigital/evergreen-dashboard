@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	if(!isAuthorised){
 		return
 	}
-	
+
 	let cachedData = null
 
 	const current = Date.now().valueOf()

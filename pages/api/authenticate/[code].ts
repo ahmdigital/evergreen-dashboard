@@ -33,10 +33,10 @@ export default async function handler(
 			`https://github.com/login/oauth/access_token?client_id=${client_id}&client_secret=${client_secret}&code=${code}&redirect_uri=${redirect_uri}`,
 			requestOptions
 		).then(r => r.json())
-			
+
 		const accessToken = tokenObj.access_token
 		console.log("accessToken:", accessToken)
-		
+
 		const tokenCookie:TokenCookie = { accessToken }
 		console.log("Token cookie:", tokenCookie)
 		const tokenCookieString = encodeTokenCookie(tokenCookie)
