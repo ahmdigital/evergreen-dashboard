@@ -1,18 +1,35 @@
-.tableCellStyle {
-  padding: 4px;
-  font-size: medium;
-  font-weight: bold;
+.tableCellStyleIcon {
+  width: 2.8rem;
+  /* padding: 0.625rem 0.625rem 0.625rem 0.25rem;  */
+  padding: 10px 10px 10px 4px; /* px to rem conversion doesn't seem to render the same*/
 }
 
-p.reposStyle {
-  font-size: medium;
+.tableCellStyleCount {
+  padding: 16px 10px 16px 10px;
+}
+
+.tableCellStyleCount p {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-semibold);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.statusLabel {
+  padding: 16px 2px 16px 16px;
+  line-height: 1.125rem;
+  letter-spacing: 1%;
+  font-weight: var(--font-weight-semibolder);
+  font-family: var(--secondary-font-family);
+  font-size: var(--font-size-normal);
 }
 
 .totalsCellStyle{
     padding: 4px;
     border-color: black;
-    line-height: 0.5rem;
+    line-height: 1.5rem;
     font-size: var(--font-size-large);
     font-weight: bold;
     font-family: var(--primary-font-family);
 }
+
