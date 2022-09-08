@@ -25,9 +25,3 @@
 	color: var(--colour-font);
 }
 
-.tableComponent{
-	max-height: 20.3rem;
-	overflow: scroll;
-	overflow-x: hidden;
-	box-shadow: none;
-}
