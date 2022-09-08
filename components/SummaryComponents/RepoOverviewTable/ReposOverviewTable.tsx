@@ -16,7 +16,7 @@ type RowProps = {
 };
 
 enum StatusLabel {
-  RED = "need updating now",
+  RED = "need(s) up updating urgently",
   YELLOW = "should be updated soon",
   GREEN = "up-to-date",
 }
