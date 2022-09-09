@@ -9,7 +9,7 @@ import ForestIcon from '@mui/icons-material/Forest';
 import Tooltip from "@mui/material/Tooltip";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import refreshIcon from "../components/images/refresh.svg" ;
+import refreshIcon from "./images/refresh.svg" ;
 import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
 import config from "../config.json";
 
