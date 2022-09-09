@@ -1,7 +1,6 @@
 .tableCellStyleIcon {
   width: 2.8rem;
-  /* padding: 0.625rem 0.625rem 0.625rem 0.25rem;  */
-  padding: 10px 10px 10px 4px; /* px to rem conversion doesn't seem to render the same*/
+  padding: 0.625rem 0.625rem 0.625rem 0.25rem;  /* padding: 10px 10px 10px 4px; */
 }
 
 .tableCellStyleCount {
@@ -19,16 +18,7 @@
   padding: 1rem 2px 1rem 1rem;
   line-height: 1.125rem;
   letter-spacing: 1%;
-  font-weight: var(--font-weight-semibolder);
+  font-weight: var(--font-weight-semibold);
   font-family: var(--secondary-font-family);
   font-size: var(--font-size-normal);
 }
-
-/* .totalsCellStyle {
-  padding: 4px;
-  border-color: black;
-  line-height: 1.5rem;
-  font-size: var(--font-size-large);
-  font-weight: bold;
-  font-family: var(--primary-font-family);
-} */

@@ -6,9 +6,9 @@ div.summaryStyle {
 
 .subtitle {
   font-size: 1rem;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
   margin-top: 3px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold); /*500*/
 }
 
 div.summaryOverall {
@@ -36,7 +36,6 @@ div.summaryOverallGrey {
 }
 
 div.smallSharedCompProps {
-  width: 31.8%;
   height: 75%;
   min-width: 100%;
   border-radius: 20px;
@@ -47,7 +46,7 @@ div.smallSharedCompProps {
 div.summaryComponent {
   display: block;
   /* max-height: 100%; */
-  min-height: 410px;
+  min-height: 380px;
   background-color: var(--colour-lightGrey);
   box-sizing: border-box;
   margin-top: 1rem;
@@ -97,7 +96,7 @@ div.summaryComponent div.summaryCompHeader {
 }
 
 div.sharedCompProps {
-  width: 31.8%;
+  width: 100%;
   min-width: 18rem;
   border-radius: var(--main-section-border-radius); /*20px*/
   padding: 1rem 1.4rem 1.4rem;
@@ -189,7 +188,7 @@ div.btnsContainer button {
   background-color: var(--colour-container-background);
   border: none;
   padding: 0.8rem;
-  border-radius: 20px;
+  border-radius: var(--main-section-border-radius);
   justify-content: center;
   align-items: center;
 }

@@ -22,15 +22,15 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: "var(--secondary-font-family)",
-          fontSize: "1.1rem",
+          fontSize: "1rem",
           backgroundColor: "#f5f5f5",
           color: "var(--colour-font)",
           borderColor: "#7a7a7a",
-        }
-      }
-    }
-  }
-})
+        },
+      },
+    },
+  },
+});
 
 // Creates the collapsible rows for internal/external dependencies
 export function SubRow(props: SubRowProps) {
@@ -53,10 +53,13 @@ export function SubRow(props: SubRowProps) {
   }
 
   return (
-    <TableRow >
+    <TableRow>
       <ThemeProvider theme={theme}>
         <TableCell className={styles.tableCellStyle}>
-          <Tooltip arrow title={<p className={styles.tooltipStyle}>{iconDefinition}</p>}>
+          <Tooltip
+            arrow
+            title={<p className={styles.tooltipStyle}>{iconDefinition}</p>}
+          >
             <div className={styles.iconContainer}>
               <Image
                 src={statusIcon}
@@ -70,7 +73,11 @@ export function SubRow(props: SubRowProps) {
         </TableCell>
         <TableCell className={styles.tableCellStyle}>{depName}</TableCell>
         <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
-        <TableCell className={`${styles.tableCellStyle} ${styles.latestVerStyle}`}>{latestVersion}</TableCell>
+        <TableCell
+          className={`${styles.tableCellStyle} ${styles.latestVerStyle}`}
+        >
+          {latestVersion}
+        </TableCell>
       </ThemeProvider>
     </TableRow>
   );

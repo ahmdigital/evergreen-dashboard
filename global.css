@@ -13,11 +13,13 @@ body {
 h2 {
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 22px;
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-semibolder);
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 2rem; /* 32px; */
+  font-weight: var(--font-weight-semibolder);
 }
 
 .noMargins {
@@ -30,7 +32,7 @@ h3 {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibolder);
 }
 
 p {
@@ -58,6 +60,7 @@ p {
   --colour-blue: rgb(30, 101, 255);
   --colour-green: rgba(31, 162, 25, 1);
   --colour-red: rgba(198, 55, 24, 1);
+  --colour-grey-border: "#CECECE";
   --border-thick: 0.625rem solid var(--colour-black);
   --border-thick-halved: 0.32rem solid var(--colour-black);
   --table-left-edge: #f6f6f6;

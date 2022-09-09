@@ -64,7 +64,7 @@ export default function SummaryContainer(props: {
         <Grid>
           <h1 className="noMargins"><ForestIcon /> Evergreen Dashboard</h1>
           <p className={styles.subtitle}>
-            Monitoring for <b>{config.targetOrganisation}</b> Github Organisation
+            Monitoring dependencies for <b>{config.targetOrganisation}</b> Github Organisation
           </p>
         </Grid>
         <Grid>
