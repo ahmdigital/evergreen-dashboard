@@ -19,30 +19,31 @@ export default function DependenciesContainer(props: {
   emptyRows: boolean;
   sortDropdown: any;
   rankSelection: any;
+  sortDirection: any;
 }) {
 
-	async function callRefresh(){
-		if(refreshing){ return }
-		if(lastRequest == null){ return; }
-		if(PageLoaderIsLoading){ return; }
-		PageLoaderSetLoading(true)
-		PageLoaderSetData({refreshing: true, data: PageLoaderCurrentData as any} as any)
+  async function callRefresh() {
+    if (refreshing) { return }
+    if (lastRequest == null) { return; }
+    if (PageLoaderIsLoading) { return; }
+    PageLoaderSetLoading(true)
+    PageLoaderSetData({ refreshing: true, data: PageLoaderCurrentData as any } as any)
 
-		refreshing = true
+    refreshing = true
 
-		//TODO: Support other configuration
-		//switch(mode){
-		//	case(Mode.Frontend): break;
-		//	case(Mode.StandaloneBackend):break;
-		//	case(Mode.IntegratedBackend): {
-				forceNewVersion(lastRequest).then(async (result) => {
-					PageLoaderSetData(result as any)
-					PageLoaderSetLoading(false)
-					refreshing = false
-				})
-		//	} break;
-		//}
-	}
+    //TODO: Support other configuration
+    //switch(mode){
+    //	case(Mode.Frontend): break;
+    //	case(Mode.StandaloneBackend):break;
+    //	case(Mode.IntegratedBackend): {
+    forceNewVersion(lastRequest).then(async (result) => {
+      PageLoaderSetData(result as any)
+      PageLoaderSetLoading(false)
+      refreshing = false
+    })
+    //	} break;
+    //}
+  }
 
   return (
     <div className={`${styles.sectionContainer}`}>
@@ -53,10 +54,11 @@ export default function DependenciesContainer(props: {
           searchTerm={props.searchTerm}
           setSearchTerm={props.setSearchTerm}
         />
-      {/* commented out filter button */}
+        {/* commented out filter button */}
         <div className={styles.btnsContainer}>
-		  {props.sortDropdown}
-		  {props.rankSelection}
+          {props.sortDropdown}
+          {props.sortDirection}
+          {props.rankSelection}
           {/* <button>
             <Image src={filterIcon} alt="filter" width="20px" height="20px"></Image>
             <span>Filter</span>
@@ -66,11 +68,11 @@ export default function DependenciesContainer(props: {
       <div className={styles.tableStyle}>
         <CollapsibleTable>{props.rows}</CollapsibleTable>
       </div>
-        {props.emptyRows && 
-          <div className={styles.noReposStyle}>
-            <p><b>{config.targetOrganisation}</b> has 0 repositories</p>
-          </div>
-        }
+      {props.emptyRows &&
+        <div className={styles.noReposStyle}>
+          <p><b>{config.targetOrganisation}</b> has 0 repositories</p>
+        </div>
+      }
     </div>
   );
 }

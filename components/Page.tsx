@@ -10,7 +10,6 @@ import SummaryContainer from "./SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
 import LoadingBackdrop from "./LoadingBackdrop";
 import HelpGuide from "./HelpComponents/HelpGuide";
-
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { RankSelectionList, SortBox, SortSettings } from "./SortAndFilterDropdowns";
 import { applySort, Filter, rankCounts, searchAndFilter } from "../src/sortingAndFiltering";
@@ -51,9 +50,6 @@ export function Page(props: PageProps) {
 
 	// check if there are no rows
 	if (rows.length === 0) { emptyRows = true; }
-
-
-
 	let loadingBackdrop: any = null;
 	// If the final data is loading, then set the backdrop open to true
 	if (!props.finalData) {
@@ -107,13 +103,13 @@ export function Page(props: PageProps) {
 			<main style={{ padding: 0 }}>
 				<Layout>
 					<SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
-					<div>{sortDirectionBox}</div>
 					<DependenciesContainer
 						JSObject={props.JSObject}
 						rows={diplayedRows}
 						searchTerm={searchTerm}
 						setSearchTerm={setSearchTerm}
 						sortDropdown={sortBox}
+						sortDirection={sortDirectionBox}
 						rankSelection={rankSelectionList}
 						emptyRows={emptyRows}
 					/>
