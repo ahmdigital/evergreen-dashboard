@@ -29,12 +29,6 @@ const theme = createTheme({
 					fontSize: "1rem",
 					fontFamily: 'var(--primary-font-family)',
 					borderColor: "var(--table-cell-border)",
-
-					// color: "var(--colour-font)",
-					// marginTop: '1rem',
-					// lineHeight: '3rem',
-
-					// borderWidth: '0.2rem',
 				}
 			}
 		},
@@ -113,15 +107,15 @@ export function Page(props: PageProps) {
 	}
 
 	//TODO: Replace this
-	const sortDirectionBox = <ThemeProvider theme={theme}><FormControl sx={{ m: 1, minWidth: 120 }}>
+	const sortDirectionBox = <ThemeProvider theme={theme}><FormControl sx={{ m: 1, minWidth: 135, maxWidth: 135 }}>
 		<InputLabel>Sort direction</InputLabel>
 		<Select
 			value={sortSetting.direction ? "ascending" : "descending"}
 			onChange={handleSortDirectionChange}
 			label="Sort direction"
 		>
-			<MenuItem value={"ascending"}>ascending</MenuItem>
-			<MenuItem value={"descending"}>descending</MenuItem>
+			<MenuItem value={"ascending"}>Ascending</MenuItem>
+			<MenuItem value={"descending"}>Descending</MenuItem>
 		</Select>
 	</FormControl></ThemeProvider>
 

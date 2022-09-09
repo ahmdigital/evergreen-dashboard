@@ -11,20 +11,14 @@ const theme = createTheme({
 				select: {
 					fontSize: "1rem",
 					fontFamily: 'var(--primary-font-family)',
-					borderColor: "var(--table-cell-border)",
-
-					// color: "var(--colour-font)",
-					// marginTop: '1rem',
-					// lineHeight: '3rem',
-
-					// borderWidth: '0.2rem',
-				}
+				},
 			}
 		},
 		MuiInputLabel: {
 			styleOverrides: {
 				root: {
 					fontSize: "1.1rem",
+					fontWeight: "1.3rem"
 				}
 			}
 		}
@@ -35,11 +29,11 @@ const theme = createTheme({
 export type SortSettings = { type: "name" | "rank" | "time" | "internal" | "external" | "total" | "users", direction: boolean }
 
 export function SortBox(sortSetting: SortSettings, handleSortChange: any) {
+	
 	return <ThemeProvider theme={theme}>
-		<FormControl className={styles.sortby} sx={{ m: 1, minWidth: 120 }}>
+		<FormControl className={styles.sortby} sx={{ m: 1, minWidth: 200, maxWidth: 200 }}>
 			<InputLabel>Sort by</InputLabel>
 			<Select
-				className={styles.sortby}
 				value={sortSetting.type}
 				onChange={handleSortChange}
 				label="Sort by"
@@ -66,7 +60,7 @@ export function RankSelectionList(filterSetting: Filter, handleRankSelectionChan
 	]
 
 	return <ThemeProvider theme={theme}>
-		<FormControl sx={{ m: 1, minWidth: 120 }}>
+		<FormControl sx={{ m: 1, minWidth: 200, maxWidth: 200 }}>
 			<InputLabel>Filter</InputLabel>
 			<Select
 				multiple
