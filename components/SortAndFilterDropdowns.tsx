@@ -12,6 +12,9 @@ const theme = createTheme({
 					fontSize: "1rem",
 					fontFamily: 'var(--primary-font-family)',
 					color: 'black',
+					'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+						borderColor: 'red',
+					},
 				},
 			}
 		},
@@ -56,9 +59,9 @@ export function SortBox(sortSetting: SortSettings, handleSortChange: any) {
 
 export function RankSelectionList(filterSetting: Filter, handleRankSelectionChange: any) {
 	const rankSelectionValue = [
-		...(filterSetting.showGreen ? ["green"] : []),
-		...(filterSetting.showYellow ? ["yellow"] : []),
-		...(filterSetting.showRed ? ["red"] : [])
+		...(filterSetting.showGreen ? ["Green"] : []),
+		...(filterSetting.showYellow ? ["Yellow"] : []),
+		...(filterSetting.showRed ? ["Red"] : [])
 	]
 
 	return <ThemeProvider theme={theme}>
@@ -72,17 +75,17 @@ export function RankSelectionList(filterSetting: Filter, handleRankSelectionChan
 				input={<OutlinedInput label="Tag" />}
 			>
 				{[
-					<MenuItem value={"green"} key={"green"}>
+					<MenuItem value={"Green"} key={"Green"}>
 						<Checkbox checked={filterSetting.showGreen} />
-						<ListItemText primary={"green"} />
+						<ListItemText primary={"Green"} />
 					</MenuItem>,
-					<MenuItem value={"yellow"} key={"yellow"}>
+					<MenuItem value={"Yellow"} key={"Yellow"}>
 						<Checkbox checked={filterSetting.showYellow} />
-						<ListItemText primary={"yellow"} />
+						<ListItemText primary={"Yellow"} />
 					</MenuItem>,
-					<MenuItem value={"red"} key={"red"}>
+					<MenuItem value={"Red"} key={"Red"}>
 						<Checkbox checked={filterSetting.showRed} />
-						<ListItemText primary={"red"} />
+						<ListItemText primary={"Red"} />
 					</MenuItem>
 				]}
 			</Select>

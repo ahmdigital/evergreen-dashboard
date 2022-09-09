@@ -110,7 +110,7 @@ export function Page(props: PageProps) {
 
 	//TODO: Replace this
 	const sortDirectionBox = <ThemeProvider theme={theme}>
-		<FormControl sx={{ m: 1, minWidth: 135, maxWidth: 135 }}>
+		<FormControl sx={{ m: 1, minWidth: 138, maxWidth: 138 }}>
 		<InputLabel>Sort direction</InputLabel>
 		<Select
 			value={sortSetting.direction ? "ascending" : "descending"}

@@ -62,3 +62,8 @@ div.refreshWord {
 div.noReposStyle {
   padding: 2rem;
 }
+
+div.sortBy {
+  display: flex;
+  flex-direction: column;
+}
