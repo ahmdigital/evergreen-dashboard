@@ -10,6 +10,7 @@ import SummaryContainer from "./SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
 import LoadingBackdrop from "./LoadingBackdrop";
 import HelpGuide from "./HelpComponents/HelpGuide";
+import { CondensedHeaderSummaryContainer } from "./HeaderContainer";
 
 
 export type PageProps = {
@@ -93,6 +94,7 @@ export function Page(props: PageProps) {
       </Head>
       <main style={{ padding: 0 }}>
         <Layout>
+          <CondensedHeaderSummaryContainer rankArray={rankArray} />
           <SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} />
           <DependenciesContainer
             JSObject={props.JSObject}
