@@ -11,6 +11,7 @@ const theme = createTheme({
 				select: {
 					fontSize: "1rem",
 					fontFamily: 'var(--primary-font-family)',
+					color: 'black',
 				},
 			}
 		},
@@ -18,7 +19,8 @@ const theme = createTheme({
 			styleOverrides: {
 				root: {
 					fontSize: "1.1rem",
-					fontWeight: "1.3rem"
+					fontFamily: 'var(--primary-font-family)',
+					color: 'black',
 				}
 			}
 		}

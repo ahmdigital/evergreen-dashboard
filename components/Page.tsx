@@ -28,7 +28,7 @@ const theme = createTheme({
 				select: {
 					fontSize: "1rem",
 					fontFamily: 'var(--primary-font-family)',
-					borderColor: "var(--table-cell-border)",
+					color: 'black',
 				}
 			}
 		},
@@ -36,6 +36,8 @@ const theme = createTheme({
 			styleOverrides: {
 				root: {
 					fontSize: "1.1rem",
+					fontFamily: 'var(--primary-font-family)',
+					color: 'black',
 				}
 			}
 		}
@@ -107,7 +109,8 @@ export function Page(props: PageProps) {
 	}
 
 	//TODO: Replace this
-	const sortDirectionBox = <ThemeProvider theme={theme}><FormControl sx={{ m: 1, minWidth: 135, maxWidth: 135 }}>
+	const sortDirectionBox = <ThemeProvider theme={theme}>
+		<FormControl sx={{ m: 1, minWidth: 135, maxWidth: 135 }}>
 		<InputLabel>Sort direction</InputLabel>
 		<Select
 			value={sortSetting.direction ? "ascending" : "descending"}
