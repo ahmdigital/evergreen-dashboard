@@ -64,7 +64,7 @@ export default function SummaryContainer(props: {
     <Box sx={{ flexGrow: 1 }} className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}>
       <Grid container spacing={1} className={styles.container}>
         <Grid>
-          <h2 className="h2NoMargins"><ForestIcon /> Evergreen Dashboard</h2>
+          <h2 className="h2NoMargins"><ForestIcon aria-label="Evergreen Forest Icon"/> Evergreen Dashboard</h2>
           <p className={headerStyles.headerStyle}>
             Monitoring for <b>{config.targetOrganisation}</b> Github Organisation
           </p>
