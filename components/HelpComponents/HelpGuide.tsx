@@ -2,7 +2,7 @@ import React from "react";
 import { Fab, Dialog, DialogTitle, DialogContent, DialogContentText, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import HelpOutline from "@mui/icons-material/HelpOutline";
-import styles from "./HelpGuide.module.css";
+import styles from "../../styles/HelpGuide.module.css";
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';

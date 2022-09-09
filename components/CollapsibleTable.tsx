@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import styles from "./CollapsibleTable.module.css";
+import styles from "../styles/CollapsibleTable.module.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 type CollapsibleTableProps = {

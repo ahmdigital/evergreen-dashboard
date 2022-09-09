@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./HeaderContainer.module.css";
-import sharedStyles from "./treeView.module.css";
+import styles from "../styles/HeaderContainer.module.css";
+import sharedStyles from "../styles/treeView.module.css";
 import org from "../config.json";
 
 export default function HeaderContainer() {

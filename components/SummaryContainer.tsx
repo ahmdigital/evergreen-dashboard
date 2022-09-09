@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import styles from "./SummaryContainer.module.css";
-import sharedStyles from "./treeView.module.css";
+import styles from "../styles/SummaryContainer.module.css";
+import sharedStyles from "../styles/treeView.module.css";
 import ReposOverviewTable from "./SummaryComponents/RepoOverviewTable/ReposOverviewTable";
 import helpIcon from "./images/helpIcon.png";
 import Image from "next/image";
 import HelpScreen from "./LightStatus";
-import headerStyles from "./HeaderContainer.module.css";
+import headerStyles from "../styles/HeaderContainer.module.css";
 import ForestIcon from '@mui/icons-material/Forest';
 import Tooltip from "@mui/material/Tooltip";
 import Box from '@mui/material/Box';

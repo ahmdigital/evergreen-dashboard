@@ -1,7 +1,7 @@
 import Table from "@mui/material/Table";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import styles from "./ReposOverviewTable.module.css";
+import styles from "../../../styles/ReposOverviewTable.module.css";
 import RedIcon from "../../../components/images/redIcon.svg";
 import YellowIcon from "../../../components/images/yellowIcon.svg";
 import greenIcon from "../../../components/images/greenIcon.svg";

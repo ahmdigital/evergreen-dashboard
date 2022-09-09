@@ -12,7 +12,7 @@ import greenIcon from "./images/greenIcon.svg";
 import Image from "next/image";
 import Tabs from "./Tabs";
 import { semVerToString } from "../src/semVer";
-import styles from "./Row.module.css";
+import styles from "../styles/Row.module.css";
 import { redDef, yellowDef, greenDef } from "./LightStatus";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
