@@ -17,7 +17,7 @@ export default function CollapsibleTable(props: CollapsibleTableProps) {
   return (
     <TableContainer
       component={Paper}
-      className={styles.tableComponent}
+	  className={styles.tableComponent}
     >
       <Table size="small" aria-label="collapsible table">
         <colgroup>

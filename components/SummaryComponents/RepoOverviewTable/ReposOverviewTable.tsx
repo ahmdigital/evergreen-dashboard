@@ -7,7 +7,7 @@ import YellowIcon from "../../../components/images/yellowIcon.svg";
 import greenIcon from "../../../components/images/greenIcon.svg";
 import Image from "next/image";
 
-export default function ReposOverViewTable(props: { rankArray: any; }) {
+export default function ReposOverViewTable(props: { rankArray: any;}) {
   return (
     <Table>
       <TableRow>
