@@ -4,14 +4,21 @@ div.summaryStyle {
   min-width: 15rem;
 }
 
+.subtitle {
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+  margin-top: 3px;
+  font-weight: 600;
+}
+
 div.summaryOverall {
   display: block;
   max-height: 100%;
-  box-sizing: border-box;
-  margin-top: 1rem;
+  /* box-sizing: border-box; */
+  /* margin-top: 1rem;
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
-  margin-right: 1rem;
+  margin-right: 1rem; */
   text-align: center;
 }
 
@@ -28,7 +35,7 @@ div.summaryOverallGrey {
 div.smallSharedCompProps {
   width: 31.8%;
   height: 75%;
-  min-width: 94%;
+  min-width: 100%;
   border-radius: 20px;
   padding: 1.5rem 2rem 2rem 2rem;
   box-sizing: border-box;
@@ -58,18 +65,9 @@ div.summaryStyle div.container {
   margin-bottom: 0.5rem;
 }
 
-h4.summaryStylePercent {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  justify-content: space-between;
+h3.summaryStylePercent {
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
-}
-
-div.headerStyle {
-  align-items: center;
 }
 
 div.summaryComponent2 {
@@ -97,15 +95,15 @@ div.summaryComponent div.summaryCompHeader {
 div.sharedCompProps {
   width: 31.8%;
   min-width: 18rem;
-  border-radius: 20px;
+  border-radius: var(--main-section-border-radius); /*20px*/
   padding: 1rem 1.4rem 1.4rem;
   box-sizing: border-box;
 }
 
-h2.percentStyle {
+h3.percentStyle {
   color: white;
   font-size: 6.25rem; /*100px;*/
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-normal);
   margin-block-start: 0em;
   margin-block-end: 0em;
   align-self: center;

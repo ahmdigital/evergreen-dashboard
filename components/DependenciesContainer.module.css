@@ -6,7 +6,7 @@ div.sectionContainer {
   background-color: var(--colour-container-background);
   box-shadow: var(--main-section-boxshadow);
   border-radius: var(--main-section-border-radius);
-  padding: 1.5rem 2.5rem 3rem 2.5rem;
+  padding: 2rem 3.125rem 3.75rem 3.125rem;
   margin: 1.1rem;
   box-sizing: border-box;
   font-family: var(--primary-font-family);
@@ -24,15 +24,15 @@ div.depsBarStyle {
   margin-bottom: 0.5rem;
 }
 
-div.btnsContainer{
+div.btnsContainer {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 0;
   width: 17rem;
 }
 
-div.btnsContainer button{
-  width:8rem;
+div.btnsContainer button {
+  width: 8rem;
   font-family: var(--primary-font-family);
   font-size: var(--font-size-large);
   background-color: var(--colour-container-background);
@@ -56,8 +56,8 @@ div.refreshWord {
 }
 
 .tooltipStyle {
-	font-size: var(--font-size-normal);
-	font-family: var(--primary-font-family);
+  font-size: var(--font-size-normal);
+  font-family: var(--primary-font-family);
 }
 
 div.noReposStyle {

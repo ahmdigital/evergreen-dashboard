@@ -5,7 +5,7 @@
 }
 
 .tableCellStyleCount {
-  padding: 16px 10px 16px 10px;
+  padding: 1rem 10px 1rem 10px;
 }
 
 .tableCellStyleCount p {
@@ -16,7 +16,7 @@
 }
 
 .statusLabel {
-  padding: 16px 2px 16px 16px;
+  padding: 1rem 2px 1rem 1rem;
   line-height: 1.125rem;
   letter-spacing: 1%;
   font-weight: var(--font-weight-semibolder);

@@ -5,7 +5,6 @@ import ReposOverviewTable from "./SummaryComponents/RepoOverviewTable/ReposOverv
 import helpIcon from "./images/helpIcon.png";
 import Image from "next/image";
 import HelpScreen from "./LightStatus";
-import headerStyles from "./HeaderContainer.module.css";
 import ForestIcon from '@mui/icons-material/Forest';
 import Tooltip from "@mui/material/Tooltip";
 import config from "../config.json";
@@ -32,8 +31,8 @@ export default function SummaryContainer(props: {
 
   return (
     <div className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}>
-        <h2 className="h2NoMargins"><ForestIcon />  Evergreen Dashboard</h2>
-        <p className={headerStyles.headerStyle}>
+        <h1 className="noMargins"><ForestIcon />  Evergreen Dashboard</h1>
+        <p className={styles.subtitle}>
           Monitoring for <b>{config.targetOrganisation}</b> Github Organisation
         </p>
         <div>
@@ -41,10 +40,10 @@ export default function SummaryContainer(props: {
         </div>
       <div className={styles.container}>
 		<div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-			<h4 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h4>
+			<h3 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h3>
 			<div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
 				<h3 className={styles.overallTitleStyle}>Overall</h3>
-				<h2 className={styles.percentStyle} >{overallPercentStr}</h2>
+				<h3 className={styles.percentStyle} >{overallPercentStr}</h3>
 				<h3 className={styles.overallCentredTitleStyle}>up-to-date</h3>
 			</div>
         </div>
@@ -77,7 +76,7 @@ export default function SummaryContainer(props: {
         </div>
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
           <div className={styles.summaryCompHeader}>
-            <h4 className={styles.summaryStyle}>Dependent Repos</h4>
+            <h3 className={styles.summaryStyle}>Dependent Repos</h3>
           </div>
         </div>
       </div>
