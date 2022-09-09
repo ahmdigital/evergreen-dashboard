@@ -40,14 +40,14 @@ export function SubRow(props: SubRowProps) {
           alt="Repo Priority"
           width="33px"
           height="33px"
-		  className={styles.inverseSubRowIcon}
+          className={styles.inverseSubRowIcon}
         ></Image>
       </TableCell>
       <TableCell className={styles.tableCellStyle}>
-		<a href={depLink} rel="noreferrer" target="_blank">
-		  {depName}
+        <a href={depLink} rel="noreferrer" target="_blank">
+          {depName}
         </a>
-	  </TableCell>
+      </TableCell>
       <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
       <TableCell className={`${styles.tableCellStyle} ${styles.latestVerStyle}`}>{latestVersion}</TableCell>
     </TableRow>

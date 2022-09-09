@@ -89,7 +89,7 @@ export default function HelpScreen(props: HelpScreenProps) {
           />
         </div>
         <div>
-          <StatusTable/>
+          <StatusTable />
         </div>
       </div>
     </div>

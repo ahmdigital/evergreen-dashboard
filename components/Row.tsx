@@ -54,7 +54,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
-			className={styles.rowArrow}
+            className={styles.rowArrow}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
@@ -65,11 +65,11 @@ export default function Row(props: { rank: number; row: any } & Props) {
             alt="Repo Priority"
             width="40px"
             height="40px"
-			className={styles.statusIcon}/>
+            className={styles.statusIcon} />
         </TableCell>
         <TableCell className={styles.tableCellStyle} component="th" scope="row">
-		  <a href={row.link} rel="noreferrer" target="_blank">
-		    {row.name}
+          <a href={row.link} rel="noreferrer" target="_blank">
+            {row.name}
           </a>
         </TableCell>
         <TableCell className={styles.tableCellStyle} align="left">
@@ -85,7 +85,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
           colSpan={6}
         >
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1}}>
+            <Box sx={{ margin: 1 }}>
               <Table size="small" aria-label="dependencies">
                 <TableHead className={styles.collapsibleTableHead} >
                   <TableRow>

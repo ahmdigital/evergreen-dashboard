@@ -4,7 +4,7 @@ import styles from "./DependenciesContainer.module.css";
 import sharedStyles from "./treeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
-import refreshIcon from "../components/images/refresh.svg" ;
+import refreshIcon from "../components/images/refresh.svg";
 //import filterIcon from "../components/images/filter.svg" ;
 import Image from "next/image";
 import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
@@ -21,28 +21,28 @@ export default function DependenciesContainer(props: {
   rankSelection: any;
 }) {
 
-	async function callRefresh(){
-		if(refreshing){ return }
-		if(lastRequest == null){ return; }
-		if(PageLoaderIsLoading){ return; }
-		PageLoaderSetLoading(true)
-		PageLoaderSetData({refreshing: true, data: PageLoaderCurrentData as any} as any)
+  async function callRefresh() {
+    if (refreshing) { return }
+    if (lastRequest == null) { return; }
+    if (PageLoaderIsLoading) { return; }
+    PageLoaderSetLoading(true)
+    PageLoaderSetData({ refreshing: true, data: PageLoaderCurrentData as any } as any)
 
-		refreshing = true
+    refreshing = true
 
-		//TODO: Support other configuration
-		//switch(mode){
-		//	case(Mode.Frontend): break;
-		//	case(Mode.StandaloneBackend):break;
-		//	case(Mode.IntegratedBackend): {
-				forceNewVersion(lastRequest).then(async (result) => {
-					PageLoaderSetData(result as any)
-					PageLoaderSetLoading(false)
-					refreshing = false
-				})
-		//	} break;
-		//}
-	}
+    //TODO: Support other configuration
+    //switch(mode){
+    //	case(Mode.Frontend): break;
+    //	case(Mode.StandaloneBackend):break;
+    //	case(Mode.IntegratedBackend): {
+    forceNewVersion(lastRequest).then(async (result) => {
+      PageLoaderSetData(result as any)
+      PageLoaderSetLoading(false)
+      refreshing = false
+    })
+    //	} break;
+    //}
+  }
 
   return (
     <div className={`${styles.sectionContainer}`}>
@@ -53,10 +53,10 @@ export default function DependenciesContainer(props: {
           searchTerm={props.searchTerm}
           setSearchTerm={props.setSearchTerm}
         />
-      {/* commented out filter button */}
+        {/* commented out filter button */}
         <div className={styles.btnsContainer}>
-		  {props.sortDropdown}
-		  {props.rankSelection}
+          {props.sortDropdown}
+          {props.rankSelection}
           {/* <button>
             <Image src={filterIcon} alt="filter" width="20px" height="20px"></Image>
             <span>Filter</span>
