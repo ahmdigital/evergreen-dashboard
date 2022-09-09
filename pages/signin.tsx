@@ -88,7 +88,8 @@ export default function SignIn() {
 				<Paper className={styles.signinContainer}>
 					{/* TODO: evergreen dashborad logo, we are aming for this design https://gitter.im/ */}
 					<Typography variant="h5" component="h1"><span className={styles.everGreen}>Evergreen Dashboard</span> </Typography>
-					<Typography variant="body1">You can read <Link href="https://github.com/ahm-monash/evergreen/documentation/oauth-scope.md">our documentation</Link> on OAuth scopes to see why we request certain OAuth scopes.</Typography>
+					{/* TODO: add documentation URL */}
+					<Typography variant="body1">You can read <Link href="#">our documentation</Link> on OAuth scopes to see why we request certain OAuth scopes.</Typography>
 
 					{
 						signInStatus === "calculating" && <>
