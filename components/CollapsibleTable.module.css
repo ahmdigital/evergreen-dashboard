@@ -1,10 +1,10 @@
-.tableContainer{
+.tableContainer {
 	box-shadow: none;
-    background-color: var(--colour-background);
-    color: var(--colour-font);
+	background-color: var(--colour-background);
+	color: var(--colour-font);
 }
 
-.col1{
+.col1 {
 	width: 0%;
 	background-color: var(--table-left-edge);
 }
@@ -29,15 +29,15 @@
 	background-color: var(--colour-background);
 }
 
-.tableCellStyle{
+.tableCellStyle {
 	font-weight: var(--font-weight-bold);
-  	font-family: var(--primary-font-family);
-  	font-size: 1.4rem;
+	font-family: var(--primary-font-family);
+	font-size: 1.4rem;
 	background-color: var(--table-cell-background);
 	color: var(--colour-font);
 	margin-top: 1rem;
 	line-height: 3rem;
-	border-color:  var(--table-cell-border);
+	border-color: var(--table-cell-border);
 	border-width: 0.2rem;
 	color: var(--colour-text);
 }
@@ -46,4 +46,8 @@
 	box-shadow: none;
 	background-color: var(--colour-background);
 	color: var(--colour-font);
+}
+
+.tableComponent {
+	box-shadow: none;
 }

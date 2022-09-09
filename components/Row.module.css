@@ -1,25 +1,23 @@
-
-.tableCellStyle{
-	font-weight: bold;
-    font-family: var(--font-family);
-    font-size: large;
-	background-color: var(--colour-container-background);
-	color: var(--colour-font)
-}
-
-.rowArrow{
+.rowArrow {
 	color: gray;
 }
 
-.statusIcon{
+.statusIcon {
 	max-width: 100%;
 	max-height: 100%;
 }
 
-.subRowContainer{
+div.iconContainer {
+	display: grid;
+	max-width: 100%;
+	max-height: 100%;
+	align-items: center;
+}
+
+.subRowContainer {
 	padding-bottom: 0;
 	padding-top: 0;
-    background-color: var(--colour-container-background);
+	background-color: var(--colour-container-background);
 }
 
 .collapsibleTableHead {
@@ -27,7 +25,12 @@
 	color: var(--colour-font);
 }
 
-.collapsibleTableCell {
-	padding-bottom: 0;
-	padding-top: 0;
+.tooltipStyle {
+	font-size: var(--font-size-normal);
+	font-family: var(--primary-font-family);
+}
+
+.questionIcon {
+	width: 1.125rem;
+	height: 1.125rem;
 }

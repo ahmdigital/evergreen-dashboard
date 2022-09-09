@@ -1,0 +1,61 @@
+.iconStyle {
+    width: 40px;
+    height: 40px;
+}
+
+.tooltipStyle {
+    font-family: var(--primary-font-family);
+    font-size: var(--font-size-normal);
+}
+
+.helpTitleStyle {
+    font-size: var(--font-size-xlarge);
+    font-family: var(--primary-font-family);
+    font-weight: var(--font-weight-bold);
+    align-self: center;
+}
+
+.questionHeaderStyle {
+    font-size: var(--font-size-large);
+    font-family: var(--primary-font-family);
+    font-weight: var(--font-weight-bold);
+    padding-top: 1rem;
+    color: var(--colour-font);
+}
+
+.infoContentStyle {
+    font-size: var(--font-size-normal);
+    font-family: var(--primary-font-family);
+    padding-bottom: 1rem;
+    color: var(--colour-font);
+}
+
+.fieldContentStyle {
+    font-size: var(--font-size-normal);
+    font-family: var(--primary-font-family);
+    padding-bottom: 1rem;
+    font-weight: bold;
+    color: var(--colour-font);
+}
+
+.overallHeaderStyle {
+    font-size: var(--font-size-xlarge);
+    font-family: var(--primary-font-family);
+    color: var(--colour-font);
+    font-weight: var(--font-weight-bold);
+    padding-top: 0.5rem;
+    padding-bottom: 0.25rem;
+}
+
+div.componentStyle {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: var(--colour-lightGrey);
+    border-radius: var(--main-section-border-radius);
+    box-sizing: border-box;
+    font-size: 10px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}

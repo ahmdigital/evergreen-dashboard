@@ -1,20 +1,25 @@
-.tableCellStyle{
-    font-family: var(--secondary-font-family);
-    font-size: var(--font-size-large);
-	background-color: var(--colour-container-background);
-	color: var(--colour-font)
-}
-
 .latestVerStyle{
 	font-weight: var(--font-weight-bold);
 }
 
 .inverseSubRow {
-	background-color: var(--colour-background);
+	background-color: var(--colour-lightGrey);
 	color: var(--colour-font);
 }
 
 .inverseSubRowIcon {
 	max-width: 100%;
 	max-height: 100%;
+}
+
+.tooltipStyle {
+	font-size: var(--font-size-normal);
+	font-family: var(--primary-font-family);
+}
+
+div.iconContainer{
+	display: grid;
+	max-width: 100%;
+	max-height: 100%;
+	align-items: center;
 }

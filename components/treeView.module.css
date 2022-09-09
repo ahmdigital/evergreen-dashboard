@@ -15,7 +15,7 @@ div.sectionContainer {
   padding: 1.5rem 2rem 1.5rem 2rem;
   margin: 1.1rem;
   box-sizing: border-box;
-  font-family: var(--font-family);
+  font-family: var(--primary-font-family);
 }
 
 
