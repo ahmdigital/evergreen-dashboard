@@ -72,7 +72,7 @@ export default function DependenciesContainer(props: {
 		{
 		  !props.emptyRows && (props.searchTerm !== "" && props.rows.length === 0) && 
 		    <div className={styles.noReposStyle}>
-              <p>No results found for you search</p>
+              <p>No results found for your search</p>
             </div>	
 	    }
     </div>
