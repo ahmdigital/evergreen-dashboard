@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import CollapsibleTable from "./CollapsibleTable";
 import styles from "../styles/DependenciesContainer.module.css";
 import sharedStyles from "../styles/treeView.module.css";
@@ -13,7 +13,7 @@ let refreshing = false
 /* Container includes  Search, Filter, Dependencies Table */
 export default function DependenciesContainer(props: {
   JSObject: DependencyData;
-  rows: ReactNode;
+  rows: JSX.Element[];
   searchTerm: any;
   setSearchTerm: any;
   emptyRows: boolean;
@@ -59,14 +59,22 @@ export default function DependenciesContainer(props: {
           </button> */}
         </div>
       </div>
+
       <div className={styles.tableStyle}>
         <CollapsibleTable>{props.rows}</CollapsibleTable>
       </div>
-        {props.emptyRows && 
-          <div className={styles.noReposStyle}>
-            <p><b>{config.targetOrganisation}</b> has 0 repositories</p>
-          </div>
+        {
+		  props.emptyRows && 
+            <div className={styles.noReposStyle}>
+              <p><b>{config.targetOrganisation}</b> has 0 repositories</p>
+            </div>
         }
+		{
+		  !props.emptyRows && (props.searchTerm !== "" && props.rows.length === 0) && 
+		    <div className={styles.noReposStyle}>
+              <p>No results found for your search</p>
+            </div>	
+	    }
     </div>
   );
 }
