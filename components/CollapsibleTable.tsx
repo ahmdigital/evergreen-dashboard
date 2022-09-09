@@ -60,7 +60,6 @@ export default function CollapsibleTable(props: CollapsibleTableProps) {
           </colgroup>
           <TableHead>
             <TableRow>
-
               <TableCell ></TableCell>
               <TableCell >status</TableCell>
               <TableCell >name</TableCell>

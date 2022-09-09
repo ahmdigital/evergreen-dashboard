@@ -125,7 +125,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
               </Tooltip>
             }
           </TableCell>
-          <TableCell align="right">
+          <TableCell align="left">
             {dayjs(row.lastUpdated).fromNow()}
           </TableCell>
         </ThemeProvider>
