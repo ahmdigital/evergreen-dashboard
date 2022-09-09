@@ -14,8 +14,10 @@ div.summaryStyle {
 div.summaryOverall {
   display: block;
   max-height: 100%;
-  /* box-sizing: border-box; */
-  /* margin-top: 1rem;
+  /* height: 410px; */
+  background-color: var(--colour-green);
+  /* box-sizing: border-box;
+  margin-top: 1rem;
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
   margin-right: 1rem; */
@@ -25,6 +27,7 @@ div.summaryOverall {
 div.summaryOverallGreen {
   background-color: var(--colour-green);
 }
+
 div.summaryOverallRed {
   background-color: var(--colour-red);
 }
@@ -44,6 +47,7 @@ div.smallSharedCompProps {
 div.summaryComponent {
   display: block;
   max-height: 100%;
+  /* height: 410px; */
   background-color: var(--colour-lightGrey);
   box-sizing: border-box;
   margin-top: 1rem;
@@ -97,6 +101,7 @@ div.sharedCompProps {
   min-width: 18rem;
   border-radius: var(--main-section-border-radius); /*20px*/
   padding: 1rem 1.4rem 1.4rem;
+  /* padding: 1.5rem 2rem 2rem 2rem; */
   box-sizing: border-box;
 }
 
@@ -104,6 +109,7 @@ h3.percentStyle {
   color: white;
   font-size: 6.25rem; /*100px;*/
   font-weight: var(--font-weight-normal);
+  /* font-weight: var(--font-weight-semibold); */
   margin-block-start: 0em;
   margin-block-end: 0em;
   align-self: center;
@@ -162,4 +168,37 @@ div.loadingWheelBox {
 .tooltipStyle {
   font-size: var(--font-size-normal);
   font-family: var(--primary-font-family);
+}
+
+div.refreshWord {
+  font-family: var(--primary-font-family);
+  font-size: var(--font-size-large);
+}
+
+div.btnsContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0;
+  width: 17rem;
+}
+
+div.btnsContainer button {
+  width: 8rem;
+  font-family: var(--primary-font-family);
+  font-size: var(--font-size-large);
+  background-color: var(--colour-container-background);
+  border: none;
+  padding: 0.8rem;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+div.btnsContainer button span {
+  margin-left: 0.5rem;
+}
+
+div.btnsContainer button:hover {
+  cursor: pointer;
+  background-color: lightgray;
 }

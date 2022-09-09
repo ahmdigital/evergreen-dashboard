@@ -19,28 +19,9 @@
 	background-color: var(--colour-background);
 }
 
-.tableCellStyle {
-	font-weight: bold;
-	font-family: var(--primary-font-family);
-	font-size: 1.1rem;
-	background-color: #f5f5f5;
-	color: var(--colour-font);
-	margin-top: 1rem;
-	line-height: 3rem;
-	border-color: var(--table-cell-border);
-	border-width: 0.2rem;
-	color: var(--colour-text);
-}
-
 .tableStyle {
 	box-shadow: none;
 	background-color: var(--colour-lightGrey);
 	color: var(--colour-font);
 }
 
-.tableComponent{
-	max-height: 20.3rem;
-	overflow: scroll;
-	overflow-x: hidden;
-	box-shadow: none;
-}
