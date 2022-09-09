@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import CollapsibleTable from "./CollapsibleTable";
 import styles from "./DependenciesContainer.module.css";
 import sharedStyles from "./treeView.module.css";
