@@ -5,9 +5,7 @@ import sharedStyles from "./treeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
 import config from "../config.json";
-//import filterIcon from "../components/images/filter.svg" ;
 import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
-
 let refreshing = false
 
 /* Container includes  Search, Filter, Dependencies Table */
