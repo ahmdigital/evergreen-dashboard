@@ -14,40 +14,40 @@ type InverseSubRowProps = {
   user: SubRowProps["dependency"];
 };
 
-export function testClickFunction(name: string){
-	let mainTableBody = document.getElementById("mainTableBody");
-	if(mainTableBody == null){ return }
-	let children = mainTableBody.children;
-	console.log(children.length)
-	console.log(name)
+export function testClickFunction(name: string) {
+  let mainTableBody = document.getElementById("mainTableBody");
+  if (mainTableBody == null) { return }
+  let children = mainTableBody.children;
+  console.log(children.length)
+  console.log(name)
 
-	var instance = children[1]
+  var instance = children[1]
 
-	console.log(instance)
+  console.log(instance)
 
-	if(instance instanceof HTMLElement){
+  if (instance instanceof HTMLElement) {
 
-		if (instance.getAttribute('aria-expanded') == 'false') { // region is collapsed
+    if (instance.getAttribute('aria-expanded') == 'false') { // region is collapsed
 
-			// update the aria-expanded attribute of the region
-			instance.setAttribute('aria-expanded', 'true');
+      // update the aria-expanded attribute of the region
+      instance.setAttribute('aria-expanded', 'true');
 
-			// move focus to the region
-			instance.focus();
+      // move focus to the region
+      instance.focus();
 
-			// update the button label
-			//thisObj.$toggle.find('span').html('Hide');
+      // update the button label
+      //thisObj.$toggle.find('span').html('Hide');
 
-		}
-		else { // region is expanded
+    }
+    else { // region is expanded
 
-			// update the aria-expanded attribute of the region
-			instance.setAttribute('aria-expanded', 'false');
+      // update the aria-expanded attribute of the region
+      instance.setAttribute('aria-expanded', 'false');
 
-			// update the button label
-			//thisObj.$toggle.find('span').html('Show');
-		}
-	}
+      // update the button label
+      //thisObj.$toggle.find('span').html('Show');
+    }
+  }
 }
 
 export function InverseSubRow(props: InverseSubRowProps) {
@@ -73,16 +73,16 @@ export function InverseSubRow(props: InverseSubRowProps) {
           alt="Repo Priority"
           width="33px"
           height="33px"
-		  className={styles.inverseSubRowIcon}
+          className={styles.inverseSubRowIcon}
         ></Image>
       </TableCell>
       <TableCell className={styles.tableCellStyle}>
-		<a href={depLink} rel="noreferrer" target="_blank">
-		  {userName}
+        <a href={depLink} rel="noreferrer" target="_blank">
+          {userName}
         </a>
-	  </TableCell>
+      </TableCell>
       <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
-	  {/* <button onClick = {() => {testClickFunction(userName)}}> </button> */}
+      {/* <button onClick = {() => {testClickFunction(userName)}}> </button> */}
     </TableRow>
   );
 }

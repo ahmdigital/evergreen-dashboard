@@ -18,7 +18,7 @@ export type PageProps = {
 	finalData: boolean;
 };
 
-function rowsToJSX(rows: ProcessedDependencyData){
+function rowsToJSX(rows: ProcessedDependencyData) {
 	return rows.map((row) => (
 		<Row
 			key={row.name}
@@ -50,11 +50,11 @@ export function Page(props: PageProps) {
 	let loadingBackdrop: any = null;
 	// If the final data is loading, then set the backdrop open to true
 	if (!props.finalData) {
-	  loadingBackdrop = (
-		<>
-		  <LoadingBackdrop open={true}/>
-		</>
-	  )
+		loadingBackdrop = (
+			<>
+				<LoadingBackdrop open={true} />
+			</>
+		)
 	}
 
 	//Sorting. Doing this after filtering would be more efficient
@@ -94,23 +94,23 @@ export function Page(props: PageProps) {
 
 	return (
 		<div className="container">
-		  <Head>
-			<title>Evergreen dashboard</title>
-		  </Head>
-		  <main style={{ padding: 0 }}>
-			<Layout>
-			  <SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
-			  <div>{sortDirectionBox}</div>
-			  <DependenciesContainer
-				JSObject={props.JSObject}
-				rows={diplayedRows}
-				searchTerm={searchTerm}
-				setSearchTerm={setSearchTerm}
-				sortDropdown={sortBox}
-				rankSelection={rankSelectionList}
-			  />
-			</Layout>
-		  </main>
+			<Head>
+				<title>Evergreen dashboard</title>
+			</Head>
+			<main style={{ padding: 0 }}>
+				<Layout>
+					<SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
+					<div>{sortDirectionBox}</div>
+					<DependenciesContainer
+						JSObject={props.JSObject}
+						rows={diplayedRows}
+						searchTerm={searchTerm}
+						setSearchTerm={setSearchTerm}
+						sortDropdown={sortBox}
+						rankSelection={rankSelectionList}
+					/>
+				</Layout>
+			</main>
 		</div>
-	  );
+	);
 }

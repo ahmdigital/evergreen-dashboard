@@ -27,17 +27,17 @@ export default function SummaryContainer(props: {
 
   return (
     <div className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}>
-        <h2 className="h2NoMargins">Evergreen Dashboard</h2>
-        <p className={headerStyles.headerStyle}>
-          Monitoring for <b>{org.targetOrganisation}</b> Github Organisation
-        </p>
-        <div>
-            {props.loadingBackdrop}
-        </div>
+      <h2 className="h2NoMargins">Evergreen Dashboard</h2>
+      <p className={headerStyles.headerStyle}>
+        Monitoring for <b>{org.targetOrganisation}</b> Github Organisation
+      </p>
+      <div>
+        {props.loadingBackdrop}
+      </div>
       <div className={styles.container}>
-      <div className={`${styles.summaryOverall} ${styles.sharedCompProps}`}>
-            <h3 className={styles.overallTitleStyle}>Overall</h3>
-            <h2 className={styles.percentStyle} >{overallPercent}%</h2>
+        <div className={`${styles.summaryOverall} ${styles.sharedCompProps}`}>
+          <h3 className={styles.overallTitleStyle}>Overall</h3>
+          <h2 className={styles.percentStyle} >{overallPercent}%</h2>
         </div>
 
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
@@ -63,7 +63,7 @@ export default function SummaryContainer(props: {
         </div>
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
           <div className={styles.summaryComponent2}>
-			<ReposSecondarySummaryTable rows = {props.rows} filterTerm = {props.filterTerm} setFilterTerm = {props.setFilterTerm}/>
+            <ReposSecondarySummaryTable rows={props.rows} filterTerm={props.filterTerm} setFilterTerm={props.setFilterTerm} />
           </div>
         </div>
       </div>
