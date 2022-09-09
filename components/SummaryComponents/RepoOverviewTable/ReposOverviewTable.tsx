@@ -62,7 +62,7 @@ const Row = (props: RowProps) => {
   );
 };
 
-export default function ReposOverViewTable(props: { rankArray: any }) {
+export default function ReposOverViewTable(props: { rankArray: any;}) {
   return (
     <Table
       sx={{

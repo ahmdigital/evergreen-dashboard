@@ -84,11 +84,11 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 				let JSObject = getJsonStructure(
 					accessToken, config, [api]
 				).then(
-					result => JSON.parse(result) as { npm: any, PyPI: any, RubyGems: any }
+					(result: string) => JSON.parse(result) as { npm: any, PyPI: any, RubyGems: any }
 				).then(
-					data => JSObjectFromJSON(getProperty(data!, request))
+					(data: any) => JSObjectFromJSON(getProperty(data!, request))
 				)
-				JSObject.then((result) => {
+				JSObject.then((result: any) => {
 					setData(result as any)
 					setLoading(false)
 				})

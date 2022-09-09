@@ -16,6 +16,10 @@ import styles from "./Row.module.css";
 import { redDef, yellowDef, greenDef } from "./LightStatus";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+const dayjs = require('dayjs')
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
+
 export type Props = {
   subRows: {
     internal: JSX.Element[];
@@ -77,6 +81,9 @@ export default function Row(props: { rank: number; row: any } & Props) {
     iconDefinition = yellowDef.description;
   }
 
+
+  let timeFormatter = new Intl.RelativeTimeFormat(undefined, { style: "narrow" });
+
   return (
     <React.Fragment>
       <TableRow>
@@ -105,7 +112,9 @@ export default function Row(props: { rank: number; row: any } & Props) {
             </Tooltip>
           </TableCell>
           <TableCell component="th" scope="row">
-            {row.name}
+            <a href={row.link} rel="noreferrer" target="_blank">
+              {row.name}
+            </a>
           </TableCell>
           <TableCell align="left">
             {semVerToString(row.version)}
@@ -117,11 +126,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
             }
           </TableCell>
           <TableCell align="right">
-            (
-            <a href={row.link} rel="noreferrer" target="_blank">
-              GitHub
-            </a>
-            )
+            {dayjs(row.lastUpdated).fromNow()}
           </TableCell>
         </ThemeProvider>
       </TableRow>

@@ -15,10 +15,16 @@ import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastReques
 import config from "../config.json";
 
 let refreshing = false
+import { ProcessedDependencyData } from "../hooks/useProcessDependencyData";
+import ReposSecondarySummaryTable from "./SummaryComponents/ReposSecondarySummaryTable";
+import { Filter } from "../src/sortingAndFiltering";
 
 export default function SummaryContainer(props: {
   rankArray: any;
   loadingBackdrop: any;
+  rows: ProcessedDependencyData;
+  filterTerm: Filter;
+  setFilterTerm: any;
 }) {
   const totalRepos = props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
   let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
@@ -122,8 +128,8 @@ export default function SummaryContainer(props: {
         </Grid>
         <Grid xs={12} sm={12} md={6} lg={4}>
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-          <div className={styles.summaryCompHeader}>
-            <h4 className={styles.summaryStyle}>Dependent Repos</h4>
+          <div className={styles.summaryComponent2}>
+            <ReposSecondarySummaryTable rows={props.rows} filterTerm={props.filterTerm} setFilterTerm={props.setFilterTerm} />
           </div>
         </div>
         </Grid>

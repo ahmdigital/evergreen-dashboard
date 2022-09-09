@@ -1,32 +1,32 @@
 #__next {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
 body {
-  margin: 0;
-  font-size: var(--font-size-normal);
-  font-family: var(--primary-font-family);
+	margin: 0;
+	font-size: var(--font-size-normal);
+	font-family: var(--primary-font-family);
 }
 
 .h2NoMargins {
-  margin-top: 0;
-  margin-bottom: 0;
-  color: var(--colour-font);
+	margin-top: 0;
+	margin-bottom: 0;
+	color: var(--colour-font);
 }
 
 h3 {
-  margin-top: 0;
-  margin-bottom: 0;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 p {
-  margin-top: 0;
-  margin-bottom: 0;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
-  :root {
+:root {
 	font-size: 16px;
 	--rank-green: green;
 	--rank-light-green: #cfc;
@@ -46,8 +46,9 @@ p {
 	--colour-blue: rgb(30, 101, 255);
 	--colour-green: rgba(31, 162, 25, 1);
 	--colour-red: rgba(198, 55, 24, 1);
-	--border-thick: .5rem solid  var(--colour-black);
-	--border-thick-halved: .25rem solid  var(--colour-black);
+	--colour-table-selected: #98c6db;
+	--border-thick: .5rem solid var(--colour-black);
+	--border-thick-halved: .25rem solid var(--colour-black);
 	--table-left-edge: #f6f6f6;
 	--table-cell-border: var(--colour-black);
 	--table-cell-background: var(--colour-container-background);
@@ -60,8 +61,9 @@ p {
 	--font-weight-semibold: 500;
 	--font-weight-normal: 400;
 	--font-size-large: 1.125rem;
-	--font-size-normal: 1rem; /*16px*/
+	--font-size-normal: 1rem;
+	/*16px*/
 	--font-size-xlarge: 1.5rem;
-	--font-size-small: 0.75rem; /*12px*/
-
-  }
+	--font-size-small: 0.75rem;
+	/*12px*/
+}

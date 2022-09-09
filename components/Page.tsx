@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { InverseSubRow } from "./InverseSubRow";
 import { SubRow } from "./SubRow";
-import { useProcessDependencyData } from "../hooks/useProcessDependencyData";
+import { ProcessedDependencyData, useProcessDependencyData } from "../hooks/useProcessDependencyData";
 import Row from "./Row";
 import Layout from "./Layout";
 import Head from "next/head";
@@ -11,99 +11,115 @@ import { DependencyData } from "../src/dataProcessing";
 import LoadingBackdrop from "./LoadingBackdrop";
 import HelpGuide from "./HelpComponents/HelpGuide";
 
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { RankSelectionList, SortBox, SortSettings } from "./SortAndFilterDropdowns";
+import { applySort, Filter, rankCounts, searchAndFilter } from "../src/sortingAndFiltering";
 
 export type PageProps = {
-  JSObject: DependencyData;
-  finalData: boolean;
+	JSObject: DependencyData;
+	finalData: boolean;
 };
 
+function rowsToJSX(rows: ProcessedDependencyData) {
+	return rows.map((row) => (
+		<Row
+			key={row.name}
+			rank={row.minRank}
+			row={row}
+			subRows={{
+				internal: row.internalSubRows.map((i) => (
+					<SubRow key={i.name} dependency={i} />
+				)),
+				external: row.externalSubRows.map((i) => (
+					<SubRow key={i.name} dependency={i} />
+				)),
+				user: row.userSubRows.map((i) => (
+					<InverseSubRow key={i.name} user={i} />
+				)),
+				final: row.userSubRows.length === 0,
+			}}
+		/>
+	))
+}
 
 export function Page(props: PageProps) {
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const rows = useProcessDependencyData(props.JSObject);
-  const rankArray = { green: 0, red: 0, yellow: 0 };
-  const diplayedRows = [];
-  let emptyRows = false;
+	const [searchTerm, setSearchTerm] = useState<string>("");
+	const rows = useProcessDependencyData(props.JSObject);
+	const [sortSetting, setSortSetting] = useState<SortSettings>({ type: "rank", direction: true });
+	const [filterSetting, setFilterSetting] = useState<Filter>({ type: "", level: 0, direction: false, mustHaveDependency: 0, showRed: true, showYellow: true, showGreen: true });
+	let emptyRows = false;
 
-  // check if there are no rows
-  if (rows.length === 0) { emptyRows = true; }
+	// check if there are no rows
+	if (rows.length === 0) { emptyRows = true; }
 
-  let loadingBackdrop: any = null;
-  // If the final data is loading, then set the backdrop open to true
-  if (!props.finalData) {
-    loadingBackdrop = (
-      <>
-        <LoadingBackdrop open={true}/>
-      </>
-    )
-  }
 
-  //Sort alphabetically by name
-  rows.sort((a, b) => a.name.localeCompare(b.name));
 
-  const jsxRows = rows.map((row) => (
-    <Row
-      key={row.name}
-      rank={row.minRank}
-      row={row}
-      subRows={{
-        internal: row.internalSubRows.map((i) => (
-          <SubRow key={i.name} dependency={i} />
-        )),
-        external: row.externalSubRows.map((i) => (
-          <SubRow key={i.name} dependency={i} />
-        )),
-        user: row.userSubRows.map((i) => (
-          <InverseSubRow key={i.name} user={i} />
-        )),
-        final: row.userSubRows.length === 0,
-      }}
-    />
-  ));
+	let loadingBackdrop: any = null;
+	// If the final data is loading, then set the backdrop open to true
+	if (!props.finalData) {
+		loadingBackdrop = (
+			<>
+				<LoadingBackdrop open={true} />
+			</>
+		)
+	}
 
-  for (let i = 0; i < rows.length; i++) {
-    if (rows[i].minRank == 2) {
-      rankArray.green += 1;
-    }
-    if (rows[i].minRank == 1) {
-      rankArray.yellow += 1;
-    }
-    if (rows[i].minRank == 0) {
-      rankArray.red += 1;
-    }
-  }
+	//Sorting. Doing this after filtering would be more efficient
+	applySort(rows, sortSetting)
 
-  for (let i = 0; i < rows.length; i++) {
-    let row = rows[i];
-    let jsx = jsxRows[i];
+	const jsxRows = rowsToJSX(rows)
+	const rankArray = rankCounts(rows)
 
-    if (
-      searchTerm.length == 0 ||
-      row.name.toLowerCase().includes(searchTerm.toLowerCase())
-      // &&checkImageFilterType(currentResult) === true
-    ) {
-      diplayedRows.push(jsx);
-    }
-  }
+	const diplayedRows = searchAndFilter(rows, jsxRows, filterSetting, searchTerm)
 
-  return (
-    <div className="container">
-      <Head>
-        <title>Evergreen dashboard</title>
-      </Head>
-      <main style={{ padding: 0 }}>
-        <Layout>
-          <SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} />
-          <DependenciesContainer
-            JSObject={props.JSObject}
-            rows={diplayedRows}
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            emptyRows={emptyRows}
-          />
-          <HelpGuide />
-        </Layout>
-      </main>
-    </div>
-  );
+	const sortBox = SortBox(sortSetting, (event: SelectChangeEvent) => {
+		setSortSetting({ type: event.target.value as any, direction: sortSetting.direction })
+	})
+
+	const rankSelectionList = RankSelectionList(filterSetting, (event: SelectChangeEvent<string[]>) => {
+		const sel = typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value
+		setFilterSetting({ ...filterSetting, showRed: sel.indexOf("red") != -1, showYellow: sel.includes("yellow"), showGreen: sel.includes("green") })
+	})
+
+	//TODO: Adapt to sorting buttons this
+	const handleSortDirectionChange = (event: SelectChangeEvent) => {
+		setSortSetting({ type: sortSetting.type, direction: event.target.value == "ascending" })
+	}
+
+	//TODO: Replace this
+	const sortDirectionBox = <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+		<InputLabel>Sort direction</InputLabel>
+		<Select
+			value={sortSetting.direction ? "ascending" : "descending"}
+			onChange={handleSortDirectionChange}
+			label="Sort direction"
+		>
+			<MenuItem value={"ascending"}>ascending</MenuItem>
+			<MenuItem value={"descending"}>descending</MenuItem>
+		</Select>
+	</FormControl>
+
+	return (
+		<div className="container">
+			<Head>
+				<title>Evergreen dashboard</title>
+			</Head>
+			<main style={{ padding: 0 }}>
+				<Layout>
+					<SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
+					<div>{sortDirectionBox}</div>
+					<DependenciesContainer
+						JSObject={props.JSObject}
+						rows={diplayedRows}
+						searchTerm={searchTerm}
+						setSearchTerm={setSearchTerm}
+						sortDropdown={sortBox}
+						rankSelection={rankSelectionList}
+						emptyRows={emptyRows}
+					/>
+					<HelpGuide />
+				</Layout>
+			</main>
+		</div>
+	);
 }
