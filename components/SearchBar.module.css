@@ -1,7 +1,6 @@
 /* -----------------START: SEARCH BAR CONTAINER CSS ------------------- */
 div.searchBarWidth {
-  width:70%;
-  min-width: 25rem;
+  width:35%;
 }
 
 div.searchBar {

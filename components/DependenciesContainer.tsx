@@ -54,16 +54,17 @@ export default function DependenciesContainer(props: {
           searchTerm={props.searchTerm}
           setSearchTerm={props.setSearchTerm}
         />
-        {/* commented out filter button */}
-        <div className={styles.btnsContainer}>
           {props.sortDropdown}
           {props.sortDirection}
           {props.rankSelection}
+        {/* commented out filter button */}
+        {/* <div className={styles.btnsContainer}> */}
+          
           {/* <button>
             <Image src={filterIcon} alt="filter" width="20px" height="20px"></Image>
             <span>Filter</span>
           </button> */}
-        </div>
+        {/* </div> */}
       </div>
       <div className={styles.tableStyle}>
         <CollapsibleTable>{props.rows}</CollapsibleTable>

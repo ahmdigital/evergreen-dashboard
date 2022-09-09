@@ -13,11 +13,41 @@ import HelpGuide from "./HelpComponents/HelpGuide";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { RankSelectionList, SortBox, SortSettings } from "./SortAndFilterDropdowns";
 import { applySort, Filter, rankCounts, searchAndFilter } from "../src/sortingAndFiltering";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export type PageProps = {
 	JSObject: DependencyData;
 	finalData: boolean;
 };
+
+// Customising the table styling using ThemeProvider
+const theme = createTheme({
+	components: {
+		MuiSelect: {
+			styleOverrides: {
+				select: {
+					fontSize: "1rem",
+					fontFamily: 'var(--primary-font-family)',
+					borderColor: "var(--table-cell-border)",
+
+					// color: "var(--colour-font)",
+					// marginTop: '1rem',
+					// lineHeight: '3rem',
+
+					// borderWidth: '0.2rem',
+				}
+			}
+		},
+		MuiInputLabel: {
+			styleOverrides: {
+				root: {
+					fontSize: "1.1rem",
+				}
+			}
+		}
+	}
+})
+
 
 function rowsToJSX(rows: ProcessedDependencyData) {
 	return rows.map((row) => (
@@ -83,7 +113,7 @@ export function Page(props: PageProps) {
 	}
 
 	//TODO: Replace this
-	const sortDirectionBox = <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+	const sortDirectionBox = <ThemeProvider theme={theme}><FormControl sx={{ m: 1, minWidth: 120 }}>
 		<InputLabel>Sort direction</InputLabel>
 		<Select
 			value={sortSetting.direction ? "ascending" : "descending"}
@@ -93,7 +123,7 @@ export function Page(props: PageProps) {
 			<MenuItem value={"ascending"}>ascending</MenuItem>
 			<MenuItem value={"descending"}>descending</MenuItem>
 		</Select>
-	</FormControl>
+	</FormControl></ThemeProvider>
 
 	return (
 		<div className="container">

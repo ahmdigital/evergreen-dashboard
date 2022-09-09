@@ -19,7 +19,6 @@ div.depsBarStyle {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-end;
-  justify-content: space-between;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
