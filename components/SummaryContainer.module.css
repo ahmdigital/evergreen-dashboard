@@ -216,7 +216,7 @@ div.refreshWord {
 }
 
 div.btnsContainer {
-  display: flex;
+  display:block;
   justify-content: flex-end;
   margin-bottom: 0;
   width: 17rem;

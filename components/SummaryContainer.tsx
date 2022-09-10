@@ -103,26 +103,28 @@ export default function SummaryContainer(props: {
           <p className={headerStyles.headerStyle}>
             {"Last updated DD/MM/YY HH/MM AEST"}
           </p>
-          <div className={styles.btnsContainer}>
-            <Tooltip
-              arrow
-              title={
-                <p className={styles.tooltipStyle}>
-                  Check for new repository updates
-                </p>
-              }
-            >
-              <button onClick={callRefresh}>
-                <Image
-                  src={refreshIcon}
-                  alt="refresh"
-                  width="20rem"
-                  height="20rem"
-                ></Image>
-                <span className={styles.refreshWord}>Refresh</span>
-              </button>
-            </Tooltip>
-          </div>
+          <Grid>
+            <div className={styles.btnsContainer}>
+              <Tooltip
+                arrow
+                title={
+                  <p className={styles.tooltipStyle}>
+                    Check for new repository updates
+                  </p>
+                }
+              >
+                <button onClick={callRefresh}>
+                  <Image
+                    src={refreshIcon}
+                    alt="refresh"
+                    width="20rem"
+                    height="20rem"
+                  ></Image>
+                  <span className={styles.refreshWord}>Refresh</span>
+                </button>
+              </Tooltip>
+            </div>
+          </Grid>
         </Grid>
         <Grow in={!closeHeader}>
           <Grid>
