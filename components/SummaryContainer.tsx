@@ -12,7 +12,13 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import refreshIcon from "../components/images/refresh.svg";
 import Collapse from "@mui/material/Collapse";
+import Fade from '@mui/material/Fade';
 import Grow from '@mui/material/Grow';
+import Slide from '@mui/material/Slide';
+import IconButton from "@mui/material/IconButton";
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
 import {
   PageLoaderCurrentData,
   forceNewVersion,
@@ -99,8 +105,6 @@ export default function SummaryContainer(props: {
           <p className={headerStyles.headerStyle}>
             {"Last updated DD/MM/YY HH/MM AEST"}
           </p>
-        </Grid>
-        <Grid>
           <div className={styles.btnsContainer}>
             <Tooltip
               arrow
@@ -137,7 +141,7 @@ export default function SummaryContainer(props: {
         </Grow>
       </Grid>
       <div>{props.loadingBackdrop}</div>
-      <Collapse in={closeHeader} timeout="auto" unmountOnExit>
+      <Grow in={closeHeader} timeout="auto" unmountOnExit>
         <Grid container spacing={1} className={styles.container}>
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div
@@ -199,8 +203,15 @@ export default function SummaryContainer(props: {
             </div>
           </Grid>
         </Grid>
-      </Collapse>
-      <button onClick={() => setCloseHeader(!closeHeader)}>Show Less</button>
+      </Grow>
+      {/* <button onClick={() => setCloseHeader(!closeHeader)}>Show Less</button> */}
+      <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setCloseHeader(!closeHeader)}
+            >
+              {closeHeader ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
     </Box>
   );
 }
