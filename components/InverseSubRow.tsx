@@ -4,10 +4,10 @@ import { semVerToString } from "../src/semVer";
 import { SubRowProps } from "./SubRow";
 import Image from "next/image";
 import styles from "./SubRow.module.css";
-
 import RedIcon from "./images/redIcon.svg"
 import YellowIcon from "./images/yellowIcon.svg";
 import GreenIcon from "./images/greenIcon.svg";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 type InverseSubRowProps = {
   //This is just renaming dependency to user to make it more clear
@@ -49,6 +49,22 @@ export function testClickFunction(name: string) {
     }
   }
 }
+// Customising the row styling using ThemeProvider
+const theme = createTheme({
+  components: {
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          fontFamily: "var(--secondary-font-family)",
+          fontSize: "1.1rem",
+          backgroundColor: "#f5f5f5",
+          color: "var(--colour-font)",
+          borderColor: "#7a7a7a",
+        }
+      }
+    }
+  }
+})
 
 export function InverseSubRow(props: InverseSubRowProps) {
   const userName = props.user.name;
@@ -67,22 +83,24 @@ export function InverseSubRow(props: InverseSubRowProps) {
 
   return (
     <TableRow className={styles.inverseSubRow}    >
-      <TableCell className={styles.tableCellStyle}>
-        <Image
-          src={statusIcon}
-          alt="Repo Priority"
-          width="33px"
-          height="33px"
-          className={styles.inverseSubRowIcon}
-        ></Image>
-      </TableCell>
-      <TableCell className={styles.tableCellStyle}>
-        <a href={depLink} rel="noreferrer" target="_blank">
-          {userName}
-        </a>
-      </TableCell>
-      <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
-      {/* <button onClick = {() => {testClickFunction(userName)}}> </button> */}
+		<ThemeProvider theme={theme}>
+			<TableCell className={styles.tableCellStyle}>
+				<Image
+				src={statusIcon}
+				alt="Repo Priority"
+				width="33px"
+				height="33px"
+				className={styles.inverseSubRowIcon}
+				></Image>
+			</TableCell>
+			<TableCell className={styles.tableCellStyle}>
+				<a href={depLink} rel="noreferrer" target="_blank">
+				{userName}
+				</a>
+			</TableCell>
+			<TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
+			{/* <button onClick = {() => {testClickFunction(userName)}}> </button> */}
+		</ThemeProvider>
     </TableRow>
   );
 }

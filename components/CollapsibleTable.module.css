@@ -1,16 +1,16 @@
-.tableContainer{
+.tableContainer {
 	box-shadow: none;
-    background-color: var(--colour-background);
-    color: var(--colour-font);
+	background-color: var(--colour-background);
+	color: var(--colour-font);
 }
 
-.col1{
-	width: 0%;
+.col1 {
+	width: 5%;
 	background-color: var(--table-left-edge);
 }
 
 .col2 {
-	width: 0%;
+	width: 8%;
 	background-color: var(--colour-background);
 }
 
@@ -20,24 +20,24 @@
 }
 
 .col4 {
-	width: 15%;
+	width: 17%;
 	background-color: var(--colour-background);
 }
 
 .col5 {
-	width: 20%;
+	width: 15%;
 	background-color: var(--colour-background);
 }
 
-.tableCellStyle{
+.tableCellStyle {
 	font-weight: var(--font-weight-bold);
-  	font-family: var(--primary-font-family);
-  	font-size: 1.4rem;
+	font-family: var(--primary-font-family);
+	font-size: 1.4rem;
 	background-color: var(--table-cell-background);
 	color: var(--colour-font);
 	margin-top: 1rem;
 	line-height: 3rem;
-	border-color:  var(--table-cell-border);
+	border-color: var(--table-cell-border);
 	border-width: 0.2rem;
 	color: var(--colour-text);
 }
@@ -47,3 +47,13 @@
 	background-color: var(--colour-background);
 	color: var(--colour-font);
 }
+
+.tableComponent {
+	box-shadow: none;
+}
+
+.tableFixedWidth {
+	display:table;
+	table-layout:fixed;
+	width:100%;
+  }

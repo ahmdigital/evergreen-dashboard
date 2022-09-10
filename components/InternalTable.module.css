@@ -1,0 +1,31 @@
+.tableContainer {
+	box-shadow: none;
+	background-color: var(--colour-lightGrey);
+	color: var(--colour-font);
+}
+
+.col1 {
+	width: 10%;
+	background-color: var(--table-left-edge);
+}
+
+.col2 {
+	width: 50%;
+	background-color: var(--colour-background);
+}
+
+.col3 {
+	width: 20%;
+	background-color: var(--colour-background);
+}
+
+.col4 {
+	width: 20%;
+	background-color: var(--colour-background);
+}
+
+.tableStyle {
+	box-shadow: none;
+	background-color: var(--colour-lightGrey);
+	color: var(--colour-font);
+}

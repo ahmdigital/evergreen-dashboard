@@ -4,6 +4,8 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Badge from "@mui/material/Badge";
+import InternalTable from "./InternalTable";
+import UsersTable from './UsersTable'
 
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -19,9 +21,10 @@ interface TabPanelProps {
 const useStyles = makeStyles((_) => ({
   indicator: {
     backgroundColor: "black",
-    height: "10px",
-    top: "45px",
+    height: "0.625rem", //"10px"
+    top: "2.813rem", //"45px"
     color: "black",
+    marginTop: "0.625rem",
   },
 }));
 
@@ -38,22 +41,36 @@ const theme = createTheme({
         root: {
           textTransform: "none",
           fontWeight: "bold",
+          fontSize: '500',
           fontFamily: "Work Sans, sans-serif",
-          width: "15%",
+          width: "30%",
+          maxWidth: "18.75rem", //"300px"
+          textAlign: "left",
+          flexDirection: "row",
         },
         textColorSecondary: {
-          color: "#eeeee4",
+          color: "#9e9b99",
           textTransform: "none",
           fontWeight: "normal",
         },
       },
     },
+
     MuiBadge: {
       styleOverrides: {
+        root: {},
         badge: {
           backgroundColor: "black",
-          right: "-14px",
-          top: "8px",
+          left: "0.5rem", //8px
+          top: "unset",
+        },
+      },
+    },
+
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          justifyContent: "flex-start",
         },
       },
     },
@@ -80,11 +97,35 @@ const TabPanel = (props: TabPanelProps) => {
   );
 };
 
+type HeaderLabelProps = {
+  badgeValue: number;
+  headerTitle: string;
+};
+
+const HeaderLabel = (props: HeaderLabelProps) => {
+  const boxStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+  };
+
+  return (
+    <Box sx={boxStyle}>
+      <label style={{ maxWidth: "6.25rem" /* 100px */ }}>{props.headerTitle}</label>
+      <Badge badgeContent={props.badgeValue} color="primary" showZero></Badge>
+    </Box>
+  );
+};
+
 const Tabs = (props: Props) => {
   // Creates the tab menu & displays the internal/external data
   const internal = props.subRows.internal;
   const external = props.subRows.external;
   const user = props.subRows.user;
+
+  const internalTable = <InternalTable>{internal}</InternalTable>;
+  const externalTable = <InternalTable>{external}</InternalTable>;
+  const userTable = <UsersTable>{user}</UsersTable>;
 
   const [tabVal, setTabVal] = useState(0);
   const classes = useStyles();
@@ -96,38 +137,41 @@ const Tabs = (props: Props) => {
     <Tab
       key="internal"
       label={
-        <Badge badgeContent={internal.length} color="primary" showZero>
-          Internal
-        </Badge>
+        <HeaderLabel
+          headerTitle="Internal Dependencies"
+          badgeValue={internal.length}
+        />
       }
     />,
     <Tab
       key="external"
       label={
-        <Badge badgeContent={external.length} color="primary" showZero>
-          External
-        </Badge>
+        <HeaderLabel
+          headerTitle="External Dependencies"
+          badgeValue={external.length}
+        />
       }
     />,
     <Tab
       key="users"
       label={
-        <Badge badgeContent={user.length} color="primary" showZero>
-          Users
-        </Badge>
+        <HeaderLabel
+          headerTitle="Dependent Repositories"
+          badgeValue={user.length}
+        />
       }
     />,
   ];
 
   let tabPanels = [
     <TabPanel key="internal" value={tabVal} index={0}>
-      {internal.length > 0 ? internal : "No depedencies found"}
+      {internal.length > 0 ? internalTable : "No depedencies found"}
     </TabPanel>,
     <TabPanel key="external" value={tabVal} index={1}>
-      {external.length > 0 ? external : "No depedencies found"}
+      {external.length > 0 ? externalTable : "No depedencies found"}
     </TabPanel>,
     <TabPanel key="users" value={tabVal} index={2}>
-      {user.length > 0 ? user : "No users found"}
+      {user.length > 0 ? userTable : "No dependent repositories found"}
     </TabPanel>,
   ];
 

@@ -5,6 +5,7 @@ import { getJsonStructure } from "evergreen-org-crawler/src/index"
 import config from "evergreen-org-crawler/config.json"
 import { useEffect, useState } from "react";
 import LoadingBackdrop from "./LoadingBackdrop";
+import ErrorSnackbar from "./FeedbackComponents/ErrorSnackbar";
 
 enum Mode {
 	Frontend,
@@ -124,7 +125,10 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 
 		return <><LoadingBackdrop open={true}/></>
 	}
-	if (!data) { return <p>Failed to load data!</p> }
+	if (!data) {
+		// If data is unable to load, throw error message to user
+		return <><ErrorSnackbar open={true}/></>
+	}
 
 	return <Page JSObject={data} finalData={true}/>
 }

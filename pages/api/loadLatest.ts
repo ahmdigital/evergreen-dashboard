@@ -1,12 +1,12 @@
 import * as fs from "fs";
 import path from "path";
 import { NextApiRequest, NextApiResponse} from 'next'
+import config from "../../config.json"
 
 // Cache files are stored inside ./next folder
 const CachePath = path.resolve("./dynamicCache.json")
 
-//TODO: Move to config file
-const timeUntilRefresh = 5 * 60 * 1000 // 5 minutes in milliseconds
+const timeUntilRefresh = config.timeUntilRefresh * 60 * 1000 // minutes to milliseconds
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	let cachedData = null

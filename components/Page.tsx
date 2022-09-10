@@ -12,6 +12,8 @@ import LoadingBackdrop from "./LoadingBackdrop";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { RankSelectionList, SortBox, SortSettings } from "./SortAndFilterDropdowns";
 import { applySort, Filter, rankCounts, searchAndFilter } from "../src/sortingAndFiltering";
+import HelpGuide from "./HelpComponents/HelpGuide";
+
 
 export type PageProps = {
 	JSObject: DependencyData;
@@ -59,6 +61,9 @@ export function Page(props: PageProps) {
 
 	//Sorting. Doing this after filtering would be more efficient
 	applySort(rows, sortSetting)
+
+	// check if there are no rows
+	let emptyRows = rows.length === 0;
 
 	const jsxRows = rowsToJSX(rows)
 	const rankArray = rankCounts(rows)
@@ -108,7 +113,9 @@ export function Page(props: PageProps) {
 						setSearchTerm={setSearchTerm}
 						sortDropdown={sortBox}
 						rankSelection={rankSelectionList}
+						emptyRows={emptyRows}
 					/>
+					<HelpGuide />
 				</Layout>
 			</main>
 		</div>

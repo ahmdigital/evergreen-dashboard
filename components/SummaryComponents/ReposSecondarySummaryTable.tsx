@@ -45,7 +45,7 @@ function countUsage(rows: ProcessedDependencyData, countOnlyOutdated: boolean) {
 	return usageCounts
 }
 
-/* Creates a small table of the first 5 elements of the given array. If these elements are clicked on, then that dependecny is added to the filter */
+/* Creates a small table of the first 7 elements of the given array. If these elements are clicked on, then that dependecny is added to the filter */
 function MostCommonSummaryTable(name: string, usageCounts: {name: string, id: number, count: number}[], filterTerm: Filter, setFilterTerm: any) {
 	return (
 		<Table>
@@ -57,7 +57,7 @@ function MostCommonSummaryTable(name: string, usageCounts: {name: string, id: nu
 				</TableCell>
 			</TableRow>
 			{
-				usageCounts.slice(0, 5).map(i => {
+				usageCounts.slice(0, 7).map(i => {
 						return <TableRow key={i.id} sx={{ ...(filterTerm.mustHaveDependency == i.id && {background: "var(--colour-table-selected)"})}} onClick={() => setFilterTerm({...filterTerm, mustHaveDependency: filterTerm.mustHaveDependency == i.id ? -1 : i.id})}>
 						<TableCell className={styles.tableCellStyle}>
 							<div className={styles.textContainer}>
