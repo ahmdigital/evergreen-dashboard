@@ -16,6 +16,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import refreshIcon from "../components/images/refresh.svg" ;
 import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
 import config from "../config.json";
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 let refreshing = false
 
@@ -41,6 +42,7 @@ export default function SummaryContainer(props: {
 
   // State for opening the helpLegend
   const [openHelp, setOpenHelp] = useState<boolean>(false);
+  const [showChart, setShowChart] = useState<boolean>(false);
 
   async function callRefresh(){
 		if(refreshing){ return }
@@ -103,6 +105,11 @@ export default function SummaryContainer(props: {
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
           <div className={styles.summaryCompHeader}>
             <h4 className={styles.summaryStyle}>Repos Overview</h4>
+				<BarChartIcon
+					onClick={() => {
+                    	setShowChart(!showChart);
+                  	}
+				}/>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
               <div>
               <Image
@@ -121,7 +128,7 @@ export default function SummaryContainer(props: {
           {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
           <div>
             <div className={styles.summaryComponent2}>
-              <ReposOverviewTable rankArray={props.rankArray} />
+              <ReposOverviewTable rankArray={props.rankArray} showChart={showChart} />
             </div>
           </div>
         </div>

@@ -9,6 +9,13 @@ import Image from "next/image";
 import { TableBody } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+import { Colours, getResolved } from "../../../src/Colours"
+
 type RowProps = {
   icon: any;
   iconAlt?: string;
@@ -33,9 +40,9 @@ const theme = createTheme({
 })
 
 enum StatusLabel {
-  RED = "need(s) updating urgently",
-  YELLOW = "should be updated soon",
-  GREEN = "up-to-date",
+  Red = "need updating urgently",
+  Yellow = "should be updated soon",
+  Green = "up-to-date",
 }
 
 const Row = (props: RowProps) => {
@@ -62,35 +69,55 @@ const Row = (props: RowProps) => {
   );
 };
 
-export default function ReposOverViewTable(props: { rankArray: any }) {
-  return (
-    <Table
-      sx={{
-        [`& .${tableCellClasses.root}`]: {
-          borderBottom: "none",
+export default function ReposOverViewTable(props: { rankArray: any, showChart: boolean}) {
+  if(props.showChart){
+    let data = {
+      labels: [StatusLabel.Red, StatusLabel.Yellow, StatusLabel.Green],
+      datasets: [
+        {
+          label: "# of dependencies",
+          data: [props.rankArray.red, props.rankArray.yellow, props.rankArray.green],
+          backgroundColor: [
+            getResolved(Colours.redVar),
+            getResolved(Colours.orangeVar),
+            getResolved(Colours.greenVar)
+          ],
+          borderWidth: 1,
         },
-      }}
-    >
-      <TableBody>
-        <Row
-          icon={RedIcon}
-          statusCount={props.rankArray.red}
-          statusLabel={StatusLabel.RED}
-          iconAlt={"Red Status"}
-        ></Row>
-        <Row
-          icon={YellowIcon}
-          statusCount={props.rankArray.yellow}
-          statusLabel={StatusLabel.YELLOW}
-          iconAlt={"Yellow Status"}
-        ></Row>
-        <Row
-          icon={greenIcon}
-          statusCount={props.rankArray.green}
-          statusLabel={StatusLabel.GREEN}
-          iconAlt={"Green Status"}
-        />
-      </TableBody>
-    </Table>
-  );
+      ],
+    };
+
+    return <Pie data={data} redraw={false} options= {{plugins: {legend: {display: false}}}}/>;
+  } else{
+    return (
+      <Table
+        sx={{
+          [`& .${tableCellClasses.root}`]: {
+            borderBottom: "none",
+          },
+        }}
+      >
+        <TableBody>
+          <Row
+            icon={RedIcon}
+            statusCount={props.rankArray.red}
+            statusLabel={StatusLabel.Red}
+            iconAlt={"Red Status"}
+          ></Row>
+          <Row
+            icon={YellowIcon}
+            statusCount={props.rankArray.yellow}
+            statusLabel={StatusLabel.Yellow}
+            iconAlt={"Yellow Status"}
+          ></Row>
+          <Row
+            icon={greenIcon}
+            statusCount={props.rankArray.green}
+            statusLabel={StatusLabel.Green}
+            iconAlt={"Green Status"}
+          />
+        </TableBody>
+      </Table>
+    );
+  }
 }

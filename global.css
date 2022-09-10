@@ -47,6 +47,7 @@ p {
 	--colour-table-selected: #98c6db;
 	--colour-green: rgba(31, 162, 25, 1);
 	/*         previously 0.8 for alpha ^ */
+	--colour-yellow: rgb(235, 158, 17);
 	--colour-red: rgba(198, 55, 24, 1);
 	--border-thick: .5rem solid  var(--colour-black);
 	--border-thick-halved: .25rem solid  var(--colour-black);
