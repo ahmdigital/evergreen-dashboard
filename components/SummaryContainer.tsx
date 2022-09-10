@@ -12,6 +12,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import refreshIcon from "../components/images/refresh.svg";
 import Collapse from "@mui/material/Collapse";
+import Grow from '@mui/material/Grow';
 import {
   PageLoaderCurrentData,
   forceNewVersion,
@@ -47,7 +48,7 @@ export default function SummaryContainer(props: {
   const [openHelp, setOpenHelp] = useState<boolean>(false);
 
   // State for collapsing the header
-  const [closeHeader, setCloseHeader] = useState<boolean>(false);
+  const [closeHeader, setCloseHeader] = useState<boolean>(true);
 
   async function callRefresh() {
     if (refreshing) {
@@ -96,7 +97,7 @@ export default function SummaryContainer(props: {
             Organisation
           </p>
           <p className={headerStyles.headerStyle}>
-          {"Last updated DD/MM/YY HH/MM AEST"}
+            {"Last updated DD/MM/YY HH/MM AEST"}
           </p>
         </Grid>
         <Grid>
@@ -121,17 +122,19 @@ export default function SummaryContainer(props: {
             </Tooltip>
           </div>
         </Grid>
-        <Grid>
-          {!closeHeader && (
-            <div>
-              <CondensedSummary
-                statusValues={props.rankArray}
-                overall={overallPercent}
-                target={config.targetPercentage}
-              ></CondensedSummary>
-            </div>
-          )}
-        </Grid>
+        <Grow in={!closeHeader}>
+          <Grid>
+            {!closeHeader && (
+              <div>
+                <CondensedSummary
+                  statusValues={props.rankArray}
+                  overall={overallPercent}
+                  target={config.targetPercentage}
+                ></CondensedSummary>
+              </div>
+            )}
+          </Grid>
+        </Grow>
       </Grid>
       <div>{props.loadingBackdrop}</div>
       <Collapse in={closeHeader} timeout="auto" unmountOnExit>

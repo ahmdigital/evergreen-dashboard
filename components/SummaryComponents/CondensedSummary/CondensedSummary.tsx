@@ -5,7 +5,6 @@ import greenIcon from "../../images/greenIcon.svg";
 import yellowIcon from "../../images/yellowIcon.svg";
 import styles from "./CondensedSummary.module.css";
 import Box from "@mui/material/Box";
-import sharedStyles from "../../treeView.module.css";
 // import HeaderContainer from "../../HeaderContainer";
 
 // import RefreshButton from "../../RefreshButton";
@@ -88,7 +87,7 @@ export default function CondensedSummary(props: CondensedRepoSummaryProps) {
   return (
     <Box
       sx={{ flexGrow: 1 }}
-      className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}
+      className={`${styles.summaryStyle}`}
     >
       <Summary
         statusValues={props.statusValues}
