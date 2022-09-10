@@ -1,4 +1,4 @@
-import { Divider, Container, Grid } from "@mui/material";
+import { Divider, Container } from "@mui/material";
 import Image from "next/image";
 import redIcon from "../../images/redIcon.svg";
 import greenIcon from "../../images/greenIcon.svg";
@@ -6,9 +6,9 @@ import yellowIcon from "../../images/yellowIcon.svg";
 import styles from "./CondensedSummary.module.css";
 import Box from "@mui/material/Box";
 import sharedStyles from "../../treeView.module.css";
-import HeaderContainer from "../../HeaderContainer";
+// import HeaderContainer from "../../HeaderContainer";
 
-import RefreshButton from "../../RefreshButton";
+// import RefreshButton from "../../RefreshButton";
 
 export type RepoOverviewCondensedProps = {
   readonly red: number | string;
@@ -90,15 +90,6 @@ export default function CondensedSummary(props: CondensedRepoSummaryProps) {
       sx={{ flexGrow: 1 }}
       className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}
     >
-      <Grid container spacing={1} className={styles.container}>
-        <Grid>
-          <HeaderContainer />
-          <div>
-            {"Last updated DD/MM/YY HH/MM AEST"}
-            <RefreshButton iconSize={"15rem"} fontSize={"1rem"} />
-          </div>
-        </Grid>
-      </Grid>
       <Summary
         statusValues={props.statusValues}
         overall={props.overall}

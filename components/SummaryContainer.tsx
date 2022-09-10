@@ -11,6 +11,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import refreshIcon from "../components/images/refresh.svg";
+import Collapse from "@mui/material/Collapse";
 import {
   PageLoaderCurrentData,
   forceNewVersion,
@@ -94,6 +95,9 @@ export default function SummaryContainer(props: {
             Monitoring for <b>{config.targetOrganisation}</b> Github
             Organisation
           </p>
+          <p className={headerStyles.headerStyle}>
+          {"Last updated DD/MM/YY HH/MM AEST"}
+          </p>
         </Grid>
         <Grid>
           <div className={styles.btnsContainer}>
@@ -117,79 +121,83 @@ export default function SummaryContainer(props: {
             </Tooltip>
           </div>
         </Grid>
+        <Grid>
+          {!closeHeader && (
+            <div>
+              <CondensedSummary
+                statusValues={props.rankArray}
+                overall={overallPercent}
+                target={config.targetPercentage}
+              ></CondensedSummary>
+            </div>
+          )}
+        </Grid>
       </Grid>
       <div>{props.loadingBackdrop}</div>
-      <Grid container spacing={1} className={styles.container}>
-        <Grid xs={12} sm={12} md={6} lg={4}>
-          <div
-            className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
-          >
-            <h4 className={styles.summaryStylePercent}>
-              Target ({config.targetPercentage}%)
-            </h4>
+      <Collapse in={closeHeader} timeout="auto" unmountOnExit>
+        <Grid container spacing={1} className={styles.container}>
+          <Grid xs={12} sm={12} md={6} lg={4}>
             <div
-              className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}
+              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
             >
-              <h3 className={styles.overallTitleStyle}>Overall</h3>
-              <h2 className={styles.percentStyle}>{overallPercentStr}</h2>
-              <h3 className={styles.overallCentredTitleStyle}>up-to-date</h3>
-            </div>
-          </div>
-        </Grid>
-        <Grid xs={12} sm={12} md={6} lg={4}>
-          <div
-            className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
-          >
-            <div className={styles.summaryCompHeader}>
-              <h4 className={styles.summaryStyle}>Repos Overview</h4>
-              <Tooltip
-                arrow
-                title={
-                  <p className={styles.tooltipStyle}>Status Icon Meanings</p>
-                }
+              <h4 className={styles.summaryStylePercent}>
+                Target ({config.targetPercentage}%)
+              </h4>
+              <div
+                className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}
               >
-                <div>
-                  <Image
-                    className={styles.helpBtn}
-                    width="30px"
-                    height="30px"
-                    alt="help"
-                    src={helpIcon}
-                    onClick={() => {
-                      setOpenHelp(true);
-                    }}
-                  />
-                </div>
-              </Tooltip>
-            </div>
-            {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
-            <div>
-              <div className={styles.summaryComponent2}>
-                <ReposOverviewTable rankArray={props.rankArray} />
+                <h3 className={styles.overallTitleStyle}>Overall</h3>
+                <h2 className={styles.percentStyle}>{overallPercentStr}</h2>
+                <h3 className={styles.overallCentredTitleStyle}>up-to-date</h3>
               </div>
             </div>
-          </div>
-        </Grid>
-        <Grid xs={12} sm={12} md={6} lg={4}>
-          <div
-            className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
-          >
-            <div className={styles.summaryCompHeader}>
-              <h4 className={styles.summaryStyle}>Dependent Repos</h4>
+          </Grid>
+          <Grid xs={12} sm={12} md={6} lg={4}>
+            <div
+              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
+            >
+              <div className={styles.summaryCompHeader}>
+                <h4 className={styles.summaryStyle}>Repos Overview</h4>
+                <Tooltip
+                  arrow
+                  title={
+                    <p className={styles.tooltipStyle}>Status Icon Meanings</p>
+                  }
+                >
+                  <div>
+                    <Image
+                      className={styles.helpBtn}
+                      width="30px"
+                      height="30px"
+                      alt="help"
+                      src={helpIcon}
+                      onClick={() => {
+                        setOpenHelp(true);
+                      }}
+                    />
+                  </div>
+                </Tooltip>
+              </div>
+              {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
+              <div>
+                <div className={styles.summaryComponent2}>
+                  <ReposOverviewTable rankArray={props.rankArray} />
+                </div>
+              </div>
             </div>
-          </div>
+          </Grid>
+          <Grid xs={12} sm={12} md={6} lg={4}>
+            <div
+              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
+            >
+              <div className={styles.summaryCompHeader}>
+                <h4 className={styles.summaryStyle}>Dependent Repos</h4>
+              </div>
+            </div>
+          </Grid>
         </Grid>
-      </Grid>
+      </Collapse>
       <button onClick={() => setCloseHeader(!closeHeader)}>Show Less</button>
-      {closeHeader && (
-        <div>
-          <CondensedSummary
-            statusValues={props.rankArray}
-            overall={overallPercent}
-            target={config.targetPercentage}
-          ></CondensedSummary>
-        </div>
-      )}
     </Box>
   );
 }
