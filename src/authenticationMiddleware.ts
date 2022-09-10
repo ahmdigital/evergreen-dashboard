@@ -67,7 +67,7 @@ async function isOrganisationMember(org: string, username: string, authToken: st
 export async function checkAuthorisation(req: NextApiRequest, res: NextApiResponse): Promise<boolean> {
 	console.log("Middleware called for: " + req.url)
 	if (configFile.requireAuthentication == false) {
-		console.log("'requireAuthentication' is set to 'true', granting access to user")
+		console.log("'requireAuthentication' is set to 'false', granting access to user")
 		return true
 	}
 	const tokenString = (req as any).cookies.token
@@ -75,7 +75,7 @@ export async function checkAuthorisation(req: NextApiRequest, res: NextApiRespon
 
 	if (tokenString == null) {
 		console.log("Token not present in client cookie")
-		res.status(401).json({ message: 'Login required' })
+		res.status(401).json({ message: 'login_required' })
 		return false
 	}
 	try {
@@ -88,7 +88,7 @@ export async function checkAuthorisation(req: NextApiRequest, res: NextApiRespon
 		if (!isMember) {
 			console.log(`User ${username} is not a member of ${configFile.targetOrganisation}`)
 			//return NextResponse.redirect("localhost:3000/signin?error=Not a member")
-			res.status(403).json({ message: `"${username}" is not a member of the organisation` })
+			res.status(403).json({ message: `not_a_member` })
 			return false
 		}
 
@@ -96,12 +96,12 @@ export async function checkAuthorisation(req: NextApiRequest, res: NextApiRespon
 		return true
 	} catch (error: any) {
 		if (error?.status == 401) {
-			res.status(401).json({ message: 'Login required' })
+			res.status(401).json({ message: 'login_required' })
 			return false
 		}
 		console.log("Error while checking authorisation: ", error.message)
 
-		res.status(500).json({ message: 'Unexpected error' })
+		res.status(500).json({ message: 'unexpected_error' })
 		return false
 	}
 }

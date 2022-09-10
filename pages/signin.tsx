@@ -42,6 +42,7 @@ export default function SignIn() {
 		if (error != null) {
 			setSignInStatus('error-while-signing-in')
 			error === "access_denied" && setErrorMessage("You have denied access to your GitHub account. Please try again.")
+			error === "not_a_member" && setErrorMessage("You are not a member of the organisation. Please sign in with a different account.")
 		} else if (code != null) {
 			setSignInStatus('exchanging-code-for-token')
 			console.log(`code ${code}`);
