@@ -12,13 +12,10 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import refreshIcon from "../components/images/refresh.svg";
 import Collapse from "@mui/material/Collapse";
-import Fade from '@mui/material/Fade';
 import Grow from '@mui/material/Grow';
-import Slide from '@mui/material/Slide';
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { TableRow, TableHead, TableCell, Table } from "@mui/material";
 
 import {
   PageLoaderCurrentData,
@@ -213,7 +210,7 @@ export default function SummaryContainer(props: {
         size="small"
         onClick={() => setCloseHeader(!closeHeader)}
       >
-        {closeHeader ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        {closeHeader ? <><KeyboardArrowUpIcon />Show Less</> : <><KeyboardArrowDownIcon />Show More</>}
       </IconButton>
     </Box>
   );
