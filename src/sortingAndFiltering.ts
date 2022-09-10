@@ -111,8 +111,8 @@ export function applyFilter(row: ProcessedDependencyData[0], filter: Filter): bo
 		if(!hasDependency){
 			return false
 		}
-	}
 
+	}
 	switch (row.minRank) {
 		case 0: if (!filter.showRed) { return false } break
 		case 1: if (!filter.showYellow) { return false } break
