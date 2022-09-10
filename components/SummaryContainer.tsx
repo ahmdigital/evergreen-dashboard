@@ -18,6 +18,7 @@ import Slide from '@mui/material/Slide';
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { TableRow, TableHead, TableCell, Table } from "@mui/material";
 
 import {
   PageLoaderCurrentData,
@@ -141,77 +142,79 @@ export default function SummaryContainer(props: {
         </Grow>
       </Grid>
       <div>{props.loadingBackdrop}</div>
-      <Grow in={closeHeader} timeout="auto" unmountOnExit>
-        <Grid container spacing={1} className={styles.container}>
-          <Grid xs={12} sm={12} md={6} lg={4}>
-            <div
-              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
-            >
-              <h4 className={styles.summaryStylePercent}>
-                Target ({config.targetPercentage}%)
-              </h4>
+      <>
+        <Collapse in={closeHeader} timeout="auto" unmountOnExit>
+          <Grid container spacing={1} className={styles.container}>
+            <Grid xs={12} sm={12} md={6} lg={4}>
               <div
-                className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}
+                className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
               >
-                <h3 className={styles.overallTitleStyle}>Overall</h3>
-                <h2 className={styles.percentStyle}>{overallPercentStr}</h2>
-                <h3 className={styles.overallCentredTitleStyle}>up-to-date</h3>
-              </div>
-            </div>
-          </Grid>
-          <Grid xs={12} sm={12} md={6} lg={4}>
-            <div
-              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
-            >
-              <div className={styles.summaryCompHeader}>
-                <h4 className={styles.summaryStyle}>Repos Overview</h4>
-                <Tooltip
-                  arrow
-                  title={
-                    <p className={styles.tooltipStyle}>Status Icon Meanings</p>
-                  }
+                <h4 className={styles.summaryStylePercent}>
+                  Target ({config.targetPercentage}%)
+                </h4>
+                <div
+                  className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}
                 >
-                  <div>
-                    <Image
-                      className={styles.helpBtn}
-                      width="30px"
-                      height="30px"
-                      alt="help"
-                      src={helpIcon}
-                      onClick={() => {
-                        setOpenHelp(true);
-                      }}
-                    />
-                  </div>
-                </Tooltip>
-              </div>
-              {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
-              <div>
-                <div className={styles.summaryComponent2}>
-                  <ReposOverviewTable rankArray={props.rankArray} />
+                  <h3 className={styles.overallTitleStyle}>Overall</h3>
+                  <h2 className={styles.percentStyle}>{overallPercentStr}</h2>
+                  <h3 className={styles.overallCentredTitleStyle}>up-to-date</h3>
                 </div>
               </div>
-            </div>
-          </Grid>
-          <Grid xs={12} sm={12} md={6} lg={4}>
-            <div
-              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
-            >
-              <div className={styles.summaryCompHeader}>
-                <h4 className={styles.summaryStyle}>Dependent Repos</h4>
+            </Grid>
+            <Grid xs={12} sm={12} md={6} lg={4}>
+              <div
+                className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
+              >
+                <div className={styles.summaryCompHeader}>
+                  <h4 className={styles.summaryStyle}>Repos Overview</h4>
+                  <Tooltip
+                    arrow
+                    title={
+                      <p className={styles.tooltipStyle}>Status Icon Meanings</p>
+                    }
+                  >
+                    <div>
+                      <Image
+                        className={styles.helpBtn}
+                        width="30px"
+                        height="30px"
+                        alt="help"
+                        src={helpIcon}
+                        onClick={() => {
+                          setOpenHelp(true);
+                        }}
+                      />
+                    </div>
+                  </Tooltip>
+                </div>
+                {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
+                <div>
+                  <div className={styles.summaryComponent2}>
+                    <ReposOverviewTable rankArray={props.rankArray} />
+                  </div>
+                </div>
               </div>
-            </div>
+            </Grid>
+            <Grid xs={12} sm={12} md={6} lg={4}>
+              <div
+                className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
+              >
+                <div className={styles.summaryCompHeader}>
+                  <h4 className={styles.summaryStyle}>Dependent Repos</h4>
+                </div>
+              </div>
+            </Grid>
           </Grid>
-        </Grid>
-      </Grow>
+        </Collapse>
+      </>
       {/* <button onClick={() => setCloseHeader(!closeHeader)}>Show Less</button> */}
       <IconButton
-              aria-label="expand row"
-              size="small"
-              onClick={() => setCloseHeader(!closeHeader)}
-            >
-              {closeHeader ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
+        aria-label="expand row"
+        size="small"
+        onClick={() => setCloseHeader(!closeHeader)}
+      >
+        {closeHeader ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+      </IconButton>
     </Box>
   );
 }
