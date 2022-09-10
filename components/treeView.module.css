@@ -2,7 +2,7 @@
 /* -----------------START: SHARED SECTION CONTAINERS CSS ------------------- */
 div.sectionContainer {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;

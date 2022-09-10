@@ -32,7 +32,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontWeight: "bold",
-          fontSize: "large",
+          fontSize: "1.1rem",
           fontFamily: 'var(--primary-font-family)',
           backgroundColor: "var(--colour-container-background)",
           color: "var(--colour-font)",
@@ -50,7 +50,7 @@ const collapsibleTheme = createTheme({
       styleOverrides: {
         root: {
           fontWeight: "bold",
-          fontSize: "large",
+          fontSize: "1.1rem",
           fontFamily: 'var(--primary-font-family)',
           backgroundColor: "#f5f5f5",
           color: "var(--colour-font)",

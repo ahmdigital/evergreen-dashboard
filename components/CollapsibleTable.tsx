@@ -21,7 +21,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontWeight: "bold",
-          fontSize: "1.4rem",
+          fontSize: "1.15rem",
           fontFamily: 'var(--primary-font-family)',
           backgroundColor: "var(--table-cell-background)",
           color: "var(--colour-font)",
