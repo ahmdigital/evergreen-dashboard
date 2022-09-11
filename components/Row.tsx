@@ -65,16 +65,19 @@ export default function Row(props: { rank: number; row: any } & Props) {
   const { rank, row, subRows } = props;
   const [open, setOpen] = useState(false);
   let statusIcon = RedIcon;
+  let statusText = "Needs updating urgently";
   let iconDefinition = redDef.description;
-
+  
   // Setting the status
   if (rank == 2) {
     statusIcon = greenIcon;
     iconDefinition = greenDef.description;
+	statusText = "Up to date";
   }
   if (rank == 1) {
     statusIcon = YellowIcon;
     iconDefinition = yellowDef.description;
+	statusText = "Should be updated soon";
   }
 
   return (
@@ -83,7 +86,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
         <ThemeProvider theme={theme}>
           <TableCell>
             <IconButton
-              aria-label="expand row"
+              aria-label="Expand row"
               size="small"
               onClick={() => setOpen(!open)}
               className={styles.rowArrow}
@@ -96,7 +99,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
               <div className={styles.iconContainer}>
                 <Image
                   src={statusIcon}
-                  alt="Repo Priority"
+                  alt={statusText}
                   width="40px"
                   height="40px"
                   className={styles.statusIcon}

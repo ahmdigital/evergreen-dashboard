@@ -26,6 +26,12 @@
   margin-bottom: 100px;
 }
 
+.crossButtonContainer {
+	display: flex;
+	flex-direction: row-reverse;
+
+}
+
 .title {
   display: inline-block;
   text-align: center;
