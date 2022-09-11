@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import styles from "../styles/SummaryContainer.module.css";
-import sharedStyles from "../styles/treeView.module.css";
-import ReposOverviewTable from "./SummaryComponents/RepoOverviewTable/ReposOverviewTable";
-import helpIcon from "./images/helpIcon.png";
+import styles from "../../styles/SummaryContainer.module.css";
+import sharedStyles from "../../styles/treeView.module.css";
+import ReposOverviewTable from "./ReposOverviewTable";
+import helpIcon from "../images/helpIcon.png";
 import Image from "next/image";
-import HelpScreen from "./LightStatus";
-import headerStyles from "../styles/HeaderContainer.module.css";
+import HelpScreen from "../HelpComponents/LightStatus";
+import headerStyles from "../../styles/HeaderContainer.module.css";
 import ForestIcon from '@mui/icons-material/Forest';
 import Tooltip from "@mui/material/Tooltip";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import refreshIcon from "../components/images/refresh.svg" ;
-import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
-import config from "../config.json";
+import refreshIcon from "../images/refresh.svg" ;
+import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "../PageLoader";
+import config from "../../config.json";
 
 let refreshing = false
 

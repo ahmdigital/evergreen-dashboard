@@ -1,12 +1,12 @@
 import React from "react";
 import CollapsibleTable from "./CollapsibleTable";
-import styles from "../styles/DependenciesContainer.module.css";
-import sharedStyles from "../styles/treeView.module.css";
+import styles from "../../styles/DependenciesContainer.module.css";
+import sharedStyles from "../../styles/treeView.module.css";
 import SearchBar from "./SearchBar";
-import { DependencyData } from "../src/dataProcessing";
-import config from "../config.json";
+import { DependencyData } from "../../src/dataProcessing";
+import config from "../../config.json";
 //import filterIcon from "../components/images/filter.svg" ;
-import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
+import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "../PageLoader";
 
 let refreshing = false
 

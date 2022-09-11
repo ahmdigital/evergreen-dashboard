@@ -6,14 +6,14 @@ import { Tooltip, TableRow, TableHead, TableCell, Table } from "@mui/material";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import QuestionMark from "@mui/icons-material/QuestionMark";
-import RedIcon from "./images/redIcon.svg";
-import YellowIcon from "./images/yellowIcon.svg";
-import greenIcon from "./images/greenIcon.svg";
+import RedIcon from "../images/redIcon.svg";
+import YellowIcon from "../images/yellowIcon.svg";
+import greenIcon from "../images/greenIcon.svg";
 import Image from "next/image";
-import Tabs from "./Tabs";
-import { semVerToString } from "../src/semVer";
-import styles from "../styles/Row.module.css";
-import { redDef, yellowDef, greenDef } from "./LightStatus";
+import Tabs from "./InternalTableComponents/Tabs";
+import { semVerToString } from "../../src/semVer";
+import styles from "../../styles/Row.module.css";
+import { redDef, yellowDef, greenDef } from "../HelpComponents/LightStatus";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export type Props = {

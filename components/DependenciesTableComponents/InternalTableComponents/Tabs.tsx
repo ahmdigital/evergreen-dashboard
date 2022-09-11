@@ -9,7 +9,7 @@ import UsersTable from './UsersTable'
 
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Props } from "./Row";
+import { Props } from "../Row";
 
 interface TabPanelProps {
   children?: React.ReactNode;

@@ -4,7 +4,7 @@ import { JSObjectFromJSON } from "../src/dataProcessing";
 import { getJsonStructure } from "evergreen-org-crawler/src/index"
 import config from "evergreen-org-crawler/config.json"
 import { useEffect, useState } from "react";
-import LoadingBackdrop from "./LoadingBackdrop";
+import LoadingBackdrop from "./FeedbackComponents/LoadingBackdrop";
 import ErrorSnackbar from "./FeedbackComponents/ErrorSnackbar";
 
 enum Mode {

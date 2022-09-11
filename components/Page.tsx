@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { InverseSubRow } from "./InverseSubRow";
-import { SubRow } from "./SubRow";
+import { InverseSubRow } from "./DependenciesTableComponents/InverseSubRow";
+import { SubRow } from "./DependenciesTableComponents/InternalTableComponents/SubRow";
 import { useProcessDependencyData } from "../hooks/useProcessDependencyData";
-import Row from "./Row";
+import Row from "./DependenciesTableComponents/Row";
 import Layout from "./Layout";
 import Head from "next/head";
-import DependenciesContainer from "./DependenciesContainer";
-import SummaryContainer from "./SummaryContainer";
+import DependenciesContainer from "./DependenciesTableComponents/DependenciesContainer";
+import SummaryContainer from "./SummaryComponents/SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
-import LoadingBackdrop from "./LoadingBackdrop";
+import LoadingBackdrop from "./FeedbackComponents/LoadingBackdrop";
 import HelpGuide from "./HelpComponents/HelpGuide";
 
 
