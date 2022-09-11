@@ -71,8 +71,8 @@ export default function SummaryContainer(props: {
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
               <button onClick={callRefresh}>
-                <Image src={refreshIcon} alt="refresh" width="20rem" height="20rem"></Image>
-                <span className={styles.refreshWord}>Refresh</span>
+                  <Image src={refreshIcon} alt="refresh" width="15rem" height="15rem"></Image>
+                  <span className={styles.refreshWord}>Refresh</span>
               </button>
             </Tooltip>
           </div>

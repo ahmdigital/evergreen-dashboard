@@ -5,8 +5,7 @@ div.summaryStyle {
 }
 
 .subtitle {
-  font-size: 1rem;
-  letter-spacing: 0.4px;
+  font-size: var(--font-size-large);
   margin-top: 3px;
   font-weight: var(--font-weight-semibold); /*500*/
 }
@@ -182,7 +181,6 @@ div.btnsContainer {
 }
 
 div.btnsContainer button {
-  width: 8rem;
   font-family: var(--primary-font-family);
   font-size: var(--font-size-large);
   background-color: var(--colour-container-background);
