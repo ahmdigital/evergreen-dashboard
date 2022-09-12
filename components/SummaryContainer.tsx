@@ -10,12 +10,12 @@ import ForestIcon from "@mui/icons-material/Forest";
 import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
+import refreshIcon from "../components/images/refresh.svg";
 import Collapse from "@mui/material/Collapse";
 import Grow from '@mui/material/Grow';
+import IconButton from "@mui/material/IconButton";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import refreshIcon from "./images/refresh.svg" ;
-import { IconButton } from "@mui/material";
 
 import {
   PageLoaderCurrentData,
@@ -93,74 +93,38 @@ export default function SummaryContainer(props: {
     >
       <Grid container spacing={1} className={styles.container}>
         <Grid>
-          <h1 className="noMargins"><ForestIcon /> Evergreen Dashboard</h1>
-          <p className={styles.subtitle}>
-            Monitoring dependencies for <b>{config.targetOrganisation}</b> Github Organisation
+          <h2 className="h2NoMargins">
+            <ForestIcon /> Evergreen Dashboard
+          </h2>
+          <p className={headerStyles.headerStyle}>
+            Monitoring for <b>{config.targetOrganisation}</b> Github
+            Organisation
           </p>
           <p className={headerStyles.headerStyle}>
             {"Last updated DD/MM/YY HH/MM AEST"}
           </p>
-        </Grid>
-        <Grid>
-          <div className={styles.btnsContainer}>
-            <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
-              <button onClick={callRefresh} aria-label="Refresh data">
-                <Image src={refreshIcon} alt="Refresh Icon" width="15rem" height="15rem"></Image>
-                <span className={styles.refreshWord}>Refresh</span>
-              </button>
-            </Tooltip>
-          </div>
-        </Grid>
-      </Grid>
-        <div>
-            {props.loadingBackdrop}
-        </div>
-      <Grid container spacing={1} className={`${styles.container} ${styles.margins}`}>
-        <Grid xs={12} sm={12} md={6} lg={4}>
-        <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-          <h3 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h3>
-          <div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
-            <h3 className={styles.overallTitleStyle}>Overall</h3>
-            <h3 className={styles.percentStyle} >{overallPercentStr}</h3>
-            <h3 className={styles.overallCentredTitleStyle}>up-to-date</h3>
-          </div>
-        </div>
-        </Grid>
-        <Grid xs={12} sm={12} md={6} lg={4}>
-        <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-          <div className={styles.summaryCompHeader}>
-          <h3 className={styles.summaryStyle}>{`Total Repos (${props.rankArray.green + props.rankArray.yellow + props.rankArray.red})`}</h3>
-            <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
-              <IconButton
-			    aria-label="Help button"
-				onClick={() => {
-                  setOpenHelp(true);
-                }}
-			  >
-              <Image
-                  className={styles.helpBtn}
-                  width="30px"
-                  height="30px"
-                  alt="Help Icon"
-                  src={helpIcon}
-                />
-              </IconButton>
-            </Tooltip>
-          </div>
-          {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
-          <div>
-            <div className={styles.summaryComponent2}>
-              <ReposOverviewTable rankArray={props.rankArray} />
+          <Grid>
+            <div className={styles.btnsContainer}>
+              <Tooltip
+                arrow
+                title={
+                  <p className={styles.tooltipStyle}>
+                    Check for new repository updates
+                  </p>
+                }
+              >
+                <button onClick={callRefresh}>
+                  <Image
+                    src={refreshIcon}
+                    alt="refresh"
+                    width="20rem"
+                    height="20rem"
+                  ></Image>
+                  <span className={styles.refreshWord}>Refresh</span>
+                </button>
+              </Tooltip>
             </div>
-          </div>
-        </div>
-        </Grid>
-        <Grid xs={12} sm={12} md={6} lg={4}>
-        <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-          <div className={styles.summaryCompHeader}>
-            <h3 className={styles.summaryStyle}>Dependent Repos</h3>
-          </div>
-        </div>
+          </Grid>
         </Grid>
         <Grow in={!closeHeader}>
           <Grid>

@@ -22,15 +22,15 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: "var(--secondary-font-family)",
-          fontSize: "1rem",
+          fontSize: "1.1rem",
           backgroundColor: "#f5f5f5",
           color: "var(--colour-font)",
           borderColor: "#7a7a7a",
-        },
-      },
-    },
-  },
-});
+        }
+      }
+    }
+  }
+})
 
 // Creates the collapsible rows for internal/external dependencies
 export function SubRow(props: SubRowProps) {
@@ -40,33 +40,27 @@ export function SubRow(props: SubRowProps) {
   const latestVersion = semVerToString(props.dependency.version);
 
   let statusIcon = RedIcon;
-  let statusText = "Needs updating urgently";
   let iconDefinition = redDef.description;
 
   // Setting the status
   if (props.dependency.rank == 2) {
     statusIcon = GreenIcon;
     iconDefinition = greenDef.description;
-	statusText = "Up to date";
   }
   if (props.dependency.rank == 1) {
     statusIcon = YellowIcon;
     iconDefinition = yellowDef.description;
-	statusText = "Should be updated soon";
   }
 
   return (
-    <TableRow>
+    <TableRow >
       <ThemeProvider theme={theme}>
         <TableCell className={styles.tableCellStyle}>
-          <Tooltip
-            arrow
-            title={<p className={styles.tooltipStyle}>{iconDefinition}</p>}
-          >
+          <Tooltip arrow title={<p className={styles.tooltipStyle}>{iconDefinition}</p>}>
             <div className={styles.iconContainer}>
               <Image
                 src={statusIcon}
-                alt={statusText}
+                alt="Repo Priority"
                 width="33px"
                 height="33px"
                 className={styles.inverseSubRowIcon}
@@ -76,11 +70,7 @@ export function SubRow(props: SubRowProps) {
         </TableCell>
         <TableCell className={styles.tableCellStyle}>{depName}</TableCell>
         <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
-        <TableCell
-          className={`${styles.tableCellStyle} ${styles.latestVerStyle}`}
-        >
-          {latestVersion}
-        </TableCell>
+        <TableCell className={`${styles.tableCellStyle} ${styles.latestVerStyle}`}>{latestVersion}</TableCell>
       </ThemeProvider>
     </TableRow>
   );

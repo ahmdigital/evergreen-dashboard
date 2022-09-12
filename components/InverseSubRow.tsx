@@ -36,15 +36,13 @@ export function InverseSubRow(props: InverseSubRowProps) {
   const usedVersion = semVerToString(props.user.version);
 
   let statusIcon = RedIcon;
-  let statusText = "Needs updating urgently";
+
   // Setting the status
   if (props.user.rank == 2) {
-	  statusIcon = GreenIcon;
-	  statusText = "Up to date";
-	}
-	if (props.user.rank == 1) {
-	statusIcon = YellowIcon;
-	statusText = "Should be updated soon";
+    statusIcon = GreenIcon;
+  }
+  if (props.user.rank == 1) {
+    statusIcon = YellowIcon;
   }
 
   return (
@@ -53,7 +51,7 @@ export function InverseSubRow(props: InverseSubRowProps) {
         <TableCell>
           <Image
             src={statusIcon}
-            alt={statusText}
+            alt="Repo Priority"
             width="33px"
             height="33px"
             className={styles.inverseSubRowIcon}

@@ -20,8 +20,8 @@ const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          fontWeight: "var(--font-weight-semibolder)",
-          fontSize: "var(--font-size-large)",
+          fontWeight: "bold",
+          fontSize: "1.15rem",
           fontFamily: 'var(--primary-font-family)',
           backgroundColor: "var(--table-cell-background)",
           color: "var(--colour-font)",

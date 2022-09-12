@@ -15,7 +15,6 @@ interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
-  isEmpty: boolean;
 }
 
 // Using createTheme for customising Tabs text
@@ -25,7 +24,7 @@ const useStyles = makeStyles((_) => ({
     height: "0.625rem", //"10px"
     top: "2.813rem", //"45px"
     color: "black",
-    marginTop: "0.825rem",
+    marginTop: "0.625rem",
   },
 }));
 
@@ -37,23 +36,20 @@ const theme = createTheme({
         textColorPrimary: {
           "&.Mui-selected": {
             color: "#000000",
-            fontWeight: "600",
           },
         },
         root: {
           textTransform: "none",
-          fontWeight: "var(--font-weight-normal)", //400
-          fontSize: 'var(--font-size-normal)',
-          fontFamily: "var(--primary-font-family)",
+          fontWeight: "bold",
+          fontSize: '500',
+          fontFamily: "Work Sans, sans-serif",
           width: "30%",
           maxWidth: "18.75rem", //"300px"
           textAlign: "left",
           flexDirection: "row",
-          color: "var(--colour-black)",
-          border: 'var(--colour-black)',
         },
         textColorSecondary: {
-          color: "var(--colour-black)",
+          color: "#9e9b99",
           textTransform: "none",
           fontWeight: "normal",
         },
@@ -82,7 +78,7 @@ const theme = createTheme({
 });
 
 const TabPanel = (props: TabPanelProps) => {
-  const { children, value, index, isEmpty, ...other } = props;
+  const { children, value, index, ...other } = props;
 
   return (
     <div
@@ -93,7 +89,7 @@ const TabPanel = (props: TabPanelProps) => {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: isEmpty ? "24px" : "0px 0px 24px 24px" }}>
+        <Box sx={{ p: 3 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -168,25 +164,25 @@ const Tabs = (props: Props) => {
   ];
 
   let tabPanels = [
-    <TabPanel key="internal" value={tabVal} index={0} isEmpty={internal.length === 0}>
+    <TabPanel key="internal" value={tabVal} index={0}>
       {internal.length > 0 ? internalTable : "No depedencies found"}
     </TabPanel>,
-    <TabPanel key="external" value={tabVal} index={1} isEmpty={external.length === 0}>
+    <TabPanel key="external" value={tabVal} index={1}>
       {external.length > 0 ? externalTable : "No depedencies found"}
     </TabPanel>,
-    <TabPanel key="users" value={tabVal} index={2} isEmpty={user.length === 0}>
+    <TabPanel key="users" value={tabVal} index={2}>
       {user.length > 0 ? userTable : "No dependent repositories found"}
     </TabPanel>,
   ];
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1}}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <ThemeProvider theme={theme}>
           <Tabss
             value={tabVal}
             onChange={handleChange}
-            aria-label=""
+            aria-label="basic tabs example"
             TabIndicatorProps={{ className: classes.indicator }}
           >
             {tabLabels}
