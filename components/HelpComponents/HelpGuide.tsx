@@ -106,7 +106,7 @@ function StatusTable() {
         <TableBody>
           <TableRow>
             <TableCell>
-              <Image src={redIcon} alt="Needs updating urgently" width="40px" height="40px"></Image>
+              <Image src={redIcon} alt="Red" width="40px" height="40px"></Image>
             </TableCell>
             <TableCell className={styles.infoContentStyle}>
               {redDef.description}
@@ -114,7 +114,7 @@ function StatusTable() {
           </TableRow>
           <TableRow>
             <TableCell>
-              <Image src={yellowIcon} alt="Up to date" width="40px" height="40px"></Image>
+              <Image src={yellowIcon} alt="Yellow" width="40px" height="40px"></Image>
             </TableCell>
             <TableCell className={styles.infoContentStyle}>
               {yellowDef.description}
@@ -122,7 +122,7 @@ function StatusTable() {
           </TableRow>
           <TableRow>
             <TableCell>
-              <Image src={greenIcon} alt="Should be updated soon" width="40px" height="40px"></Image>
+              <Image src={greenIcon} alt="Green" width="40px" height="40px"></Image>
             </TableCell>
             <TableCell className={styles.infoContentStyle}>
               {greenDef.description}
@@ -212,7 +212,7 @@ export default function HelpGuide() {
     <>
       <LightTooltip arrow title="Help Guide">
         <ThemeProvider theme={theme}>
-          <Fab onClick={handleClickOpen} aria-label="Help guide button">
+          <Fab onClick={handleClickOpen}>
             <HelpOutline className={styles.iconStyle} />
           </Fab>
         </ThemeProvider>
