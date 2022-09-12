@@ -10,7 +10,19 @@ body {
   font-family: var(--primary-font-family);
 }
 
-.h2NoMargins {
+h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-semibolder);
+}
+
+h1 {
+  font-size: 2rem; /* 32px; */
+  font-weight: var(--font-weight-semibolder);
+}
+
+.noMargins {
   margin-top: 0;
   margin-bottom: 0;
   color: var(--colour-font);
@@ -19,6 +31,8 @@ body {
 h3 {
   margin-top: 0;
   margin-bottom: 0;
+  font-size: 20px;
+  font-weight: var(--font-weight-semibolder);
 }
 
 p {
@@ -26,45 +40,42 @@ p {
   margin-bottom: 0;
 }
 
-  :root {
-	font-size: 16px;
-	--rank-green: green;
-	--rank-light-green: #cfc;
-	--rank-green-border: 1px solid green;
-	--rank-orange: orange;
-	--rank-light-orange: #ffc;
-	--rank-orange-border: 1px solid orange;
-	--rank-red: red;
-	--rank-light-red: #fcc;
-	--rank-red-border: 1px solid red;
-	--colour-font: #000;
-	--colour-background: #F2F0EE;
-	--colour-container-background: #fff;
-	--colour-white: #fff;
-	--colour-black: #000;
-	--colour-lightGrey: rgb(242, 240, 238);
-	--colour-blue: rgb(30, 101, 255);
-	--colour-orange: rgb(236 107 5);
-	--colour-green: rgba(31, 162, 25, 1);
-	--colour-red: rgba(198, 55, 24, 1);
-	--border-thick: .5rem solid  var(--colour-black);
-	--border-thick-halved: .25rem solid  var(--colour-black);
-	--table-left-edge: #f6f6f6;
-	--table-cell-border: var(--colour-black);
-	--table-cell-background: var(--colour-container-background);
-	--main-section-boxshadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	--main-section-border-radius: 20px;
-	--label-border-radius: 15px;
-	--primary-font-family: 'Work Sans', sans-serif;
-	--secondary-font-family: 'Inter', sans-serif;
-	--font-weight-bold: 700;
-	--font-weight-semibolder: 600;
-	--font-weight-semibold: 500;
-	--font-weight-normal: 400;
-	--font-size-x-large: 1.5rem; /*24px*/
-	--font-size-large: 1.125rem;
-	--font-size-normal: 1rem; /*16px*/
-	--font-size-xlarge: 1.5rem;
-	--font-size-small: 0.75rem; /*12px*/
-
-  }
+:root {
+  font-size: 16px;
+  --rank-green: green;
+  --rank-light-green: #cfc;
+  --rank-green-border: 1px solid green;
+  --rank-orange: orange;
+  --rank-light-orange: #ffc;
+  --rank-orange-border: 1px solid orange;
+  --rank-red: red;
+  --rank-light-red: #fcc;
+  --rank-red-border: 1px solid red;
+  --colour-font: #000;
+  --colour-background: #f2f0ee;
+  --colour-container-background: #fff;
+  --colour-white: #fff;
+  --colour-black: #000;
+  --colour-lightGrey: rgb(242, 240, 238);
+  --colour-blue: rgb(30, 101, 255);
+  --colour-green: rgba(31, 162, 25, 1);
+  --colour-red: rgba(198, 55, 24, 1);
+  --colour-grey-border: "#CECECE";
+  --border-thick: 0.625rem solid var(--colour-black);
+  --border-thick-halved: 0.32rem solid var(--colour-black);
+  --table-left-edge: #f6f6f6;
+  --table-cell-border: var(--colour-black);
+  --table-cell-background: var(--colour-container-background);
+  --main-section-boxshadow: 0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25); /*0px 4px 4px*/
+  --main-section-border-radius: 1.25rem; /*20 px*/
+  --primary-font-family: "Work Sans", sans-serif;
+  --secondary-font-family: "Inter", sans-serif;
+  --font-weight-bold: 700;
+  --font-weight-semibolder: 600;
+  --font-weight-semibold: 500;
+  --font-weight-normal: 400;
+  --font-size-large: 1.25rem; /*20px*/
+  --font-size-normal: 1rem; /*16px*/
+  --font-size-xlarge: 1.5rem; /* 24px */
+  --font-size-small: 0.75rem; /*12px*/
+}
