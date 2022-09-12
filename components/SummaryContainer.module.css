@@ -117,6 +117,9 @@ h3.percentStyle {
   align-self: center;
 }
 
+.helpButton{
+  padding: 0px;
+}
 h3.overallTitleStyle {
   color: white;
   text-align: left;
