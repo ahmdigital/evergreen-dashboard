@@ -55,7 +55,7 @@ export const theme = createTheme({
     }
 })
 
-// Creates the interior table
+// Creates the interior tabl
 export default function CollapsibleTable(props: CollapsibleTableProps) {
     return (
         <ThemeProvider theme={theme}>
@@ -73,7 +73,6 @@ export default function CollapsibleTable(props: CollapsibleTableProps) {
                     </colgroup>
                     <TableHead>
                         <TableRow>
-
                             <TableCell >status</TableCell>
                             <TableCell>name</TableCell>
                             <TableCell >current</TableCell>
