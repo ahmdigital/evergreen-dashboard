@@ -71,7 +71,7 @@ export function Page(props: PageProps) {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const rows = useProcessDependencyData(props.JSObject);
 	const [sortSetting, setSortSetting] = useState<SortSettings>({ type: "rank", direction: true });
-	const [filterSetting, setFilterSetting] = useState<Filter>({ type: "", level: 0, direction: false, mustHaveDependency: 0, showRed: true, showYellow: true, showGreen: true });
+	const [filterSetting, setFilterSetting] = useState<Filter>({ type: "", level: 0, direction: false, mustHaveDependency: -1, showRed: true, showYellow: true, showGreen: true });
 	let emptyRows = false;
 
 	// check if there are no rows

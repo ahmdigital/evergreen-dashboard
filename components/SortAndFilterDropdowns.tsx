@@ -59,9 +59,9 @@ export function SortBox(sortSetting: SortSettings, handleSortChange: any) {
 
 export function RankSelectionList(filterSetting: Filter, handleRankSelectionChange: any) {
 	const rankSelectionValue = [
-		...(filterSetting.showGreen ? ["Green"] : []),
-		...(filterSetting.showYellow ? ["Yellow"] : []),
-		...(filterSetting.showRed ? ["Red"] : [])
+		...(filterSetting.showGreen ? ["green"] : []),
+		...(filterSetting.showYellow ? ["yellow"] : []),
+		...(filterSetting.showRed ? ["red"] : [])
 	]
 
 	return <ThemeProvider theme={theme}>
@@ -75,17 +75,17 @@ export function RankSelectionList(filterSetting: Filter, handleRankSelectionChan
 				input={<OutlinedInput label="Tag" />}
 			>
 				{[
-					<MenuItem value={"Green"} key={"Green"}>
+					<MenuItem value={"green"} key={"green"}>
 						<Checkbox checked={filterSetting.showGreen} />
-						<ListItemText primary={"Green"} />
+						<ListItemText primary={"green"} />
 					</MenuItem>,
-					<MenuItem value={"Yellow"} key={"Yellow"}>
+					<MenuItem value={"yellow"} key={"yellow"}>
 						<Checkbox checked={filterSetting.showYellow} />
-						<ListItemText primary={"Yellow"} />
+						<ListItemText primary={"yellow"} />
 					</MenuItem>,
-					<MenuItem value={"Red"} key={"Red"}>
+					<MenuItem value={"red"} key={"red"}>
 						<Checkbox checked={filterSetting.showRed} />
-						<ListItemText primary={"Red"} />
+						<ListItemText primary={"red"} />
 					</MenuItem>
 				]}
 			</Select>
