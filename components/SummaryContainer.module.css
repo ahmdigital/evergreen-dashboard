@@ -67,6 +67,10 @@ div.summaryStyle div.container {
   margin-bottom: 0rem;
 }
 
+div.margins {
+  margin-top: 0.5rem !important;
+}
+
 h3.summaryStylePercent {
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;

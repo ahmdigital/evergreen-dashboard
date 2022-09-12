@@ -72,7 +72,7 @@ export default function SummaryContainer(props: {
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
               <button onClick={callRefresh} aria-label="Refresh data">
-                <Image src={refreshIcon} alt="Refresh Icon" width="20rem" height="20rem"></Image>
+                <Image src={refreshIcon} alt="Refresh Icon" width="15rem" height="15rem"></Image>
                 <span className={styles.refreshWord}>Refresh</span>
               </button>
             </Tooltip>
@@ -82,7 +82,7 @@ export default function SummaryContainer(props: {
         <div>
             {props.loadingBackdrop}
         </div>
-      <Grid container spacing={1} className={styles.container}>
+      <Grid container spacing={1} className={`${styles.container} ${styles.margins}`}>
         <Grid xs={12} sm={12} md={6} lg={4}>
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
           <h3 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h3>
@@ -96,10 +96,7 @@ export default function SummaryContainer(props: {
         <Grid xs={12} sm={12} md={6} lg={4}>
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
           <div className={styles.summaryCompHeader}>
-          {/* TODO: Check the styles.summaryStyle is needed */}
           <h3 className={styles.summaryStyle}>{`Total Repos (${props.rankArray.green + props.rankArray.yellow + props.rankArray.red})`}</h3>
-
-
             <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
               <IconButton
 			    aria-label="Help button"
