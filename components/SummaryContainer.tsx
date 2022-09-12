@@ -103,28 +103,67 @@ export default function SummaryContainer(props: {
           <p className={headerStyles.headerStyle}>
             {"Last updated DD/MM/YY HH/MM AEST"}
           </p>
-          <Grid>
-            <div className={styles.btnsContainer}>
-              <Tooltip
-                arrow
-                title={
-                  <p className={styles.tooltipStyle}>
-                    Check for new repository updates
-                  </p>
-                }
-              >
-                <button onClick={callRefresh}>
+        </Grid>
+        <Grid>
+          <div className={styles.btnsContainer}>
+            <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
+              <button onClick={callRefresh} aria-label="Refresh data">
+                <Image src={refreshIcon} alt="Refresh Icon" width="15rem" height="15rem"></Image>
+                <span className={styles.refreshWord}>Refresh</span>
+              </button>
+            </Tooltip>
+          </div>
+        </Grid>
+      </Grid>
+      <div>
+        {props.loadingBackdrop}
+      </div>
+      <Grid container spacing={1} className={`${styles.container} ${styles.margins}`}>
+        <Grid xs={12} sm={12} md={6} lg={4}>
+          <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+            <h3 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h3>
+            <div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
+              <h3 className={styles.overallTitleStyle}>Overall</h3>
+              <h3 className={styles.percentStyle} >{overallPercentStr}</h3>
+              <h3 className={styles.overallCentredTitleStyle}>up-to-date</h3>
+            </div>
+          </div>
+        </Grid>
+        <Grid xs={12} sm={12} md={6} lg={4}>
+          <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+            <div className={styles.summaryCompHeader}>
+              <h3 className={styles.summaryStyle}>{`Total Repos (${props.rankArray.green + props.rankArray.yellow + props.rankArray.red})`}</h3>
+              <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
+                <IconButton
+                  aria-label="Help button"
+                  onClick={() => {
+                    setOpenHelp(true);
+                  }}
+                >
                   <Image
-                    src={refreshIcon}
-                    alt="refresh"
-                    width="20rem"
-                    height="20rem"
-                  ></Image>
-                  <span className={styles.refreshWord}>Refresh</span>
-                </button>
+                    className={styles.helpBtn}
+                    width="30px"
+                    height="30px"
+                    alt="Help Icon"
+                    src={helpIcon}
+                  />
+                </IconButton>
               </Tooltip>
             </div>
-          </Grid>
+            {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
+            <div>
+              <div className={styles.summaryComponent2}>
+                <ReposOverviewTable rankArray={props.rankArray} />
+              </div>
+            </div>
+          </div>
+        </Grid>
+        <Grid xs={12} sm={12} md={6} lg={4}>
+          <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+            <div className={styles.summaryCompHeader}>
+              <h3 className={styles.summaryStyle}>Dependent Repos</h3>
+            </div>
+          </div>
         </Grid>
         <Grow in={!closeHeader}>
           <Grid>
