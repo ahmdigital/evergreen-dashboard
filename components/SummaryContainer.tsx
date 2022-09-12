@@ -9,7 +9,7 @@ import ForestIcon from '@mui/icons-material/Forest';
 import Tooltip from "@mui/material/Tooltip";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import refreshIcon from "./images/refresh.svg" ;
+import refreshIcon from "./images/refresh.svg";
 import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
 import config from "../config.json";
 import { IconButton } from "@mui/material";
@@ -26,38 +26,38 @@ export default function SummaryContainer(props: {
   let overallStyle = styles.summaryOverall
   let overallColour = styles.summaryOverallGreen
 
-  if(isNaN(overallPercent)){
+  if (isNaN(overallPercent)) {
     overallPercentStr = "N/A"
-	overallColour = styles.summaryOverallGrey
-  } else if(overallPercent < config.targetPercentage){
-	overallColour = styles.summaryOverallRed
+    overallColour = styles.summaryOverallGrey
+  } else if (overallPercent < config.targetPercentage) {
+    overallColour = styles.summaryOverallRed
   }
 
   // State for opening the helpLegend
   const [openHelp, setOpenHelp] = useState<boolean>(false);
 
-  async function callRefresh(){
-		if(refreshing){ return }
-		if(lastRequest == null){ return; }
-		if(PageLoaderIsLoading){ return; }
-		PageLoaderSetLoading(true)
-		PageLoaderSetData({refreshing: true, data: PageLoaderCurrentData as any} as any)
+  async function callRefresh() {
+    if (refreshing) { return }
+    if (lastRequest == null) { return; }
+    if (PageLoaderIsLoading) { return; }
+    PageLoaderSetLoading(true)
+    PageLoaderSetData({ refreshing: true, data: PageLoaderCurrentData as any } as any)
 
-		refreshing = true
+    refreshing = true
 
-		//TODO: Support other configuration
-		//switch(mode){
-		//	case(Mode.Frontend): break;
-		//	case(Mode.StandaloneBackend):break;
-		//	case(Mode.IntegratedBackend): {
-				forceNewVersion(lastRequest).then(async (result) => {
-					PageLoaderSetData(result as any)
-					PageLoaderSetLoading(false)
-					refreshing = false
-				})
-		//	} break;
-		//}
-	}
+    //TODO: Support other configuration
+    //switch(mode){
+    //	case(Mode.Frontend): break;
+    //	case(Mode.StandaloneBackend):break;
+    //	case(Mode.IntegratedBackend): {
+    forceNewVersion(lastRequest).then(async (result) => {
+      PageLoaderSetData(result as any)
+      PageLoaderSetLoading(false)
+      refreshing = false
+    })
+    //	} break;
+    //}
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }} className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}>
@@ -79,55 +79,55 @@ export default function SummaryContainer(props: {
           </div>
         </Grid>
       </Grid>
-        <div>
-            {props.loadingBackdrop}
-        </div>
+      <div>
+        {props.loadingBackdrop}
+      </div>
       <Grid container spacing={1} className={`${styles.container} ${styles.margins}`}>
         <Grid xs={12} sm={12} md={6} lg={4}>
-        <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-          <h3 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h3>
-          <div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
-            <h3 className={styles.overallTitleStyle}>Overall</h3>
-            <h3 className={styles.percentStyle} >{overallPercentStr}</h3>
-            <h3 className={styles.overallCentredTitleStyle}>up-to-date</h3>
-          </div>
-        </div>
-        </Grid>
-        <Grid xs={12} sm={12} md={6} lg={4}>
-        <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-          <div className={styles.summaryCompHeader}>
-          <h3 className={styles.summaryStyle}>{`Total Repos (${props.rankArray.green + props.rankArray.yellow + props.rankArray.red})`}</h3>
-            <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
-              <IconButton
-			    aria-label="Help button"
-				onClick={() => {
-                  setOpenHelp(true);
-                }}
-			  >
-              <Image
-                  className={styles.helpBtn}
-                  width="30px"
-                  height="30px"
-                  alt="Help Icon"
-                  src={helpIcon}
-                />
-              </IconButton>
-            </Tooltip>
-          </div>
-          {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
-          <div>
-            <div className={styles.summaryComponent2}>
-              <ReposOverviewTable rankArray={props.rankArray} />
+          <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+            <h3 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h3>
+            <div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
+              <h3 className={styles.overallTitleStyle}>Overall</h3>
+              <h3 className={styles.percentStyle} >{overallPercentStr}</h3>
+              <h3 className={styles.overallCentredTitleStyle}>up-to-date</h3>
             </div>
           </div>
-        </div>
         </Grid>
         <Grid xs={12} sm={12} md={6} lg={4}>
-        <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-          <div className={styles.summaryCompHeader}>
-            <h3 className={styles.summaryStyle}>Dependent Repos</h3>
+          <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+            <div className={styles.summaryCompHeader}>
+              <h3 className={styles.summaryStyle}>{`Total Repos (${props.rankArray.green + props.rankArray.yellow + props.rankArray.red})`}</h3>
+              <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
+                <IconButton
+                  aria-label="Help button"
+                  onClick={() => {
+                    setOpenHelp(true);
+                  }}
+                >
+                  <Image
+                    className={styles.helpBtn}
+                    width="30px"
+                    height="30px"
+                    alt="Help Icon"
+                    src={helpIcon}
+                  />
+                </IconButton>
+              </Tooltip>
+            </div>
+            {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
+            <div>
+              <div className={styles.summaryComponent2}>
+                <ReposOverviewTable rankArray={props.rankArray} />
+              </div>
+            </div>
           </div>
-        </div>
+        </Grid>
+        <Grid xs={12} sm={12} md={6} lg={4}>
+          <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+            <div className={styles.summaryCompHeader}>
+              <h3 className={styles.summaryStyle}>Dependent Repos</h3>
+            </div>
+          </div>
         </Grid>
       </Grid>
     </Box>
