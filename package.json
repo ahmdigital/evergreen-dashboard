@@ -14,7 +14,7 @@
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.3",
-    "evergreen-org-crawler": "^0.0.6",
+    "evergreen-org-crawler": "^0.0.7",
     "@mui/material": "^5.10.4",
     "@mui/styles": "^5.10.2",
     "next": "^v12.3.0",
