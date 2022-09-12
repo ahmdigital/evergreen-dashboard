@@ -5,7 +5,6 @@ import ReposOverviewTable from "./SummaryComponents/RepoOverviewTable/ReposOverv
 import helpIcon from "./images/helpIcon.png";
 import Image from "next/image";
 import HelpScreen from "./LightStatus";
-import headerStyles from "./HeaderContainer.module.css";
 import ForestIcon from "@mui/icons-material/Forest";
 import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
@@ -86,6 +85,7 @@ export default function SummaryContainer(props: {
     //}
   }
 
+
   return (
     <Box
       sx={{ flexGrow: 1 }}
@@ -97,7 +97,7 @@ export default function SummaryContainer(props: {
           <p className={styles.subtitle}>
             Monitoring dependencies for <b>{config.targetOrganisation}</b> Github Organisation
           </p>
-          <p className={headerStyles.headerStyle}>
+          <p className={styles.lastUpdated}>
             {"Last updated DD/MM/YY HH/MM AEST"}
           </p>
         </Grid>
@@ -112,7 +112,7 @@ export default function SummaryContainer(props: {
           </div>
         </Grid>
         <Grid>
-        <Grow in={!closeHeader}>
+          <Grow in={!closeHeader}>
             <Grid>
               {!closeHeader && (
                 <div>
@@ -181,14 +181,15 @@ export default function SummaryContainer(props: {
         </Grid>
         <div>{props.loadingBackdrop}</div>
       </Collapse>
-      {/* <button onClick={() => setCloseHeader(!closeHeader)}>Show Less</button> */}
-      <IconButton
-        aria-label="expand row"
-        size="small"
-        onClick={() => setCloseHeader(!closeHeader)}
-      >
-        {closeHeader ? <><KeyboardArrowUpIcon />Show Less</> : <><KeyboardArrowDownIcon />Show More</>}
-      </IconButton>
+      <div className={styles.expandButton}>
+        <IconButton
+          aria-label="expand row"
+          size="small"
+          onClick={() => setCloseHeader(!closeHeader)}
+        >
+          {closeHeader ? <><KeyboardArrowUpIcon />Show Less</> : <><KeyboardArrowDownIcon />Show More</>}
+        </IconButton>
+      </div>
     </Box>
   );
 }

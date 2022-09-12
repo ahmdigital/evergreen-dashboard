@@ -1,7 +1,6 @@
 .overall {
   color: white;
   border-radius: var(--label-border-radius);
-
   text-align: center;
   padding: 4px 12px 4px 12px;
 }
@@ -13,6 +12,7 @@
   /* box-sizing: border-box;
   display: flex; */
   margin-left: 8px;
+  border-radius: var(--label-border-radius);
 }
 
 .rootContainer {

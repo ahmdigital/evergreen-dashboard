@@ -10,6 +10,17 @@ div.summaryStyle {
   font-weight: var(--font-weight-semibold); /*500*/
 }
 
+.lastUpdated {
+  font-size: var(--font-size-normal);
+  margin-top: 3px;
+  font-weight: var(--font-weight-normal); /*500*/
+}
+
+.expandButton {
+  display: flex;
+  flex-direction: column;
+}
+
 div.summaryOverall {
   display: block;
   max-height: 100%;

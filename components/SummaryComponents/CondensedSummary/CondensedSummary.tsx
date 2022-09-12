@@ -38,6 +38,7 @@ const Summary = (props: CondensedRepoSummaryProps) => {
     }
   };
 
+  
   return (
     <Container className={styles.rootContainer} maxWidth="xs">
       <Container className={styles.topPart}>
