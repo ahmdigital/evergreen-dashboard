@@ -40,16 +40,19 @@ export function SubRow(props: SubRowProps) {
   const latestVersion = semVerToString(props.dependency.version);
 
   let statusIcon = RedIcon;
+  let statusText = "Needs updating urgently";
   let iconDefinition = redDef.description;
 
   // Setting the status
   if (props.dependency.rank == 2) {
     statusIcon = GreenIcon;
     iconDefinition = greenDef.description;
+	statusText = "Up to date";
   }
   if (props.dependency.rank == 1) {
     statusIcon = YellowIcon;
     iconDefinition = yellowDef.description;
+	statusText = "Should be updated soon";
   }
 
   return (
@@ -60,7 +63,7 @@ export function SubRow(props: SubRowProps) {
             <div className={styles.iconContainer}>
               <Image
                 src={statusIcon}
-                alt="Repo Priority"
+                alt={statusText}
                 width="33px"
                 height="33px"
                 className={styles.inverseSubRowIcon}

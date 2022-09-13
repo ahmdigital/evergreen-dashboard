@@ -11,8 +11,9 @@ import Tooltip from "@mui/material/Tooltip";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import refreshIcon from "../images/refresh.svg" ;
-import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "../PageLoader";
+import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
 import config from "../../config.json";
+import { IconButton } from "@mui/material";
 
 let refreshing = false
 
@@ -63,7 +64,7 @@ export default function SummaryContainer(props: {
     <Box sx={{ flexGrow: 1 }} className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}>
       <Grid container spacing={1} className={styles.container}>
         <Grid>
-          <h2 className="h2NoMargins"><ForestIcon /> Evergreen Dashboard</h2>
+          <h2 className="h2NoMargins"><ForestIcon aria-label="Evergreen Forest Icon"/> Evergreen Dashboard</h2>
           <p className={headerStyles.headerStyle}>
             Monitoring for <b>{config.targetOrganisation}</b> Github Organisation
           </p>
@@ -71,8 +72,8 @@ export default function SummaryContainer(props: {
         <Grid>
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
-              <button onClick={callRefresh}>
-                <Image src={refreshIcon} alt="refresh" width="20rem" height="20rem"></Image>
+              <button onClick={callRefresh} aria-label="Refresh data">
+                <Image src={refreshIcon} alt="Refresh Icon" width="20rem" height="20rem"></Image>
                 <span className={styles.refreshWord}>Refresh</span>
               </button>
             </Tooltip>
@@ -97,19 +98,21 @@ export default function SummaryContainer(props: {
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
           <div className={styles.summaryCompHeader}>
             <h4 className={styles.summaryStyle}>Repos Overview</h4>
-            <Tooltip arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
-              <div>
+            <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
+              <IconButton 
+			    aria-label="Help button"
+				onClick={() => {
+                  setOpenHelp(true);
+                }}
+			  >
               <Image
                   className={styles.helpBtn}
                   width="30px"
                   height="30px"
-                  alt="help"
+                  alt="Help Icon"
                   src={helpIcon}
-                  onClick={() => {
-                    setOpenHelp(true);
-                  }}
                 />
-              </div>
+              </IconButton>
             </Tooltip>
           </div>
           {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
