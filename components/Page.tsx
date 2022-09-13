@@ -11,7 +11,6 @@ import { DependencyData } from "../src/dataProcessing";
 import LoadingBackdrop from "./LoadingBackdrop";
 import HelpGuide from "./HelpComponents/HelpGuide";
 
-
 export type PageProps = {
   JSObject: DependencyData;
   finalData: boolean;
@@ -93,6 +92,7 @@ export function Page(props: PageProps) {
       </Head>
       <main style={{ padding: 0 }}>
         <Layout>
+          {/* <CondensedHeaderSummaryContainer rankArray={rankArray} /> */}
           <SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} />
           <DependenciesContainer
             JSObject={props.JSObject}

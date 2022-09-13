@@ -31,12 +31,11 @@ const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          fontWeight: "bold",
-          fontSize: "large",
-          fontFamily: 'var(--primary-font-family)',
+          fontWeight: "var(--font-weight-semibold)",
+          fontSize: "18px",
+          fontFamily: 'var(--secondary-font-family)',
           backgroundColor: "var(--colour-container-background)",
           color: "var(--colour-font)",
-          borderBottom: "none",
         }
       }
     }
@@ -50,10 +49,11 @@ const collapsibleTheme = createTheme({
       styleOverrides: {
         root: {
           fontWeight: "bold",
-          fontSize: "large",
+          fontSize: "1.1rem",
           fontFamily: 'var(--primary-font-family)',
           backgroundColor: "#f5f5f5",
           color: "var(--colour-font)",
+
         }
       }
     }
@@ -67,7 +67,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
   let statusIcon = RedIcon;
   let statusText = "Needs updating urgently";
   let iconDefinition = redDef.description;
-  
+
   // Setting the status
   if (rank == 2) {
     statusIcon = greenIcon;
@@ -82,7 +82,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
 
   return (
     <React.Fragment>
-      <TableRow>
+      <TableRow >
         <ThemeProvider theme={theme}>
           <TableCell>
             <IconButton
@@ -137,7 +137,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
               <Box sx={{ margin: 1 }}>
                 <Table size="small" aria-label="dependencies">
                   <TableHead className={styles.collapsibleTableHead} >
-                    <TableRow>
+                    <TableRow >
                       <TableCell className={styles.collapsibleTableCell}>
                         <Tabs subRows={subRows}></Tabs>
                       </TableCell>
@@ -152,4 +152,3 @@ export default function Row(props: { rank: number; row: any } & Props) {
     </React.Fragment >
   );
 }
-
