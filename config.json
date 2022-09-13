@@ -1,6 +1,6 @@
 {
 	"targetOrganisation": "octokit",
-	"requireAuthentication": true,
+	"requireAuthentication": false,
 	"rankCutoff": {
 		"major": "0.6.-1",
 		"minor": "0.5.-1"
@@ -8,5 +8,5 @@
 	"timeUntilRefresh": 5,
 	"targetPercentage": 80,
 	"clientID": "5cd550d6a19995e8faf0",
-	"redirectURL": "http://localhost:3000/signin/"
+	"redirectURI": "http://localhost:3000/signin/"
 }

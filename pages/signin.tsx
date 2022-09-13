@@ -14,7 +14,7 @@ const SCOPE = "repo"
 // get code
 function redirect() {
 	const uuid = self.crypto.randomUUID();
-	window.location.href = `https://github.com/login/oauth/authorize?client_id=${config.clientID}&redirect_uri=${config.redirectURL}&scope=${SCOPE}&state=${uuid}`;
+	window.location.href = `https://github.com/login/oauth/authorize?client_id=${config.clientID}&redirect_uri=${config.redirectURI}&scope=${SCOPE}&state=${uuid}`;
 }
 
 type SignInStatus = "calculating" | "not-signed-in" | "exchanging-code-for-token" | "signed-in" | "error-while-signing-in"

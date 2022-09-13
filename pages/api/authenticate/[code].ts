@@ -1,16 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { serialize } from 'cookie';
 import { encodeTokenCookie, TokenCookie } from "../../../src/authenticationMiddleware";
+import config from "../../../config.json"
 
-type AuthResponse = {
-	access_token: string;
-	scope: string;
-	token_type: string;
-};
-
-const clientID = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
-const redirectURL = process.env.REDIRECT_URL || `http://localhost:${process.env.PORT || 3000}/signin`
 
 export default async function handler(
 	req: NextApiRequest,
@@ -27,9 +20,8 @@ export default async function handler(
 	};
 
 	try {
-
 		const tokenObj = await fetch(
-			`https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${client_secret}&code=${code}&redirect_uri=${redirectURL}`,
+			`https://github.com/login/oauth/access_token?client_id=${config.clientID}&client_secret=${client_secret}&code=${code}&redirect_uri=${config.redirectURI}`,
 			requestOptions
 		).then(r => r.json())
 
