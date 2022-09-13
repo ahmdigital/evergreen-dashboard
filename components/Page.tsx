@@ -10,7 +10,7 @@ import SummaryContainer from "./SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
 import LoadingBackdrop from "./LoadingBackdrop";
 import HelpGuide from "./HelpComponents/HelpGuide";
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { RankSelectionList, SortBox, SortSettings } from "./SortAndFilterDropdowns";
 import { applySort, Filter, rankCounts, searchAndFilter } from "../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -111,15 +111,15 @@ export function Page(props: PageProps) {
 	//TODO: Replace this
 	const sortDirectionBox = <ThemeProvider theme={theme}>
 		<FormControl sx={{ m: 1, minWidth: 138, maxWidth: 138 }}>
-		<p>Sort Direction</p>
-		<Select
-			value={sortSetting.direction ? "ascending" : "descending"}
-			onChange={handleSortDirectionChange}
-		>
-			<MenuItem value={"ascending"}>Ascending</MenuItem>
-			<MenuItem value={"descending"}>Descending</MenuItem>
-		</Select>
-	</FormControl></ThemeProvider>
+			<p>Sort Direction</p>
+			<Select
+				value={sortSetting.direction ? "ascending" : "descending"}
+				onChange={handleSortDirectionChange}
+			>
+				<MenuItem value={"ascending"}>Ascending</MenuItem>
+				<MenuItem value={"descending"}>Descending</MenuItem>
+			</Select>
+		</FormControl></ThemeProvider>
 
 	return (
 		<div className="container">

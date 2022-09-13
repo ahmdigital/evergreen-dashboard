@@ -12,6 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import config from "../config.json";
 import { semVerFromString } from "../src/semVer";
+import { IconButton } from "@mui/material";
 
 export type HelpScreenProps = {
   closeHelp: (_value: boolean | ((_prev: boolean) => boolean)) => void;
@@ -50,7 +51,7 @@ function StatusTable() {
         <TableBody>
           <TableRow>
             <TableCell className={styles.tableCellStyle}>
-              <Image src={redIcon} alt="Red" width="40px" height="40px"></Image>
+              <Image src={redIcon} alt="Needs updating urgently" width="40px" height="40px"></Image>
             </TableCell>
             <TableCell className={styles.tableCellStyle}>
               <p>{redDef.description}</p>
@@ -58,7 +59,7 @@ function StatusTable() {
           </TableRow>
           <TableRow>
             <TableCell className={styles.tableCellStyle}>
-              <Image src={yellowIcon} alt="Yellow" width="40px" height="40px"></Image>
+              <Image src={yellowIcon} alt="Should be updated soon" width="40px" height="40px"></Image>
             </TableCell>
             <TableCell className={styles.tableCellStyle}>
               <p>{yellowDef.description}</p>
@@ -66,7 +67,7 @@ function StatusTable() {
           </TableRow>
           <TableRow>
             <TableCell className={styles.tableCellStyle}>
-              <Image src={greenIcon} alt="Green" width="40px" height="40px"></Image>
+             <Image src={greenIcon} alt="Up to date" width="40px" height="40px"></Image>
             </TableCell>
             <TableCell className={styles.tableCellStyle}>
               <p>{greenDef.description}</p>
@@ -83,20 +84,23 @@ export default function HelpScreen(props: HelpScreenProps) {
   return (
     <div className={styles.modalBg}>
       <div className={styles.modalContainer}>
-        <div
-          className={styles.closeHelpScreen}
-          onClick={() => props.closeHelp(false)}
-        >
-          <Image
-            className={styles.closeBtn}
-            width="40"
-            height="40"
-            alt="help"
-            src={closeIcon}
-          />
+        <div className={styles.crossButtonContainer}>
+          <IconButton
+            aria-label="Close button"
+            className={styles.closeHelpScreen}
+            onClick={() => props.closeHelp(false)}
+          >
+            <Image
+              className={styles.closeBtn}
+              width="40"
+              height="40"
+              alt="Cross icon"
+              src={closeIcon}
+            />
+          </IconButton>
         </div>
         <div>
-          <StatusTable/>
+          <StatusTable />
         </div>
       </div>
     </div>

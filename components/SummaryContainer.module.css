@@ -4,16 +4,33 @@ div.summaryStyle {
   min-width: 15rem;
 }
 
+.subtitle {
+  font-size: var(--font-size-large);
+  margin-top: 3px;
+  font-weight: var(--font-weight-semibold); /*500*/
+}
+
+.lastUpdated {
+  font-size: var(--font-size-normal);
+  margin-top: 3px;
+  font-weight: var(--font-weight-normal); /*500*/
+}
+
+.expandButton {
+  display: flex;
+  flex-direction: column;
+}
+
 div.summaryOverall {
   display: block;
   max-height: 100%;
-  height: 410px;
+  /* height: 410px; */
   background-color: var(--colour-green);
-  box-sizing: border-box;
+  /* box-sizing: border-box;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
-  margin-right: 1rem;
+  margin-right: 1rem; */
   text-align: center;
 }
 
@@ -24,41 +41,29 @@ div.summaryOverallGreen {
 div.summaryOverallRed {
   background-color: var(--colour-red);
 }
+div.summaryOverallGrey {
+  background-color: gray;
+}
+
+div.smallSharedCompProps {
+  height: 75%;
+  min-width: 100%;
+  border-radius: 20px;
+  padding: 1.5rem 2rem 2rem 2rem;
+  box-sizing: border-box;
+}
 
 div.summaryComponent {
   display: block;
-  height: 410px;
+  /* max-height: 100%; */
+  min-height: 380px;
   background-color: var(--colour-lightGrey);
   box-sizing: border-box;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
 }
 
-div.smallSharedCompProps {
-  width: 31.8%;
-  height: 75%;
-  min-width: 94%;
-  border-radius: 20px;
-  padding: 1.5rem 2rem 2rem 2rem;
-  box-sizing: border-box;
-}
-
-div.smallSharedCompProps {
-  width: 31.8%;
-  height: 75%;
-  min-width: 94%;
-  border-radius: 20px;
-  padding: 1.5rem 2rem 2rem 2rem;
-  box-sizing: border-box;
-}
-
-div.summaryComponent {
-  display: block;
-  max-height: 100%;
-  background-color: var(--colour-lightGrey);
-  box-sizing: border-box;
+div.summaryOverall h3 {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
 }
@@ -69,42 +74,17 @@ div.summaryStyle div.container {
   flex-wrap: wrap;
   width: 100%;
   justify-content: space-between;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
 }
 
-h4.summaryStylePercent {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  justify-content: space-between;
+div.margins {
+  margin-top: 0.5rem !important;
+}
+
+h3.summaryStylePercent {
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
-}
-
-div.summaryStyle div.container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  justify-content: space-between;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-h4.summaryStylePercent {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  justify-content: space-between;
-  margin-top: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-div.headerStyle {
-  align-items: center;
 }
 
 div.summaryComponent2 {
@@ -137,40 +117,37 @@ div.summaryComponent div.summaryCompHeader {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.813rem;
   width: 100%;
 }
 
 div.sharedCompProps {
-  border-radius: 20px;
-  padding: 1.5rem 2rem 2rem 2rem;
+  width: 100%;
+  min-width: 18rem;
+  border-radius: var(--main-section-border-radius); /*20px*/
+  padding: 1rem 1.4rem 1.4rem;
+  /* padding: 1.5rem 2rem 2rem 2rem; */
   box-sizing: border-box;
 }
 
-h2.percentStyle {
+h3.percentStyle {
   color: white;
-  font-size: 6.25rem;
-  /*100px;*/
-  font-weight: var(--font-weight-semibold);
+  font-size: 6.25rem; /*100px;*/
+  font-weight: var(--font-weight-normal);
+  /* font-weight: var(--font-weight-semibold); */
   margin-block-start: 0em;
   margin-block-end: 0em;
   align-self: center;
 }
 
+.helpButton{
+  padding: 0px;
+}
 h3.overallTitleStyle {
   color: white;
   text-align: left;
-  margin-block-start: 0em;
-  margin-block-end: 0em;
-  margin-top: 0.5rem !important;
-  margin-bottom: 0.5rem !important;
-}
-
-h3.overallCentredTitleStyle {
-  color: white;
-  text-align: center;
   margin-block-start: 0em;
   margin-block-end: 0em;
   margin-top: 0.5rem !important;
@@ -218,7 +195,6 @@ div.loadingWheelBox {
   cursor: pointer;
 }
 
-
 .tooltipStyle {
   font-size: var(--font-size-normal);
   font-family: var(--primary-font-family);
@@ -230,20 +206,19 @@ div.refreshWord {
 }
 
 div.btnsContainer {
-  display: flex;
+  display:block;
   justify-content: flex-end;
   margin-bottom: 0;
   width: 17rem;
 }
 
 div.btnsContainer button {
-  width: 8rem;
   font-family: var(--primary-font-family);
   font-size: var(--font-size-large);
   background-color: var(--colour-container-background);
   border: none;
   padding: 0.8rem;
-  border-radius: 20px;
+  border-radius: var(--main-section-border-radius);
   justify-content: center;
   align-items: center;
 }

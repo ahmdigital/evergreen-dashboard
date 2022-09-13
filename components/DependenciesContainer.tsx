@@ -7,9 +7,16 @@ import { DependencyData } from "../src/dataProcessing";
 import config from "../config.json";
 import { Grid } from "@mui/material"
 //import filterIcon from "../components/images/filter.svg" ;
-import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
+import {
+  PageLoaderCurrentData,
+  forceNewVersion,
+  PageLoaderIsLoading,
+  lastRequest,
+  PageLoaderSetData,
+  PageLoaderSetLoading,
+} from "./PageLoader";
 
-let refreshing = false
+let refreshing = false;
 
 /* Container includes  Search, Filter, Dependencies Table */
 export default function DependenciesContainer(props: {
@@ -22,15 +29,23 @@ export default function DependenciesContainer(props: {
   rankSelection: any;
   sortDirection: any;
 }) {
-
   async function callRefresh() {
-    if (refreshing) { return }
-    if (lastRequest == null) { return; }
-    if (PageLoaderIsLoading) { return; }
-    PageLoaderSetLoading(true)
-    PageLoaderSetData({ refreshing: true, data: PageLoaderCurrentData as any } as any)
+    if (refreshing) {
+      return;
+    }
+    if (lastRequest == null) {
+      return;
+    }
+    if (PageLoaderIsLoading) {
+      return;
+    }
+    PageLoaderSetLoading(true);
+    PageLoaderSetData({
+      refreshing: true,
+      data: PageLoaderCurrentData as any,
+    } as any);
 
-    refreshing = true
+    refreshing = true;
 
     //TODO: Support other configuration
     //switch(mode){
@@ -38,10 +53,10 @@ export default function DependenciesContainer(props: {
     //	case(Mode.StandaloneBackend):break;
     //	case(Mode.IntegratedBackend): {
     forceNewVersion(lastRequest).then(async (result) => {
-      PageLoaderSetData(result as any)
-      PageLoaderSetLoading(false)
-      refreshing = false
-    })
+      PageLoaderSetData(result as any);
+      PageLoaderSetLoading(false);
+      refreshing = false;
+    });
     //	} break;
     //}
   }

@@ -29,18 +29,6 @@
 	background-color: var(--colour-background);
 }
 
-.tableCellStyle {
-	font-weight: var(--font-weight-bold);
-	font-family: var(--primary-font-family);
-	font-size: 1.4rem;
-	background-color: var(--table-cell-background);
-	color: var(--colour-font);
-	margin-top: 1rem;
-	line-height: 3rem;
-	border-color: var(--table-cell-border);
-	border-width: 0.2rem;
-	color: var(--colour-text);
-}
 
 .tableStyle {
 	box-shadow: none;
@@ -50,4 +38,5 @@
 
 .tableComponent {
 	box-shadow: none;
+	border-bottom: none;
 }
