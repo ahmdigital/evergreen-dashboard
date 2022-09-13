@@ -15,7 +15,7 @@
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.3",
-    "@mui/styles": "^5.10.2",
+    "@mui/styles": "^5.10.3",
     "next": "^v12.3.0",
     "next-transpile-modules": "^9.0.0",
     "dayjs": "^1.11.5",
