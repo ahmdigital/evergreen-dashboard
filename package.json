@@ -4,28 +4,25 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -- --port $PORT",
-    "startt": "next start -- --port 3000",
     "lint": "next lint",
     "type-check": "tsc",
     "test": "jest"
   },
   "dependencies": {
     "@emotion/css": "^11.10.0",
-    "@emotion/react": "^11.10.0",
+    "@emotion/react": "^11.10.4",
     "@emotion/server": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
+    "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.3",
     "@mui/styles": "^5.10.2",
-    "next": "latest",
+    "next": "^v12.3.0",
     "next-transpile-modules": "^9.0.0",
     "@types/node": "^17.0.40",
     "dayjs": "^1.11.5",
     "evergreen-org-crawler": "^0.0.7",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "typescript": "^4.7.4",
-    "validate-npm-package-name": "^4.0.0"
+    "react-dom": "17.0.2"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.17.1",
@@ -42,6 +39,9 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "jest": "^28.0.3",
     "@types/node": "^17.0.40",
-    "typescript": "^4.7.4"
+    "typescript": "^4.8.3"
+  },
+  "engines": {
+    "node": ">=16.14.2"
   }
 }
