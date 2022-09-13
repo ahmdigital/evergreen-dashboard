@@ -121,10 +121,10 @@ export default function Row(props: { rank: number; row: any } & Props) {
           </TableCell>
           <TableCell align="left">
             {semVerToString(row.version)}
-            {
+            { 
               (semVerToString(row.version) === "0.0.0-development" || semVerToString(row.version) === "0.0.0") &&
               <Tooltip arrow title={<p className={styles.tooltipStyle}>This repository was defined with a default version of 0.0.0</p>}>
-                <QuestionMark className={styles.questionIcon} />
+                <QuestionMark sx={{width: '1.125rem', height: '1.125rem'}}/>
               </Tooltip>
             }
           </TableCell>
