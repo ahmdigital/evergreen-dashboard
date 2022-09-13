@@ -9,10 +9,11 @@ import Image from "next/image";
 import { TableBody } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
-
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
+import ChartDataLabels from "chartjs-plugin-datalabels";
+ChartJS.register(ChartDataLabels);
 
 import { Colours, getResolved } from "../../../src/Colours"
 
@@ -28,11 +29,11 @@ const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          fontSize: 'var(--font-size-large)',
-          fontWeight: 'var(--font-weight-semibold)',
+          fontSize: "var(--font-size-large)",
+          fontWeight: "var(--font-weight-semibold)",
           marginTop: 0,
           marginBottom: 0,
-          padding: '16px 10px 16px 10px',
+          padding: "16px 10px 16px 10px",
         }
       }
     },
@@ -69,8 +70,8 @@ const Row = (props: RowProps) => {
   );
 };
 
-export default function ReposOverViewTable(props: { rankArray: any, showChart: boolean}) {
-  if(props.showChart){
+export default function ReposOverViewTable(props: { rankArray: any, showChart: boolean }) {
+  if (props.showChart) {
     let data = {
       labels: [StatusLabel.Red, StatusLabel.Yellow, StatusLabel.Green],
       datasets: [
@@ -87,8 +88,72 @@ export default function ReposOverViewTable(props: { rankArray: any, showChart: b
       ],
     };
 
-    return <Pie data={data} redraw={false} options= {{plugins: {legend: {display: false}}}}/>;
-  } else{
+    const config = {
+      data: {
+        labels: [StatusLabel.Red, StatusLabel.Yellow, StatusLabel.Green],
+        datasets: [{
+          backgroundColor: [
+            getResolved(Colours.redVar),
+            getResolved(Colours.orangeVar),
+            getResolved(Colours.greenVar)
+          ],
+          data: [props.rankArray.red, props.rankArray.yellow, props.rankArray.green],
+          datalabels: {
+            anchor: "end" as "end"
+          }
+        }]
+      },
+      options: {
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function (context: any) {
+                var label = context.label,
+                  currentValue = context.raw,
+                  total = context.chart._metasets[context.datasetIndex].total;
+
+                var percentage = parseFloat((currentValue / total * 100).toFixed(1));
+
+                return label + ": " + currentValue + " (" + percentage + "%)";
+              }
+            }
+          },
+          legend: { display: true, position: "bottom" as "bottom" },
+          datalabels: {
+            backgroundColor: function (context: any) {
+              return context.dataset.backgroundColor;
+            },
+            borderColor: "white",
+            borderRadius: 25,
+            borderWidth: 2,
+            color: "white",
+            display: function (context: any) {
+              var dataset = context.dataset;
+              var count = dataset.data.length;
+              var value = dataset.data[context.dataIndex];
+              return value > count * 1.5;
+            },
+            font: {
+              weight: "bold" as "bold"
+            },
+            padding: 6,
+            formatter: Math.round
+          }
+        },
+
+        responsive: true,
+        maintainAspectRatio: false,
+      }
+    }
+
+    return <div style={{ height: "100%", width: "100%", position: "relative", padding: "-1rem 0rem -1rem 0rem" }}>
+      <Pie style={{ height: "27em" }} data={config.data} options={
+        {
+          ...(config.options)
+        }
+      } />
+    </div>;
+  } else {
     return (
       <Table
         sx={{
