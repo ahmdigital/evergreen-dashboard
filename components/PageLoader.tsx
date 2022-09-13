@@ -80,7 +80,7 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 
 		switch(mode){
 			case(Mode.Frontend): {
-				const accessToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN!
+				const accessToken = process.env.NEXT_PUBLIC_EVERGREEN_GITHUB_TOKEN!
 				let JSObject = getJsonStructure(
 					accessToken, config, [api]
 				).then(
@@ -125,9 +125,9 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 
 		return <><LoadingBackdrop open={true}/></>
 	}
-	if (!data) { 
+	if (!data) {
 		// If data is unable to load, throw error message to user
-		return <><ErrorSnackbar open={true}/></> 
+		return <><ErrorSnackbar open={true}/></>
 	}
 
 	return <Page JSObject={data} finalData={true}/>
