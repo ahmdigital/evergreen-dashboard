@@ -1,4 +1,4 @@
-import { Checkbox, FormControl, InputLabel, ListItemText, MenuItem, OutlinedInput, Select } from "@mui/material";
+import { Checkbox, FormControl, ListItemText, MenuItem, Select } from "@mui/material";
 import { Filter } from "../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styles from './SortAndFilterDropdowns.module.css'
