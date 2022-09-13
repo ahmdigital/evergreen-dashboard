@@ -112,13 +112,11 @@ export default function SummaryContainer(props: {
           <Grow in={!closeHeader}>
             <Grid>
               {!closeHeader && (
-                <div>
                   <CondensedSummary
                     statusValues={props.rankArray}
                     overall={overallPercent}
                     target={config.targetPercentage}
                   ></CondensedSummary>
-                </div>
               )}
             </Grid>
           </Grow>
