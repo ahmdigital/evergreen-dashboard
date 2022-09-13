@@ -97,9 +97,6 @@ export default function SummaryContainer(props: {
           <p className={styles.subtitle}>
             Monitoring dependencies for <b>{config.targetOrganisation}</b> Github Organisation
           </p>
-          <p className={styles.lastUpdated}>
-            {"Last updated DD/MM/YY HH/MM AEST"}
-          </p>
         </Grid>
         <Grid>
           <div className={styles.btnsContainer}>

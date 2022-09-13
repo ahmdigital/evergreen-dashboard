@@ -8,11 +8,11 @@ export default function HeaderContainer() {
   return (
     <>
       <h2 className="h2NoMargins">
-            <ForestIcon /> Evergreen Dashboard
-          </h2>
-          <p className={headerStyles.headerStyle}>
-            Monitoring for <b>{config.targetOrganisation}</b> Github
-            Organisation
+        <ForestIcon /> Evergreen Dashboard
+      </h2>
+      <p className={headerStyles.headerStyle}>
+        Monitoring for <b>{config.targetOrganisation}</b> Github
+        Organisation
       </p>
     </>
   );

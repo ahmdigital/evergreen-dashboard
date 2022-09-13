@@ -10,8 +10,6 @@ import SummaryContainer from "./SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
 import LoadingBackdrop from "./LoadingBackdrop";
 import HelpGuide from "./HelpComponents/HelpGuide";
-// import { CondensedHeaderSummaryContainer } from "./HeaderContainer";
-
 
 export type PageProps = {
   JSObject: DependencyData;
