@@ -1,8 +1,7 @@
-
 /* -----------------START: SHARED SECTION CONTAINERS CSS ------------------- */
 div.sectionContainer {
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
+  /* flex-direction: column; */
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
@@ -12,12 +11,11 @@ div.sectionContainer {
   background-color: var(--colour-white);
   box-shadow: var(--main-section-boxshadow);
   border-radius: var(--main-section-border-radius);
-  padding: 1.5rem 2rem 1.5rem 2rem;
+  padding: 2rem 2.5rem 2rem 2.5rem;
   margin: 1.1rem;
   box-sizing: border-box;
   font-family: var(--primary-font-family);
 }
-
 
 h3.h3ContainerStyle {
   margin-top: 0.5rem;

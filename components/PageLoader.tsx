@@ -80,7 +80,7 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 
 		switch(mode){
 			case(Mode.Frontend): {
-				const accessToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN!
+				const accessToken = process.env.NEXT_PUBLIC_EVERGREEN_GITHUB_TOKEN!
 				let JSObject = getJsonStructure(
 					accessToken, config, [api]
 				).then(

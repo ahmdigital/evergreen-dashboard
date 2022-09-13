@@ -14,7 +14,6 @@ import { RankSelectionList, SortBox, SortSettings } from "./SortAndFilterDropdow
 import { applySort, Filter, rankCounts, searchAndFilter } from "../src/sortingAndFiltering";
 import HelpGuide from "./HelpComponents/HelpGuide";
 
-
 export type PageProps = {
 	JSObject: DependencyData;
 	finalData: boolean;

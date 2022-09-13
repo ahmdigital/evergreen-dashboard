@@ -72,35 +72,36 @@ export function InverseSubRow(props: InverseSubRowProps) {
   const depLink = props.user.link;
 
   let statusIcon = RedIcon;
-
+  let statusText = "Needs updating urgently";
   // Setting the status
   if (props.user.rank == 2) {
-    statusIcon = GreenIcon;
-  }
-  if (props.user.rank == 1) {
-    statusIcon = YellowIcon;
+	  statusIcon = GreenIcon;
+	  statusText = "Up to date";
+	}
+	if (props.user.rank == 1) {
+	statusIcon = YellowIcon;
+	statusText = "Should be updated soon";
   }
 
   return (
     <TableRow className={styles.inverseSubRow}    >
-		<ThemeProvider theme={theme}>
-			<TableCell className={styles.tableCellStyle}>
-				<Image
-				src={statusIcon}
-				alt="Repo Priority"
-				width="33px"
-				height="33px"
-				className={styles.inverseSubRowIcon}
-				></Image>
-			</TableCell>
-			<TableCell className={styles.tableCellStyle}>
-				<a href={depLink} rel="noreferrer" target="_blank">
-				{userName}
-				</a>
-			</TableCell>
-			<TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
-			{/* <button onClick = {() => {testClickFunction(userName)}}> </button> */}
-		</ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <TableCell>
+          <Image
+            src={statusIcon}
+            alt={statusText}
+            width="33px"
+            height="33px"
+            className={styles.inverseSubRowIcon}
+          ></Image>
+        </TableCell>
+		<TableCell>
+		  <a href={depLink} rel="noreferrer" target="_blank">
+		    {userName}
+		  </a>
+		</TableCell>
+        <TableCell>{usedVersion}</TableCell>
+      </ThemeProvider>
     </TableRow>
   );
 }
