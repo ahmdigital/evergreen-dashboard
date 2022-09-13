@@ -1,5 +1,5 @@
 div.headerStyle {
-  align-items: center;
+  align-items:flex-start;
   font-family: var(--primary-font-family);
 }
 

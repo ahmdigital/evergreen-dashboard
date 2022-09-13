@@ -65,7 +65,7 @@ export async function createData(request: "npm" | "PyPI" | "RubyGems" | null = n
 		api = [getProperty(requestToAPI, request)]
 	}
 
-	const accessToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN!
+	const accessToken = process.env.EVERGREEN_GITHUB_TOKEN!
 	return getJsonStructure(accessToken, config, api)
 }
 
@@ -74,7 +74,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	if(!isAuthorised){
 		return
 	}
-	
+
 	let cachedData = null
 
 	const current = Date.now().valueOf()
