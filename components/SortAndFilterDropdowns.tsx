@@ -34,14 +34,13 @@ const theme = createTheme({
 export type SortSettings = { type: "name" | "rank" | "time" | "internal" | "external" | "total" | "users", direction: boolean }
 
 export function SortBox(sortSetting: SortSettings, handleSortChange: any) {
-	
+
 	return <ThemeProvider theme={theme}>
-		<FormControl className={styles.sortby} sx={{ m: 1, minWidth: 200, maxWidth: 200 }}>
-			<InputLabel>Sort by</InputLabel>
+		<FormControl className={styles.sortby} sx={{ m: 1, minWidth: 220, maxWidth: 220 }}>
+		<p>Sort By</p>
 			<Select
 				value={sortSetting.type}
 				onChange={handleSortChange}
-				label="Sort by"
 			>
 				<MenuItem value=""> <em>None</em> </MenuItem>
 				<MenuItem value={"name"}>Name</MenuItem>
@@ -64,15 +63,16 @@ export function RankSelectionList(filterSetting: Filter, handleRankSelectionChan
 		...(filterSetting.showRed ? ["red"] : [])
 	]
 
-	return <ThemeProvider theme={theme}>
+	return <><ThemeProvider theme={theme}>
+		
 		<FormControl sx={{ m: 1, minWidth: 200, maxWidth: 200 }}>
-			<InputLabel>Filter</InputLabel>
+		<p>Filter</p>
+			
 			<Select
 				multiple
 				value={rankSelectionValue}
 				onChange={handleRankSelectionChange}
 				renderValue={(selected: string[]) => selected.join(', ')}
-				input={<OutlinedInput label="Tag" />}
 			>
 				{[
 					<MenuItem value={"green"} key={"green"}>
@@ -91,6 +91,7 @@ export function RankSelectionList(filterSetting: Filter, handleRankSelectionChan
 			</Select>
 		</FormControl>
 	</ThemeProvider>
+	</>
 }
 
 // const rankCutoffBox = <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>

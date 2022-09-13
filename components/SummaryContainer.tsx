@@ -85,9 +85,9 @@ export default function SummaryContainer(props: {
           </div>
         </Grid>
       </Grid>
-        <div>
+        {/* <div>
             {props.loadingBackdrop}
-        </div>
+        </div> */}
       <Grid container spacing={1} className={styles.container}>
         <Grid xs={12} sm={12} md={6} lg={4}>
         <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>

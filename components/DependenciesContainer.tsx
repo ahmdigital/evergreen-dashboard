@@ -49,7 +49,6 @@ export default function DependenciesContainer(props: {
     <div className={`${styles.sectionContainer}`}>
       <h3 className={sharedStyles.h3ContainerStyle}>Repositories </h3>
       <div className={styles.depsBarStyle}>
-
         <SearchBar
           searchTerm={props.searchTerm}
           setSearchTerm={props.setSearchTerm}
@@ -70,18 +69,18 @@ export default function DependenciesContainer(props: {
       <div className={styles.tableStyle}>
         <CollapsibleTable>{props.rows}</CollapsibleTable>
       </div>
-        {
-		  props.emptyRows && 
-            <div className={styles.noReposStyle}>
-              <p><b>{config.targetOrganisation}</b> has 0 repositories</p>
-            </div>
-        }
-		{
-		  !props.emptyRows && (props.searchTerm !== "" && props.rows.length === 0) && 
-		    <div className={styles.noReposStyle}>
-              <p>No search results found</p>
-            </div>	
-	    }
+      {
+        props.emptyRows &&
+        <div className={styles.noReposStyle}>
+          <p><b>{config.targetOrganisation}</b> has 0 repositories</p>
+        </div>
+      }
+      {
+        !props.emptyRows && (props.searchTerm !== "" && props.rows.length === 0) &&
+        <div className={styles.noReposStyle}>
+          <p>No search results found</p>
+        </div>
+      }
     </div>
   );
 }
