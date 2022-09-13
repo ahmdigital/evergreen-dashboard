@@ -5,7 +5,7 @@ import sharedStyles from "./treeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
 import config from "../config.json";
-import { Grid } from "@mui/material"
+// import { Grid } from "@mui/material"
 //import filterIcon from "../components/images/filter.svg" ;
 import {
   PageLoaderCurrentData,
@@ -64,37 +64,27 @@ export default function DependenciesContainer(props: {
   return (
     <div className={`${styles.sectionContainer}`}>
       <h3 className={sharedStyles.h3ContainerStyle}>Repositories </h3>
-    
-      <Grid container spacing={0}>
 
-        <Grid xs={12} lg={6} item>
-          <Grid container alignItems='center'>
-            <SearchBar
-              searchTerm={props.searchTerm}
-              setSearchTerm={props.setSearchTerm}
-            />
-          </Grid>
-        </Grid>
+      <div className={styles.depsBarStyle}>
 
-        <Grid xs={12} md={4} lg={2} item >
-          <Grid container alignItems='center'>
-            {props.sortDropdown}
-          </Grid>
-        </Grid>
+        <SearchBar
+          searchTerm={props.searchTerm}
+          setSearchTerm={props.setSearchTerm}
+        />
 
-        <Grid xs={12} md={4} lg={2} item >
-          <Grid container alignItems='center'>
-            {props.sortDirection}
-          </Grid>
-        </Grid>
+        <div className={styles.menuStyle}>
+          {props.sortDropdown}
+        </div>
 
-        <Grid xs={12} md={4} lg={2} item >
-          <Grid container alignItems='center'>
-            {props.rankSelection}
-          </Grid>
-        </Grid>
+        <div className={styles.menuStyle}>
+          {props.sortDirection}
+        </div>
 
-      </Grid>
+        <div className={styles.menuStyle}>
+          {props.rankSelection}
+        </div>
+        
+      </div>
 
 
       <div className={styles.tableStyle}>

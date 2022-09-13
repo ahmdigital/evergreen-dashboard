@@ -22,11 +22,12 @@ const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          fontSize: 'var(--font-size-large)',
+          fontSize: 'var(--font-size-normal)',
           fontWeight: 'var(--font-weight-semibold)',
           marginTop: 0,
           marginBottom: 0,
           padding: '16px 10px 16px 10px',
+          lineHeight: 'inherit'
         }
       }
     },
