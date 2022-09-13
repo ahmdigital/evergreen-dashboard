@@ -78,4 +78,5 @@ p {
   --font-size-normal: 1rem; /*16px*/
   --font-size-xlarge: 1.5rem; /* 24px */
   --font-size-small: 0.75rem; /*12px*/
+  --label-border-radius: 10px
 }
