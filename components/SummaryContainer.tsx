@@ -110,13 +110,17 @@ export default function SummaryContainer(props: {
         <Grid>
           <Grow in={!closeHeader}>
             <Grid>
-              {!closeHeader && (
-                  <CondensedSummary
-                    statusValues={props.rankArray}
-                    overall={overallPercent}
-                    target={config.targetPercentage}
-                  ></CondensedSummary>
-              )}
+              {!closeHeader ? (
+                <CondensedSummary
+                  statusValues={props.rankArray}
+                  overall={overallPercent}
+                  target={config.targetPercentage}
+                ></CondensedSummary>
+              ) : (<CondensedSummary
+                statusValues={props.rankArray}
+                overall={overallPercent}
+                target={config.targetPercentage}
+              ></CondensedSummary>)}
             </Grid>
           </Grow>
         </Grid>
@@ -166,12 +170,12 @@ export default function SummaryContainer(props: {
             </div>
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={4}>
-          <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-            <div className={styles.summaryComponent3}>
-              <ReposSecondarySummaryTable rows={props.rows} filterTerm={props.filterTerm} setFilterTerm={props.setFilterTerm} />
+            <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+              <div className={styles.summaryComponent3}>
+                <ReposSecondarySummaryTable rows={props.rows} filterTerm={props.filterTerm} setFilterTerm={props.setFilterTerm} />
+              </div>
             </div>
-          </div>
-        </Grid>
+          </Grid>
         </Grid>
         <div>{props.loadingBackdrop}</div>
       </Collapse>

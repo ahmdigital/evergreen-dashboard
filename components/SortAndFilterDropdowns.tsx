@@ -12,9 +12,6 @@ const theme = createTheme({
 					fontSize: "1rem",
 					fontFamily: 'var(--primary-font-family)',
 					color: 'black',
-					'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-						borderColor: 'red',
-					},
 				},
 			}
 		},
@@ -37,7 +34,7 @@ export function SortBox(sortSetting: SortSettings, handleSortChange: any) {
 
 	return <ThemeProvider theme={theme}>
 		<FormControl className={styles.sortby} sx={{ m: 1, minWidth: 160, maxWidth: 220 }}>
-		<p>Sort By</p>
+			<p>Sort By</p>
 			<Select
 				value={sortSetting.type}
 				onChange={handleSortChange}
@@ -64,10 +61,10 @@ export function RankSelectionList(filterSetting: Filter, handleRankSelectionChan
 	]
 
 	return <><ThemeProvider theme={theme}>
-		
+
 		<FormControl sx={{ m: 1, minWidth: 200, maxWidth: 200 }}>
-		<p>Filter</p>
-			
+			<p>Filter</p>
+
 			<Select
 				multiple
 				value={rankSelectionValue}
