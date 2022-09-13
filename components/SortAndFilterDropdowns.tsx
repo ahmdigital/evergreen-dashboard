@@ -36,7 +36,7 @@ export type SortSettings = { type: "name" | "rank" | "time" | "internal" | "exte
 export function SortBox(sortSetting: SortSettings, handleSortChange: any) {
 
 	return <ThemeProvider theme={theme}>
-		<FormControl className={styles.sortby} sx={{ m: 1, minWidth: 220, maxWidth: 220 }}>
+		<FormControl className={styles.sortby} sx={{ m: 1, minWidth: 160, maxWidth: 220 }}>
 		<p>Sort By</p>
 			<Select
 				value={sortSetting.type}

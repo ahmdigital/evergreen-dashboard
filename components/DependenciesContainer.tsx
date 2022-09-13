@@ -5,6 +5,7 @@ import sharedStyles from "./treeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
 import config from "../config.json";
+import { Grid } from "@mui/material"
 //import filterIcon from "../components/images/filter.svg" ;
 import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
 
@@ -48,29 +49,38 @@ export default function DependenciesContainer(props: {
   return (
     <div className={`${styles.sectionContainer}`}>
       <h3 className={sharedStyles.h3ContainerStyle}>Repositories </h3>
-      <div className={styles.depsBarStyle}>
-        <SearchBar
-          searchTerm={props.searchTerm}
-          setSearchTerm={props.setSearchTerm}
-        />
-        <div className={styles.menuStyle}>
-          {props.sortDropdown}
-        </div>
-        <div className={styles.menuStyle}>
-          {props.sortDirection}
-        </div>
-        <div className={styles.menuStyle}>
-          {props.rankSelection}
-        </div>
-        {/* commented out filter button */}
-        {/* <div className={styles.btnsContainer}> */}
+    
+      <Grid container spacing={0}>
 
-        {/* <button>
-            <Image src={filterIcon} alt="filter" width="20px" height="20px"></Image>
-            <span>Filter</span>
-          </button> */}
-        {/* </div> */}
-      </div>
+        <Grid xs={12} lg={6} item>
+          <Grid container alignItems='center'>
+            <SearchBar
+              searchTerm={props.searchTerm}
+              setSearchTerm={props.setSearchTerm}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid xs={12} md={4} lg={2} item >
+          <Grid container alignItems='center'>
+            {props.sortDropdown}
+          </Grid>
+        </Grid>
+
+        <Grid xs={12} md={4} lg={2} item >
+          <Grid container alignItems='center'>
+            {props.sortDirection}
+          </Grid>
+        </Grid>
+
+        <Grid xs={12} md={4} lg={2} item >
+          <Grid container alignItems='center'>
+            {props.rankSelection}
+          </Grid>
+        </Grid>
+
+      </Grid>
+
 
       <div className={styles.tableStyle}>
         <CollapsibleTable>{props.rows}</CollapsibleTable>
