@@ -45,12 +45,12 @@ resource "azurerm_linux_web_app" "this" {
   location            = azurerm_service_plan.this.location
   service_plan_id     = azurerm_service_plan.this.id
   app_settings = {
-    PORT                     = var.port
-    WEBSITES_PORT            = var.port
-    NEXT_PUBLIC_GITHUB_TOKEN = var.github_token_scope_read_org
-    CLIENT_ID                = var.client_id
-    CLIENT_SECRET            = var.client_secret
-    DYNAMIC_CACHE_PATH       = var.dynamic_cache_path
+    PORT                   = var.port
+    WEBSITES_PORT          = var.port
+    EVERGREEN_GITHUB_TOKEN = var.github_token_scope_read_org
+    CLIENT_ID              = var.client_id
+    CLIENT_SECRET          = var.client_secret
+    DYNAMIC_CACHE_PATH     = var.dynamic_cache_path
 
     # The documentation not very clear on write permission of /home
     # Also, in case org has changed, old org data must be deleted
