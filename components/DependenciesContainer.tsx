@@ -53,9 +53,15 @@ export default function DependenciesContainer(props: {
           searchTerm={props.searchTerm}
           setSearchTerm={props.setSearchTerm}
         />
-        {props.sortDropdown}
-        {props.sortDirection}
-        {props.rankSelection}
+        <div className={styles.menuStyle}>
+          {props.sortDropdown}
+        </div>
+        <div className={styles.menuStyle}>
+          {props.sortDirection}
+        </div>
+        <div className={styles.menuStyle}>
+          {props.rankSelection}
+        </div>
         {/* commented out filter button */}
         {/* <div className={styles.btnsContainer}> */}
 

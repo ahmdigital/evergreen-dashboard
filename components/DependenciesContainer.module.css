@@ -67,3 +67,7 @@ div.sortBy {
   display: flex;
   flex-direction: column;
 }
+
+div.menuStyle{
+  margin-right: 0.7rem;
+}
