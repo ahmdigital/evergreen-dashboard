@@ -90,39 +90,3 @@ export function RankSelectionList(filterSetting: Filter, handleRankSelectionChan
 	</ThemeProvider>
 	</>
 }
-
-// const rankCutoffBox = <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-// <InputLabel>Filters</InputLabel>
-// <Select
-// 	value={filterSetting.type}
-// 	onChange={handleFilterChange}
-// 	label="Filters"
-// >
-// 	<MenuItem value=""> <em>None</em> </MenuItem>
-// </Select>
-// </FormControl>
-
-// const handleFilterChange = (event: SelectChangeEvent) => {
-// 	const sel = event.target.value;
-// 	if (sel in ["", "time"]) {
-// 		setFilterSetting({ ...filterSetting, type: sel as "" | "time" })
-// 	}
-// }
-
-// //TODO: Change to using buttons
-// const filterCutoffDirectionBox = <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-// 	<InputLabel>Rank cutoff direction</InputLabel>
-// 	<Select
-// 		value={filterSetting.direction ? "ascending" : "descending"}
-// 		onChange={handleFilterCutoffDirectionChange}
-// 		label="Rank cutoff direction"
-// 	>
-// 		<MenuItem value={"ascending"}>ascending</MenuItem>
-// 		<MenuItem value={"descending"}>descending</MenuItem>
-// 	</Select>
-// </FormControl>
-
-// //TODO: Adapt to sorting buttons this
-// const handleFilterCutoffDirectionChange = (event: SelectChangeEvent) => {
-// 	setFilterSetting({ ...filterSetting, direction: event.target.value == "ascending" })
-// }
