@@ -59,3 +59,44 @@ div.componentStyle {
     padding: 1rem;
     margin-bottom: 1.5rem;
 }
+
+@media only screen and (max-width: 600px) {
+    .helpTitleStyle {
+        font-size: var(--font-size-large);
+        font-family: var(--primary-font-family);
+        font-weight: var(--font-weight-bold);
+        align-self: center;
+    }
+
+    .overallHeaderStyle {
+        font-size: var(--font-size-large);
+        font-family: var(--primary-font-family);
+        color: var(--colour-font);
+        font-weight: var(--font-weight-bold);
+        padding-top: 0.5rem;
+        padding-bottom: 0.25rem;
+    }
+
+    .questionHeaderStyle {
+        font-size: var(--font-size-normal);
+        font-family: var(--primary-font-family);
+        font-weight: var(--font-weight-bold);
+        padding-top: 1rem;
+        color: var(--colour-font);
+    }
+
+    .infoContentStyle {
+        font-size: var(--font-size-small);
+        font-family: var(--primary-font-family);
+        padding-bottom: 1rem;
+        color: var(--colour-font);
+    }
+
+    .fieldContentStyle {
+        font-size: var(--font-size-small);
+        font-family: var(--primary-font-family);
+        padding-bottom: 1rem;
+        font-weight: bold;
+        color: var(--colour-font);
+    }
+}
