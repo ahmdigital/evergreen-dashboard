@@ -12,8 +12,6 @@ import Grid from '@mui/material/Unstable_Grid2';
 import refreshIcon from "../components/images/refresh.svg";
 import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
 import config from "../config.json";
-
-let refreshing = false
 import { ProcessedDependencyData } from "../hooks/useProcessDependencyData";
 import ReposSecondarySummaryTable from "./SummaryComponents/ReposSecondarySummaryTable";
 import { Filter } from "../src/sortingAndFiltering";
@@ -24,6 +22,8 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CondensedSummary from "./SummaryComponents/CondensedSummary/CondensedSummary";
 
+
+let refreshing = false;
 
 export default function SummaryContainer(props: {
   rankArray: any;

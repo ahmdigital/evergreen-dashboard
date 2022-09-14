@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { InverseSubRow } from "./InverseSubRow";
 import { SubRow } from "./SubRow";
 import { ProcessedDependencyData, useProcessDependencyData } from "../hooks/useProcessDependencyData";
@@ -7,6 +7,8 @@ import Layout from "./Layout";
 import Head from "next/head";
 import DependenciesContainer from "./DependenciesContainer";
 import SummaryContainer from "./SummaryContainer";
+import MobileSummaryContainer from "./MobileComponents/MobileSummaryContainer";
+import MobileDependenciesContainer from "./MobileComponents/MobileDependenciesContainer";
 import { DependencyData } from "../src/dataProcessing";
 import LoadingBackdrop from "./LoadingBackdrop";
 import HelpGuide from "./HelpComponents/HelpGuide";
@@ -120,28 +122,55 @@ export function Page(props: PageProps) {
 				<MenuItem value={"descending"}>Descending</MenuItem>
 			</Select>
 		</FormControl></ThemeProvider>
+	
+	// Check if user is on Mobile Device
+	const [isMobile, setMobile ] = useState(window.innerWidth < 600);
+	const updateMedia = () => {
+	  setMobile(window.innerWidth < 600);
+	};
+	useEffect(() => {
+	  window.addEventListener("resize", updateMedia);
+	  return () => window.removeEventListener("resize", updateMedia);
+	});
 
 	return (
 		<div className="container">
-			<Head>
-				<title>Evergreen dashboard</title>
-			</Head>
-			<main style={{ padding: 0 }}>
-				<Layout>
-					<SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
-					<DependenciesContainer
-						JSObject={props.JSObject}
-						rows={diplayedRows}
-						searchTerm={searchTerm}
-						setSearchTerm={setSearchTerm}
-						sortDropdown={sortBox}
-						sortDirection={sortDirectionBox}
-						rankSelection={rankSelectionList}
-						emptyRows={emptyRows}
-					/>
-					<HelpGuide />
-				</Layout>
-			</main>
+			{ isMobile ? ( 
+				<div>					
+					<Head>
+						<title>Evergreen dashboard</title>
+					</Head>
+					<main style={{ padding: 0 }}>
+						<Layout>
+							<MobileSummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
+							<MobileDependenciesContainer />
+							<HelpGuide />
+						</Layout>
+					</main>
+				</div>
+			) : (
+				<div>			
+					<Head>
+						<title>Evergreen dashboard</title>
+					</Head>
+					<main style={{ padding: 0 }}>
+						<Layout>
+							<SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
+							<DependenciesContainer
+								JSObject={props.JSObject}
+								rows={diplayedRows}
+								searchTerm={searchTerm}
+								setSearchTerm={setSearchTerm}
+								sortDropdown={sortBox}
+								sortDirection={sortDirectionBox}
+								rankSelection={rankSelectionList}
+								emptyRows={emptyRows}
+							/>
+							<HelpGuide />
+						</Layout>
+					</main>
+				</div>
+			)}
 		</div>
 	);
 }
