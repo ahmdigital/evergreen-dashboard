@@ -108,13 +108,11 @@ export default function MobileSummaryContainer(props: {
             Monitoring dependencies for <b>{config.targetOrganisation}</b> Github Organisation
             </p>
             <div className={styles.btnsContainer}>
-            <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
               <button onClick={callRefresh} aria-label="Refresh data">
                 <Image src={refreshIcon} alt="Refresh Icon" width="15rem" height="15rem"></Image>
-                <span className={styles.refreshWord}>Refresh</span>
+                <span className={mobileStyles.refreshWord}>Refresh</span>
               </button>
-            </Tooltip>
-          </div>
+            </div>
           <div>
             {props.loadingBackdrop}
           </div>
@@ -124,7 +122,7 @@ export default function MobileSummaryContainer(props: {
             onChangeIndex={handleStepChange}
             enableMouseEvents
         >
-            <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+            <div className={`${mobileStyles.summaryComponent}`}>
               <h3 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h3>
               <div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
                 <h3 className={styles.overallTitleStyle}>Overall</h3>
@@ -133,10 +131,9 @@ export default function MobileSummaryContainer(props: {
               </div>
             </div>
 
-            <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+            <div className={`${mobileStyles.summaryComponent}`}>
               <div className={styles.summaryCompHeader}>
                 <h3 className={styles.summaryStyle}>{`Total Repositories (${props.rankArray.green + props.rankArray.yellow + props.rankArray.red})`}</h3>
-                <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
                   <IconButton
                     aria-label="Help button"
                     onClick={() => {
@@ -151,7 +148,6 @@ export default function MobileSummaryContainer(props: {
                       src={helpIcon}
                     />
                   </IconButton>
-                </Tooltip>
               </div>
               {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
               <div>
@@ -161,8 +157,8 @@ export default function MobileSummaryContainer(props: {
               </div>
             </div>
 
-            <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-              <div className={styles.summaryComponent3}>
+            <div className={`${mobileStyles.summaryComponent}`}>
+              <div className={mobileStyles.summaryComponent3}>
                 <ReposSecondarySummaryTable rows={props.rows} filterTerm={props.filterTerm} setFilterTerm={props.setFilterTerm} />
               </div>
             </div>
