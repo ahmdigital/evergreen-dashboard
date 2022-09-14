@@ -7,7 +7,7 @@
   padding: 1rem 10px 1rem 10px;
 }
 
-.tableCellStyleCount p {
+.tableCellStyleCount{
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-semibold);
   margin-top: 0;

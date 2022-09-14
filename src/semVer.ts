@@ -10,6 +10,48 @@ export type SemVer = {
 	skipBug: boolean;
 };
 
+export type SemVerDelta = {
+	major: number;
+	minor: number;
+	bug: number;
+	skipMinor: boolean;
+	skipBug: boolean;
+};
+
+export function semVerToDelta(current: SemVer, latest: SemVer): SemVerDelta{
+	return {
+		major: latest.major - current.major,
+		minor: Math.max(latest.minor - current.minor, 0),
+		bug: Math.max(latest.bug - current.bug, 0),
+		skipMinor: current.skipMinor,
+		skipBug: current.skipBug
+	}
+}
+
+export function compareSemVerDelta(a: SemVerDelta, b: SemVerDelta): number{
+	if(a.major != b.major){
+		return a.major - b.major
+	} else if (a.minor != b.minor){
+		if(a.skipMinor == b.skipMinor){
+			return a.minor - b.minor
+		} else{
+			let newA = a.skipMinor ? 0 : a.minor;
+			let newB = b.skipMinor ? 0 : b.minor;
+			return newA - newB
+		}
+	} else if (a.bug != b.bug){
+		if(a.skipBug == b.skipBug){
+			return a.bug - b.bug
+		} else{
+			let newA = a.skipBug ? 0 : a.bug;
+			let newB = b.skipBug ? 0 : b.bug;
+			return newA - newB
+		}
+	} else{
+		return 0
+	}
+}
+
 function semVerToArray(semVer: SemVer): number[]{
 	return [semVer.major, semVer.minor, semVer.bug];
 }

@@ -60,15 +60,14 @@ export default function CollapsibleTable(props: CollapsibleTableProps) {
           </colgroup>
           <TableHead>
             <TableRow>
-
               <TableCell ></TableCell>
               <TableCell >status</TableCell>
               <TableCell >name</TableCell>
               <TableCell >version</TableCell>
-              <TableCell >link</TableCell>
+              <TableCell >last push</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>{props.children}</TableBody>
+          <TableBody id={"mainTableBody"}>{props.children}</TableBody>
         </Table>
       </TableContainer>
     </ThemeProvider>

@@ -30,10 +30,46 @@ const theme = createTheme({
     }
   }
 })
+export function testClickFunction(name: string) {
+  let mainTableBody = document.getElementById("mainTableBody");
+  if (mainTableBody == null) { return }
+  let children = mainTableBody.children;
+  console.log(children.length)
+  console.log(name)
+
+  var instance = children[1]
+
+  console.log(instance)
+
+  if (instance instanceof HTMLElement) {
+
+    if (instance.getAttribute('aria-expanded') == 'false') { // region is collapsed
+
+      // update the aria-expanded attribute of the region
+      instance.setAttribute('aria-expanded', 'true');
+
+      // move focus to the region
+      instance.focus();
+
+      // update the button label
+      //thisObj.$toggle.find('span').html('Hide');
+
+    }
+    else { // region is expanded
+
+      // update the aria-expanded attribute of the region
+      instance.setAttribute('aria-expanded', 'false');
+
+      // update the button label
+      //thisObj.$toggle.find('span').html('Show');
+    }
+  }
+}
 
 export function InverseSubRow(props: InverseSubRowProps) {
   const userName = props.user.name;
   const usedVersion = semVerToString(props.user.version);
+  const depLink = props.user.link;
 
   let statusIcon = RedIcon;
   let statusText = "Needs updating urgently";
@@ -59,8 +95,11 @@ export function InverseSubRow(props: InverseSubRowProps) {
             className={styles.inverseSubRowIcon}
           ></Image>
         </TableCell>
-        <TableCell >{userName}</TableCell>
+        <TableCell ><a href={depLink} rel="noreferrer" target="_blank">
+          {userName}
+        </a></TableCell>
         <TableCell>{usedVersion}</TableCell>
+        {/* <button onClick = {() => {testClickFunction(userName)}}> </button> */}
       </ThemeProvider>
     </TableRow>
   );
