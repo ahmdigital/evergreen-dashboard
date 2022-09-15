@@ -5,8 +5,8 @@ import sharedStyles from "./treeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
 import config from "../config.json";
-// import { Grid } from "@mui/material"
-//import filterIcon from "../components/images/filter.svg" ;
+import FilterListIcon from '@mui/icons-material/FilterList';
+
 import {
 	PageLoaderCurrentData,
 	forceNewVersion,
@@ -15,7 +15,8 @@ import {
 	PageLoaderSetData,
 	PageLoaderSetLoading,
 } from "./PageLoader";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, IconButton } from "@mui/material";
+import { Stack } from "@mui/system";
 
 let refreshing = false;
 
@@ -62,6 +63,19 @@ export default function DependenciesContainer(props: {
 		//}
 	}
 
+	const [filterOpen, setFilterOpen] = React.useState(false);
+
+	const toggleFilter = () => {
+		setFilterOpen(!filterOpen);
+	};
+
+	const filterSelectGridDisplay = {
+		display: {
+			xs: filterOpen ? "block" : "none",
+			md: 'initial'
+		}
+	}
+
 	return (
 		<Box className={styles.sectionContainer} sx={{
 			padding: {
@@ -73,18 +87,30 @@ export default function DependenciesContainer(props: {
 
 			<Grid container spacing={2}>
 				<Grid item xs={12} lg={5} xl={6}>
-					<SearchBar
-						searchTerm={props.searchTerm}
-						setSearchTerm={props.setSearchTerm}
-					/>
+					<Stack direction="row" spacing={1} alignItems="center">
+						<SearchBar
+							searchTerm={props.searchTerm}
+							setSearchTerm={props.setSearchTerm}
+						/>
+						<IconButton
+							sx={{ display: { xs: 'initial', md: 'none' } }}
+							aria-label='Sort and filter'
+							onClick={toggleFilter}
+						>
+							<FilterListIcon
+								fontSize='medium'
+								color={filterOpen ? 'primary' : 'inherit'}
+							/>
+						</IconButton>
+					</Stack>
 				</Grid>
-				<Grid item xs={12} md={4} lg={2.33} xl={2}>
+				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
 					{props.sortDropdown}
 				</Grid>
-				<Grid item xs={12} md={4} lg={2.33} xl={2}>
+				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
 					{props.sortDirection}
 				</Grid>
-				<Grid item xs={12} md={4} lg={2.33} xl={2}>
+				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
 					{props.rankSelection}
 				</Grid>
 			</Grid>
