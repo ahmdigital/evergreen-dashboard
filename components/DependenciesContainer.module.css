@@ -12,16 +12,6 @@ div.sectionContainer {
   font-family: var(--primary-font-family);
 }
 
-div.depsBarStyle {
-  box-sizing: border-box;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: space-between;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
 
 div.btnsContainer {
   display: flex;
@@ -70,10 +60,6 @@ div.noReposStyle {
 div.sortBy {
   display: flex;
   flex-direction: column;
-}
-
-div.menuStyle{
-  margin-right: 0.7rem;
 }
 
 div.menusPosition{

@@ -12,39 +12,19 @@ import MobileDependenciesContainer from "./MobileComponents/MobileDependenciesCo
 import { DependencyData } from "../src/dataProcessing";
 import LoadingBackdrop from "./LoadingBackdrop";
 import HelpGuide from "./HelpComponents/HelpGuide";
-import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { RankSelectionList, SortBox, SortSettings } from "./SortAndFilterDropdowns";
 import { applySort, Filter, rankCounts, searchAndFilter } from "../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { theme } from './SortAndFilterDropdowns'
 
 export type PageProps = {
 	JSObject: DependencyData;
 	finalData: boolean;
 };
 
-// Customising the table styling using ThemeProvider
-const theme = createTheme({
-	components: {
-		MuiSelect: {
-			styleOverrides: {
-				select: {
-					fontSize: "1rem",
-					fontFamily: 'var(--primary-font-family)',
-					color: 'black',
-				}
-			}
-		},
-		MuiInputLabel: {
-			styleOverrides: {
-				root: {
-					fontSize: "1.1rem",
-					fontFamily: 'var(--primary-font-family)',
-					color: 'black',
-				}
-			}
-		}
-	}
-})
+
 
 
 function rowsToJSX(rows: ProcessedDependencyData) {
@@ -112,31 +92,39 @@ export function Page(props: PageProps) {
 
 	//TODO: Replace this
 	const sortDirectionBox = <ThemeProvider theme={theme}>
-		<FormControl sx={{ m: 1, minWidth: 138, maxWidth: 138 }}>
-			<p>Sort Direction</p>
+		<FormControl fullWidth>
+			<InputLabel id="sort-direction-select-label" sx={{ fontSize: '1.3em', transform: 'translate(10px, -15px)' }}>
+				Sort Direction
+			</InputLabel>
 			<Select
+				label="___________ Sort Direction" //DO NOT REMOVE UNDERSCORES, label is only used for layout, see here https://mui.com/material-ui/api/outlined-input/#props
+				labelId="sort-direction-select-label"
 				value={sortSetting.direction ? "ascending" : "descending"}
 				onChange={handleSortDirectionChange}
+				IconComponent={(props) =>
+					<ArrowDropDownIcon {...props} fontSize='large' htmlColor="#000000" />
+				}
 			>
 				<MenuItem value={"ascending"}>Ascending</MenuItem>
 				<MenuItem value={"descending"}>Descending</MenuItem>
 			</Select>
-		</FormControl></ThemeProvider>
-	
+		</FormControl>
+	</ThemeProvider>
+
 	// Check if user is on Mobile Device
-	const [isMobile, setMobile ] = useState(window.innerWidth < 600);
+	const [isMobile, setMobile] = useState(window.innerWidth < 600);
 	const updateMedia = () => {
-	  setMobile(window.innerWidth < 600);
+		setMobile(window.innerWidth < 600);
 	};
 	useEffect(() => {
-	  window.addEventListener("resize", updateMedia);
-	  return () => window.removeEventListener("resize", updateMedia);
+		window.addEventListener("resize", updateMedia);
+		return () => window.removeEventListener("resize", updateMedia);
 	});
 
 	return (
 		<div className="container">
-			{ isMobile ? ( 
-				<div>					
+			{isMobile ? (
+				<div>
 					<Head>
 						<title>Evergreen dashboard</title>
 					</Head>
@@ -144,12 +132,22 @@ export function Page(props: PageProps) {
 						<Layout>
 							<MobileSummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
 							<MobileDependenciesContainer />
+							<DependenciesContainer
+								JSObject={props.JSObject}
+								rows={diplayedRows}
+								searchTerm={searchTerm}
+								setSearchTerm={setSearchTerm}
+								sortDropdown={sortBox}
+								sortDirection={sortDirectionBox}
+								rankSelection={rankSelectionList}
+								emptyRows={emptyRows}
+							/>
 							<HelpGuide />
 						</Layout>
 					</main>
 				</div>
 			) : (
-				<div>			
+				<div>
 					<Head>
 						<title>Evergreen dashboard</title>
 					</Head>
