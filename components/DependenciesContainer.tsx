@@ -15,7 +15,7 @@ import {
 	PageLoaderSetData,
 	PageLoaderSetLoading,
 } from "./PageLoader";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 let refreshing = false;
 
@@ -63,7 +63,12 @@ export default function DependenciesContainer(props: {
 	}
 
 	return (
-		<div className={`${styles.sectionContainer}`}>
+		<Box className={styles.sectionContainer} sx={{
+			padding: {
+				xs: 2,
+				md: '2.5rem 3.125rem 3.75rem 3.125rem',
+			}
+		}}>
 			<h3 className={sharedStyles.h3ContainerStyle}>Repositories </h3>
 
 			<Grid container spacing={2}>
@@ -100,6 +105,6 @@ export default function DependenciesContainer(props: {
 					<p>No search results found</p>
 				</div>
 			}
-		</div>
+		</Box>
 	);
 }

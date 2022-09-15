@@ -6,7 +6,6 @@ div.sectionContainer {
   background-color: var(--colour-container-background);
   box-shadow: var(--main-section-boxshadow);
   border-radius: var(--main-section-border-radius);
-  padding: 2.5rem 3.125rem 3.75rem 3.125rem;
   margin: 1.1rem;
   box-sizing: border-box;
   font-family: var(--primary-font-family);
