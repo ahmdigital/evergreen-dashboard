@@ -18,13 +18,13 @@ import HelpScreen from '../LightStatus';
 import ReposOverviewTable from '../SummaryComponents/RepoOverviewTable/ReposOverviewTable';
 import ReposSecondarySummaryTable from "../SummaryComponents/ReposSecondarySummaryTable";
 import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
-import { 
-    PageLoaderCurrentData, 
-    forceNewVersion, 
-    PageLoaderIsLoading, 
-    lastRequest, 
-    PageLoaderSetData, 
-    PageLoaderSetLoading 
+import {
+	PageLoaderCurrentData,
+	forceNewVersion,
+	PageLoaderIsLoading,
+	lastRequest,
+	PageLoaderSetData,
+	PageLoaderSetLoading
 } from "../PageLoader";
 import { Filter } from "../../src/sortingAndFiltering";
 import styles from "../SummaryContainer.module.css";
@@ -34,163 +34,165 @@ import { useState } from 'react';
 let refreshing = false;
 
 export default function MobileSummaryContainer(props: {
-    rankArray: any;
-    loadingBackdrop: any;
-    rows: ProcessedDependencyData;
-    filterTerm: Filter;
-    setFilterTerm: any;
+	rankArray: any;
+	loadingBackdrop: any;
+	rows: ProcessedDependencyData;
+	filterTerm: Filter;
+	setFilterTerm: any;
 }) {
-    const totalRepos =
-        props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
-    let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
-    let overallPercentStr = overallPercent + "%";
-    let overallStyle = styles.summaryOverall;
-    let overallColour = styles.summaryOverallGreen;
+	const totalRepos =
+		props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
+	let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
+	let overallPercentStr = overallPercent + "%";
+	let overallStyle = styles.summaryOverall;
+	let overallColour = styles.summaryOverallGreen;
 
-    if (isNaN(overallPercent)) {
-        overallPercentStr = "N/A";
-        overallColour = styles.summaryOverallGrey;
-    } else if (overallPercent < config.targetPercentage) {
-        overallColour = styles.summaryOverallRed;
-    }
+	if (isNaN(overallPercent)) {
+		overallPercentStr = "N/A";
+		overallColour = styles.summaryOverallGrey;
+	} else if (overallPercent < config.targetPercentage) {
+		overallColour = styles.summaryOverallRed;
+	}
 
-    // State for opening the helpLegend
-    const [openHelp, setOpenHelp] = useState<boolean>(false);
+	// State for opening the helpLegend
+	const [openHelp, setOpenHelp] = useState<boolean>(false);
 
-    // State for collapsing the header
-    const [closeHeader, setCloseHeader] = useState<boolean>(true);
+	// State for collapsing the header
+	const [closeHeader, setCloseHeader] = useState<boolean>(true);
 
-    async function callRefresh() {
-        if (refreshing) {
-            return;
-        }
-        if (lastRequest == null) {
-            return;
-        }
-        if (PageLoaderIsLoading) {
-            return;
-        }
-        PageLoaderSetLoading(true);
-        PageLoaderSetData({
-            refreshing: true,
-            data: PageLoaderCurrentData as any,
-        } as any);
+	async function callRefresh() {
+		if (refreshing) {
+			return;
+		}
+		if (lastRequest == null) {
+			return;
+		}
+		if (PageLoaderIsLoading) {
+			return;
+		}
+		PageLoaderSetLoading(true);
+		PageLoaderSetData({
+			refreshing: true,
+			data: PageLoaderCurrentData as any,
+		} as any);
 
-        refreshing = true;
+		refreshing = true;
 
-        forceNewVersion(lastRequest).then(async (result) => {
-            PageLoaderSetData(result as any);
-            PageLoaderSetLoading(false);
-            refreshing = false;
-        });
-    }
+		forceNewVersion(lastRequest).then(async (result) => {
+			PageLoaderSetData(result as any);
+			PageLoaderSetLoading(false);
+			refreshing = false;
+		});
+	}
 
-    // swipeable component settings
-    const theme = useTheme();
-    const [activeStep, setActiveStep] = React.useState(0);
-  
-    const handleNext = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-  
-    const handleBack = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-  
-    const handleStepChange = (step: number) => {
-      setActiveStep(step);
-    };
+	// swipeable component settings
+	const theme = useTheme();
+	const [activeStep, setActiveStep] = React.useState(0);
 
-    return (
-        <Box className={`${mobileStyles.summaryContainer}`}>
-            <h2 className="noMargins"><ForestIcon /> Evergreen Dashboard</h2>
-            <p className={mobileStyles.subtitle}>
-            Monitoring dependencies for <b>{config.targetOrganisation}</b> Github Organisation
-            </p>
-            <div className={styles.btnsContainer}>
-              <button onClick={callRefresh} aria-label="Refresh data">
-                <Image src={refreshIcon} alt="Refresh Icon" width="15rem" height="15rem"></Image>
-                <span className={mobileStyles.refreshWord}>Refresh</span>
-              </button>
-            </div>
-          <div>
-            {props.loadingBackdrop}
-          </div>
-        <SwipeableViews
-            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-            index={activeStep}
-            onChangeIndex={handleStepChange}
-            enableMouseEvents
-        >
-            <div className={`${mobileStyles.summaryComponent}`}>
-              <h3 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h3>
-              <div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
-                <h3 className={styles.overallTitleStyle}>Overall</h3>
-                <h3 className={styles.percentStyle} >{overallPercentStr}</h3>
-                <h3 className={styles.overallCentredTitleStyle}>up-to-date</h3>
-              </div>
-            </div>
+	const handleNext = () => {
+		setActiveStep((prevActiveStep) => prevActiveStep + 1);
+	};
 
-            <div className={`${mobileStyles.summaryComponent}`}>
-              <div className={styles.summaryCompHeader}>
-                <h3 className={styles.summaryStyle}>{`Total Repositories (${props.rankArray.green + props.rankArray.yellow + props.rankArray.red})`}</h3>
-                  <IconButton
-                    aria-label="Help button"
-                    onClick={() => {
-                      setOpenHelp(true);
-                    }}
-                  >
-                    <Image
-                      className={styles.helpBtn}
-                      width="30px"
-                      height="30px"
-                      alt="Help Icon"
-                      src={helpIcon}
-                    />
-                  </IconButton>
-              </div>
-              {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
-              <div>
-                <div className={styles.summaryComponent2}>
-                  <ReposOverviewTable rankArray={props.rankArray} />
-                </div>
-              </div>
-            </div>
+	const handleBack = () => {
+		setActiveStep((prevActiveStep) => prevActiveStep - 1);
+	};
 
-            <div className={`${mobileStyles.summaryComponent}`}>
-              <div className={mobileStyles.summaryComponent3}>
-                <ReposSecondarySummaryTable rows={props.rows} filterTerm={props.filterTerm} setFilterTerm={props.setFilterTerm} />
-              </div>
-            </div>
-        </SwipeableViews>
+	const handleStepChange = (step: number) => {
+		setActiveStep(step);
+	};
 
-        <MobileStepper
-            steps={3}
-            position="static"
-            activeStep={activeStep}
-            nextButton={
-                <Button
-                    size="small"
-                    onClick={handleNext}
-                    disabled={activeStep === 2}
-                >
-                    {theme.direction === 'rtl' ? (
-                    <KeyboardArrowLeft />
-                    ) : (
-                    <KeyboardArrowRight />
-                    )}
-                </Button>
-                }
-                backButton={
-                <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                    {theme.direction === 'rtl' ? (
-                    <KeyboardArrowRight />
-                    ) : (
-                    <KeyboardArrowLeft />
-                    )}
-                </Button>
-                }
-        />
-        </Box>
-    );
+	return (
+		<Box className={mobileStyles.summaryContainer}>
+			<Box className={mobileStyles.summaryContainerSubBox}>
+				<h2 className="noMargins"><ForestIcon /> Evergreen Dashboard</h2>
+				<p className={mobileStyles.subtitle}>
+					Monitoring dependencies for <b>{config.targetOrganisation}</b> Github Organisation
+				</p>
+				<div className={styles.btnsContainer}>
+					<button onClick={callRefresh} aria-label="Refresh data">
+						<Image src={refreshIcon} alt="Refresh Icon" width="15rem" height="15rem"></Image>
+						<span className={mobileStyles.refreshWord}>Refresh</span>
+					</button>
+				</div>
+				<div>
+					{props.loadingBackdrop}
+				</div>
+				<SwipeableViews
+					axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+					index={activeStep}
+					onChangeIndex={handleStepChange}
+					enableMouseEvents
+				>
+					<div className={`${mobileStyles.summaryComponent}`}>
+						<h3 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h3>
+						<div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
+							<h3 className={styles.overallTitleStyle}>Overall</h3>
+							<h3 className={styles.percentStyle} >{overallPercentStr}</h3>
+							<h3 className={styles.overallCentredTitleStyle}>up-to-date</h3>
+						</div>
+					</div>
+
+					<div className={`${mobileStyles.summaryComponent}`}>
+						<div className={styles.summaryCompHeader}>
+							<h3 className={styles.summaryStyle}>{`Total Repositories (${props.rankArray.green + props.rankArray.yellow + props.rankArray.red})`}</h3>
+							<IconButton
+								aria-label="Help button"
+								onClick={() => {
+									setOpenHelp(true);
+								}}
+							>
+								<Image
+									className={styles.helpBtn}
+									width="30px"
+									height="30px"
+									alt="Help Icon"
+									src={helpIcon}
+								/>
+							</IconButton>
+						</div>
+						{openHelp && <HelpScreen closeHelp={setOpenHelp} />}
+						<div>
+							<div className={styles.summaryComponent2}>
+								<ReposOverviewTable rankArray={props.rankArray} />
+							</div>
+						</div>
+					</div>
+
+					<div className={`${mobileStyles.summaryComponent}`}>
+						<div className={mobileStyles.summaryComponent3}>
+							<ReposSecondarySummaryTable rows={props.rows} filterTerm={props.filterTerm} setFilterTerm={props.setFilterTerm} />
+						</div>
+					</div>
+				</SwipeableViews>
+
+				<MobileStepper
+					steps={3}
+					position="static"
+					activeStep={activeStep}
+					nextButton={
+						<Button
+							size="small"
+							onClick={handleNext}
+							disabled={activeStep === 2}
+						>
+							{theme.direction === 'rtl' ? (
+								<KeyboardArrowLeft />
+							) : (
+								<KeyboardArrowRight />
+							)}
+						</Button>
+					}
+					backButton={
+						<Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+							{theme.direction === 'rtl' ? (
+								<KeyboardArrowRight />
+							) : (
+								<KeyboardArrowLeft />
+							)}
+						</Button>
+					}
+				/>
+			</Box>
+		</Box>
+	);
 }

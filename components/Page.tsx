@@ -131,7 +131,7 @@ export function Page(props: PageProps) {
 					<main style={{ padding: 0 }}>
 						<Layout>
 							<MobileSummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
-							<MobileDependenciesContainer />
+							{/* <MobileDependenciesContainer /> */}
 							<DependenciesContainer
 								JSObject={props.JSObject}
 								rows={diplayedRows}

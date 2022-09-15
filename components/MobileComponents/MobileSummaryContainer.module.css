@@ -5,20 +5,29 @@
 }
 
 div.summaryContainer {
-    display: inline-block;
+    width: 100%;
+    max-width: 125rem; /*2000px;*/
+    /* padding: 1rem; */
+    margin-bottom: 1rem;
+	padding: 0 0.5rem;
+}
+
+.summaryContainerSubBox{
+	box-sizing: border-box;
+	display: inline-block;
     /* flex-direction: column; */
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
     height: max-content;
-    width: 100%;
-    max-width: 125rem; /*2000px;*/
-    background-color: var(--colour-white);
+	width: 100%;
+	padding: 1rem;
+	background-color: var(--colour-white);
     box-shadow: var(--main-section-boxshadow);
     border-radius: var(--main-section-border-radius);
-    padding: 1rem;
-    margin: 0.5rem;
-    font-family: var(--primary-font-family);
+	background-color: var(--colour-white);
+    box-shadow: var(--main-section-boxshadow);
+    border-radius: var(--main-section-border-radius)
 }
 
 .refreshWord {
