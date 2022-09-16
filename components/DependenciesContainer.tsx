@@ -5,23 +5,12 @@ import sharedStyles from "./treeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
 import config from "../config.json";
-// import { Grid } from "@mui/material"
-//import filterIcon from "../components/images/filter.svg" ;
-import {
-  PageLoaderCurrentData,
-  forceNewVersion,
-  PageLoaderIsLoading,
-  lastRequest,
-  PageLoaderSetData,
-  PageLoaderSetLoading,
-} from "./PageLoader";
-
-let refreshing = false;
 
 /* Container includes  Search, Filter, Dependencies Table */
 export default function DependenciesContainer(props: {
   JSObject: DependencyData;
-  rows: JSX.Element[];
+  tableRows: any;
+  setTableRows: any;
   searchTerm: any;
   setSearchTerm: any;
   sortDropdown: any;
@@ -29,37 +18,7 @@ export default function DependenciesContainer(props: {
   emptyRows: boolean;
   sortDirection: any;
 }) {
-  async function callRefresh() {
-    if (refreshing) {
-      return;
-    }
-    if (lastRequest == null) {
-      return;
-    }
-    if (PageLoaderIsLoading) {
-      return;
-    }
-    PageLoaderSetLoading(true);
-    PageLoaderSetData({
-      refreshing: true,
-      data: PageLoaderCurrentData as any,
-    } as any);
 
-    refreshing = true;
-
-    //TODO: Support other configuration
-    //switch(mode){
-    //	case(Mode.Frontend): break;
-    //	case(Mode.StandaloneBackend):break;
-    //	case(Mode.IntegratedBackend): {
-    forceNewVersion(lastRequest).then(async (result) => {
-      PageLoaderSetData(result as any);
-      PageLoaderSetLoading(false);
-      refreshing = false;
-    });
-    //	} break;
-    //}
-  }
 
   return (
     <div className={`${styles.sectionContainer}`}>
@@ -83,12 +42,12 @@ export default function DependenciesContainer(props: {
         <div className={styles.menuStyle}>
           {props.rankSelection}
         </div>
-        
+
       </div>
 
 
       <div className={styles.tableStyle}>
-        <CollapsibleTable>{props.rows}</CollapsibleTable>
+        <CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows}></CollapsibleTable>
       </div>
       {
         props.emptyRows &&
@@ -97,7 +56,7 @@ export default function DependenciesContainer(props: {
         </div>
       }
       {
-        !props.emptyRows && (props.searchTerm !== "" && props.rows.length === 0) &&
+        !props.emptyRows && (props.searchTerm !== "" && props.tableRows.length === 0) &&
         <div className={styles.noReposStyle}>
           <p>No search results found</p>
         </div>

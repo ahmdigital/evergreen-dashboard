@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,10 +8,7 @@ import Paper from "@mui/material/Paper";
 import styles from "./InternalTable.module.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { tableBodyStyle, theme as tableTheme } from "./InternalTable";
-
-type CollapsibleTableProps = {
-  children: ReactNode;
-};
+import { InverseSubRow } from "./InverseSubRow";
 
 // Customising the table styling using ThemeProvider
 const theme = createTheme({
@@ -46,7 +42,7 @@ const theme = createTheme({
 });
 
 // Creates the interior table
-export default function CollapsibleTable(props: CollapsibleTableProps) {
+export default function UsersTable(props: { tableRows: any }) {
   return (
     <ThemeProvider theme={tableTheme}>
       <TableContainer component={Paper} className={styles.tableComponent}>
@@ -67,7 +63,12 @@ export default function CollapsibleTable(props: CollapsibleTableProps) {
               <TableCell>current</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>{props.children}</TableBody>
+          <TableBody>{
+
+            props.tableRows.map((row) => (
+              <InverseSubRow key={row.name} user={row} />
+            ))
+          }</TableBody>
         </Table>
       </TableContainer>
     </ThemeProvider>

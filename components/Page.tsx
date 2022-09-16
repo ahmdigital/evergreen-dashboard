@@ -68,15 +68,22 @@ function rowsToJSX(rows: ProcessedDependencyData) {
 }
 
 export function Page(props: PageProps) {
-	const [searchTerm, setSearchTerm] = useState<string>("");
+
+	// Using react state for table data
 	const rows = useProcessDependencyData(props.JSObject);
+	const [tableRows, setTableRows] = useState<ProcessedDependencyData>(useProcessDependencyData(props.JSObject))
+	console.log('PRINTING TABLE ROWS ', tableRows)
+
+	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [sortSetting, setSortSetting] = useState<SortSettings>({ type: "rank", direction: true });
 	const [filterSetting, setFilterSetting] = useState<Filter>({ type: "", level: 0, direction: false, mustHaveDependency: -1, showRed: true, showYellow: true, showGreen: true });
 
 	// check if there are no rows
-	let emptyRows = rows.length === 0;
+	// let emptyRows = rows.length === 0;
+	let emptyRows = tableRows.length === 0;
 
 	let loadingBackdrop: any = null;
+
 	// If the final data is loading, then set the backdrop open to true
 	if (!props.finalData) {
 		loadingBackdrop = (
@@ -87,14 +94,12 @@ export function Page(props: PageProps) {
 	}
 
 	//Sorting. Doing this after filtering would be more efficient
-	applySort(rows, sortSetting)
+	//applySort(rows, sortSetting)
+	applySort(tableRows, sortSetting)
 
-	
-
-	const jsxRows = rowsToJSX(rows)
-	const rankArray = rankCounts(rows)
-
-	const diplayedRows = searchAndFilter(rows, jsxRows, filterSetting, searchTerm)
+	// const jsxRows = rowsToJSX(rows)
+	const rankArray = rankCounts(tableRows)
+	// const diplayedRows = searchAndFilter(rows, jsxRows, filterSetting, searchTerm)
 
 	const sortBox = SortBox(sortSetting, (event: SelectChangeEvent) => {
 		setSortSetting({ type: event.target.value as any, direction: sortSetting.direction })
@@ -133,7 +138,8 @@ export function Page(props: PageProps) {
 					<SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
 					<DependenciesContainer
 						JSObject={props.JSObject}
-						rows={diplayedRows}
+						tableRows={tableRows}
+						setTableRows={setTableRows}
 						searchTerm={searchTerm}
 						setSearchTerm={setSearchTerm}
 						sortDropdown={sortBox}

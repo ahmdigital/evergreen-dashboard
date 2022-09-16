@@ -14,7 +14,6 @@ export type ProcessedDependencyData = (DependencyMapElement & {
 	userSubRows: PackageData[]
 })[]
 
-
 export function useProcessDependencyData(JSObject: DependencyData) {
 	const rowList: ProcessedDependencyData = [];
 

@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,17 +8,14 @@ import Paper from "@mui/material/Paper";
 import styles from "./InternalTable.module.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import tableCellClasses from "@mui/material/TableCell/tableCellClasses";
-
-type CollapsibleTableProps = {
-    children: ReactNode;
-};
+import { SubRow } from "./SubRow";
 
 export const borderBodyColor = "#CECECE";
 
 export const tableBodyStyle = {
     [`& .${tableCellClasses.body}`]: {
-      borderBottomColor: borderBodyColor,
-      borderWidth: "2px",
+        borderBottomColor: borderBodyColor,
+        borderWidth: "2px",
     },
 }
 
@@ -56,7 +52,7 @@ export const theme = createTheme({
 })
 
 // Creates the interior tabl
-export default function CollapsibleTable(props: CollapsibleTableProps) {
+export default function InternalTable(props: { tableRows: any }) {
     return (
         <ThemeProvider theme={theme}>
             <TableContainer
@@ -64,7 +60,7 @@ export default function CollapsibleTable(props: CollapsibleTableProps) {
                 className={styles.tableComponent}
             >
                 <Table size="small" aria-label="collapsible table"
-                sx={tableBodyStyle}>
+                    sx={tableBodyStyle}>
                     <colgroup>
                         <col className={styles.col1} />
                         <col className={styles.col2} />
@@ -80,7 +76,13 @@ export default function CollapsibleTable(props: CollapsibleTableProps) {
 
                         </TableRow>
                     </TableHead>
-                    <TableBody>{props.children}</TableBody>
+                    <TableBody>
+                        {
+                            props.tableRows.map((row) => (
+                                <SubRow key={row.name} dependency={row} />
+                            ))
+                        }
+                    </TableBody>
                 </Table>
             </TableContainer>
         </ThemeProvider>

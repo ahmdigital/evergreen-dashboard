@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,11 +6,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "./CollapsibleTable.module.css";
+import Row from "./Row";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-type CollapsibleTableProps = {
-  children: ReactNode;
-};
 
 
 // Customising the table styling using ThemeProvider
@@ -43,33 +39,49 @@ const theme = createTheme({
 })
 
 // Creates the whole table
-export default function CollapsibleTable(props: CollapsibleTableProps) {
+export default function CollapsibleTable(props: { tableRows: any, setTableRows: any }) {
   return (
-	<ThemeProvider theme={theme}>
-    <TableContainer
-      component={Paper}
-      className={styles.tableComponent}
-    >
-      <Table size="small" aria-label="collapsible table" className={styles.tableFixedWidth}>
-        <colgroup>
-          <col className={styles.col1} />
-          <col className={styles.col2} />
-          <col className={styles.col3} />
-          <col className={styles.col4} />
-          <col className={styles.col5} />
-        </colgroup>
-        <TableHead>
-          <TableRow>
-            <TableCell></TableCell>
-            <TableCell>status</TableCell>
-            <TableCell>name</TableCell>
-            <TableCell>version</TableCell>
-            <TableCell>last push</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody id={"mainTableBody"}>{props.children}</TableBody>
-      </Table>
-    </TableContainer>
-	</ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <TableContainer
+        component={Paper}
+        className={styles.tableComponent}
+      >
+        <Table size="small" aria-label="collapsible table" className={styles.tableFixedWidth}>
+          <colgroup>
+            <col className={styles.col1} />
+            <col className={styles.col2} />
+            <col className={styles.col3} />
+            <col className={styles.col4} />
+            <col className={styles.col5} />
+          </colgroup>
+          <TableHead>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell>status</TableCell>
+              <TableCell>name</TableCell>
+              <TableCell>version</TableCell>
+              <TableCell>last push</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody id={"mainTableBody"}>
+            {
+              props.tableRows.map((row) => (
+                <Row
+                  key={row.name}
+                  rank={row.minRank}
+                  row={row}
+                  subRows={{
+                    internal: row.internalSubRows,
+                    external: row.externalSubRows,
+                    user: row.userSubRows,
+                    final: row.userSubRows.length === 0
+                  }}
+                />
+              ))
+            }
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </ThemeProvider>
   );
 }

@@ -9,7 +9,6 @@ import UsersTable from './UsersTable'
 
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Props } from "./Row";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -121,15 +120,15 @@ const HeaderLabel = (props: HeaderLabelProps) => {
   );
 };
 
-const Tabs = (props: Props) => {
+const Tabs = (props: {internal: any, external: any, user: any}) => {
   // Creates the tab menu & displays the internal/external data
-  const internal = props.subRows.internal;
-  const external = props.subRows.external;
-  const user = props.subRows.user;
+  const internal = props.internal;
+  const external = props.external;
+  const user = props.user;
 
-  const internalTable = <InternalTable>{internal}</InternalTable>;
-  const externalTable = <InternalTable>{external}</InternalTable>;
-  const userTable = <UsersTable>{user}</UsersTable>;
+  const internalTable = <InternalTable tableRows={internal}></InternalTable>;
+  const externalTable = <InternalTable tableRows={external}></InternalTable>;
+  const userTable = <UsersTable tableRows={user}></UsersTable>;
 
   const [tabVal, setTabVal] = useState(0);
   const classes = useStyles();
@@ -181,7 +180,7 @@ const Tabs = (props: Props) => {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1}}>
+      <Box sx={{ borderBottom: 1 }}>
         <ThemeProvider theme={theme}>
           <Tabss
             value={tabVal}
