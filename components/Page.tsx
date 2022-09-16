@@ -74,7 +74,8 @@ export function Page(props: PageProps) {
 	const [filterSetting, setFilterSetting] = useState<Filter>({ type: "", level: 0, direction: false, mustHaveDependency: -1, showRed: true, showYellow: true, showGreen: true });
 
 	// check if there are no rows
-	if (rows.length === 0) { emptyRows = true; }
+	let emptyRows = rows.length === 0;
+
 	let loadingBackdrop: any = null;
 	// If the final data is loading, then set the backdrop open to true
 	if (!props.finalData) {
@@ -88,8 +89,7 @@ export function Page(props: PageProps) {
 	//Sorting. Doing this after filtering would be more efficient
 	applySort(rows, sortSetting)
 
-	// check if there are no rows
-	let emptyRows = rows.length === 0;
+	
 
 	const jsxRows = rowsToJSX(rows)
 	const rankArray = rankCounts(rows)
