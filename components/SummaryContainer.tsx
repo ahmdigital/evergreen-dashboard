@@ -23,6 +23,7 @@ import IconButton from "@mui/material/IconButton";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CondensedSummary from "./SummaryComponents/CondensedSummary/CondensedSummary";
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 
 export default function SummaryContainer(props: {
@@ -48,6 +49,7 @@ export default function SummaryContainer(props: {
 
   // State for opening the helpLegend
   const [openHelp, setOpenHelp] = useState<boolean>(false);
+  const [showChart, setShowChart] = useState<boolean>(false);
 
   // State for collapsing the header
   const [closeHeader, setCloseHeader] = useState<boolean>(true);
@@ -109,13 +111,13 @@ export default function SummaryContainer(props: {
         <Grid>
           <Grow in={!closeHeader}>
             <Grid>
-              {!closeHeader ? (
+              {!closeHeader && (
                 <CondensedSummary
                   statusValues={props.rankArray}
                   overall={overallPercent}
                   target={config.targetPercentage}
                 ></CondensedSummary>
-              ) : (<></>)}
+              )}
             </Grid>
           </Grow>
         </Grid>
@@ -138,28 +140,38 @@ export default function SummaryContainer(props: {
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
               <div className={styles.summaryCompHeader}>
-                <h3 className={styles.summaryStyle}>{`Total Repositories (${props.rankArray.green + props.rankArray.yellow + props.rankArray.red})`}</h3>
-                <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
-                  <IconButton
-                    aria-label="Help button"
-                    onClick={() => {
-                      setOpenHelp(true);
-                    }}
-                  >
-                    <Image
+              <h3 className={styles.summaryStyle}>Total Repositories ({props.rankArray.green + props.rankArray.yellow + props.rankArray.red})</h3>
+                <div style={{display: "flex", width: "70px", justifyContent: "space-between"}}>
+                <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Toggle Pie Chart</p>}>
+                    <IconButton
                       className={styles.helpBtn}
-                      width="30px"
-                      height="30px"
-                      alt="Help Icon"
-                      src={helpIcon}
-                    />
-                  </IconButton>
-                </Tooltip>
+                      aria-label="Chart button"
+                      onClick={() => {
+                        setShowChart(!showChart);
+                      }}
+                    ><BarChartIcon className={styles.chartButton}/></IconButton></Tooltip>
+                  <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
+                    <IconButton
+                      className={styles.helpBtn}
+                      aria-label="Help button"
+                      onClick={() => {
+                        setOpenHelp(true);
+                      }}
+                    >
+                      <Image
+                        width="30px"
+                        height="30px"
+                        alt="Help Icon"
+                        src={helpIcon}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                </div>
               </div>
               {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
               <div>
                 <div className={styles.summaryComponent2}>
-                  <ReposOverviewTable rankArray={props.rankArray} />
+                  <ReposOverviewTable rankArray={props.rankArray} showChart={showChart} />
                 </div>
               </div>
             </div>

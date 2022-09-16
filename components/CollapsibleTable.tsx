@@ -45,31 +45,31 @@ const theme = createTheme({
 // Creates the whole table
 export default function CollapsibleTable(props: CollapsibleTableProps) {
   return (
-    <ThemeProvider theme={theme}>
-      <TableContainer
-        component={Paper}
-        className={styles.tableComponent}
-      >
-        <Table size="small" aria-label="collapsible table">
-          <colgroup>
-            <col className={styles.col1} />
-            <col className={styles.col2} />
-            <col className={styles.col3} />
-            <col className={styles.col4} />
-            <col className={styles.col5} />
-          </colgroup>
-          <TableHead>
-            <TableRow>
-              <TableCell ></TableCell>
-              <TableCell >status</TableCell>
-              <TableCell >name</TableCell>
-              <TableCell >version</TableCell>
-              <TableCell >last push</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody id={"mainTableBody"}>{props.children}</TableBody>
-        </Table>
-      </TableContainer>
-    </ThemeProvider>
+	<ThemeProvider theme={theme}>
+    <TableContainer
+      component={Paper}
+      className={styles.tableComponent}
+    >
+      <Table size="small" aria-label="collapsible table" className={styles.tableFixedWidth}>
+        <colgroup>
+          <col className={styles.col1} />
+          <col className={styles.col2} />
+          <col className={styles.col3} />
+          <col className={styles.col4} />
+          <col className={styles.col5} />
+        </colgroup>
+        <TableHead>
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell>status</TableCell>
+            <TableCell>name</TableCell>
+            <TableCell>version</TableCell>
+            <TableCell>last push</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody id={"mainTableBody"}>{props.children}</TableBody>
+      </Table>
+    </TableContainer>
+	</ThemeProvider>
   );
 }

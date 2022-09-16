@@ -5,7 +5,6 @@ import IconButton from "@mui/material/IconButton";
 import { Tooltip, TableRow, TableHead, TableCell, Table } from "@mui/material";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import QuestionMark from "@mui/icons-material/QuestionMark";
 import RedIcon from "./images/redIcon.svg";
 import YellowIcon from "./images/yellowIcon.svg";
 import greenIcon from "./images/greenIcon.svg";
@@ -15,6 +14,7 @@ import { semVerToString } from "../src/semVer";
 import styles from "./Row.module.css";
 import { redDef, yellowDef, greenDef } from "./LightStatus";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import QuestionMark from "@mui/icons-material/QuestionMark";
 
 const dayjs = require('dayjs')
 var relativeTime = require('dayjs/plugin/relativeTime')
@@ -83,9 +83,6 @@ export default function Row(props: { rank: number; row: any } & Props) {
     iconDefinition = yellowDef.description;
 	statusText = "Should be updated soon";
   }
-
-
-  let timeFormatter = new Intl.RelativeTimeFormat(undefined, { style: "narrow" });
 
   return (
     <React.Fragment>

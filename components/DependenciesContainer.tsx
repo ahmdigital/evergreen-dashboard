@@ -24,9 +24,9 @@ export default function DependenciesContainer(props: {
   rows: JSX.Element[];
   searchTerm: any;
   setSearchTerm: any;
-  emptyRows: boolean;
   sortDropdown: any;
   rankSelection: any;
+  emptyRows: boolean;
   sortDirection: any;
 }) {
   async function callRefresh() {

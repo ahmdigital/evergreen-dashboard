@@ -75,9 +75,11 @@ export function SubRow(props: SubRowProps) {
             </div>
           </Tooltip>
         </TableCell>
-        <TableCell className={styles.tableCellStyle}><a href={depLink} rel="noreferrer" target="_blank">
-          {depName}
-        </a></TableCell>
+		<TableCell className={styles.tableCellStyle}>
+			<a href={depLink} rel="noreferrer" target="_blank">
+				{depName}
+			</a>
+		</TableCell>
         <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
         <TableCell
           className={`${styles.tableCellStyle} ${styles.latestVerStyle}`}
