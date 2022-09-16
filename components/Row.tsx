@@ -14,6 +14,7 @@ import { semVerToString } from "../src/semVer";
 import styles from "./Row.module.css";
 import { redDef, yellowDef, greenDef } from "./LightStatus";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import QuestionMark from "@mui/icons-material/QuestionMark";
 
 const dayjs = require('dayjs')
 var relativeTime = require('dayjs/plugin/relativeTime')
@@ -110,23 +111,22 @@ export default function Row(props: { rank: number; row: any } & Props) {
               </div>
             </Tooltip>
           </TableCell>
-		  <TableCell className={styles.tableCellStyle} component="th" scope="row">
-			<a href={row.link} rel="noreferrer" target="_blank">
-				{row.name}
-			</a>
-		  </TableCell>
-          <TableCell align="left" className={styles.myTable}  >
-            {
-				(semVerToString(row.version) === "0.0.0-development" || semVerToString(row.version) === "0.0.0") ?
-					(<Tooltip arrow disableInteractive title={<p className={styles.tooltipStyle}>This repository was defined with a default version of 0.0.0</p>}>
-						<p className = {styles.textContainer}>{semVerToString(row.version)}</p>
-					</Tooltip>)
-				:
-					semVerToString(row.version)
-			}
+          <TableCell component="th" scope="row">
+            <a href={row.link} rel="noreferrer" target="_blank">
+              {row.name}
+            </a>
           </TableCell>
-		  <TableCell className={styles.tableCellStyle} align="left">
-          	{dayjs(row.lastUpdated).fromNow()}
+          <TableCell align="left">
+            {semVerToString(row.version)}
+            { 
+              (semVerToString(row.version) === "0.0.0-development" || semVerToString(row.version) === "0.0.0") &&
+              <Tooltip arrow title={<p className={styles.tooltipStyle}>This repository was defined with a default version of 0.0.0</p>}>
+                <QuestionMark sx={{width: '1.125rem', height: '1.125rem'}}/>
+              </Tooltip>
+            }
+          </TableCell>
+          <TableCell align="left">
+            {dayjs(row.lastUpdated).fromNow()}
           </TableCell>
         </ThemeProvider>
       </TableRow>

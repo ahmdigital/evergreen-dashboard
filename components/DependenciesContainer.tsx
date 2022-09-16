@@ -5,6 +5,7 @@ import sharedStyles from "./treeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
 import config from "../config.json";
+// import { Grid } from "@mui/material"
 //import filterIcon from "../components/images/filter.svg" ;
 import {
   PageLoaderCurrentData,
@@ -26,6 +27,7 @@ export default function DependenciesContainer(props: {
   sortDropdown: any;
   rankSelection: any;
   emptyRows: boolean;
+  sortDirection: any;
 }) {
   async function callRefresh() {
     if (refreshing) {
@@ -61,38 +63,45 @@ export default function DependenciesContainer(props: {
 
   return (
     <div className={`${styles.sectionContainer}`}>
-      <h2 className={sharedStyles.h3ContainerStyle}>Repositories </h2>
+      <h3 className={sharedStyles.h3ContainerStyle}>Repositories </h3>
+
       <div className={styles.depsBarStyle}>
+
         <SearchBar
           searchTerm={props.searchTerm}
           setSearchTerm={props.setSearchTerm}
         />
-        {/* commented out filter button */}
-        <div className={styles.btnsContainer}>
-		  {props.sortDropdown}
-		  {props.rankSelection}
-          {/* <button>
-            <Image src={filterIcon} alt="filter" width="20px" height="20px"></Image>
-            <span>Filter</span>
-          </button> */}
+
+        <div className={styles.menuStyle}>
+          {props.sortDropdown}
         </div>
+
+        <div className={styles.menuStyle}>
+          {props.sortDirection}
+        </div>
+
+        <div className={styles.menuStyle}>
+          {props.rankSelection}
+        </div>
+        
       </div>
+
 
       <div className={styles.tableStyle}>
         <CollapsibleTable>{props.rows}</CollapsibleTable>
       </div>
-      {props.emptyRows && (
+      {
+        props.emptyRows &&
         <div className={styles.noReposStyle}>
-          <p>
-            <b>{config.targetOrganisation}</b> has 0 repositories
-          </p>
+          <p><b>{config.targetOrganisation}</b> has 0 repositories</p>
         </div>
-      )}
-      {!props.emptyRows && props.searchTerm !== "" && props.rows.length === 0 && (
+      }
+      {
+        !props.emptyRows && (props.searchTerm !== "" && props.rows.length === 0) &&
         <div className={styles.noReposStyle}>
-          <p>No results found for your search</p>
+          <p>No search results found</p>
         </div>
-      )}
+      }
     </div>
   );
 }

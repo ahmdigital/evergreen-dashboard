@@ -5,33 +5,26 @@ import ReposOverviewTable from "./SummaryComponents/RepoOverviewTable/ReposOverv
 import helpIcon from "./images/helpIcon.png";
 import Image from "next/image";
 import HelpScreen from "./LightStatus";
+import ForestIcon from "@mui/icons-material/Forest";
+import Tooltip from "@mui/material/Tooltip";
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Unstable_Grid2';
+import refreshIcon from "../components/images/refresh.svg";
+import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
+import config from "../config.json";
+
+let refreshing = false
 import { ProcessedDependencyData } from "../hooks/useProcessDependencyData";
 import ReposSecondarySummaryTable from "./SummaryComponents/ReposSecondarySummaryTable";
 import { Filter } from "../src/sortingAndFiltering";
-import ForestIcon from '@mui/icons-material/Forest';
-import Tooltip from "@mui/material/Tooltip";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Unstable_Grid2";
-import refreshIcon from "../components/images/refresh.svg";
 import Collapse from "@mui/material/Collapse";
 import Grow from '@mui/material/Grow';
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
-import {
-  PageLoaderCurrentData,
-  forceNewVersion,
-  PageLoaderIsLoading,
-  lastRequest,
-  PageLoaderSetData,
-  PageLoaderSetLoading,
-} from "./PageLoader";
-import config from "../config.json";
-import BarChartIcon from '@mui/icons-material/BarChart';
 import CondensedSummary from "./SummaryComponents/CondensedSummary/CondensedSummary";
+import BarChartIcon from '@mui/icons-material/BarChart';
 
-let refreshing = false;
 
 export default function SummaryContainer(props: {
   rankArray: any;
@@ -96,7 +89,7 @@ export default function SummaryContainer(props: {
 
   return (
     <Box
-      sx={{ flexGrow: 1 }}
+      sx={{ flexGrow: 1, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between' }}
       className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}
     >
       <Grid container spacing={1} className={styles.container}>
@@ -105,8 +98,6 @@ export default function SummaryContainer(props: {
           <p className={styles.subtitle}>
             Monitoring dependencies for <b>{config.targetOrganisation}</b> Github Organisation
           </p>
-        </Grid>
-        <Grid>
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
               <button onClick={callRefresh} aria-label="Refresh data">
@@ -116,6 +107,7 @@ export default function SummaryContainer(props: {
             </Tooltip>
           </div>
         </Grid>
+        
         <Grid>
           <Grow in={!closeHeader}>
             <Grid>
@@ -134,7 +126,7 @@ export default function SummaryContainer(props: {
         {props.loadingBackdrop}
       </div>
       <Collapse in={closeHeader} timeout="auto" unmountOnExit>
-        <Grid container spacing={1} className={`${styles.container} ${styles.margins}`}>
+        <Grid container spacing={1} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between', marginTop: '0rem', marginBottom: '0rem' }} className={`${styles.container} ${styles.margins}`}>
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
               <h3 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h3>
@@ -148,7 +140,7 @@ export default function SummaryContainer(props: {
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
               <div className={styles.summaryCompHeader}>
-                <h3 className={styles.summaryStyle}>Total counts ({props.rankArray.green + props.rankArray.yellow + props.rankArray.red})</h3>
+              <h3 className={styles.summaryStyle}>Total Repositories ({props.rankArray.green + props.rankArray.yellow + props.rankArray.red})</h3>
                 <div style={{display: "flex", width: "70px", justifyContent: "space-between"}}>
                 <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Toggle Pie Chart</p>}>
                     <IconButton
@@ -186,7 +178,7 @@ export default function SummaryContainer(props: {
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-              <div className={styles.summaryComponent2}>
+              <div className={styles.summaryComponent3}>
                 <ReposSecondarySummaryTable rows={props.rows} filterTerm={props.filterTerm} setFilterTerm={props.setFilterTerm} />
               </div>
             </div>

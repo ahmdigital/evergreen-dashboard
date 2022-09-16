@@ -14,6 +14,22 @@ type InverseSubRowProps = {
   user: SubRowProps["dependency"];
 };
 
+// Customising the row styling using ThemeProvider
+const theme = createTheme({
+  components: {
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          fontFamily: "var(--secondary-font-family)",
+          fontSize: "1.1rem",
+          backgroundColor: "#f5f5f5",
+          color: "var(--colour-font)",
+          borderColor: "#7a7a7a",
+        }
+      }
+    }
+  }
+})
 export function testClickFunction(name: string) {
   let mainTableBody = document.getElementById("mainTableBody");
   if (mainTableBody == null) { return }
@@ -49,22 +65,6 @@ export function testClickFunction(name: string) {
     }
   }
 }
-// Customising the row styling using ThemeProvider
-const theme = createTheme({
-  components: {
-    MuiTableCell: {
-      styleOverrides: {
-        root: {
-          fontFamily: "var(--secondary-font-family)",
-          fontSize: "1.1rem",
-          backgroundColor: "#f5f5f5",
-          color: "var(--colour-font)",
-          borderColor: "#7a7a7a",
-        }
-      }
-    }
-  }
-})
 
 export function InverseSubRow(props: InverseSubRowProps) {
   const userName = props.user.name;
@@ -75,12 +75,12 @@ export function InverseSubRow(props: InverseSubRowProps) {
   let statusText = "Needs updating urgently";
   // Setting the status
   if (props.user.rank == 2) {
-	  statusIcon = GreenIcon;
-	  statusText = "Up to date";
-	}
-	if (props.user.rank == 1) {
-	statusIcon = YellowIcon;
-	statusText = "Should be updated soon";
+    statusIcon = GreenIcon;
+    statusText = "Up to date";
+  }
+  if (props.user.rank == 1) {
+    statusIcon = YellowIcon;
+    statusText = "Should be updated soon";
   }
 
   return (
@@ -95,12 +95,11 @@ export function InverseSubRow(props: InverseSubRowProps) {
             className={styles.inverseSubRowIcon}
           ></Image>
         </TableCell>
-		<TableCell>
-		  <a href={depLink} rel="noreferrer" target="_blank">
-		    {userName}
-		  </a>
-		</TableCell>
+        <TableCell ><a href={depLink} rel="noreferrer" target="_blank">
+          {userName}
+        </a></TableCell>
         <TableCell>{usedVersion}</TableCell>
+        {/* <button onClick = {() => {testClickFunction(userName)}}> </button> */}
       </ThemeProvider>
     </TableRow>
   );

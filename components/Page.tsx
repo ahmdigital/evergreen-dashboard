@@ -9,15 +9,41 @@ import DependenciesContainer from "./DependenciesContainer";
 import SummaryContainer from "./SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
 import LoadingBackdrop from "./LoadingBackdrop";
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import HelpGuide from "./HelpComponents/HelpGuide";
+import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { RankSelectionList, SortBox, SortSettings } from "./SortAndFilterDropdowns";
 import { applySort, Filter, rankCounts, searchAndFilter } from "../src/sortingAndFiltering";
-import HelpGuide from "./HelpComponents/HelpGuide";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export type PageProps = {
 	JSObject: DependencyData;
 	finalData: boolean;
 };
+
+// Customising the table styling using ThemeProvider
+const theme = createTheme({
+	components: {
+		MuiSelect: {
+			styleOverrides: {
+				select: {
+					fontSize: "1rem",
+					fontFamily: 'var(--primary-font-family)',
+					color: 'black',
+				}
+			}
+		},
+		MuiInputLabel: {
+			styleOverrides: {
+				root: {
+					fontSize: "1.1rem",
+					fontFamily: 'var(--primary-font-family)',
+					color: 'black',
+				}
+			}
+		}
+	}
+})
+
 
 function rowsToJSX(rows: ProcessedDependencyData) {
 	return rows.map((row) => (
@@ -43,11 +69,12 @@ function rowsToJSX(rows: ProcessedDependencyData) {
 
 export function Page(props: PageProps) {
 	const [searchTerm, setSearchTerm] = useState<string>("");
+	const rows = useProcessDependencyData(props.JSObject);
 	const [sortSetting, setSortSetting] = useState<SortSettings>({ type: "rank", direction: true });
 	const [filterSetting, setFilterSetting] = useState<Filter>({ type: "", level: 0, direction: false, mustHaveDependency: -1, showRed: true, showYellow: true, showGreen: true });
-	const rows = useProcessDependencyData(props.JSObject);
 
-
+	// check if there are no rows
+	if (rows.length === 0) { emptyRows = true; }
 	let loadingBackdrop: any = null;
 	// If the final data is loading, then set the backdrop open to true
 	if (!props.finalData) {
@@ -84,17 +111,17 @@ export function Page(props: PageProps) {
 	}
 
 	//TODO: Replace this
-	const sortDirectionBox = <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-		<InputLabel>Sort direction</InputLabel>
-		<Select
-			value={sortSetting.direction ? "ascending" : "descending"}
-			onChange={handleSortDirectionChange}
-			label="Sort direction"
-		>
-			<MenuItem value={"ascending"}>ascending</MenuItem>
-			<MenuItem value={"descending"}>descending</MenuItem>
-		</Select>
-	</FormControl>
+	const sortDirectionBox = <ThemeProvider theme={theme}>
+		<FormControl sx={{ m: 1, minWidth: 138, maxWidth: 138 }}>
+			<p>Sort Direction</p>
+			<Select
+				value={sortSetting.direction ? "ascending" : "descending"}
+				onChange={handleSortDirectionChange}
+			>
+				<MenuItem value={"ascending"}>Ascending</MenuItem>
+				<MenuItem value={"descending"}>Descending</MenuItem>
+			</Select>
+		</FormControl></ThemeProvider>
 
 	return (
 		<div className="container">
@@ -104,13 +131,13 @@ export function Page(props: PageProps) {
 			<main style={{ padding: 0 }}>
 				<Layout>
 					<SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
-					<div>{sortDirectionBox}</div>
 					<DependenciesContainer
 						JSObject={props.JSObject}
 						rows={diplayedRows}
 						searchTerm={searchTerm}
 						setSearchTerm={setSearchTerm}
 						sortDropdown={sortBox}
+						sortDirection={sortDirectionBox}
 						rankSelection={rankSelectionList}
 						emptyRows={emptyRows}
 					/>

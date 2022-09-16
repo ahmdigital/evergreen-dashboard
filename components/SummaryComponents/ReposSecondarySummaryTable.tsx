@@ -12,6 +12,25 @@ import { useTheme } from '@mui/material/styles';
 import { PackageData, ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import { compareSemVerDelta, SemVerDelta, semVerToDelta } from "../../src/semVer";
 import { Filter } from "../../src/sortingAndFiltering";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+// Customising the table styling using ThemeProvider
+export const theme = createTheme({
+	components: {
+		MuiTableCell: {
+			styleOverrides: {
+				root: {
+					fontWeight: "var(--font-weight-semibold)",
+					fontSize: "var(--font-size-normal)", //16px
+					fontFamily: 'var(--secondary-font-family)',
+					padding: '4px',
+					lineHeight: 'inherit'
+				},
+			}
+		}
+	}
+})
+
 
 /* Returns a sorted array containing the name/id of each dependecy and the number of repostiotories that use that dependency
  * The countOnlyOutdated flag allows the count to only include cases where the used dependency version is outdated.
@@ -45,34 +64,36 @@ function countUsage(rows: ProcessedDependencyData, countOnlyOutdated: boolean) {
 	return usageCounts
 }
 
-/* Creates a small table of the first 7 elements of the given array. If these elements are clicked on, then that dependecny is added to the filter */
-function MostCommonSummaryTable(name: string, usageCounts: {name: string, id: number, count: number}[], filterTerm: Filter, setFilterTerm: any) {
+/* Creates a small table of the first 5 elements of the given array. If these elements are clicked on, then that dependecny is added to the filter */
+function MostCommonSummaryTable(name: string, usageCounts: { name: string, id: number, count: number }[], filterTerm: Filter, setFilterTerm: any) {
 	return (
-		<Table>
-			<TableRow>
-				<TableCell className={styles.totalsCellStyle}>
-					<h3>{name}</h3>
-				</TableCell>
-				<TableCell className={styles.totalsCellStyle}>
-				</TableCell>
-			</TableRow>
-			{
-				usageCounts.slice(0, 7).map(i => {
-						return <TableRow key={i.id} sx={{ ...(filterTerm.mustHaveDependency == i.id && {background: "var(--colour-table-selected)"})}} onClick={() => setFilterTerm({...filterTerm, mustHaveDependency: filterTerm.mustHaveDependency == i.id ? -1 : i.id})}>
-						<TableCell className={styles.tableCellStyle}>
-							<div className={styles.textContainer}>
-								{i.name}
-							</div>
-						</TableCell>
-						<TableCell className={styles.tableCellStyle}>
-							<div className={styles.countContainer}>
-								{i.count}
-							</div>
-						</TableCell>
-					</TableRow>
-				})
-			}
-		</Table>
+		<ThemeProvider theme={theme}>
+			<Table>
+				<TableRow>
+					<TableCell className={styles.totalsCellStyle}>
+						<h3>{name}</h3>
+					</TableCell>
+					<TableCell className={styles.totalsCellStyle}>
+					</TableCell>
+				</TableRow>
+				{
+					usageCounts.slice(0, 5).map(i => {
+						return <TableRow key={i.id} sx={{ ...(filterTerm.mustHaveDependency == i.id && { background: "var(--colour-table-selected)" }) }} onClick={() => setFilterTerm({ ...filterTerm, mustHaveDependency: filterTerm.mustHaveDependency == i.id ? -1 : i.id })}>
+							<TableCell className={styles.tableCellStyle}>
+								<div className={styles.textContainer}>
+									{i.name}
+								</div>
+							</TableCell>
+							<TableCell className={styles.tableCellStyle}>
+								<div className={styles.countContainer}>
+									{i.count}
+								</div>
+							</TableCell>
+						</TableRow>
+					})
+				}
+			</Table>
+		</ThemeProvider>
 	);
 }
 
@@ -95,16 +116,16 @@ export default function ReposSecondarySummaryTable(props: {
 
 	const handleNext = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1)
-		props.setFilterTerm({...props.filterTerm, mustHaveDependency: -1})
+		props.setFilterTerm({ ...props.filterTerm, mustHaveDependency: -1 })
 	};
 
 	const handleBack = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1)
-		props.setFilterTerm({...props.filterTerm, mustHaveDependency: -1})
+		props.setFilterTerm({ ...props.filterTerm, mustHaveDependency: -1 })
 	};
 
 	return (
-		<Box sx={{ flexGrow: 1, width: "100%"}}>
+		<Box sx={{ flexGrow: 1, width: "100%", marginTop: "10px" }}>
 			{options[activeStep]}
 			<MobileStepper
 				steps={maxSteps}
