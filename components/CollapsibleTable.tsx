@@ -8,8 +8,6 @@ import Paper from "@mui/material/Paper";
 import styles from "./CollapsibleTable.module.css";
 import Row from "./Row";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import config from "../config.json";
-
 
 // Customising the table styling using ThemeProvider
 const theme = createTheme({
@@ -66,9 +64,7 @@ export default function CollapsibleTable(props: { tableRows: any, setTableRows: 
             </TableRow>
           </TableHead>
           <TableBody id={"mainTableBody"}>
-            {props.tableRows.filter((row) =>
-              row.name.toLowerCase().includes(props.searchTerm.toLowerCase())
-            ).map((row) => (
+            {props.tableRows.map((row) => (
               <Row
                 key={row.name}
                 rank={row.minRank}

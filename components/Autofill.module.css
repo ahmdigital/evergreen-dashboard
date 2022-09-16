@@ -1,0 +1,17 @@
+.dropdown {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    z-index: 1;
+}
+
+.dropdown:empty {
+    border: none;
+}
+
+.dropdownRow {
+    cursor: pointer;
+    text-align: start;
+    margin: 2px 0;
+}
