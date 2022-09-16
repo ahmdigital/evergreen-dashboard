@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./SearchBar.module.css";
 import magnifyingGlass from "./images/magnifying-glass.svg";
@@ -9,6 +9,9 @@ export default function SearchBar(props: {
   setSearchTerm: any;
   repoNames: any
 }) {
+
+  const [display, setDisplay] = useState<boolean>(false);
+
   return (
     <div className={styles.searchBarWidth}>
       <div className={styles.searchBar}>
@@ -17,11 +20,12 @@ export default function SearchBar(props: {
           type="text"
           placeholder="Search..."
           value={props.searchTerm}
+          onClick={() => setDisplay(!display)}
           onChange={(e) => props.setSearchTerm(e.target.value)}
         />
         <Image onClick={() => props.setSearchTerm(props.searchTerm)} alt="Search Icon" src={magnifyingGlass} width={24} height={26} />
       </div>
-      <Autofill repoNames={props.repoNames} searchTerm={props.searchTerm} setSearchTerm={props.setSearchTerm}></Autofill>
+      <Autofill repoNames={props.repoNames} searchTerm={props.searchTerm} setSearchTerm={props.setSearchTerm} display={display} setDisplay={setDisplay}></Autofill>
     </div>
   );
 }
