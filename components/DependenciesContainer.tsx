@@ -47,7 +47,7 @@ export default function DependenciesContainer(props: {
 
 
       <div className={styles.tableStyle}>
-        <CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows}></CollapsibleTable>
+        <CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows} searchTerm={props.searchTerm} setSearchTerm={props.setSearchTerm}></CollapsibleTable>
       </div>
       {
         props.emptyRows &&

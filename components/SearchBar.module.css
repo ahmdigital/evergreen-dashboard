@@ -6,7 +6,7 @@ div.searchBarWidth {
 
 div.searchBar {
   border: 1px solid var(--colour-black);
-  border-radius: 20px;
+  border-radius: 6px;
   display: flex;
   flex-direction: row;
   margin-top: 0.5rem;
