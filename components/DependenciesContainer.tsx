@@ -29,7 +29,7 @@ export default function DependenciesContainer(props: {
         <SearchBar
           searchTerm={props.searchTerm}
           setSearchTerm={props.setSearchTerm}
-          repoNames={(props.tableRows.map(row => row.name))}
+          repoNames={(props.tableRows.map((row: any) => row.name))}
         />
 
         <div className={styles.menuStyle}>

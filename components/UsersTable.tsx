@@ -34,7 +34,7 @@ export default function UsersTable(props: { tableRows: any }) {
           </TableHead>
           <TableBody>
             {
-              props.tableRows.map((row) => (
+              props.tableRows.map((row: any) => (
                 <InverseSubRow key={row.name} user={row} />
               ))
             }

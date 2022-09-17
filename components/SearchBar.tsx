@@ -27,7 +27,7 @@ export default function SearchBar(props: {
 }) {
 
   // Updating the searchTerm state
-  const handleChange = (event, value) => {
+  const handleChange = (event: any, value: any) => {
     if (!value) {
       props.setSearchTerm('')
     } else {

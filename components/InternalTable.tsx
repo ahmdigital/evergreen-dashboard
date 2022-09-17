@@ -78,7 +78,7 @@ export default function InternalTable(props: { tableRows: any }) {
                     </TableHead>
                     <TableBody>
                         {
-                            props.tableRows.map((row) => (
+                            props.tableRows.map((row: any) => (
                                 <SubRow key={row.name} dependency={row} />
                             ))
                         }

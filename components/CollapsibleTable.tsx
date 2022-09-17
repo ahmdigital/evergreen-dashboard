@@ -63,7 +63,7 @@ export default function CollapsibleTable(props: { tableRows: any, setTableRows: 
             </TableRow>
           </TableHead>
           <TableBody id={"mainTableBody"}>
-            {props.tableRows.filter((row) => row.name.toLowerCase().includes(props.searchTerm.toLowerCase())).map((row) => (
+            {props.tableRows.filter((row: any) => row.name.toLowerCase().includes(props.searchTerm.toLowerCase())).map((row: any) => (
               <Row
                 key={row.name}
                 rank={row.minRank}
