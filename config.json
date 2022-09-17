@@ -1,5 +1,5 @@
 {
-	"targetOrganisation": "ahmdigital",
+	"targetOrganisation": "octokit",
 	"rankCutoff": {
 		"major": "0.6.-1",
 		"minor": "0.5.-1"

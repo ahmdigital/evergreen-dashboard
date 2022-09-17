@@ -73,7 +73,6 @@ export function Page(props: PageProps) {
 	// Using react state for table data
 	const rows = useProcessDependencyData(props.JSObject);
 	const [tableRows, setTableRows] = useState<ProcessedDependencyData>(useProcessDependencyData(props.JSObject))
-	console.log('PRINTING TABLE ROWS ', tableRows)
 
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [sortSetting, setSortSetting] = useState<SortSettings>({ type: "rank", direction: true });
