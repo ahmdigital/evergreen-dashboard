@@ -5,7 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import styles from "./InternalTable.module.css";
+import styles from "../../styles/InternalTable.module.css";
 import { tableBodyStyle, theme as tableTheme } from "./InternalTable";
 import { InverseSubRow } from "./InverseSubRow";
 import { ThemeProvider } from "@mui/material/styles";

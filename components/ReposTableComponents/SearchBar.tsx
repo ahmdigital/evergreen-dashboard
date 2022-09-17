@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./SearchBar.module.css";
+import styles from "../../styles/SearchBar.module.css";
 import debounce from 'lodash.debounce';
 import Autocomplete from '@mui/material/Autocomplete';
 import { TextField } from "@mui/material";

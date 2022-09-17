@@ -8,7 +8,7 @@ import { DependencyData } from "../src/dataProcessing";
 import LoadingBackdrop from "./FeedbackComponents/LoadingBackdrop";
 import HelpGuide from "./HelpComponents/HelpGuide";
 import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { RankSelectionList, SortBox, SortSettings } from "./SortAndFilterDropdowns";
+import { RankSelectionList, SortBox, SortSettings } from "./ReposTableComponents/SortAndFilterDropdowns";
 import { applySort, Filter, rankCounts } from "../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
