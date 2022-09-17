@@ -15,6 +15,7 @@ import { RankSelectionList, SortBox, SortSettings } from "./SortAndFilterDropdow
 import { applySort, Filter, rankCounts, searchAndFilter } from "../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+
 export type PageProps = {
 	JSObject: DependencyData;
 	finalData: boolean;
