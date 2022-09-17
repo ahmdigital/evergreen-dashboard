@@ -1,28 +1,28 @@
 import React, { useState } from "react";
-import styles from "../styles/SummaryContainer.module.css";
-import sharedStyles from "../styles/TreeView.module.css";
-import ReposOverviewTable from "./SummaryComponents/RepoOverviewTable/ReposOverviewTable";
-import helpIcon from "./images/helpIcon.png";
+import styles from "../../styles/SummaryContainer.module.css";
+import sharedStyles from "../../styles/TreeView.module.css";
+import ReposOverviewTable from "./RepoOverviewTable/ReposOverviewTable";
+import helpIcon from "../images/helpIcon.png";
 import Image from "next/image";
-import HelpScreen from "./LightStatus";
+import HelpScreen from "../HelpComponents/LightStatus";
 import ForestIcon from "@mui/icons-material/Forest";
 import Tooltip from "@mui/material/Tooltip";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import refreshIcon from "../components/images/refresh.svg";
-import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "./PageLoader";
-import config from "../config.json";
+import refreshIcon from "../images/refresh.svg";
+import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "../PageLoader";
+import config from "../../config.json";
 
 let refreshing = false
-import { ProcessedDependencyData } from "../hooks/useProcessDependencyData";
-import ReposSecondarySummaryTable from "./SummaryComponents/ReposSecondarySummaryTable";
-import { Filter } from "../src/sortingAndFiltering";
+import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
+import ReposSecondarySummaryTable from "./ReposSecondarySummaryTable";
+import { Filter } from "../../src/sortingAndFiltering";
 import Collapse from "@mui/material/Collapse";
 import Grow from '@mui/material/Grow';
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import CondensedSummary from "./SummaryComponents/CondensedSummary/CondensedSummary";
+import CondensedSummary from "./CondensedSummary/CondensedSummary";
 import BarChartIcon from '@mui/icons-material/BarChart';
 
 
