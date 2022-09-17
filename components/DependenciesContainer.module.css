@@ -41,15 +41,17 @@ div.btnsContainer button {
   justify-content: center;
   align-items: center;
 }
+
 div.btnsContainer button span {
   margin-left: 0.5rem;
 }
+
 div.btnsContainer button:hover {
   cursor: pointer;
   background-color: lightgray;
 }
 
-div.searchBarDiv{
+div.searchBarDiv {
   flex-wrap: wrap;
 }
 
@@ -72,11 +74,11 @@ div.sortBy {
   flex-direction: column;
 }
 
-div.menuStyle{
+div.menuStyle {
   margin-right: 0.7rem;
 }
 
-div.menusPosition{
+div.menusPosition {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

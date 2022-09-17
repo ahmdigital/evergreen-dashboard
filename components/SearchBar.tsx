@@ -1,10 +1,24 @@
 import React from "react";
-import Image from "next/image";
 import styles from "./SearchBar.module.css";
-import magnifyingGlass from "./images/magnifying-glass.svg";
 import debounce from 'lodash.debounce';
 import Autocomplete from '@mui/material/Autocomplete';
 import { TextField } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+// Customising the table styling using ThemeProvider
+const theme = createTheme({
+  components: {
+    MuiAutocomplete: {
+      styleOverrides: {
+        root: {
+          fontWeight: "var(--font-weight-semibolder)",
+          fontSize: "var(--font-size-large)",
+          fontFamily: 'var(--primary-font-family)',
+        }
+      }
+    },
+  }
+})
 
 export default function SearchBar(props: {
   searchTerm: any;
@@ -12,7 +26,7 @@ export default function SearchBar(props: {
   repoNames: any
 }) {
 
-  // Updating the search term state
+  // Updating the searchTerm state
   const handleChange = (event, value) => {
     if (!value) {
       props.setSearchTerm('')
@@ -25,8 +39,10 @@ export default function SearchBar(props: {
   const debounceOnChange = debounce(handleChange, 100)
 
   return (
-    <div className={styles.searchBarWidth}>
-      <Autocomplete freeSolo options={props.repoNames} renderInput={(params) => <TextField {...params} label="Search" />} onChange={debounceOnChange} />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className={styles.searchBarWidth}>
+        <Autocomplete fullWidth={true} freeSolo options={props.repoNames} renderInput={(params) => <TextField {...params} label="Search" />} onChange={debounceOnChange} />
+      </div>
+    </ThemeProvider>
   );
 }
