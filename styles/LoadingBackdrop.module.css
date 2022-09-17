@@ -2,8 +2,6 @@
 .p {
     font-family: var(--primary-font-family);
     font-size: var(--font-size-normal);
-    font-style: italic;
-    font-weight: bold;
     color: #fff;
     align-self:center;
 }
