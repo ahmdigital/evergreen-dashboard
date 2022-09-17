@@ -7,7 +7,7 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import styles from "./ReposSecondarySummaryTable.module.css";
+import styles from "../../styles/ReposSecondarySummaryTable.module.css";
 import { useTheme } from '@mui/material/styles';
 import { PackageData, ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import { compareSemVerDelta, SemVerDelta, semVerToDelta } from "../../src/semVer";
