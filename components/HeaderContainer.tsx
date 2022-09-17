@@ -1,6 +1,6 @@
 import React from "react";
-import headerStyles from "./HeaderContainer.module.css";
-// import sharedStyles from "./treeView.module.css";
+import headerStyles from "../styles/HeaderContainer.module.css";
+// import sharedStyles from "../styles/TreeView.module.css";
 import config from "../config.json";
 import ForestIcon from "@mui/icons-material/Forest";
 import { RepoOverviewCondensedProps } from "./SummaryComponents/CondensedSummary/CondensedSummary";

@@ -3,7 +3,7 @@ import TableRow from "@mui/material/TableRow";
 import Tooltip from "@mui/material/Tooltip";
 import { semVerToString } from "../src/semVer";
 import { PackageData } from "../hooks/useProcessDependencyData";
-import styles from "./SubRow.module.css";
+import styles from "../styles/SubRow.module.css";
 import Image from "next/image";
 import RedIcon from "./images/redIcon.svg";
 import YellowIcon from "./images/yellowIcon.svg";

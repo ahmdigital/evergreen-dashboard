@@ -2,7 +2,7 @@ import closeIcon from "./images/closeIcon.png";
 import greenIcon from "./images/greenIcon.svg";
 import yellowIcon from "./images/yellowIcon.svg";
 import redIcon from "./images/redIcon.svg";
-import styles from "./LightStatus.module.css";
+import styles from "../styles/LightStatus.module.css";
 import Image from "next/image";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';

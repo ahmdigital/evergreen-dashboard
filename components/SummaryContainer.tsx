@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import styles from "./SummaryContainer.module.css";
-import sharedStyles from "./treeView.module.css";
+import styles from "../styles/SummaryContainer.module.css";
+import sharedStyles from "../styles/TreeView.module.css";
 import ReposOverviewTable from "./SummaryComponents/RepoOverviewTable/ReposOverviewTable";
 import helpIcon from "./images/helpIcon.png";
 import Image from "next/image";

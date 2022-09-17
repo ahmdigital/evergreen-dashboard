@@ -1,7 +1,7 @@
 import React from "react";
 import CollapsibleTable from "./CollapsibleTable";
-import styles from "./DependenciesContainer.module.css";
-import sharedStyles from "./treeView.module.css";
+import styles from "../styles/DependenciesContainer.module.css";
+import sharedStyles from "../styles/TreeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
 import config from "../config.json";

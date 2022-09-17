@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import styles from "./SearchBar.module.css";
+import styles from "../styles/SearchBar.module.css";
 import magnifyingGlass from "./images/magnifying-glass.svg";
 
 export default function SearchBar(props: {
