@@ -1,7 +1,7 @@
 import Tooltip from "@mui/material/Tooltip/Tooltip";
 import refreshIcon from "components/images/refresh.svg";
 import Image from "next/image";
-import styles from "./SummaryContainer.module.css";
+import styles from "../styles/SummaryContainer.module.css";
 
 
 type RefreshButtonProps = {
