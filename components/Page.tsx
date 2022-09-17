@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { InverseSubRow } from "./InverseSubRow";
-import { SubRow } from "./SubRow";
+import { InverseSubRow } from "./ReposTableComponents/InverseSubRow";
+import { SubRow } from "./ReposTableComponents/SubRow";
 import { ProcessedDependencyData, useProcessDependencyData } from "../hooks/useProcessDependencyData";
-import Row from "./Row";
+import Row from "./ReposTableComponents/Row";
 import Layout from "./Layout";
 import Head from "next/head";
-import DependenciesContainer from "./DependenciesContainer";
-import SummaryContainer from "./SummaryContainer";
+import DependenciesContainer from "./ReposTableComponents/DependenciesContainer";
+import SummaryContainer from "./SummaryComponents/SummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
-import LoadingBackdrop from "./LoadingBackdrop";
+import LoadingBackdrop from "./FeedbackComponents/LoadingBackdrop";
 import HelpGuide from "./HelpComponents/HelpGuide";
 import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { RankSelectionList, SortBox, SortSettings } from "./SortAndFilterDropdowns";
+import { RankSelectionList, SortBox, SortSettings } from "./ReposTableComponents/SortAndFilterDropdowns";
 import { applySort, Filter, rankCounts, searchAndFilter } from "../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 

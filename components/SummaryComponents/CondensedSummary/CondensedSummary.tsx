@@ -3,7 +3,7 @@ import Image from "next/image";
 import redIcon from "../../images/redIcon.svg";
 import greenIcon from "../../images/greenIcon.svg";
 import yellowIcon from "../../images/yellowIcon.svg";
-import styles from "./CondensedSummary.module.css";
+import styles from "../../../styles/CondensedSummary.module.css";
 import Box from "@mui/material/Box";
 // import { createTheme, ThemeProvider } from "@mui/material/styles";
 
