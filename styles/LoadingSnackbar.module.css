@@ -3,5 +3,6 @@
     font-family: var(--primary-font-family);
     font-size: var(--font-size-normal);
     color: #fff;
-    align-self:center;
+    flex: 1;
+    padding: 1rem;
 }
