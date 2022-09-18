@@ -7,17 +7,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 // Customising the table styling using ThemeProvider
 const theme = createTheme({
-  components: {
-    MuiAutocomplete: {
-      styleOverrides: {
-        root: {
-          fontWeight: "var(--font-weight-semibolder)",
-          fontSize: "var(--font-size-large)",
-          fontFamily: 'var(--primary-font-family)',
-        }
-      }
-    },
-  }
+  typography: {
+    fontFamily: 'var(--primary-font-family)',
+    fontWeightRegular: 'var(--font-weight-semibold)',
+  },
 })
 
 export default function SearchBar(props: {
