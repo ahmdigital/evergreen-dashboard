@@ -41,6 +41,18 @@ div.summaryOverallGreen {
 div.summaryOverallRed {
   background-color: var(--colour-red);
 }
+
+div.summaryComponent {
+  display: block;
+  height: 410px;
+  background-color: var(--colour-lightGrey);
+  box-sizing: border-box;
+  margin-top: 0rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 div.summaryOverallGrey {
   background-color: gray;
 }
@@ -59,8 +71,23 @@ div.summaryComponent {
   min-height: 380px;
   background-color: var(--colour-lightGrey);
   box-sizing: border-box;
-  margin-top: 1rem;
+  margin-top: 0rem;
   margin-bottom: 0.5rem;
+}
+
+div.summaryStyle div.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+h4.summaryStyle{
+	margin-top: 0rem;
+	margin-bottom: 0.0rem;
+	margin-block-start: 0em;
+	margin-block-end: 0em;
 }
 
 div.summaryOverall h3 {
@@ -76,6 +103,16 @@ div.summaryStyle div.container {
   justify-content: space-between;
   margin-top: 0rem;
   margin-bottom: 0rem;
+}
+
+div.summaryStyle div.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 0.0rem;
 }
 
 div.margins {
@@ -193,6 +230,14 @@ div.loadingWheelBox {
 
 .helpBtn {
   cursor: pointer;
+  padding: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.chartButton {
+  font-size: calc(var(--font-size-normal) * 1.95);
+  color: var(--colour-font);
 }
 
 .tooltipStyle {

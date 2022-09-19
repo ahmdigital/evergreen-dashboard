@@ -1,7 +1,7 @@
 import { Checkbox, FormControl, InputLabel, ListItemText, MenuItem, Select } from "@mui/material";
-import { Filter } from "../src/sortingAndFiltering";
+import { Filter } from "../../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import styles from './SortAndFilterDropdowns.module.css'
+import styles from '../../styles/SortAndFilterDropdowns.module.css'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 // Customising the table styling using ThemeProvider

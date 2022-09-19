@@ -1,12 +1,12 @@
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import { semVerToString } from "../src/semVer";
+import { semVerToString } from "../../src/semVer";
 import { SubRowProps } from "./SubRow";
 import Image from "next/image";
-import styles from "./SubRow.module.css";
-import RedIcon from "./images/redIcon.svg"
-import YellowIcon from "./images/yellowIcon.svg";
-import GreenIcon from "./images/greenIcon.svg";
+import styles from "../../styles/SubRow.module.css";
+import RedIcon from "../images/redIcon.svg"
+import YellowIcon from "../images/yellowIcon.svg";
+import GreenIcon from "../images/greenIcon.svg";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 type InverseSubRowProps = {
@@ -75,12 +75,12 @@ export function InverseSubRow(props: InverseSubRowProps) {
   let statusText = "Needs updating urgently";
   // Setting the status
   if (props.user.rank == 2) {
-	  statusIcon = GreenIcon;
-	  statusText = "Up to date";
-	}
-	if (props.user.rank == 1) {
-	statusIcon = YellowIcon;
-	statusText = "Should be updated soon";
+    statusIcon = GreenIcon;
+    statusText = "Up to date";
+  }
+  if (props.user.rank == 1) {
+    statusIcon = YellowIcon;
+    statusText = "Should be updated soon";
   }
 
   return (

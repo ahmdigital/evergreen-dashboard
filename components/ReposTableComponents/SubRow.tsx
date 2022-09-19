@@ -1,15 +1,15 @@
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Tooltip from "@mui/material/Tooltip";
-import { semVerToString } from "../src/semVer";
-import { PackageData } from "../hooks/useProcessDependencyData";
-import styles from "./SubRow.module.css";
+import { semVerToString } from "../../src/semVer";
+import { PackageData } from "../../hooks/useProcessDependencyData";
+import styles from "../../styles/SubRow.module.css";
 import Image from "next/image";
-import RedIcon from "./images/redIcon.svg";
-import YellowIcon from "./images/yellowIcon.svg";
-import GreenIcon from "./images/greenIcon.svg";
+import RedIcon from "../images/redIcon.svg";
+import YellowIcon from "../images/yellowIcon.svg";
+import GreenIcon from "../images/greenIcon.svg";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { redDef, yellowDef, greenDef } from "./LightStatus";
+import { redDef, yellowDef, greenDef } from "../HelpComponents/LightStatus";
 
 export type SubRowProps = {
   dependency: PackageData;
@@ -75,9 +75,11 @@ export function SubRow(props: SubRowProps) {
             </div>
           </Tooltip>
         </TableCell>
-        <TableCell className={styles.tableCellStyle}><a href={depLink} rel="noreferrer" target="_blank">
-          {depName}
-        </a></TableCell>
+		<TableCell className={styles.tableCellStyle}>
+			<a href={depLink} rel="noreferrer" target="_blank">
+				{depName}
+			</a>
+		</TableCell>
         <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
         <TableCell
           className={`${styles.tableCellStyle} ${styles.latestVerStyle}`}
