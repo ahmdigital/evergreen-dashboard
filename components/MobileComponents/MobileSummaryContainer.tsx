@@ -30,7 +30,12 @@ import { Filter } from "../../src/sortingAndFiltering";
 import styles from "../../styles/SummaryContainer.module.css";
 import { useState } from 'react';
 import BarChartIcon from '@mui/icons-material/BarChart';
-
+import Collapse from "@mui/material/Collapse";
+import Grow from '@mui/material/Grow';
+import CondensedSummary from "../SummaryComponents/CondensedSummary/CondensedSummary";
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Grid from '@mui/material/Unstable_Grid2';
 
 let refreshing = false;
 
@@ -119,6 +124,18 @@ export default function MobileSummaryContainer(props: {
 				<div>
 					{props.loadingBackdrop}
 				</div>
+				<Grow in={!closeHeader}>
+					<Grid>
+						{!closeHeader && (
+							<CondensedSummary
+							statusValues={props.rankArray}
+							overall={overallPercent}
+							target={config.targetPercentage}
+							></CondensedSummary>
+						)}
+					</Grid>
+				</Grow>
+				<Collapse in={closeHeader} timeout="auto" unmountOnExit>
 				<SwipeableViews
 					axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
 					index={activeStep}
@@ -204,6 +221,19 @@ export default function MobileSummaryContainer(props: {
 						</Button>
 					}
 				/>
+				</Collapse>
+				<div className={styles.expandButton}>
+					<IconButton
+					aria-label="expand row"
+					size="small"
+					onClick={() => setCloseHeader(!closeHeader)}
+					>
+					{closeHeader ? <>
+						<KeyboardArrowUpIcon /><p className={styles.expandText}>Show Less</p></> : <>
+						<KeyboardArrowDownIcon /><p className={styles.expandText}>Show More</p></>
+					}
+					</IconButton>
+				</div>
 			</Box>
 		</Box>
 	);

@@ -16,6 +16,12 @@ div.summaryStyle {
   font-weight: var(--font-weight-normal); /*500*/
 }
 
+.expandText {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal); /*500*/
+  font-family: var(--primary-font-family);
+}
+
 .expandButton {
   display: flex;
   flex-direction: column;

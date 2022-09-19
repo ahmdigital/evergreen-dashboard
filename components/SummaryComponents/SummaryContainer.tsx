@@ -192,7 +192,10 @@ export default function SummaryContainer(props: {
           size="small"
           onClick={() => setCloseHeader(!closeHeader)}
         >
-          {closeHeader ? <><KeyboardArrowUpIcon />Show Less</> : <><KeyboardArrowDownIcon />Show More</>}
+          {closeHeader ? <>
+            <KeyboardArrowUpIcon /><p className={styles.expandText}>Show Less</p></> : <>
+            <KeyboardArrowDownIcon /><p className={styles.expandText}>Show More</p></>
+          }
         </IconButton>
       </div>
     </Box>
