@@ -14,7 +14,7 @@ import config from "../../config.json";
 import Tooltip from '@mui/material/Tooltip';
 import Image from "next/image";
 import IconButton from '@mui/material/IconButton';
-import HelpScreen from '../LightStatus';
+import HelpScreen from '../HelpComponents/LightStatus';
 import ReposOverviewTable from '../SummaryComponents/RepoOverviewTable/ReposOverviewTable';
 import ReposSecondarySummaryTable from "../SummaryComponents/ReposSecondarySummaryTable";
 import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
@@ -27,8 +27,9 @@ import {
 	PageLoaderSetLoading
 } from "../PageLoader";
 import { Filter } from "../../src/sortingAndFiltering";
-import styles from "../SummaryContainer.module.css";
+import styles from "../../styles/SummaryContainer.module.css";
 import { useState } from 'react';
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 
 let refreshing = false;
@@ -56,6 +57,7 @@ export default function MobileSummaryContainer(props: {
 
 	// State for opening the helpLegend
 	const [openHelp, setOpenHelp] = useState<boolean>(false);
+	const [showChart, setShowChart] = useState<boolean>(false);
 
 	// State for collapsing the header
 	const [closeHeader, setCloseHeader] = useState<boolean>(true);
@@ -135,25 +137,35 @@ export default function MobileSummaryContainer(props: {
 					<div className={`${mobileStyles.summaryComponent}`}>
 						<div className={styles.summaryCompHeader}>
 							<h3 className={styles.summaryStyle}>{`Total Repositories (${props.rankArray.green + props.rankArray.yellow + props.rankArray.red})`}</h3>
-							<IconButton
-								aria-label="Help button"
-								onClick={() => {
-									setOpenHelp(true);
-								}}
-							>
-								<Image
+							<div style={{display: "flex", width: "70px", justifyContent: "space-between"}}>
+								<Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Toggle Pie Chart</p>}>
+									<IconButton
 									className={styles.helpBtn}
-									width="30px"
-									height="30px"
-									alt="Help Icon"
-									src={helpIcon}
-								/>
-							</IconButton>
+									aria-label="Chart button"
+									onClick={() => {
+										setShowChart(!showChart);
+									}}
+									><BarChartIcon className={styles.chartButton}/></IconButton></Tooltip>
+								<IconButton
+									aria-label="Help button"
+									onClick={() => {
+										setOpenHelp(true);
+									}}
+								>
+									<Image
+										className={styles.helpBtn}
+										width="30px"
+										height="30px"
+										alt="Help Icon"
+										src={helpIcon}
+									/>
+								</IconButton>
+							</div>
 						</div>
 						{openHelp && <HelpScreen closeHelp={setOpenHelp} />}
 						<div>
 							<div className={styles.summaryComponent2}>
-								<ReposOverviewTable rankArray={props.rankArray} />
+								<ReposOverviewTable rankArray={props.rankArray} showChart={showChart} />
 							</div>
 						</div>
 					</div>

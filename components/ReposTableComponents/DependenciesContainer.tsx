@@ -13,7 +13,7 @@ import {
 	lastRequest,
 	PageLoaderSetData,
 	PageLoaderSetLoading,
-} from "./PageLoader";
+} from "../PageLoader";
 import { Box, Grid, IconButton } from "@mui/material";
 import { Stack } from "@mui/system";
 

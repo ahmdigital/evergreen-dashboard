@@ -17,36 +17,12 @@ import { RankSelectionList, SortBox, SortSettings } from  "./ReposTableComponent
 import { applySort, Filter, rankCounts, searchAndFilter } from "../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { theme } from "./ReposTableComponents/SortAndFilterDropdowns";
+import { theme } from './ReposTableComponents/SortAndFilterDropdowns'
 
 export type PageProps = {
 	JSObject: DependencyData;
 	finalData: boolean;
 };
-
-// Customising the table styling using ThemeProvider
-const theme = createTheme({
-	components: {
-		MuiSelect: {
-			styleOverrides: {
-				select: {
-					fontSize: "1rem",
-					fontFamily: 'var(--primary-font-family)',
-					color: 'black',
-				}
-			}
-		},
-		MuiInputLabel: {
-			styleOverrides: {
-				root: {
-					fontSize: "1.1rem",
-					fontFamily: 'var(--primary-font-family)',
-					color: 'black',
-				}
-			}
-		}
-	}
-})
 
 
 function rowsToJSX(rows: ProcessedDependencyData) {
