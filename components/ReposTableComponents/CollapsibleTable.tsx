@@ -51,7 +51,7 @@ export default function CollapsibleTable(props: CollapsibleTableProps) {
       className={styles.tableComponent}
     >
       <Table size="small" aria-label="collapsible table" className={styles.tableFixedWidth}>
-        <colgroup>
+      <colgroup>
           <col className={styles.col1} />
           <col className={styles.col2} />
           <col className={styles.col3} />

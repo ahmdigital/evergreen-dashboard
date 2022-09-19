@@ -9,7 +9,7 @@ import SwipeableViews from 'react-swipeable-views';
 import ForestIcon from '@mui/icons-material/Forest';
 import refreshIcon from "../images/refresh.svg";
 import helpIcon from "../images/helpIcon.png";
-import mobileStyles from "./MobileSummaryContainer.module.css";
+import mobileStyles from "../../styles/MobileSummaryContainer.module.css";
 import config from "../../config.json";
 import Tooltip from '@mui/material/Tooltip';
 import Image from "next/image";
