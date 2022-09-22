@@ -6,15 +6,16 @@ import { GitHubIcon } from "../components/GitHubIcon";
 import * as React from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
 import TrafficIcon from '@mui/icons-material/Traffic';
-import config from "../config.json"
 
 
 const SCOPE = "repo"
+const client_id = process.env.NEXT_PUBLIC_CLIENT_ID;
+const redirect_uri = process.env.NEXT_PUBLIC_REDIRECT_URI;
 
 // get code
 function redirect() {
 	const uuid = self.crypto.randomUUID();
-	window.location.href = `https://github.com/login/oauth/authorize?client_id=${config.clientID}&redirect_uri=${config.redirectURI}&scope=${SCOPE}&state=${uuid}`;
+	window.location.href = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${SCOPE}&state=${uuid}`;
 }
 
 type SignInStatus = "calculating" | "not-signed-in" | "exchanging-code-for-token" | "signed-in" | "error-while-signing-in"

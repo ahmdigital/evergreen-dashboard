@@ -8,14 +8,20 @@ variable "github_token_scope_read_org" {
 
 variable "client_id" {
   type        = string
-  description = "Github evergreen oauth app client id"
-  sensitive   = true
+  description = "Github evergreen dashboard oauth app client id"
+  sensitive   = false
 }
 
 variable "client_secret" {
   type        = string
-  description = "Github evergreen oauth app client secret"
+  description = "Github evergreen dashboard oauth app client secret"
   sensitive   = true
+}
+
+variable "redirect_uri" {
+  type        = string
+  description = "Github evergreen dashboard oauth app redirect id"
+  sensitive   = false
 }
 
 variable "port" {
