@@ -12,10 +12,10 @@
 	width: 100%;
 	max-width: 400px;
 	min-height: 200px;
-	padding: 2rem 2.5rem 2rem 2.5rem;
+	padding: 1.5rem;
 	background-color: var(--colour-white);
-  	box-shadow: var(--main-section-boxshadow);
-  	border-radius: var(--main-section-border-radius);
+	box-shadow: var(--main-section-boxshadow);
+	border-radius: var(--main-section-border-radius);
 	font-family: var(--primary-font-family);
 	box-sizing: content-box;
 }
@@ -29,8 +29,11 @@
 	background-color: #2e2e2e;
 }
 
-/* @media screen and (max-width: 10px) {
+
+
+@media (min-width: 900px) {
 	.signinPage {
-		background-color: var(--colour-white);
+		height: 100vh;
+		background-color: var(--colour-lightGrey);
 	}
-  } */
+}
