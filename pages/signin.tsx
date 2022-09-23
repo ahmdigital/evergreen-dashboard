@@ -85,73 +85,82 @@ export default function SignIn() {
 	return (
 		<>
 			{/* <button onClick={redirect}>Login</button> */}
-			<Grid container className={styles.signinPage} justifyContent='center' alignContent='center'>
-				<Paper className={styles.signinContainer}>
-					{/* TODO: evergreen dashborad logo, we are aming for this design https://gitter.im/ */}
-					<Typography variant="h4" sx={{marginBottom: '1.5rem'}} component="h1"><span className={styles.everGreen}>Evergreen Dashboard</span> </Typography>
-					{/* TODO: add documentation URL */}
-					<Typography variant="body1" sx={{fontWeight: 'var(--font-weight-semibold)'}}>You can read <Link href="#">our documentation</Link> on OAuth scopes to see why we request certain OAuth scopes.</Typography>
+			<Grid container>
+				<Grid item xs={0} md={5} sx={{ heigth: '100%', backgroundColor: 'green' }}>
 
-					{
-						signInStatus === "calculating" && <>
-							<Box sx={{ py: 10 }}>
-								<CircularProgress />
-							</Box>
-						</>
-					}
-					{
-						signInStatus === "not-signed-in" && <>
+				</Grid>
+				<Grid item xs={12} md={7}>
 
-							<Box sx={{ py: 10 }}>
-								<Button
-									variant="contained"
-									size="large"
-									className={styles.signinWithGithubButton}
-									onClick={redirect}
-									startIcon={<GitHubIcon />}
-								>Sign In With GitHub</Button>
-							</Box>
-						</>
-					}
-					{
-						signInStatus === "exchanging-code-for-token" && <>
-							<Box sx={{ py: 5 }}>
-								<LoadingButton
-									loading
+					<Grid container className={styles.signinPage} justifyContent='center' alignContent='center'>
+						<Paper className={styles.signinContainer}>
+							{/* TODO: evergreen dashborad logo, we are aming for this design https://gitter.im/ */}
+							<Typography variant="h4" sx={{ marginBottom: '1.5rem' }} component="h1"><span className={styles.everGreen}>Evergreen Dashboard</span> </Typography>
+							{/* TODO: add documentation URL */}
+							<Typography variant="body1" sx={{ fontWeight: 'var(--font-weight-semibold)' }}>You can read <Link href="#">our documentation</Link> on OAuth scopes to see why we request certain OAuth scopes.</Typography>
 
-									variant="outlined"
-								>
-									Almost done
-								</LoadingButton>
-							</Box>
-						</>
-					}
-					{
-						signInStatus === "error-while-signing-in" && <>
-							<Alert severity="error">
-								<AlertTitle>Error</AlertTitle>
-								{
-									errorMessage
-										? errorMessage
-										: "Whoops! There was an error while trying to sign you in."
-								}
-							</Alert>
-							<Button onClick={handleTryAgain}>Try Again</Button>
-						</>
-					}
-					{
-						signInStatus === "signed-in" && <>
-							<Alert severity="success">
-								<AlertTitle>Hi { }</AlertTitle>
-								You have successfully signed in!
-							</Alert>
-							<Button variant="contained"
-								size="large"
-								endIcon={<TrafficIcon />}
-								href="/">Continue to the dashboard</Button>
-						</>
-					}
-				</Paper>
+							{
+								signInStatus === "calculating" && <>
+									<Box sx={{ py: 10 }}>
+										<CircularProgress />
+									</Box>
+								</>
+							}
+							{
+								signInStatus === "not-signed-in" && <>
+
+									<Box sx={{ py: 10 }}>
+										<Button
+											variant="contained"
+											size="large"
+											className={styles.signinWithGithubButton}
+											onClick={redirect}
+											startIcon={<GitHubIcon />}
+										>Sign In With GitHub</Button>
+									</Box>
+								</>
+							}
+							{
+								signInStatus === "exchanging-code-for-token" && <>
+									<Box sx={{ py: 5 }}>
+										<LoadingButton
+											loading
+
+											variant="outlined"
+										>
+											Almost done
+										</LoadingButton>
+									</Box>
+								</>
+							}
+							{
+								signInStatus === "error-while-signing-in" && <>
+									<Alert severity="error">
+										<AlertTitle>Error</AlertTitle>
+										{
+											errorMessage
+												? errorMessage
+												: "Whoops! There was an error while trying to sign you in."
+										}
+									</Alert>
+									<Button onClick={handleTryAgain}>Try Again</Button>
+								</>
+							}
+							{
+								signInStatus === "signed-in" && <>
+									<Alert severity="success">
+										<AlertTitle>Hi { }</AlertTitle>
+										You have successfully signed in!
+									</Alert>
+									<Button variant="contained"
+										size="large"
+										endIcon={<TrafficIcon />}
+										href="/">Continue to the dashboard</Button>
+								</>
+							}
+						</Paper>
+					</Grid>
+				</Grid>
+
 			</Grid>
 		</>
 	);
