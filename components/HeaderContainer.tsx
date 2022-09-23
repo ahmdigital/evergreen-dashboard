@@ -11,7 +11,7 @@ export default function HeaderContainer() {
         <ForestIcon /> Evergreen Dashboard
       </h2>
       <p className={headerStyles.headerStyle}>
-        Monitoring for <b>{config.targetOrganisation}</b> Github
+        Monitoring for <b>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> Github
         Organisation
       </p>
     </>
