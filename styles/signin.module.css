@@ -6,7 +6,6 @@
 
 .signinPage {
 	height: 100vh;
-	background-color: var(--colour-lightGrey);
 }
 
 .signinContainer {
@@ -29,3 +28,9 @@
 .signinWithGithubButton:hover {
 	background-color: #2e2e2e;
 }
+
+/* @media screen and (max-width: 10px) {
+	.signinPage {
+		background-color: var(--colour-white);
+	}
+  } */
