@@ -1,7 +1,8 @@
 import * as fs from "fs";
 import path from "path";
 import { NextApiRequest, NextApiResponse} from 'next'
-import config from "../../config.json"
+import getConfig from 'next/config'
+const { publicRuntimeConfig: config } = getConfig()
 
 // Cache files are stored inside ./next folder
 const CachePath = path.resolve("./dynamicCache.json")

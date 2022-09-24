@@ -15,6 +15,7 @@ import Grow from '@mui/material/Grow';
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import getConfig from 'next/config'
 
 import {
   PageLoaderCurrentData,
@@ -24,7 +25,7 @@ import {
   PageLoaderSetData,
   PageLoaderSetLoading,
 } from "./PageLoader";
-import config from "../config.json";
+const { publicRuntimeConfig: config } = getConfig();
 import CondensedSummary from "./SummaryComponents/CondensedSummary/CondensedSummary";
 
 let refreshing = false;

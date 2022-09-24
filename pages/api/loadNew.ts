@@ -6,7 +6,8 @@ import { NextApiRequest, NextApiResponse} from 'next'
 // import { getJsonStructure } from "../../../crawler/src/index"
 import { getJsonStructure } from "evergreen-org-crawler/src/index"
 
-import config from "../../config.json"
+import getConfig from 'next/config'
+const { publicRuntimeConfig: config } = getConfig()
 
 // Cache files are stored inside ./next folder
 export const CachePath = path.resolve(process.env.DYNAMIC_CACHE_PATH || "./dynamicCache.json")

@@ -4,7 +4,8 @@ import styles from "./DependenciesContainer.module.css";
 import sharedStyles from "./treeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../src/dataProcessing";
-import config from "../config.json";
+import getConfig from 'next/config'
+const { publicRuntimeConfig: config } = getConfig();
 //import filterIcon from "../components/images/filter.svg" ;
 import {
   PageLoaderCurrentData,

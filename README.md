@@ -22,6 +22,23 @@ Please avoid doing this at all cost.
 
 The `-n` allows you to skip git hooks.
 
+
+## Running 
+
+### ENV
+Required `.env`
+
+```
+EVERGREEN_GITHUB_TOKEN=
+CLIENT_SECRET=
+NEXT_PUBLIC_TARGET_ORGANISATION=
+NEXT_PUBLIC_CLIENT_ID=
+NEXT_PUBLIC_REDIRECT_URI=
+PORT=3000
+```
+### CustomConfig
+Optional `customConfig.json`
+
 ## Provisioning the infrastructure locally
 
 Make sure you have terraform installed, to deploy follow these steps:
