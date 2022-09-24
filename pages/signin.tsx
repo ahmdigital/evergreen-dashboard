@@ -259,7 +259,7 @@ export default function SignIn() {
 
 								<Typography
 									align='center'
-									variant="h5"
+									variant="body1"
 									sx={{
 										color: 'var(--colour--black)',
 										marginTop: '1rem',
