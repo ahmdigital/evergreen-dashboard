@@ -4,7 +4,7 @@ import { JSObjectFromJSON } from "../src/dataProcessing";
 import { getJsonStructure } from "evergreen-org-crawler/src/index"
 import CrawlerConfig from "evergreen-org-crawler/config.json"
 import { useEffect, useState } from "react";
-import LoadingBackdrop from "./LoadingBackdrop";
+import LoadingBackdrop from "./FeedbackComponents/LoadingBackdrop";
 import ErrorSnackbar from "./FeedbackComponents/ErrorSnackbar";
 
 enum Mode {
@@ -84,11 +84,11 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 				let JSObject = getJsonStructure(
 					accessToken, CrawlerConfig, [api]
 				).then(
-					result => JSON.parse(result) as { npm: any, PyPI: any, RubyGems: any }
+					(result: string) => JSON.parse(result) as { npm: any, PyPI: any, RubyGems: any }
 				).then(
-					data => JSObjectFromJSON(getProperty(data!, request))
+					(data: any) => JSObjectFromJSON(getProperty(data!, request))
 				)
-				JSObject.then((result) => {
+				JSObject.then((result: any) => {
 					setData(result as any)
 					setLoading(false)
 				})

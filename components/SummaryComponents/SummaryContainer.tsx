@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import styles from "./SummaryContainer.module.css";
-import sharedStyles from "./treeView.module.css";
-import ReposOverviewTable from "./SummaryComponents/RepoOverviewTable/ReposOverviewTable";
-import helpIcon from "./images/helpIcon.png";
+import styles from "../../styles/SummaryContainer.module.css";
+import sharedStyles from "../../styles/TreeView.module.css";
+import ReposOverviewTable from "./RepoOverviewTable/ReposOverviewTable";
+import helpIcon from "../images/helpIcon.png";
 import Image from "next/image";
-import HelpScreen from "./LightStatus";
+import HelpScreen from "../HelpComponents/LightStatus";
 import ForestIcon from "@mui/icons-material/Forest";
 import Tooltip from "@mui/material/Tooltip";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Unstable_Grid2";
-import refreshIcon from "../components/images/refresh.svg";
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Unstable_Grid2';
+import refreshIcon from "../images/refresh.svg";
+import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "../PageLoader";
+
+import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
+import ReposSecondarySummaryTable from "./ReposSecondarySummaryTable";
+import { Filter } from "../../src/sortingAndFiltering";
 import Collapse from "@mui/material/Collapse";
 import Grow from '@mui/material/Grow';
 import IconButton from "@mui/material/IconButton";
@@ -17,22 +22,18 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import getConfig from 'next/config'
 
-import {
-  PageLoaderCurrentData,
-  forceNewVersion,
-  PageLoaderIsLoading,
-  lastRequest,
-  PageLoaderSetData,
-  PageLoaderSetLoading,
-} from "./PageLoader";
-const { publicRuntimeConfig: config } = getConfig();
-import CondensedSummary from "./SummaryComponents/CondensedSummary/CondensedSummary";
+import CondensedSummary from "./CondensedSummary/CondensedSummary";
+import BarChartIcon from '@mui/icons-material/BarChart';
 
-let refreshing = false;
+const { publicRuntimeConfig: config } = getConfig();
+let refreshing = false
 
 export default function SummaryContainer(props: {
   rankArray: any;
   loadingBackdrop: any;
+  rows: ProcessedDependencyData;
+  filterTerm: Filter;
+  setFilterTerm: any;
 }) {
   const totalRepos =
     props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
@@ -50,6 +51,7 @@ export default function SummaryContainer(props: {
 
   // State for opening the helpLegend
   const [openHelp, setOpenHelp] = useState<boolean>(false);
+  const [showChart, setShowChart] = useState<boolean>(false);
 
   // State for collapsing the header
   const [closeHeader, setCloseHeader] = useState<boolean>(true);
@@ -89,7 +91,7 @@ export default function SummaryContainer(props: {
 
   return (
     <Box
-      sx={{ flexGrow: 1 }}
+      sx={{ flexGrow: 1, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between' }}
       className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}
     >
       <Grid container spacing={1} className={styles.container}>
@@ -98,8 +100,6 @@ export default function SummaryContainer(props: {
           <p className={styles.subtitle}>
             Monitoring dependencies for <b>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> Github Organisation
           </p>
-        </Grid>
-        <Grid>
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
               <button onClick={callRefresh} aria-label="Refresh data">
@@ -109,15 +109,16 @@ export default function SummaryContainer(props: {
             </Tooltip>
           </div>
         </Grid>
+
         <Grid>
           <Grow in={!closeHeader}>
             <Grid>
               {!closeHeader && (
-                  <CondensedSummary
-                    statusValues={props.rankArray}
-                    overall={overallPercent}
-                    target={config.targetPercentage}
-                  ></CondensedSummary>
+                <CondensedSummary
+                  statusValues={props.rankArray}
+                  overall={overallPercent}
+                  target={config.targetPercentage}
+                ></CondensedSummary>
               )}
             </Grid>
           </Grow>
@@ -127,7 +128,7 @@ export default function SummaryContainer(props: {
         {props.loadingBackdrop}
       </div>
       <Collapse in={closeHeader} timeout="auto" unmountOnExit>
-        <Grid container spacing={1} className={`${styles.container} ${styles.margins}`}>
+        <Grid container spacing={1} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between', marginTop: '0rem', marginBottom: '0rem' }} className={`${styles.container} ${styles.margins}`}>
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
               <h3 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h3>
@@ -141,36 +142,46 @@ export default function SummaryContainer(props: {
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
               <div className={styles.summaryCompHeader}>
-                <h3 className={styles.summaryStyle}>{`Total Repos (${props.rankArray.green + props.rankArray.yellow + props.rankArray.red})`}</h3>
-                <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
-                  <IconButton
-                    aria-label="Help button"
-                    onClick={() => {
-                      setOpenHelp(true);
-                    }}
-                  >
-                    <Image
+              <h3 className={styles.summaryStyle}>Total Repositories ({props.rankArray.green + props.rankArray.yellow + props.rankArray.red})</h3>
+                <div style={{display: "flex", width: "70px", justifyContent: "space-between"}}>
+                <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Toggle Pie Chart</p>}>
+                    <IconButton
                       className={styles.helpBtn}
-                      width="30px"
-                      height="30px"
-                      alt="Help Icon"
-                      src={helpIcon}
-                    />
-                  </IconButton>
-                </Tooltip>
+                      aria-label="Chart button"
+                      onClick={() => {
+                        setShowChart(!showChart);
+                      }}
+                    ><BarChartIcon className={styles.chartButton}/></IconButton></Tooltip>
+                  <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
+                    <IconButton
+                      className={styles.helpBtn}
+                      aria-label="Help button"
+                      onClick={() => {
+                        setOpenHelp(true);
+                      }}
+                    >
+                      <Image
+                        width="30px"
+                        height="30px"
+                        alt="Help Icon"
+                        src={helpIcon}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                </div>
               </div>
               {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
               <div>
                 <div className={styles.summaryComponent2}>
-                  <ReposOverviewTable rankArray={props.rankArray} />
+                  <ReposOverviewTable rankArray={props.rankArray} showChart={showChart} />
                 </div>
               </div>
             </div>
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-              <div className={styles.summaryCompHeader}>
-                <h3 className={styles.summaryStyle}>Dependent Repos</h3>
+              <div className={styles.summaryComponent3}>
+                <ReposSecondarySummaryTable rows={props.rows} filterTerm={props.filterTerm} setFilterTerm={props.setFilterTerm} />
               </div>
             </div>
           </Grid>

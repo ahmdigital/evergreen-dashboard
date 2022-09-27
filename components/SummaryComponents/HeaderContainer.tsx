@@ -1,10 +1,11 @@
 import React from "react";
-import headerStyles from "./HeaderContainer.module.css";
-// import sharedStyles from "./treeView.module.css";
-import getConfig from 'next/config'
+import headerStyles from "../../styles/HeaderContainer.module.css";
+// import sharedStyles from "../styles/TreeView.module.css";
 import ForestIcon from "@mui/icons-material/Forest";
-import { RepoOverviewCondensedProps } from "./SummaryComponents/CondensedSummary/CondensedSummary";
+import { RepoOverviewCondensedProps } from "./CondensedSummary/CondensedSummary";
+import getConfig from 'next/config'
 const { publicRuntimeConfig: config } = getConfig();
+
 export default function HeaderContainer() {
   return (
     <>

@@ -6,13 +6,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import styles from "./CollapsibleTable.module.css";
+import styles from "../../styles/InternalTable.module.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { tableBodyStyle, theme as tableTheme } from "./InternalTable";
 
 type CollapsibleTableProps = {
   children: ReactNode;
 };
-
 
 // Customising the table styling using ThemeProvider
 const theme = createTheme({
@@ -20,52 +20,51 @@ const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          fontWeight: "var(--font-weight-semibolder)",
-          fontSize: "var(--font-size-large)",
-          fontFamily: 'var(--primary-font-family)',
-          backgroundColor: "var(--table-cell-background)",
+          fontWeight: "bold",
+          fontSize: "var(--font-size-normal)",
+          fontFamily: "var(--primary-font-family)",
+          backgroundColor: "#f5f5f5",
           color: "var(--colour-font)",
-          marginTop: '1rem',
-          lineHeight: '3rem',
+          marginTop: "1rem",
+          lineHeight: "3rem",
           borderColor: "var(--table-cell-border)",
-          borderWidth: '0.2rem'
-        }
-      }
+          borderWidth: "0.2rem",
+        },
+      },
     },
     MuiTableContainer: {
       styleOverrides: {
         root: {
-          boxShadow: 'none',
-        }
-      }
-    }
-  }
-})
+          maxHeight: "18.4rem",
+          overflow: "scroll",
+          overflowX: "hidden",
+          boxShadow: "none",
+        },
+      },
+    },
+  },
+});
 
-// Creates the whole table
+// Creates the interior table
 export default function CollapsibleTable(props: CollapsibleTableProps) {
   return (
-    <ThemeProvider theme={theme}>
-      <TableContainer
-        component={Paper}
-        className={styles.tableComponent}
-      >
-        <Table size="small" aria-label="collapsible table">
+    <ThemeProvider theme={tableTheme}>
+      <TableContainer component={Paper} className={styles.tableComponent}>
+        <Table
+          size="small"
+          aria-label="collapsible table"
+          sx={tableBodyStyle}
+        >
           <colgroup>
             <col className={styles.col1} />
             <col className={styles.col2} />
             <col className={styles.col3} />
-            <col className={styles.col4} />
-            <col className={styles.col5} />
           </colgroup>
           <TableHead>
             <TableRow>
-
-              <TableCell ></TableCell>
-              <TableCell >status</TableCell>
-              <TableCell >name</TableCell>
-              <TableCell >version</TableCell>
-              <TableCell >link</TableCell>
+              <TableCell>status</TableCell>
+              <TableCell>name</TableCell>
+              <TableCell>current</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>{props.children}</TableBody>
