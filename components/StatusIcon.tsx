@@ -7,6 +7,7 @@ import Image from "next/image";
 
 type StatusIconProps = {
 	rank: number;
+	variant?: 'small' | 'medium';
 }
 
 export function StatusIcon(props: StatusIconProps) {
@@ -41,8 +42,8 @@ export function StatusIcon(props: StatusIconProps) {
 				layout="fixed"
 				src={statusIcon}
 				alt={statusText}
-				width="40px"
-				height="40px"
+				width= {props?.variant === 'small' ? '33px' : "40px"} 
+				height={props?.variant === 'small' ? '33px' : "40px"}
 			/>
 		</div>
 	</Tooltip>
