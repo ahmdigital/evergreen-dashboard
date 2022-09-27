@@ -1,13 +1,11 @@
 /* -----------------START: SHARED SECTION CONTAINERS CSS ------------------- */
 div.sectionContainer {
   display: inline-block;
-  /* flex-direction: column; */
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
   height: max-content;
   width: 100%;
-  max-width: 125rem; /*2000px;*/
   background-color: var(--colour-white);
   box-shadow: var(--main-section-boxshadow);
   border-radius: var(--main-section-border-radius);
