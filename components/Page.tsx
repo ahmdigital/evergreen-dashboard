@@ -72,7 +72,7 @@ export function Page(props: PageProps) {
 	const jsxRows = rowsToJSX(rows)
 	const rankArray = rankCounts(rows)
 
-	const diplayedRows = searchAndFilter(rows, jsxRows, filterSetting, searchTerm)
+	const {dataRows, diplayedRows} = searchAndFilter(rows, jsxRows, filterSetting, searchTerm)
 
 	const sortBox = SortBox(sortSetting, (event: SelectChangeEvent) => {
 		setSortSetting({ type: event.target.value as any, direction: sortSetting.direction })
@@ -119,6 +119,7 @@ export function Page(props: PageProps) {
 		return () => window.removeEventListener("resize", updateMedia);
 	});
 
+
 	return (
 		<div className="container">
 			{isMobile ? (
@@ -133,6 +134,7 @@ export function Page(props: PageProps) {
 							<DependenciesContainer
 								JSObject={props.JSObject}
 								rows={diplayedRows}
+								dataRows={dataRows}
 								searchTerm={searchTerm}
 								setSearchTerm={setSearchTerm}
 								sortDropdown={sortBox}
@@ -155,6 +157,7 @@ export function Page(props: PageProps) {
 							<DependenciesContainer
 								JSObject={props.JSObject}
 								rows={diplayedRows}
+								dataRows={dataRows}
 								searchTerm={searchTerm}
 								setSearchTerm={setSearchTerm}
 								sortDropdown={sortBox}

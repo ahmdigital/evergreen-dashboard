@@ -131,6 +131,7 @@ export function applyFilter(row: ProcessedDependencyData[0], filter: Filter): bo
 
 export function searchAndFilter(rows: ProcessedDependencyData, jsxRows: JSX.Element[], filterSetting: Filter, searchTerm: string) {
 	let diplayedRows = []
+	let filteredRows = []
 	for (let i = 0; i < rows.length; i++) {
 		let row = rows[i]
 		let jsx = jsxRows[i]
@@ -142,7 +143,8 @@ export function searchAndFilter(rows: ProcessedDependencyData, jsxRows: JSX.Elem
 			)
 		) {
 			diplayedRows.push(jsx)
+			filteredRows.push(row)
 		}
 	}
-	return diplayedRows
+	return {dataRows: filteredRows, diplayedRows}
 }
