@@ -19,6 +19,7 @@
     "chartjs-plugin-datalabels": "^2.1.0",
     "@mui/material": "^5.10.5",
     "@mui/styles": "^5.10.6",
+    "@mui/lab": "^5.0.0-alpha.101",
     "next": "^v12.3.0",
     "cookie": "^0.5.0",
     "next-transpile-modules": "^9.0.0",
