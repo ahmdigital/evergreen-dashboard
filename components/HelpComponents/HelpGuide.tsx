@@ -2,7 +2,7 @@ import React from "react";
 import { Fab, Dialog, DialogTitle, DialogContent, DialogContentText, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import HelpOutline from "@mui/icons-material/HelpOutline";
-import styles from "./HelpGuide.module.css";
+import styles from "../../styles/HelpGuide.module.css";
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -213,7 +213,7 @@ export default function HelpGuide() {
       <LightTooltip arrow title="Help Guide">
         <ThemeProvider theme={theme}>
           <Fab onClick={handleClickOpen} aria-label="Help guide button">
-            <HelpOutline className={styles.iconStyle} />
+            <HelpOutline sx={{ width: '40px', height: '40px' }} className={styles.iconStyle} />
           </Fab>
         </ThemeProvider>
       </LightTooltip>
@@ -226,7 +226,9 @@ export default function HelpGuide() {
         <CustomisedDialogTitle id="customised-dialog-title" onClose={handleClose}>Need Help?</CustomisedDialogTitle>
         <DialogContent dividers>
           <div className={styles.componentStyle}>
-            <DialogContentText className={styles.overallHeaderStyle}>Summary</DialogContentText>
+            <ThemeProvider theme={theme}>
+              <DialogContentText className={styles.overallHeaderStyle}>Summary</DialogContentText>
+            </ThemeProvider>
             <Divider />
             <DialogContentText className={styles.questionHeaderStyle}>
               What do the light status icons represent?

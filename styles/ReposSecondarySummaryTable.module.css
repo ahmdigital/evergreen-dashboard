@@ -1,0 +1,30 @@
+.tableCellStyle {
+	padding: 4px;
+	font-size: medium;
+	font-weight: bold;
+}
+
+.textContainer {
+	display: block;
+	width: 190px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.countContainer {
+	display: block;
+}
+
+p.reposStyle {
+	font-size: medium;
+}
+
+.totalsCellStyle {
+	padding: 4px;
+	border-color: black;
+	line-height: 0.5rem + var(--font-size-large);
+	font-size: var(--font-size-large);
+	font-weight: bold;
+	font-family: var(--primary-font-family);
+}

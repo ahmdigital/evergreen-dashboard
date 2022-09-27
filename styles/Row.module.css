@@ -34,3 +34,14 @@ div.iconContainer {
 	width: 1.125rem;
 	height: 1.125rem;
 }
+
+.myTable {
+    min-width: 0;
+}
+
+.textContainer {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

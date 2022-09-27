@@ -88,6 +88,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		if(dif > timeUntilRefresh){
 			if(waitingPromise.promise != null){
 				await waitingPromise.promise
+				waitingPromise.promise = null
 				cachedData = JSON.parse(await fs.promises.readFile(CachePath, 'utf8'))
 			} else{
 				console.log("Cache file is too old. Recreating...")
@@ -99,8 +100,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		} else{
 			cachedData = JSON.parse(await fs.promises.readFile(CachePath, 'utf8'))
 		}
-
-		//console.log("Now: " + current + "\nLast Edit: " + mtimeMs + "Dif: " + dif)
 	} catch (error) {
 		console.log("Cache file does not exist. Intialising...")
 	}

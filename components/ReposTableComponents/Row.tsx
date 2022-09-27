@@ -5,16 +5,20 @@ import IconButton from "@mui/material/IconButton";
 import { Tooltip, TableRow, TableHead, TableCell, Table } from "@mui/material";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import QuestionMark from "@mui/icons-material/QuestionMark";
-import RedIcon from "./images/redIcon.svg";
-import YellowIcon from "./images/yellowIcon.svg";
-import greenIcon from "./images/greenIcon.svg";
+import RedIcon from "../images/redIcon.svg";
+import YellowIcon from "../images/yellowIcon.svg";
+import greenIcon from "../images/greenIcon.svg";
 import Image from "next/image";
 import Tabs from "./Tabs";
-import { semVerToString } from "../src/semVer";
-import styles from "./Row.module.css";
-import { redDef, yellowDef, greenDef } from "./LightStatus";
+import { semVerToString } from "../../src/semVer";
+import styles from "../../styles/Row.module.css";
+import { redDef, yellowDef, greenDef } from "../HelpComponents/LightStatus";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import QuestionMark from "@mui/icons-material/QuestionMark";
+
+const dayjs = require('dayjs')
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 
 export type Props = {
   subRows: {
@@ -108,23 +112,21 @@ export default function Row(props: { rank: number; row: any } & Props) {
             </Tooltip>
           </TableCell>
           <TableCell component="th" scope="row">
-            {row.name}
+            <a href={row.link} rel="noreferrer" target="_blank">
+              {row.name}
+            </a>
           </TableCell>
           <TableCell align="left">
             {semVerToString(row.version)}
-            {
+            { 
               (semVerToString(row.version) === "0.0.0-development" || semVerToString(row.version) === "0.0.0") &&
               <Tooltip arrow title={<p className={styles.tooltipStyle}>This repository was defined with a default version of 0.0.0</p>}>
-                <QuestionMark className={styles.questionIcon} />
+                <QuestionMark sx={{width: '1.125rem', height: '1.125rem'}}/>
               </Tooltip>
             }
           </TableCell>
-          <TableCell align="right">
-            (
-            <a href={row.link} rel="noreferrer" target="_blank">
-              GitHub
-            </a>
-            )
+          <TableCell align="left">
+            {dayjs(row.lastUpdated).fromNow()}
           </TableCell>
         </ThemeProvider>
       </TableRow>

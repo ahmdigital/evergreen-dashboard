@@ -18,8 +18,7 @@ div.depsBarStyle {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
+  align-items: space-between;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
@@ -50,6 +49,10 @@ div.btnsContainer button:hover {
   background-color: lightgray;
 }
 
+div.searchBarDiv{
+  flex-wrap: wrap;
+}
+
 div.refreshWord {
   font-family: var(--primary-font-family);
   font-size: var(--font-size-large);
@@ -62,4 +65,20 @@ div.refreshWord {
 
 div.noReposStyle {
   padding: 2rem;
+}
+
+div.sortBy {
+  display: flex;
+  flex-direction: column;
+}
+
+div.menuStyle{
+  margin-right: 0.7rem;
+}
+
+div.menusPosition{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: space-between;
 }
