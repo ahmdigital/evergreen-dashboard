@@ -16,8 +16,6 @@ import {
 } from "../PageLoader";
 import { Box, Grid, IconButton } from "@mui/material";
 import { Stack } from "@mui/system";
-import { GridTable } from "../MobileComponents/GridTable";
-import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 
 let refreshing = false;
 
@@ -25,7 +23,6 @@ let refreshing = false;
 export default function DependenciesContainer(props: {
 	JSObject: DependencyData;
 	rows: JSX.Element[];
-	dataRows: ProcessedDependencyData;
 	searchTerm: any;
 	setSearchTerm: any;
 	emptyRows: boolean;
@@ -116,8 +113,6 @@ export default function DependenciesContainer(props: {
 					{props.rankSelection}
 				</Grid>
 			</Grid>
-
-			<GridTable rows={props.dataRows} />
 
 
 			<div className={styles.tableStyle}>
