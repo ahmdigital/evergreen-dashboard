@@ -28,7 +28,7 @@ let refreshing = false;
 
 export default function SummaryContainer(props: {
   rankArray: any;
-  loadingBackdrop: any;
+  loadingSnackbar: any;
   rows: ProcessedDependencyData;
   filterTerm: Filter;
   setFilterTerm: any;
@@ -123,7 +123,7 @@ export default function SummaryContainer(props: {
         </Grid>
       </Grid>
       <div>
-        {props.loadingBackdrop}
+        {props.loadingSnackbar}
       </div>
       <Collapse in={closeHeader} timeout="auto" unmountOnExit>
         <Grid container spacing={1} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between', marginTop: '0rem', marginBottom: '0rem' }} className={`${styles.container} ${styles.margins}`}>
@@ -184,7 +184,7 @@ export default function SummaryContainer(props: {
             </div>
           </Grid>
         </Grid>
-        <div>{props.loadingBackdrop}</div>
+        <div>{props.loadingSnackbar}</div>
       </Collapse>
       <div className={styles.expandButton}>
         <IconButton
