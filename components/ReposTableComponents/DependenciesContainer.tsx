@@ -4,7 +4,6 @@ import styles from "../../styles/DependenciesContainer.module.css";
 import sharedStyles from "../../styles/TreeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../../src/dataProcessing";
-import config from "../../config.json";
 // import { Grid } from "@mui/material"
 //import filterIcon from "../components/images/filter.svg" ;
 import {

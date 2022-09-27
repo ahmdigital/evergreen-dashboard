@@ -35,7 +35,7 @@ async function getUsername(authToken: string): Promise<string> {
 			return response.json()
 		}
 		throw response.json()
-	}).then((res) => res.login
+	}).then((res: any) => res.login
 	).catch(error => {
 		throw new Error(error.message)
 	})
