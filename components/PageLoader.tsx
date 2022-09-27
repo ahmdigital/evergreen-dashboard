@@ -2,7 +2,7 @@ import cachedData from "../cachedData.json";
 import {Page} from "./Page";
 import { JSObjectFromJSON } from "../src/dataProcessing";
 import { getJsonStructure } from "evergreen-org-crawler/src/index"
-import config from "evergreen-org-crawler/config.json"
+import config from "../config.json"
 import { useEffect, useState } from "react";
 import LoadingBackdrop from "./LoadingBackdrop";
 import ErrorSnackbar from "./FeedbackComponents/ErrorSnackbar";
@@ -92,7 +92,7 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 			case(Mode.Frontend): {
 				const accessToken = process.env.NEXT_PUBLIC_EVERGREEN_GITHUB_TOKEN!
 				let JSObject = getJsonStructure(
-					accessToken, config, [api]
+					accessToken, {targetOrganisation :process.env.NEXT_PUBLIC_TARGET_ORGANISATION as string, ...config}, [api]
 				).then(
 					result => JSON.parse(result) as { npm: any, PyPI: any, RubyGems: any }
 				).then(
