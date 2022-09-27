@@ -82,7 +82,7 @@ export default function DependenciesContainer(props: {
 				md: '2.5rem 3.125rem 3.75rem 3.125rem',
 			}
 		}}>
-			<h3 className={sharedStyles.h3ContainerStyle}>Repositories </h3>
+			<h2 className={sharedStyles.h2ContainerStyle}>Repositories </h2>
 
 			<Grid container spacing={2}>
 				<Grid item xs={12} lg={5} xl={6}>

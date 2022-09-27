@@ -38,7 +38,7 @@ h1 {
 h3 {
 	margin-top: 0;
 	margin-bottom: 0;
-	font-size: 20px;
+	font-size: var(--font-size-large);
 	font-weight: var(--font-weight-semibolder);
 }
 
@@ -95,4 +95,11 @@ p {
 	--font-size-small: 0.75rem;
 	/*12px*/
 	--label-border-radius: 10px
+}
+
+
+@media only screen and (min-width: 1920px) {
+	h1.noMargins {
+		font-size: 2.5rem;
+	}
 }

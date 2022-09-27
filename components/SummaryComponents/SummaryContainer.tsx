@@ -94,7 +94,7 @@ export default function SummaryContainer(props: {
     >
       <Grid container spacing={1} className={styles.container}>
         <Grid>
-          <h1 className="noMargins"><ForestIcon /> Evergreen Dashboard</h1>
+          <h1 className={styles.noMargins}><ForestIcon /> Evergreen Dashboard</h1>
           <p className={styles.subtitle}>
             Monitoring dependencies for <b>{config.targetOrganisation}</b> Github Organisation
           </p>
@@ -137,6 +137,7 @@ export default function SummaryContainer(props: {
               </div>
             </div>
           </Grid>
+          
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
               <div className={styles.summaryCompHeader}>

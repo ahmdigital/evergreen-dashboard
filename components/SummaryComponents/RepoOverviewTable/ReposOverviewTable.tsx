@@ -24,8 +24,9 @@ type RowProps = {
   statusLabel: string;
 };
 
+
 // TODO: MUST REVIEW  with CSS
-const theme = createTheme({
+const theme1 = createTheme({
   components: {
     MuiTableCell: {
       styleOverrides: {
@@ -35,7 +36,7 @@ const theme = createTheme({
           marginTop: 0,
           marginBottom: 0,
           padding: '16px 10px 16px 10px',
-          lineHeight: 'inherit'
+          lineHeight: 'inherit',
         }
       }
     },
@@ -52,7 +53,7 @@ const Row = (props: RowProps) => {
   const ICON_SIZE = "40px";
   return (
     <TableRow>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme1}>
         <TableCell className={styles.tableCellStyleIcon}>
           <Image
             src={props.icon}
@@ -62,10 +63,10 @@ const Row = (props: RowProps) => {
           ></Image>
         </TableCell>
         <TableCell className={styles.tableCellStyleCount}>
-          <p>{props.statusCount} </p>
+          <p className={styles.countText}>{props.statusCount} </p>
         </TableCell>
         <TableCell className={styles.statusLabel}>
-          <p>{props.statusLabel}</p>
+          <p className={styles.countText}>{props.statusLabel}</p>
         </TableCell>
       </ThemeProvider>
     </TableRow>

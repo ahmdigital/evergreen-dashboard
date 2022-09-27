@@ -1,5 +1,6 @@
 div.sectionContainer {
   display: flex;
+  max-width: 125rem;
   flex-direction: column;
   height: max-content;
   width: 100%;
