@@ -2,9 +2,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { serialize } from 'cookie';
 import { encodeTokenCookie, TokenCookie } from "../../../src/authenticationMiddleware";
 
-const client_secret = process.env.CLIENT_SECRET;
-const client_id = process.env.NEXT_PUBLIC_CLIENT_ID;
-const redirect_uri = process.env.NEXT_PUBLIC_REDIRECT_URI;
 
 export default async function handler(
 	req: NextApiRequest,
@@ -22,7 +19,7 @@ export default async function handler(
 
 	try {
 		const tokenObj = await fetch(
-			`https://github.com/login/oauth/access_token?client_id=${client_id}&client_secret=${client_secret}&code=${code}&redirect_uri=${redirect_uri}`,
+			`https://github.com/login/oauth/access_token?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&code=${code}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}`,
 			requestOptions
 		).then(r => r.json())
 

@@ -1,6 +1,4 @@
 {
-	"targetOrganisation": "ahm-monash",
-	"requireAuthentication": true,
 	"rankCutoff": {
 		"major": "0.6.-1",
 		"minor": "0.5.-1"

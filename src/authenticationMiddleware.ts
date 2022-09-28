@@ -1,4 +1,3 @@
-import configFile from "../config.json";
 import fetch from 'node-fetch';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -36,7 +35,7 @@ async function getUsername(authToken: string): Promise<string> {
 			return response.json()
 		}
 		throw response.json()
-	}).then((res) => res.login
+	}).then((res: any) => res.login
 	).catch(error => {
 		throw new Error(error.message)
 	})
@@ -66,8 +65,8 @@ async function isOrganisationMember(org: string, username: string, authToken: st
 
 export async function checkAuthorisation(req: NextApiRequest, res: NextApiResponse): Promise<boolean> {
 	console.log("Middleware called for: " + req.url)
-	if (configFile.requireAuthentication == false) {
-		console.log("'requireAuthentication' is set to 'false', granting access to user")
+	if (((process.env.REQUIRE_AUTHENTICATION as string).toLowerCase() === "true" ? true : false) == false) {
+		console.log("REQUIRE_AUTHENTICATION is set to 'false', granting access to user")
 		return true
 	}
 	const tokenString = (req as any).cookies.token
@@ -83,16 +82,16 @@ export async function checkAuthorisation(req: NextApiRequest, res: NextApiRespon
 		const tokenCookie = decodeTokenCookie(tokenString)
 
 		const username = await getUsername(tokenCookie.accessToken)
-		const isMember = await isOrganisationMember(configFile.targetOrganisation, username, tokenCookie.accessToken)
+		const isMember = await isOrganisationMember(process.env.NEXT_PUBLIC_TARGET_ORGANISATION as string, username, tokenCookie.accessToken)
 
 		if (!isMember) {
-			console.log(`User ${username} is not a member of ${configFile.targetOrganisation}`)
+			console.log(`User ${username} is not a member of ${process.env.NEXT_PUBLIC_TARGET_ORGANISATION}`)
 			//return NextResponse.redirect("localhost:3000/signin?error=Not a member")
 			res.status(403).json({ message: `not_a_member` })
 			return false
 		}
 
-		console.log(`User ${username} is a member of ${configFile.targetOrganisation}`)
+		console.log(`User ${username} is a member of ${process.env.NEXT_PUBLIC_TARGET_ORGANISATION}`)
 		return true
 	} catch (error: any) {
 		if (error?.status == 401) {

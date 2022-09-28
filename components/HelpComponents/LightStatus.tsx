@@ -1,8 +1,8 @@
-import closeIcon from "./images/closeIcon.png";
-import greenIcon from "./images/greenIcon.svg";
-import yellowIcon from "./images/yellowIcon.svg";
-import redIcon from "./images/redIcon.svg";
-import styles from "./LightStatus.module.css";
+import closeIcon from "../images/closeIcon.png";
+import greenIcon from "../images/greenIcon.svg";
+import yellowIcon from "../images/yellowIcon.svg";
+import redIcon from "../images/redIcon.svg";
+import styles from "../../styles/LightStatus.module.css";
 import Image from "next/image";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,8 +10,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import config from "../config.json";
-import { semVerFromString } from "../src/semVer";
+import config from "../../config.json";
+import { semVerFromString } from "../../src/semVer";
 import { IconButton } from "@mui/material";
 
 export type HelpScreenProps = {

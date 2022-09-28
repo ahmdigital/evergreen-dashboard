@@ -27,9 +27,15 @@ The `-n` allows you to skip git hooks.
 ```
 EVERGREEN_GITHUB_TOKEN=
 CLIENT_SECRET=
-PORT=3000
+NEXT_PUBLIC_TARGET_ORGANISATION=
+REQUIRE_AUTHENTICATION=true
+NEXT_PUBLIC_CLIENT_ID=
+NEXT_PUBLIC_REDIRECT_URI=http://example.com/signin/
 ```
 ## Deployment
+
+1. Setup github oauth app
+2. populate env variables
 
 ### Docker
 
