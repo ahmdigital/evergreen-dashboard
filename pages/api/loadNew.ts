@@ -8,23 +8,26 @@ import { getJsonStructure } from "evergreen-org-crawler/src/index"
 
 import config from "../../config.json"
 import {checkAuthorisation} from "../../src/authenticationMiddleware";
+import { sleep } from "evergreen-org-crawler/src/utils";
 
 // Cache files are stored inside ./next folder
 export const CachePath = path.resolve(process.env.DYNAMIC_CACHE_PATH || "./dynamicCache.json")
 export const EmptyCachePath = path.resolve("./defaultDynamicCache.json")
 
-const timeUntilRefresh = config.timeUntilRefresh * 60 * 1000 // minutes to milliseconds
+export const timeUntilRefresh = config.timeUntilRefresh * 60 * 1000 // minutes to milliseconds
 
 export let waitingPromise: {
 	promise: Promise<void> | null
 	resolve:  any
 } = {promise: null, resolve: null}
 
+export let lastRefreshTime = 0
+
 export function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
     return o[propertyName];
 }
 
-export async function saveAndServerCache(res: NextApiResponse, cachedData: any){
+export async function saveAndServerCache(cachedData: any){
 	if(cachedData == null){
 		try {
 			const data = await createData()
@@ -49,8 +52,6 @@ export async function saveAndServerCache(res: NextApiResponse, cachedData: any){
 	} else{
 		console.log("Served cache")
 	}
-
-	res.status(200).json(cachedData)
 }
 
 export async function createData(request: "npm" | "PyPI" | "RubyGems" | null = null){
@@ -69,12 +70,7 @@ export async function createData(request: "npm" | "PyPI" | "RubyGems" | null = n
 	return getJsonStructure(accessToken, {targetOrganisation :process.env.NEXT_PUBLIC_TARGET_ORGANISATION as string, ...config}, api)
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	const isAuthorised = await checkAuthorisation(req, res)
-	if(!isAuthorised){
-		return
-	}
-
+async function crawl(){
 	let cachedData = null
 
 	const current = Date.now().valueOf()
@@ -104,5 +100,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		console.log("Cache file does not exist. Intialising...")
 	}
 
-	await saveAndServerCache(res, cachedData);
+	await saveAndServerCache(cachedData);
+
+	return cachedData;
+}
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+	const isAuthorised = await checkAuthorisation(req, res)
+	if(!isAuthorised){
+		return
+	}
+
+	let cachedData = crawl()
+
+	let isResolved = false;
+	cachedData.then(function() {
+		isResolved = true;
+	});
+
+	await sleep(1000);
+
+	if(isResolved){
+		res.status(200).json(cachedData)
+	}else{
+		res.status(200).json({aux: {crawlStart: Date.now().toString()}})
+	}
+	return
 }

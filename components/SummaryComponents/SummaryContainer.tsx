@@ -25,8 +25,13 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CondensedSummary from "./CondensedSummary/CondensedSummary";
 import BarChartIcon from '@mui/icons-material/BarChart';
 
+const dayjs = require('dayjs')
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
+
 
 export default function SummaryContainer(props: {
+  auxData: {crawlStart: string};
   rankArray: any;
   loadingSnackbar: any;
   rows: ProcessedDependencyData;
@@ -99,6 +104,7 @@ export default function SummaryContainer(props: {
             Monitoring dependencies for <b>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> Github Organisation
           </p>
           <div className={styles.btnsContainer}>
+		  	<h3 className={styles.summaryStylePercent}>Last crawl time: {dayjs(parseInt(props.auxData.crawlStart)).fromNow()}</h3>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
               <button onClick={callRefresh} aria-label="Refresh data">
                 <Image src={refreshIcon} alt="Refresh Icon" width="15rem" height="15rem"></Image>
@@ -107,7 +113,7 @@ export default function SummaryContainer(props: {
             </Tooltip>
           </div>
         </Grid>
-        
+
         <Grid>
           <Grow in={!closeHeader}>
             <Grid>

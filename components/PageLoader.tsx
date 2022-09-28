@@ -1,11 +1,12 @@
-import cachedData from "../cachedData.json";
 import {Page} from "./Page";
+import cachedData from "../cachedData.json";
 import { JSObjectFromJSON } from "../src/dataProcessing";
 import { getJsonStructure } from "evergreen-org-crawler/src/index"
 import config from "../config.json"
 import { useEffect, useState } from "react";
 import LoadingSnackbar from "./FeedbackComponents/LoadingSnackbar";
 import ErrorSnackbar from "./FeedbackComponents/ErrorSnackbar";
+import { sleep } from "evergreen-org-crawler/src/utils";
 
 enum Mode {
 	Frontend,
@@ -16,12 +17,13 @@ enum Mode {
 //TODO: Move to config file
 const mode: Mode = Mode.IntegratedBackend
 
+let lastRefreshTime = 0
+
 function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
 	return o[propertyName];
 }
 
-async function getDataFromAPI(api: "loadNew" | "loadLatest" | "forceNew", request: "npm" | "PyPI" | "RubyGems"){
-	console.log("Start")
+async function getDataFromAPI(api: "loadNew" | "loadLatest" | "forceNew" | "getLatestTime", request: "npm" | "PyPI" | "RubyGems"){
 	let JSObject = await fetch("api/" + api)
 	let retries = 10
 	while(!JSObject.ok){
@@ -41,20 +43,37 @@ async function getDataFromAPI(api: "loadNew" | "loadLatest" | "forceNew", reques
 			throw new Error("Failed to fetch")
 		}
 	}
-	console.log(JSObject)
 	const data = await JSObject.json()
 	const result = JSObjectFromJSON(getProperty(data! as { npm: any, PyPI: any, RubyGems: any }, request))
-	console.log("End")
+	return {aux: data!.aux, ...result}
+}
+
+async function waitForNewVersion(request: "npm" | "PyPI" | "RubyGems", api: "loadNew" | "forceNew", timeOffset = 0){
+	let result = await getDataFromAPI("getLatestTime", request)
+
+	lastRefreshTime = parseInt(result.aux?.crawlStart)
+
+	let refreshRequest = parseInt((await getDataFromAPI(api, request)).aux?.crawlStart)
+
+	if(lastRefreshTime + timeOffset < refreshRequest){
+		result = await getDataFromAPI("getLatestTime", request)
+
+		while(lastRefreshTime >= parseInt(result.aux?.crawlStart)){
+			await sleep(1000)
+			result = await getDataFromAPI("getLatestTime", request)
+		}
+	}
+
+	result = await getDataFromAPI("loadLatest", request)
 	return result
 }
 
 export async function forceNewVersion(request: "npm" | "PyPI" | "RubyGems"){
-	return getDataFromAPI("forceNew", request)
+	return await waitForNewVersion(request, "forceNew")
 }
 
-
 async function getNewVersion(request: "npm" | "PyPI" | "RubyGems"){
-	return getDataFromAPI("loadNew", request)
+	return await waitForNewVersion(request, "loadNew", config.timeUntilRefresh * 60 * 1000)
 }
 
 async function getCurrentVersion(request: "npm" | "PyPI" | "RubyGems"){

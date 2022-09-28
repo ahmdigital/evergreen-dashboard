@@ -3,12 +3,7 @@ import { NextApiRequest, NextApiResponse} from 'next'
 import { checkAuthorisation } from "../../src/authenticationMiddleware";
 import { CachePath, saveAndServerCache, waitingPromise } from "./loadNew";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	const isAuthorised = await checkAuthorisation(req, res)
-	if(!isAuthorised){
-		return
-	}
-	
+async function crawl(){
 	let cachedData = null
 
 	try {
@@ -27,5 +22,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		console.log("Cache file does not exist. Intialising...")
 	}
 
-	await saveAndServerCache(res, cachedData);
+	await saveAndServerCache(cachedData);
+
+	return cachedData;
+}
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+	const isAuthorised = await checkAuthorisation(req, res)
+	if(!isAuthorised){
+		return
+	}
+
+	let cachedData = crawl()
+
+	let isResolved = false;
+	cachedData.then(function() {
+		isResolved = true;
+	});
+
+	res.status(200).json({aux: {crawlStart: Date.now().toString()}})
+	return
 }

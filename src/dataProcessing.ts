@@ -17,7 +17,8 @@ export type DependencyListElement = {
   users: DependencyListSingleDep[];
 };
 export type DependencyList = DependencyListElement[];
-export type DependencyData = { depMap: DependencyMap; deps: DependencyList };
+export type DependencyData = { aux: {crawlStart: string, error: string}, depMap: DependencyMap; deps: DependencyList };
+export type PartialDependencyData = { depMap: DependencyMap; deps: DependencyList };
 
 // Parameter: jsonData JSON cachesdata format
 // Return:
@@ -25,8 +26,8 @@ export function JSObjectFromJSON(
   jsonData:
     | [any, { dep: number; dependencies: (string | number)[][] }[]]
     | never[]
-): DependencyData {
-  if (jsonData.length == 0) {
+): PartialDependencyData {
+  if (!jsonData || jsonData.length == 0) {
     return {
       depMap: new Map(),
       deps: [],
