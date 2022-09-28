@@ -3,6 +3,7 @@ import path from "path";
 import { NextApiRequest, NextApiResponse} from 'next'
 import getConfig from 'next/config'
 const { publicRuntimeConfig: config } = getConfig()
+// const config  = require('config');
 
 // Cache files are stored inside ./next folder
 const CachePath = path.resolve("./dynamicCache.json")

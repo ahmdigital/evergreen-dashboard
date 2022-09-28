@@ -23,7 +23,7 @@ Please avoid doing this at all cost.
 The `-n` allows you to skip git hooks.
 
 
-## Running 
+## Running
 
 ### ENV
 Required `.env`
@@ -34,7 +34,6 @@ CLIENT_SECRET=
 NEXT_PUBLIC_TARGET_ORGANISATION=
 NEXT_PUBLIC_CLIENT_ID=
 NEXT_PUBLIC_REDIRECT_URI=
-PORT=3000
 ```
 ### CustomConfig
 Optional `customConfig.json`

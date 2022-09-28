@@ -8,6 +8,8 @@ import { getJsonStructure } from "evergreen-org-crawler/src/index"
 
 import getConfig from 'next/config'
 const { publicRuntimeConfig: config } = getConfig()
+// const config  = require('config');
+// console.log(config)
 
 // Cache files are stored inside ./next folder
 export const CachePath = path.resolve(process.env.DYNAMIC_CACHE_PATH || "./dynamicCache.json")
@@ -47,6 +49,9 @@ export async function saveAndServerCache(res: NextApiResponse, cachedData: any){
 			}
 		}
 	} else{
+		//...
+		// const temp = config.targetPercentage;
+		// console.log(temp)
 		console.log("Served cache")
 	}
 
@@ -66,7 +71,7 @@ export async function createData(request: "npm" | "PyPI" | "RubyGems" | null = n
 	}
 
 	const accessToken = process.env.EVERGREEN_GITHUB_TOKEN!
-	return getJsonStructure(accessToken, config, api)
+	return getJsonStructure(accessToken, {targetOrganisation :process.env.NEXT_PUBLIC_TARGET_ORGANISATION, ...config}, api)
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -96,7 +101,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			cachedData = JSON.parse(await fs.promises.readFile(CachePath, 'utf8'))
 		}
 	} catch (error) {
-		console.log("Cache file does not exist. Intialising...")
+		console.log("Cache file does not exist. Initialising...")
 	}
 
 	await saveAndServerCache(res, cachedData);

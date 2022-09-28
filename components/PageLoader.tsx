@@ -2,10 +2,12 @@ import cachedData from "../cachedData.json";
 import {Page} from "./Page";
 import { JSObjectFromJSON } from "../src/dataProcessing";
 import { getJsonStructure } from "evergreen-org-crawler/src/index"
-import CrawlerConfig from "evergreen-org-crawler/config.json"
 import { useEffect, useState } from "react";
 import LoadingBackdrop from "./FeedbackComponents/LoadingBackdrop";
 import ErrorSnackbar from "./FeedbackComponents/ErrorSnackbar";
+import getConfig from 'next/config'
+const { publicRuntimeConfig: config } = getConfig()
+// const config  = require('config');
 
 enum Mode {
 	Frontend,
@@ -82,7 +84,7 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 			case(Mode.Frontend): {
 				const accessToken = process.env.NEXT_PUBLIC_EVERGREEN_GITHUB_TOKEN!
 				let JSObject = getJsonStructure(
-					accessToken, CrawlerConfig, [api]
+					accessToken, {targetOrganisation :process.env.NEXT_PUBLIC_TARGET_ORGANISATION, ...config}, [api]
 				).then(
 					(result: string) => JSON.parse(result) as { npm: any, PyPI: any, RubyGems: any }
 				).then(
