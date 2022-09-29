@@ -44,8 +44,8 @@ const theme1 = createTheme({
 })
 
 enum StatusLabel {
-  Red = "need updating urgently",
-  Yellow = "should be updated soon",
+  Red = "out-of-date",
+  Yellow = "few minors behind",
   Green = "up-to-date",
 }
 
@@ -137,7 +137,7 @@ export default function ReposOverViewTable(props: { rankArray: any, showChart: b
               return value > count * 1.5;
             },
             font: {
-              weight: "bold" as "bold"
+              weight: "bold" as "bold",
             },
             padding: 6,
             formatter: Math.round
