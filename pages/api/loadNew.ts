@@ -7,6 +7,7 @@ import { NextApiRequest, NextApiResponse} from 'next'
 import { getJsonStructure } from "evergreen-org-crawler/src/index"
 
 import config from "../../config.json"
+import {checkAuthorisation} from "../../src/authenticationMiddleware";
 
 // Cache files are stored inside ./next folder
 export const CachePath = path.resolve(process.env.DYNAMIC_CACHE_PATH || "./dynamicCache.json")
@@ -65,10 +66,15 @@ export async function createData(request: "npm" | "PyPI" | "RubyGems" | null = n
 	}
 
 	const accessToken = process.env.EVERGREEN_GITHUB_TOKEN!
-	return getJsonStructure(accessToken, config, api)
+	return getJsonStructure(accessToken, {targetOrganisation :process.env.NEXT_PUBLIC_TARGET_ORGANISATION as string, ...config}, api)
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+	const isAuthorised = await checkAuthorisation(req, res)
+	if(!isAuthorised){
+		return
+	}
+
 	let cachedData = null
 
 	const current = Date.now().valueOf()

@@ -4,8 +4,9 @@ import styles from "../../styles/DependenciesContainer.module.css";
 import sharedStyles from "../../styles/TreeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../../src/dataProcessing";
-import config from "../../config.json";
 import FilterListIcon from '@mui/icons-material/FilterList';
+// import { Grid } from "@mui/material"
+//import filterIcon from "../components/images/filter.svg" ;
 import {
 	PageLoaderCurrentData,
 	forceNewVersion,
@@ -115,21 +116,23 @@ export default function DependenciesContainer(props: {
 			</Grid>
 
 
-			<div className={styles.tableStyle}>
-				<CollapsibleTable>{props.rows}</CollapsibleTable>
-			</div>
-			{
-				props.emptyRows &&
-				<div className={styles.noReposStyle}>
-					<p><b>{config.targetOrganisation}</b> has 0 repositories</p>
-				</div>
-			}
-			{
-				!props.emptyRows && (props.searchTerm !== "" && props.rows.length === 0) &&
-				<div className={styles.noReposStyle}>
-					<p>No search results found</p>
-				</div>
-			}
-		</Box>
-	);
+      <div className={styles.tableStyle}>
+        <CollapsibleTable>{props.rows}</CollapsibleTable>
+      </div>
+      {
+        props.emptyRows &&
+        <div className={styles.noReposStyle}>
+          <p>
+            <b>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> has 0 repositories
+          </p>
+        </div>
+      }
+      {
+        !props.emptyRows && (props.searchTerm !== "" && props.rows.length === 0) &&
+        <div className={styles.noReposStyle}>
+          <p>No search results found</p>
+        </div>
+      }
+    </div>
+  );
 }
