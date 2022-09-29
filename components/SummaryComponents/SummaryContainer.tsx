@@ -9,7 +9,7 @@ import ForestIcon from "@mui/icons-material/Forest";
 import Tooltip from "@mui/material/Tooltip";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import refreshIcon from "../images/refresh.svg";
+import RefreshIcon from '@mui/icons-material/Refresh';
 import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "../PageLoader";
 import config from "../../config.json";
 import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
@@ -22,6 +22,8 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CondensedSummary from "./CondensedSummary/CondensedSummary";
 import BarChartIcon from '@mui/icons-material/BarChart';
+import Button from '@mui/material/Button';
+
 
 
 let refreshing = false;
@@ -100,14 +102,17 @@ export default function SummaryContainer(props: {
           </p>
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
-              <button onClick={callRefresh} aria-label="Refresh data">
-                <Image src={refreshIcon} alt="Refresh Icon" width="15rem" height="15rem"></Image>
-                <span className={styles.refreshWord}>Refresh</span>
-              </button>
+              <Button variant="contained" startIcon={<RefreshIcon />} sx={{
+                backgroundColor: 'var(--colour-black)', borderRadius: 'var(--main-section-border-radius)', '&:hover': {
+                  backgroundColor: '#424242',
+                },
+              }} onClick={callRefresh}>
+                Refresh
+              </Button>
             </Tooltip>
           </div>
         </Grid>
-        
+
         <Grid>
           <Grow in={!closeHeader}>
             <Grid>
@@ -137,20 +142,20 @@ export default function SummaryContainer(props: {
               </div>
             </div>
           </Grid>
-          
+
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
               <div className={styles.summaryCompHeader}>
-              <h3 className={styles.summaryStyle}>Total Repositories ({props.rankArray.green + props.rankArray.yellow + props.rankArray.red})</h3>
-                <div style={{display: "flex", width: "70px", justifyContent: "space-between"}}>
-                <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Toggle Pie Chart</p>}>
+                <h3 className={styles.summaryStyle}>Total Repositories ({props.rankArray.green + props.rankArray.yellow + props.rankArray.red})</h3>
+                <div style={{ display: "flex", width: "70px", justifyContent: "space-between" }}>
+                  <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Toggle Pie Chart</p>}>
                     <IconButton
                       className={styles.helpBtn}
                       aria-label="Chart button"
                       onClick={() => {
                         setShowChart(!showChart);
                       }}
-                    ><BarChartIcon className={styles.chartButton}/></IconButton></Tooltip>
+                    ><BarChartIcon className={styles.chartButton} /></IconButton></Tooltip>
                   <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
                     <IconButton
                       className={styles.helpBtn}

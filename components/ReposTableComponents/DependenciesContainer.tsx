@@ -133,6 +133,6 @@ export default function DependenciesContainer(props: {
           <p>No search results found</p>
         </div>
       }
-    </div>
+	  </Box>
   );
 }

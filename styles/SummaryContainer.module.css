@@ -257,31 +257,9 @@ div.loadingWheelBox {
 }
 
 div.btnsContainer {
-  display:block;
-  justify-content: flex-end;
-  margin-bottom: 0;
-  width: 17rem;
+  margin-top: 0.5rem;
 }
 
-div.btnsContainer button {
-  font-family: var(--primary-font-family);
-  font-size: var(--font-size-large);
-  background-color: var(--colour-container-background);
-  border: none;
-  padding: 0.8rem;
-  border-radius: var(--main-section-border-radius);
-  justify-content: center;
-  align-items: center;
-}
-
-div.btnsContainer button span {
-  margin-left: 0.5rem;
-}
-
-div.btnsContainer button:hover {
-  cursor: pointer;
-  background-color: lightgray;
-}
 
 h1.noMargins {
 	margin-top: 0;
