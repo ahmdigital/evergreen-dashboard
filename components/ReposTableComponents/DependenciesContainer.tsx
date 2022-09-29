@@ -4,18 +4,6 @@ import styles from "../../styles/DependenciesContainer.module.css";
 import sharedStyles from "../../styles/TreeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../../src/dataProcessing";
-// import { Grid } from "@mui/material"
-//import filterIcon from "../components/images/filter.svg" ;
-import {
-  PageLoaderCurrentData,
-  forceNewVersion,
-  PageLoaderIsLoading,
-  lastRequest,
-  PageLoaderSetData,
-  PageLoaderSetLoading,
-} from "../PageLoader";
-
-let refreshing = false;
 
 /* Container includes  Search, Filter, Dependencies Table */
 export default function DependenciesContainer(props: {
