@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router"
-import { Button, CircularProgress, Grid, Paper, Typography, Link, Box, Alert, AlertTitle } from "@mui/material";
+import { Button, CircularProgress, Grid, Paper, Typography, Box } from "@mui/material";
 import styles from "../styles/signin.module.css";
 import { GitHubIcon } from "../components/GitHubIcon";
 import * as React from 'react';
-import LoadingButton from '@mui/lab/LoadingButton';
 import TrafficIcon from '@mui/icons-material/Traffic';
 import Image from "next/image";
 import ForestIcon from "@mui/icons-material/Forest";
 import greenIcon from "../components/images/greenIcon.svg";
 import redIcon from '../components/images/redIcon.svg'
-
 
 const SCOPE = "repo"
 
@@ -90,12 +88,11 @@ export default function SignIn() {
 				height: '100vh'
 			}}>
 				<Grid item xs={12} md={5} sx={{
-					backgroundImage: 'url("/authPageBG.jpg")',
+					backgroundImage: 'linear-gradient(115deg, #CFF4D2, #7BE495, #56C596, #329D9C, #205072)',
 					backgroundSize: 'cover',
 					backgroundPositionX: '80%',
 					position: 'relative',
-					overflow: 'hidden'
-
+					overflow: 'hidden',
 				}}>
 
 					<Box sx={{ padding: 4 }}>
