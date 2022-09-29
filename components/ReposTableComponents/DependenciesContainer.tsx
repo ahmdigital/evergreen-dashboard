@@ -4,7 +4,6 @@ import styles from "../../styles/DependenciesContainer.module.css";
 import sharedStyles from "../../styles/TreeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../../src/dataProcessing";
-import config from "../../config.json";
 // import { Grid } from "@mui/material"
 //import filterIcon from "../components/images/filter.svg" ;
 import {
@@ -93,7 +92,9 @@ export default function DependenciesContainer(props: {
       {
         props.emptyRows &&
         <div className={styles.noReposStyle}>
-          <p><b>{config.targetOrganisation}</b> has 0 repositories</p>
+          <p>
+            <b>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> has 0 repositories
+          </p>
         </div>
       }
       {
