@@ -121,7 +121,18 @@ export default function ReposOverViewTable(props: { rankArray: any, showChart: b
               }
             }
           },
-          legend: { display: true, position: "bottom" as "bottom" },
+          legend: {
+            display: true, position: "right" as "right", labels: {
+              usePointStyle: true,
+              pointStyle: 'circle',
+              padding: 20,
+              font: {
+                size: 15,
+                weight: 'normal',
+              },
+              color: 'black',
+            }
+          },
           datalabels: {
             backgroundColor: function (context: any) {
               return context.dataset.backgroundColor;
