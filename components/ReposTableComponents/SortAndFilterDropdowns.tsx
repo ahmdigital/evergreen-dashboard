@@ -61,7 +61,6 @@ export function RankSelectionList(filterSetting: Filter, handleRankSelectionChan
 	]
 
 	return <><ThemeProvider theme={theme}>
-
 		<FormControl sx={{ m: 1, minWidth: 200, maxWidth: 200 }}>
 			<p>Filter</p>
 

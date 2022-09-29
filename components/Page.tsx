@@ -114,6 +114,7 @@ export function Page(props: PageProps) {
 						sortDirection={sortDirectionBox}
 						rankSelection={rankSelectionList}
 						emptyRows={emptyRows}
+						filterSetting={filterSetting}
 					/>
 					<HelpGuide />
 				</Layout>

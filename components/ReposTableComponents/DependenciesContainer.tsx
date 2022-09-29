@@ -16,9 +16,8 @@ export default function DependenciesContainer(props: {
   rankSelection: any;
   emptyRows: boolean;
   sortDirection: any;
+  filterSetting: any;
 }) {
-
-
   return (
     <div className={`${styles.sectionContainer}`}>
       <h3 className={sharedStyles.h3ContainerStyle}>Repositories </h3>
@@ -47,7 +46,7 @@ export default function DependenciesContainer(props: {
 
 
       <div className={styles.tableStyle}>
-        <CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows} searchTerm={props.searchTerm} setSearchTerm={props.setSearchTerm}></CollapsibleTable>
+        <CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows} searchTerm={props.searchTerm} setSearchTerm={props.setSearchTerm} filterSetting={props.filterSetting}></CollapsibleTable>
       </div>
       {
         props.emptyRows &&

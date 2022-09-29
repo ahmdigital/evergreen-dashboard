@@ -7,6 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "../../styles/CollapsibleTable.module.css";
 import Row from "./Row";
+import { applyFilter } from "../../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 // Customising the table styling using ThemeProvider
@@ -38,7 +39,7 @@ const theme = createTheme({
 })
 
 // Creates the whole table
-export default function CollapsibleTable(props: { tableRows: any, setTableRows: any, searchTerm: any, setSearchTerm: any }) {
+export default function CollapsibleTable(props: { tableRows: any, setTableRows: any, searchTerm: any, setSearchTerm: any, filterSetting: any }) {
   return (
     <ThemeProvider theme={theme}>
       <TableContainer
@@ -63,7 +64,7 @@ export default function CollapsibleTable(props: { tableRows: any, setTableRows: 
             </TableRow>
           </TableHead>
           <TableBody id={"mainTableBody"}>
-            {props.tableRows.filter((row: any) => row.name.toLowerCase().includes(props.searchTerm.toLowerCase())).map((row: any) => (
+            {props.tableRows.filter((row: any) => applyFilter(row, props.filterSetting) && row.name.toLowerCase().includes(props.searchTerm.toLowerCase())).map((row: any) => (
               <Row
                 key={row.name}
                 rank={row.minRank}
