@@ -83,7 +83,6 @@ export default function SignIn() {
 
 	return (
 		<>
-			{/* <button onClick={redirect}>Login</button> */}
 			<Grid container alignItems="stretch" sx={{
 				height: '100vh'
 			}}>
@@ -102,7 +101,6 @@ export default function SignIn() {
 						</Typography>
 					</Box>
 
-					{/* <Grid justifyItems={"flex-end"} spacing={0} alignItems="stretch"> */}
 					<Box sx={{
 						position: 'absolute',
 						bottom: '0',
@@ -119,7 +117,6 @@ export default function SignIn() {
 							alt="Screenshot of the Evergreen Dashboard"
 							width={2692}
 							height={2048} />
-						{/* </Grid> */}
 					</Box>
 
 				</Grid>
@@ -146,7 +143,7 @@ export default function SignIn() {
 				justifyContent='center'
 				alignContent='center'>
 				<Paper className={styles.signinContainer}>
-					<Typography variant="h4" sx={{ marginBottom: '1.5rem' }} component="h1"><span className={styles.everGreen}>Evergreen Dashboard</span> </Typography>
+					<Typography variant="h4" sx={{ marginBottom: '1.5rem', marginLeft: '1rem'}} component="h1"><span className={styles.everGreen}>Evergreen Dashboard</span> </Typography>
 
 					{
 						signInStatus === "calculating" && <>
@@ -194,7 +191,6 @@ export default function SignIn() {
 								container
 								direction='column'
 								alignItems='center'
-							//sx={{ justifyContent: 'center' }} 
 							>
 
 								<Typography
@@ -236,7 +232,6 @@ export default function SignIn() {
 								container
 								direction='column'
 								alignItems='center'
-							//sx={{ justifyContent: 'center' }} 
 							>
 
 								<Typography
