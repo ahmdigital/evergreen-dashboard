@@ -8,8 +8,6 @@ import { getJsonStructure } from "evergreen-org-crawler/src/index"
 
 import getConfig from 'next/config'
 const { publicRuntimeConfig: config } = getConfig()
-// const config  = require('config');
-// console.log(config)
 
 // Cache files are stored inside ./next folder
 export const CachePath = path.resolve(process.env.DYNAMIC_CACHE_PATH || "./dynamicCache.json")
@@ -49,9 +47,6 @@ export async function saveAndServerCache(res: NextApiResponse, cachedData: any){
 			}
 		}
 	} else{
-		//...
-		// const temp = config.targetPercentage;
-		// console.log(temp)
 		console.log("Served cache")
 	}
 

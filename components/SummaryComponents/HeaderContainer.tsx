@@ -3,6 +3,8 @@ import headerStyles from "../../styles/HeaderContainer.module.css";
 // import sharedStyles from "../styles/TreeView.module.css";
 import ForestIcon from "@mui/icons-material/Forest";
 import { RepoOverviewCondensedProps } from "./CondensedSummary/CondensedSummary";
+import getConfig from "next/config";
+const { publicRuntimeConfig: config } = getConfig()
 
 export default function HeaderContainer() {
   return (
@@ -11,7 +13,7 @@ export default function HeaderContainer() {
         <ForestIcon /> Evergreen Dashboard
       </h2>
       <p className={headerStyles.headerStyle}>
-        Monitoring for <b>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> Github
+        Monitoring for <b>{config.targetOrganisation}</b> Github
         Organisation
       </p>
     </>

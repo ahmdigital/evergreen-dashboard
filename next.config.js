@@ -5,6 +5,9 @@ const nextConfig = {
 };
 const withTM = require("next-transpile-modules")(["evergreen-org-crawler"]);
 
+const config = require('config');
+// const APIConfig = config.get('API')
+
 function MergeCustomConfig(customConfigFileName) {
 	const fs = require("fs");
 	const DefaultConfigFileName = "./config.json";
@@ -39,11 +42,12 @@ function MergeCustomConfig(customConfigFileName) {
 	return MergedConfigs;
 }
 
-const CustomConfigFileName = "./customConfig.json";
-const config = MergeCustomConfig(CustomConfigFileName);
-
+// const CustomConfigFileName = "./customConfig.json";
+// const evergreenConfig = MergeCustomConfig(CustomConfigFileName);
+// console.log(evergreenConfig)
 module.exports = withTM({
 	publicRuntimeConfig: {
+    targetOrganisation : process.env.NEXT_PUBLIC_TARGET_ORGANISATION,
 		...config
 	},
 	webpack5: true,

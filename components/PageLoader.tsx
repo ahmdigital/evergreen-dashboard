@@ -7,7 +7,6 @@ import LoadingBackdrop from "./FeedbackComponents/LoadingBackdrop";
 import ErrorSnackbar from "./FeedbackComponents/ErrorSnackbar";
 import getConfig from 'next/config'
 const { publicRuntimeConfig: config } = getConfig()
-// const config  = require('config');
 
 enum Mode {
 	Frontend,
@@ -81,20 +80,20 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 		setLoading(true)
 
 		switch(mode){
-			case(Mode.Frontend): {
-				const accessToken = process.env.NEXT_PUBLIC_EVERGREEN_GITHUB_TOKEN!
-				let JSObject = getJsonStructure(
-					accessToken, {targetOrganisation :process.env.NEXT_PUBLIC_TARGET_ORGANISATION, ...config}, [api]
-				).then(
-					(result: string) => JSON.parse(result) as { npm: any, PyPI: any, RubyGems: any }
-				).then(
-					(data: any) => JSObjectFromJSON(getProperty(data!, request))
-				)
-				JSObject.then((result: any) => {
-					setData(result as any)
-					setLoading(false)
-				})
-			} break;
+			// case(Mode.Frontend): {
+			// 	const accessToken = process.env.NEXT_PUBLIC_EVERGREEN_GITHUB_TOKEN!
+			// 	let JSObject = getJsonStructure(
+			// 		accessToken, {targetOrganisation: config.targetOrganisation, ...config}, [api]
+			// 	).then(
+			// 		(result: string) => JSON.parse(result) as { npm: any, PyPI: any, RubyGems: any }
+			// 	).then(
+			// 		(data: any) => JSObjectFromJSON(getProperty(data!, request))
+			// 	)
+			// 	JSObject.then((result: any) => {
+			// 		setData(result as any)
+			// 		setLoading(false)
+			// 	})
+			// } break;
 			case(Mode.StandaloneBackend): {
 				const data = getProperty((cachedData as { npm: any, PyPI: any, RubyGems: any })!, request)
 				let JSObject = JSObjectFromJSON(data)

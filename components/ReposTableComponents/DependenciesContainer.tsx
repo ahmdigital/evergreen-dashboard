@@ -94,7 +94,7 @@ export default function DependenciesContainer(props: {
         props.emptyRows &&
         <div className={styles.noReposStyle}>
           <p>
-            <b>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> has 0 repositories
+            <b>{config.targetOrganisation}</b> has 0 repositories
           </p>
         </div>
       }
