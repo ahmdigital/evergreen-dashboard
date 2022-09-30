@@ -8,7 +8,6 @@ import Head from "next/head";
 import DependenciesContainer from "./ReposTableComponents/DependenciesContainer";
 import SummaryContainer from "./SummaryComponents/SummaryContainer";
 import MobileSummaryContainer from "./MobileComponents/MobileSummaryContainer";
-import MobileDependenciesContainer from "./MobileComponents/MobileDependenciesContainer";
 import { DependencyData } from "../src/dataProcessing";
 import LoadingSnackbar from "./FeedbackComponents/LoadingSnackbar";
 import HelpGuide from "./HelpComponents/HelpGuide";

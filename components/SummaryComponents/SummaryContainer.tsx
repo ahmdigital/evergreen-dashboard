@@ -98,7 +98,7 @@ export default function SummaryContainer(props: {
         <Grid>
           <h1 className={styles.noMargins}><ForestIcon /> Evergreen Dashboard</h1>
           <p className={styles.subtitle}>
-            Monitoring dependencies for <b>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> Github Organisation
+            Monitoring dependencies for <b className={styles.orgTitle}>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> Github Organisation
           </p>
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
@@ -138,7 +138,7 @@ export default function SummaryContainer(props: {
               <div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
                 <h3 className={styles.overallTitleStyle}>Overall</h3>
                 <h3 className={styles.percentStyle} >{overallPercentStr}</h3>
-                <h3 className={styles.overallCentredTitleStyle}>up-to-date</h3>
+                <h3 className={styles.overallCentredTitleStyle}>up-to-date of {props.rankArray.green + props.rankArray.yellow + props.rankArray.red} repositories </h3>
               </div>
             </div>
           </Grid>

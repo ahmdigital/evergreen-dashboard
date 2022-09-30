@@ -4,9 +4,16 @@ div.summaryStyle {
   min-width: 15rem;
 }
 
+.orgTitle{
+  background-color: black;
+  color: white;
+  padding: 0.2rem 0.3rem 0.2rem 0.3rem;
+  border-radius: 0.3rem;
+}
+
 .subtitle {
   font-size: var(--font-size-large);
-  margin-top: 3px;
+  margin-top: 6px;
   font-weight: var(--font-weight-semibold); /*500*/
 }
 
