@@ -3,6 +3,7 @@ import { SemVer, semVerFromString } from "./semVer";
 export type ID = number & { __brand: "ID" };
 export type DependencyMapElement = {
   name: string;
+  oldName: string;
   version: SemVer;
   lastUpdated: string;
   link: string;
@@ -42,6 +43,7 @@ export function JSObjectFromJSON(
     const semVerVer = semVerFromString(data.version as string);
     betterMap.set(parseInt(id) as ID, {
       name: data.name,
+      oldName: data.oldName,
       version: semVerVer,
       lastUpdated: data.lastUpdated,
       link: data.link,

@@ -28,7 +28,7 @@ const theme = createTheme({
 })
 
 
-export type SortSettings = { type: "name" | "rank" | "time" | "internal" | "external" | "total" | "users", direction: boolean }
+export type SortSettings = { type: "name" | "repo" | "rank" | "time" | "internal" | "external" | "total" | "users", direction: boolean }
 
 export function SortBox(sortSetting: SortSettings, handleSortChange: any) {
 
@@ -41,6 +41,7 @@ export function SortBox(sortSetting: SortSettings, handleSortChange: any) {
 			>
 				<MenuItem value=""> <em>None</em> </MenuItem>
 				<MenuItem value={"name"}>Name</MenuItem>
+				<MenuItem value={"repo"}>Repository</MenuItem>
 				<MenuItem value={"rank"}>Rank</MenuItem>
 				<MenuItem value={"time"}>Time</MenuItem>
 				<MenuItem value={"internal"}>Internal count</MenuItem>

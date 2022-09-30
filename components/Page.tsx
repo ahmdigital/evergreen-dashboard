@@ -105,7 +105,7 @@ export function Page(props: PageProps) {
 		setFilterSetting({ ...filterSetting, showRed: sel.indexOf("red") != -1, showYellow: sel.includes("yellow"), showGreen: sel.includes("green") })
 	})
 
-	//TODO: Adapt to sorting buttons this
+	//TODO: Adapt to sorting buttons
 	const handleSortDirectionChange = (event: SelectChangeEvent) => {
 		setSortSetting({ type: sortSetting.type, direction: event.target.value == "ascending" })
 	}

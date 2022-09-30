@@ -15,7 +15,12 @@
 }
 
 .col3 {
-	width: 58%;
+	width: 38%;
+	background-color: var(--colour-background);
+}
+
+.col3 {
+	width: 20%;
 	background-color: var(--colour-background);
 }
 
