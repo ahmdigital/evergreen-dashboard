@@ -3,6 +3,7 @@ import path from "path";
 import { NextApiRequest, NextApiResponse} from 'next'
 import getConfig from 'next/config'
 const { publicRuntimeConfig: config } = getConfig()
+import { checkAuthorisation } from "../../src/authenticationMiddleware";
 
 // Cache files are stored inside ./next folder
 const CachePath = path.resolve("./dynamicCache.json")
@@ -10,6 +11,11 @@ const CachePath = path.resolve("./dynamicCache.json")
 const timeUntilRefresh = config.timeUntilRefresh * 60 * 1000 // minutes to milliseconds
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+	const isAuthorised = await checkAuthorisation(req, res)
+	if(!isAuthorised){
+		return
+	}
+
 	let cachedData = null
 
 	const current = Date.now().valueOf()

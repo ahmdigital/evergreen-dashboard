@@ -1,8 +1,14 @@
 import * as fs from "fs";
 import { NextApiRequest, NextApiResponse} from 'next'
+import { checkAuthorisation } from "../../src/authenticationMiddleware";
 import { CachePath, saveAndServerCache, waitingPromise } from "./loadNew";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+	const isAuthorised = await checkAuthorisation(req, res)
+	if(!isAuthorised){
+		return
+	}
+	
 	let cachedData = null
 
 	try {

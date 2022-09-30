@@ -20,7 +20,7 @@ provider "azurerm" {
 }
 
 locals {
-  # this should use semantic versioning, otherwise it will
+  # this should use semantic versioning, otherwise it may
   # not trigger doployment when a new 'latest' image is pushed
   build_imge_tag = "latest"
   docker_image   = "docker.io/mtempty/evergreendashboard"
@@ -45,12 +45,15 @@ resource "azurerm_linux_web_app" "this" {
   location            = azurerm_service_plan.this.location
   service_plan_id     = azurerm_service_plan.this.id
   app_settings = {
-    PORT                   = var.port
-    WEBSITES_PORT          = var.port
-    EVERGREEN_GITHUB_TOKEN = var.github_token_scope_read_org
-    CLIENT_ID              = var.client_id
-    CLIENT_SECRET          = var.client_secret
-    DYNAMIC_CACHE_PATH     = var.dynamic_cache_path
+    PORT                            = var.port
+    WEBSITES_PORT                   = var.port
+    EVERGREEN_GITHUB_TOKEN          = var.github_token_scope_read_org
+    NEXT_PUBLIC_CLIENT_ID           = var.client_id
+    REQUIRE_AUTHENTICATION          = var.require_authentication
+    NEXT_PUBLIC_TARGET_ORGANISATION = var.target_organisation
+    NEXT_PUBLIC_REDIRECT_URI        = var.redirect_uri
+    CLIENT_SECRET                   = var.client_secret
+    DYNAMIC_CACHE_PATH              = var.dynamic_cache_path
 
     # The documentation not very clear on write permission of /home
     # Also, in case org has changed, old org data must be deleted

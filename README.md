@@ -32,24 +32,37 @@ Required `.env`
 EVERGREEN_GITHUB_TOKEN=
 CLIENT_SECRET=
 NEXT_PUBLIC_TARGET_ORGANISATION=
+REQUIRE_AUTHENTICATION=true
 NEXT_PUBLIC_CLIENT_ID=
-NEXT_PUBLIC_REDIRECT_URI=
+NEXT_PUBLIC_REDIRECT_URI=http://example.com/signin/
 ```
+
 ### CustomConfig
 Optional `customConfig.json`
 
-## Provisioning the infrastructure locally
+## Deployment
+
+1. Setup github oauth app
+2. populate env variables
+
+### Docker
+
+`docker-compose build`
+
+`docker-compose up`
+
+### Provisioning the infrastructure from cli
 
 Make sure you have terraform installed, to deploy follow these steps:
 
-### AWS Beanstalk
+#### AWS Beanstalk
 
 1. `terraform init`
 2. `bash bootstrap.sh`, currently works on linux, if on other OSs simply zip the required files(refer to `bootstrap.sh`)
 3. `terraform apply`, it will ask you to accept the configuration, type `yes` once you have read the plan
 4. Wait until terraform finishes applying the plan, once it's done it will output the url of the website
 
-### Azure web app
+#### Azure web app
 
 Because azure web app was not executing the build command, a docker container was used instead
 

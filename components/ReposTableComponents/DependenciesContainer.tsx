@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 import { DependencyData } from "../../src/dataProcessing";
 import getConfig from 'next/config'
 const { publicRuntimeConfig: config } = getConfig();
-//import filterIcon from "../components/images/filter.svg" ;
+
 import {
   PageLoaderCurrentData,
   forceNewVersion,
