@@ -24,9 +24,14 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CondensedSummary from "./CondensedSummary/CondensedSummary";
 import BarChartIcon from '@mui/icons-material/BarChart';
+import { AuxData } from "../../src/dataProcessing";
 
+const dayjs = require('dayjs')
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 
 export default function SummaryContainer(props: {
+  auxData: AuxData;
   rankArray: any;
   loadingSnackbar: any;
   rows: ProcessedDependencyData;
@@ -96,7 +101,7 @@ export default function SummaryContainer(props: {
         <Grid>
           <h1 className="noMargins"><ForestIcon /> Evergreen Dashboard</h1>
           <p className={styles.subtitle}>
-            Monitoring dependencies for <b>ahm-digital</b> Github Organisation
+            Monitoring dependencies for the <a href={props.auxData.orgLink}>{props.auxData.orgName}</a> Github Organisation
           </p>
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
@@ -105,9 +110,10 @@ export default function SummaryContainer(props: {
                 <span className={styles.refreshWord}>Refresh</span>
               </button>
             </Tooltip>
+		    <h3>Last crawl time: {dayjs(parseInt(props.auxData.crawlStart)).fromNow()}</h3>
           </div>
         </Grid>
-        
+
         <Grid>
           <Grow in={!closeHeader}>
             <Grid>

@@ -21,7 +21,6 @@ function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
 }
 
 async function getDataFromAPI(api: "loadNew" | "loadLatest" | "forceNew", request: "npm" | "PyPI" | "RubyGems"){
-	console.log("Start")
 	let JSObject = await fetch("api/" + api)
 	let retries = 10
 	while(!JSObject.ok){
@@ -41,11 +40,9 @@ async function getDataFromAPI(api: "loadNew" | "loadLatest" | "forceNew", reques
 			throw new Error("Failed to fetch")
 		}
 	}
-	console.log(JSObject)
 	const data = await JSObject.json()
 	const result = JSObjectFromJSON(getProperty(data! as { npm: any, PyPI: any, RubyGems: any }, request))
-	console.log("End")
-	return result
+	return {aux: data!.aux, ...result}
 }
 
 export async function forceNewVersion(request: "npm" | "PyPI" | "RubyGems"){

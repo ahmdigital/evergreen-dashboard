@@ -254,10 +254,11 @@ div.btnsContainer {
   display:block;
   justify-content: flex-end;
   margin-bottom: 0;
-  width: 17rem;
+  width: 100%;
 }
 
 div.btnsContainer button {
+  display:inline-block;
   font-family: var(--primary-font-family);
   font-size: var(--font-size-large);
   background-color: var(--colour-container-background);
@@ -266,6 +267,12 @@ div.btnsContainer button {
   border-radius: var(--main-section-border-radius);
   justify-content: center;
   align-items: center;
+}
+
+div.btnsContainer h3 {
+	display:inline-block;
+	font-style: italic;
+	font-weight: var(--font-weight-normal);
 }
 
 div.btnsContainer button span {

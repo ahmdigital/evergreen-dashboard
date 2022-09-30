@@ -89,7 +89,7 @@ export function Page(props: PageProps) {
 	//Sorting. Doing this after filtering would be more efficient
 	applySort(rows, sortSetting)
 
-	
+
 
 	const jsxRows = rowsToJSX(rows)
 	const rankArray = rankCounts(rows)
@@ -130,7 +130,7 @@ export function Page(props: PageProps) {
 			</Head>
 			<main style={{ padding: 0 }}>
 				<Layout>
-					<SummaryContainer rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
+					<SummaryContainer auxData = {props.JSObject.aux} rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
 					<DependenciesContainer
 						JSObject={props.JSObject}
 						rows={diplayedRows}
