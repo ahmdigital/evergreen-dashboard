@@ -14,7 +14,7 @@ import HelpGuide from "./HelpComponents/HelpGuide";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { RankSelectionList, SortBox, SortSettings } from  "./ReposTableComponents/SortAndFilterDropdowns";
 import { applySort, Filter, rankCounts, searchAndFilter } from "../src/sortingAndFiltering";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {  ThemeProvider } from "@mui/material/styles";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { theme } from './ReposTableComponents/SortAndFilterDropdowns'
 

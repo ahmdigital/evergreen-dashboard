@@ -41,7 +41,7 @@ let refreshing = false;
 
 export default function MobileSummaryContainer(props: {
 	rankArray: any;
-	loadingBackdrop: any;
+	loadingSnackbar: any;
 	rows: ProcessedDependencyData;
 	filterTerm: Filter;
 	setFilterTerm: any;
@@ -122,7 +122,7 @@ export default function MobileSummaryContainer(props: {
 					</button>
 				</div>
 				<div>
-					{props.loadingBackdrop}
+					{props.loadingSnackbar}
 				</div>
 				<Grow in={!closeHeader}>
 					<Grid>
