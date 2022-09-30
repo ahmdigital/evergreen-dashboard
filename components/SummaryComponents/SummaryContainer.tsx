@@ -101,7 +101,7 @@ export default function SummaryContainer(props: {
         <Grid>
           <h1 className="noMargins"><ForestIcon /> Evergreen Dashboard</h1>
           <p className={styles.subtitle}>
-            Monitoring dependencies for <b>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> Github Organisation
+            Monitoring dependencies for <b>ahm-digital</b> Github Organisation
           </p>
           <div className={styles.btnsContainer}>
 		  	<h3 className={styles.summaryStylePercent}>Last crawl time: {dayjs(parseInt(props.auxData.crawlStart)).fromNow()}</h3>
