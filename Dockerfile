@@ -38,6 +38,13 @@ COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 
+# the "nextjs" user in the docker container doesn't have create new file capability
+# but the application dynamically generates dynamicCache file at runtime
+# which means these files won't be bundled at build time, i.e. files won't be created at runtime 
+# so, to make this work with docker container, we manually include them in the build step
+COPY --from=builder --chown=nextjs:nodejs /app/defaultDynamicCache.json ./defaultDynamicCache.json
+COPY --from=builder --chown=nextjs:nodejs /app/dynamicCache.json ./dynamicCache.json
+
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./

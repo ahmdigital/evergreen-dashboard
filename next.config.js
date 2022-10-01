@@ -2,6 +2,9 @@
 const nextConfig = {
 	reactStrictMode: true,
 	output: "standalone",
+	// need to include(trace) these files, because next cannot determine whether they are important
+	// this option doesn't seem to work, so copy them manually in dockerfile
+	// unstable_includeFiles: ["./dynamicCache.json", "./defaultDynamicCache.json"] 
 };
 const withTM = require("next-transpile-modules")(["evergreen-org-crawler"]);
 
@@ -47,7 +50,6 @@ function MergeCustomConfig(customConfigFileName) {
 // console.log(evergreenConfig)
 module.exports = withTM({
 	publicRuntimeConfig: {
-    targetOrganisation : process.env.NEXT_PUBLIC_TARGET_ORGANISATION,
 		...config
 	},
 	webpack5: true,

@@ -1,0 +1,11 @@
+{
+	"rankCutoff": {
+		"major": "0.6.-1",
+		"minor": "0.5.-1"
+	},
+	"timeUntilRefresh": 5,
+	"targetPercentage": 80,
+	"npmURL": "",
+	"pipURL": "",
+	"rubygemsURL": ""
+}
