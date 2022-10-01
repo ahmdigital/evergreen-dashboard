@@ -20,6 +20,7 @@
     "@types/node": "^18.7.23",
     "chart.js": "^3.9.1",
     "chartjs-plugin-datalabels": "^2.1.0",
+    "config": "^3.3.8",
     "cookie": "^0.5.0",
     "dayjs": "^1.11.5",
     "evergreen-org-crawler": "^0.0.8",

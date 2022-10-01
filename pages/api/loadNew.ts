@@ -6,12 +6,13 @@ import { NextApiRequest, NextApiResponse} from 'next'
 // import { getJsonStructure } from "../../../crawler/src/index"
 import { getJsonStructure } from "evergreen-org-crawler/src/index"
 
-import config from "../../config.json"
+import getConfig from 'next/config'
+const { publicRuntimeConfig: config } = getConfig()
 import {checkAuthorisation} from "../../src/authenticationMiddleware";
 
 // Cache files are stored inside ./next folder
-export const CachePath = path.resolve(process.env.DYNAMIC_CACHE_PATH || "./dynamicCache.json")
-export const EmptyCachePath = path.resolve("./defaultDynamicCache.json")
+export const CachePath = path.resolve(process.env.DYNAMIC_CACHE_DIR ?? "", "./dynamicCache.json")
+export const EmptyCachePath = path.resolve(process.env.DYNAMIC_CACHE_DIR ?? "", "./defaultDynamicCache.json")
 
 const timeUntilRefresh = config.timeUntilRefresh * 60 * 1000 // minutes to milliseconds
 
@@ -101,7 +102,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			cachedData = JSON.parse(await fs.promises.readFile(CachePath, 'utf8'))
 		}
 	} catch (error) {
-		console.log("Cache file does not exist. Intialising...")
+		console.log("Cache file does not exist. Initialising...")
 	}
 
 	await saveAndServerCache(res, cachedData);
