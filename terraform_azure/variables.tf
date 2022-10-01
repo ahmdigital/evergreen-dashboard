@@ -2,7 +2,7 @@
 
 variable "github_token_scope_read_org" {
   type        = string
-  description = "Github token that has a scope read organistaion repositories"
+  description = "Github token that has a scope read organisation repositories"
   sensitive   = true
 }
 
@@ -61,7 +61,7 @@ variable "app_name" {
 variable "app_description" {
   type      = string
   sensitive = false
-  default   = "Monitoring Github orgnization dependencies"
+  default   = "Monitoring Github orgnisation dependencies"
 }
 
 variable "location" {
