@@ -44,11 +44,11 @@ variable "port" {
   default     = "3000"
 }
 
-variable "dynamic_cache_path" {
+variable "dynamic_cache_directory" {
   type        = string
   description = "Azure web app custom container only allows write permission on /home"
   sensitive   = false
-  default     = "/home/dynamicCache.json"
+  default     = "/home/"
 }
 
 variable "app_name" {

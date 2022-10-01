@@ -18,8 +18,17 @@ import {
 
 let refreshing = false;
 
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION,
+    }
+  }
+}
+
 /* Container includes  Search, Filter, Dependencies Table */
-export default function DependenciesContainer(props: {
+export default function DependenciesContainer(ContainerProps: {
   JSObject: DependencyData;
   rows: JSX.Element[];
   searchTerm: any;
@@ -28,7 +37,7 @@ export default function DependenciesContainer(props: {
   rankSelection: any;
   emptyRows: boolean;
   sortDirection: any;
-}) {
+}, props: { targetOrganisation: string }) {
   async function callRefresh() {
     if (refreshing) {
       return;
@@ -68,38 +77,38 @@ export default function DependenciesContainer(props: {
       <div className={styles.depsBarStyle}>
 
         <SearchBar
-          searchTerm={props.searchTerm}
-          setSearchTerm={props.setSearchTerm}
+          searchTerm={ContainerProps.searchTerm}
+          setSearchTerm={ContainerProps.setSearchTerm}
         />
 
         <div className={styles.menuStyle}>
-          {props.sortDropdown}
+          {ContainerProps.sortDropdown}
         </div>
 
         <div className={styles.menuStyle}>
-          {props.sortDirection}
+          {ContainerProps.sortDirection}
         </div>
 
         <div className={styles.menuStyle}>
-          {props.rankSelection}
+          {ContainerProps.rankSelection}
         </div>
 
       </div>
 
 
       <div className={styles.tableStyle}>
-        <CollapsibleTable>{props.rows}</CollapsibleTable>
+        <CollapsibleTable>{ContainerProps.rows}</CollapsibleTable>
       </div>
       {
-        props.emptyRows &&
+        ContainerProps.emptyRows &&
         <div className={styles.noReposStyle}>
           <p>
-            <b>{config.targetOrganisation}</b> has 0 repositories
+            <b>{props.targetOrganisation}</b> has 0 repositories
           </p>
         </div>
       }
       {
-        !props.emptyRows && (props.searchTerm !== "" && props.rows.length === 0) &&
+        !ContainerProps.emptyRows && (ContainerProps.searchTerm !== "" && ContainerProps.rows.length === 0) &&
         <div className={styles.noReposStyle}>
           <p>No search results found</p>
         </div>

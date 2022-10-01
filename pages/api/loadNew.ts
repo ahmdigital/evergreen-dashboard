@@ -11,8 +11,8 @@ const { publicRuntimeConfig: config } = getConfig()
 import {checkAuthorisation} from "../../src/authenticationMiddleware";
 
 // Cache files are stored inside ./next folder
-export const CachePath = path.resolve(process.env.DYNAMIC_CACHE_PATH || "./dynamicCache.json")
-export const EmptyCachePath = path.resolve("./defaultDynamicCache.json")
+export const CachePath = path.resolve(process.env.DYNAMIC_CACHE_DIR ?? "", "./dynamicCache.json")
+export const EmptyCachePath = path.resolve(process.env.DYNAMIC_CACHE_DIR ?? "", "./defaultDynamicCache.json")
 
 const timeUntilRefresh = config.timeUntilRefresh * 60 * 1000 // minutes to milliseconds
 
