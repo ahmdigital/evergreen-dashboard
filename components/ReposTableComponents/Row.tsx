@@ -102,10 +102,11 @@ export default function Row(props: { rank: number; row: any } & Props) {
             <Tooltip arrow title={<p className={styles.tooltipStyle}>{iconDefinition}</p>}>
               <div className={styles.iconContainer}>
                 <Image
+                  layout="fixed"
                   src={statusIcon}
                   alt={statusText}
-                  width="40px"
-                  height="40px"
+                  width= "40px"
+                  height= "40px"
                   className={styles.statusIcon}
                 />
               </div>
