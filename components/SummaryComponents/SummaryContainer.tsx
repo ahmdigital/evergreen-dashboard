@@ -11,7 +11,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "../PageLoader";
-import config from "../../config.json";
 import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import ReposSecondarySummaryTable from "./ReposSecondarySummaryTable";
 import { Filter } from "../../src/sortingAndFiltering";
@@ -20,13 +19,14 @@ import Grow from '@mui/material/Grow';
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import getConfig from 'next/config'
+
 import CondensedSummary from "./CondensedSummary/CondensedSummary";
 import BarChartIcon from '@mui/icons-material/BarChart';
 import Button from '@mui/material/Button';
 
-
-
-let refreshing = false;
+const { publicRuntimeConfig: config } = getConfig();
+let refreshing = false
 
 export default function SummaryContainer(props: {
   rankArray: any;

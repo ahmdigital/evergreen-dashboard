@@ -5,8 +5,9 @@ import sharedStyles from "../../styles/TreeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../../src/dataProcessing";
 import FilterListIcon from '@mui/icons-material/FilterList';
-// import { Grid } from "@mui/material"
-//import filterIcon from "../components/images/filter.svg" ;
+import getConfig from 'next/config'
+const { publicRuntimeConfig: config } = getConfig();
+
 import {
 	PageLoaderCurrentData,
 	forceNewVersion,
@@ -20,32 +21,41 @@ import { Stack } from "@mui/system";
 
 let refreshing = false;
 
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION,
+    }
+  }
+}
+
 /* Container includes  Search, Filter, Dependencies Table */
-export default function DependenciesContainer(props: {
-	JSObject: DependencyData;
-	rows: JSX.Element[];
-	searchTerm: any;
-	setSearchTerm: any;
-	emptyRows: boolean;
-	sortDropdown: any;
-	rankSelection: any;
-	sortDirection: any;
-}) {
-	async function callRefresh() {
-		if (refreshing) {
-			return;
-		}
-		if (lastRequest == null) {
-			return;
-		}
-		if (PageLoaderIsLoading) {
-			return;
-		}
-		PageLoaderSetLoading(true);
-		PageLoaderSetData({
-			refreshing: true,
-			data: PageLoaderCurrentData as any,
-		} as any);
+export default function DependenciesContainer(ContainerProps: {
+  JSObject: DependencyData;
+  rows: JSX.Element[];
+  searchTerm: any;
+  setSearchTerm: any;
+  sortDropdown: any;
+  rankSelection: any;
+  emptyRows: boolean;
+  sortDirection: any;
+}, props: { targetOrganisation: string }) {
+  async function callRefresh() {
+    if (refreshing) {
+      return;
+    }
+    if (lastRequest == null) {
+      return;
+    }
+    if (PageLoaderIsLoading) {
+      return;
+    }
+    PageLoaderSetLoading(true);
+    PageLoaderSetData({
+      refreshing: true,
+      data: PageLoaderCurrentData as any,
+    } as any);
 
 		refreshing = true;
 
@@ -89,8 +99,8 @@ export default function DependenciesContainer(props: {
 				<Grid item xs={12} lg={5} xl={6}>
 					<Stack direction="row" spacing={1} alignItems="center">
 						<SearchBar
-							searchTerm={props.searchTerm}
-							setSearchTerm={props.setSearchTerm}
+							searchTerm={ContainerProps.searchTerm}
+							setSearchTerm={ContainerProps.setSearchTerm}
 						/>
 						<IconButton
 							sx={{ display: { xs: 'initial', md: 'none' } }}
@@ -105,30 +115,30 @@ export default function DependenciesContainer(props: {
 					</Stack>
 				</Grid>
 				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
-					{props.sortDropdown}
+					{ContainerProps.sortDropdown}
 				</Grid>
 				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
-					{props.sortDirection}
+					{ContainerProps.sortDirection}
 				</Grid>
 				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
-					{props.rankSelection}
+					{ContainerProps.rankSelection}
 				</Grid>
 			</Grid>
 
 
       <div className={styles.tableStyle}>
-        <CollapsibleTable>{props.rows}</CollapsibleTable>
+        <CollapsibleTable>{ContainerProps.rows}</CollapsibleTable>
       </div>
       {
-        props.emptyRows &&
+        ContainerProps.emptyRows &&
         <div className={styles.noReposStyle}>
           <p>
-            <b>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> has 0 repositories
+            <b>{props.targetOrganisation}</b> has 0 repositories
           </p>
         </div>
       }
       {
-        !props.emptyRows && (props.searchTerm !== "" && props.rows.length === 0) &&
+        !ContainerProps.emptyRows && (ContainerProps.searchTerm !== "" && ContainerProps.rows.length === 0) &&
         <div className={styles.noReposStyle}>
           <p>No search results found</p>
         </div>
