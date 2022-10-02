@@ -4,12 +4,13 @@ const nextConfig = {
 	output: "standalone",
 	// need to include(trace) these files, because next cannot determine whether they are important
 	// this option doesn't seem to work, so copy them manually in dockerfile
-	// unstable_includeFiles: ["./dynamicCache.json", "./defaultDynamicCache.json"] 
+	// unstable_includeFiles: ["./dynamicCache.json", "./defaultDynamicCache.json"]
 };
-const withTM = require("next-transpile-modules")(["evergreen-org-crawler"]);
+// const withTM = require("next-transpile-modules")(["evergreen-org-crawler"]);
 
-const config = require('config');
-// const APIConfig = config.get('API')
+
+// const config = require('config'); // in case of using node-config
+const config = require('./config.json');
 
 function MergeCustomConfig(customConfigFileName) {
 	const fs = require("fs");
@@ -48,7 +49,7 @@ function MergeCustomConfig(customConfigFileName) {
 // const CustomConfigFileName = "./customConfig.json";
 // const evergreenConfig = MergeCustomConfig(CustomConfigFileName);
 // console.log(evergreenConfig)
-module.exports = withTM({
+module.exports = ({
 	publicRuntimeConfig: {
 		...config
 	},
