@@ -1,12 +1,9 @@
 import cachedData from "../cachedData.json";
 import {Page} from "./Page";
 import { JSObjectFromJSON } from "../src/dataProcessing";
-// import { getJsonStructure } from "evergreen-org-crawler/src/index"
 import { useEffect, useState } from "react";
 import LoadingSnackbar from "./FeedbackComponents/LoadingSnackbar";
 import ErrorSnackbar from "./FeedbackComponents/ErrorSnackbar";
-// import getConfig from 'next/config'
-// const { publicRuntimeConfig: config } = getConfig()
 
 enum Mode {
 	Frontend,

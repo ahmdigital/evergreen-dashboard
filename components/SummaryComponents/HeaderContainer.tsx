@@ -3,8 +3,6 @@ import headerStyles from "../../styles/HeaderContainer.module.css";
 // import sharedStyles from "../styles/TreeView.module.css";
 import ForestIcon from "@mui/icons-material/Forest";
 import { RepoOverviewCondensedProps } from "./CondensedSummary/CondensedSummary";
-// import getConfig from "next/config";
-// const { publicRuntimeConfig: config } = getConfig()
 
 export async function getServerSideProps() {
   return {
