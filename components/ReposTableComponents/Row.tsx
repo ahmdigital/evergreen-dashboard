@@ -22,9 +22,9 @@ dayjs.extend(relativeTime)
 
 export type Props = {
   subRows: {
-    internal: JSX.Element[];
-    external: JSX.Element[];
-    user: JSX.Element[];
+    internal: any;
+    external: any;
+    user: any;
     final: boolean;
   };
 };
@@ -67,6 +67,8 @@ const collapsibleTheme = createTheme({
 // Creates each individual row
 export default function Row(props: { rank: number; row: any } & Props) {
   const { rank, row, subRows } = props;
+
+  
   const [open, setOpen] = useState(false);
   let statusIcon = RedIcon;
   let statusText = "Needs updating urgently";
@@ -76,12 +78,12 @@ export default function Row(props: { rank: number; row: any } & Props) {
   if (rank == 2) {
     statusIcon = greenIcon;
     iconDefinition = greenDef.description;
-	statusText = "Up to date";
+    statusText = "Up to date";
   }
   if (rank == 1) {
     statusIcon = YellowIcon;
     iconDefinition = yellowDef.description;
-	statusText = "Should be updated soon";
+    statusText = "Should be updated soon";
   }
 
   return (
@@ -119,10 +121,10 @@ export default function Row(props: { rank: number; row: any } & Props) {
           </TableCell>
           <TableCell align="left">
             {semVerToString(row.version)}
-            { 
+            {
               (semVerToString(row.version) === "0.0.0-development" || semVerToString(row.version) === "0.0.0") &&
               <Tooltip arrow title={<p className={styles.tooltipStyle}>This repository was defined with a default version of 0.0.0</p>}>
-                <QuestionMark sx={{width: '1.125rem', height: '1.125rem'}}/>
+                <QuestionMark sx={{ width: '1.125rem', height: '1.125rem' }} />
               </Tooltip>
             }
           </TableCell>
@@ -142,7 +144,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
                   <TableHead className={styles.collapsibleTableHead} >
                     <TableRow >
                       <TableCell className={styles.collapsibleTableCell}>
-                        <Tabs subRows={subRows}></Tabs>
+                        <Tabs internal={subRows.internal} external={subRows.external} user={subRows.user}></Tabs>
                       </TableCell>
                     </TableRow>
                   </TableHead>
