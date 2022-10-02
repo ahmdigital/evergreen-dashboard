@@ -2,7 +2,7 @@
 
 variable "github_token_scope_read_org" {
   type        = string
-  description = "Github token that has a scope read organistaion repositories"
+  description = "Github token that has a scope read organisation repositories"
   sensitive   = true
 }
 
@@ -44,11 +44,11 @@ variable "port" {
   default     = "3000"
 }
 
-variable "dynamic_cache_path" {
+variable "dynamic_cache_directory" {
   type        = string
   description = "Azure web app custom container only allows write permission on /home"
   sensitive   = false
-  default     = "/home/dynamicCache.json"
+  default     = "/home/"
 }
 
 variable "app_name" {
@@ -61,7 +61,7 @@ variable "app_name" {
 variable "app_description" {
   type      = string
   sensitive = false
-  default   = "Monitoring Github orgnization dependencies"
+  default   = "Monitoring Github orgnisation dependencies"
 }
 
 variable "location" {
@@ -79,7 +79,7 @@ variable "instance_type" {
   description = "Stock Keeping Unit type and the operating system"
   sensitive   = false
   default = {
-    sku_name = "F1"
+    sku_name = "B1"
     os_type  = "Linux"
   }
 }

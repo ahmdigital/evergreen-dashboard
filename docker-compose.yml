@@ -3,6 +3,7 @@ version: '3.4'
 services:
   evergreendashboard:
     image: evergreendashboard:latest
+    container_name: evergreendashboard
     # image: evergreendashborad.azurecr.io/evergreendashboard:latest
     build:
       context: ./
@@ -10,6 +11,5 @@ services:
     env_file: .env
     environment:
       NODE_ENV: production
-      EVERGREEN_GITHUB_TOKEN: ${EVERGREEN_GITHUB_TOKEN}
     ports:
       - 3000:3000
