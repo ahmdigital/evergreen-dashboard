@@ -16,7 +16,8 @@ div.sectionContainer {
   font-family: var(--primary-font-family);
 }
 
-h2.h2ContainerStyle {
+
+h3.h3ContainerStyle {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   color: var(--colour-font);

@@ -88,7 +88,6 @@ export default function SummaryContainer(props: {
     //}
   }
 
-
   return (
     <Box
       sx={{ flexGrow: 1, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between' }}
