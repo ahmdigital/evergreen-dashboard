@@ -1,10 +1,11 @@
-import { Checkbox, FormControl, ListItemText, MenuItem, Select } from "@mui/material";
+import { Checkbox, FormControl, InputLabel, ListItemText, MenuItem, Select } from "@mui/material";
 import { Filter } from "../../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styles from '../../styles/SortAndFilterDropdowns.module.css'
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 // Customising the table styling using ThemeProvider
-const theme = createTheme({
+export const theme = createTheme({
 	components: {
 		MuiSelect: {
 			styleOverrides: {
@@ -33,11 +34,19 @@ export type SortSettings = { type: "name" | "rank" | "time" | "internal" | "exte
 export function SortBox(sortSetting: SortSettings, handleSortChange: any) {
 
 	return <ThemeProvider theme={theme}>
-		<FormControl className={styles.sortby} sx={{ m: 1, minWidth: 160, maxWidth: 220 }}>
-			<p>Sort By</p>
+		<FormControl className={styles.sortby} fullWidth>
+			<InputLabel id="sort-by-select-label" sx={{ fontSize: '1.3em', transform: 'translate(10px, -15px)' }}>
+				Sort by
+			</InputLabel>
 			<Select
+				label="_____ Sort by" //DO NOT REMOVE UNDERSCORES, label is only used for layout, see here https://mui.com/material-ui/api/outlined-input/#props
+				labelId="sort-by-select-label"
 				value={sortSetting.type}
 				onChange={handleSortChange}
+				IconComponent={(props) => {
+					console.log("Icon props:", props)
+					return <ArrowDropDownIcon {...props} fontSize='large' htmlColor="#000000" />
+				}}
 			>
 				<MenuItem value=""> <em>None</em> </MenuItem>
 				<MenuItem value={"name"}>Name</MenuItem>
@@ -61,14 +70,21 @@ export function RankSelectionList(filterSetting: Filter, handleRankSelectionChan
 	]
 
 	return <><ThemeProvider theme={theme}>
-		<FormControl sx={{ m: 1, minWidth: 200, maxWidth: 200 }}>
-			<p>Filter</p>
 
+		<FormControl fullWidth>
+			<InputLabel id="filter-select-label" sx={{ fontSize: '1.3em', transform: 'translate(10px, -15px)' }}>
+				Filter
+			</InputLabel>
 			<Select
+				label="___ Filter" //DO NOT REMOVE UNDERSCORES, label is only used for layout, see here https://mui.com/material-ui/api/outlined-input/#props
+				labelId="filter-select-label"
 				multiple
 				value={rankSelectionValue}
 				onChange={handleRankSelectionChange}
 				renderValue={(selected: string[]) => selected.join(', ')}
+				IconComponent={(props) =>
+					<ArrowDropDownIcon {...props} fontSize='large' htmlColor="#000000" />
+				}
 			>
 				{[
 					<MenuItem value={"green"} key={"green"}>

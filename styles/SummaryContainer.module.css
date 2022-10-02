@@ -4,9 +4,16 @@ div.summaryStyle {
   min-width: 15rem;
 }
 
+.orgTitle{
+  background-color: black;
+  color: white;
+  padding: 0.2rem 0.3rem 0.2rem 0.3rem;
+  border-radius: 0.3rem;
+}
+
 .subtitle {
   font-size: var(--font-size-large);
-  margin-top: 3px;
+  margin-top: 6px;
   font-weight: var(--font-weight-semibold); /*500*/
 }
 
@@ -14,6 +21,12 @@ div.summaryStyle {
   font-size: var(--font-size-normal);
   margin-top: 3px;
   font-weight: var(--font-weight-normal); /*500*/
+}
+
+.expandText {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal); /*500*/
+  font-family: var(--primary-font-family);
 }
 
 .expandButton {
@@ -245,34 +258,56 @@ div.loadingWheelBox {
   font-family: var(--primary-font-family);
 }
 
-div.refreshWord {
+.refreshWord {
   font-family: var(--primary-font-family);
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-normal);
 }
 
 div.btnsContainer {
-  display:block;
-  justify-content: flex-end;
-  margin-bottom: 0;
-  width: 17rem;
+  margin-top: 0.5rem;
 }
 
-div.btnsContainer button {
-  font-family: var(--primary-font-family);
-  font-size: var(--font-size-large);
-  background-color: var(--colour-container-background);
-  border: none;
-  padding: 0.8rem;
-  border-radius: var(--main-section-border-radius);
-  justify-content: center;
-  align-items: center;
+
+h1.noMargins {
+	margin-top: 0;
+	margin-bottom: 0;
+	color: var(--colour-font);
 }
 
-div.btnsContainer button span {
-  margin-left: 0.5rem;
-}
+@media only screen and (min-width: 1920px){
+  h3.overallTitleStyle {
+    color: white;
+    font-size: 1.75rem;
+    text-align: left;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
 
-div.btnsContainer button:hover {
-  cursor: pointer;
-  background-color: lightgray;
+  h3.overallCentredTitleStyle {
+    font-size: 1.75rem;
+  }
+
+  h3.summaryStylePercent {
+    font-size: 1.75rem;
+  }
+
+  h3.summaryStyle {
+    font-size: 1.75rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .subtitle {
+    font-size: 1.3rem;
+
+  }
+
+  .expandText {
+    font-size: var(--font-size-large);
+  }
+
+  .refreshWord {
+    font-size: 1.25rem;
+  }
 }

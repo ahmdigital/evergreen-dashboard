@@ -1,7 +1,8 @@
-.everGreen{
-	color: green
+.everGreen {
+	font-family: var(--primary-font-family);
+	font-weight: bold;
+	margin-bottom: 1rem;
 }
-
 
 .signinPage {
 	height: 100vh;
@@ -11,15 +12,27 @@
 	width: 100%;
 	max-width: 400px;
 	min-height: 200px;
-	padding: 1em;
-	
+	padding: 1.5rem;
+	background-color: var(--colour-white);
+	box-shadow: var(--main-section-boxshadow);
+	border-radius: var(--main-section-border-radius);
+	font-family: var(--primary-font-family);
+	box-sizing: content-box;
+	justify-content: center;
 }
 
-.signinWithGithubButton{
+.signinWithGithubButton {
 	background-color: black;
 	width: 100%;
 }
 
-.signinWithGithubButton:hover{
+.signinWithGithubButton:hover {
 	background-color: #2e2e2e;
+}
+
+@media (min-width: 900px) {
+	.signinPage {
+		height: 100vh;
+		background-color: var(--colour-lightGrey);
+	}
 }

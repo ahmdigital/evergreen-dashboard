@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ProcessedDependencyData, useProcessDependencyData } from "../hooks/useProcessDependencyData";
 import Layout from "./Layout";
 import Head from "next/head";
 import DependenciesContainer from "./ReposTableComponents/DependenciesContainer";
 import SummaryContainer from "./SummaryComponents/SummaryContainer";
+import MobileSummaryContainer from "./MobileComponents/MobileSummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
 import LoadingSnackbar from "./FeedbackComponents/LoadingSnackbar";
 import HelpGuide from "./HelpComponents/HelpGuide";
-import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { RankSelectionList, SortBox, SortSettings } from "./ReposTableComponents/SortAndFilterDropdowns";
-import { applySort, Filter, rankCounts } from "../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { RankSelectionList, SortBox, SortSettings } from  "./ReposTableComponents/SortAndFilterDropdowns";
+import { applySort, Filter, rankCounts } from "../src/sortingAndFiltering";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { theme } from './ReposTableComponents/SortAndFilterDropdowns'
 
 
 export type PageProps = {
@@ -19,7 +22,7 @@ export type PageProps = {
 };
 
 // Customising the table styling using ThemeProvider
-const theme = createTheme({
+const theme2 = createTheme({
 	components: {
 		MuiSelect: {
 			styleOverrides: {
@@ -84,41 +87,88 @@ export function Page(props: PageProps) {
 	}
 
 	//TODO: Replace this
-	const sortDirectionBox = <ThemeProvider theme={theme}>
-		<FormControl sx={{ m: 1, minWidth: 138, maxWidth: 138 }}>
-			<p>Sort Direction</p>
+	const sortDirectionBox = <ThemeProvider theme={theme2}>
+		<FormControl fullWidth>
+			<InputLabel id="sort-direction-select-label" sx={{ fontSize: '1.3em', transform: 'translate(10px, -15px)' }}>
+				Sort Direction
+			</InputLabel>
 			<Select
+				label="___________ Sort Direction" //DO NOT REMOVE UNDERSCORES, label is only used for layout, see here https://mui.com/material-ui/api/outlined-input/#props
+				labelId="sort-direction-select-label"
 				value={sortSetting.direction ? "ascending" : "descending"}
 				onChange={handleSortDirectionChange}
+				IconComponent={(props) =>
+					<ArrowDropDownIcon {...props} fontSize='large' htmlColor="#000000" />
+				}
 			>
 				<MenuItem value={"ascending"}>Ascending</MenuItem>
 				<MenuItem value={"descending"}>Descending</MenuItem>
 			</Select>
-		</FormControl></ThemeProvider>
+		</FormControl>
+	</ThemeProvider>
+
+	// Check if user is on Mobile Device
+	const [isMobile, setMobile] = useState(window.innerWidth < 600);
+	const updateMedia = () => {
+		setMobile(window.innerWidth < 600);
+	};
+	useEffect(() => {
+		window.addEventListener("resize", updateMedia);
+		return () => window.removeEventListener("resize", updateMedia);
+	});
 
 	return (
 		<div className="container">
-			<Head>
-				<title>Evergreen dashboard</title>
-			</Head>
-			<main style={{ padding: 0 }}>
-				<Layout>
-					<SummaryContainer rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
-					<DependenciesContainer
-						JSObject={props.JSObject}
-						tableRows={tableRows}
-						setTableRows={setTableRows}
-						searchTerm={searchTerm}
-						setSearchTerm={setSearchTerm}
-						sortDropdown={sortBox}
-						sortDirection={sortDirectionBox}
-						rankSelection={rankSelectionList}
-						emptyRows={emptyRows}
-						filterSetting={filterSetting}
-					/>
-					<HelpGuide />
-				</Layout>
-			</main>
+			{isMobile ? (
+				<div>
+					<Head>
+						<title>Evergreen dashboard</title>
+					</Head>
+					<main style={{ padding: 0 }}>
+						<Layout>
+							<MobileSummaryContainer rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
+							{/* <MobileDependenciesContainer /> */}
+							<DependenciesContainer
+								JSObject={props.JSObject}
+								tableRows={tableRows}
+								setTableRows={setTableRows}
+								searchTerm={searchTerm}
+								setSearchTerm={setSearchTerm}
+								sortDropdown={sortBox}
+								sortDirection={sortDirectionBox}
+								rankSelection={rankSelectionList}
+								emptyRows={emptyRows}
+								filterSetting={filterSetting}
+							/>
+							<HelpGuide />
+						</Layout>
+					</main>
+				</div>
+			) : (
+				<div>
+					<Head>
+						<title>Evergreen dashboard</title>
+					</Head>
+					<main style={{ padding: 0 }}>
+						<Layout>
+							<SummaryContainer rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
+							<DependenciesContainer
+								JSObject={props.JSObject}
+								tableRows={tableRows}
+								setTableRows={setTableRows}
+								searchTerm={searchTerm}
+								setSearchTerm={setSearchTerm}
+								sortDropdown={sortBox}
+								sortDirection={sortDirectionBox}
+								rankSelection={rankSelectionList}
+								emptyRows={emptyRows}
+								filterSetting={filterSetting}
+							/>
+							<HelpGuide />
+						</Layout>
+					</main>
+				</div>
+			)}
 		</div>
 	);
 }

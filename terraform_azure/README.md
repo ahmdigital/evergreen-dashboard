@@ -28,12 +28,18 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_app_description"></a> [app\_description](#input\_app\_description) | n/a | `string` | `"Monitoring Github orgnization dependencies"` | no |
-| <a name="input_app_name"></a> [app\_name](#input\_app\_name) | n/a | `string` | `"evergreendashboard"` | no |
+| <a name="input_app_description"></a> [app\_description](#input\_app\_description) | n/a | `string` | `"Monitoring Github orgnisation dependencies"` | no |
+| <a name="input_app_name"></a> [app\_name](#input\_app\_name) | Also used as the subdomain if deployed on azure as is, may conflict if left unchanged | `string` | `"evergreendashboard"` | no |
+| <a name="input_client_id"></a> [client\_id](#input\_client\_id) | Github evergreen dashboard oauth Oauth client id | `string` | n/a | yes |
+| <a name="input_client_secret"></a> [client\_secret](#input\_client\_secret) | Github evergreen dashboard Oauth app client secret | `string` | n/a | yes |
+| <a name="input_dynamic_cache_directory"></a> [dynamic\_cache\_directory](#input\_dynamic\_cache\_directory) | Azure web app custom container only allows write permission on /home | `string` | `"/home/"` | no |
+| <a name="input_github_token_scope_read_org"></a> [github\_token\_scope\_read\_org](#input\_github\_token\_scope\_read\_org) | Github token that has a scope read organisation repositories | `string` | n/a | yes |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | Stock Keeping Unit type and the operating system | <pre>object({<br>    sku_name = string<br>    os_type  = string<br>  })</pre> | <pre>{<br>  "os_type": "Linux",<br>  "sku_name": "B1"<br>}</pre> | no |
 | <a name="input_location"></a> [location](#input\_location) | Azure location | `string` | `"Australia Southeast"` | no |
-| <a name="input_max_instance_count"></a> [max\_instance\_count](#input\_max\_instance\_count) | Max instance count in auto scaling group | `number` | `1` | no |
-| <a name="input_port"></a> [port](#input\_port) | application port number | `number` | `3000` | no |
+| <a name="input_port"></a> [port](#input\_port) | Application port number, azure web app defines port using WEBSITES\_PORT | `string` | `"3000"` | no |
+| <a name="input_redirect_uri"></a> [redirect\_uri](#input\_redirect\_uri) | Oauth app redirect uri | `string` | n/a | yes |
+| <a name="input_require_authentication"></a> [require\_authentication](#input\_require\_authentication) | Whether Github authentication is required to access the dashboard | `string` | `"true"` | no |
+| <a name="input_target_organisation"></a> [target\_organisation](#input\_target\_organisation) | The name of the Github organisation that is tracked | `string` | n/a | yes |
 
 ## Outputs
 
