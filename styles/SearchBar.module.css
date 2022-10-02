@@ -1,17 +1,15 @@
 /* -----------------START: SEARCH BAR CONTAINER CSS ------------------- */
 div.searchBarWidth {
-  margin-top: 26px;
-  width: 55%;
+  width: 100%;
 }
 
 div.searchBar {
   border: 1px solid var(--colour-black);
-  border-radius: 20px;
+  border-radius: 8px;
   display: flex;
   flex-direction: row;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  margin-right: 1rem;
   font-family: var(--primary-font-family);
   padding-right: 0.75rem;
 }

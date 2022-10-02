@@ -10,9 +10,10 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import config from "../../config.json";
+import getConfig from 'next/config'
 import { semVerFromString } from "../../src/semVer";
 import { IconButton } from "@mui/material";
+const { publicRuntimeConfig: config } = getConfig();
 
 export type HelpScreenProps = {
   closeHelp: (_value: boolean | ((_prev: boolean) => boolean)) => void;
@@ -27,7 +28,7 @@ class VersionDefinition {
   }
 }
 
-// defines the status icon definitions based on rankCutoff configured 
+// defines the status icon definitions based on rankCutoff configured
 const upperLimit = semVerFromString(config.rankCutoff.major);
 const lowerLimit = semVerFromString(config.rankCutoff.minor);
 

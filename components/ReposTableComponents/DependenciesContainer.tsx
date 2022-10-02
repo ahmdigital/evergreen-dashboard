@@ -4,21 +4,34 @@ import styles from "../../styles/DependenciesContainer.module.css";
 import sharedStyles from "../../styles/TreeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../../src/dataProcessing";
-// import { Grid } from "@mui/material"
-//import filterIcon from "../components/images/filter.svg" ;
+import FilterListIcon from '@mui/icons-material/FilterList';
+import getConfig from 'next/config'
+const { publicRuntimeConfig: config } = getConfig();
+
 import {
-  PageLoaderCurrentData,
-  forceNewVersion,
-  PageLoaderIsLoading,
-  lastRequest,
-  PageLoaderSetData,
-  PageLoaderSetLoading,
+	PageLoaderCurrentData,
+	forceNewVersion,
+	PageLoaderIsLoading,
+	lastRequest,
+	PageLoaderSetData,
+	PageLoaderSetLoading,
 } from "../PageLoader";
+import { Box, Grid, IconButton } from "@mui/material";
+import { Stack } from "@mui/system";
 
 let refreshing = false;
 
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION,
+    }
+  }
+}
+
 /* Container includes  Search, Filter, Dependencies Table */
-export default function DependenciesContainer(props: {
+export default function DependenciesContainer(ContainerProps: {
   JSObject: DependencyData;
   rows: JSX.Element[];
   searchTerm: any;
@@ -27,7 +40,7 @@ export default function DependenciesContainer(props: {
   rankSelection: any;
   emptyRows: boolean;
   sortDirection: any;
-}) {
+}, props: { targetOrganisation: string }) {
   async function callRefresh() {
     if (refreshing) {
       return;
@@ -44,65 +57,92 @@ export default function DependenciesContainer(props: {
       data: PageLoaderCurrentData as any,
     } as any);
 
-    refreshing = true;
+		refreshing = true;
 
-    //TODO: Support other configuration
-    //switch(mode){
-    //	case(Mode.Frontend): break;
-    //	case(Mode.StandaloneBackend):break;
-    //	case(Mode.IntegratedBackend): {
-    forceNewVersion(lastRequest).then(async (result) => {
-      PageLoaderSetData(result as any);
-      PageLoaderSetLoading(false);
-      refreshing = false;
-    });
-    //	} break;
-    //}
-  }
+		//TODO: Support other configuration
+		//switch(mode){
+		//	case(Mode.Frontend): break;
+		//	case(Mode.StandaloneBackend):break;
+		//	case(Mode.IntegratedBackend): {
+		forceNewVersion(lastRequest).then(async (result) => {
+			PageLoaderSetData(result as any);
+			PageLoaderSetLoading(false);
+			refreshing = false;
+		});
+		//	} break;
+		//}
+	}
 
-  return (
-    <div className={`${styles.sectionContainer}`}>
-      <h3 className={sharedStyles.h3ContainerStyle}>Repositories </h3>
+	const [filterOpen, setFilterOpen] = React.useState(false);
 
-      <div className={styles.depsBarStyle}>
+	const toggleFilter = () => {
+		setFilterOpen(!filterOpen);
+	};
 
-        <SearchBar
-          searchTerm={props.searchTerm}
-          setSearchTerm={props.setSearchTerm}
-        />
+	const filterSelectGridDisplay = {
+		display: {
+			xs: filterOpen ? "block" : "none",
+			md: 'initial'
+		}
+	}
 
-        <div className={styles.menuStyle}>
-          {props.sortDropdown}
-        </div>
+	return (
+		<Box className={styles.sectionContainer} sx={{
+			padding: {
+				xs: 2,
+				md: '2.5rem 3.125rem 3.75rem 3.125rem',
+			}
+		}}>
+			<h2 className={sharedStyles.h2ContainerStyle}>Repositories </h2>
 
-        <div className={styles.menuStyle}>
-          {props.sortDirection}
-        </div>
-
-        <div className={styles.menuStyle}>
-          {props.rankSelection}
-        </div>
-        
-      </div>
+			<Grid container spacing={2}>
+				<Grid item xs={12} lg={5} xl={6}>
+					<Stack direction="row" spacing={1} alignItems="center">
+						<SearchBar
+							searchTerm={ContainerProps.searchTerm}
+							setSearchTerm={ContainerProps.setSearchTerm}
+						/>
+						<IconButton
+							sx={{ display: { xs: 'initial', md: 'none' } }}
+							aria-label='Sort and filter'
+							onClick={toggleFilter}
+						>
+							<FilterListIcon
+								fontSize='medium'
+								color={filterOpen ? 'primary' : 'inherit'}
+							/>
+						</IconButton>
+					</Stack>
+				</Grid>
+				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
+					{ContainerProps.sortDropdown}
+				</Grid>
+				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
+					{ContainerProps.sortDirection}
+				</Grid>
+				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
+					{ContainerProps.rankSelection}
+				</Grid>
+			</Grid>
 
 
       <div className={styles.tableStyle}>
-        <CollapsibleTable>{props.rows}</CollapsibleTable>
+        <CollapsibleTable>{ContainerProps.rows}</CollapsibleTable>
       </div>
       {
-        props.emptyRows &&
+        ContainerProps.emptyRows &&
         <div className={styles.noReposStyle}>
           <p>
-            <b>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> has 0 repositories
+            <b>{props.targetOrganisation}</b> has 0 repositories
           </p>
         </div>
       }
       {
-        !props.emptyRows && (props.searchTerm !== "" && props.rows.length === 0) &&
+        !ContainerProps.emptyRows && (ContainerProps.searchTerm !== "" && ContainerProps.rows.length === 0) &&
         <div className={styles.noReposStyle}>
           <p>No search results found</p>
         </div>
       }
-    </div>
+	  </Box>
   );
 }

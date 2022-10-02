@@ -12,15 +12,26 @@ import redIcon from '../components/images/redIcon.svg'
 
 const SCOPE = "repo"
 
+
+export async function getServerSideProps() {
+	return {
+	props: {
+		clientID : process.env.NEXT_PUBLIC_CLIENT_ID,
+		redirectURI : process.env.NEXT_PUBLIC_REDIRECT_URI,
+	  }, // will be passed to the page component as props
+	}
+  }
+
 // get code
-function redirect() {
+function redirect(clientID: string, redirectURI: string) {
 	const uuid = self.crypto.randomUUID();
-	window.location.href = `https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&scope=${SCOPE}&state=${uuid}`;
+	window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientID}&redirect_uri=${redirectURI}&scope=${SCOPE}&state=${uuid}`;
 }
 
 type SignInStatus = "calculating" | "not-signed-in" | "exchanging-code-for-token" | "signed-in" | "error-while-signing-in"
 
-export default function SignIn() {
+
+export default function SignIn(props: {clientID: string, redirectURI: string} ) {
 
 	const router = useRouter()
 
@@ -167,7 +178,7 @@ export default function SignIn() {
 									variant="contained"
 									size="large"
 									className={styles.signinWithGithubButton}
-									onClick={redirect}
+									onClick={() => redirect(props.clientID, props.redirectURI)}
 									startIcon={<GitHubIcon />}
 								>Sign In With GitHub</Button>
 							</Box>

@@ -24,8 +24,9 @@ type RowProps = {
   statusLabel: string;
 };
 
+
 // TODO: MUST REVIEW  with CSS
-const theme = createTheme({
+const theme1 = createTheme({
   components: {
     MuiTableCell: {
       styleOverrides: {
@@ -35,7 +36,7 @@ const theme = createTheme({
           marginTop: 0,
           marginBottom: 0,
           padding: '16px 10px 16px 10px',
-          lineHeight: 'inherit'
+          lineHeight: 'inherit',
         }
       }
     },
@@ -43,8 +44,8 @@ const theme = createTheme({
 })
 
 enum StatusLabel {
-  Red = "need updating urgently",
-  Yellow = "should be updated soon",
+  Red = "out-of-date",
+  Yellow = "few minors behind",
   Green = "up-to-date",
 }
 
@@ -52,7 +53,7 @@ const Row = (props: RowProps) => {
   const ICON_SIZE = "40px";
   return (
     <TableRow>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme1}>
         <TableCell className={styles.tableCellStyleIcon}>
           <Image
             src={props.icon}
@@ -62,10 +63,10 @@ const Row = (props: RowProps) => {
           ></Image>
         </TableCell>
         <TableCell className={styles.tableCellStyleCount}>
-          <p>{props.statusCount} </p>
+          <p className={styles.countText}>{props.statusCount} </p>
         </TableCell>
         <TableCell className={styles.statusLabel}>
-          <p>{props.statusLabel}</p>
+          <p className={styles.countText}>{props.statusLabel}</p>
         </TableCell>
       </ThemeProvider>
     </TableRow>
@@ -120,7 +121,18 @@ export default function ReposOverViewTable(props: { rankArray: any, showChart: b
               }
             }
           },
-          legend: { display: true, position: "bottom" as "bottom" },
+          legend: {
+            display: true, position: "right" as "right", labels: {
+              usePointStyle: true,
+              pointStyle: 'circle',
+              padding: 20,
+              font: {
+                size: 15,
+                weight: 'normal',
+              },
+              color: 'black',
+            }
+          },
           datalabels: {
             backgroundColor: function (context: any) {
               return context.dataset.backgroundColor;
@@ -136,7 +148,7 @@ export default function ReposOverViewTable(props: { rankArray: any, showChart: b
               return value > count * 1.5;
             },
             font: {
-              weight: "bold" as "bold"
+              weight: "bold" as "bold",
             },
             padding: 6,
             formatter: Math.round

@@ -4,5 +4,8 @@
 		"minor": "0.5.-1"
 	},
 	"timeUntilRefresh": 5,
-	"targetPercentage": 80
+	"targetPercentage": 80,
+	"npmURL": "",
+	"pipURL": "",
+	"rubygemsURL": ""
 }

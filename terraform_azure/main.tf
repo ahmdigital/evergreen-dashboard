@@ -53,7 +53,7 @@ resource "azurerm_linux_web_app" "this" {
     NEXT_PUBLIC_TARGET_ORGANISATION = var.target_organisation
     NEXT_PUBLIC_REDIRECT_URI        = var.redirect_uri
     CLIENT_SECRET                   = var.client_secret
-    DYNAMIC_CACHE_PATH              = var.dynamic_cache_path
+    DYNAMIC_CACHE_DIR               = var.dynamic_cache_directory
 
     # The documentation not very clear on write permission of /home
     # Also, in case org has changed, old org data must be deleted
