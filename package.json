@@ -24,7 +24,6 @@
     "dayjs": "^1.11.5",
     "evergreen-org-crawler": "^0.0.10",
     "next": "^12.3.1",
-    "next-transpile-modules": "^9.0.0",
     "react": "17.0.2",
     "react-chartjs-2": "^4.3.1",
     "react-dom": "17.0.2",
