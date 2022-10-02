@@ -97,7 +97,7 @@ export default function SummaryContainer(props: {
         <Grid>
           <h1 className={styles.noMargins}><ForestIcon /> Evergreen Dashboard</h1>
           <p className={styles.subtitle}>
-            Monitoring dependencies for <b className={styles.orgTitle}>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> Github Organisation
+            Monitoring dependencies for <b className={styles.orgTitle}>ahm-digital</b> Github Organisation
           </p>
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
