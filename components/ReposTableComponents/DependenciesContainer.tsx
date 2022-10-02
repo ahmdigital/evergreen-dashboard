@@ -7,61 +7,61 @@ import { DependencyData } from "../../src/dataProcessing";
 
 /* Container includes  Search, Filter, Dependencies Table */
 export default function DependenciesContainer(props: {
-  JSObject: DependencyData;
-  tableRows: any;
-  setTableRows: any;
-  searchTerm: any;
-  setSearchTerm: any;
-  sortDropdown: any;
-  rankSelection: any;
-  emptyRows: boolean;
-  sortDirection: any;
-  filterSetting: any;
+	JSObject: DependencyData;
+	tableRows: any;
+	setTableRows: any;
+	searchTerm: any;
+	setSearchTerm: any;
+	sortDropdown: any;
+	rankSelection: any;
+	emptyRows: boolean;
+	sortDirection: any;
+	filterSetting: any;
 }) {
-  return (
-    <div className={`${styles.sectionContainer}`}>
-      <h3 className={sharedStyles.h3ContainerStyle}>Repositories </h3>
+	return (
+		<div className={`${styles.sectionContainer}`}>
+			<h3 className={sharedStyles.h3ContainerStyle}>Repositories </h3>
 
-      <div className={styles.depsBarStyle}>
+			<div className={styles.depsBarStyle}>
 
-        <SearchBar
-          searchTerm={props.searchTerm}
-          setSearchTerm={props.setSearchTerm}
-          repoNames={(props.tableRows.map((row: any) => row.name))}
-        />
+				<SearchBar
+					searchTerm={props.searchTerm}
+					setSearchTerm={props.setSearchTerm}
+					repoNames={(props.tableRows.map((row: any) => row.name))}
+				/>
 
-        <div className={styles.menuStyle}>
-          {props.sortDropdown}
-        </div>
+				<div className={styles.menuStyle}>
+					{props.sortDropdown}
+				</div>
 
-        <div className={styles.menuStyle}>
-          {props.sortDirection}
-        </div>
+				<div className={styles.menuStyle}>
+					{props.sortDirection}
+				</div>
 
-        <div className={styles.menuStyle}>
-          {props.rankSelection}
-        </div>
+				<div className={styles.menuStyle}>
+					{props.rankSelection}
+				</div>
 
-      </div>
+			</div>
 
 
-      <div className={styles.tableStyle}>
-        <CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows} searchTerm={props.searchTerm} setSearchTerm={props.setSearchTerm} filterSetting={props.filterSetting}></CollapsibleTable>
-      </div>
-      {
-        props.emptyRows &&
-        <div className={styles.noReposStyle}>
-          <p>
-            <b>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> has 0 repositories
-          </p>
-        </div>
-      }
-      {
-        !props.emptyRows && (props.searchTerm !== "" && props.tableRows.length === 0) &&
-        <div className={styles.noReposStyle}>
-          <p>No search results found</p>
-        </div>
-      }
-    </div>
-  );
+			<div className={styles.tableStyle}>
+				<CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows} searchTerm={props.searchTerm} setSearchTerm={props.setSearchTerm} filterSetting={props.filterSetting}></CollapsibleTable>
+			</div>
+			{
+				props.emptyRows &&
+				<div className={styles.noReposStyle}>
+					<p>
+						<b>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> has 0 repositories
+					</p>
+				</div>
+			}
+			{
+				!props.emptyRows && (props.searchTerm !== "" && props.tableRows.length === 0) &&
+				<div className={styles.noReposStyle}>
+					<p>No search results found</p>
+				</div>
+			}
+		</div>
+	);
 }
