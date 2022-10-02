@@ -96,23 +96,11 @@ export default function DependenciesContainer(ContainerProps: {
 
 			<Grid container spacing={2}>
 				<Grid item xs={12} lg={5} xl={6}>
-					{/* <Stack direction="row" spacing={1} alignItems="center"> */}
 					<SearchBar
 						searchTerm={ContainerProps.searchTerm}
 						setSearchTerm={ContainerProps.setSearchTerm}
 						repoNames={(ContainerProps.tableRows.map((row: any) => row.name))}
 					/>
-					{/* <IconButton
-							sx={{ display: { xs: 'initial', md: 'none' } }}
-							aria-label='Sort and filter'
-							onClick={toggleFilter}
-						>
-							<FilterListIcon
-								fontSize='medium'
-								color={filterOpen ? 'primary' : 'inherit'}
-							/>
-						</IconButton> */}
-					{/* </Stack> */}
 				</Grid>
 				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
 					{ContainerProps.sortDropdown}

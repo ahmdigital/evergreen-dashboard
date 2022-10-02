@@ -16,6 +16,9 @@ div.sectionContainer {
   font-family: var(--primary-font-family);
 }
 
+h2.h2ContainerStyle {
+  margin-bottom: 1rem;
+}
 
 h3.h3ContainerStyle {
   margin-top: 0.5rem;
@@ -27,6 +30,7 @@ h3.h3ContainerStyle {
 @media only screen and (min-width: 1920px){
 	h2.h2ContainerStyle {
     font-size: 1.9rem;
+    margin-bottom: 1rem;
   }
 	
 }
