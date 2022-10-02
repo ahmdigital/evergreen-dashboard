@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import getConfig from 'next/config'
 import { semVerFromString } from "../../src/semVer";
 import { IconButton } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 const { publicRuntimeConfig: config } = getConfig();
 
 export type HelpScreenProps = {
@@ -27,6 +28,40 @@ class VersionDefinition {
     this.description = description;
   }
 }
+
+
+// Customising the table styling using ThemeProvider
+const theme = createTheme({
+  components: {
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          padding: '10px',
+          fontSize: 'var(--font-size-large)',
+          fontWeight: 'var(--font-size-large)',
+          fontFamily: 'var(--primary-font-family)',
+        }
+      }
+    },
+  }
+})
+
+const themeHeaderCell = createTheme({
+  components: {
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          paddingLeft: '10px',
+          paddingBottom: '10px',
+          paddingTop: '0px',
+          fontSize: 'var(--font-size-large)',
+          fontWeight: 'bold',
+          fontFamily: 'var(--primary-font-family)',
+        }
+      }
+    },
+  }
+})
 
 // defines the status icon definitions based on rankCutoff configured
 const upperLimit = semVerFromString(config.rankCutoff.major);
@@ -45,38 +80,42 @@ function StatusTable() {
       <Table size="medium" className={styles.tableStyle}>
         <TableHead>
           <TableRow>
-            <TableCell className={styles.tableHeaderCellStyle}>Status</TableCell>
-            <TableCell className={styles.tableHeaderCellStyle}>Definition</TableCell>
+            <ThemeProvider theme={themeHeaderCell}>
+              <TableCell className={styles.tableHeaderCellStyle}>Status</TableCell>
+              <TableCell className={styles.tableHeaderCellStyle}>Definition</TableCell>
+            </ThemeProvider>
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow>
-            <TableCell className={styles.tableCellStyle}>
-              <Image src={redIcon} alt="Needs updating urgently" width="40px" height="40px"></Image>
-            </TableCell>
-            <TableCell className={styles.tableCellStyle}>
-              <p>{redDef.description}</p>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell className={styles.tableCellStyle}>
-              <Image src={yellowIcon} alt="Should be updated soon" width="40px" height="40px"></Image>
-            </TableCell>
-            <TableCell className={styles.tableCellStyle}>
-              <p>{yellowDef.description}</p>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell className={styles.tableCellStyle}>
-             <Image src={greenIcon} alt="Up to date" width="40px" height="40px"></Image>
-            </TableCell>
-            <TableCell className={styles.tableCellStyle}>
-              <p>{greenDef.description}</p>
-            </TableCell>
-          </TableRow>
+          <ThemeProvider theme={theme}>
+            <TableRow>
+              <TableCell className={styles.tableCellStyle}>
+                <Image src={redIcon} alt="Needs updating urgently" width="40px" height="40px"></Image>
+              </TableCell>
+              <TableCell className={styles.tableCellStyle}>
+                <p>{redDef.description}</p>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className={styles.tableCellStyle}>
+                <Image src={yellowIcon} alt="Should be updated soon" width="40px" height="40px"></Image>
+              </TableCell>
+              <TableCell className={styles.tableCellStyle}>
+                <p>{yellowDef.description}</p>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className={styles.tableCellStyle}>
+                <Image src={greenIcon} alt="Up to date" width="40px" height="40px"></Image>
+              </TableCell>
+              <TableCell className={styles.tableCellStyle}>
+                <p>{greenDef.description}</p>
+              </TableCell>
+            </TableRow>
+          </ThemeProvider>
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer >
   );
 }
 
