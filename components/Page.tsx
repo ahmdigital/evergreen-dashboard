@@ -10,7 +10,7 @@ import SummaryContainer from "./SummaryComponents/SummaryContainer";
 import MobileSummaryContainer from "./MobileComponents/MobileSummaryContainer";
 import MobileDependenciesContainer from "./MobileComponents/MobileDependenciesContainer";
 import { DependencyData } from "../src/dataProcessing";
-import LoadingBackdrop from "./FeedbackComponents/LoadingBackdrop";
+import LoadingSnackbar from "./FeedbackComponents/LoadingSnackbar";
 import HelpGuide from "./HelpComponents/HelpGuide";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { RankSelectionList, SortBox, SortSettings } from  "./ReposTableComponents/SortAndFilterDropdowns";
@@ -56,12 +56,12 @@ export function Page(props: PageProps) {
 	// check if there are no rows
 	let emptyRows = rows.length === 0;
 
-	let loadingBackdrop: any = null;
+	let loadingSnackbar: any = null;
 	// If the final data is loading, then set the backdrop open to true
 	if (!props.finalData) {
-		loadingBackdrop = (
+		loadingSnackbar = (
 			<>
-				<LoadingBackdrop open={true} />
+				<LoadingSnackbar open={true} />
 			</>
 		)
 	}
@@ -129,7 +129,7 @@ export function Page(props: PageProps) {
 					</Head>
 					<main style={{ padding: 0 }}>
 						<Layout>
-							<MobileSummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
+							<MobileSummaryContainer rankArray={rankArray} loadingBackdrop={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
 							{/* <MobileDependenciesContainer /> */}
 							<DependenciesContainer
 								JSObject={props.JSObject}
@@ -153,7 +153,7 @@ export function Page(props: PageProps) {
 					</Head>
 					<main style={{ padding: 0 }}>
 						<Layout>
-							<SummaryContainer rankArray={rankArray} loadingBackdrop={loadingBackdrop} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
+							<SummaryContainer rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
 							<DependenciesContainer
 								JSObject={props.JSObject}
 								rows={diplayedRows}

@@ -1,11 +1,12 @@
 import cachedData from "../cachedData.json";
 import {Page} from "./Page";
 import { JSObjectFromJSON } from "../src/dataProcessing";
-import { getJsonStructure } from "evergreen-org-crawler/src/index"
-import config from "evergreen-org-crawler/config.json"
+// import { getJsonStructure } from "evergreen-org-crawler/src/index"
 import { useEffect, useState } from "react";
-import LoadingBackdrop from "./FeedbackComponents/LoadingBackdrop";
+import LoadingSnackbar from "./FeedbackComponents/LoadingSnackbar";
 import ErrorSnackbar from "./FeedbackComponents/ErrorSnackbar";
+// import getConfig from 'next/config'
+// const { publicRuntimeConfig: config } = getConfig()
 
 enum Mode {
 	Frontend,
@@ -25,6 +26,16 @@ async function getDataFromAPI(api: "loadNew" | "loadLatest" | "forceNew", reques
 	let JSObject = await fetch("api/" + api)
 	let retries = 10
 	while(!JSObject.ok){
+		//user is not authorised and should be signed in
+		if (JSObject.status == 401 || JSObject.status == 403){
+			const error = await JSObject.json()
+			if (error?.message === "login_required"){
+				window.location.href = "/signin"
+			}else{
+				window.location.href = `/signin?error=${encodeURIComponent(error?.message)}`
+			}
+		}
+
 		JSObject = await fetch("api/" + api)
 		--retries
 		if(retries == 0){
@@ -79,20 +90,20 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 		setLoading(true)
 
 		switch(mode){
-			case(Mode.Frontend): {
-				const accessToken = process.env.NEXT_PUBLIC_EVERGREEN_GITHUB_TOKEN!
-				let JSObject = getJsonStructure(
-					accessToken, config, [api]
-				).then(
-					(result: string) => JSON.parse(result) as { npm: any, PyPI: any, RubyGems: any }
-				).then(
-					(data: any) => JSObjectFromJSON(getProperty(data!, request))
-				)
-				JSObject.then((result: any) => {
-					setData(result as any)
-					setLoading(false)
-				})
-			} break;
+			// case(Mode.Frontend): {
+			// 	const accessToken = process.env.NEXT_PUBLIC_EVERGREEN_GITHUB_TOKEN!
+			// 	let JSObject = getJsonStructure(
+			// 		accessToken, {targetOrganisation: config.targetOrganisation, ...config}, [api]
+			// 	).then(
+			// 		(result: string) => JSON.parse(result) as { npm: any, PyPI: any, RubyGems: any }
+			// 	).then(
+			// 		(data: any) => JSObjectFromJSON(getProperty(data!, request))
+			// 	)
+			// 	JSObject.then((result: any) => {
+			// 		setData(result as any)
+			// 		setLoading(false)
+			// 	})
+			// } break;
 			case(Mode.StandaloneBackend): {
 				const data = getProperty((cachedData as { npm: any, PyPI: any, RubyGems: any })!, request)
 				let JSObject = JSObjectFromJSON(data)
@@ -123,7 +134,7 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 			}
 		}
 
-		return <><LoadingBackdrop open={true}/></>
+		return <><LoadingSnackbar open={true}/></>
 	}
 	if (!data) {
 		// If data is unable to load, throw error message to user
