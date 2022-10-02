@@ -29,13 +29,3 @@ export default function HeaderContainer(props: {targetOrganisation: string}) {
 type CondensedHeaderSumProps = {
   rankArray: RepoOverviewCondensedProps;
 }
-
-// export const CondensedHeaderSummaryContainer = (props: CondensedHeaderSumProps) => {
-
-//   return (
-//     <div className={`${headerStyles.headerStyle} ${sharedStyles.sectionContainer}`}>
-//       <HeaderContainer />
-//       <CondensedSummary statusValues={props.rankArray} target={config.targetPercentage} />
-//     </div>
-//   );
-// };
