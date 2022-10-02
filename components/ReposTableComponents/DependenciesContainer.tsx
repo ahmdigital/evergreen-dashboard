@@ -4,7 +4,6 @@ import styles from "../../styles/DependenciesContainer.module.css";
 import sharedStyles from "../../styles/TreeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../../src/dataProcessing";
-import FilterListIcon from '@mui/icons-material/FilterList';
 import getConfig from 'next/config'
 const { publicRuntimeConfig: config } = getConfig();
 
@@ -16,18 +15,16 @@ import {
 	PageLoaderSetData,
 	PageLoaderSetLoading,
 } from "../PageLoader";
-import { Box, Grid, IconButton } from "@mui/material";
-import { Stack } from "@mui/system";
-
+import { Box, Grid } from "@mui/material";
 let refreshing = false;
 
 
 export async function getServerSideProps() {
-  return {
-    props: {
-      targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION,
-    }
-  }
+	return {
+		props: {
+			targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION,
+		}
+	}
 }
 
 /* Container includes  Search, Filter, Dependencies Table */
@@ -43,21 +40,21 @@ export default function DependenciesContainer(ContainerProps: {
 	sortDirection: any;
 	filterSetting: any;
 }, props: { targetOrganisation: string }) {
-  async function callRefresh() {
-    if (refreshing) {
-      return;
-    }
-    if (lastRequest == null) {
-      return;
-    }
-    if (PageLoaderIsLoading) {
-      return;
-    }
-    PageLoaderSetLoading(true);
-    PageLoaderSetData({
-      refreshing: true,
-      data: PageLoaderCurrentData as any,
-    } as any);
+	async function callRefresh() {
+		if (refreshing) {
+			return;
+		}
+		if (lastRequest == null) {
+			return;
+		}
+		if (PageLoaderIsLoading) {
+			return;
+		}
+		PageLoaderSetLoading(true);
+		PageLoaderSetData({
+			refreshing: true,
+			data: PageLoaderCurrentData as any,
+		} as any);
 
 		refreshing = true;
 
@@ -99,13 +96,13 @@ export default function DependenciesContainer(ContainerProps: {
 
 			<Grid container spacing={2}>
 				<Grid item xs={12} lg={5} xl={6}>
-					<Stack direction="row" spacing={1} alignItems="center">
-						<SearchBar
-							searchTerm={ContainerProps.searchTerm}
-							setSearchTerm={ContainerProps.setSearchTerm}
-							repoNames={(ContainerProps.tableRows.map((row: any) => row.name))}
-						/>
-						<IconButton
+					{/* <Stack direction="row" spacing={1} alignItems="center"> */}
+					<SearchBar
+						searchTerm={ContainerProps.searchTerm}
+						setSearchTerm={ContainerProps.setSearchTerm}
+						repoNames={(ContainerProps.tableRows.map((row: any) => row.name))}
+					/>
+					{/* <IconButton
 							sx={{ display: { xs: 'initial', md: 'none' } }}
 							aria-label='Sort and filter'
 							onClick={toggleFilter}
@@ -114,8 +111,8 @@ export default function DependenciesContainer(ContainerProps: {
 								fontSize='medium'
 								color={filterOpen ? 'primary' : 'inherit'}
 							/>
-						</IconButton>
-					</Stack>
+						</IconButton> */}
+					{/* </Stack> */}
 				</Grid>
 				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
 					{ContainerProps.sortDropdown}
@@ -129,23 +126,23 @@ export default function DependenciesContainer(ContainerProps: {
 			</Grid>
 
 
-      <div className={styles.tableStyle}>
-	  <CollapsibleTable tableRows={ContainerProps.tableRows} setTableRows={ContainerProps.setTableRows} searchTerm={ContainerProps.searchTerm} setSearchTerm={ContainerProps.setSearchTerm} filterSetting={ContainerProps.filterSetting}></CollapsibleTable>
-      </div>
-      {
-        ContainerProps.emptyRows &&
-        <div className={styles.noReposStyle}>
-          <p>
-            <b>{props.targetOrganisation}</b> has 0 repositories
-          </p>
-        </div>
-      }
-      {
-        !ContainerProps.emptyRows && (ContainerProps.searchTerm !== "" && ContainerProps.tableRows.length === 0) &&
-        <div className={styles.noReposStyle}>
-          <p>No search results found</p>
-        </div>
-      }
-	  </Box>
-  );
+			<div className={styles.tableStyle}>
+				<CollapsibleTable tableRows={ContainerProps.tableRows} setTableRows={ContainerProps.setTableRows} searchTerm={ContainerProps.searchTerm} setSearchTerm={ContainerProps.setSearchTerm} filterSetting={ContainerProps.filterSetting}></CollapsibleTable>
+			</div>
+			{
+				ContainerProps.emptyRows &&
+				<div className={styles.noReposStyle}>
+					<p>
+						<b>{props.targetOrganisation}</b> has 0 repositories
+					</p>
+				</div>
+			}
+			{
+				!ContainerProps.emptyRows && (ContainerProps.searchTerm !== "" && ContainerProps.tableRows.length === 0) &&
+				<div className={styles.noReposStyle}>
+					<p>No search results found</p>
+				</div>
+			}
+		</Box>
+	);
 }

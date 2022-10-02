@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "../../styles/SearchBar.module.css";
 import debounce from 'lodash.debounce';
 import Autocomplete from '@mui/material/Autocomplete';
 import { TextField } from "@mui/material";
@@ -33,7 +32,7 @@ export default function SearchBar(props: {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className={styles.searchBarWidth}>
+      <div>
         <Autocomplete fullWidth={true} freeSolo options={props.repoNames} renderInput={(params) => <TextField {...params} label="Search" />} onChange={debounceOnChange} />
       </div>
     </ThemeProvider>

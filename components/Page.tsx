@@ -10,11 +10,9 @@ import LoadingSnackbar from "./FeedbackComponents/LoadingSnackbar";
 import HelpGuide from "./HelpComponents/HelpGuide";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { RankSelectionList, SortBox, SortSettings } from  "./ReposTableComponents/SortAndFilterDropdowns";
+import { RankSelectionList, SortBox, SortSettings } from "./ReposTableComponents/SortAndFilterDropdowns";
 import { applySort, Filter, rankCounts } from "../src/sortingAndFiltering";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { theme } from './ReposTableComponents/SortAndFilterDropdowns'
-
 
 export type PageProps = {
 	JSObject: DependencyData;
