@@ -16,7 +16,7 @@
     "loadash": "^1.0.0",
     "lodash.debounce": "^4.0.8",
     "@mui/icons-material": "^5.10.6",
-    "@mui/lab": "^5.0.0-alpha.101",
+    "@mui/lab": "^5.0.0-alpha.102",
     "@mui/material": "^5.10.7",
     "@mui/styles": "^5.10.7",
     "@types/node": "^18.7.23",
