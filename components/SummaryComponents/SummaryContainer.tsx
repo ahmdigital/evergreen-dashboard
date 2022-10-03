@@ -34,13 +34,15 @@ export default function SummaryContainer(props: {
   rows: ProcessedDependencyData;
   filterTerm: Filter;
   setFilterTerm: any;
+  targetOrganisation: string;
 }) {
   const totalRepos =
-    props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
+  props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
   let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
   let overallPercentStr = overallPercent + "%";
   let overallStyle = styles.summaryOverall;
   let overallColour = styles.summaryOverallGreen;
+  console.log('TARGET', props.targetOrganisation)
 
   if (isNaN(overallPercent)) {
     overallPercentStr = "N/A";
@@ -97,7 +99,7 @@ export default function SummaryContainer(props: {
         <Grid>
           <h1 className={styles.noMargins}><ForestIcon /> Evergreen Dashboard</h1>
           <p className={styles.subtitle}>
-            Monitoring dependencies for <b className={styles.orgTitle}>ahm-digital</b> Github Organisation
+            Monitoring dependencies for <b className={styles.orgTitle}>{props.targetOrganisation}</b> Github Organisation
           </p>
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>

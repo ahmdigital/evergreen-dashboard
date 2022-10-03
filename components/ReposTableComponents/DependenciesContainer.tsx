@@ -19,16 +19,8 @@ import { Box, Grid } from "@mui/material";
 let refreshing = false;
 
 
-export async function getServerSideProps() {
-	return {
-		props: {
-			targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION,
-		}
-	}
-}
-
 /* Container includes  Search, Filter, Dependencies Table */
-export default function DependenciesContainer(ContainerProps: {
+export default function DependenciesContainer(props: {
 	JSObject: DependencyData;
 	tableRows: any;
 	setTableRows: any;
@@ -39,7 +31,8 @@ export default function DependenciesContainer(ContainerProps: {
 	emptyRows: boolean;
 	sortDirection: any;
 	filterSetting: any;
-}, props: { targetOrganisation: string }) {
+	targetOrganisation: string;
+}) {
 	async function callRefresh() {
 		if (refreshing) {
 			return;
@@ -97,28 +90,28 @@ export default function DependenciesContainer(ContainerProps: {
 			<Grid container spacing={2}>
 				<Grid item xs={12} lg={5} xl={6}>
 					<SearchBar
-						searchTerm={ContainerProps.searchTerm}
-						setSearchTerm={ContainerProps.setSearchTerm}
-						repoNames={(ContainerProps.tableRows.map((row: any) => row.name))}
+						searchTerm={props.searchTerm}
+						setSearchTerm={props.setSearchTerm}
+						repoNames={(props.tableRows.map((row: any) => row.name))}
 					/>
 				</Grid>
 				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
-					{ContainerProps.sortDropdown}
+					{props.sortDropdown}
 				</Grid>
 				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
-					{ContainerProps.sortDirection}
+					{props.sortDirection}
 				</Grid>
 				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
-					{ContainerProps.rankSelection}
+					{props.rankSelection}
 				</Grid>
 			</Grid>
 
 
 			<div className={styles.tableStyle}>
-				<CollapsibleTable tableRows={ContainerProps.tableRows} setTableRows={ContainerProps.setTableRows} searchTerm={ContainerProps.searchTerm} setSearchTerm={ContainerProps.setSearchTerm} filterSetting={ContainerProps.filterSetting}></CollapsibleTable>
+				<CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows} searchTerm={props.searchTerm} setSearchTerm={props.setSearchTerm} filterSetting={props.filterSetting}></CollapsibleTable>
 			</div>
 			{
-				ContainerProps.emptyRows &&
+				props.emptyRows &&
 				<div className={styles.noReposStyle}>
 					<p>
 						<b>{props.targetOrganisation}</b> has 0 repositories
@@ -126,7 +119,7 @@ export default function DependenciesContainer(ContainerProps: {
 				</div>
 			}
 			{
-				!ContainerProps.emptyRows && (ContainerProps.searchTerm !== "" && ContainerProps.tableRows.length === 0) &&
+				!props.emptyRows && (props.searchTerm !== "" && props.tableRows.length === 0) &&
 				<div className={styles.noReposStyle}>
 					<p>No search results found</p>
 				</div>
