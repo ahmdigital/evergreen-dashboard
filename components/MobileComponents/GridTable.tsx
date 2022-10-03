@@ -56,14 +56,21 @@ const subRowHeaderTextSX = {
 	borderWidth: '0.2rem'
 }
 
-export function GridSubRow(props: GridSubRowProps) {
 
-	const mapFunc = (forUsers: boolean) => (data: PackageData) => <>
+
+type SubRowProps = {
+	data: PackageData
+	forUsers: boolean
+}
+
+export function SubRow(props: SubRowProps) {
+	const { data, forUsers } = props
+	return <>
 		<Grid
 			wrap="nowrap"
 			columnSpacing={2}
 			alignItems='center'
-			sx={{ py: 1}}
+			sx={{ py: 1 }}
 			container>
 
 			{/* Status */}
@@ -74,7 +81,9 @@ export function GridSubRow(props: GridSubRowProps) {
 			{/* Name */}
 			<Grid item xs sx={{ overflowWrap: "anywhere" }}>
 				<Typography sx={subRowTextSX}>
-					{data.name}
+					<a href={data.link} rel="noreferrer" target="_blank">
+						{data.name}
+					</a>
 				</Typography>
 			</Grid>
 
@@ -97,15 +106,20 @@ export function GridSubRow(props: GridSubRowProps) {
 			}
 
 		</Grid>
-		<Divider  sx={{ borderColor: "#7a7a7a" }} />
+		<Divider sx={{ borderColor: "#7a7a7a" }} />
 	</>
+}
 
+
+
+export function GridSubRow(props: GridSubRowProps) {
+	
 	return <>
 		<Box sx={{ backgroundColor: "#f5f5f5" }}>
 			<Tabs subRows={{
-				internal: props.internal.map(mapFunc(false)),
-				external: props.external.map(mapFunc(false)),
-				user: props.users.map(mapFunc(true)),
+				internal: props.internal.map((data, i) => <SubRow key={i} data={data} forUsers={false} />),
+				external: props.external.map((data, i) => <SubRow key={i} data={data} forUsers={false} />),
+				user: props.users.map((data, i) => <SubRow key={i} data={data} forUsers={true} />),
 				final: false
 			}}
 				tableFunc={(elem: ReactNode, variant: "dependency" | "user") => {
@@ -172,7 +186,9 @@ export function GridRow(props: GridRowProps) {
 				{/* Name */}
 				<Grid item xs sx={{ overflowWrap: "anywhere" }}>
 					<Typography sx={{ ...rowTextSX }} >
-						{props.row.name}
+						<a href={props.row.link} rel="noreferrer" target="_blank">
+							{props.row.name}
+						</a>
 					</Typography>
 				</Grid>
 
