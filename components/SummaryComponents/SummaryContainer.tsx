@@ -139,7 +139,7 @@ export default function SummaryContainer(props: {
               <div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
                 <h3 className={styles.overallTitleStyle}>Overall</h3>
                 <h3 className={styles.percentStyle} >{overallPercentStr}</h3>
-                <h3 className={styles.overallCentredTitleStyle}>{props.rankArray.red}/{totalRepos} repositories up-to-date </h3>
+                <h3 className={styles.overallCentredTitleStyle}>{props.rankArray.green}/{totalRepos} repositories up-to-date </h3>
               </div>
             </div>
           </Grid>
