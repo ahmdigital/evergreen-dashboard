@@ -7,8 +7,11 @@ import { SemVerFormatter } from "../../SemVerFormatter";
 import { StatusIcon } from "../../StatusIcon";
 import { Box } from "@mui/system";
 import { GridSubRow } from "./GridSubRow";
-const dayjs = require('dayjs')
+// import dayjs from 'dayjs';
 
+const dayjs = require('dayjs')
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 
 const rowTextSX = {
 	fontWeight: "var(--font-weight-semibold)",

@@ -6,7 +6,9 @@ import { DependencyData } from "../../src/dataProcessing";
 import { applyFilter, Filter } from "../../src/sortingAndFiltering";
 import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import { GridTable } from "../MobileComponents/GridTable";
-import CollapsibleTable from "./CollapsibleTable";
+import FilterListIcon from '@mui/icons-material/FilterList';
+import { Box, Grid, IconButton } from "@mui/material";
+import { Stack } from "@mui/system";
 import {
 	PageLoaderCurrentData,
 	forceNewVersion,
@@ -15,7 +17,6 @@ import {
 	PageLoaderSetData,
 	PageLoaderSetLoading,
 } from "../PageLoader";
-import { Box, Grid } from "@mui/material";
 let refreshing = false;
 
 
@@ -97,11 +98,29 @@ export default function DependenciesContainer(props: {
 
 			<Grid container spacing={2}>
 				<Grid item xs={12} lg={5} xl={6}>
-					<SearchBar
-						searchTerm={props.searchTerm}
-						setSearchTerm={props.setSearchTerm}
-						repoNames={(props.tableRows.map((row: any) => row.name))}
-					/>
+				<Grid container  spacing={1} alignItems="center">
+					<Grid item xs>
+
+						<SearchBar
+								searchTerm={props.searchTerm}
+								setSearchTerm={props.setSearchTerm}
+								repoNames={(props.tableRows.map((row: any) => row.name))}
+								/>
+					</Grid>
+					
+					<Grid item xs="auto">
+							<IconButton
+								sx={{ display: { xs: 'initial', md: 'none' } }}
+								aria-label='Sort and filter'
+								onClick={toggleFilter}
+								>
+								<FilterListIcon
+									fontSize='medium'
+									color={filterOpen ? 'primary' : 'inherit'}
+									/>
+							</IconButton>
+						</Grid>
+					</Grid>
 				</Grid>
 				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
 					{props.sortDropdown}
@@ -116,10 +135,10 @@ export default function DependenciesContainer(props: {
 			
 			<GridTable rows={searchAndFilteredData} />
 
-
-			<div className={styles.tableStyle}>
+			{/* TODO: Delete this */}
+			{/* <div className={styles.tableStyle}>
 				<CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows} searchAndFilteredData={searchAndFilteredData}></CollapsibleTable>
-			</div>
+			</div> */}
 			{
 				props.emptyRows &&
 				<div className={styles.noReposStyle}>

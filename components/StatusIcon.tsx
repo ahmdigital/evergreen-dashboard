@@ -13,7 +13,7 @@ type StatusIconProps = {
 export function StatusIcon(props: StatusIconProps) {
 
 	let statusIcon = RedIcon;
-	let statusText = "Needs updating urgently";
+	let statusText = "highly out-of-date";
 	let iconDefinition = redDef.description;
 
 	// Setting the status
@@ -24,7 +24,7 @@ export function StatusIcon(props: StatusIconProps) {
 	} else if (props.rank == 1) {
 		statusIcon = YellowIcon;
 		iconDefinition = yellowDef.description;
-		statusText = "Should be updated soon";
+		statusText = "moderately out-of-date";
 	}
 
 	return <Tooltip arrow title={

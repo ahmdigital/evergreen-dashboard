@@ -41,7 +41,7 @@ export function SubRow(props: SubRowProps) {
   const latestVersion = semVerToString(props.dependency.version);
 
   let statusIcon = RedIcon;
-  let statusText = "Needs updating urgently";
+  let statusText = "Highly out-of-date";
   let iconDefinition = redDef.description;
 
   // Setting the status
@@ -53,7 +53,7 @@ export function SubRow(props: SubRowProps) {
   if (props.dependency.rank == 1) {
     statusIcon = YellowIcon;
     iconDefinition = yellowDef.description;
-	statusText = "Should be updated soon";
+	statusText = "Moderately out-of-date";
   }
 
   return (
