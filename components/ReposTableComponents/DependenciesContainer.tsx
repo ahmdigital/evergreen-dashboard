@@ -1,5 +1,4 @@
 import React from "react";
-import CollapsibleTable from "./CollapsibleTable";
 import styles from "../../styles/DependenciesContainer.module.css";
 import sharedStyles from "../../styles/TreeView.module.css";
 import SearchBar from "./SearchBar";

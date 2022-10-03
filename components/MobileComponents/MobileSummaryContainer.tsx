@@ -113,7 +113,7 @@ export default function MobileSummaryContainer(props: {
 			<Box className={mobileStyles.summaryContainerSubBox}>
 				<h2 className="noMargins"><ForestIcon /> Evergreen Dashboard</h2>
 				<p className={mobileStyles.subtitle}>
-					Monitoring dependencies for <b>{config.targetOrganisation}</b> Github Organisation
+					Monitoring dependencies for <b>ahm-digital</b> Github Organisation
 				</p>
 				<div className={styles.btnsContainer}>
 					<button onClick={callRefresh} aria-label="Refresh data">
