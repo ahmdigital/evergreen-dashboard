@@ -17,6 +17,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 export type PageProps = {
 	JSObject: DependencyData;
 	finalData: boolean;
+	targetOrganisation: string
 };
 
 // Customising the table styling using ThemeProvider
@@ -124,7 +125,7 @@ export function Page(props: PageProps) {
 					</Head>
 					<main style={{ padding: 0 }}>
 						<Layout>
-							<MobileSummaryContainer rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
+							<MobileSummaryContainer rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} targetOrganisation={props.targetOrganisation} />
 							{/* <MobileDependenciesContainer /> */}
 							<DependenciesContainer
 								JSObject={props.JSObject}
@@ -137,6 +138,7 @@ export function Page(props: PageProps) {
 								rankSelection={rankSelectionList}
 								emptyRows={emptyRows}
 								filterSetting={filterSetting}
+								targetOrganisation={props.targetOrganisation}
 							/>
 							<HelpGuide />
 						</Layout>
@@ -149,7 +151,7 @@ export function Page(props: PageProps) {
 					</Head>
 					<main style={{ padding: 0 }}>
 						<Layout>
-							<SummaryContainer rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
+							<SummaryContainer rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} targetOrganisation={props.targetOrganisation} />
 							<DependenciesContainer
 								JSObject={props.JSObject}
 								tableRows={tableRows}
@@ -161,6 +163,7 @@ export function Page(props: PageProps) {
 								rankSelection={rankSelectionList}
 								emptyRows={emptyRows}
 								filterSetting={filterSetting}
+								targetOrganisation={props.targetOrganisation}
 							/>
 							<HelpGuide />
 						</Layout>

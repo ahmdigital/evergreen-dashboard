@@ -45,6 +45,7 @@ export default function MobileSummaryContainer(props: {
 	rows: ProcessedDependencyData;
 	filterTerm: Filter;
 	setFilterTerm: any;
+	targetOrganisation: string
 }) {
 	const totalRepos =
 		props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
@@ -113,7 +114,7 @@ export default function MobileSummaryContainer(props: {
 			<Box className={mobileStyles.summaryContainerSubBox}>
 				<h2 className="noMargins"><ForestIcon /> Evergreen Dashboard</h2>
 				<p className={mobileStyles.subtitle}>
-					Monitoring dependencies for <b>{process.env.NEXT_PUBLIC_TARGET_ORGANISATION}</b> Github Organisation
+					Monitoring dependencies for <b>{props.targetOrganisation}</b> Github Organisation
 				</p>
 				<div className={styles.btnsContainer}>
 					<button onClick={callRefresh} aria-label="Refresh data">

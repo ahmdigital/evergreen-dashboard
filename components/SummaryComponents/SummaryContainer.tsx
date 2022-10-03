@@ -28,24 +28,17 @@ import Button from '@mui/material/Button';
 const { publicRuntimeConfig: config } = getConfig();
 let refreshing = false
 
-export async function getServerSideProps() {
-  return {
-    props: {
-      targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION
-    },
-  }
-}
-
-export default function SummaryContainer(SummaryProps: {
+export default function SummaryContainer(props: {
   rankArray: any;
   loadingSnackbar: any;
   rows: ProcessedDependencyData;
   filterTerm: Filter;
   setFilterTerm: any;
-}, props: {targetOrganisation: string}) {
+  targetOrganisation: string;
+}) {
   const totalRepos =
-  SummaryProps.rankArray.green + SummaryProps.rankArray.yellow + SummaryProps.rankArray.red;
-  let overallPercent = Math.round((SummaryProps.rankArray.green / totalRepos) * 100);
+  props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
+  let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
   let overallPercentStr = overallPercent + "%";
   let overallStyle = styles.summaryOverall;
   let overallColour = styles.summaryOverallGreen;
@@ -126,7 +119,7 @@ export default function SummaryContainer(SummaryProps: {
             <Grid>
               {!closeHeader && (
                 <CondensedSummary
-                  statusValues={SummaryProps.rankArray}
+                  statusValues={props.rankArray}
                   overall={overallPercent}
                   target={config.targetPercentage}
                 ></CondensedSummary>
@@ -136,7 +129,7 @@ export default function SummaryContainer(SummaryProps: {
         </Grid>
       </Grid>
       <div>
-        {SummaryProps.loadingSnackbar}
+        {props.loadingSnackbar}
       </div>
       <Collapse in={closeHeader} timeout="auto" unmountOnExit>
         <Grid container spacing={1} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between', marginTop: '0rem', marginBottom: '0rem' }} className={`${styles.container} ${styles.margins}`}>
@@ -146,7 +139,7 @@ export default function SummaryContainer(SummaryProps: {
               <div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
                 <h3 className={styles.overallTitleStyle}>Overall</h3>
                 <h3 className={styles.percentStyle} >{overallPercentStr}</h3>
-                <h3 className={styles.overallCentredTitleStyle}>up-to-date of {SummaryProps.rankArray.green + SummaryProps.rankArray.yellow + SummaryProps.rankArray.red} repositories </h3>
+                <h3 className={styles.overallCentredTitleStyle}>up-to-date of {props.rankArray.green + props.rankArray.yellow + props.rankArray.red} repositories </h3>
               </div>
             </div>
           </Grid>
@@ -154,7 +147,7 @@ export default function SummaryContainer(SummaryProps: {
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
               <div className={styles.summaryCompHeader}>
-                <h3 className={styles.summaryStyle}>Total Repositories ({SummaryProps.rankArray.green + SummaryProps.rankArray.yellow + SummaryProps.rankArray.red})</h3>
+                <h3 className={styles.summaryStyle}>Total Repositories ({props.rankArray.green + props.rankArray.yellow + props.rankArray.red})</h3>
                 <div style={{ display: "flex", width: "70px", justifyContent: "space-between" }}>
                   <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Toggle Pie Chart</p>}>
                     <IconButton
@@ -185,7 +178,7 @@ export default function SummaryContainer(SummaryProps: {
               {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
               <div>
                 <div className={styles.summaryComponent2}>
-                  <ReposOverviewTable rankArray={SummaryProps.rankArray} showChart={showChart} />
+                  <ReposOverviewTable rankArray={props.rankArray} showChart={showChart} />
                 </div>
               </div>
             </div>
@@ -193,12 +186,12 @@ export default function SummaryContainer(SummaryProps: {
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
               <div className={styles.summaryComponent3}>
-                <ReposSecondarySummaryTable rows={SummaryProps.rows} filterTerm={SummaryProps.filterTerm} setFilterTerm={SummaryProps.setFilterTerm} />
+                <ReposSecondarySummaryTable rows={props.rows} filterTerm={props.filterTerm} setFilterTerm={props.setFilterTerm} />
               </div>
             </div>
           </Grid>
         </Grid>
-        <div>{SummaryProps.loadingSnackbar}</div>
+        <div>{props.loadingSnackbar}</div>
       </Collapse>
       <div className={styles.expandButton}>
         <IconButton

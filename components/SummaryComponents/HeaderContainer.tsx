@@ -4,14 +4,6 @@ import headerStyles from "../../styles/HeaderContainer.module.css";
 import ForestIcon from "@mui/icons-material/Forest";
 import { RepoOverviewCondensedProps } from "./CondensedSummary/CondensedSummary";
 
-export async function getServerSideProps() {
-  return {
-    props: {
-      targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION,
-    }
-  }
-}
-
 export default function HeaderContainer(props: {targetOrganisation: string}) {
   return (
     <>
