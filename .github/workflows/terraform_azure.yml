@@ -2,6 +2,20 @@ name: Terraform azure
 # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_run
 on:
   workflow_dispatch:
+    inputs:
+      require_authentication:
+        description: 'Whether Github authentication is required to access the dashboard'
+        required: true
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      target_organisation:
+        description: 'The name of the Github organisation that is tracked'
+        required: true
+        default: 'ahm-monash'
+        type: text
   workflow_run:
     branches: [main]
     workflows: [Docker]
@@ -107,6 +121,11 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && github.event_name != 'workflow_dispatch'
         # instead of forced replacement, it should be triggered in main.tf
         run: terraform apply -replace=azurerm_linux_web_app.this -auto-approve
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+        # instead of forced replacement, it should be triggered in main.tf
+        run: terraform apply -replace=azurerm_linux_web_app.this -auto-approve -var="require_authentication=${{ inputs.require_authentication }}" -var="target_organisation=${{ inputs.target_organisation }}"
