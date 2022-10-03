@@ -1,9 +1,9 @@
-import React, {useMemo} from "react";
+import React from "react";
 import styles from "../../styles/DependenciesContainer.module.css";
 import sharedStyles from "../../styles/TreeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../../src/dataProcessing";
-import { applyFilter, Filter } from "../../src/sortingAndFiltering";
+import { Filter } from "../../src/sortingAndFiltering";
 import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import { GridTable } from "../MobileComponents/GridTable";
 import FilterListIcon from '@mui/icons-material/FilterList';
@@ -18,7 +18,6 @@ import {
 } from "../PageLoader";
 let refreshing = false;
 
-
 /* Container includes  Search, Filter, Dependencies Table */
 export default function DependenciesContainer(props: {
 	JSObject: DependencyData;
@@ -32,6 +31,7 @@ export default function DependenciesContainer(props: {
 	sortDirection: JSX.Element;
 	filterSetting: Filter;
 	targetOrganisation: string;
+	finalisedData: ProcessedDependencyData;
 }) {
 	async function callRefresh() {
 		if (refreshing) {
@@ -62,7 +62,7 @@ export default function DependenciesContainer(props: {
 			refreshing = false;
 		});
 		//	} break;
-		//}
+		//
 	}
 
 	const [filterOpen, setFilterOpen] = React.useState(false);
@@ -78,14 +78,6 @@ export default function DependenciesContainer(props: {
 		}
 	};
 
-	// searchTerm={props.searchTerm} setSearchTerm={props.setSearchTerm} filterSetting={props.filterSetting}
-	const searchAndFilteredData = useMemo(() => {
-		return props.tableRows.filter(
-			(row) => 
-				applyFilter(row, props.filterSetting) 
-				&& row.name.toLowerCase().includes(props.searchTerm.toLowerCase()))
-	}, [props.tableRows, props.filterSetting, props.searchTerm])
-	
 	return (
 		<Box className={styles.sectionContainer} sx={{
 			padding: {
@@ -132,7 +124,7 @@ export default function DependenciesContainer(props: {
 				</Grid>
 			</Grid>
 			
-			<GridTable rows={searchAndFilteredData} />
+			<GridTable rows={props.finalisedData} />
 
 			{/* TODO: Delete this */}
 			{/* <div className={styles.tableStyle}>

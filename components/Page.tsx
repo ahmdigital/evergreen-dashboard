@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { ProcessedDependencyData, useProcessDependencyData } from "../hooks/useProcessDependencyData";
 import Layout from "./Layout";
 import Head from "next/head";
@@ -11,7 +11,7 @@ import HelpGuide from "./HelpComponents/HelpGuide";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { RankSelectionList, SortBox, SortSettings } from "./ReposTableComponents/SortAndFilterDropdowns";
-import { applySort, Filter, rankCounts } from "../src/sortingAndFiltering";
+import { applyFilter, applySort, Filter, rankCounts } from "../src/sortingAndFiltering";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 export type PageProps = {
@@ -66,8 +66,8 @@ export function Page(props: PageProps) {
 		)
 	}
 
-	//Sorting. Doing this after filtering would be more efficient
-	applySort(tableRows, sortSetting)
+	// //Sorting. Doing this after filtering would be more efficient
+	// applySort(tableRows, sortSetting)
 
 	const rankArray = rankCounts(tableRows)
 
@@ -116,6 +116,14 @@ export function Page(props: PageProps) {
 		return () => window.removeEventListener("resize", updateMedia);
 	});
 
+	// Apply the search, sorting and filtering before passing the data to other components
+	const finalisedData = useMemo(() => {
+		return tableRows.filter(
+			(row) => applyFilter(row, filterSetting) && row.name.toLowerCase().includes(searchTerm.toLowerCase())
+		)
+	}, [tableRows, filterSetting, searchTerm])
+	applySort(finalisedData, sortSetting)
+
 	return (
 		<div className="container">
 			{isMobile ? (
@@ -139,6 +147,7 @@ export function Page(props: PageProps) {
 								emptyRows={emptyRows}
 								filterSetting={filterSetting}
 								targetOrganisation={props.targetOrganisation}
+								finalisedData={finalisedData}
 							/>
 							<HelpGuide />
 						</Layout>
@@ -164,6 +173,7 @@ export function Page(props: PageProps) {
 								emptyRows={emptyRows}
 								filterSetting={filterSetting}
 								targetOrganisation={props.targetOrganisation}
+								finalisedData={finalisedData}
 							/>
 							<HelpGuide />
 						</Layout>
