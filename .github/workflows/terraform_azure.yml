@@ -9,8 +9,8 @@ on:
         default: 'true'
         type: choice
         options:
-        - 'true'
-        - 'false'
+          - 'true'
+          - 'false'
       target_organisation:
         description: 'The name of the Github organisation that is tracked'
         required: true
