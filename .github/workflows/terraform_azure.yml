@@ -125,7 +125,7 @@ jobs:
         # instead of forced replacement, it should be triggered in main.tf
         run: terraform apply -replace=azurerm_linux_web_app.this -auto-approve
 
-      - name: Terraform Apply
+      - name: Terraform Apply Workflow Dispatch
         if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
         # instead of forced replacement, it should be triggered in main.tf
         run: terraform apply -replace=azurerm_linux_web_app.this -auto-approve -var="require_authentication=${{ inputs.require_authentication }}" -var="target_organisation=${{ inputs.target_organisation }}"
