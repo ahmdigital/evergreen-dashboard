@@ -8,7 +8,6 @@ import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import { GridTable } from "../MobileComponents/GridTable";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Box, Grid, IconButton } from "@mui/material";
-import { Stack } from "@mui/system";
 import {
 	PageLoaderCurrentData,
 	forceNewVersion,
