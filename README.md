@@ -22,24 +22,64 @@ Please avoid doing this at all cost.
 
 The `-n` allows you to skip git hooks.
 
-## Provisioning the infrastructure locally
 
-Make sure you have terraform installed, to deploy follow these steps:
+## Running
 
-### AWS Beanstalk
+### ENV
 
-1. `terraform init`
-2. `bash bootstrap.sh`, currently works on linux, if on other OSs simply zip the required files(refer to `bootstrap.sh`)
-3. `terraform apply`, it will ask you to accept the configuration, type `yes` once you have read the plan
-4. Wait until terraform finishes applying the plan, once it's done it will output the url of the website
+Make sure you have the following requirements in `.env`
 
-### Azure web app
+```
+EVERGREEN_GITHUB_TOKEN=
+NEXT_PUBLIC_TARGET_ORGANISATION=
+REQUIRE_AUTHENTICATION=true
+CLIENT_SECRET=
+NEXT_PUBLIC_CLIENT_ID=
+NEXT_PUBLIC_REDIRECT_URI=http://example.com/signin/
+```
 
-Because azure web app was not executing the build command, a docker container was used instead
+The last three variables are optional if `REQUIRE_AUTHENTICATION` is set to `false`
+
+### (Authentication only)
+
+Setup github [OAuth app](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app) to be used for authentication.
+
+When authenticating, we ask for `repo` scope, to validate whether the user is part of the organisation.
+
+<!-- ### Custom configuration
+
+Use the file `custom-config.json` to customise the app based on your need.
+
+Please refer to `custom-config.sample` for guidance. -->
+
+### Standalone
+
+1. `npm run build`
+2. `npm start`
+
+
+### Docker
+
+`docker-compose up --build`
+
+### Provisioning the infrastructure from terraform cli
+
+#### Azure App Service
+
+A docker container is used to deploy to App Service.
 
 1. `terraform init`
 2. `docker-compose build`
 3. `docker tag evergreendashboard:latest <DOCKERHUB_ACCOUNT_NAME>/evergreendashboard:latest`
 4. Change the local docker variable in the main.tf
-5. `terraform apply`, it will ask you to accept the configuration, type `yes` once you have read the plan
+5. `terraform apply`, it will ask you to accept the configuration, enter `yes` once you have read the plan
 6. Wait until terraform finishes applying the plan, once it's done it will output the url of the website
+
+#### AWS Elastic Beanstalk
+
+A standalone app is directory deployed to Elastic Beanstalk.
+
+1. `terraform init`
+2. `bash bootstrap.sh`, currently works on linux, if on other OSs, simply zip the required files(refer to `bootstrap.sh`)
+3. `terraform apply`, it will ask you to accept the configuration, enter `yes` once you have read the plan
+4. Wait until terraform finishes applying the plan, once it's done it will output the url of the website

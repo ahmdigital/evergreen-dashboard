@@ -11,7 +11,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import refreshIcon from "../images/refresh.svg";
 import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "../PageLoader";
-import config from "../../config.json";
 import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import ReposSecondarySummaryTable from "./ReposSecondarySummaryTable";
 import { Filter } from "../../src/sortingAndFiltering";
@@ -20,15 +19,17 @@ import Grow from '@mui/material/Grow';
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import getConfig from 'next/config'
+
 import CondensedSummary from "./CondensedSummary/CondensedSummary";
 import BarChartIcon from '@mui/icons-material/BarChart';
 
-
-let refreshing = false;
+const { publicRuntimeConfig: config } = getConfig();
+let refreshing = false
 
 export default function SummaryContainer(props: {
   rankArray: any;
-  loadingBackdrop: any;
+  loadingSnackbar: any;
   rows: ProcessedDependencyData;
   filterTerm: Filter;
   setFilterTerm: any;
@@ -96,7 +97,7 @@ export default function SummaryContainer(props: {
         <Grid>
           <h1 className="noMargins"><ForestIcon /> Evergreen Dashboard</h1>
           <p className={styles.subtitle}>
-            Monitoring dependencies for <b>{config.targetOrganisation}</b> Github Organisation
+            Monitoring dependencies for <b>ahm-digital</b> Github Organisation
           </p>
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
@@ -107,7 +108,7 @@ export default function SummaryContainer(props: {
             </Tooltip>
           </div>
         </Grid>
-        
+
         <Grid>
           <Grow in={!closeHeader}>
             <Grid>
@@ -123,7 +124,7 @@ export default function SummaryContainer(props: {
         </Grid>
       </Grid>
       <div>
-        {props.loadingBackdrop}
+        {props.loadingSnackbar}
       </div>
       <Collapse in={closeHeader} timeout="auto" unmountOnExit>
         <Grid container spacing={1} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between', marginTop: '0rem', marginBottom: '0rem' }} className={`${styles.container} ${styles.margins}`}>
@@ -184,7 +185,7 @@ export default function SummaryContainer(props: {
             </div>
           </Grid>
         </Grid>
-        <div>{props.loadingBackdrop}</div>
+        <div>{props.loadingSnackbar}</div>
       </Collapse>
       <div className={styles.expandButton}>
         <IconButton

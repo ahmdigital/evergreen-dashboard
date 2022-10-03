@@ -2,47 +2,72 @@
 
 variable "github_token_scope_read_org" {
   type        = string
-  description = "Github token that has a scope read organistaion repositories"
+  description = "Github token that has a scope read organisation repositories"
   sensitive   = true
 }
 
 variable "client_id" {
   type        = string
-  description = "Github evergreen oauth app client id"
-  sensitive   = true
+  description = "Github evergreen dashboard oauth Oauth client id"
+  sensitive   = false
 }
 
 variable "client_secret" {
   type        = string
-  description = "Github evergreen oauth app client secret"
+  description = "Github evergreen dashboard Oauth app client secret"
   sensitive   = true
+}
+
+variable "require_authentication" {
+  type        = string
+  description = "Whether Github authentication is required to access the dashboard"
+  sensitive   = false
+  default     = "true"
+}
+
+variable "target_organisation" {
+  type        = string
+  description = "The name of the Github organisation that is tracked"
+  sensitive   = false
+}
+
+variable "redirect_uri" {
+  type        = string
+  description = "Oauth app redirect uri"
+  sensitive   = false
 }
 
 variable "port" {
   type        = string
-  description = "application port number, azure web app defines port using WEBSITES_PORT"
+  description = "Application port number, azure web app defines port using WEBSITES_PORT"
+  sensitive   = false
   default     = "3000"
 }
 
-variable "dynamic_cache_path" {
+variable "dynamic_cache_directory" {
   type        = string
-  description = "Azure ewb app custom container only allows write permission on /home"
-  default     = "/home/dynamicCache.json"
+  description = "Azure web app custom container only allows write permission on /home"
+  sensitive   = false
+  default     = "/home/"
 }
 
 variable "app_name" {
-  type    = string
-  default = "evergreendashboard"
+  type        = string
+  description = "Also used as the subdomain if deployed on azure as is, may conflict if left unchanged"
+  sensitive   = false
+  default     = "evergreendashboard"
 }
 
 variable "app_description" {
-  type    = string
-  default = "Monitoring Github orgnization dependencies"
+  type      = string
+  sensitive = false
+  default   = "Monitoring Github orgnisation dependencies"
 }
 
 variable "location" {
   description = "Azure location"
   type        = string
+  sensitive   = false
   default     = "Australia Southeast"
 }
 
@@ -52,6 +77,7 @@ variable "instance_type" {
     os_type  = string
   })
   description = "Stock Keeping Unit type and the operating system"
+  sensitive   = false
   default = {
     sku_name = "B1"
     os_type  = "Linux"

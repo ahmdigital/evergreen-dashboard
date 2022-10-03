@@ -193,8 +193,8 @@ const Tabs = (props: Props & {tableFunc?: (elem:ReactNode, variant:"dependency" 
             value={tabVal}
             onChange={handleChange}
             aria-label=""
-			variant="scrollable"
-			scrollButtons="auto"
+            variant="scrollable"
+            scrollButtons="auto"
             TabIndicatorProps={{ className: classes.indicator }}
           >
             {tabLabels}
