@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { InverseSubRow } from "./ReposTableComponents/InverseSubRow";
-import { SubRow } from "./ReposTableComponents/SubRow";
 import { ProcessedDependencyData, useProcessDependencyData } from "../hooks/useProcessDependencyData";
-import Row from "./ReposTableComponents/Row";
 import Layout from "./Layout";
 import Head from "next/head";
 import DependenciesContainer from "./ReposTableComponents/DependenciesContainer";
@@ -11,49 +8,52 @@ import MobileSummaryContainer from "./MobileComponents/MobileSummaryContainer";
 import { DependencyData } from "../src/dataProcessing";
 import LoadingSnackbar from "./FeedbackComponents/LoadingSnackbar";
 import HelpGuide from "./HelpComponents/HelpGuide";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { RankSelectionList, SortBox, SortSettings } from  "./ReposTableComponents/SortAndFilterDropdowns";
-import { applySort, Filter, rankCounts, searchAndFilter } from "../src/sortingAndFiltering";
-import {  ThemeProvider } from "@mui/material/styles";
+import { RankSelectionList, SortBox, SortSettings } from "./ReposTableComponents/SortAndFilterDropdowns";
+import { applySort, Filter, rankCounts } from "../src/sortingAndFiltering";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { theme } from './ReposTableComponents/SortAndFilterDropdowns'
 
 export type PageProps = {
 	JSObject: DependencyData;
 	finalData: boolean;
 };
 
-
-function rowsToJSX(rows: ProcessedDependencyData) {
-	return rows.map((row) => (
-		<Row
-			key={row.name}
-			rank={row.minRank}
-			row={row}
-			subRows={{
-				internal: row.internalSubRows.map((i) => (
-					<SubRow key={i.name} dependency={i} />
-				)),
-				external: row.externalSubRows.map((i) => (
-					<SubRow key={i.name} dependency={i} />
-				)),
-				user: row.userSubRows.map((i) => (
-					<InverseSubRow key={i.name} user={i} />
-				)),
-				final: row.userSubRows.length === 0,
-			}}
-		/>
-	))
-}
+// Customising the table styling using ThemeProvider
+const theme2 = createTheme({
+	components: {
+		MuiSelect: {
+			styleOverrides: {
+				select: {
+					fontSize: "1rem",
+					fontFamily: 'var(--primary-font-family)',
+					color: 'black',
+				}
+			}
+		},
+		MuiInputLabel: {
+			styleOverrides: {
+				root: {
+					fontSize: "1.1rem",
+					fontFamily: 'var(--primary-font-family)',
+					color: 'black',
+				}
+			}
+		}
+	}
+})
 
 export function Page(props: PageProps) {
-	const [searchTerm, setSearchTerm] = useState<string>("");
+
+	// Using react state for table data
 	const rows = useProcessDependencyData(props.JSObject);
+	const [tableRows, setTableRows] = useState<ProcessedDependencyData>(useProcessDependencyData(props.JSObject))
+	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [sortSetting, setSortSetting] = useState<SortSettings>({ type: "rank", direction: true });
 	const [filterSetting, setFilterSetting] = useState<Filter>({ type: "", level: 0, direction: false, mustHaveDependency: -1, showRed: true, showYellow: true, showGreen: true });
 
 	// check if there are no rows
-	let emptyRows = rows.length === 0;
+	let emptyRows = tableRows.length === 0;
 
 	let loadingSnackbar: any = null;
 	// If the final data is loading, then set the backdrop open to true
@@ -66,12 +66,9 @@ export function Page(props: PageProps) {
 	}
 
 	//Sorting. Doing this after filtering would be more efficient
-	applySort(rows, sortSetting)
+	applySort(tableRows, sortSetting)
 
-	const jsxRows = rowsToJSX(rows)
-	const rankArray = rankCounts(rows)
-
-	const diplayedRows = searchAndFilter(rows, jsxRows, filterSetting, searchTerm)
+	const rankArray = rankCounts(tableRows)
 
 	const sortBox = SortBox(sortSetting, (event: SelectChangeEvent) => {
 		setSortSetting({ type: event.target.value as any, direction: sortSetting.direction })
@@ -88,7 +85,7 @@ export function Page(props: PageProps) {
 	}
 
 	//TODO: Replace this
-	const sortDirectionBox = <ThemeProvider theme={theme}>
+	const sortDirectionBox = <ThemeProvider theme={theme2}>
 		<FormControl fullWidth>
 			<InputLabel id="sort-direction-select-label" sx={{ fontSize: '1.3em', transform: 'translate(10px, -15px)' }}>
 				Sort Direction
@@ -131,13 +128,15 @@ export function Page(props: PageProps) {
 							{/* <MobileDependenciesContainer /> */}
 							<DependenciesContainer
 								JSObject={props.JSObject}
-								rows={diplayedRows}
+								tableRows={tableRows}
+								setTableRows={setTableRows}
 								searchTerm={searchTerm}
 								setSearchTerm={setSearchTerm}
 								sortDropdown={sortBox}
 								sortDirection={sortDirectionBox}
 								rankSelection={rankSelectionList}
 								emptyRows={emptyRows}
+								filterSetting={filterSetting}
 							/>
 							<HelpGuide />
 						</Layout>
@@ -153,13 +152,15 @@ export function Page(props: PageProps) {
 							<SummaryContainer rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} />
 							<DependenciesContainer
 								JSObject={props.JSObject}
-								rows={diplayedRows}
+								tableRows={tableRows}
+								setTableRows={setTableRows}
 								searchTerm={searchTerm}
 								setSearchTerm={setSearchTerm}
 								sortDropdown={sortBox}
 								sortDirection={sortDirectionBox}
 								rankSelection={rankSelectionList}
 								emptyRows={emptyRows}
+								filterSetting={filterSetting}
 							/>
 							<HelpGuide />
 						</Layout>
