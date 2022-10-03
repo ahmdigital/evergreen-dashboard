@@ -18,7 +18,7 @@
     "@mui/icons-material": "^5.10.6",
     "@mui/lab": "^5.0.0-alpha.102",
     "@mui/material": "^5.10.8",
-    "@mui/styles": "^5.10.7",
+    "@mui/styles": "^5.10.8",
     "@types/node": "^18.7.23",
     "chart.js": "^3.9.1",
     "chartjs-plugin-datalabels": "^2.1.0",
