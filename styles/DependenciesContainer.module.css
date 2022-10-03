@@ -1,5 +1,6 @@
 div.sectionContainer {
   display: flex;
+  max-width: 125rem;
   flex-direction: column;
   height: max-content;
   width: 100%;
@@ -30,15 +31,17 @@ div.btnsContainer button {
   justify-content: center;
   align-items: center;
 }
+
 div.btnsContainer button span {
   margin-left: 0.5rem;
 }
+
 div.btnsContainer button:hover {
   cursor: pointer;
   background-color: lightgray;
 }
 
-div.searchBarDiv{
+div.searchBarDiv {
   flex-wrap: wrap;
 }
 

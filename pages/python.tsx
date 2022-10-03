@@ -1,5 +1,13 @@
-import {PageLoader} from "../components/PageLoader"
+import { PageLoader } from "../components/PageLoader"
 
-export default function Profile() {
-    return PageLoader("PyPI")
+export async function getServerSideProps() {
+    return {
+        props: {
+            targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION,
+        }
+    }
+}
+
+export default function Profile(props: { targetOrganisation: string }) {
+    return PageLoader("PyPI", props)
 }

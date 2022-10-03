@@ -9,7 +9,7 @@ import ForestIcon from "@mui/icons-material/Forest";
 import Tooltip from "@mui/material/Tooltip";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import refreshIcon from "../images/refresh.svg";
+import RefreshIcon from '@mui/icons-material/Refresh';
 import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "../PageLoader";
 import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import ReposSecondarySummaryTable from "./ReposSecondarySummaryTable";
@@ -23,6 +23,7 @@ import getConfig from 'next/config'
 
 import CondensedSummary from "./CondensedSummary/CondensedSummary";
 import BarChartIcon from '@mui/icons-material/BarChart';
+import Button from '@mui/material/Button';
 
 const { publicRuntimeConfig: config } = getConfig();
 let refreshing = false
@@ -33,13 +34,15 @@ export default function SummaryContainer(props: {
   rows: ProcessedDependencyData;
   filterTerm: Filter;
   setFilterTerm: any;
+  targetOrganisation: string;
 }) {
   const totalRepos =
-    props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
+  props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
   let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
   let overallPercentStr = overallPercent + "%";
   let overallStyle = styles.summaryOverall;
   let overallColour = styles.summaryOverallGreen;
+  console.log('TARGET', props.targetOrganisation)
 
   if (isNaN(overallPercent)) {
     overallPercentStr = "N/A";
@@ -87,7 +90,6 @@ export default function SummaryContainer(props: {
     //}
   }
 
-
   return (
     <Box
       sx={{ flexGrow: 1, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between' }}
@@ -95,16 +97,19 @@ export default function SummaryContainer(props: {
     >
       <Grid container spacing={1} className={styles.container}>
         <Grid>
-          <h1 className="noMargins"><ForestIcon /> Evergreen Dashboard</h1>
+          <h1 className={styles.noMargins}><ForestIcon /> Evergreen Dashboard</h1>
           <p className={styles.subtitle}>
-            Monitoring dependencies for <b>ahm-digital</b> Github Organisation
+            Monitoring dependencies for <b className={styles.orgTitle}>{props.targetOrganisation}</b> Github Organisation
           </p>
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
-              <button onClick={callRefresh} aria-label="Refresh data">
-                <Image src={refreshIcon} alt="Refresh Icon" width="15rem" height="15rem"></Image>
-                <span className={styles.refreshWord}>Refresh</span>
-              </button>
+              <Button variant="contained" startIcon={<RefreshIcon />} sx={{
+                backgroundColor: 'var(--colour-black)', borderRadius: 'var(--main-section-border-radius)', '&:hover': {
+                  backgroundColor: '#424242',
+                },
+              }} onClick={callRefresh}>
+                Refresh
+              </Button>
             </Tooltip>
           </div>
         </Grid>
@@ -134,23 +139,24 @@ export default function SummaryContainer(props: {
               <div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
                 <h3 className={styles.overallTitleStyle}>Overall</h3>
                 <h3 className={styles.percentStyle} >{overallPercentStr}</h3>
-                <h3 className={styles.overallCentredTitleStyle}>up-to-date</h3>
+                <h3 className={styles.overallCentredTitleStyle}>up-to-date of {props.rankArray.green + props.rankArray.yellow + props.rankArray.red} repositories </h3>
               </div>
             </div>
           </Grid>
+
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
               <div className={styles.summaryCompHeader}>
-              <h3 className={styles.summaryStyle}>Total Repositories ({props.rankArray.green + props.rankArray.yellow + props.rankArray.red})</h3>
-                <div style={{display: "flex", width: "70px", justifyContent: "space-between"}}>
-                <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Toggle Pie Chart</p>}>
+                <h3 className={styles.summaryStyle}>Total Repositories ({props.rankArray.green + props.rankArray.yellow + props.rankArray.red})</h3>
+                <div style={{ display: "flex", width: "70px", justifyContent: "space-between" }}>
+                  <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Toggle Pie Chart</p>}>
                     <IconButton
                       className={styles.helpBtn}
                       aria-label="Chart button"
                       onClick={() => {
                         setShowChart(!showChart);
                       }}
-                    ><BarChartIcon className={styles.chartButton}/></IconButton></Tooltip>
+                    ><BarChartIcon className={styles.chartButton} /></IconButton></Tooltip>
                   <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
                     <IconButton
                       className={styles.helpBtn}

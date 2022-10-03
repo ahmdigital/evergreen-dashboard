@@ -1,12 +1,9 @@
 import cachedData from "../cachedData.json";
 import {Page} from "./Page";
 import { JSObjectFromJSON } from "../src/dataProcessing";
-// import { getJsonStructure } from "evergreen-org-crawler/src/index"
 import { useEffect, useState } from "react";
 import LoadingSnackbar from "./FeedbackComponents/LoadingSnackbar";
 import ErrorSnackbar from "./FeedbackComponents/ErrorSnackbar";
-// import getConfig from 'next/config'
-// const { publicRuntimeConfig: config } = getConfig()
 
 enum Mode {
 	Frontend,
@@ -69,7 +66,7 @@ export let PageLoaderCurrentData: any = null
 
 export let lastRequest: any = null
 
-export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
+export function PageLoader(request: "npm" | "PyPI" | "RubyGems", props: { targetOrganisation: string }) {
 	const requestToAPI = {
 		npm: "NPM",
 		PyPI: "PYPI",
@@ -128,9 +125,9 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 			//TODO: Support overwriting current page data rather than recreating the whole page.
 			//TODO: Alternatively, copy the state (i.e. which tabs are open) to the new page
 			if(data != null && (data! as {oldVersion: boolean, data: any}).oldVersion){
-				return <Page JSObject={(data as {oldVersion: boolean, data: any}).data}  finalData={false}/>
+				return <Page JSObject={(data as {oldVersion: boolean, data: any}).data}  finalData={false} targetOrganisation={props.targetOrganisation} />
 			} else if( data != null && (data! as {refreshing: boolean, data: any}).refreshing){
-				return <Page JSObject={(data as {refreshing: boolean, data: any}).data}  finalData={false}/>
+				return <Page JSObject={(data as {refreshing: boolean, data: any}).data}  finalData={false} targetOrganisation={props.targetOrganisation} />
 			}
 		}
 
@@ -141,5 +138,5 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 		return <><ErrorSnackbar open={true}/></>
 	}
 
-	return <Page JSObject={data} finalData={true}/>
+	return <Page JSObject={data} finalData={true} targetOrganisation={props.targetOrganisation} />
 }

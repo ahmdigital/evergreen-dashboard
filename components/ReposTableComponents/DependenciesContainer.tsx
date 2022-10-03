@@ -1,12 +1,12 @@
-import React from "react";
+import React, {useMemo} from "react";
 import styles from "../../styles/DependenciesContainer.module.css";
 import sharedStyles from "../../styles/TreeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../../src/dataProcessing";
-import getConfig from 'next/config'
-import FilterListIcon from '@mui/icons-material/FilterList';
-const { publicRuntimeConfig: config } = getConfig();
-
+import { applyFilter, Filter } from "../../src/sortingAndFiltering";
+import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
+import { GridTable } from "../MobileComponents/GridTable";
+import CollapsibleTable from "./CollapsibleTable";
 import {
 	PageLoaderCurrentData,
 	forceNewVersion,
@@ -15,49 +15,39 @@ import {
 	PageLoaderSetData,
 	PageLoaderSetLoading,
 } from "../PageLoader";
-import { Box, Grid, IconButton } from "@mui/material";
-import { Stack } from "@mui/system";
-import { GridTable } from "../MobileComponents/GridTable";
-import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
-
+import { Box, Grid } from "@mui/material";
 let refreshing = false;
 
 
-export async function getServerSideProps() {
-  return {
-    props: {
-      targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION,
-    }
-  }
-}
-
 /* Container includes  Search, Filter, Dependencies Table */
-export default function DependenciesContainer(ContainerProps: {
-  JSObject: DependencyData;
-  rows: JSX.Element[];
-  dataRows: ProcessedDependencyData;
-  searchTerm: any;
-  setSearchTerm: any;
-  sortDropdown: any;
-  rankSelection: any;
-  emptyRows: boolean;
-  sortDirection: any;
-}, props: { targetOrganisation: string }) {
-  async function callRefresh() {
-    if (refreshing) {
-      return;
-    }
-    if (lastRequest == null) {
-      return;
-    }
-    if (PageLoaderIsLoading) {
-      return;
-    }
-    PageLoaderSetLoading(true);
-    PageLoaderSetData({
-      refreshing: true,
-      data: PageLoaderCurrentData as any,
-    } as any);
+export default function DependenciesContainer(props: {
+	JSObject: DependencyData;
+	tableRows: ProcessedDependencyData;
+	setTableRows: React.Dispatch<React.SetStateAction<ProcessedDependencyData>>	;
+	searchTerm: string;
+	setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+	sortDropdown: JSX.Element;
+	rankSelection: JSX.Element;
+	emptyRows: boolean;
+	sortDirection: JSX.Element;
+	filterSetting: Filter;
+	targetOrganisation: string;
+}) {
+	async function callRefresh() {
+		if (refreshing) {
+			return;
+		}
+		if (lastRequest == null) {
+			return;
+		}
+		if (PageLoaderIsLoading) {
+			return;
+		}
+		PageLoaderSetLoading(true);
+		PageLoaderSetData({
+			refreshing: true,
+			data: PageLoaderCurrentData as any,
+		} as any);
 
 		refreshing = true;
 
@@ -86,8 +76,16 @@ export default function DependenciesContainer(ContainerProps: {
 			xs: filterOpen ? "block" : "none",
 			md: 'initial'
 		}
-	}
+	};
 
+	// searchTerm={props.searchTerm} setSearchTerm={props.setSearchTerm} filterSetting={props.filterSetting}
+	const searchAndFilteredData = useMemo(() => {
+		return props.tableRows.filter(
+			(row) => 
+				applyFilter(row, props.filterSetting) 
+				&& row.name.toLowerCase().includes(props.searchTerm.toLowerCase()))
+	}, [props.tableRows, props.filterSetting, props.searchTerm])
+	
 	return (
 		<Box className={styles.sectionContainer} sx={{
 			padding: {
@@ -95,50 +93,43 @@ export default function DependenciesContainer(ContainerProps: {
 				md: '2.5rem 3.125rem 3.75rem 3.125rem',
 			}
 		}}>
-			<h3 className={sharedStyles.h3ContainerStyle}>Repositories </h3>
+			<h2 className={sharedStyles.h2ContainerStyle}>Repositories </h2>
 
 			<Grid container spacing={2}>
 				<Grid item xs={12} lg={5} xl={6}>
-					<Stack direction="row" spacing={1} alignItems="center">
 					<SearchBar
-          				searchTerm={ContainerProps.searchTerm}
-          				setSearchTerm={ContainerProps.setSearchTerm}
-        			/>
-						<IconButton
-							sx={{ display: { xs: 'initial', md: 'none' } }}
-							aria-label='Sort and filter'
-							onClick={toggleFilter}
-						>
-							<FilterListIcon
-								fontSize='medium'
-								color={filterOpen ? 'primary' : 'inherit'}
-							/>
-						</IconButton>
-					</Stack>
+						searchTerm={props.searchTerm}
+						setSearchTerm={props.setSearchTerm}
+						repoNames={(props.tableRows.map((row: any) => row.name))}
+					/>
 				</Grid>
 				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
-					{ContainerProps.sortDropdown}
+					{props.sortDropdown}
 				</Grid>
 				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
-					{ContainerProps.sortDirection}
+					{props.sortDirection}
 				</Grid>
 				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
-					{ContainerProps.rankSelection}
+					{props.rankSelection}
 				</Grid>
 			</Grid>
 			
-			<GridTable rows={ContainerProps.dataRows} />
+			<GridTable rows={searchAndFilteredData} />
 
+
+			<div className={styles.tableStyle}>
+				<CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows} searchAndFilteredData={searchAndFilteredData}></CollapsibleTable>
+			</div>
 			{
-				ContainerProps.emptyRows &&
+				props.emptyRows &&
 				<div className={styles.noReposStyle}>
 					<p>
-						<b>{config.targetOrganisation}</b> has 0 repositories
+						<b>{props.targetOrganisation}</b> has 0 repositories
 					</p>
 				</div>
 			}
 			{
-				!ContainerProps.emptyRows && (ContainerProps.searchTerm !== "" && ContainerProps.rows.length === 0) &&
+				!props.emptyRows && (props.searchTerm !== "" && props.tableRows.length === 0) &&
 				<div className={styles.noReposStyle}>
 					<p>No search results found</p>
 				</div>

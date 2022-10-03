@@ -24,7 +24,10 @@ export const theme = createTheme({
 					fontSize: "var(--font-size-normal)", //16px
 					fontFamily: 'var(--secondary-font-family)',
 					padding: '4px',
-					lineHeight: 'inherit'
+					lineHeight: 'inherit',
+					"&:hover": {
+						cursor: 'pointer'
+					  }
 				},
 			}
 		}

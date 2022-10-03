@@ -22,3 +22,13 @@
   font-family: var(--secondary-font-family);
   font-size: var(--font-size-normal);
 }
+
+p.countText{
+  font-size: 1.25rem;
+}
+
+@media only screen and (min-width: 1920px){
+  p.countText {
+    font-size: var(--font-size-xlarge);
+  }
+}

@@ -3,16 +3,6 @@ import headerStyles from "../../styles/HeaderContainer.module.css";
 // import sharedStyles from "../styles/TreeView.module.css";
 import ForestIcon from "@mui/icons-material/Forest";
 import { RepoOverviewCondensedProps } from "./CondensedSummary/CondensedSummary";
-// import getConfig from "next/config";
-// const { publicRuntimeConfig: config } = getConfig()
-
-export async function getServerSideProps() {
-  return {
-    props: {
-      targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION,
-    }
-  }
-}
 
 export default function HeaderContainer(props: {targetOrganisation: string}) {
   return (
@@ -31,13 +21,3 @@ export default function HeaderContainer(props: {targetOrganisation: string}) {
 type CondensedHeaderSumProps = {
   rankArray: RepoOverviewCondensedProps;
 }
-
-// export const CondensedHeaderSummaryContainer = (props: CondensedHeaderSumProps) => {
-
-//   return (
-//     <div className={`${headerStyles.headerStyle} ${sharedStyles.sectionContainer}`}>
-//       <HeaderContainer />
-//       <CondensedSummary statusValues={props.rankArray} target={config.targetPercentage} />
-//     </div>
-//   );
-// };

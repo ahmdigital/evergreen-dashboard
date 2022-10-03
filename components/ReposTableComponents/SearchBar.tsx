@@ -1,25 +1,40 @@
 import React from "react";
-import Image from "next/image";
-import styles from "../../styles/SearchBar.module.css";
-import magnifyingGlass from "../images/magnifying-glass.svg";
+import debounce from 'lodash.debounce';
+import Autocomplete from '@mui/material/Autocomplete';
+import { TextField } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+// Customising the table styling using ThemeProvider
+const theme = createTheme({
+  typography: {
+    fontFamily: 'var(--primary-font-family)',
+    fontWeightRegular: 'var(--font-weight-semibold)',
+  },
+})
 
 export default function SearchBar(props: {
   searchTerm: any;
   setSearchTerm: any;
+  repoNames: any
 }) {
-  return (
-    <div className={styles.searchBarWidth}>
-      <div className={styles.searchBar}>
-        <input
-          className={styles.searchBar}
-          type="text"
-          placeholder="Search..."
-          value={props.searchTerm}
-          onChange={(e) => props.setSearchTerm(e.target.value)}
-        />
 
-        <Image alt="Search Icon" src={magnifyingGlass} width={24} height={26} />
+  // Updating the searchTerm state
+  const handleChange = (event: any, value: any) => {
+    if (!value) {
+      props.setSearchTerm('')
+    } else {
+      props.setSearchTerm(value)
+    }
+  }
+
+  // Using debounce to delay invoking handleChange function, this ensures there is no lag/(freeze) when clearing the search bar
+  const debounceOnChange = debounce(handleChange, 100)
+
+  return (
+    <ThemeProvider theme={theme}>
+      <div>
+        <Autocomplete fullWidth={true} freeSolo options={props.repoNames} renderInput={(params) => <TextField {...params} label="Search" />} onChange={debounceOnChange} />
       </div>
-    </div>
+    </ThemeProvider>
   );
 }

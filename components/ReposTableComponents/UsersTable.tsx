@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,46 +6,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "../../styles/InternalTable.module.css";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { tableBodyStyle, theme as tableTheme } from "./InternalTable";
-
-type CollapsibleTableProps = {
-  children: ReactNode;
-};
-
-// Customising the table styling using ThemeProvider
-const theme = createTheme({
-  components: {
-    MuiTableCell: {
-      styleOverrides: {
-        root: {
-          fontWeight: "bold",
-          fontSize: "var(--font-size-normal)",
-          fontFamily: "var(--primary-font-family)",
-          backgroundColor: "#f5f5f5",
-          color: "var(--colour-font)",
-          marginTop: "1rem",
-          lineHeight: "3rem",
-          borderColor: "var(--table-cell-border)",
-          borderWidth: "0.2rem",
-        },
-      },
-    },
-    MuiTableContainer: {
-      styleOverrides: {
-        root: {
-          maxHeight: "18.4rem",
-          overflow: "scroll",
-          overflowX: "hidden",
-          boxShadow: "none",
-        },
-      },
-    },
-  },
-});
+import { InverseSubRow } from "./InverseSubRow";
+import { ThemeProvider } from "@mui/material/styles";
 
 // Creates the interior table
-export default function CollapsibleTable(props: CollapsibleTableProps) {
+export default function UsersTable(props: { tableRows: any }) {
   return (
     <ThemeProvider theme={tableTheme}>
       <TableContainer component={Paper} className={styles.tableComponent}>
@@ -67,7 +32,13 @@ export default function CollapsibleTable(props: CollapsibleTableProps) {
               <TableCell>current</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>{props.children}</TableBody>
+          <TableBody>
+            {
+              props.tableRows.map((row: any) => (
+                <InverseSubRow key={row.name} user={row} />
+              ))
+            }
+          </TableBody>
         </Table>
       </TableContainer>
     </ThemeProvider>
