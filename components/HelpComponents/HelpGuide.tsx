@@ -31,13 +31,7 @@ const theme = createTheme({
           color: 'white',
         }
       }
-    }
-  }
-})
-
-// Customising the table styling using ThemeProvider
-const tabelCellTheme = createTheme({
-  components: {
+    },
     MuiTableCell: {
       styleOverrides: {
         root: {
@@ -51,6 +45,7 @@ const tabelCellTheme = createTheme({
     },
   }
 })
+
 
 // defining style for custom tooltip
 const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
@@ -116,7 +111,7 @@ function StatusTable() {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <ThemeProvider theme={tabelCellTheme}>
+            <ThemeProvider theme={theme}>
               <TableCell className={styles.fieldContentStyle}>Status</TableCell>
               <TableCell className={styles.fieldContentStyle}>Definition</TableCell>
             </ThemeProvider>

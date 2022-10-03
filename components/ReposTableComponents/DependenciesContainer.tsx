@@ -124,26 +124,12 @@ export default function DependenciesContainer(props: {
 				</Grid>
 			</Grid>
 			
-			<GridTable rows={props.finalisedData} />
+			<GridTable rows={props.finalisedData} emptyRows={props.emptyRows} searchTerm={props.searchTerm} tableRows={props.tableRows}/>
 
 			{/* TODO: Delete this */}
 			{/* <div className={styles.tableStyle}>
 				<CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows} searchAndFilteredData={searchAndFilteredData}></CollapsibleTable>
 			</div> */}
-			{
-				props.emptyRows &&
-				<div className={styles.noReposStyle}>
-					<p>
-						<b>{props.targetOrganisation}</b> has 0 repositories
-					</p>
-				</div>
-			}
-			{
-				!props.emptyRows && (props.searchTerm !== "" && props.tableRows.length === 0) &&
-				<div className={styles.noReposStyle}>
-					<p>No search results found</p>
-				</div>
-			}
 		</Box>
 	);
 }

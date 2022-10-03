@@ -17,7 +17,10 @@ const tableHeaderTextSX = {
 }
 
 type GridTableProps = {
-	rows: ProcessedDependencyData
+	rows: ProcessedDependencyData,
+	emptyRows: boolean,
+	searchTerm: string,
+	tableRows: ProcessedDependencyData
 }
 
 export function GridTable(props: GridTableProps) {
@@ -53,6 +56,20 @@ export function GridTable(props: GridTableProps) {
 
 		{
 			props.rows?.map((row, index) => <GridRow row={row} key={index} />)
+		}
+		{
+			props.emptyRows &&
+			<div>
+				<p>
+					organisation has 0 repositories
+				</p>
+			</div>
+		}
+		{
+			(props.searchTerm !== "" && props.rows.length === 0) &&
+			<div>
+				<p>No search results found</p>
+			</div>
 		}
 	</Box>
 }
