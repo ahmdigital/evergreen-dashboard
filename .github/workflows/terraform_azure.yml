@@ -27,7 +27,7 @@ on:
 jobs:
   terraform_azure_docker:
     name: terraform azure docker
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor != 'dependabot[bot]' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor != 'dependabot[bot]' }} || ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     defaults:
       run:
