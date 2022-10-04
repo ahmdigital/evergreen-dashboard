@@ -139,7 +139,7 @@ export default function SummaryContainer(props: {
               <div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
                 <h3 className={styles.overallTitleStyle}>Overall</h3>
                 <h3 className={styles.percentStyle} >{overallPercentStr}</h3>
-                <h3 className={styles.overallCentredTitleStyle}>up-to-date of {props.rankArray.green + props.rankArray.yellow + props.rankArray.red} repositories </h3>
+                <h3 className={styles.overallCentredTitleStyle}>{props.rankArray.green}/{totalRepos} repositories up-to-date </h3>
               </div>
             </div>
           </Grid>
@@ -147,7 +147,7 @@ export default function SummaryContainer(props: {
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
               <div className={styles.summaryCompHeader}>
-                <h3 className={styles.summaryStyle}>Total Repositories ({props.rankArray.green + props.rankArray.yellow + props.rankArray.red})</h3>
+                <h3 className={styles.summaryStyle}>Total Repositories ({totalRepos})</h3>
                 <div style={{ display: "flex", width: "70px", justifyContent: "space-between" }}>
                   <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Toggle Pie Chart</p>}>
                     <IconButton

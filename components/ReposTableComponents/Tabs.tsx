@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useState, ReactNode } from "react";
 import Tabss from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
@@ -9,6 +9,7 @@ import UsersTable from './UsersTable'
 
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Props } from "./Row";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -44,8 +45,9 @@ const theme = createTheme({
           fontWeight: "var(--font-weight-normal)", //400
           fontSize: 'var(--font-size-normal)',
           fontFamily: "var(--primary-font-family)",
-          width: "30%",
-          maxWidth: "18.75rem", //"300px"
+        //   width: "30%",
+		//   paddingRight: '40px',	
+        //   maxWidth: "18.75rem", //"300px"
           textAlign: "left",
           flexDirection: "row",
           color: "var(--colour-black)",
@@ -113,22 +115,27 @@ const HeaderLabel = (props: HeaderLabelProps) => {
   };
 
   return (
-    <Box sx={boxStyle}>
+    <Box sx={{paddingRight: {
+		xs: '40px',
+		md: '80px',
+		lg: '120px',
+	  },
+	  ...boxStyle}}>
       <label style={{ maxWidth: "6.25rem" /* 100px */ }}>{props.headerTitle}</label>
       <Badge badgeContent={props.badgeValue} color="primary" showZero></Badge>
     </Box>
   );
 };
 
-const Tabs = (props: {internal: any, external: any, user: any}) => {
+const Tabs = (props: Props & {tableFunc?: (elem:ReactNode, variant:"dependency" | "user") => ReactNode}) => {
   // Creates the tab menu & displays the internal/external data
-  const internal = props.internal;
-  const external = props.external;
-  const user = props.user;
+  const internal = props.subRows.internal;
+  const external = props.subRows.external;
+  const user = props.subRows.user;
 
-  const internalTable = <InternalTable tableRows={internal}></InternalTable>;
-  const externalTable = <InternalTable tableRows={external}></InternalTable>;
-  const userTable = <UsersTable tableRows={user}></UsersTable>;
+  const internalTable = props.tableFunc ? props.tableFunc(internal, "dependency") : <InternalTable tableRows={internal}></InternalTable>;
+  const externalTable = props.tableFunc ? props.tableFunc(external, "dependency") : <InternalTable tableRows={external}></InternalTable>;
+  const userTable = props.tableFunc ? props.tableFunc(user, "user") : <UsersTable tableRows={user}></UsersTable>;
 
   const [tabVal, setTabVal] = useState(0);
   const classes = useStyles();
@@ -186,6 +193,8 @@ const Tabs = (props: {internal: any, external: any, user: any}) => {
             value={tabVal}
             onChange={handleChange}
             aria-label=""
+            variant="scrollable"
+            scrollButtons="auto"
             TabIndicatorProps={{ className: classes.indicator }}
           >
             {tabLabels}

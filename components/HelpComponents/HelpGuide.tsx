@@ -31,9 +31,21 @@ const theme = createTheme({
           color: 'white',
         }
       }
-    }
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          fontSize: 'var(--font-size-normal)',
+          fontFamily: 'var(--primary-font-family)',
+          paddingBottom: '1rem',
+          fontWeight: 'bold',
+          color: 'var(--colour- font)',
+        }
+      }
+    },
   }
 })
+
 
 // defining style for custom tooltip
 const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
@@ -99,14 +111,16 @@ function StatusTable() {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell className={styles.fieldContentStyle}>Status</TableCell>
-            <TableCell className={styles.fieldContentStyle}>Definition</TableCell>
+            <ThemeProvider theme={theme}>
+              <TableCell className={styles.fieldContentStyle}>Status</TableCell>
+              <TableCell className={styles.fieldContentStyle}>Definition</TableCell>
+            </ThemeProvider>
           </TableRow>
         </TableHead>
         <TableBody>
           <TableRow>
             <TableCell>
-              <Image src={redIcon} alt="Needs updating urgently" width="40px" height="40px"></Image>
+              <Image src={redIcon} alt="highly out-of-date" width="40px" height="40px"></Image>
             </TableCell>
             <TableCell className={styles.infoContentStyle}>
               {redDef.description}

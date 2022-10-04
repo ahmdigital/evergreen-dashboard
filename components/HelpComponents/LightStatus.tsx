@@ -90,7 +90,7 @@ function StatusTable() {
           <ThemeProvider theme={theme}>
             <TableRow>
               <TableCell className={styles.tableCellStyle}>
-                <Image src={redIcon} alt="Needs updating urgently" width="40px" height="40px"></Image>
+                <Image src={redIcon} alt="Highly out-of-date" width="40px" height="40px"></Image>
               </TableCell>
               <TableCell className={styles.tableCellStyle}>
                 <p>{redDef.description}</p>
@@ -98,7 +98,7 @@ function StatusTable() {
             </TableRow>
             <TableRow>
               <TableCell className={styles.tableCellStyle}>
-                <Image src={yellowIcon} alt="Should be updated soon" width="40px" height="40px"></Image>
+                <Image src={yellowIcon} alt="Moderately out-of-date" width="40px" height="40px"></Image>
               </TableCell>
               <TableCell className={styles.tableCellStyle}>
                 <p>{yellowDef.description}</p>

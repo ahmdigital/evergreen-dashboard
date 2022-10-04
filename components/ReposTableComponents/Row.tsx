@@ -9,7 +9,6 @@ import RedIcon from "../images/redIcon.svg";
 import YellowIcon from "../images/yellowIcon.svg";
 import greenIcon from "../images/greenIcon.svg";
 import Image from "next/image";
-import Tabs from "./Tabs";
 import { semVerToString } from "../../src/semVer";
 import styles from "../../styles/Row.module.css";
 import { redDef, yellowDef, greenDef } from "../HelpComponents/LightStatus";
@@ -71,7 +70,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
   
   const [open, setOpen] = useState(false);
   let statusIcon = RedIcon;
-  let statusText = "Needs updating urgently";
+  let statusText = "Highly out-of-date";
   let iconDefinition = redDef.description;
 
   // Setting the status
@@ -83,7 +82,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
   if (rank == 1) {
     statusIcon = YellowIcon;
     iconDefinition = yellowDef.description;
-    statusText = "Should be updated soon";
+    statusText = "Moderately out-of-date";
   }
 
   return (
@@ -144,7 +143,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
                   <TableHead className={styles.collapsibleTableHead} >
                     <TableRow >
                       <TableCell className={styles.collapsibleTableCell}>
-                        <Tabs internal={subRows.internal} external={subRows.external} user={subRows.user}></Tabs>
+                        {/* <Tabs internal={subRows.internal} external={subRows.external} user={subRows.user}></Tabs> */}
                       </TableCell>
                     </TableRow>
                   </TableHead>

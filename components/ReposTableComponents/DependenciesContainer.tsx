@@ -1,12 +1,13 @@
 import React from "react";
-import CollapsibleTable from "./CollapsibleTable";
 import styles from "../../styles/DependenciesContainer.module.css";
 import sharedStyles from "../../styles/TreeView.module.css";
 import SearchBar from "./SearchBar";
 import { DependencyData } from "../../src/dataProcessing";
-import getConfig from 'next/config'
-const { publicRuntimeConfig: config } = getConfig();
-
+import { Filter } from "../../src/sortingAndFiltering";
+import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
+import { GridTable } from "../MobileComponents/GridTable";
+import FilterListIcon from '@mui/icons-material/FilterList';
+import { Box, Grid, IconButton } from "@mui/material";
 import {
 	PageLoaderCurrentData,
 	forceNewVersion,
@@ -15,23 +16,22 @@ import {
 	PageLoaderSetData,
 	PageLoaderSetLoading,
 } from "../PageLoader";
-import { Box, Grid } from "@mui/material";
 let refreshing = false;
-
 
 /* Container includes  Search, Filter, Dependencies Table */
 export default function DependenciesContainer(props: {
 	JSObject: DependencyData;
-	tableRows: any;
-	setTableRows: any;
-	searchTerm: any;
-	setSearchTerm: any;
-	sortDropdown: any;
-	rankSelection: any;
+	tableRows: ProcessedDependencyData;
+	setTableRows: React.Dispatch<React.SetStateAction<ProcessedDependencyData>>	;
+	searchTerm: string;
+	setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+	sortDropdown: JSX.Element;
+	rankSelection: JSX.Element;
 	emptyRows: boolean;
-	sortDirection: any;
-	filterSetting: any;
+	sortDirection: JSX.Element;
+	filterSetting: Filter;
 	targetOrganisation: string;
+	finalisedData: ProcessedDependencyData;
 }) {
 	async function callRefresh() {
 		if (refreshing) {
@@ -62,7 +62,7 @@ export default function DependenciesContainer(props: {
 			refreshing = false;
 		});
 		//	} break;
-		//}
+		//
 	}
 
 	const [filterOpen, setFilterOpen] = React.useState(false);
@@ -76,7 +76,7 @@ export default function DependenciesContainer(props: {
 			xs: filterOpen ? "block" : "none",
 			md: 'initial'
 		}
-	}
+	};
 
 	return (
 		<Box className={styles.sectionContainer} sx={{
@@ -89,11 +89,29 @@ export default function DependenciesContainer(props: {
 
 			<Grid container spacing={2}>
 				<Grid item xs={12} lg={5} xl={6}>
-					<SearchBar
-						searchTerm={props.searchTerm}
-						setSearchTerm={props.setSearchTerm}
-						repoNames={(props.tableRows.map((row: any) => row.name))}
-					/>
+				<Grid container  spacing={1} alignItems="center">
+					<Grid item xs>
+
+						<SearchBar
+								searchTerm={props.searchTerm}
+								setSearchTerm={props.setSearchTerm}
+								repoNames={(props.tableRows.map((row: any) => row.name))}
+								/>
+					</Grid>
+					
+					<Grid item xs="auto">
+							<IconButton
+								sx={{ display: { xs: 'initial', md: 'none' } }}
+								aria-label='Sort and filter'
+								onClick={toggleFilter}
+								>
+								<FilterListIcon
+									fontSize='medium'
+									color={filterOpen ? 'primary' : 'inherit'}
+									/>
+							</IconButton>
+						</Grid>
+					</Grid>
 				</Grid>
 				<Grid item xs={12} md={4} lg={2.33} xl={2} sx={filterSelectGridDisplay}>
 					{props.sortDropdown}
@@ -105,25 +123,13 @@ export default function DependenciesContainer(props: {
 					{props.rankSelection}
 				</Grid>
 			</Grid>
+			
+			<GridTable rows={props.finalisedData} emptyRows={props.emptyRows} searchTerm={props.searchTerm} tableRows={props.tableRows}/>
 
-
-			<div className={styles.tableStyle}>
-				<CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows} searchTerm={props.searchTerm} setSearchTerm={props.setSearchTerm} filterSetting={props.filterSetting}></CollapsibleTable>
-			</div>
-			{
-				props.emptyRows &&
-				<div className={styles.noReposStyle}>
-					<p>
-						<b>{props.targetOrganisation}</b> has 0 repositories
-					</p>
-				</div>
-			}
-			{
-				!props.emptyRows && (props.searchTerm !== "" && props.tableRows.length === 0) &&
-				<div className={styles.noReposStyle}>
-					<p>No search results found</p>
-				</div>
-			}
+			{/* TODO: Delete this */}
+			{/* <div className={styles.tableStyle}>
+				<CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows} searchAndFilteredData={searchAndFilteredData}></CollapsibleTable>
+			</div> */}
 		</Box>
 	);
 }

@@ -44,8 +44,8 @@ const theme1 = createTheme({
 })
 
 enum StatusLabel {
-  Red = "out-of-date",
-  Yellow = "few minors behind",
+  Red = "highly out-of-date",
+  Yellow = "moderately out-of-date",
   Green = "up-to-date",
 }
 
