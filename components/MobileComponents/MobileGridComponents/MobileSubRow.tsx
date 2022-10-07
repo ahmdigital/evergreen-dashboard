@@ -1,7 +1,7 @@
 import { Divider, Grid, Typography } from "@mui/material";
 import { PackageData } from "../../../hooks/useProcessDependencyData";
 import { SemVerFormatter } from "../../SemVerFormatter";
-import { StatusIcon } from "../../StatusIcon";
+import { StatusIcon } from "../../icons/StatusIcon";
 
 
 const subRowTextSX = {

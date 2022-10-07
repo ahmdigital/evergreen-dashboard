@@ -4,7 +4,7 @@ import { ProcessedDependencyData } from "../../../hooks/useProcessDependencyData
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { SemVerFormatter } from "../../SemVerFormatter";
-import { StatusIcon } from "../../StatusIcon";
+import { StatusIcon } from "../../icons/StatusIcon";
 import { Box } from "@mui/system";
 import { GridSubRow } from "./GridSubRow";
 // import dayjs from 'dayjs';

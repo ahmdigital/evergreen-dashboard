@@ -36,11 +36,12 @@ import CondensedSummary from "../SummaryComponents/CondensedSummary/CondensedSum
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Grid from "@mui/material/Unstable_Grid2";
+import { RankArray } from "../Page";
 
 let refreshing = false;
 
 export default function MobileSummaryContainer(props: {
-  rankArray: any;
+  rankArray: RankArray;
   loadingSnackbar: any;
   rows: ProcessedDependencyData;
   filterTerm: Filter;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import styles from "../../styles/SummaryContainer.module.css";
 import sharedStyles from "../../styles/TreeView.module.css";
 import ReposOverviewTable from "./RepoOverviewTable/ReposOverviewTable";
@@ -24,12 +24,13 @@ import getConfig from 'next/config'
 import CondensedSummary from "./CondensedSummary/CondensedSummary";
 import BarChartIcon from '@mui/icons-material/BarChart';
 import Button from '@mui/material/Button';
+import { RankArray } from "../Page";
 
 const { publicRuntimeConfig: config } = getConfig();
 let refreshing = false
 
 export default function SummaryContainer(props: {
-  rankArray: any;
+  rankArray: RankArray;
   loadingSnackbar: any;
   rows: ProcessedDependencyData;
   filterTerm: Filter;
@@ -57,6 +58,7 @@ export default function SummaryContainer(props: {
 
   // State for collapsing the header
   const [closeHeader, setCloseHeader] = useState<boolean>(true);
+
 
   async function callRefresh() {
     if (refreshing) {
@@ -90,6 +92,12 @@ export default function SummaryContainer(props: {
     //}
   }
 
+  const renderRepoOverviewTable = useMemo(()=>{
+    return (
+      <ReposOverviewTable rankArray={props.rankArray} showChart={showChart} />
+   )
+  } , [props.rankArray, showChart]);
+
   return (
     <Box
       sx={{ flexGrow: 1, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between' }}
@@ -99,7 +107,7 @@ export default function SummaryContainer(props: {
         <Grid>
           <h1 className={styles.noMargins}><ForestIcon /> Evergreen Dashboard</h1>
           <p className={styles.subtitle}>
-            Monitoring dependencies for <b className={styles.orgTitle}>{props.targetOrganisation}</b> Github Organisation
+            Monitoring dependencies for {props.targetOrganisation.length > 0 && <b className={styles.orgTitle}>{props.targetOrganisation}</b>} Github Organisation
           </p>
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
@@ -178,7 +186,7 @@ export default function SummaryContainer(props: {
               {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
               <div>
                 <div className={styles.summaryComponent2}>
-                  <ReposOverviewTable rankArray={props.rankArray} showChart={showChart} />
+                  {renderRepoOverviewTable}
                 </div>
               </div>
             </div>

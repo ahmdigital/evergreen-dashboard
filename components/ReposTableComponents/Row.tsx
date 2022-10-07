@@ -5,15 +5,14 @@ import IconButton from "@mui/material/IconButton";
 import { Tooltip, TableRow, TableHead, TableCell, Table } from "@mui/material";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import RedIcon from "../images/redIcon.svg";
-import YellowIcon from "../images/yellowIcon.svg";
-import greenIcon from "../images/greenIcon.svg";
+
 import Image from "next/image";
 import { semVerToString } from "../../src/semVer";
 import styles from "../../styles/Row.module.css";
-import { redDef, yellowDef, greenDef } from "../HelpComponents/LightStatus";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import QuestionMark from "@mui/icons-material/QuestionMark";
+import { rankToStatusType, statusDefinitions, statusLabel } from "../constants";
+import { iconImg } from "../icons/IconFactory";
 
 const dayjs = require('dayjs')
 var relativeTime = require('dayjs/plugin/relativeTime')
@@ -67,23 +66,15 @@ const collapsibleTheme = createTheme({
 export default function Row(props: { rank: number; row: any } & Props) {
   const { rank, row, subRows } = props;
 
-  
-  const [open, setOpen] = useState(false);
-  let statusIcon = RedIcon;
-  let statusText = "Highly out-of-date";
-  let iconDefinition = redDef.description;
 
-  // Setting the status
-  if (rank == 2) {
-    statusIcon = greenIcon;
-    iconDefinition = greenDef.description;
-    statusText = "Up to date";
-  }
-  if (rank == 1) {
-    statusIcon = YellowIcon;
-    iconDefinition = yellowDef.description;
-    statusText = "Moderately out-of-date";
-  }
+  const [open, setOpen] = useState(false);
+
+  const statusType = rankToStatusType[rank];
+
+	const statusIcon = iconImg[statusType];
+	const statusText = statusLabel[statusType];
+	const iconDefinition = statusDefinitions[statusType];
+  const ICON_SIZE = "40px";
 
   return (
     <React.Fragment>
@@ -106,10 +97,11 @@ export default function Row(props: { rank: number; row: any } & Props) {
                   layout="fixed"
                   src={statusIcon}
                   alt={statusText}
-                  width= "40px"
-                  height= "40px"
+                  width={ICON_SIZE}
+                  height={ICON_SIZE}
                   className={styles.statusIcon}
                 />
+
               </div>
             </Tooltip>
           </TableCell>

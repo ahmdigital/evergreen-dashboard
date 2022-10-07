@@ -6,12 +6,10 @@ import styles from "../../styles/HelpGuide.module.css";
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import greenIcon from "../images/greenIcon.svg";
-import yellowIcon from "../images/yellowIcon.svg";
-import redIcon from "../images/redIcon.svg";
-import Image from "next/image";
 import Divider from '@mui/material/Divider';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { statusDefinitions, StatusType } from "../constants";
+import { LightStatusIconFactory } from "../icons/IconFactory";
 
 // Customising the table styling using ThemeProvider
 const theme = createTheme({
@@ -99,13 +97,11 @@ class VersionDefinition {
   }
 }
 
-// defines red, yellow and green traffic light descriptions
-let redDef = new VersionDefinition("Current major version behind by more than 1 major or 6 minors.");
-let yellowDef = new VersionDefinition("Current minor version behind by 5 or 6 minors.");
-let greenDef = new VersionDefinition("Current minor version behind by less than 5 minors.");
+
 
 // creates the table for the status definitions
 function StatusTable() {
+  const ICON_SIZE = "40px";
   return (
     <TableContainer>
       <Table size="small">
@@ -120,26 +116,26 @@ function StatusTable() {
         <TableBody>
           <TableRow>
             <TableCell>
-              <Image src={redIcon} alt="highly out-of-date" width="40px" height="40px"></Image>
+              <LightStatusIconFactory toolTip={false} type={StatusType.RED} iconSize={ICON_SIZE} />
             </TableCell>
             <TableCell className={styles.infoContentStyle}>
-              {redDef.description}
+              {statusDefinitions[StatusType.RED]}
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>
-              <Image src={yellowIcon} alt="Up to date" width="40px" height="40px"></Image>
+              <LightStatusIconFactory toolTip={false} type={StatusType.YELLOW} iconSize={ICON_SIZE} />
             </TableCell>
             <TableCell className={styles.infoContentStyle}>
-              {yellowDef.description}
+              {statusDefinitions[StatusType.YELLOW]}
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>
-              <Image src={greenIcon} alt="Should be updated soon" width="40px" height="40px"></Image>
+              <LightStatusIconFactory toolTip={false} type={StatusType.GREEN} iconSize={ICON_SIZE} />
             </TableCell>
             <TableCell className={styles.infoContentStyle}>
-              {greenDef.description}
+              {statusDefinitions[StatusType.GREEN]}
             </TableCell>
           </TableRow>
         </TableBody>

@@ -4,10 +4,9 @@ import { semVerToString } from "../../src/semVer";
 import { SubRowProps } from "./SubRow";
 import Image from "next/image";
 import styles from "../../styles/SubRow.module.css";
-import RedIcon from "../images/redIcon.svg"
-import YellowIcon from "../images/yellowIcon.svg";
-import GreenIcon from "../images/greenIcon.svg";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { rankToStatusType, statusLabel } from "../constants";
+import { iconImg } from "../icons/IconFactory";
 
 type InverseSubRowProps = {
   //This is just renaming dependency to user to make it more clear
@@ -71,17 +70,10 @@ export function InverseSubRow(props: InverseSubRowProps) {
   const usedVersion = semVerToString(props.user.version);
   const depLink = props.user.link;
 
-  let statusIcon = RedIcon;
-  let statusText = "Highly out-of-date";
-  // Setting the status
-  if (props.user.rank == 2) {
-    statusIcon = GreenIcon;
-    statusText = "Up to date";
-  }
-  if (props.user.rank == 1) {
-    statusIcon = YellowIcon;
-    statusText = "Moderately out-of-date";
-  }
+  const statusType = rankToStatusType[props.user.rank];
+
+	const statusIcon = iconImg[statusType];
+	const statusText = statusLabel[statusType];
 
   return (
     <TableRow className={styles.inverseSubRow}    >

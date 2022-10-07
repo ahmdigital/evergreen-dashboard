@@ -20,6 +20,12 @@ export type PageProps = {
 	targetOrganisation: string
 };
 
+export type RankArray = {
+    green: number;
+    red: number;
+    yellow: number;
+};
+
 // Customising the table styling using ThemeProvider
 const theme2 = createTheme({
 	components: {
@@ -42,7 +48,7 @@ const theme2 = createTheme({
 			}
 		}
 	}
-})
+});
 
 export function Page(props: PageProps) {
 
@@ -69,11 +75,11 @@ export function Page(props: PageProps) {
 	// //Sorting. Doing this after filtering would be more efficient
 	// applySort(tableRows, sortSetting)
 
-	const rankArray = rankCounts(tableRows)
+	const rankArray: RankArray = rankCounts(tableRows);
 
 	const sortBox = SortBox(sortSetting, (event: SelectChangeEvent) => {
 		setSortSetting({ type: event.target.value as any, direction: sortSetting.direction })
-	})
+	});
 
 	const rankSelectionList = RankSelectionList(filterSetting, (event: SelectChangeEvent<string[]>) => {
 		const sel = typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value
