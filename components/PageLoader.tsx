@@ -1,8 +1,6 @@
 import cachedData from "../cachedData.json";
 import {Page} from "./Page";
 import { JSObjectFromJSON } from "../src/dataProcessing";
-import { getJsonStructure } from "evergreen-org-crawler/src/index"
-import config from "../config.json"
 import { useEffect, useState } from "react";
 import LoadingSnackbar from "./FeedbackComponents/LoadingSnackbar";
 import ErrorSnackbar from "./FeedbackComponents/ErrorSnackbar";
@@ -65,7 +63,7 @@ export let PageLoaderCurrentData: any = null
 
 export let lastRequest: any = null
 
-export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
+export function PageLoader(request: "npm" | "PyPI" | "RubyGems", props: { targetOrganisation: string }) {
 	const requestToAPI = {
 		npm: "NPM",
 		PyPI: "PYPI",
@@ -86,20 +84,20 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 		setLoading(true)
 
 		switch(mode){
-			case(Mode.Frontend): {
-				const accessToken = process.env.NEXT_PUBLIC_EVERGREEN_GITHUB_TOKEN!
-				let JSObject = getJsonStructure(
-					accessToken, {targetOrganisation :process.env.NEXT_PUBLIC_TARGET_ORGANISATION as string, ...config}, [api]
-				).then(
-					(result: string) => JSON.parse(result) as { npm: any, PyPI: any, RubyGems: any }
-				).then(
-					(data: any) => JSObjectFromJSON(getProperty(data!, request))
-				)
-				JSObject.then((result: any) => {
-					setData(result as any)
-					setLoading(false)
-				})
-			} break;
+			// case(Mode.Frontend): {
+			// 	const accessToken = process.env.NEXT_PUBLIC_EVERGREEN_GITHUB_TOKEN!
+			// 	let JSObject = getJsonStructure(
+			// 		accessToken, {targetOrganisation: config.targetOrganisation, ...config}, [api]
+			// 	).then(
+			// 		(result: string) => JSON.parse(result) as { npm: any, PyPI: any, RubyGems: any }
+			// 	).then(
+			// 		(data: any) => JSObjectFromJSON(getProperty(data!, request))
+			// 	)
+			// 	JSObject.then((result: any) => {
+			// 		setData(result as any)
+			// 		setLoading(false)
+			// 	})
+			// } break;
 			case(Mode.StandaloneBackend): {
 				const data = getProperty((cachedData as { npm: any, PyPI: any, RubyGems: any })!, request)
 				let JSObject = JSObjectFromJSON(data)
@@ -124,9 +122,9 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 			//TODO: Support overwriting current page data rather than recreating the whole page.
 			//TODO: Alternatively, copy the state (i.e. which tabs are open) to the new page
 			if(data != null && (data! as {oldVersion: boolean, data: any}).oldVersion){
-				return <Page JSObject={(data as {oldVersion: boolean, data: any}).data}  finalData={false}/>
+				return <Page JSObject={(data as {oldVersion: boolean, data: any}).data}  finalData={false} targetOrganisation={props.targetOrganisation} />
 			} else if( data != null && (data! as {refreshing: boolean, data: any}).refreshing){
-				return <Page JSObject={(data as {refreshing: boolean, data: any}).data}  finalData={false}/>
+				return <Page JSObject={(data as {refreshing: boolean, data: any}).data}  finalData={false} targetOrganisation={props.targetOrganisation} />
 			}
 		}
 
@@ -137,5 +135,5 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems") {
 		return <><ErrorSnackbar open={true}/></>
 	}
 
-	return <Page JSObject={data} finalData={true}/>
+	return <Page JSObject={data} finalData={true} targetOrganisation={props.targetOrganisation} />
 }

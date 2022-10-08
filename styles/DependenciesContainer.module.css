@@ -1,27 +1,17 @@
 div.sectionContainer {
   display: flex;
+  max-width: 125rem;
   flex-direction: column;
   height: max-content;
   width: 100%;
   background-color: var(--colour-container-background);
   box-shadow: var(--main-section-boxshadow);
   border-radius: var(--main-section-border-radius);
-  padding: 2.5rem 3.125rem 3.75rem 3.125rem;
   margin: 1.1rem;
   box-sizing: border-box;
   font-family: var(--primary-font-family);
 }
 
-div.depsBarStyle {
-  box-sizing: border-box;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: space-between;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
 
 div.btnsContainer {
   display: flex;
@@ -41,15 +31,17 @@ div.btnsContainer button {
   justify-content: center;
   align-items: center;
 }
+
 div.btnsContainer button span {
   margin-left: 0.5rem;
 }
+
 div.btnsContainer button:hover {
   cursor: pointer;
   background-color: lightgray;
 }
 
-div.searchBarDiv{
+div.searchBarDiv {
   flex-wrap: wrap;
 }
 
@@ -70,10 +62,6 @@ div.noReposStyle {
 div.sortBy {
   display: flex;
   flex-direction: column;
-}
-
-div.menuStyle{
-  margin-right: 0.7rem;
 }
 
 div.menusPosition{

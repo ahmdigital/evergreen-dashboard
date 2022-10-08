@@ -9,7 +9,6 @@ import RedIcon from "../images/redIcon.svg";
 import YellowIcon from "../images/yellowIcon.svg";
 import greenIcon from "../images/greenIcon.svg";
 import Image from "next/image";
-import Tabs from "./Tabs";
 import { semVerToString } from "../../src/semVer";
 import styles from "../../styles/Row.module.css";
 import { redDef, yellowDef, greenDef } from "../HelpComponents/LightStatus";
@@ -22,9 +21,9 @@ dayjs.extend(relativeTime)
 
 export type Props = {
   subRows: {
-    internal: JSX.Element[];
-    external: JSX.Element[];
-    user: JSX.Element[];
+    internal: any;
+    external: any;
+    user: any;
     final: boolean;
   };
 };
@@ -67,21 +66,23 @@ const collapsibleTheme = createTheme({
 // Creates each individual row
 export default function Row(props: { rank: number; row: any } & Props) {
   const { rank, row, subRows } = props;
+
+
   const [open, setOpen] = useState(false);
   let statusIcon = RedIcon;
-  let statusText = "Needs updating urgently";
+  let statusText = "Highly out-of-date";
   let iconDefinition = redDef.description;
 
   // Setting the status
   if (rank == 2) {
     statusIcon = greenIcon;
     iconDefinition = greenDef.description;
-	statusText = "Up to date";
+    statusText = "Up to date";
   }
   if (rank == 1) {
     statusIcon = YellowIcon;
     iconDefinition = yellowDef.description;
-	statusText = "Should be updated soon";
+    statusText = "Moderately out-of-date";
   }
 
   return (
@@ -102,10 +103,11 @@ export default function Row(props: { rank: number; row: any } & Props) {
             <Tooltip arrow title={<p className={styles.tooltipStyle}>{iconDefinition}</p>}>
               <div className={styles.iconContainer}>
                 <Image
+                  layout="fixed"
                   src={statusIcon}
                   alt={statusText}
-                  width="40px"
-                  height="40px"
+                  width= "40px"
+                  height= "40px"
                   className={styles.statusIcon}
                 />
               </div>
@@ -124,7 +126,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
             {
               (semVerToString(row.version) === "0.0.0-development" || semVerToString(row.version) === "0.0.0") &&
               <Tooltip arrow title={<p className={styles.tooltipStyle}>This repository was defined with a default version of 0.0.0</p>}>
-                <QuestionMark sx={{width: '1.125rem', height: '1.125rem'}}/>
+                <QuestionMark sx={{ width: '1.125rem', height: '1.125rem' }} />
               </Tooltip>
             }
           </TableCell>
@@ -144,7 +146,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
                   <TableHead className={styles.collapsibleTableHead} >
                     <TableRow >
                       <TableCell className={styles.collapsibleTableCell}>
-                        <Tabs subRows={subRows}></Tabs>
+                        {/* <Tabs internal={subRows.internal} external={subRows.external} user={subRows.user}></Tabs> */}
                       </TableCell>
                     </TableRow>
                   </TableHead>

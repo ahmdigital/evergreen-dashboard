@@ -50,4 +50,32 @@
 	display:table;
 	table-layout:fixed;
 	width:100%;
-  }
+}
+
+
+@media only screen and (max-width: 600px) {
+	.col1 {
+		width: 5%;
+		background-color: var(--table-left-edge);
+	}
+
+	.col2 {
+		width: 8%;
+		background-color: var(--colour-background);
+	}
+
+	.col3 {
+		width: 58%;
+		background-color: var(--colour-background);
+	}
+
+	.col4 {
+		width: 22%;
+		background-color: var(--colour-background);
+	}
+
+	.col5 {
+		width: 0%;
+		background-color: var(--colour-background);
+	}
+}

@@ -72,7 +72,7 @@ export function InverseSubRow(props: InverseSubRowProps) {
   const depLink = props.user.link;
 
   let statusIcon = RedIcon;
-  let statusText = "Needs updating urgently";
+  let statusText = "Highly out-of-date";
   // Setting the status
   if (props.user.rank == 2) {
     statusIcon = GreenIcon;
@@ -80,7 +80,7 @@ export function InverseSubRow(props: InverseSubRowProps) {
   }
   if (props.user.rank == 1) {
     statusIcon = YellowIcon;
-    statusText = "Should be updated soon";
+    statusText = "Moderately out-of-date";
   }
 
   return (

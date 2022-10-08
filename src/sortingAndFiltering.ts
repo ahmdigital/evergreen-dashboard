@@ -5,19 +5,19 @@ import { compareSemVerDelta, SemVerDelta, semVerToDelta } from "./semVer";
 export type SortSettings = { type: "name" | "repo" | "rank" | "time" | "internal" | "external" | "total" | "users" | "mostOutdated", direction: boolean }
 export type Filter = { type: "" | "time", level: any, direction: boolean, mustHaveDependency: number, showRed: boolean, showYellow: boolean, showGreen: boolean }
 
-function findMostOutdated(rows: ProcessedDependencyData){
+function findMostOutdated(rows: ProcessedDependencyData) {
 	let mostOutdated: SemVerDelta[] = []
-	for(let row of rows){
-		let curMin: SemVerDelta = {major: 0, minor: 0, bug: 0, skipMinor: false, skipBug: false}
-		for(let sub of row.internalSubRows){
+	for (let row of rows) {
+		let curMin: SemVerDelta = { major: 0, minor: 0, bug: 0, skipMinor: false, skipBug: false }
+		for (let sub of row.internalSubRows) {
 			let delta = semVerToDelta(sub.usedVersion, sub.version)
-			if(compareSemVerDelta(curMin, delta) < 0){
+			if (compareSemVerDelta(curMin, delta) < 0) {
 				curMin = delta
 			}
 		}
-		for(let sub of row.externalSubRows){
+		for (let sub of row.externalSubRows) {
 			let delta = semVerToDelta(sub.usedVersion, sub.version)
-			if(compareSemVerDelta(curMin, delta) < 0){
+			if (compareSemVerDelta(curMin, delta) < 0) {
 				curMin = delta
 			}
 		}
@@ -58,13 +58,13 @@ export function applySort(rows: ProcessedDependencyData, sortSetting: SortSettin
 		case ("mostOutdated"):
 			let deltas = findMostOutdated(rows)
 			let forSorting = []
-			for(let i = 0; i < rows.length; i++){
-				forSorting.push({"delta": deltas[i], "data": rows[i]})
+			for (let i = 0; i < rows.length; i++) {
+				forSorting.push({ "delta": deltas[i], "data": rows[i] })
 			}
 
 			forSorting.sort((a, b) => compareSemVerDelta(a.delta, b.delta))
 
-			for(let i = 0; i < rows.length; i++){
+			for (let i = 0; i < rows.length; i++) {
 				rows[i] = forSorting[i].data
 			}
 			break
@@ -93,25 +93,25 @@ export function rankCounts(rows: ProcessedDependencyData) {
 }
 
 export function applyFilter(row: ProcessedDependencyData[0], filter: Filter): boolean {
-	if(filter.mustHaveDependency != -1){
+	if (filter.mustHaveDependency != -1) {
 		let hasDependency = false
-		for(let sub of row.internalSubRows){
-			if(sub.id == filter.mustHaveDependency){
+		for (let sub of row.internalSubRows) {
+			if (sub.id == filter.mustHaveDependency) {
 				hasDependency = true
 				break
 			}
 		}
 
-		if(!hasDependency){
-			for(let sub of row.externalSubRows){
-				if(sub.id == filter.mustHaveDependency){
+		if (!hasDependency) {
+			for (let sub of row.externalSubRows) {
+				if (sub.id == filter.mustHaveDependency) {
 					hasDependency = true
 					break
 				}
 			}
 		}
 
-		if(!hasDependency){
+		if (!hasDependency) {
 			return false
 		}
 
