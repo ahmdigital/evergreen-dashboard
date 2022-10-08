@@ -79,7 +79,7 @@ variable "instance_type" {
   description = "Stock Keeping Unit type and the operating system"
   sensitive   = false
   default = {
-    sku_name = "B1"
+    sku_name = "F1"
     os_type  = "Linux"
   }
 }
