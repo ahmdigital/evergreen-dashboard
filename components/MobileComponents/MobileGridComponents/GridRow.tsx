@@ -59,8 +59,8 @@ export function GridRow(props: GridRowProps) {
 					</Typography>
 				</Grid>
 
-				{/* Name */}
-				<Grid item xs sx={{ overflowWrap: "anywhere" }}>
+				{/* Repo name */}
+				<Grid item xs sx={{ display: { xs: 'none', md: 'initial' }, overflowWrap: "anywhere" }}>
 					<Typography sx={{ ...rowTextSX }} >
 						{props.row.oldName ? props.row.oldName.substr(0, props.row.oldName.lastIndexOf('(')) : ""}
 					</Typography>
