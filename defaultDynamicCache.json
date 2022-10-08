@@ -1,4 +1,10 @@
 {
+	"aux":{
+		"orgName":"",
+		"orgLink":"",
+		"crawlStart":"0",
+		"error": "No cache"
+	},
 	"npm": [],
 	"PyPI": [],
 	"RubyGems": []

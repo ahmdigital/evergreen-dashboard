@@ -41,7 +41,7 @@ export function GridTable(props: GridTableProps) {
 					...tableHeaderTextSX
 				}}>status&nbsp;</Typography>
 			</Grid>
-			<Grid item xs >
+			<Grid item xs>
 				<Typography sx={tableHeaderTextSX}>name</Typography>
 			</Grid>
 			<Grid item xs sx={{ display: { xs: 'none', md: 'initial' } }} >
