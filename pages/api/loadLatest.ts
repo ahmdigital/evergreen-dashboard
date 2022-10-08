@@ -7,6 +7,7 @@ import { checkAuthorisation } from "../../src/authenticationMiddleware";
 
 // Cache files are stored inside ./next folder
 const CachePath = path.resolve(process.env.DYNAMIC_CACHE_DIR ?? "", "./dynamicCache.json")
+const DefaultCachePath = path.resolve("./defaultDynamicCache.json")
 
 const timeUntilRefresh = config.timeUntilRefresh * 60 * 1000 // minutes to milliseconds
 
@@ -36,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	} catch (error) {
 		console.log("Cache file does not exist.")
 
-		cachedData = {npm: [], PyPI: [], RubyGems: []}
+		cachedData = JSON.parse(fs.readFileSync(DefaultCachePath, 'utf8'))
 	}
 
 	res.status(200).json(cachedData)
