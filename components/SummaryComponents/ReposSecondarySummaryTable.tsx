@@ -71,6 +71,7 @@ function countUsage(rows: ProcessedDependencyData, countOnlyOutdated: boolean) {
 function MostCommonSummaryTable(name: string, usageCounts: { name: string, id: number, count: number }[], filterTerm: Filter, setFilterTerm: any) {
 	return (
 		<ThemeProvider theme={theme}>
+			<Box sx={{ px: 2, maxHeight: '75%', overflow: 'auto', boxSizing: 'border-box' }}>
 			<Table>
 				<TableRow>
 					<TableCell className={styles.totalsCellStyle}>
@@ -80,7 +81,7 @@ function MostCommonSummaryTable(name: string, usageCounts: { name: string, id: n
 					</TableCell>
 				</TableRow>
 				{
-					usageCounts.slice(0, 5).map(i => {
+					usageCounts.map(i => {
 						return <TableRow key={i.id} sx={{ ...(filterTerm.mustHaveDependency == i.id && { background: "var(--colour-table-selected)" }) }} onClick={() => setFilterTerm({ ...filterTerm, mustHaveDependency: filterTerm.mustHaveDependency == i.id ? -1 : i.id })}>
 							<TableCell className={styles.tableCellStyle}>
 								<div className={styles.textContainer}>
@@ -96,6 +97,7 @@ function MostCommonSummaryTable(name: string, usageCounts: { name: string, id: n
 					})
 				}
 			</Table>
+			</Box>
 		</ThemeProvider>
 	);
 }
@@ -128,7 +130,7 @@ export default function ReposSecondarySummaryTable(props: {
 	};
 
 	return (
-		<Box sx={{ flexGrow: 1, width: "100%", marginTop: "10px" }}>
+		<Box sx={{ width: "100%", marginTop: "10px" }}>
 			{options[activeStep]}
 			<MobileStepper
 				steps={maxSteps}
