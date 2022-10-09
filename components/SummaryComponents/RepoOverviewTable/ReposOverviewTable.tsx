@@ -13,7 +13,6 @@ ChartJS.register(ChartDataLabels);
 
 import { Colours, getResolved } from "../../../src/Colours";
 import { statusLabel, StatusType } from "../../constants";
-import { PropsWithChildren } from "react";
 import { LightStatusIconFactory } from "../../icons/IconFactory";
 import { RankArray } from "../../Page";
 
@@ -41,7 +40,7 @@ const theme1 = createTheme({
 });
 
 const ICON_SIZE = "40px";
-const Row = (props: PropsWithChildren<RowProps>) => {
+const Row = (props: RowProps) => {
   return (
     <TableRow>
       <ThemeProvider theme={theme1}>

@@ -131,13 +131,13 @@ export function Page(props: PageProps) {
 	applySort(finalisedData, sortSetting)
 
 	return (
-		<div className="container">
+		<>
 			{isMobile ? (
-				<div>
+				<>
 					<Head>
 						<title>Evergreen dashboard</title>
 					</Head>
-					<main style={{ padding: 0 }}>
+					<div style={{ padding: 0 }}>
 						<Layout>
 							<MobileSummaryContainer rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} targetOrganisation={props.targetOrganisation} />
 							{/* <MobileDependenciesContainer /> */}
@@ -157,14 +157,14 @@ export function Page(props: PageProps) {
 							/>
 							<HelpGuide />
 						</Layout>
-					</main>
-				</div>
+					</div>
+				</>
 			) : (
-				<div>
+				<>
 					<Head>
 						<title>Evergreen dashboard</title>
 					</Head>
-					<main style={{ padding: 0 }}>
+					<div style={{ padding: 0 }}>
 						<Layout>
 							<SummaryContainer rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} targetOrganisation={props.targetOrganisation} />
 							<DependenciesContainer
@@ -183,9 +183,9 @@ export function Page(props: PageProps) {
 							/>
 							<HelpGuide />
 						</Layout>
-					</main>
-				</div>
+					</div>
+				</>
 			)}
-		</div>
+		</>
 	);
 }
