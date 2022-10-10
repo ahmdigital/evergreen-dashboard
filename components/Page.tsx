@@ -83,7 +83,7 @@ export function Page(props: PageProps) {
 
 	const rankSelectionList = RankSelectionList(filterSetting, (event: SelectChangeEvent<string[]>) => {
 		const sel = typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value
-		setFilterSetting({ ...filterSetting, showRed: sel.indexOf("red") != -1, showYellow: sel.includes("yellow"), showGreen: sel.includes("green") })
+		setFilterSetting({ ...filterSetting, showRed: sel.indexOf("Highly-Outdated") != -1, showYellow: sel.includes("Moderately-Outdated"), showGreen: sel.includes("Up-To-Date") })
 	})
 
 	//TODO: Adapt to sorting buttons this
