@@ -35,7 +35,7 @@
     "validate-npm-package-name": "^4.0.0"
   },
   "devDependencies": {
-    "@testing-library/dom": "^8.18.1",
+    "@testing-library/dom": "^8.19.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",
     "@types/lodash.debounce": "^4.0.7",
