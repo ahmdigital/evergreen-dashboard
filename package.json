@@ -41,7 +41,7 @@
     "@types/lodash.debounce": "^4.0.7",
     "@testing-library/user-event": "^14.4.3",
     "@types/cookie": "^0.5.1",
-    "@types/jest": "^29.1.1",
+    "@types/jest": "^29.1.2",
     "@types/next": "^9.0.0",
     "@types/react-swipeable-views": "^0.13.1",
     "@types/node": "^18.8.0",
