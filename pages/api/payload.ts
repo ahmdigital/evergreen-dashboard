@@ -28,7 +28,7 @@ export default async function handler(
 				// Resolve as quickly as possible
 				res.status(200).end()
 
-				// skip any push event not targeting the main branch
+				// skip any push event that doesn't target the default branch
 				// This is temporary, until we delegate this to crawler lib
 				if (eventType == acceptedEventTypes.PUSH && req.body.ref != req.body.repository.default_branch) {
 					return
@@ -49,13 +49,6 @@ export default async function handler(
 
 					// waitingPromise.promise = null;
 				}
-				// TODO, investigate whether the order of incoming requests is respected when asynchronous processing,
-				// Given r3,r2,r1 ordered whichever came first, r1 will crawl first and r2 and r3 will wait, but after
-				// r1 is finished what guarantee is there that r2 will execute next,
-				// because it might get executed with this order r2,r3,r1,
-				// basically we should use a buffer here to enforce orders
-				// A better way is to cancel current promise and abruptly stop the crawling whenever an
-				// a new event shows up, because the current crawling will be invalidated by the new one
 				console.log(
 					"I'm now free now to call backend at the moment, And I will create a new promise"
 				);
@@ -103,5 +96,8 @@ async function updateCache(payload: any, eventType: string) {
 	if (waitingPromise.resolve != null) {
 		waitingPromise.resolve();
 		waitingPromise.promise = null;
+	}
+	else {
+		console.log("Unhandled asynchronous case, please git blame for help")
 	}
 }
