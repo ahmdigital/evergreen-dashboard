@@ -275,7 +275,8 @@ div.btnsContainer button {
 
   margin-top: 0.5rem;
   margin-right: 0.5rem;
-  padding: 0.4rem;
+  padding: 0.5rem;
+  padding-top: 0.05rem;
   /* display:block; */
   justify-content: flex-end;
   margin-bottom: 0;
