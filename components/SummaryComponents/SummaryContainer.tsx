@@ -192,6 +192,7 @@ export default function SummaryContainer(props: {
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+		      <h3 className={styles.summaryStylePercent}>Most Common:</h3>
               <div className={styles.summaryComponent3}>
                 <ReposSecondarySummaryTable rows={props.rows} filterTerm={props.filterTerm} setFilterTerm={props.setFilterTerm} />
               </div>

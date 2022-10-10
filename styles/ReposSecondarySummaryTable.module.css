@@ -5,8 +5,10 @@
 }
 
 .textContainer {
-	display: block;
-	width: 190px;
+	width: auto;
+display: inline-block;
+	/* /width: 175px; */
+	width: 25%;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;

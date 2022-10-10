@@ -71,33 +71,37 @@ function countUsage(rows: ProcessedDependencyData, countOnlyOutdated: boolean) {
 function MostCommonSummaryTable(name: string, usageCounts: { name: string, id: number, count: number }[], filterTerm: Filter, setFilterTerm: any) {
 	return (
 		<ThemeProvider theme={theme}>
-			<Box sx={{ px: 2, maxHeight: '75%', overflow: 'auto', boxSizing: 'border-box' }}>
-			<Table>
-				<TableRow>
-					<TableCell className={styles.totalsCellStyle}>
-						<h3>{name}</h3>
-					</TableCell>
-					<TableCell className={styles.totalsCellStyle}>
-					</TableCell>
-				</TableRow>
-				{
-					usageCounts.map(i => {
-						return <TableRow key={i.id} sx={{ ...(filterTerm.mustHaveDependency == i.id && { background: "var(--colour-table-selected)" }) }} onClick={() => setFilterTerm({ ...filterTerm, mustHaveDependency: filterTerm.mustHaveDependency == i.id ? -1 : i.id })}>
-							<TableCell className={styles.tableCellStyle}>
-								<div className={styles.textContainer}>
-									{i.name}
-								</div>
-							</TableCell>
-							<TableCell className={styles.tableCellStyle}>
-								<div className={styles.countContainer}>
-									{i.count}
-								</div>
-							</TableCell>
-						</TableRow>
-					})
-				}
-			</Table>
-			</Box>
+
+				<Table sx={{ width: "100px" }}>
+				<Box sx={{ maxHeight: "150px"}}>
+					<TableRow>
+						<TableCell className={styles.totalsCellStyle}>
+							<h3>{name}</h3>
+						</TableCell>
+						<TableCell className={styles.totalsCellStyle}>
+						</TableCell>
+					</TableRow>
+					</Box>
+					<Box sx={{ maxHeight: "150px", px: 2, overflow: 'auto', boxSizing: 'border-box' }}>
+					{
+						usageCounts.map(i => {
+							return <TableRow key={i.id} sx={{ ...(filterTerm.mustHaveDependency == i.id && { background: "var(--colour-table-selected)" }) }} onClick={() => setFilterTerm({ ...filterTerm, mustHaveDependency: filterTerm.mustHaveDependency == i.id ? -1 : i.id })}>
+								<TableCell className={styles.tableCellStyle}>
+									<div className={styles.textContainer}>
+										{i.name}
+									</div>
+								</TableCell>
+								<TableCell className={styles.tableCellStyle}>
+									<div className={styles.countContainer}>
+										{i.count}
+									</div>
+								</TableCell>
+							</TableRow>
+						})
+					}
+					</Box>
+				</Table>
+
 		</ThemeProvider>
 	);
 }
@@ -113,8 +117,8 @@ export default function ReposSecondarySummaryTable(props: {
 
 	//TODO: Move outside of function, as these can be constant
 	let options = [
-		MostCommonSummaryTable("Most common dependencies", countUsage(props.rows, false), props.filterTerm, props.setFilterTerm),
-		MostCommonSummaryTable("Most common outdated", countUsage(props.rows, true), props.filterTerm, props.setFilterTerm)
+		MostCommonSummaryTable("Dependencies", countUsage(props.rows, false), props.filterTerm, props.setFilterTerm),
+		MostCommonSummaryTable("Outdated", countUsage(props.rows, true), props.filterTerm, props.setFilterTerm)
 	]
 
 	let maxSteps = options.length;
@@ -130,7 +134,7 @@ export default function ReposSecondarySummaryTable(props: {
 	};
 
 	return (
-		<Box sx={{ width: "100%", marginTop: "10px" }}>
+		<Box sx={{ maxWidth: "100%", marginTop: "10px" }}>
 			{options[activeStep]}
 			<MobileStepper
 				steps={maxSteps}
