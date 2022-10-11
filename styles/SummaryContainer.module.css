@@ -5,10 +5,34 @@ div.summaryStyle {
 }
 
 .orgTitle{
-  background-color: black;
-  color: white;
+  background-color: var(--colour-black);
+  color: var(--colour-inv-font);
   padding: 0.2rem 0.3rem 0.2rem 0.3rem;
   border-radius: 0.3rem;
+}
+
+.orgTitle:hover {
+  background-color: var(--colour-black-hover);
+}
+
+a.orgLink:link {
+  color: var(--colour-inv-font);
+  text-decoration: none;
+}
+
+a.orgLink:visited {
+  color: var(--colour-inv-font);
+  text-decoration: none;
+}
+
+a.orgLink:hover {
+  color: var(--colour-inv-font);
+  text-decoration: none;
+}
+
+a.orgLink:active {
+  color: var(--colour-green);
+  text-decoration: none;
 }
 
 .subtitle {
@@ -263,8 +287,44 @@ div.loadingWheelBox {
   font-size: var(--font-size-normal);
 }
 
-div.btnsContainer {
+div.btnsContainer button {
+  display:inline-block;
+  font-family: var(--primary-font-family);
+  font-size: var(--font-size-large);
+  /* background-color: var(--colour-container-background); */
+  background-color: var(--colour-black);
+  border-radius: var(--main-section-border-radius);
+  justify-content: center;
+  align-items: center;
+
   margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 0.4rem;
+  padding-right: 0.8rem;
+  /* padding: 0.5rem;
+  padding-top: 0.05rem; */
+  /* display:block; */
+  justify-content: flex-end;
+  margin-bottom: 0;
+  /* width: 100%; */
+}
+
+div.btnsContainer button:hover {
+	background-color: var(--colour-black-hover);
+}
+
+div.btnsContainer h3 {
+	top: 50%;
+	transform: translateY(+25%);
+	display:inline-block;
+	font-style: italic;
+	font-weight: var(--font-weight-normal);
+}
+
+div.btnsContainer button span {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  margin-top: 0.1rem;
 }
 
 
@@ -297,7 +357,7 @@ h1.noMargins {
     font-size: 1.75rem;
     margin-bottom: 0.8rem;
   }
-  
+
   .subtitle {
     font-size: 1.3rem;
 

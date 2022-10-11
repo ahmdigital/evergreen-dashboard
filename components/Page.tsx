@@ -40,7 +40,16 @@ const theme2 = createTheme({
 					color: 'black',
 				}
 			}
-		}
+		},
+		MuiMenuItem: {
+			styleOverrides: {
+				root: {
+					fontSize: "1.1rem",
+					fontFamily: "var(--primary-font-family)",
+					color: "black",
+				},
+			},
+		},
 	}
 })
 
@@ -80,7 +89,7 @@ export function Page(props: PageProps) {
 		setFilterSetting({ ...filterSetting, showRed: sel.indexOf("Highly-Outdated") != -1, showYellow: sel.includes("Moderately-Outdated"), showGreen: sel.includes("Up-To-Date") })
 	})
 
-	//TODO: Adapt to sorting buttons this
+	//TODO: Adapt to sorting buttons
 	const handleSortDirectionChange = (event: SelectChangeEvent) => {
 		setSortSetting({ type: sortSetting.type, direction: event.target.value == "ascending" })
 	}
@@ -133,7 +142,7 @@ export function Page(props: PageProps) {
 					</Head>
 					<main style={{ padding: 0 }}>
 						<Layout>
-							<MobileSummaryContainer rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} targetOrganisation={props.targetOrganisation} />
+							<MobileSummaryContainer auxData = {props.JSObject.aux} rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} targetOrganisation={props.targetOrganisation} />
 							{/* <MobileDependenciesContainer /> */}
 							<DependenciesContainer
 								JSObject={props.JSObject}
@@ -160,7 +169,7 @@ export function Page(props: PageProps) {
 					</Head>
 					<main style={{ padding: 0 }}>
 						<Layout>
-							<SummaryContainer rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} targetOrganisation={props.targetOrganisation} />
+							<SummaryContainer auxData = {props.JSObject.aux} rankArray={rankArray} loadingSnackbar={loadingSnackbar} rows={rows} filterTerm={filterSetting} setFilterTerm={setFilterSetting} targetOrganisation={props.targetOrganisation} />
 							<DependenciesContainer
 								JSObject={props.JSObject}
 								tableRows={tableRows}

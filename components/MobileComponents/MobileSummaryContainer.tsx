@@ -36,10 +36,16 @@ import CondensedSummary from "../SummaryComponents/CondensedSummary/CondensedSum
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Grid from "@mui/material/Unstable_Grid2";
+import { AuxData } from "../../src/dataProcessing";
+
+const dayjs = require('dayjs')
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 
 let refreshing = false;
 
 export default function MobileSummaryContainer(props: {
+  auxData: AuxData;
   rankArray: any;
   loadingSnackbar: any;
   rows: ProcessedDependencyData;
@@ -116,8 +122,7 @@ export default function MobileSummaryContainer(props: {
           <ForestIcon /> Evergreen Dashboard
         </h2>
         <p className={mobileStyles.subtitle}>
-          Monitoring dependencies for <b>{props.targetOrganisation}</b> Github
-          Organisation
+		  Monitoring dependencies for the <b className={styles.orgTitle}><a className={styles.orgLink} href={props.auxData.orgLink}>{props.auxData.orgName}</a></b> Github Organisation
         </p>
         <div className={styles.btnsContainer}>
           <Tooltip
@@ -143,6 +148,7 @@ export default function MobileSummaryContainer(props: {
               Refresh
             </Button>
           </Tooltip>
+		  <h3>Last crawl time: {dayjs(parseInt(props.auxData.crawlStart)).fromNow()}</h3>
         </div>
         <div>{props.loadingSnackbar}</div>
         <Grow in={!closeHeader}>
