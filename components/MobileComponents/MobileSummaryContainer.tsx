@@ -122,7 +122,7 @@ export default function MobileSummaryContainer(props: {
           <ForestIcon /> Evergreen Dashboard
         </h2>
         <p className={mobileStyles.subtitle}>
-		  Monitoring dependencies for the <b className={styles.orgTitle}><a href={props.auxData.orgLink}>{props.auxData.orgName}</a></b> Github Organisation
+		  Monitoring dependencies for the <b className={styles.orgTitle}><a className={styles.orgLink} href={props.auxData.orgLink}>{props.auxData.orgName}</a></b> Github Organisation
         </p>
         <div className={styles.btnsContainer}>
           <Tooltip

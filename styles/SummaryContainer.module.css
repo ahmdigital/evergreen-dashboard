@@ -5,10 +5,34 @@ div.summaryStyle {
 }
 
 .orgTitle{
-  background-color: black;
-  color: white;
+  background-color: var(--colour-black);
+  color: var(--colour-inv-font);
   padding: 0.2rem 0.3rem 0.2rem 0.3rem;
   border-radius: 0.3rem;
+}
+
+.orgTitle:hover {
+  background-color: var(--colour-black-hover);
+}
+
+a.orgLink:link {
+  color: var(--colour-inv-font);
+  text-decoration: none;
+}
+
+a.orgLink:visited {
+  color: var(--colour-inv-font);
+  text-decoration: none;
+}
+
+a.orgLink:hover {
+  color: var(--colour-inv-font);
+  text-decoration: none;
+}
+
+a.orgLink:active {
+  color: var(--colour-green);
+  text-decoration: none;
 }
 
 .subtitle {
@@ -276,6 +300,7 @@ div.btnsContainer button {
   margin-top: 0.5rem;
   margin-right: 0.5rem;
   padding: 0.4rem;
+  padding-right: 0.8rem;
   /* display:block; */
   justify-content: flex-end;
   margin-bottom: 0;
@@ -283,7 +308,7 @@ div.btnsContainer button {
 }
 
 div.btnsContainer button:hover {
-	background-color: '#424242';
+	background-color: var(--colour-black-hover);
 }
 
 div.btnsContainer h3 {
@@ -296,7 +321,8 @@ div.btnsContainer h3 {
 
 div.btnsContainer button span {
   margin-left: 0.5rem;
-  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  margin-top: 0.1rem;
 }
 
 

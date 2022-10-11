@@ -59,7 +59,9 @@ p {
 	--rank-red: red;
 	--rank-light-red: #fcc;
 	--rank-red-border: 1px solid red;
+
 	--colour-font: #000;
+	--colour-inv-font: white;
 	--colour-background: #f2f0ee;
 	--colour-container-background: #fff;
 	--colour-white: #fff;
@@ -72,6 +74,8 @@ p {
 	--colour-yellow: rgb(235, 158, 17);
 	--colour-red: rgba(198, 55, 24, 1);
 	--colour-grey-border: "#CECECE";
+	--colour-black-hover: rgba(66, 66, 66, 255);
+
 	--border-thick: 0.625rem solid var(--colour-black);
 	--border-thick-halved: 0.32rem solid var(--colour-black);
 	--table-left-edge: #f6f6f6;
