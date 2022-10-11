@@ -117,7 +117,7 @@ export default function SummaryContainer(props: {
                 Refresh
               </Button>
             </Tooltip>
-		    <h3>Last crawl time: {dayjs(parseInt(props.auxData.crawlStart)).fromNow()}</h3>
+		        <h3>Last crawl time: {dayjs(parseInt(props.auxData.crawlStart)).fromNow()}</h3>
           </div>
         </Grid>
 

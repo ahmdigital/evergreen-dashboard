@@ -29,6 +29,25 @@ export const theme = createTheme({
 				},
 			},
 		},
+		MuiMenuItem: {
+			styleOverrides: {
+				root: {
+					fontSize: "1.1rem",
+					fontFamily: "var(--primary-font-family)",
+					color: "black",
+				},
+			},
+		},
+		MuiListItemText: {
+			styleOverrides: {
+				primary: {
+					marginLeft: "0.4rem",
+					fontSize: "1.1rem",
+					fontFamily: "var(--primary-font-family)",
+					color: "black",
+				},
+			},
+		},
 	},
 });
 
@@ -113,7 +132,6 @@ export function RankSelectionList(
 								/>
 								<ListItemText
 									primary={"Highly-Outdated"}
-									sx={{ marginLeft: "0.4rem" }}
 								/>
 							</MenuItem>,
 							<MenuItem
@@ -130,7 +148,6 @@ export function RankSelectionList(
 								/>
 								<ListItemText
 									primary={"Moderately-Outdated"}
-									sx={{ marginLeft: "0.4rem" }}
 								/>
 							</MenuItem>,
 							<MenuItem value={"Up-To-Date"} key={"Up-To-Date"}>
@@ -144,7 +161,6 @@ export function RankSelectionList(
 								/>
 								<ListItemText
 									primary={"Up-To-Date"}
-									sx={{ marginLeft: "0.4rem" }}
 								/>
 							</MenuItem>,
 						]}
