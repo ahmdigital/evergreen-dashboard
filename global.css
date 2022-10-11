@@ -48,6 +48,26 @@ p {
 	margin-bottom: 0;
 }
 
+a:link {
+	color: var(--colour-font);
+	/* text-decoration: none; */
+}
+
+a:visited {
+	color: var(--colour-font);
+	/* text-decoration: none; */
+}
+
+a:hover {
+	color: var(--colour-font);
+	/* text-decoration: none; */
+}
+
+a:active {
+	color: var(--colour-green);
+	/* text-decoration: none; */
+}
+
 :root {
 	font-size: 16px;
 	--rank-green: green;
