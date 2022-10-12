@@ -12,7 +12,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 ChartJS.register(ChartDataLabels);
 
 import { Colours, getResolved } from "../../../src/Colours";
-import { statusLabel, StatusType } from "../../constants";
+import { statusDefinitionsRepos, statusLabel, StatusType } from "../../constants";
 import { LightStatusIconFactory } from "../../icons/IconFactory";
 import { RankArray } from "../../Page";
 
@@ -49,6 +49,7 @@ const Row = (props: RowProps) => {
             type={props.statusType}
             toolTip={true}
             iconSize={ICON_SIZE}
+            toolTipLabel={statusDefinitionsRepos[props.statusType]}
           />
         </TableCell>
         <TableCell className={styles.tableCellStyleCount}>

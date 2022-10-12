@@ -6,7 +6,11 @@ import { PackageData } from "../../hooks/useProcessDependencyData";
 import styles from "../../styles/SubRow.module.css";
 import Image from "next/image";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { rankToStatusType, statusDefinitions, statusLabel } from "../constants";
+import {
+  rankToStatusType,
+  statusDefinitionsDeps,
+  statusLabel,
+} from "../constants";
 import { iconImg } from "../icons/IconFactory";
 
 export type SubRowProps = {
@@ -40,9 +44,9 @@ export function SubRow(props: SubRowProps) {
 
   const statusType = rankToStatusType[props.dependency.rank];
 
-	const statusIcon = iconImg[statusType];
-	const statusText = statusLabel[statusType];
-	const iconDefinition = statusDefinitions[statusType];
+  const statusIcon = iconImg[statusType];
+  const statusText = statusLabel[statusType];
+  const iconDefinition = statusDefinitionsDeps[statusType];
 
   return (
     <TableRow>
@@ -63,11 +67,11 @@ export function SubRow(props: SubRowProps) {
             </div>
           </Tooltip>
         </TableCell>
-		<TableCell className={styles.tableCellStyle}>
-			<a href={depLink} rel="noreferrer" target="_blank">
-				{depName}
-			</a>
-		</TableCell>
+        <TableCell className={styles.tableCellStyle}>
+          <a href={depLink} rel="noreferrer" target="_blank">
+            {depName}
+          </a>
+        </TableCell>
         <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
         <TableCell
           className={`${styles.tableCellStyle} ${styles.latestVerStyle}`}

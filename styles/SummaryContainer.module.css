@@ -370,4 +370,8 @@ h1.noMargins {
   .refreshWord {
     font-size: 1.25rem;
   }
+
+  .lastUpdated {
+    font-size: 1rem;
+  }
 }

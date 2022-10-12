@@ -9,7 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { IconButton } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { statusDefinitions, StatusType } from "../constants";
+import { statusDefinitionsReposSummary, StatusType } from "../constants";
 import { LightStatusIconFactory } from "../icons/IconFactory";
 
 export type HelpScreenProps = {
@@ -79,7 +79,7 @@ function StatusTable() {
                 />
               </TableCell>
               <TableCell className={styles.tableCellStyle}>
-                <p>{statusDefinitions[StatusType.RED]}</p>
+                <p>{statusDefinitionsReposSummary[StatusType.RED]}</p>
               </TableCell>
             </TableRow>
             <TableRow>
@@ -91,7 +91,7 @@ function StatusTable() {
                 />
               </TableCell>
               <TableCell className={styles.tableCellStyle}>
-                <p>{statusDefinitions[StatusType.YELLOW]}</p>
+                <p>{statusDefinitionsReposSummary[StatusType.YELLOW]}</p>
               </TableCell>
             </TableRow>
             <TableRow>
@@ -103,7 +103,7 @@ function StatusTable() {
                 />
               </TableCell>
               <TableCell className={styles.tableCellStyle}>
-                <p>{statusDefinitions[StatusType.GREEN]}</p>
+                <p>{statusDefinitionsReposSummary[StatusType.GREEN]}</p>
               </TableCell>
             </TableRow>
           </ThemeProvider>

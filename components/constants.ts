@@ -21,17 +21,30 @@ export const statusLabel: {[key in StatusType]: string} = {
     [StatusType.GREEN]: "Up-to-date",
 }
 
-
-
 const upperLimit = semVerFromString(config.rankCutoff.major);
 const lowerLimit = semVerFromString(config.rankCutoff.minor);
 
-export const statusDefinitions: {[key in StatusType]: string} = {
-    [StatusType.RED]: `Current version is behind by more than 1 major or ${upperLimit.minor} minor versions.`,
-    [StatusType.YELLOW]: `Current version is behind by ${lowerLimit.minor} or ${upperLimit.minor} minor versions.`,
-    [StatusType.GREEN]: `Current version is behind by less than ${lowerLimit.minor} minor versions.`,
+export const statusDefinitionsDeps: {[key in StatusType]: string} = {
+    [StatusType.RED]: `Current version is more than 1 major or ${upperLimit.minor} minor versions behind.`,
+    [StatusType.YELLOW]: `Current version is ${lowerLimit.minor} - ${upperLimit.minor} minor versions behind.`,
+    [StatusType.GREEN]: `Current version is up-to-date or less than ${lowerLimit.minor} minor versions behind.`,
 }
 
+export const statusDefinitionsRepos: {[key in StatusType]: string} = {
+    [StatusType.RED]: `Repository has dependencies that are more than 1 major or ${upperLimit.minor} minor versions behind.`,
+    [StatusType.YELLOW]: `Repository has dependencies that are ${lowerLimit.minor} - ${upperLimit.minor} minor versions behind.`,
+    [StatusType.GREEN]: `Repository has dependencies that are up-to-date or less than ${lowerLimit.minor} minor versions behind.`,
+}
+export const statusDefinitionsReposSummary: {[key in StatusType]: string} = {
+    [StatusType.RED]: `Repositories with dependencies that are more than 1 major or ${upperLimit.minor} minor versions behind.`,
+    [StatusType.YELLOW]: `Repositories with dependencies that are ${lowerLimit.minor} - ${upperLimit.minor} minor versions behind.`,
+    [StatusType.GREEN]: `Repositories with dependencies that are up-to-date or less than ${lowerLimit.minor} minor versions behind.`,
+}
+export const statusDefinitionsHelpGuide: {[key in StatusType]: string} = {
+    [StatusType.RED]: statusDefinitionsRepos[StatusType.RED],
+    [StatusType.YELLOW]: statusDefinitionsRepos[StatusType.YELLOW],
+    [StatusType.GREEN]: statusDefinitionsRepos[StatusType.GREEN],
+}
 export const rankToStatusType: {[ rank: number]: StatusType; } = {
     0 : StatusType.RED,
     1 : StatusType.YELLOW,

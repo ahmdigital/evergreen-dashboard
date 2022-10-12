@@ -1,7 +1,7 @@
 import { Tooltip } from "@mui/material";
 import { PropsWithChildren } from "react";
 import styles from "../../styles/Row.module.css";
-import { iconAltText, statusDefinitions, StatusType } from "../constants";
+import { iconAltText, statusDefinitionsDeps, StatusType } from "../constants";
 import RedIconImg from "../images/redIcon.svg";
 import YellowIconImg from "../images/yellowIcon.svg";
 import GreenIconImg from "../images/greenIcon.svg";
@@ -37,12 +37,12 @@ export const IconImgGenerator = (props: IconImgGeneratorProps) => {
 
   return (
     <Image
-        src={iconImg[type]}
-        alt={iconAltText[type]}
-        width={iconSize}
-        height={iconSize}
-        layout={props.layout}
-        className={props.className}
+      src={iconImg[type]}
+      alt={iconAltText[type]}
+      width={iconSize}
+      height={iconSize}
+      layout={props.layout}
+      className={props.className}
     />
   );
 };
@@ -56,7 +56,7 @@ const IconToolTipGenerator = (
   props: PropsWithChildren<IconToolTipGeneratorProps>
 ) => {
   const { type, toolTipLabel } = props;
-  const definition = () => statusDefinitions[type];
+  const definition = () => statusDefinitionsDeps[type];
   const title = (
     <IconDefinition
       iconDefinition={toolTipLabel ? toolTipLabel : definition()}

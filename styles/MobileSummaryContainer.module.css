@@ -4,6 +4,19 @@
     font-weight: var(--font-weight-semibold); /*500*/
 }
 
+p.subtitle {
+    margin-bottom: 3px;
+}
+.subtitle2 {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    font-family: var(--secondary-font-family);
+    font-weight: var(--font-weight-normal); /*400*/
+    margin-left: 0.1rem;
+    color: var(--colour-grey-border);
+}
+
 div.summaryContainer {
     width: 100%;
     max-width: 125rem; /*2000px;*/
@@ -63,4 +76,9 @@ div.summaryComponent3 {
     margin-top: 1rem;
     margin-bottom: 1rem;
     justify-content: center;
+  }
+
+  .refresh {
+    margin-bottom: 3px;
+
   }

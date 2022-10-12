@@ -57,7 +57,7 @@ export function SortBox(sortSetting: SortSettings, handleSortChange: any) {
 
 	return <ThemeProvider theme={theme}>
 		<FormControl className={styles.sortby} fullWidth>
-			<InputLabel id="sort-by-select-label" sx={{ fontSize: '1.3em', transform: 'translate(10px, -15px)' }}>
+			<InputLabel id="sort-by-select-label" sx={{ fontSize: '1.3rem', transform: 'translate(10px, -15px)' }}>
 				Sort by
 			</InputLabel>
 			<Select

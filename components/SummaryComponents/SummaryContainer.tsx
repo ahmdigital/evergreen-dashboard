@@ -112,7 +112,7 @@ export default function SummaryContainer(props: {
         <Grid>
           <h1 className={styles.noMargins}><ForestIcon /> Evergreen Dashboard</h1>
           <p className={styles.subtitle}>
-            Monitoring dependencies for {props.targetOrganisation.length > 0 && (<span className={styles.orgTitle}><a className={styles.orgLink} href={props.auxData.orgLink}>{props.auxData.orgName}</a></span>)} Github Organisation
+            Monitoring dependencies for {props.auxData?.orgName && (<span className={styles.orgTitle}><a className={styles.orgLink} href={props.auxData?.orgLink && props.auxData.orgLink}>{props.auxData.orgName}</a></span>)} Github Organisation
           </p>
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
@@ -124,7 +124,7 @@ export default function SummaryContainer(props: {
                 Refresh
               </Button>
             </Tooltip>
-		        <h3>Last crawl time: {dayjs(parseInt(props.auxData.crawlStart)).fromNow()}</h3>
+		        <span className={styles.lastUpdated}>Last updated: { props.auxData?.crawlStart ? dayjs(parseInt(props.auxData?.crawlStart)).fromNow(): "N/A"}</span>
           </div>
         </Grid>
 
