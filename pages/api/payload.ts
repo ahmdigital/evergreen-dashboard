@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { handleGitHubWebhookPushEvents, handleGitHubWebhookRepositoryEvents } from "../../node_modules/evergreen-org-crawler/src/webhooks/github";
-// import { handleGitHubWebhookPushEvents, handleGitHubWebhookRepositoryEvents } from "evergreen-org-crawler";
+import { handleGitHubWebhookPushEvents, handleGitHubWebhookRepositoryEvents } from "evergreen-org-crawler";
 
 import getConfig from "next/config";
 const { publicRuntimeConfig: config } = getConfig();
