@@ -67,7 +67,7 @@ const collapsibleTheme = createTheme({
 export default function Row(props: { rank: number; row: any } & Props) {
   const { rank, row, subRows } = props;
 
-  
+
   const [open, setOpen] = useState(false);
   let statusIcon = RedIcon;
   let statusText = "Highly out-of-date";
@@ -117,6 +117,9 @@ export default function Row(props: { rank: number; row: any } & Props) {
             <a href={row.link} rel="noreferrer" target="_blank">
               {row.name}
             </a>
+          </TableCell>
+          <TableCell component="th" scope="row">
+              {row.oldName ? row.oldName.substr(0, row.oldName.lastIndexOf('(')) : ""}
           </TableCell>
           <TableCell align="left">
             {semVerToString(row.version)}

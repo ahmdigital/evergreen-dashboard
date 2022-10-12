@@ -15,7 +15,12 @@
 }
 
 .col3 {
-	width: 58%;
+	width: 38%;
+	background-color: var(--colour-background);
+}
+
+.col3 {
+	width: 20%;
 	background-color: var(--colour-background);
 }
 
@@ -53,22 +58,22 @@
 		width: 5%;
 		background-color: var(--table-left-edge);
 	}
-	
+
 	.col2 {
 		width: 8%;
 		background-color: var(--colour-background);
 	}
-	
+
 	.col3 {
 		width: 58%;
 		background-color: var(--colour-background);
 	}
-	
+
 	.col4 {
 		width: 22%;
 		background-color: var(--colour-background);
 	}
-	
+
 	.col5 {
 		width: 0%;
 		background-color: var(--colour-background);

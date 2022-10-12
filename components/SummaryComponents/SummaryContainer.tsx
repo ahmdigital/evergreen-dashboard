@@ -23,12 +23,18 @@ import getConfig from 'next/config'
 
 import CondensedSummary from "./CondensedSummary/CondensedSummary";
 import BarChartIcon from '@mui/icons-material/BarChart';
+import { AuxData } from "../../src/dataProcessing";
+
+const dayjs = require('dayjs')
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 import Button from '@mui/material/Button';
 
 const { publicRuntimeConfig: config } = getConfig();
 let refreshing = false
 
 export default function SummaryContainer(props: {
+  auxData: AuxData;
   rankArray: any;
   loadingSnackbar: any;
   rows: ProcessedDependencyData;
@@ -99,18 +105,19 @@ export default function SummaryContainer(props: {
         <Grid>
           <h1 className={styles.noMargins}><ForestIcon /> Evergreen Dashboard</h1>
           <p className={styles.subtitle}>
-            Monitoring dependencies for <b className={styles.orgTitle}>{props.targetOrganisation}</b> Github Organisation
+            Monitoring dependencies for the <span className={styles.orgTitle}><a className={styles.orgLink} href={props.auxData.orgLink}>{props.auxData.orgName}</a></span> Github Organisation
           </p>
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
               <Button variant="contained" startIcon={<RefreshIcon />} sx={{
                 backgroundColor: 'var(--colour-black)', borderRadius: 'var(--main-section-border-radius)', '&:hover': {
-                  backgroundColor: '#424242',
+                  backgroundColor: 'var(--colour-black-hover)',
                 },
               }} onClick={callRefresh}>
                 Refresh
               </Button>
             </Tooltip>
+		        <h3>Last crawl time: {dayjs(parseInt(props.auxData.crawlStart)).fromNow()}</h3>
           </div>
         </Grid>
 
