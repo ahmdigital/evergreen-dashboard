@@ -110,6 +110,9 @@ export default function Row(props: { rank: number; row: any } & Props) {
               {row.name}
             </a>
           </TableCell>
+          <TableCell component="th" scope="row">
+              {row.oldName ? row.oldName.substr(0, row.oldName.lastIndexOf('(')) : ""}
+          </TableCell>
           <TableCell align="left">
             {semVerToString(row.version)}
             {

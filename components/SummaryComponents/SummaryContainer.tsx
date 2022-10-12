@@ -23,14 +23,19 @@ import getConfig from 'next/config'
 
 import CondensedSummary from "./CondensedSummary/CondensedSummary";
 import BarChartIcon from '@mui/icons-material/BarChart';
+import { AuxData } from "../../src/dataProcessing";
+
+const dayjs = require('dayjs')
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 import Button from '@mui/material/Button';
-import { RankArray } from "../Page";
 
 const { publicRuntimeConfig: config } = getConfig();
 let refreshing = false
 
 export default function SummaryContainer(props: {
-  rankArray: RankArray;
+  auxData: AuxData;
+  rankArray: any;
   loadingSnackbar: any;
   rows: ProcessedDependencyData;
   filterTerm: Filter;
@@ -100,48 +105,26 @@ export default function SummaryContainer(props: {
 
   return (
     <Box
-      sx={{
-        flexGrow: 1,
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        width: "100%",
-        justifyContent: "space-between",
-      }}
+      sx={{ flexGrow: 1, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between' }}
       className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}
     >
       <Grid container spacing={1} className={styles.container}>
         <Grid>
-          <h1 className={styles.noMargins}>
-            <ForestIcon /> Evergreen Dashboard
-          </h1>
+          <h1 className={styles.noMargins}><ForestIcon /> Evergreen Dashboard</h1>
           <p className={styles.subtitle}>
-            Monitoring dependencies for {props.targetOrganisation.length > 0 && <b className={styles.orgTitle}>{props.targetOrganisation}</b>} Github Organisation
+            Monitoring dependencies for {props.targetOrganisation.length > 0 && (<span className={styles.orgTitle}><a className={styles.orgLink} href={props.auxData.orgLink}>{props.auxData.orgName}</a></span>)} Github Organisation
           </p>
           <div className={styles.btnsContainer}>
-            <Tooltip
-              arrow
-              title={
-                <p className={styles.tooltipStyle}>
-                  Check for new repository updates
-                </p>
-              }
-            >
-              <Button
-                variant="contained"
-                startIcon={<RefreshIcon />}
-                sx={{
-                  backgroundColor: "var(--colour-black)",
-                  borderRadius: "var(--main-section-border-radius)",
-                  "&:hover": {
-                    backgroundColor: "#424242",
-                  },
-                }}
-                onClick={callRefresh}
-              >
+            <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
+              <Button variant="contained" startIcon={<RefreshIcon />} sx={{
+                backgroundColor: 'var(--colour-black)', borderRadius: 'var(--main-section-border-radius)', '&:hover': {
+                  backgroundColor: 'var(--colour-black-hover)',
+                },
+              }} onClick={callRefresh}>
                 Refresh
               </Button>
             </Tooltip>
+		        <h3>Last crawl time: {dayjs(parseInt(props.auxData.crawlStart)).fromNow()}</h3>
           </div>
         </Grid>
 
@@ -159,86 +142,36 @@ export default function SummaryContainer(props: {
           </Grow>
         </Grid>
       </Grid>
-      <div>{props.loadingSnackbar}</div>
+      <div>
+        {props.loadingSnackbar}
+      </div>
       <Collapse in={closeHeader} timeout="auto" unmountOnExit>
-        <Grid
-          container
-          spacing={1}
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            width: "100%",
-            justifyContent: "space-between",
-            marginTop: "0rem",
-            marginBottom: "0rem",
-          }}
-          className={`${styles.container} ${styles.margins}`}
-        >
+        <Grid container spacing={1} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between', marginTop: '0rem', marginBottom: '0rem' }} className={`${styles.container} ${styles.margins}`}>
           <Grid xs={12} sm={12} md={6} lg={4}>
-            <div
-              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
-            >
-              <h3 className={styles.summaryStylePercent}>
-                Target ({config.targetPercentage}%)
-              </h3>
-              <div
-                className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}
-              >
+            <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+              <h3 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h3>
+              <div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
                 <h3 className={styles.overallTitleStyle}>Overall</h3>
-                <h3 className={styles.percentStyle}>{overallPercentStr}</h3>
-                <h3 className={styles.overallCentredTitleStyle}>
-                  {props.rankArray.green}/{totalRepos} repositories up-to-date{" "}
-                </h3>
+                <h3 className={styles.percentStyle} >{overallPercentStr}</h3>
+                <h3 className={styles.overallCentredTitleStyle}>{props.rankArray.green}/{totalRepos} repositories up-to-date </h3>
               </div>
             </div>
           </Grid>
 
           <Grid xs={12} sm={12} md={6} lg={4}>
-            <div
-              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
-            >
+            <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
               <div className={styles.summaryCompHeader}>
-                <h3 className={styles.summaryStyle}>
-                  Total Repositories ({totalRepos})
-                </h3>
-                <div
-                  style={{
-                    display: "flex",
-                    width: "70px",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Tooltip
-                    placement="top"
-                    arrow
-                    title={
-                      <p className={styles.tooltipStyle}>Toggle Pie Chart</p>
-                    }
-                  >
+                <h3 className={styles.summaryStyle}>Total Repositories ({totalRepos})</h3>
+                <div style={{ display: "flex", width: "70px", justifyContent: "space-between" }}>
+                  <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Toggle Pie Chart</p>}>
                     <IconButton
                       className={styles.helpBtn}
                       aria-label="Chart button"
                       onClick={() => {
                         setShowChart(!showChart);
                       }}
-                      style={{
-                        height: "40px",
-                        width: "40px"
-                      }}
-                    >
-                      <BarChartIcon className={styles.chartButton} />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip
-                    placement="top"
-                    arrow
-                    title={
-                      <p className={styles.tooltipStyle}>
-                        Status Icon Meanings
-                      </p>
-                    }
-                  >
+                    ><BarChartIcon className={styles.chartButton} /></IconButton></Tooltip>
+                  <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
                     <IconButton
                       className={styles.helpBtn}
                       aria-label="Help button"
@@ -265,15 +198,9 @@ export default function SummaryContainer(props: {
             </div>
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={4}>
-            <div
-              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
-            >
+            <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
               <div className={styles.summaryComponent3}>
-                <ReposSecondarySummaryTable
-                  rows={props.rows}
-                  filterTerm={props.filterTerm}
-                  setFilterTerm={props.setFilterTerm}
-                />
+                <ReposSecondarySummaryTable rows={props.rows} filterTerm={props.filterTerm} setFilterTerm={props.setFilterTerm} />
               </div>
             </div>
           </Grid>

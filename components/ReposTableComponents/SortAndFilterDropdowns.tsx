@@ -29,56 +29,60 @@ export const theme = createTheme({
 				},
 			},
 		},
+		MuiMenuItem: {
+			styleOverrides: {
+				root: {
+					fontSize: "1.1rem",
+					fontFamily: "var(--primary-font-family)",
+					color: "black",
+				},
+			},
+		},
+		MuiListItemText: {
+			styleOverrides: {
+				primary: {
+					marginLeft: "0.4rem",
+					fontSize: "1.1rem",
+					fontFamily: "var(--primary-font-family)",
+					color: "black",
+				},
+			},
+		},
 	},
 });
 
-export type SortSettings = {
-	type: "name" | "rank" | "time" | "internal" | "external" | "total" | "users";
-	direction: boolean;
-};
+export type SortSettings = { type: "name" | "repo" | "rank" | "time" | "internal" | "external" | "total" | "users", direction: boolean }
 
 export function SortBox(sortSetting: SortSettings, handleSortChange: any) {
-	return (
-		<ThemeProvider theme={theme}>
-			<FormControl className={styles.sortby} fullWidth>
-				<InputLabel
-					id="sort-by-select-label"
-					sx={{ fontSize: "1.3em", transform: "translate(10px, -15px)" }}
-				>
-					Sort by
-				</InputLabel>
-				<Select
-					label="_____ Sort by" //DO NOT REMOVE UNDERSCORES, label is only used for layout, see here https://mui.com/material-ui/api/outlined-input/#props
-					labelId="sort-by-select-label"
-					value={sortSetting.type}
-					onChange={handleSortChange}
-					IconComponent={(props) => {
-						console.log("Icon props:", props);
-						return (
-							<ArrowDropDownIcon
-								{...props}
-								fontSize="large"
-								htmlColor="#000000"
-							/>
-						);
-					}}
-				>
-					<MenuItem value="">
-						{" "}
-						<em>None</em>{" "}
-					</MenuItem>
-					<MenuItem value={"name"}>Name</MenuItem>
-					<MenuItem value={"rank"}>Rank</MenuItem>
-					<MenuItem value={"time"}>Time</MenuItem>
-					<MenuItem value={"internal"}>Internal count</MenuItem>
-					<MenuItem value={"external"}>External count</MenuItem>
-					<MenuItem value={"total"}>Total count</MenuItem>
-					<MenuItem value={"users"}>User count</MenuItem>
-					<MenuItem value={"mostOutdated"}>Most Outdated Dependency</MenuItem>
-				</Select>
-			</FormControl>
-		</ThemeProvider>
-	);
+
+	return <ThemeProvider theme={theme}>
+		<FormControl className={styles.sortby} fullWidth>
+			<InputLabel id="sort-by-select-label" sx={{ fontSize: '1.3em', transform: 'translate(10px, -15px)' }}>
+				Sort by
+			</InputLabel>
+			<Select
+				label="_____ Sort by" //DO NOT REMOVE UNDERSCORES, label is only used for layout, see here https://mui.com/material-ui/api/outlined-input/#props
+				labelId="sort-by-select-label"
+				value={sortSetting.type}
+				onChange={handleSortChange}
+				IconComponent={(props) => {
+					console.log("Icon props:", props)
+					return <ArrowDropDownIcon {...props} fontSize='large' htmlColor="#000000" />
+				}}
+			>
+				<MenuItem value=""> <em>None</em> </MenuItem>
+				<MenuItem value={"name"}>Name</MenuItem>
+				<MenuItem value={"repo"}>Repository</MenuItem>
+				<MenuItem value={"rank"}>Rank</MenuItem>
+				<MenuItem value={"time"}>Time</MenuItem>
+				<MenuItem value={"internal"}>Internal count</MenuItem>
+				<MenuItem value={"external"}>External count</MenuItem>
+				<MenuItem value={"total"}>Total count</MenuItem>
+				<MenuItem value={"users"}>User count</MenuItem>
+				<MenuItem value={"mostOutdated"}>Most Outdated Dependency</MenuItem>
+			</Select>
+		</FormControl>
+	</ThemeProvider>
 }
 
 export function RankSelectionList(
@@ -128,7 +132,6 @@ export function RankSelectionList(
 								/>
 								<ListItemText
 									primary={"Highly-Outdated"}
-									sx={{ marginLeft: "0.4rem" }}
 								/>
 							</MenuItem>,
 							<MenuItem
@@ -145,7 +148,6 @@ export function RankSelectionList(
 								/>
 								<ListItemText
 									primary={"Moderately-Outdated"}
-									sx={{ marginLeft: "0.4rem" }}
 								/>
 							</MenuItem>,
 							<MenuItem value={"Up-To-Date"} key={"Up-To-Date"}>
@@ -159,7 +161,6 @@ export function RankSelectionList(
 								/>
 								<ListItemText
 									primary={"Up-To-Date"}
-									sx={{ marginLeft: "0.4rem" }}
 								/>
 							</MenuItem>,
 						]}

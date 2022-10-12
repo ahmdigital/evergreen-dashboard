@@ -52,12 +52,14 @@ export default function CollapsibleTable(props: { tableRows: any, setTableRows: 
             <col className={styles.col3} />
             <col className={styles.col4} />
             <col className={styles.col5} />
+			      <col className={styles.col6} />
           </colgroup>
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
               <TableCell>status</TableCell>
               <TableCell>name</TableCell>
+			        <TableCell>repo</TableCell>
               <TableCell>version</TableCell>
               <TableCell>last push</TableCell>
             </TableRow>
