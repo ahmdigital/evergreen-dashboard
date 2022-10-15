@@ -25,7 +25,7 @@ type GridSubRowProps = {
 }
 
 export function GridSubRow(props: GridSubRowProps) {
-	
+
 	return <>
 		<Box sx={{ backgroundColor: "#f5f5f5" }}>
 			<Tabs subRows={{

@@ -13,7 +13,7 @@ export default function LoadingSnackbar(props: {
     <div className={styles.snackbar}>
       <Snackbar
       open={props.open}
-      sx={{ 
+      sx={{
         backgroundColor: 'rgb(59,93,214)',
         borderRadius: 4,
         width: 350,
@@ -22,7 +22,7 @@ export default function LoadingSnackbar(props: {
       }}
       >
         <Box sx={{ width: '100%' , display: 'flex', padding: '1rem'}}>
-            <CircularProgress 
+            <CircularProgress
 
               sx={{
                 padding: '0.5rem',
