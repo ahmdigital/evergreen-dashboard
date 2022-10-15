@@ -46,7 +46,7 @@ const theme = createTheme({
           fontSize: 'var(--font-size-normal)',
           fontFamily: "var(--primary-font-family)",
         //   width: "30%",
-		//   paddingRight: '40px',	
+		//   paddingRight: '40px',
         //   maxWidth: "18.75rem", //"300px"
           textAlign: "left",
           flexDirection: "row",
