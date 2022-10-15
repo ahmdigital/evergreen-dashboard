@@ -71,7 +71,7 @@ export async function createData(request: "npm" | "PyPI" | "RubyGems" | null = n
 		...config
 	}, {
 		...(api != null && { toUse: api }),
-		useCachedData: (process.env.GITHUB_WEBHOOK_IS_ENABLED as string).toLowerCase() === "true" ? true : false
+		useCachedData: (process.env.GITHUB_WEBHOOK_IS_ENABLED ?? "").toLowerCase() === "true" ? true : false
 	})
 }
 
