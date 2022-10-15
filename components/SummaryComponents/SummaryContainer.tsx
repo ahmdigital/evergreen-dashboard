@@ -202,16 +202,18 @@ export default function SummaryContainer(props: {
         <div>{props.loadingSnackbar}</div>
       </Collapse>
       <div className={styles.expandButton}>
-        <IconButton
+        <Button
+		  variant="text"
           aria-label="expand row"
           size="small"
           onClick={() => setCloseHeader(!closeHeader)}
+		  className={styles.expandButton}
         >
           {closeHeader ? <>
             <KeyboardArrowUpIcon /><p className={styles.expandText}>Show Less</p></> : <>
             <KeyboardArrowDownIcon /><p className={styles.expandText}>Show More</p></>
           }
-        </IconButton>
+        </Button>
       </div>
     </Box>
   );

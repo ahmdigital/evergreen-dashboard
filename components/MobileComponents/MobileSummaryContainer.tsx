@@ -285,10 +285,12 @@ export default function MobileSummaryContainer(props: {
           />
         </Collapse>
         <div className={styles.expandButton}>
-          <IconButton
+		  <Button
+		    variant="text"
             aria-label="expand row"
             size="small"
             onClick={() => setCloseHeader(!closeHeader)}
+			className={styles.expandButton}
           >
             {closeHeader ? (
               <>
@@ -301,7 +303,7 @@ export default function MobileSummaryContainer(props: {
                 <p className={styles.expandText}>Show More</p>
               </>
             )}
-          </IconButton>
+          </Button>
         </div>
       </Box>
     </Box>

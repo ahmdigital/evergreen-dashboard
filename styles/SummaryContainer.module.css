@@ -56,6 +56,15 @@ a.orgLink:active {
 .expandButton {
   display: flex;
   flex-direction: column;
+  border-radius: var(--label-border-radius);
+  color: var(--colour-black);
+}
+
+button.expandButton{
+  display: inline-flex;
+  flex-direction: row;
+  border-radius: var(--label-border-radius);
+  color: var(--colour-black);
 }
 
 div.summaryOverall {
