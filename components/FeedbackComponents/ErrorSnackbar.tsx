@@ -11,7 +11,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 
 export default function ErrorSnackbar( props: {
     open: boolean;
-}) 
+})
 {
     // click elsewhere to remove
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {

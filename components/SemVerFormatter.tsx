@@ -19,7 +19,7 @@ export function SemVerFormatter(props: SemVerProps) {
 			}>
 				<QuestionMark sx={{ width: '1.125rem', height: '1.125rem' }} />
 			</Tooltip>
-			
+
 		}
 		</>
 }

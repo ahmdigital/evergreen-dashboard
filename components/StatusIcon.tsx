@@ -42,7 +42,7 @@ export function StatusIcon(props: StatusIconProps) {
 				layout="fixed"
 				src={statusIcon}
 				alt={statusText}
-				width= {props?.variant === 'small' ? '33px' : "40px"} 
+				width= {props?.variant === 'small' ? '33px' : "40px"}
 				height={props?.variant === 'small' ? '33px' : "40px"}
 			/>
 		</div>
