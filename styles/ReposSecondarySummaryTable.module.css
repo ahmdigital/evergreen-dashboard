@@ -1,14 +1,29 @@
-.tableCellStyle {
-	padding: 4px;
+.tableCellStyle1 {
+	display: inline-flex;
+	padding: 0px;
+	padding-top: 4px;
+	padding-bottom: 4px;
 	font-size: medium;
 	font-weight: bold;
+	width: calc(100% - 2rem);
+	max-width: calc(100% - 2rem);
+}
+
+.tableCellStyle2 {
+	display: inline-flex;
+	padding: 0px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	font-size: medium;
+	font-weight: bold;
+	max-width: 1rem;
+	padding-left: 1rem;
 }
 
 .textContainer {
-	width: auto;
-display: inline-block;
+	width: 100%;
+	display: inline-block;
 	/* /width: 175px; */
-	width: 25%;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;

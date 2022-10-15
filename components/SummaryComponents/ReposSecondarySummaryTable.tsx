@@ -1,14 +1,14 @@
-import * as React from 'react';
+import * as React from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Table from "@mui/material/Table";
-import MobileStepper from '@mui/material/MobileStepper';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+import MobileStepper from "@mui/material/MobileStepper";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import styles from "../../styles/ReposSecondarySummaryTable.module.css";
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 import { PackageData, ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import { compareSemVerDelta, SemVerDelta, semVerToDelta } from "../../src/semVer";
 import { Filter } from "../../src/sortingAndFiltering";
@@ -22,11 +22,11 @@ export const theme = createTheme({
 				root: {
 					fontWeight: "var(--font-weight-semibold)",
 					fontSize: "var(--font-size-normal)", //16px
-					fontFamily: 'var(--secondary-font-family)',
-					padding: '4px',
-					lineHeight: 'inherit',
+					fontFamily: "var(--secondary-font-family)",
+					padding: "4px",
+					lineHeight: "inherit",
 					"&:hover": {
-						cursor: 'pointer'
+						cursor: "pointer"
 					  }
 				},
 			}
@@ -72,8 +72,8 @@ function MostCommonSummaryTable(name: string, usageCounts: { name: string, id: n
 	return (
 		<ThemeProvider theme={theme}>
 
-				<Table sx={{ width: "100px" }}>
-				<Box sx={{ maxHeight: "150px"}}>
+				<Table sx={{ width: "100%", tableLayout: "fixed" }}>
+				<Box sx={{ maxHeight: "160px", paddingLeft: "2px"}}>
 					<TableRow>
 						<TableCell className={styles.totalsCellStyle}>
 							<h3>{name}</h3>
@@ -81,25 +81,27 @@ function MostCommonSummaryTable(name: string, usageCounts: { name: string, id: n
 						<TableCell className={styles.totalsCellStyle}>
 						</TableCell>
 					</TableRow>
-					</Box>
-					<Box sx={{ maxHeight: "150px", px: 2, overflow: 'auto', boxSizing: 'border-box' }}>
-					{
-						usageCounts.map(i => {
-							return <TableRow key={i.id} sx={{ ...(filterTerm.mustHaveDependency == i.id && { background: "var(--colour-table-selected)" }) }} onClick={() => setFilterTerm({ ...filterTerm, mustHaveDependency: filterTerm.mustHaveDependency == i.id ? -1 : i.id })}>
-								<TableCell className={styles.tableCellStyle}>
+				</Box>
+				<Box sx={{ maxHeight: "160px", px: 2, paddingRight: "2px", paddingLeft: "2px", overflowX: "hidden", overflowY: "scroll", boxSizing: "border-box", display: "block"}}>
+				{
+					usageCounts.map(i => {
+						return <div key={i.id + " containingDiv"}>
+							<TableRow key={i.id} sx={{ display: "inline-block", width: "100%", ...(filterTerm.mustHaveDependency == i.id && { background: "var(--colour-table-selected)" }) }} onClick={() => setFilterTerm({ ...filterTerm, mustHaveDependency: filterTerm.mustHaveDependency == i.id ? -1 : i.id })}>
+								<TableCell className={styles.tableCellStyle1}>
 									<div className={styles.textContainer}>
 										{i.name}
 									</div>
 								</TableCell>
-								<TableCell className={styles.tableCellStyle}>
+								<TableCell className={styles.tableCellStyle2}>
 									<div className={styles.countContainer}>
 										{i.count}
 									</div>
 								</TableCell>
 							</TableRow>
-						})
-					}
-					</Box>
+						</div>
+					})
+				}
+				</Box>
 				</Table>
 
 		</ThemeProvider>
@@ -134,7 +136,7 @@ export default function ReposSecondarySummaryTable(props: {
 	};
 
 	return (
-		<Box sx={{ maxWidth: "100%", marginTop: "10px" }}>
+		<Box sx={{ maxWidth: "100%"}}>
 			{options[activeStep]}
 			<MobileStepper
 				steps={maxSteps}
@@ -147,7 +149,7 @@ export default function ReposSecondarySummaryTable(props: {
 						disabled={activeStep === maxSteps - 1}
 					>
 						{/* Next */}
-						{theme.direction === 'rtl' ? (
+						{theme.direction === "rtl" ? (
 							<KeyboardArrowLeft />
 						) : (
 							<KeyboardArrowRight />
@@ -156,7 +158,7 @@ export default function ReposSecondarySummaryTable(props: {
 				}
 				backButton={
 					<Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-						{theme.direction === 'rtl' ? (
+						{theme.direction === "rtl" ? (
 							<KeyboardArrowRight />
 						) : (
 							<KeyboardArrowLeft />
