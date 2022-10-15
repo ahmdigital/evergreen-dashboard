@@ -53,7 +53,7 @@ export async function saveAndServerCache(res: NextApiResponse, cachedData: any){
 	res.status(200).json(cachedData)
 }
 
-export async function createData(request: "npm" | "PyPI" | "RubyGems" | null = null){
+export async function createData(request: "npm" | "PyPI" | "RubyGems" | null = null) {
 	const requestToAPI = {
 		npm: "NPM",
 		PyPI: "PYPI",
@@ -61,7 +61,7 @@ export async function createData(request: "npm" | "PyPI" | "RubyGems" | null = n
 	}
 
 	let api = null
-	if(request != null){
+	if (request != null) {
 		api = [getProperty(requestToAPI, request)]
 	}
 
@@ -69,7 +69,10 @@ export async function createData(request: "npm" | "PyPI" | "RubyGems" | null = n
 	return getJsonStructure(accessToken, {
 		targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION as string,
 		...config
-	}, { ...(api != null && { toUse: api }), useCachedData: true })
+	}, {
+		...(api != null && { toUse: api }),
+		useCachedData: (process.env.GITHUB_WEBHOOK_IS_ENABLED as string).toLowerCase() === "true" ? true : false
+	})
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
