@@ -59,9 +59,10 @@ export function CatchAllErrors(props: CatchAllErrorsProps) {
 					left: '50%',
 					transform: 'translate(-50%, -50%)',
 					width: 400,
-					bgcolor: 'background.paper',
-					border: '2px solid #000',
+					backgroundColor: 'var(--colour-container-background)',
 					boxShadow: 24,
+					border: 'none',
+					borderRadius: 'var(--label-border-radius)', 
 					p: 4,
 				}}>
 					<Typography id="catchall-modal-title" variant="h6" component="h2">
