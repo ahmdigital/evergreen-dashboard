@@ -40,7 +40,16 @@ const theme2 = createTheme({
 					color: 'black',
 				}
 			}
-		}
+		},
+		MuiMenuItem: {
+			styleOverrides: {
+				root: {
+					fontSize: "1.1rem",
+					fontFamily: "var(--primary-font-family)",
+					color: "black",
+				},
+			},
+		},
 	}
 })
 

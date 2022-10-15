@@ -105,13 +105,13 @@ export default function SummaryContainer(props: {
         <Grid>
           <h1 className={styles.noMargins}><ForestIcon /> Evergreen Dashboard</h1>
           <p className={styles.subtitle}>
-            Monitoring dependencies for the <b className={styles.orgTitle}><a href={props.auxData.orgLink}>{props.auxData.orgName}</a></b> Github Organisation
+            Monitoring dependencies for the <span className={styles.orgTitle}><a className={styles.orgLink} href={props.auxData.orgLink}>{props.auxData.orgName}</a></span> Github Organisation
           </p>
           <div className={styles.btnsContainer}>
             <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
               <Button variant="contained" startIcon={<RefreshIcon />} sx={{
                 backgroundColor: 'var(--colour-black)', borderRadius: 'var(--main-section-border-radius)', '&:hover': {
-                  backgroundColor: '#424242',
+                  backgroundColor: 'var(--colour-black-hover)',
                 },
               }} onClick={callRefresh}>
                 Refresh
