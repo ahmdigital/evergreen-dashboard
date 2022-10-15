@@ -119,8 +119,8 @@ export default function ReposSecondarySummaryTable(props: {
 
 	//TODO: Move outside of function, as these can be constant
 	let options = [
+		MostCommonSummaryTable("Outdated", countUsage(props.rows, true), props.filterTerm, props.setFilterTerm),
 		MostCommonSummaryTable("Dependencies", countUsage(props.rows, false), props.filterTerm, props.setFilterTerm),
-		MostCommonSummaryTable("Outdated", countUsage(props.rows, true), props.filterTerm, props.setFilterTerm)
 	]
 
 	let maxSteps = options.length;
