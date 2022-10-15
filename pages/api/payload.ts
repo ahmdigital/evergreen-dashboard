@@ -12,7 +12,7 @@ const pinoStreams = [
 ]
 const MasterLogger = pino(
 	{
-		level: process.env.PINO_LOG_LEVEL || 'info',
+		level: process.env.PINO_LOG_LEVEL || 'info', // currently level doesn't work when used with multistream
 		formatters: {
 			level: (label: string) => {
 				return { level: label };
@@ -48,7 +48,7 @@ export default async function handler(
 		MasterLogger.info(`Received an event on api/payload with user-agent: ${req.headers["user-agent"]}`)
 		const childLogger = MasterLogger.child({ GUID: req.headers["x-github-delivery"] })
 
-		if ([acceptedEventTypes.PUSH as string, acceptedEventTypes.REPOSITORY as string].includes(eventType)
+		if (Object.values(acceptedEventTypes).filter((x: string) => x === eventType)
 			&& req.body != null && req.body.organization.login == process.env.NEXT_PUBLIC_TARGET_ORGANISATION) {
 
 			childLogger.info({ Webhook_GUID: req.headers["x-github-delivery"], EventType: eventType })
@@ -65,7 +65,7 @@ export default async function handler(
 			if (waitingPromise.promise != null) {
 				if (alreadyOneWaiting) {
 					// we only have to buffer a single request at a time, running other will be repetitive work
-					childLogger.info({ repository: req.body.repository.name }, "Ignoring this event because one is already in queue");
+					childLogger.info({ repository: req.body.repository.name }, "Ignoring this event because there is one is already in queue");
 					return
 				}
 				// if alreadyOneWaiting is not used, all waiting promises here will proceed to execute as soon the promise is resolved
@@ -83,7 +83,7 @@ export default async function handler(
 			});
 
 			childLogger.info({ repository: req.body.repository.name }, "Proceeding to update cache...");
-			updateCache(req.body, eventType, childLogger);
+			updateCache(req.body, <acceptedEventTypes>eventType, childLogger);
 		}
 		else {
 			childLogger.info("Event doesn't satisfy the requirements");
@@ -95,17 +95,17 @@ export default async function handler(
 	}
 }
 
-async function updateCache(payload: any, eventType: string, logger: any) {
+async function updateCache(payload: any, eventType: acceptedEventTypes, logger: any) {
 	try {
 		if (eventType == acceptedEventTypes.PUSH) {
-			handleGitHubWebhookPushEvents(process.env.EVERGREEN_GITHUB_TOKEN!, {
+			await handleGitHubWebhookPushEvents(process.env.EVERGREEN_GITHUB_TOKEN!, {
 				targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION!,
 				...config
 			}, payload, false
 			);
 		}
 		else if (eventType == acceptedEventTypes.REPOSITORY) {
-			handleGitHubWebhookRepositoryEvents(process.env.EVERGREEN_GITHUB_TOKEN!, {
+			await handleGitHubWebhookRepositoryEvents(process.env.EVERGREEN_GITHUB_TOKEN!, {
 				targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION!,
 				...config
 			}, payload, false

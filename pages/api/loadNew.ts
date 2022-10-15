@@ -66,7 +66,10 @@ export async function createData(request: "npm" | "PyPI" | "RubyGems" | null = n
 	}
 
 	const accessToken = process.env.EVERGREEN_GITHUB_TOKEN!
-	return getJsonStructure(accessToken, {targetOrganisation :process.env.NEXT_PUBLIC_TARGET_ORGANISATION as string, ...config}, api)
+	return getJsonStructure(accessToken, {
+		targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION as string,
+		...config
+	}, { ...(api != null && { toUse: api }), useCachedData: true })
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
