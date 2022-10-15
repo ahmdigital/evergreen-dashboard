@@ -62,7 +62,7 @@ export function CatchAllErrors(props: CatchAllErrorsProps) {
 					backgroundColor: 'var(--colour-container-background)',
 					boxShadow: 24,
 					border: 'none',
-					borderRadius: 'var(--label-border-radius)', 
+					borderRadius: 'var(--label-border-radius)',
 					p: 4,
 				}}>
 					<Typography id="catchall-modal-title" variant="h6" component="h2">
