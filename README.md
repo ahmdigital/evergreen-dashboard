@@ -22,6 +22,8 @@ Please avoid doing this at all cost.
 
 The `-n` allows you to skip git hooks.
 
+## Internal Endpoints
+
 
 ## Running
 
@@ -32,13 +34,17 @@ Make sure you have the following requirements in `.env`
 ```
 EVERGREEN_GITHUB_TOKEN=
 NEXT_PUBLIC_TARGET_ORGANISATION=
+GITHUB_WEBHOOK_IS_ENABLED=false
 REQUIRE_AUTHENTICATION=true
+DYNAMIC_CACHE_DIR=
 CLIENT_SECRET=
 NEXT_PUBLIC_CLIENT_ID=
 NEXT_PUBLIC_REDIRECT_URI=http://example.com/signin/
 ```
 
-The last three variables are optional if `REQUIRE_AUTHENTICATION` is set to `false`
+`DYNAMIC_CACHE_DIR` is only required if the environment only allows you to write to a specific path/directory.
+
+If `REQUIRE_AUTHENTICATION` is set to `false`, then the last three variables are not needed.
 
 ### (Authentication only)
 
