@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
-import { Tooltip, TableRow, TableHead, TableCell, Table } from "@mui/material";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import { Tooltip, TableRow, TableHead, TableCell, Table } from '@mui/material';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-import Image from "next/image";
-import { semVerToString } from "../../src/semVer";
-import styles from "../../styles/Row.module.css";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import QuestionMark from "@mui/icons-material/QuestionMark";
+import Image from 'next/image';
+import { semVerToString } from '../../src/semVer';
+import styles from '../../styles/Row.module.css';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import QuestionMark from '@mui/icons-material/QuestionMark';
 import {
   rankToStatusType,
   statusDefinitionsRepos,
   statusLabel,
-} from "../constants";
-import { iconImg } from "../icons/IconFactory";
+} from '../constants';
+import { iconImg } from '../icons/IconFactory';
 
-const dayjs = require("dayjs");
-var relativeTime = require("dayjs/plugin/relativeTime");
+const dayjs = require('dayjs');
+var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
 export type Props = {
@@ -37,11 +37,11 @@ const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          fontWeight: "var(--font-weight-semibold)",
-          fontSize: "18px",
-          fontFamily: "var(--secondary-font-family)",
-          backgroundColor: "var(--colour-container-background)",
-          color: "var(--colour-font)",
+          fontWeight: 'var(--font-weight-semibold)',
+          fontSize: '18px',
+          fontFamily: 'var(--secondary-font-family)',
+          backgroundColor: 'var(--colour-container-background)',
+          color: 'var(--colour-font)',
         },
       },
     },
@@ -54,11 +54,11 @@ const collapsibleTheme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          fontWeight: "bold",
-          fontSize: "1.1rem",
-          fontFamily: "var(--primary-font-family)",
-          backgroundColor: "#f5f5f5",
-          color: "var(--colour-font)",
+          fontWeight: 'bold',
+          fontSize: '1.1rem',
+          fontFamily: 'var(--primary-font-family)',
+          backgroundColor: '#f5f5f5',
+          color: 'var(--colour-font)',
         },
       },
     },
@@ -76,7 +76,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
   const statusIcon = iconImg[statusType];
   const statusText = statusLabel[statusType];
   const iconDefinition = statusDefinitionsRepos[statusType];
-  const ICON_SIZE = "40px";
+  const ICON_SIZE = '40px';
 
   return (
     <React.Fragment>
@@ -116,13 +116,13 @@ export default function Row(props: { rank: number; row: any } & Props) {
           </TableCell>
           <TableCell component="th" scope="row">
             {row.oldName
-              ? row.oldName.substr(0, row.oldName.lastIndexOf("("))
-              : ""}
+              ? row.oldName.substr(0, row.oldName.lastIndexOf('('))
+              : ''}
           </TableCell>
           <TableCell align="left">
             {semVerToString(row.version)}
-            {(semVerToString(row.version) === "0.0.0-development" ||
-              semVerToString(row.version) === "0.0.0") && (
+            {(semVerToString(row.version) === '0.0.0-development' ||
+              semVerToString(row.version) === '0.0.0') && (
               <Tooltip
                 arrow
                 title={
@@ -131,7 +131,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
                   </p>
                 }
               >
-                <QuestionMark sx={{ width: "1.125rem", height: "1.125rem" }} />
+                <QuestionMark sx={{ width: '1.125rem', height: '1.125rem' }} />
               </Tooltip>
             )}
           </TableCell>
