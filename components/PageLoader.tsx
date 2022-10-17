@@ -80,6 +80,8 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems", props: { target
 	PageLoaderCurrentData = data
 	PageLoaderIsLoading = isLoading
 
+	const [error, setError] = useState(null)
+
 	useEffect(() => {
 		setLoading(true)
 
@@ -112,10 +114,17 @@ export function PageLoader(request: "npm" | "PyPI" | "RubyGems", props: { target
 						setData(result as any)
 						setLoading(false)
 					})
+				}).catch(error => {
+					setError(error)
+					setLoading(false)
 				})
 			} break;
 		}
 	}, [])
+
+	if (error){
+		throw error
+	}
 	// Three states, loading, failed, or loaded
 	if (isLoading) {
 		if(mode == Mode.IntegratedBackend){

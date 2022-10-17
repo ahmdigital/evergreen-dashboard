@@ -308,3 +308,5 @@ $RECYCLE.BIN/
 other/*
 dynamicCache.json
 **/*.zip
+*github-org-cache.json
+scrapeOrganisationCache.json

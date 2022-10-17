@@ -98,7 +98,7 @@ export default function DependenciesContainer(props: {
 								repoNames={(props.tableRows.map((row: any) => row.name))}
 								/>
 					</Grid>
-					
+
 					<Grid item xs="auto">
 							<IconButton
 								sx={{ display: { xs: 'initial', md: 'none' } }}
@@ -123,7 +123,7 @@ export default function DependenciesContainer(props: {
 					{props.rankSelection}
 				</Grid>
 			</Grid>
-			
+
 			<GridTable rows={props.finalisedData} emptyRows={props.emptyRows} searchTerm={props.searchTerm} tableRows={props.tableRows}/>
 
 			{/* TODO: Delete this */}

@@ -65,7 +65,7 @@ async function isOrganisationMember(org: string, username: string, authToken: st
 
 export async function checkAuthorisation(req: NextApiRequest, res: NextApiResponse): Promise<boolean> {
 	console.log("Middleware called for: " + req.url)
-	if (((process.env.REQUIRE_AUTHENTICATION as string).toLowerCase() === "true" ? true : false) == false) {
+	if (((process.env.REQUIRE_AUTHENTICATION ?? "").toLowerCase() === "true" ? true : false) == false) {
 		console.log("REQUIRE_AUTHENTICATION is set to 'false', granting access to user")
 		return true
 	}
