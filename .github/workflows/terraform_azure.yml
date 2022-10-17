@@ -15,7 +15,15 @@ on:
         description: 'The name of the Github organisation that is tracked'
         required: true
         default: 'ahm-monash'
-        type: text
+        type: string
+      github_webhook_is_enabled:
+        description: 'Whether Github organisation webhook is enabled'
+        required: true
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
   workflow_run:
     branches: [main]
     workflows: [Docker]
@@ -128,4 +136,8 @@ jobs:
       - name: Terraform Apply Workflow Dispatch
         if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
         # instead of forced replacement, it should be triggered in main.tf
-        run: terraform apply -replace=azurerm_linux_web_app.this -auto-approve -var="require_authentication=${{ inputs.require_authentication }}" -var="target_organisation=${{ inputs.target_organisation }}"
+        run: > 
+          terraform apply -replace=azurerm_linux_web_app.this -auto-approve
+          -var="require_authentication=${{ inputs.require_authentication }}"
+          -var="target_organisation=${{ inputs.target_organisation }}"
+          -var="github_webhook_is_enabled=${{ inputs.github_webhook_is_enabled }}"
