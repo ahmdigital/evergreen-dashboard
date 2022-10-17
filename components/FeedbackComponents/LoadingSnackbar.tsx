@@ -4,8 +4,11 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import styles from "../../styles/LoadingSnackbar.module.css";
 
+
 // loading snackbar that appears on data refresh
-export default function LoadingSnackbar(props: { open: boolean }) {
+export default function LoadingSnackbar(props: {
+    open: boolean;
+}) {
   return (
     <div className={styles.snackbar}>
       <Snackbar
