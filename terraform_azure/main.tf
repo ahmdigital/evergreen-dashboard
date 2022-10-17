@@ -50,6 +50,7 @@ resource "azurerm_linux_web_app" "this" {
     EVERGREEN_GITHUB_TOKEN          = var.github_token_scope_read_org
     NEXT_PUBLIC_CLIENT_ID           = var.client_id
     REQUIRE_AUTHENTICATION          = var.require_authentication
+    GITHUB_WEBHOOK_IS_ENABLED       = var.github_webhook_is_enabled
     NEXT_PUBLIC_TARGET_ORGANISATION = var.target_organisation
     NEXT_PUBLIC_REDIRECT_URI        = var.redirect_uri
     CLIENT_SECRET                   = var.client_secret
