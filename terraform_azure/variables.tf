@@ -22,7 +22,7 @@ variable "require_authentication" {
   type        = string
   description = "Whether Github authentication is required to access the dashboard"
   sensitive   = false
-  default     = "true"
+  default     = "false"
 }
 
 variable "target_organisation" {
@@ -42,6 +42,13 @@ variable "port" {
   description = "Application port number, azure web app defines port using WEBSITES_PORT"
   sensitive   = false
   default     = "3000"
+}
+
+variable "github_webhook_is_enabled" {
+  type        = string
+  description = "Whether Github organisation webhook is enabled"
+  sensitive   = true
+  default     = "false"
 }
 
 variable "dynamic_cache_directory" {
@@ -79,7 +86,7 @@ variable "instance_type" {
   description = "Stock Keeping Unit type and the operating system"
   sensitive   = false
   default = {
-    sku_name = "F1"
+    sku_name = "B1"
     os_type  = "Linux"
   }
 }
