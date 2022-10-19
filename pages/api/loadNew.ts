@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse} from 'next'
 
 // Was not sure which import statement to keep?
 import { getJsonStructure } from "evergreen-org-crawler"
-
+import { payloadPromise } from "./payload";
 import getConfig from 'next/config'
 const { publicRuntimeConfig: config } = getConfig()
 import {checkAuthorisation} from "../../src/authenticationMiddleware";
@@ -60,7 +60,7 @@ export async function createData(request: "npm" | "PyPI" | "RubyGems" | null = n
 		RubyGems: "RUBYGEMS"
 	}
 
-	let api = null
+	let api = ["NPM"]
 	if (request != null) {
 		api = [getProperty(requestToAPI, request)]
 	}
@@ -92,8 +92,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		const dif = current - mtimeMs
 
 		if(dif > timeUntilRefresh){
-			if(waitingPromise.promise != null){
-				await waitingPromise.promise
+			if(waitingPromise.promise != null || payloadPromise.promise != null){
+				if (waitingPromise.promise != null) {
+					await waitingPromise.promise;
+				} else if (payloadPromise.promise != null) {
+					await payloadPromise.promise;
+				} else {
+					await Promise.all([waitingPromise.promise, payloadPromise.promise])
+				}
 				waitingPromise.promise = null
 				cachedData = JSON.parse(await fs.promises.readFile(CachePath, 'utf8'))
 			} else{

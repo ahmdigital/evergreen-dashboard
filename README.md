@@ -24,6 +24,13 @@ The `-n` allows you to skip git hooks.
 
 ## Internal Endpoints
 
+```
+curl -X POST 'http://localhost:3000/api/payload' \
+-H 'x-github-delivery: $(date +%s)'
+-H 'X-GitHub-Event: push' \
+-H 'Content-Type: application/json' \
+-d @pathto/push.sample.json
+```
 
 ## Running
 
