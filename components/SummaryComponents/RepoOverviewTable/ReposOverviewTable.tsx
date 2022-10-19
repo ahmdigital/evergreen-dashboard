@@ -1,20 +1,24 @@
-import Table from "@mui/material/Table";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
-import styles from "../../../styles/ReposOverviewTable.module.css";
-import { TableBody } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Table from '@mui/material/Table';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import styles from '../../../styles/ReposOverviewTable.module.css';
+import { TableBody } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
-import ChartDataLabels from "chartjs-plugin-datalabels";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 ChartJS.register(ChartDataLabels);
 
-import { Colours, getResolved } from "../../../src/Colours";
-import { statusDefinitionsRepos, statusLabel, StatusType } from "../../constants";
-import { LightStatusIconFactory } from "../../icons/IconFactory";
-import { RankArray } from "../../Page";
+import { Colours, getResolved } from '../../../src/Colours';
+import {
+  statusDefinitionsRepos,
+  statusLabel,
+  StatusType,
+} from '../../constants';
+import { LightStatusIconFactory } from '../../icons/IconFactory';
+import { RankArray } from '../../Page';
 
 type RowProps = {
   statusType: StatusType;
@@ -27,19 +31,19 @@ const theme1 = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          fontSize: "var(--font-size-normal)",
-          fontWeight: "var(--font-weight-semibold)",
+          fontSize: 'var(--font-size-normal)',
+          fontWeight: 'var(--font-weight-semibold)',
           marginTop: 0,
           marginBottom: 0,
-          padding: "16px 10px 16px 10px",
-          lineHeight: "inherit",
+          padding: '16px 10px 16px 10px',
+          lineHeight: 'inherit',
         },
       },
     },
   },
 });
 
-const ICON_SIZE = "40px";
+const ICON_SIZE = '40px';
 const Row = (props: RowProps) => {
   return (
     <TableRow>
@@ -69,36 +73,36 @@ export default function ReposOverViewTable(props: {
 }) {
   const { rankArray } = props;
 
-  const statusCount: { [key in StatusType]: number } = {
+  const statusCount: { [_key in StatusType]: number } = {
     [StatusType.RED]: rankArray.red,
     [StatusType.GREEN]: rankArray.green,
     [StatusType.YELLOW]: rankArray.yellow,
   };
 
   if (props.showChart) {
-    let data = {
-      labels: [
-        statusLabel[StatusType.RED],
-        statusLabel[StatusType.YELLOW],
-        statusLabel[StatusType.GREEN],
-      ],
-      datasets: [
-        {
-          label: "# of dependencies",
-          data: [
-            props.rankArray.red,
-            props.rankArray.yellow,
-            props.rankArray.green,
-          ],
-          backgroundColor: [
-            getResolved(Colours.redVar),
-            getResolved(Colours.orangeVar),
-            getResolved(Colours.greenVar),
-          ],
-          borderWidth: 1,
-        },
-      ],
-    };
+    // let data = {
+    //   labels: [
+    //     statusLabel[StatusType.RED],
+    //     statusLabel[StatusType.YELLOW],
+    //     statusLabel[StatusType.GREEN],
+    //   ],
+    //   datasets: [
+    //     {
+    //       label: '# of dependencies',
+    //       data: [
+    //         props.rankArray.red,
+    //         props.rankArray.yellow,
+    //         props.rankArray.green,
+    //       ],
+    //       backgroundColor: [
+    //         getResolved(Colours.redVar),
+    //         getResolved(Colours.orangeVar),
+    //         getResolved(Colours.greenVar),
+    //       ],
+    //       borderWidth: 1,
+    //     },
+    //   ],
+    // };
 
     const config = {
       data: {
@@ -120,7 +124,7 @@ export default function ReposOverViewTable(props: {
               props.rankArray.green,
             ],
             datalabels: {
-              anchor: "end" as "end",
+              anchor: 'end' as 'end',
             },
           },
         ],
@@ -138,32 +142,32 @@ export default function ReposOverViewTable(props: {
                   ((currentValue / total) * 100).toFixed(1)
                 );
 
-                return label + ": " + currentValue + " (" + percentage + "%)";
+                return label + ': ' + currentValue + ' (' + percentage + '%)';
               },
             },
           },
           legend: {
             display: true,
-            position: "right" as "right",
+            position: 'right' as 'right',
             labels: {
               usePointStyle: true,
-              pointStyle: "circle",
+              pointStyle: 'circle',
               padding: 20,
               font: {
                 size: 15,
-                weight: "normal",
+                weight: 'normal',
               },
-              color: "black",
+              color: 'black',
             },
           },
           datalabels: {
             backgroundColor: function (context: any) {
               return context.dataset.backgroundColor;
             },
-            borderColor: "white",
+            borderColor: 'white',
             borderRadius: 25,
             borderWidth: 2,
-            color: "white",
+            color: 'white',
             display: function (context: any) {
               var dataset = context.dataset;
               var count = dataset.data.length;
@@ -171,7 +175,7 @@ export default function ReposOverViewTable(props: {
               return value > count * 1.5;
             },
             font: {
-              weight: "bold" as "bold",
+              weight: 'bold' as 'bold',
             },
             padding: 6,
             formatter: Math.round,
@@ -186,14 +190,14 @@ export default function ReposOverViewTable(props: {
     return (
       <div
         style={{
-          height: "100%",
-          width: "100%",
-          position: "relative",
-          padding: "-1rem 0rem -1rem 0rem",
+          height: '100%',
+          width: '100%',
+          position: 'relative',
+          padding: '-1rem 0rem -1rem 0rem',
         }}
       >
         <Pie
-          style={{ height: "27em" }}
+          style={{ height: '27em' }}
           data={config.data}
           options={{
             ...config.options,
@@ -206,7 +210,7 @@ export default function ReposOverViewTable(props: {
       <Table
         sx={{
           [`& .${tableCellClasses.root}`]: {
-            borderBottom: "none",
+            borderBottom: 'none',
           },
         }}
       >

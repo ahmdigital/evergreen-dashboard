@@ -87,7 +87,7 @@ const TabPanel = (props: TabPanelProps) => {
 
   return (
     <div
-      role='tabpanel'
+      role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
@@ -128,7 +128,7 @@ const HeaderLabel = (props: HeaderLabelProps) => {
       <label style={{ maxWidth: '6.25rem' /* 100px */ }}>
         {props.headerTitle}
       </label>
-      <Badge badgeContent={props.badgeValue} color='primary' showZero></Badge>
+      <Badge badgeContent={props.badgeValue} color="primary" showZero></Badge>
     </Box>
   );
 };
@@ -167,28 +167,28 @@ const Tabs = (
 
   let tabLabels = [
     <Tab
-      key='internal'
+      key="internal"
       label={
         <HeaderLabel
-          headerTitle='Internal Dependencies'
+          headerTitle="Internal Dependencies"
           badgeValue={internal.length}
         />
       }
     />,
     <Tab
-      key='external'
+      key="external"
       label={
         <HeaderLabel
-          headerTitle='External Dependencies'
+          headerTitle="External Dependencies"
           badgeValue={external.length}
         />
       }
     />,
     <Tab
-      key='users'
+      key="users"
       label={
         <HeaderLabel
-          headerTitle='Dependent Repositories'
+          headerTitle="Dependent Repositories"
           badgeValue={user.length}
         />
       }
@@ -197,7 +197,7 @@ const Tabs = (
 
   let tabPanels = [
     <TabPanel
-      key='internal'
+      key="internal"
       value={tabVal}
       index={0}
       isEmpty={internal.length === 0}
@@ -205,14 +205,14 @@ const Tabs = (
       {internal.length > 0 ? internalTable : 'No depedencies found'}
     </TabPanel>,
     <TabPanel
-      key='external'
+      key="external"
       value={tabVal}
       index={1}
       isEmpty={external.length === 0}
     >
       {external.length > 0 ? externalTable : 'No depedencies found'}
     </TabPanel>,
-    <TabPanel key='users' value={tabVal} index={2} isEmpty={user.length === 0}>
+    <TabPanel key="users" value={tabVal} index={2} isEmpty={user.length === 0}>
       {user.length > 0 ? userTable : 'No dependent repositories found'}
     </TabPanel>,
   ];
@@ -224,9 +224,9 @@ const Tabs = (
           <Tabss
             value={tabVal}
             onChange={handleChange}
-            aria-label=''
-            variant='scrollable'
-            scrollButtons='auto'
+            aria-label=""
+            variant="scrollable"
+            scrollButtons="auto"
             TabIndicatorProps={{ className: classes.indicator }}
           >
             {tabLabels}

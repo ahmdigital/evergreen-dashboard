@@ -103,15 +103,6 @@ const CustomisedDialogTitle = (props: DialogTitleProps) => {
   );
 };
 
-// class created to make linking of descriptions to config easier later on
-class VersionDefinition {
-  description: string;
-
-  constructor(description: string) {
-    this.description = description;
-  }
-}
-
 // creates the table for the status definitions
 function StatusTable() {
   const ICON_SIZE = "40px";

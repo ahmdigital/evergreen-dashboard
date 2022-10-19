@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		} else{
 			console.log("Manual refresh requested. Recreating...")
 			cachedData = null
-			waitingPromise.promise = new Promise(function(resolve, reject){
+			waitingPromise.promise = new Promise(function(resolve, _reject){
 				waitingPromise.resolve = resolve;
 			});
 		}

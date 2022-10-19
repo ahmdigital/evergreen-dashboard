@@ -1,8 +1,8 @@
-import { Divider } from "@mui/material";
-import styles from "../../../styles/CondensedSummary.module.css";
-import Box from "@mui/material/Box";
-import { LightStatusIconFactory } from "../../icons/IconFactory";
-import { statusLabel, StatusType } from "../../constants";
+import { Divider } from '@mui/material';
+import styles from '../../../styles/CondensedSummary.module.css';
+import Box from '@mui/material/Box';
+import { LightStatusIconFactory } from '../../icons/IconFactory';
+import { statusLabel, StatusType } from '../../constants';
 // import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export type RepoOverviewCondensedProps = {
@@ -21,16 +21,16 @@ const Summary = (props: CondensedRepoSummaryProps) => {
   const { red, green, yellow } = props.statusValues;
   const overall = props.overall;
   const target = props.target;
-  const ICON_SIZE = "30px";
+  const ICON_SIZE = '30px';
 
   const overallStatusColour = () => {
-    if (typeof overall === "undefined") {
-      return "var(--colour-red)";
+    if (typeof overall === 'undefined') {
+      return 'var(--colour-red)';
     } else {
       if (overall < target) {
-        return "var(--colour-red)";
+        return 'var(--colour-red)';
       } else {
-        return "var(--colour-green)";
+        return 'var(--colour-green)';
       }
     }
   };
@@ -44,7 +44,7 @@ const Summary = (props: CondensedRepoSummaryProps) => {
             className={`${styles.overall} ${styles.percentage}`}
             style={{ backgroundColor: overallStatusColour() }}
           >
-            {overall ? `${overall}%` : "N/A"}
+            {overall ? `${overall}%` : 'N/A'}
           </span>
         </div>
         <span className={styles.percentageContainer}>

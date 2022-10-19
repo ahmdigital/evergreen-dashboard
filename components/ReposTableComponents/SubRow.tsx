@@ -1,17 +1,17 @@
-import TableCell from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
-import Tooltip from "@mui/material/Tooltip";
-import { semVerToString } from "../../src/semVer";
-import { PackageData } from "../../hooks/useProcessDependencyData";
-import styles from "../../styles/SubRow.module.css";
-import Image from "next/image";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import Tooltip from '@mui/material/Tooltip';
+import { semVerToString } from '../../src/semVer';
+import { PackageData } from '../../hooks/useProcessDependencyData';
+import styles from '../../styles/SubRow.module.css';
+import Image from 'next/image';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {
   rankToStatusType,
   statusDefinitionsDeps,
   statusLabel,
-} from "../constants";
-import { iconImg } from "../icons/IconFactory";
+} from '../constants';
+import { iconImg } from '../icons/IconFactory';
 
 export type SubRowProps = {
   dependency: PackageData;
@@ -23,11 +23,11 @@ const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          fontFamily: "var(--secondary-font-family)",
-          fontSize: "1rem",
-          backgroundColor: "#f5f5f5",
-          color: "var(--colour-font)",
-          borderColor: "#7a7a7a",
+          fontFamily: 'var(--secondary-font-family)',
+          fontSize: '1rem',
+          backgroundColor: '#f5f5f5',
+          color: 'var(--colour-font)',
+          borderColor: '#7a7a7a',
         },
       },
     },

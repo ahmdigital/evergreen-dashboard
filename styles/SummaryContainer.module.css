@@ -4,7 +4,7 @@ div.summaryStyle {
   min-width: 15rem;
 }
 
-.orgTitle{
+.orgTitle {
   background-color: var(--colour-black);
   color: var(--colour-inv-font);
   padding: 0.2rem 0.3rem 0.2rem 0.3rem;
@@ -38,18 +38,21 @@ a.orgLink:active {
 .subtitle {
   font-size: var(--font-size-large);
   margin-top: 6px;
-  font-weight: var(--font-weight-semibold); /*500*/
+  font-weight: var(--font-weight-semibold);
+  /*500*/
 }
 
 .lastUpdated {
   font-size: var(--font-size-normal);
   margin-top: 3px;
-  font-weight: var(--font-weight-normal); /*500*/
+  font-weight: var(--font-weight-normal);
+  /*500*/
 }
 
 .expandText {
   font-size: var(--font-size-normal);
-  font-weight: var(--font-weight-normal); /*500*/
+  font-weight: var(--font-weight-normal);
+  /*500*/
   font-family: var(--primary-font-family);
 }
 
@@ -60,7 +63,7 @@ a.orgLink:active {
   color: var(--colour-black);
 }
 
-button.expandButton{
+button.expandButton {
   display: inline-flex;
   flex-direction: row;
   border-radius: var(--label-border-radius);
@@ -130,11 +133,11 @@ div.summaryStyle div.container {
   justify-content: space-between;
 }
 
-h4.summaryStyle{
-	margin-top: 0rem;
-	margin-bottom: 0.0rem;
-	margin-block-start: 0em;
-	margin-block-end: 0em;
+h4.summaryStyle {
+  margin-top: 0rem;
+  margin-bottom: 0.0rem;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
 }
 
 div.summaryOverall h3 {
@@ -210,7 +213,8 @@ div.summaryComponent div.summaryCompHeader {
 div.sharedCompProps {
   width: 100%;
   min-width: 18rem;
-  border-radius: var(--main-section-border-radius); /*20px*/
+  border-radius: var(--main-section-border-radius);
+  /*20px*/
   padding: 1rem 1.4rem 1.4rem;
   /* padding: 1.5rem 2rem 2rem 2rem; */
   box-sizing: border-box;
@@ -218,7 +222,8 @@ div.sharedCompProps {
 
 h3.percentStyle {
   color: white;
-  font-size: 6.25rem; /*100px;*/
+  font-size: 6.25rem;
+  /*100px;*/
   font-weight: var(--font-weight-normal);
   /* font-weight: var(--font-weight-semibold); */
   margin-block-start: 0em;
@@ -226,9 +231,10 @@ h3.percentStyle {
   align-self: center;
 }
 
-.helpButton{
+.helpButton {
   padding: 0px;
 }
+
 h3.overallTitleStyle {
   color: white;
   text-align: left;
@@ -298,7 +304,7 @@ div.loadingWheelBox {
 }
 
 div.btnsContainer button {
-  display:inline-block;
+  display: inline-block;
   font-family: var(--primary-font-family);
   font-size: var(--font-size-large);
   /* background-color: var(--colour-container-background); */
@@ -320,15 +326,15 @@ div.btnsContainer button {
 }
 
 div.btnsContainer button:hover {
-	background-color: var(--colour-black-hover);
+  background-color: var(--colour-black-hover);
 }
 
 div.btnsContainer h3 {
-	top: 50%;
-	transform: translateY(+25%);
-	display:inline-block;
-	font-style: italic;
-	font-weight: var(--font-weight-normal);
+  top: 50%;
+  transform: translateY(+25%);
+  display: inline-block;
+  font-style: italic;
+  font-weight: var(--font-weight-normal);
 }
 
 div.btnsContainer button span {
@@ -339,12 +345,12 @@ div.btnsContainer button span {
 
 
 h1.noMargins {
-	margin-top: 0;
-	margin-bottom: 0;
-	color: var(--colour-font);
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--colour-font);
 }
 
-@media only screen and (min-width: 1920px){
+@media only screen and (min-width: 1920px) {
   h3.overallTitleStyle {
     color: white;
     font-size: 1.75rem;

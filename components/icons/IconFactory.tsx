@@ -1,11 +1,11 @@
-import { Tooltip } from "@mui/material";
-import { PropsWithChildren } from "react";
-import styles from "../../styles/Row.module.css";
-import { iconAltText, statusDefinitionsDeps, StatusType } from "../constants";
-import RedIconImg from "../images/redIcon.svg";
-import YellowIconImg from "../images/yellowIcon.svg";
-import GreenIconImg from "../images/greenIcon.svg";
-import Image, { ImageProps } from "next/image";
+import { Tooltip } from '@mui/material';
+import { PropsWithChildren } from 'react';
+import styles from '../../styles/Row.module.css';
+import { iconAltText, statusDefinitionsDeps, StatusType } from '../constants';
+import RedIconImg from '../images/redIcon.svg';
+import YellowIconImg from '../images/yellowIcon.svg';
+import GreenIconImg from '../images/greenIcon.svg';
+import Image, { ImageProps } from 'next/image';
 
 type IconDefProps = {
   iconDefinition: string;
@@ -24,7 +24,7 @@ type IconGeneratorProps = {
   iconSize: string;
 };
 
-export const iconImg: { [key in StatusType]: any } = {
+export const iconImg: { [_key in StatusType]: any } = {
   [StatusType.GREEN]: GreenIconImg,
   [StatusType.RED]: RedIconImg,
   [StatusType.YELLOW]: YellowIconImg,

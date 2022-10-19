@@ -1,16 +1,16 @@
-import TableCell from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
-import { semVerToString } from "../../src/semVer";
-import { SubRowProps } from "./SubRow";
-import Image from "next/image";
-import styles from "../../styles/SubRow.module.css";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { rankToStatusType, statusLabel } from "../constants";
-import { iconImg } from "../icons/IconFactory";
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import { semVerToString } from '../../src/semVer';
+import { SubRowProps } from './SubRow';
+import Image from 'next/image';
+import styles from '../../styles/SubRow.module.css';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { rankToStatusType, statusLabel } from '../constants';
+import { iconImg } from '../icons/IconFactory';
 
 type InverseSubRowProps = {
   //This is just renaming dependency to user to make it more clear
-  user: SubRowProps["dependency"];
+  user: SubRowProps['dependency'];
 };
 
 // Customising the row styling using ThemeProvider
@@ -19,30 +19,32 @@ const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          fontFamily: "var(--secondary-font-family)",
-          fontSize: "1.1rem",
-          backgroundColor: "#f5f5f5",
-          color: "var(--colour-font)",
-          borderColor: "#7a7a7a",
-        }
-      }
-    }
-  }
-})
+          fontFamily: 'var(--secondary-font-family)',
+          fontSize: '1.1rem',
+          backgroundColor: '#f5f5f5',
+          color: 'var(--colour-font)',
+          borderColor: '#7a7a7a',
+        },
+      },
+    },
+  },
+});
 export function testClickFunction(name: string) {
-  let mainTableBody = document.getElementById("mainTableBody");
-  if (mainTableBody == null) { return }
+  let mainTableBody = document.getElementById('mainTableBody');
+  if (mainTableBody == null) {
+    return;
+  }
   let children = mainTableBody.children;
-  console.log(children.length)
-  console.log(name)
+  console.log(children.length);
+  console.log(name);
 
-  var instance = children[1]
+  var instance = children[1];
 
-  console.log(instance)
+  console.log(instance);
 
   if (instance instanceof HTMLElement) {
-
-    if (instance.getAttribute('aria-expanded') == 'false') { // region is collapsed
+    if (instance.getAttribute('aria-expanded') == 'false') {
+      // region is collapsed
 
       // update the aria-expanded attribute of the region
       instance.setAttribute('aria-expanded', 'true');
@@ -52,9 +54,8 @@ export function testClickFunction(name: string) {
 
       // update the button label
       //thisObj.$toggle.find('span').html('Hide');
-
-    }
-    else { // region is expanded
+    } else {
+      // region is expanded
 
       // update the aria-expanded attribute of the region
       instance.setAttribute('aria-expanded', 'false');
@@ -72,11 +73,11 @@ export function InverseSubRow(props: InverseSubRowProps) {
 
   const statusType = rankToStatusType[props.user.rank];
 
-	const statusIcon = iconImg[statusType];
-	const statusText = statusLabel[statusType];
+  const statusIcon = iconImg[statusType];
+  const statusText = statusLabel[statusType];
 
   return (
-    <TableRow className={styles.inverseSubRow}    >
+    <TableRow className={styles.inverseSubRow}>
       <ThemeProvider theme={theme}>
         <TableCell>
           <Image
@@ -87,9 +88,11 @@ export function InverseSubRow(props: InverseSubRowProps) {
             className={styles.inverseSubRowIcon}
           ></Image>
         </TableCell>
-        <TableCell ><a href={depLink} rel="noreferrer" target="_blank">
-          {userName}
-        </a></TableCell>
+        <TableCell>
+          <a href={depLink} rel="noreferrer" target="_blank">
+            {userName}
+          </a>
+        </TableCell>
         <TableCell>{usedVersion}</TableCell>
         {/* <button onClick = {() => {testClickFunction(userName)}}> </button> */}
       </ThemeProvider>

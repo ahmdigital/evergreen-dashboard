@@ -1,37 +1,44 @@
-import React, { useMemo, useState } from "react";
-import styles from "../../styles/SummaryContainer.module.css";
-import sharedStyles from "../../styles/TreeView.module.css";
-import ReposOverviewTable from "./RepoOverviewTable/ReposOverviewTable";
-import helpIcon from "../images/helpIcon.png";
-import Image from "next/image";
-import HelpScreen from "../HelpComponents/LightStatus";
-import ForestIcon from "@mui/icons-material/Forest";
-import Tooltip from "@mui/material/Tooltip";
+import React, { useMemo, useState } from 'react';
+import styles from '../../styles/SummaryContainer.module.css';
+import sharedStyles from '../../styles/TreeView.module.css';
+import ReposOverviewTable from './RepoOverviewTable/ReposOverviewTable';
+import helpIcon from '../images/helpIcon.png';
+import Image from 'next/image';
+import HelpScreen from '../HelpComponents/LightStatus';
+import ForestIcon from '@mui/icons-material/Forest';
+import Tooltip from '@mui/material/Tooltip';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "../PageLoader";
-import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
-import ReposSecondarySummaryTable from "./ReposSecondarySummaryTable";
-import { Filter } from "../../src/sortingAndFiltering";
-import Collapse from "@mui/material/Collapse";
+import {
+  PageLoaderCurrentData,
+  forceNewVersion,
+  PageLoaderIsLoading,
+  lastRequest,
+  PageLoaderSetData,
+  PageLoaderSetLoading,
+} from '../PageLoader';
+import { ProcessedDependencyData } from '../../hooks/useProcessDependencyData';
+import ReposSecondarySummaryTable from './ReposSecondarySummaryTable';
+import { Filter } from '../../src/sortingAndFiltering';
+import Collapse from '@mui/material/Collapse';
 import Grow from '@mui/material/Grow';
-import IconButton from "@mui/material/IconButton";
+import IconButton from '@mui/material/IconButton';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import getConfig from 'next/config'
+import getConfig from 'next/config';
 
-import CondensedSummary from "./CondensedSummary/CondensedSummary";
+import CondensedSummary from './CondensedSummary/CondensedSummary';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import { AuxData } from "../../src/dataProcessing";
+import { AuxData } from '../../src/dataProcessing';
 
-const dayjs = require('dayjs')
-var relativeTime = require('dayjs/plugin/relativeTime')
-dayjs.extend(relativeTime)
+const dayjs = require('dayjs');
+var relativeTime = require('dayjs/plugin/relativeTime');
+dayjs.extend(relativeTime);
 import Button from '@mui/material/Button';
 
 const { publicRuntimeConfig: config } = getConfig();
-let refreshing = false
+let refreshing = false;
 
 export default function SummaryContainer(props: {
   auxData: AuxData;
@@ -43,15 +50,15 @@ export default function SummaryContainer(props: {
   targetOrganisation: string;
 }) {
   const totalRepos =
-  props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
+    props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
   let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
-  let overallPercentStr = overallPercent + "%";
+  let overallPercentStr = overallPercent + '%';
   let overallStyle = styles.summaryOverall;
   let overallColour = styles.summaryOverallGreen;
-  console.log('TARGET', props.targetOrganisation)
+  console.log('TARGET', props.targetOrganisation);
 
   if (isNaN(overallPercent)) {
-    overallPercentStr = "N/A";
+    overallPercentStr = 'N/A';
     overallColour = styles.summaryOverallGrey;
   } else if (overallPercent < config.targetPercentage) {
     overallColour = styles.summaryOverallRed;
@@ -63,7 +70,6 @@ export default function SummaryContainer(props: {
 
   // State for collapsing the header
   const [closeHeader, setCloseHeader] = useState<boolean>(true);
-
 
   async function callRefresh() {
     if (refreshing) {
@@ -97,11 +103,11 @@ export default function SummaryContainer(props: {
     //}
   }
 
-  const renderRepoOverviewTable = useMemo(()=>{
+  const renderRepoOverviewTable = useMemo(() => {
     return (
       <ReposOverviewTable rankArray={props.rankArray} showChart={showChart} />
-   )
-  } , [props.rankArray, showChart]);
+    );
+  }, [props.rankArray, showChart]);
 
   return (
     <Box

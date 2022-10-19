@@ -67,7 +67,8 @@ const collapsibleTheme = createTheme({
 
 // Creates each individual row
 export default function Row(props: { rank: number; row: any } & Props) {
-  const { rank, row, subRows } = props;
+  // const { rank, row, subRows } = props;
+  const { rank, row } = props;
 
   const [open, setOpen] = useState(false);
 

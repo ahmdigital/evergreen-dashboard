@@ -1,20 +1,33 @@
-import closeIcon from "../images/closeIcon.png";
-import styles from "../../styles/LightStatus.module.css";
-import Image from "next/image";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import { IconButton } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { statusDefinitionsReposSummary, StatusType } from "../constants";
-import { LightStatusIconFactory } from "../icons/IconFactory";
+import closeIcon from '../images/closeIcon.png';
+import greenIcon from '../images/greenIcon.svg';
+import yellowIcon from '../images/yellowIcon.svg';
+import redIcon from '../images/redIcon.svg';
+import styles from '../../styles/LightStatus.module.css';
+import Image from 'next/image';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import getConfig from 'next/config';
+import { semVerFromString } from '../../src/semVer';
+import { IconButton } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+const { publicRuntimeConfig: config } = getConfig();
 
 export type HelpScreenProps = {
   closeHelp: (_value: boolean | ((_prev: boolean) => boolean)) => void;
 };
+
+// class created to make linking of descriptions to config easier later on
+class VersionDefinition {
+  description: string;
+
+  constructor(description: string) {
+    this.description = description;
+  }
+}
 
 // Customising the table styling using ThemeProvider
 const theme = createTheme({
@@ -22,10 +35,10 @@ const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          padding: "10px",
-          fontSize: "var(--font-size-large)",
-          fontWeight: "var(--font-size-large)",
-          fontFamily: "var(--primary-font-family)",
+          padding: '10px',
+          fontSize: 'var(--font-size-large)',
+          fontWeight: 'var(--font-size-large)',
+          fontFamily: 'var(--primary-font-family)',
         },
       },
     },
@@ -37,19 +50,32 @@ const themeHeaderCell = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          paddingLeft: "10px",
-          paddingBottom: "10px",
-          paddingTop: "0px",
-          fontSize: "var(--font-size-large)",
-          fontWeight: "bold",
-          fontFamily: "var(--primary-font-family)",
+          paddingLeft: '10px',
+          paddingBottom: '10px',
+          paddingTop: '0px',
+          fontSize: 'var(--font-size-large)',
+          fontWeight: 'bold',
+          fontFamily: 'var(--primary-font-family)',
         },
       },
     },
   },
 });
 
-const ICON_SIZE = "40px";
+// defines the status icon definitions based on rankCutoff configured
+const upperLimit = semVerFromString(config.rankCutoff.major);
+const lowerLimit = semVerFromString(config.rankCutoff.minor);
+
+// defines red, yellow and green traffic light descriptions
+export const redDef = new VersionDefinition(
+  `Current major version behind by more than 1 major or ${upperLimit.minor} minors.`
+);
+export const yellowDef = new VersionDefinition(
+  `Current minor version behind by ${lowerLimit.minor} or ${upperLimit.minor} minors.`
+);
+export const greenDef = new VersionDefinition(
+  `Current minor version behind by less than ${lowerLimit.minor} minors.`
+);
 
 // creates the table for the status definitions
 function StatusTable() {
@@ -72,38 +98,41 @@ function StatusTable() {
           <ThemeProvider theme={theme}>
             <TableRow>
               <TableCell className={styles.tableCellStyle}>
-                <LightStatusIconFactory
-                  toolTip={false}
-                  type={StatusType.RED}
-                  iconSize={ICON_SIZE}
-                />
+                <Image
+                  src={redIcon}
+                  alt="Highly out-of-date"
+                  width="40px"
+                  height="40px"
+                ></Image>
               </TableCell>
               <TableCell className={styles.tableCellStyle}>
-                <p>{statusDefinitionsReposSummary[StatusType.RED]}</p>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className={styles.tableCellStyle}>
-                <LightStatusIconFactory
-                  toolTip={false}
-                  type={StatusType.YELLOW}
-                  iconSize={ICON_SIZE}
-                />
-              </TableCell>
-              <TableCell className={styles.tableCellStyle}>
-                <p>{statusDefinitionsReposSummary[StatusType.YELLOW]}</p>
+                <p>{redDef.description}</p>
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell className={styles.tableCellStyle}>
-                <LightStatusIconFactory
-                  toolTip={false}
-                  type={StatusType.GREEN}
-                  iconSize={ICON_SIZE}
-                />
+                <Image
+                  src={yellowIcon}
+                  alt="Moderately out-of-date"
+                  width="40px"
+                  height="40px"
+                ></Image>
               </TableCell>
               <TableCell className={styles.tableCellStyle}>
-                <p>{statusDefinitionsReposSummary[StatusType.GREEN]}</p>
+                <p>{yellowDef.description}</p>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className={styles.tableCellStyle}>
+                <Image
+                  src={greenIcon}
+                  alt="Up to date"
+                  width="40px"
+                  height="40px"
+                ></Image>
+              </TableCell>
+              <TableCell className={styles.tableCellStyle}>
+                <p>{greenDef.description}</p>
               </TableCell>
             </TableRow>
           </ThemeProvider>

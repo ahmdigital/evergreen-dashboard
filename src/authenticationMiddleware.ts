@@ -8,13 +8,14 @@ export type TokenCookie = {
 	accessToken: string
 }
 
-function encodeBase64(input: string): string {
-	return Buffer.from(input).toString("base64")
-}
+//TODO: Confirm and Delete Unused functions
+// function encodeBase64(input: string): string {
+// 	return Buffer.from(input).toString("base64")
+// }
 
-function decodeBase64(input: string): string {
-	return Buffer.from(input, "base64").toString("ascii")
-}
+// function decodeBase64(input: string): string {
+// 	return Buffer.from(input, "base64").toString("ascii")
+// }
 
 export function encodeTokenCookie(token: TokenCookie): string {
 	return token.accessToken

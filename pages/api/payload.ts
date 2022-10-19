@@ -78,7 +78,7 @@ export default async function handler(
 				// waitingPromise.promise = null;
 			}
 			childLogger.debug("I'm now free now to call backend at the moment, And I will create a new promise");
-			waitingPromise.promise = new Promise(function (resolve, reject) {
+			waitingPromise.promise = new Promise(function (resolve, _reject) {
 				waitingPromise.resolve = resolve;
 			});
 

@@ -1,16 +1,16 @@
-import { Tooltip } from "@mui/material";
-import Image from "next/image";
-import { iconImg } from "./IconFactory";
+import { Tooltip } from '@mui/material';
+import Image from 'next/image';
+import { iconImg } from './IconFactory';
 import {
   rankToStatusType,
   statusDefinitionsDeps,
   statusDefinitionsRepos,
   statusLabel,
-} from "../constants";
+} from '../constants';
 
 type StatusIconProps = {
   rank: number;
-  variant?: "small" | "medium";
+  variant?: 'small' | 'medium';
 };
 
 export function StatusIcon(props: StatusIconProps) {
@@ -20,10 +20,12 @@ export function StatusIcon(props: StatusIconProps) {
   const statusIcon = iconImg[statusType];
   const statusText = statusLabel[statusType];
   const iconDefinition = () => {
-    if (props.variant != undefined && props.variant === "small") {
-      return statusDefinitionsDeps[statusType] }
-    else{ return statusDefinitionsRepos[statusType]}
-  }
+    if (props.variant != undefined && props.variant === 'small') {
+      return statusDefinitionsDeps[statusType];
+    } else {
+      return statusDefinitionsRepos[statusType];
+    }
+  };
 
   return (
     <Tooltip
@@ -31,8 +33,8 @@ export function StatusIcon(props: StatusIconProps) {
       title={
         <p
           style={{
-            fontSize: "var(--font-size-normal)",
-            fontFamily: "var(--primary-font-family)",
+            fontSize: 'var(--font-size-normal)',
+            fontFamily: 'var(--primary-font-family)',
           }}
         >
           {iconDefinition()}
@@ -41,18 +43,18 @@ export function StatusIcon(props: StatusIconProps) {
     >
       <div
         style={{
-          display: "grid",
-          maxWidth: "100%",
-          maxHeight: "100%",
-          alignItems: "center",
+          display: 'grid',
+          maxWidth: '100%',
+          maxHeight: '100%',
+          alignItems: 'center',
         }}
       >
         <Image
           layout="fixed"
           src={statusIcon}
           alt={statusText}
-          width={props?.variant === "small" ? "33px" : "40px"}
-          height={props?.variant === "small" ? "33px" : "40px"}
+          width={props?.variant === 'small' ? '33px' : '40px'}
+          height={props?.variant === 'small' ? '33px' : '40px'}
         />
       </div>
     </Tooltip>

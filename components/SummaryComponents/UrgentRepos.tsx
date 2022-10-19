@@ -1,7 +1,7 @@
-import Table from "@mui/material/Table";
-import TableCell from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
-import styles from "../../styles/UrgentRepos.module.css";
+import Table from '@mui/material/Table';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import styles from '../../styles/UrgentRepos.module.css';
 
 export default function UrgentRepos() {
   return (
