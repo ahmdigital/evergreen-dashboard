@@ -43,6 +43,10 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
+	if ((process.env.GITHUB_WEBHOOK_IS_ENABLED ?? "").toLowerCase() !== "true") {
+		res.status(404).end({ message: "GITHUB_WEBHOOK_IS_ENABLED is not set to true, refusing to process events" })
+		return
+	}
 	const eventType: string = req.headers["x-github-event"] as string
 	try {
 		MasterLogger.info(`Received an event on api/payload with user-agent: ${req.headers["user-agent"]}`)
@@ -52,15 +56,16 @@ export default async function handler(
 			&& req.body != null && req.body.organization.login == process.env.NEXT_PUBLIC_TARGET_ORGANISATION) {
 
 			childLogger.info({ Webhook_GUID: req.headers["x-github-delivery"], EventType: eventType })
-			// Resolve as quickly as possible
-			res.status(200).end()
 
 			// skip any push event that doesn't target the default branch
 			// TODO: delegate this condition to crawler lib
 			if (eventType == acceptedEventTypes.PUSH && req.body.ref != "refs/heads/" + req.body.repository.default_branch) {
 				childLogger.info({ repository: req.body.repository.name, ref: req.body.ref }, "Ignoring this push event because it doesn't target the default branch");
+				res.status(200).end({ message: "Push event doesn't target the main branch, no cache update needed" })
 				return
 			}
+			// Webhook Timeout is 10 seconds, so we have to resolve as quickly as possible
+			res.status(200).end({ message: "Updating cache" })
 
 			if (waitingPromise.promise != null) {
 				if (alreadyOneWaiting) {
@@ -86,12 +91,12 @@ export default async function handler(
 			updateCache(req.body, <acceptedEventTypes>eventType, childLogger);
 		}
 		else {
-			childLogger.info("Event doesn't satisfy the requirements");
-			res.status(404).end()
+			childLogger.info("Event doesn't satisfy the webhook requirements");
+			res.status(404).end({ message: "Event doesn't satisfy the webhook requirements" })
 		}
 	} catch (error) {
 		MasterLogger.fatal(error, "Failed to process GitHub webhook event");
-		res.status(500).end()
+		res.status(500).end({ message: "Failed to process GitHub webhook event", error: error })
 	}
 }
 
