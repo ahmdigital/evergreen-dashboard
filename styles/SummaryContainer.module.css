@@ -42,9 +42,10 @@ a.orgLink:active {
 }
 
 .lastUpdated {
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-large);
   margin-top: 3px;
   font-weight: var(--font-weight-normal); /*500*/
+  font-family: var(--primary-font-family);
 }
 
 .expandText {
@@ -298,7 +299,7 @@ div.loadingWheelBox {
 }
 
 div.btnsContainer button {
-  display:inline-block;
+  /* display:inline-block; */
   font-family: var(--primary-font-family);
   font-size: var(--font-size-large);
   /* background-color: var(--colour-container-background); */
@@ -323,12 +324,11 @@ div.btnsContainer button:hover {
 	background-color: var(--colour-black-hover);
 }
 
-div.btnsContainer h3 {
-	top: 50%;
-	transform: translateY(+25%);
-	display:inline-block;
-	font-style: italic;
-	font-weight: var(--font-weight-normal);
+div.btnsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
 }
 
 div.btnsContainer button span {
@@ -344,7 +344,7 @@ h1.noMargins {
 	color: var(--colour-font);
 }
 
-@media only screen and (min-width: 1920px){
+@media only screen and (min-width: 1600px){
   h3.overallTitleStyle {
     color: white;
     font-size: 1.75rem;
@@ -382,6 +382,7 @@ h1.noMargins {
   }
 
   .lastUpdated {
-    font-size: 1rem;
+    font-size: var(--font-size-large);
+	  font-weight: var(--font-weight-normal);
   }
 }
