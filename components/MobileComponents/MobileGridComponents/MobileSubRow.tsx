@@ -44,7 +44,7 @@ export function SubRow(props: SubRowProps) {
 			{/* Current */}
 			<Grid item xs={3} sm={2} >
 				<Typography sx={subRowTextSX}>
-					<SemVerFormatter semver={forUsers ? data.version : data.usedVersion} />
+					<SemVerFormatter semver={data.usedVersion} />
 				</Typography>
 			</Grid>
 

@@ -67,7 +67,7 @@ export function testClickFunction(name: string) {
 
 export function InverseSubRow(props: InverseSubRowProps) {
   const userName = props.user.name;
-  const usedVersion = semVerToString(props.user.version);
+  const usedVersion = semVerToString(props.user.usedVersion);
   const depLink = props.user.link;
 
   const statusType = rankToStatusType[props.user.rank];
