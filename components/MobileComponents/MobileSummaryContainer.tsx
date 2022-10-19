@@ -258,7 +258,7 @@ export default function MobileSummaryContainer(props: {
             </div>
 
             <div className={`${mobileStyles.summaryComponent}`}>
-			  <h3 className={styles.summaryStylePercent}>Most Common:</h3>
+              <h3 className={styles.summaryStylePercent}>Most Common:</h3>
               <div className={mobileStyles.summaryComponent3}>
                 <ReposSecondarySummaryTable
                   rows={props.rows}
@@ -302,12 +302,12 @@ export default function MobileSummaryContainer(props: {
           />
         </Collapse>
         <div className={styles.expandButton}>
-		  <Button
-		    variant="text"
-            aria-label="expand row"
+          <Button
+            variant="text"
+            aria-label={ closeHeader ? 'expand summary section' : 'collapse summary section' }
             size="small"
             onClick={() => setCloseHeader(!closeHeader)}
-			className={styles.expandButton}
+            className={styles.expandButton}
           >
             {closeHeader ? (
               <>

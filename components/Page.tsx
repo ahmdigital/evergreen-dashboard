@@ -197,78 +197,126 @@ export function Page(props: PageProps) {
   }, [tableRows, filterSetting, searchTerm]);
   applySort(finalisedData, sortSetting);
 
+  //   return (
+  //     <>
+  //       {isMobile ? (
+  //         <>
+  //           <Head>
+  //             <title>Evergreen dashboard</title>
+  //           </Head>
+  //           <div style={{ padding: 0 }}>
+  //             <Layout>
+  //               <MobileSummaryContainer
+  //                 auxData={props.JSObject.aux}
+  //                 rankArray={rankArray}
+  //                 loadingSnackbar={loadingSnackbar}
+  //                 rows={rows}
+  //                 filterTerm={filterSetting}
+  //                 setFilterTerm={setFilterSetting}
+  //                 targetOrganisation={props.targetOrganisation}
+  //               />
+  //               {/* <MobileDependenciesContainer /> */}
+  //               <DependenciesContainer
+  //                 JSObject={props.JSObject}
+  //                 tableRows={tableRows}
+  //                 setTableRows={setTableRows}
+  //                 searchTerm={searchTerm}
+  //                 setSearchTerm={setSearchTerm}
+  //                 sortDropdown={sortBox}
+  //                 sortDirection={sortDirectionBox}
+  //                 rankSelection={rankSelectionList}
+  //                 emptyRows={emptyRows}
+  //                 filterSetting={filterSetting}
+  //                 targetOrganisation={props.targetOrganisation}
+  //                 finalisedData={finalisedData}
+  //               />
+  //               <HelpGuide />
+  //             </Layout>
+  //           </div>
+  //         </>
+  //       ) : (
+  //         <>
+  //           <Head>
+  //             <title>Evergreen dashboard</title>
+  //           </Head>
+  //           <div style={{ padding: 0 }}>
+  //             <Layout>
+  //               <SummaryContainer
+  //                 auxData={props.JSObject.aux}
+  //                 rankArray={rankArray}
+  //                 loadingSnackbar={loadingSnackbar}
+  //                 rows={rows}
+  //                 filterTerm={filterSetting}
+  //                 setFilterTerm={setFilterSetting}
+  //                 targetOrganisation={props.targetOrganisation}
+  //               />
+  //               <DependenciesContainer
+  //                 JSObject={props.JSObject}
+  //                 tableRows={tableRows}
+  //                 setTableRows={setTableRows}
+  //                 searchTerm={searchTerm}
+  //                 setSearchTerm={setSearchTerm}
+  //                 sortDropdown={sortBox}
+  //                 sortDirection={sortDirectionBox}
+  //                 rankSelection={rankSelectionList}
+  //                 emptyRows={emptyRows}
+  //                 filterSetting={filterSetting}
+  //                 targetOrganisation={props.targetOrganisation}
+  //                 finalisedData={finalisedData}
+  //               />
+  //               <HelpGuide />
+  //             </Layout>
+  //           </div>
+  //         </>
+  //       )}
+  //     </>
+  //   );
+
   return (
     <>
-      {isMobile ? (
-        <>
-          <Head>
-            <title>Evergreen dashboard</title>
-          </Head>
-          <div style={{ padding: 0 }}>
-            <Layout>
-              <MobileSummaryContainer
-                auxData={props.JSObject.aux}
-                rankArray={rankArray}
-                loadingSnackbar={loadingSnackbar}
-                rows={rows}
-                filterTerm={filterSetting}
-                setFilterTerm={setFilterSetting}
-                targetOrganisation={props.targetOrganisation}
-              />
-              {/* <MobileDependenciesContainer /> */}
-              <DependenciesContainer
-                JSObject={props.JSObject}
-                tableRows={tableRows}
-                setTableRows={setTableRows}
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-                sortDropdown={sortBox}
-                sortDirection={sortDirectionBox}
-                rankSelection={rankSelectionList}
-                emptyRows={emptyRows}
-                filterSetting={filterSetting}
-                targetOrganisation={props.targetOrganisation}
-                finalisedData={finalisedData}
-              />
-              <HelpGuide />
-            </Layout>
-          </div>
-        </>
-      ) : (
-        <>
-          <Head>
-            <title>Evergreen dashboard</title>
-          </Head>
-          <div style={{ padding: 0 }}>
-            <Layout>
-              <SummaryContainer
-                auxData={props.JSObject.aux}
-                rankArray={rankArray}
-                loadingSnackbar={loadingSnackbar}
-                rows={rows}
-                filterTerm={filterSetting}
-                setFilterTerm={setFilterSetting}
-                targetOrganisation={props.targetOrganisation}
-              />
-              <DependenciesContainer
-                JSObject={props.JSObject}
-                tableRows={tableRows}
-                setTableRows={setTableRows}
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-                sortDropdown={sortBox}
-                sortDirection={sortDirectionBox}
-                rankSelection={rankSelectionList}
-                emptyRows={emptyRows}
-                filterSetting={filterSetting}
-                targetOrganisation={props.targetOrganisation}
-                finalisedData={finalisedData}
-              />
-              <HelpGuide />
-            </Layout>
-          </div>
-        </>
-      )}
+      <Head>
+        <title>Evergreen dashboard</title>
+      </Head>
+      <div style={{ padding: 0 }}>
+        <Layout>
+          {isMobile ? (
+            <MobileSummaryContainer
+              auxData={props.JSObject.aux}
+              rankArray={rankArray}
+              loadingSnackbar={loadingSnackbar}
+              rows={rows}
+              filterTerm={filterSetting}
+              setFilterTerm={setFilterSetting}
+              targetOrganisation={props.targetOrganisation}
+            />
+          ) : (
+            <SummaryContainer
+              auxData={props.JSObject.aux}
+              rankArray={rankArray}
+              loadingSnackbar={loadingSnackbar}
+              rows={rows}
+              filterTerm={filterSetting}
+              setFilterTerm={setFilterSetting}
+              targetOrganisation={props.targetOrganisation}
+            />
+          )}
+          <DependenciesContainer
+            JSObject={props.JSObject}
+            tableRows={tableRows}
+            setTableRows={setTableRows}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            sortDropdown={sortBox}
+            sortDirection={sortDirectionBox}
+            rankSelection={rankSelectionList}
+            emptyRows={emptyRows}
+            filterSetting={filterSetting}
+            targetOrganisation={props.targetOrganisation}
+            finalisedData={finalisedData}
+          />
+          <HelpGuide />
+        </Layout>
+      </div>
     </>
   );
 }
