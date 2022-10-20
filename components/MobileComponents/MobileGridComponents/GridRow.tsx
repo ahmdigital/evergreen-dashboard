@@ -40,7 +40,7 @@ export function GridRow(props: GridRowProps) {
       <Box onClick={() => setIsOpen(!isOpen)} sx={gridHover}>
         <Grid container wrap="nowrap" columnSpacing={2} alignItems="center">
           {/* Arrow icon */}
-          <Grid item xs={"auto"}>
+          <Grid item md={0.7}>
             <IconButton
               aria-label="Expand row"
               size="small"
@@ -52,12 +52,12 @@ export function GridRow(props: GridRowProps) {
           </Grid>
 
           {/* Rank */}
-          <Grid item xs="auto" style={{ paddingLeft: "3px" }}>
+          <Grid item md={0.7} style={{ paddingLeft: "3px" }}>
             <StatusIcon rank={props.row.minRank} />
           </Grid>
 
           {/* Name */}
-          <Grid item xs sx={{ overflowWrap: "anywhere" }}>
+          <Grid item md={4} sx={{ overflowWrap: "anywhere" }}>
             <Typography sx={{ ...rowTextSX }}>
               <a href={props.row.link} rel="noreferrer" target="_blank">
                 {props.row.name}
@@ -68,7 +68,7 @@ export function GridRow(props: GridRowProps) {
           {/* Repo name */}
           <Grid
             item
-            xs
+            md={3}
             sx={{
               display: { xs: "none", md: "initial" },
               overflowWrap: "anywhere",
@@ -85,7 +85,7 @@ export function GridRow(props: GridRowProps) {
           </Grid>
 
           {/* Version */}
-          <Grid item xs="auto" md={2}>
+          <Grid item md={3}>
             <Typography sx={rowTextSX}>
               <SemVerFormatter semver={props.row.version} />
             </Typography>
