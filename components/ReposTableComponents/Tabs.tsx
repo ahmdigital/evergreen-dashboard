@@ -45,9 +45,6 @@ const theme = createTheme({
           fontWeight: 'var(--font-weight-normal)', //400
           fontSize: 'var(--font-size-normal)',
           fontFamily: 'var(--primary-font-family)',
-          //   width: '30%',
-          //   paddingRight: '40px',
-          //   maxWidth: '18.75rem', //'300px'
           textAlign: 'left',
           flexDirection: 'row',
           color: 'var(--colour-black)',
@@ -228,6 +225,7 @@ const Tabs = (
             variant='scrollable'
             scrollButtons='auto'
             TabIndicatorProps={{ className: classes.indicator }}
+            sx={{"& button:hover": { backgroundColor: "#cecece" },}}
           >
             {tabLabels}
           </Tabss>
