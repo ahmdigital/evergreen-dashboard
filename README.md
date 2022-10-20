@@ -77,6 +77,8 @@ Please refer to `custom-config.sample` for guidance. -->
 
 ### Provisioning the infrastructure from terraform cli
 
+It uses Terraform cloud(source of truth) to maintain the state of the infrastructure, Please make sure to setup environment variables correctly
+
 #### Azure App Service
 
 A docker container is used to deploy to App Service.
@@ -90,7 +92,7 @@ A docker container is used to deploy to App Service.
 
 #### AWS Elastic Beanstalk
 
-A standalone app is directory deployed to Elastic Beanstalk.
+A standalone app gets deployed to Elastic Beanstalk:
 
 1. `terraform init`
 2. `bash bootstrap.sh`, currently works on linux, if on other OSs, simply zip the required files(refer to `bootstrap.sh`)
