@@ -11,7 +11,8 @@ import { GridSubRow } from "./GridSubRow";
 // Change cursor and backgroundColor when hovering over the cell
 const gridHover = {
   "&:hover": {
-    backgroundColor: "#f2f0ee",
+    backgroundColor: "#f5f5f5",
+    cursor: 'pointer'
   },
   p: { xs: 0.5, md: 1.5 },
 };
