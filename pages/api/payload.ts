@@ -114,17 +114,15 @@ export default async function handler(
 async function updateCache(payload: any, eventType: acceptedEventTypes, logger: any) {
 	try {
 		if (eventType == acceptedEventTypes.PUSH) {
-			await handleGitHubWebhookPushEvents(process.env.EVERGREEN_GITHUB_TOKEN!, {
-				targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION!,
-				...config
-			}, payload, false
+			await handleGitHubWebhookPushEvents(process.env.EVERGREEN_GITHUB_TOKEN!,
+				process.env.NEXT_PUBLIC_TARGET_ORGANISATION!,
+				config, payload, false
 			);
 		}
 		else if (eventType == acceptedEventTypes.REPOSITORY) {
-			await handleGitHubWebhookRepositoryEvents(process.env.EVERGREEN_GITHUB_TOKEN!, {
-				targetOrganisation: process.env.NEXT_PUBLIC_TARGET_ORGANISATION!,
-				...config
-			}, payload, false
+			await handleGitHubWebhookRepositoryEvents(process.env.EVERGREEN_GITHUB_TOKEN!,
+				process.env.NEXT_PUBLIC_TARGET_ORGANISATION!,
+				config, payload, false
 			);
 
 		}
