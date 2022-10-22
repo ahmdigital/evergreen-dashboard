@@ -241,6 +241,7 @@ export default function MobileSummaryContainer(props: {
             </div>
 
             <div className={`${mobileStyles.summaryComponent}`}>
+			  <h3 className={styles.summaryStylePercent}>Most Common:</h3>
               <div className={mobileStyles.summaryComponent3}>
                 <ReposSecondarySummaryTable
                   rows={props.rows}
@@ -284,10 +285,12 @@ export default function MobileSummaryContainer(props: {
           />
         </Collapse>
         <div className={styles.expandButton}>
-          <IconButton
+		  <Button
+		    variant="text"
             aria-label="expand row"
             size="small"
             onClick={() => setCloseHeader(!closeHeader)}
+			className={styles.expandButton}
           >
             {closeHeader ? (
               <>
@@ -300,7 +303,7 @@ export default function MobileSummaryContainer(props: {
                 <p className={styles.expandText}>Show More</p>
               </>
             )}
-          </IconButton>
+          </Button>
         </div>
       </Box>
     </Box>

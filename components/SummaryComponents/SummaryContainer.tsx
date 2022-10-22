@@ -117,7 +117,7 @@ export default function SummaryContainer(props: {
                 Refresh
               </Button>
             </Tooltip>
-		        <h3>Last crawl time: {dayjs(parseInt(props.auxData.crawlStart)).fromNow()}</h3>
+		    <h3>Last crawl time: {dayjs(parseInt(props.auxData.crawlStart)).fromNow()}</h3>
           </div>
         </Grid>
 
@@ -192,6 +192,7 @@ export default function SummaryContainer(props: {
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+		      <h3 className={styles.summaryStylePercent}>Most Common:</h3>
               <div className={styles.summaryComponent3}>
                 <ReposSecondarySummaryTable rows={props.rows} filterTerm={props.filterTerm} setFilterTerm={props.setFilterTerm} />
               </div>
@@ -201,16 +202,18 @@ export default function SummaryContainer(props: {
         <div>{props.loadingSnackbar}</div>
       </Collapse>
       <div className={styles.expandButton}>
-        <IconButton
+        <Button
+		  variant="text"
           aria-label="expand row"
           size="small"
           onClick={() => setCloseHeader(!closeHeader)}
+		  className={styles.expandButton}
         >
           {closeHeader ? <>
             <KeyboardArrowUpIcon /><p className={styles.expandText}>Show Less</p></> : <>
             <KeyboardArrowDownIcon /><p className={styles.expandText}>Show More</p></>
           }
-        </IconButton>
+        </Button>
       </div>
     </Box>
   );
