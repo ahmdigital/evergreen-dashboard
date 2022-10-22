@@ -15,17 +15,22 @@
 }
 
 .col3 {
-	width: 38%;
+	width: 30%;
 	background-color: var(--colour-background);
 }
 
 .col3 {
-	width: 20%;
+	width: 30%;
 	background-color: var(--colour-background);
 }
 
 .col4 {
-	width: 22%;
+	width: 15%;
+	background-color: var(--colour-background);
+}
+
+.col5 {
+	width: 14%;
 	background-color: var(--colour-background);
 }
 
@@ -33,7 +38,6 @@
 	width: 15%;
 	background-color: var(--colour-background);
 }
-
 
 .tableStyle {
 	box-shadow: none;

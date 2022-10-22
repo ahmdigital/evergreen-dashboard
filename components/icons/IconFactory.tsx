@@ -2,9 +2,9 @@ import { Tooltip } from "@mui/material";
 import { PropsWithChildren } from "react";
 import styles from "../../styles/Row.module.css";
 import { iconAltText, statusDefinitionsDeps, StatusType } from "../constants";
-import RedIconImg from "../images/redIcon.svg";
-import YellowIconImg from "../images/yellowIcon.svg";
-import GreenIconImg from "../images/greenIcon.svg";
+import RedIconImg from "../images/redLight.svg";
+import YellowIconImg from "../images/yellowLight.svg";
+import GreenIconImg from "../images/greenLight.svg";
 import Image, { ImageProps } from "next/image";
 
 type IconDefProps = {

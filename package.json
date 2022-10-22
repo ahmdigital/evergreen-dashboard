@@ -17,6 +17,7 @@
     "@mui/lab": "^5.0.0-alpha.103",
     "@mui/material": "^5.10.9",
     "@mui/styles": "^5.10.9",
+    "@svgr/webpack": "^6.5.0",
     "@types/node": "^18.11.2",
     "chart.js": "^3.9.1",
     "chartjs-plugin-datalabels": "^2.1.0",

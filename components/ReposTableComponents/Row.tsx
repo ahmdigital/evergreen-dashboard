@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import { Tooltip, TableRow, TableHead, TableCell, Table } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Tabs from './Tabs';
 
 import Image from 'next/image';
 import { semVerToString } from '../../src/semVer';
@@ -147,7 +148,7 @@ export default function Row(props: { rank: number; row: any } & Props) {
                   <TableHead className={styles.collapsibleTableHead}>
                     <TableRow>
                       <TableCell className={styles.collapsibleTableCell}>
-                        {/* <Tabs internal={subRows.internal} external={subRows.external} user={subRows.user}></Tabs> */}
+                        <Tabs internal={subRows.internal} external={subRows.external} user={subRows.user}></Tabs>
                       </TableCell>
                     </TableRow>
                   </TableHead>
