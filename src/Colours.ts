@@ -12,10 +12,9 @@ export const Colours = {
 	ahmLeftTable: "#f6f6f6" as any,
 	ahmBlack: "var(--colour-black)" as any,
 	ahmTableLeftEdge: "var(--table-left-edge)" as any,
+};
 
-}
-
-export function getResolved(variable: string){
-	const globalStyle = getComputedStyle(document.body)
-	return globalStyle.getPropertyValue(variable)
+export function getResolved(variable: string) {
+	const globalStyle = getComputedStyle(document.body);
+	return globalStyle.getPropertyValue(variable);
 }
