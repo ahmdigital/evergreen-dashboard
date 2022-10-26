@@ -4,8 +4,6 @@ import { LightStatusIconFactory } from "../../icons/IconFactory";
 import { statusLabel, StatusType } from "../../constants";
 // import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styles from "../../../styles/CondensedSummary.module.css";
-import { LightStatusIconFactory } from "../../icons/IconFactory";
-import { statusLabel, StatusType } from "../../constants";
 
 export type RepoOverviewCondensedProps = {
 	readonly red: number | string;

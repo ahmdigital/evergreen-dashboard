@@ -1,5 +1,5 @@
 import Image from "next/image";
-import getConfig from "next/config";
+// import getConfig from "next/config";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,26 +9,15 @@ import TableRow from "@mui/material/TableRow";
 import { IconButton } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import closeIcon from "../images/closeIcon.png";
-import greenIcon from "../images/greenIcon.svg";
-import yellowIcon from "../images/yellowIcon.svg";
-import redIcon from "../images/redIcon.svg";
 import styles from "../../styles/LightStatus.module.css";
-import { semVerFromString } from "../../src/semVer";
+import { LightStatusIconFactory } from "../icons/IconFactory";
+import { statusDefinitionsReposSummary, StatusType } from "../constants";
 
-const { publicRuntimeConfig: config } = getConfig();
+// const { publicRuntimeConfig: config } = getConfig();
 
 export type HelpScreenProps = {
 	closeHelp: (_value: boolean | ((_prev: boolean) => boolean)) => void;
 };
-
-// class created to make linking of descriptions to config easier later on
-class VersionDefinition {
-	description: string;
-
-	constructor(description: string) {
-		this.description = description;
-	}
-}
 
 // Customising the table styling using ThemeProvider
 const theme = createTheme({
