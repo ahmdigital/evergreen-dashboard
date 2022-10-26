@@ -63,20 +63,7 @@ const themeHeaderCell = createTheme({
 	},
 });
 
-// defines the status icon definitions based on rankCutoff configured
-const upperLimit = semVerFromString(config.rankCutoff.major);
-const lowerLimit = semVerFromString(config.rankCutoff.minor);
-
-// defines red, yellow and green traffic light descriptions
-export const redDef = new VersionDefinition(
-	`Current major version behind by more than 1 major or ${upperLimit.minor} minors.`
-);
-export const yellowDef = new VersionDefinition(
-	`Current minor version behind by ${lowerLimit.minor} or ${upperLimit.minor} minors.`
-);
-export const greenDef = new VersionDefinition(
-	`Current minor version behind by less than ${lowerLimit.minor} minors.`
-);
+const ICON_SIZE = "40px";
 
 // creates the table for the status definitions
 function StatusTable() {
@@ -99,41 +86,56 @@ function StatusTable() {
 					<ThemeProvider theme={theme}>
 						<TableRow>
 							<TableCell className={styles.tableCellStyle}>
-								<Image
-									src={redIcon}
-									alt="Highly out-of-date"
-									width="40px"
-									height="40px"
-								></Image>
+								<LightStatusIconFactory
+									toolTip={false}
+									type={StatusType.RED}
+									iconSize={ICON_SIZE}
+								/>
 							</TableCell>
 							<TableCell className={styles.tableCellStyle}>
-								<p>{redDef.description}</p>
-							</TableCell>
-						</TableRow>
-						<TableRow>
-							<TableCell className={styles.tableCellStyle}>
-								<Image
-									src={yellowIcon}
-									alt="Moderately out-of-date"
-									width="40px"
-									height="40px"
-								></Image>
-							</TableCell>
-							<TableCell className={styles.tableCellStyle}>
-								<p>{yellowDef.description}</p>
+								<p>
+									{
+										statusDefinitionsReposSummary[
+											StatusType.RED
+										]
+									}
+								</p>
 							</TableCell>
 						</TableRow>
 						<TableRow>
 							<TableCell className={styles.tableCellStyle}>
-								<Image
-									src={greenIcon}
-									alt="Up to date"
-									width="40px"
-									height="40px"
-								></Image>
+								<LightStatusIconFactory
+									toolTip={false}
+									type={StatusType.YELLOW}
+									iconSize={ICON_SIZE}
+								/>
 							</TableCell>
 							<TableCell className={styles.tableCellStyle}>
-								<p>{greenDef.description}</p>
+								<p>
+									{
+										statusDefinitionsReposSummary[
+											StatusType.YELLOW
+										]
+									}
+								</p>
+							</TableCell>
+						</TableRow>
+						<TableRow>
+							<TableCell className={styles.tableCellStyle}>
+								<LightStatusIconFactory
+									toolTip={false}
+									type={StatusType.GREEN}
+									iconSize={ICON_SIZE}
+								/>
+							</TableCell>
+							<TableCell className={styles.tableCellStyle}>
+								<p>
+									{
+										statusDefinitionsReposSummary[
+											StatusType.GREEN
+										]
+									}
+								</p>
 							</TableCell>
 						</TableRow>
 					</ThemeProvider>
