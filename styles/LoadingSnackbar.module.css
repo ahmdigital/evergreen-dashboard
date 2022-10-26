@@ -1,8 +1,7 @@
-
 .p {
-    font-family: var(--primary-font-family);
-    font-size: var(--font-size-normal);
-    color: #fff;
-    flex: 1;
-    padding: 1rem;
+	font-family: var(--primary-font-family);
+	font-size: var(--font-size-normal);
+	color: #fff;
+	flex: 1;
+	padding: 1rem;
 }

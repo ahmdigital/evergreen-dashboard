@@ -1,4 +1,4 @@
-.latestVerStyle{
+.latestVerStyle {
 	font-weight: var(--font-weight-bold);
 }
 
@@ -17,7 +17,7 @@
 	font-family: var(--primary-font-family);
 }
 
-div.iconContainer{
+div.iconContainer {
 	display: grid;
 	max-width: 100%;
 	max-height: 100%;

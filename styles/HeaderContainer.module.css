@@ -1,8 +1,8 @@
 div.headerStyle {
-  align-items:flex-start;
-  font-family: var(--primary-font-family);
+	align-items: flex-start;
+	font-family: var(--primary-font-family);
 }
 
 p.headerStyle {
-  text-align: center;
+	text-align: center;
 }

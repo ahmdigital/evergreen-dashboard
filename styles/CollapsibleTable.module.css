@@ -34,7 +34,6 @@
 	background-color: var(--colour-background);
 }
 
-
 .tableStyle {
 	box-shadow: none;
 	background-color: var(--colour-background);
@@ -47,11 +46,10 @@
 }
 
 .tableFixedWidth {
-	display:table;
-	table-layout:fixed;
-	width:100%;
+	display: table;
+	table-layout: fixed;
+	width: 100%;
 }
-
 
 @media only screen and (max-width: 600px) {
 	.col1 {

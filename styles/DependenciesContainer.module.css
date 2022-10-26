@@ -1,72 +1,71 @@
 div.sectionContainer {
-  display: flex;
-  max-width: 125rem;
-  flex-direction: column;
-  height: max-content;
-  width: 100%;
-  background-color: var(--colour-container-background);
-  box-shadow: var(--main-section-boxshadow);
-  border-radius: var(--main-section-border-radius);
-  margin: 1.1rem;
-  box-sizing: border-box;
-  font-family: var(--primary-font-family);
+	display: flex;
+	max-width: 125rem;
+	flex-direction: column;
+	height: max-content;
+	width: 100%;
+	background-color: var(--colour-container-background);
+	box-shadow: var(--main-section-boxshadow);
+	border-radius: var(--main-section-border-radius);
+	margin: 1.1rem;
+	box-sizing: border-box;
+	font-family: var(--primary-font-family);
 }
 
-
 div.btnsContainer {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 0;
-  width: 17rem;
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 0;
+	width: 17rem;
 }
 
 div.btnsContainer button {
-  width: 8rem;
-  font-family: var(--primary-font-family);
-  font-size: var(--font-size-large);
-  background-color: var(--colour-container-background);
-  border: none;
-  padding: 0.8rem;
-  border-radius: 20px;
-  justify-content: center;
-  align-items: center;
+	width: 8rem;
+	font-family: var(--primary-font-family);
+	font-size: var(--font-size-large);
+	background-color: var(--colour-container-background);
+	border: none;
+	padding: 0.8rem;
+	border-radius: 20px;
+	justify-content: center;
+	align-items: center;
 }
 
 div.btnsContainer button span {
-  margin-left: 0.5rem;
+	margin-left: 0.5rem;
 }
 
 div.btnsContainer button:hover {
-  cursor: pointer;
-  background-color: lightgray;
+	cursor: pointer;
+	background-color: lightgray;
 }
 
 div.searchBarDiv {
-  flex-wrap: wrap;
+	flex-wrap: wrap;
 }
 
 div.refreshWord {
-  font-family: var(--primary-font-family);
-  font-size: var(--font-size-large);
+	font-family: var(--primary-font-family);
+	font-size: var(--font-size-large);
 }
 
 .tooltipStyle {
-  font-size: var(--font-size-normal);
-  font-family: var(--primary-font-family);
+	font-size: var(--font-size-normal);
+	font-family: var(--primary-font-family);
 }
 
 div.noReposStyle {
-  padding: 2rem;
+	padding: 2rem;
 }
 
 div.sortBy {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
-div.menusPosition{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: space-between;
+div.menusPosition {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: space-between;
 }

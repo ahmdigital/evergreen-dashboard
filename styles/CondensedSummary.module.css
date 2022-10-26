@@ -1,63 +1,63 @@
 .overall {
-  color: white;
-  border-radius: var(--label-border-radius);
-  text-align: center;
-  padding: 4px 12px 4px 12px;
+	color: white;
+	border-radius: var(--label-border-radius);
+	text-align: center;
+	padding: 4px 12px 4px 12px;
 }
 
 .percentage {
-  font-size: var(--font-size-x-large);
-  font-weight: var(--font-weight-semibolder);
-  letter-spacing: 0%;
-  /* box-sizing: border-box;
+	font-size: var(--font-size-x-large);
+	font-weight: var(--font-weight-semibolder);
+	letter-spacing: 0%;
+	/* box-sizing: border-box;
   display: flex; */
-  margin-left: 8px;
-  border-radius: var(--label-border-radius);
+	margin-left: 8px;
+	border-radius: var(--label-border-radius);
 }
 
 .rootContainer {
-  display: flexbox;
-  flex-direction: column;
-  box-sizing: border-box;
-  flex-wrap: wrap;
+	display: flexbox;
+	flex-direction: column;
+	box-sizing: border-box;
+	flex-wrap: wrap;
 }
 
 .statuses {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-  justify-content: space-between;
-  margin-left: 10px;
-  font-size: var(--font-size-normal);
-  font-weight: var(--font-weight-bold);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+	justify-content: space-between;
+	margin-left: 10px;
+	font-size: var(--font-size-normal);
+	font-weight: var(--font-weight-bold);
 }
 
 .status {
-  display: flex;
-  flex-direction: row;
-  padding: 8px;
-  margin: 0 10px 0 10px;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	padding: 8px;
+	margin: 0 10px 0 10px;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .status label {
-  margin-right: 8px;
+	margin-right: 8px;
 }
 
 .percentageContainer {
-  /* display: flex; */
-  margin-top: 10px;
-  margin-bottom: 10px;
+	/* display: flex; */
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .topPart {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  font-weight: var(--font-weight-semibold);
-  font-size: 20px;
-  letter-spacing: -2%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	font-weight: var(--font-weight-semibold);
+	font-size: 20px;
+	letter-spacing: -2%;
 }

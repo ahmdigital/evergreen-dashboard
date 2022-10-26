@@ -1,37 +1,36 @@
 /* -----------------START: SHARED SECTION CONTAINERS CSS ------------------- */
 div.sectionContainer {
-  display: inline-block;
-  max-width: 125rem;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  height: max-content;
-  width: 100%;
-  background-color: var(--colour-white);
-  box-shadow: var(--main-section-boxshadow);
-  border-radius: var(--main-section-border-radius);
-  padding: 2rem 2.5rem 2rem 2.5rem;
-  margin: 1.1rem;
-  box-sizing: border-box;
-  font-family: var(--primary-font-family);
+	display: inline-block;
+	max-width: 125rem;
+	flex-wrap: wrap;
+	align-content: center;
+	justify-content: center;
+	height: max-content;
+	width: 100%;
+	background-color: var(--colour-white);
+	box-shadow: var(--main-section-boxshadow);
+	border-radius: var(--main-section-border-radius);
+	padding: 2rem 2.5rem 2rem 2.5rem;
+	margin: 1.1rem;
+	box-sizing: border-box;
+	font-family: var(--primary-font-family);
 }
 
 h2.h2ContainerStyle {
-  margin-bottom: 1rem;
+	margin-bottom: 1rem;
 }
 
 h3.h3ContainerStyle {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  color: var(--colour-font);
-  font-family: var(--primary-font-family);
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	color: var(--colour-font);
+	font-family: var(--primary-font-family);
 }
 
-@media only screen and (min-width: 1920px){
+@media only screen and (min-width: 1920px) {
 	h2.h2ContainerStyle {
-    font-size: 1.9rem;
-    margin-bottom: 1rem;
-  }
-
+		font-size: 1.9rem;
+		margin-bottom: 1rem;
+	}
 }
 /* -----------------END: SHARED SECTION CONTAINERS CSS ------------------- */
