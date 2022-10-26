@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 // Was not sure which import statement to keep?
 import { getJsonStructure } from "evergreen-org-crawler";
-
+import { payloadPromise } from "./payload";
 import getConfig from "next/config";
 const { publicRuntimeConfig: config } = getConfig();
 import { checkAuthorisation } from "../../src/authenticationMiddleware";
@@ -12,11 +12,11 @@ import { checkAuthorisation } from "../../src/authenticationMiddleware";
 // Cache files are stored inside ./next folder
 export const CachePath = path.resolve(
 	process.env.DYNAMIC_CACHE_DIR ?? "",
-	"./dynamicCache.json",
+	"./dynamicCache.json"
 );
 export const EmptyCachePath = path.resolve(
 	process.env.DYNAMIC_CACHE_DIR ?? "",
-	"./defaultDynamicCache.json",
+	"./defaultDynamicCache.json"
 );
 
 const timeUntilRefresh = config.timeUntilRefresh * 60 * 1000; // minutes to milliseconds
@@ -32,7 +32,7 @@ export function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
 
 export async function saveAndServerCache(
 	res: NextApiResponse,
-	cachedData: any,
+	cachedData: any
 ) {
 	if (cachedData == null) {
 		try {
@@ -50,14 +50,14 @@ export async function saveAndServerCache(
 
 			try {
 				cachedData = JSON.parse(
-					await fs.promises.readFile(CachePath, "utf8"),
+					await fs.promises.readFile(CachePath, "utf8")
 				);
 			} catch {
 				console.log(
-					"No cached file exists as a fallback; server will crash.",
+					"No cached file exists as a fallback; server will crash."
 				);
 				cachedData = JSON.parse(
-					await fs.promises.readFile(EmptyCachePath, "utf8"),
+					await fs.promises.readFile(EmptyCachePath, "utf8")
 				);
 			}
 		}
@@ -69,7 +69,7 @@ export async function saveAndServerCache(
 }
 
 export async function createData(
-	request: "npm" | "PyPI" | "RubyGems" | null = null,
+	request: "npm" | "PyPI" | "RubyGems" | null = null
 ) {
 	const requestToAPI = {
 		npm: "NPM",
@@ -77,7 +77,7 @@ export async function createData(
 		RubyGems: "RUBYGEMS",
 	};
 
-	let api = null;
+	let api = ["NPM"];
 	if (request != null) {
 		api = [getProperty(requestToAPI, request)];
 	}
@@ -85,11 +85,8 @@ export async function createData(
 	const accessToken = process.env.EVERGREEN_GITHUB_TOKEN!;
 	return getJsonStructure(
 		accessToken,
-		{
-			targetOrganisation: process.env
-				.NEXT_PUBLIC_TARGET_ORGANISATION as string,
-			...config,
-		},
+		process.env.NEXT_PUBLIC_TARGET_ORGANISATION!,
+		config,
 		{
 			...(api != null && { toUse: api }),
 			useCachedData:
@@ -97,13 +94,13 @@ export async function createData(
 				"true"
 					? true
 					: false,
-		},
+		}
 	);
 }
 
 export default async function handler(
 	req: NextApiRequest,
-	res: NextApiResponse,
+	res: NextApiResponse
 ) {
 	const isAuthorised = await checkAuthorisation(req, res);
 	if (!isAuthorised) {
@@ -121,25 +118,37 @@ export default async function handler(
 		const dif = current - mtimeMs;
 
 		if (dif > timeUntilRefresh) {
-			if (waitingPromise.promise != null) {
-				await waitingPromise.promise;
+			if (
+				waitingPromise.promise != null ||
+				payloadPromise.promise != null
+			) {
+				if (waitingPromise.promise != null) {
+					await waitingPromise.promise;
+				} else if (payloadPromise.promise != null) {
+					await payloadPromise.promise;
+				} else {
+					await Promise.all([
+						waitingPromise.promise,
+						payloadPromise.promise,
+					]);
+				}
 				waitingPromise.promise = null;
 				cachedData = JSON.parse(
-					await fs.promises.readFile(CachePath, "utf8"),
+					await fs.promises.readFile(CachePath, "utf8")
 				);
 			} else {
 				console.log("Cache file is too old. Recreating...");
 				cachedData = null;
 				waitingPromise.promise = new Promise(function (
 					resolve,
-					_reject,
+					reject
 				) {
 					waitingPromise.resolve = resolve;
 				});
 			}
 		} else {
 			cachedData = JSON.parse(
-				await fs.promises.readFile(CachePath, "utf8"),
+				await fs.promises.readFile(CachePath, "utf8")
 			);
 		}
 	} catch (error) {

@@ -129,6 +129,54 @@ resource "aws_elastic_beanstalk_environment" "this" {
   }
 
   setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "EVERGREEN_GITHUB_TOKEN"
+    value     = var.evergreen_github_token_scope_read_org
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "NEXT_PUBLIC_CLIENT_ID"
+    value     = var.client_id
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "REQUIRE_AUTHENTICATION"
+    value     = var.require_authentication
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "GITHUB_WEBHOOK_IS_ENABLED"
+    value     = var.github_webhook_is_enabled
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "NEXT_PUBLIC_TARGET_ORGANISATION"
+    value     = var.target_organisation
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "NEXT_PUBLIC_REDIRECT_URI"
+    value     = var.redirect_uri
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "CLIENT_SECRET"
+    value     = var.client_secret
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "DYNAMIC_CACHE_DIR"
+    value     = var.dynamic_cache_directory
+  }
+
+  setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "IamInstanceProfile"
     value     = aws_iam_instance_profile.this.name

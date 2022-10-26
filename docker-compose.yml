@@ -11,5 +11,6 @@ services:
     env_file: .env
     environment:
       NODE_ENV: production
+      DYNAMIC_CACHE_DIR: /home/
     ports:
       - 3000:3000
