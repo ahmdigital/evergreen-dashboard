@@ -12,7 +12,7 @@ export default function Layout(props: LayoutProps) {
       <Box component='main' sx={{paddingX: {
 		xs: 2,
 		md: '10%'
-	  }}} className={styles.main}>{props.children}</Box>
+	  }}} className={styles.main} aria-label='Evergreen Dashboard'>{props.children}</Box>
     </>
   );
 }

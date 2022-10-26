@@ -5,11 +5,13 @@ import { semVerToString } from "../../src/semVer";
 import { PackageData } from "../../hooks/useProcessDependencyData";
 import styles from "../../styles/SubRow.module.css";
 import Image from "next/image";
-import RedIcon from "../images/redIcon.svg";
-import YellowIcon from "../images/yellowIcon.svg";
-import GreenIcon from "../images/greenIcon.svg";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { redDef, yellowDef, greenDef } from "../HelpComponents/LightStatus";
+import {
+  rankToStatusType,
+  statusDefinitionsDeps,
+  statusLabel,
+} from "../constants";
+import { iconImg } from "../icons/IconFactory";
 
 export type SubRowProps = {
   dependency: PackageData;
@@ -40,21 +42,11 @@ export function SubRow(props: SubRowProps) {
   const usedVersion = semVerToString(props.dependency.usedVersion);
   const latestVersion = semVerToString(props.dependency.version);
 
-  let statusIcon = RedIcon;
-  let statusText = "Highly out-of-date";
-  let iconDefinition = redDef.description;
+  const statusType = rankToStatusType[props.dependency.rank];
 
-  // Setting the status
-  if (props.dependency.rank == 2) {
-    statusIcon = GreenIcon;
-    iconDefinition = greenDef.description;
-	statusText = "Up to date";
-  }
-  if (props.dependency.rank == 1) {
-    statusIcon = YellowIcon;
-    iconDefinition = yellowDef.description;
-	statusText = "Moderately out-of-date";
-  }
+  const statusIcon = iconImg[statusType];
+  const statusText = statusLabel[statusType];
+  const iconDefinition = statusDefinitionsDeps[statusType];
 
   return (
     <TableRow>
@@ -75,11 +67,11 @@ export function SubRow(props: SubRowProps) {
             </div>
           </Tooltip>
         </TableCell>
-		<TableCell className={styles.tableCellStyle}>
-			<a href={depLink} rel="noreferrer" target="_blank">
-				{depName}
-			</a>
-		</TableCell>
+        <TableCell className={styles.tableCellStyle}>
+          <a href={depLink} rel="noreferrer" target="_blank">
+            {depName}
+          </a>
+        </TableCell>
         <TableCell className={styles.tableCellStyle}>{usedVersion}</TableCell>
         <TableCell
           className={`${styles.tableCellStyle} ${styles.latestVerStyle}`}

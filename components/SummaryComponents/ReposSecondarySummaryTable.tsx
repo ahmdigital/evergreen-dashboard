@@ -147,6 +147,7 @@ export default function ReposSecondarySummaryTable(props: {
 						size="small"
 						onClick={handleNext}
 						disabled={activeStep === maxSteps - 1}
+						aria-label='next'
 					>
 						{/* Next */}
 						{theme.direction === "rtl" ? (
@@ -157,8 +158,8 @@ export default function ReposSecondarySummaryTable(props: {
 					</Button>
 				}
 				backButton={
-					<Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-						{theme.direction === "rtl" ? (
+					<Button size="small" onClick={handleBack} disabled={activeStep === 0} aria-label='back'>
+						{theme.direction === 'rtl' ? (
 							<KeyboardArrowRight />
 						) : (
 							<KeyboardArrowLeft />
