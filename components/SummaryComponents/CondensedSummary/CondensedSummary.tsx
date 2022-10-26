@@ -1,10 +1,8 @@
 import { Divider } from "@mui/material";
-import Image from "next/image";
-import redIcon from "../../images/redIcon.svg";
-import greenIcon from "../../images/greenIcon.svg";
-import yellowIcon from "../../images/yellowIcon.svg";
 import styles from "../../../styles/CondensedSummary.module.css";
 import Box from "@mui/material/Box";
+import { LightStatusIconFactory } from "../../icons/IconFactory";
+import { statusLabel, StatusType } from "../../constants";
 // import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export type RepoOverviewCondensedProps = {
@@ -23,6 +21,7 @@ const Summary = (props: CondensedRepoSummaryProps) => {
   const { red, green, yellow } = props.statusValues;
   const overall = props.overall;
   const target = props.target;
+  const ICON_SIZE = "30px";
 
   const overallStatusColour = () => {
     if (typeof overall === "undefined") {
@@ -36,9 +35,8 @@ const Summary = (props: CondensedRepoSummaryProps) => {
     }
   };
 
-
   return (
-    <div className={styles.rootContainer} >
+    <div className={styles.rootContainer}>
       <div className={styles.topPart}>
         <div className={styles.percentageContainer}>
           <label>Overall:</label>
@@ -46,45 +44,51 @@ const Summary = (props: CondensedRepoSummaryProps) => {
             className={`${styles.overall} ${styles.percentage}`}
             style={{ backgroundColor: overallStatusColour() }}
           >
-            {overall ? `${overall}%` : 'N/A'}
+            {overall ? `${overall}%` : "N/A"}
           </span>
         </div>
         <span className={styles.percentageContainer}>
           <label>Target:</label>
-          <span className={`${styles.percentage}`}>
-            {`${target}%`}
-          </span>
+          <span className={`${styles.percentage}`}>{`${target}%`}</span>
         </span>
       </div>
       <Divider />
       <div className={styles.statuses}>
         <div className={styles.status}>
           <label>{red}</label>
-          <Image src={redIcon} alt='Red' width='30px' height='30px'></Image>
-        </div>
-        <div className={styles.status}>
-          <label>{green}</label>
-          <Image src={greenIcon} alt='Green' width='30px' height='30px'></Image>
+          <LightStatusIconFactory
+            type={StatusType.RED}
+            iconSize={ICON_SIZE}
+            toolTip={true}
+            toolTipLabel={statusLabel[StatusType.RED]}
+          />
         </div>
         <div className={styles.status}>
           <label>{yellow}</label>
-          <Image
-            src={yellowIcon}
-            alt='Yellow'
-            width='30px'
-            height='30px'></Image>
-        </div >
-      </div >
-    </div >
+          <LightStatusIconFactory
+            type={StatusType.YELLOW}
+            iconSize={ICON_SIZE}
+            toolTip={true}
+            toolTipLabel={statusLabel[StatusType.YELLOW]}
+          />
+        </div>
+        <div className={styles.status}>
+          <label>{green}</label>
+          <LightStatusIconFactory
+            type={StatusType.GREEN}
+            iconSize={ICON_SIZE}
+            toolTip={true}
+            toolTipLabel={statusLabel[StatusType.GREEN]}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default function CondensedSummary(props: CondensedRepoSummaryProps) {
   return (
-    <Box
-      sx={{ flexGrow: 1 }}
-      className={`${styles.summaryStyle}`}
-    >
+    <Box sx={{ flexGrow: 1 }} className={`${styles.summaryStyle}`}>
       <Summary
         statusValues={props.statusValues}
         overall={props.overall}
