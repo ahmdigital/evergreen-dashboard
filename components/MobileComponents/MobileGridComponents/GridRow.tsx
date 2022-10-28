@@ -36,7 +36,7 @@ export function GridRow(props: GridRowProps) {
           <Grid item xs={'auto'}>
             <IconButton
               aria-label="Expand row"
-              size="small"
+              size="medium"
               onClick={() => setIsOpen(!isOpen)}
               sx={{ color: 'gray' }}
             >

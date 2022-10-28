@@ -201,9 +201,10 @@ export default function SummaryContainer(props: {
             <div
               className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
             >
-              <h3 className={styles.summaryStylePercent}>
-                Target ({config.targetPercentage}%)
-              </h3>
+			  <h3 style={{marginTop: '18px', marginBottom: '25px'}} className={styles.summaryStylePercent}>
+				Target ({config.targetPercentage}%)
+			  </h3>
+			  
               <div
                 className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}
               >
@@ -286,7 +287,7 @@ export default function SummaryContainer(props: {
             <div
               className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
             >
-              <h3 className={styles.summaryStylePercent}>Most Common:</h3>
+              <h3 style={{marginTop: '18px', marginBottom: '25px'}} className={styles.summaryStylePercent}>Most Common:</h3>
               <div className={styles.summaryComponent3}>
                 <ReposSecondarySummaryTable
                   rows={props.rows}
