@@ -8,9 +8,6 @@ import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import { GridTable } from "../MobileComponents/GridTable";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Box, Grid, IconButton } from "@mui/material";
-import NewRed from '../images/redLight.svg'
-import NewYel from '../images/yellowLight.svg'
-import NewGreen from '../images/greenLight.svg'
 import {
 	PageLoaderCurrentData,
 	forceNewVersion,
@@ -128,12 +125,6 @@ export default function DependenciesContainer(props: {
 			</Grid>
 
 			<GridTable rows={props.finalisedData} emptyRows={props.emptyRows} searchTerm={props.searchTerm} tableRows={props.tableRows}/>
-
-			<div>
-			<NewRed height="500" width="500" fill="#3cab29" />
-			<NewYel height="500" width="500" fill="#036ffc" />
-			<NewGreen height="500" width="500" fill="#ba03fc" />
-			</div>
 			{/* TODO: Delete this */}
 			{/* <div className={styles.tableStyle}>
 				<CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows} searchAndFilteredData={searchAndFilteredData}></CollapsibleTable>
