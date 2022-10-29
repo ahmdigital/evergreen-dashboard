@@ -1,4 +1,4 @@
-import { Collapse, Divider, Grid, IconButton, Typography } from '@mui/material';
+import { Collapse, Divider, Grid, IconButton, Typography, useMediaQuery } from '@mui/material';
 import { useState } from 'react';
 import { ProcessedDependencyData } from '../../../hooks/useProcessDependencyData';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -28,6 +28,8 @@ type GridRowProps = {
 export function GridRow(props: GridRowProps) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const matches = useMediaQuery("(min-width:600px)");
+
   return (
     <>
       <Box sx={{ p: { xs: 0.5, md: 1.5 } }}>
@@ -36,7 +38,7 @@ export function GridRow(props: GridRowProps) {
           <Grid item xs={'auto'}>
             <IconButton
               aria-label="Expand row"
-              size="medium"
+              size={matches ? "medium" : "large"}
               onClick={() => setIsOpen(!isOpen)}
               sx={{ color: 'gray' }}
             >
