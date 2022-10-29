@@ -4,6 +4,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -- --port $PORT",
+    "startt": "next start -- --port 3001",
     "lint": "next lint",
     "type-check": "tsc",
     "test": "jest"
