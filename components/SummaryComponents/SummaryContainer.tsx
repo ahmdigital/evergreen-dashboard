@@ -228,7 +228,6 @@ export default function SummaryContainer(props: {
                 <div
                   style={{
                     display: 'flex',
-                    width: '70px',
                     justifyContent: 'space-between',
                   }}
                 >
