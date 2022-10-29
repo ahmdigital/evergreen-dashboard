@@ -52,12 +52,12 @@ export function GridRow(props: GridRowProps) {
           </Grid>
 
           {/* Rank */}
-          <Grid item md={0.7} style={{ paddingLeft: "3px" }}>
+          <Grid item xs="auto" style={{ paddingLeft: '3px' }}>
             <StatusIcon rank={props.row.minRank} />
           </Grid>
 
           {/* Name */}
-          <Grid item md={4} sx={{ overflowWrap: "anywhere" }}>
+          <Grid item xs sx={{ overflowWrap: 'anywhere' }}>
             <Typography sx={{ ...rowTextSX }}>
               <a href={props.row.link} rel="noreferrer" target="_blank">
                 {props.row.name}
@@ -68,31 +68,31 @@ export function GridRow(props: GridRowProps) {
           {/* Repo name */}
           <Grid
             item
-            md={3}
+            xs
             sx={{
-              display: { xs: "none", md: "initial" },
-              overflowWrap: "anywhere",
+              display: { xs: 'none', md: 'initial' },
+              overflowWrap: 'anywhere',
             }}
           >
             <Typography sx={{ ...rowTextSX }}>
               {props.row.oldName
                 ? props.row.oldName.substr(
                     0,
-                    props.row.oldName.lastIndexOf("(")
+                    props.row.oldName.lastIndexOf('(')
                   )
-                : ""}
+                : ''}
             </Typography>
           </Grid>
 
           {/* Version */}
-          <Grid item md={3}>
+          <Grid item xs="auto" md={2}>
             <Typography sx={rowTextSX}>
               <SemVerFormatter semver={props.row.version} />
             </Typography>
           </Grid>
 
           {/* Last updated */}
-          <Grid item md={2} sx={{ display: { xs: "none", md: "initial" } }}>
+          <Grid item md={2} sx={{ display: { xs: 'none', md: 'initial' } }}>
             <Typography sx={rowTextSX}>
               {dayjs(props.row.lastUpdated).fromNow()}
             </Typography>

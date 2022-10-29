@@ -2,7 +2,7 @@
 
 variable "github_token_scope_read_org" {
   type        = string
-  description = "Github token that has a scope read organisation repositories"
+  description = "Github token that has full repo scope and admin:org-read:org"
   sensitive   = true
 }
 
@@ -86,7 +86,7 @@ variable "instance_type" {
   description = "Stock Keeping Unit type and the operating system"
   sensitive   = false
   default = {
-    sku_name = "B1"
+    sku_name = "F1"
     os_type  = "Linux"
   }
 }
