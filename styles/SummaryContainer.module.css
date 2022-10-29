@@ -8,7 +8,9 @@ div.summaryStyle {
   background-color: var(--colour-black);
   color: var(--colour-inv-font);
   padding: 0.2rem 0.3rem 0.2rem 0.3rem;
+  padding: 0.65rem 0.55rem;
   border-radius: 0.3rem;
+  white-space: nowrap;
 }
 
 .orgTitle:hover {
@@ -36,6 +38,7 @@ a.orgLink:active {
 }
 
 .subtitle {
+  padding: 0.5rem 0;
   font-size: var(--font-size-large);
   margin-top: 6px;
   font-weight: var(--font-weight-semibold); /*500*/

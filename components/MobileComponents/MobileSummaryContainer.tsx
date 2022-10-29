@@ -160,7 +160,9 @@ export default function MobileSummaryContainer(props: {
                 '&:hover': {
                   backgroundColor: '#424242',
                 },
+				padding: '0.6rem 1rem'
               }}
+			  size='large'
               onClick={callRefresh}
             >
               Refresh
@@ -275,9 +277,10 @@ export default function MobileSummaryContainer(props: {
             activeStep={activeStep}
             nextButton={
               <Button
-                size="small"
+                size="large"
                 onClick={handleNext}
                 disabled={activeStep === 2}
+				sx={{padding: '0.65rem 0.2rem'}}
               >
                 {theme.direction === 'rtl' ? (
                   <KeyboardArrowLeft />
@@ -288,9 +291,10 @@ export default function MobileSummaryContainer(props: {
             }
             backButton={
               <Button
-                size="small"
+                size="large"
                 onClick={handleBack}
                 disabled={activeStep === 0}
+				sx={{padding: '0.65rem 0.2rem'}}
               >
                 {theme.direction === 'rtl' ? (
                   <KeyboardArrowRight />
@@ -308,6 +312,9 @@ export default function MobileSummaryContainer(props: {
             size="small"
             onClick={() => setCloseHeader(!closeHeader)}
             className={styles.expandButton}
+			sx={{
+				padding: '0.6rem 0rem' 
+			}}
           >
             {closeHeader ? (
               <>
