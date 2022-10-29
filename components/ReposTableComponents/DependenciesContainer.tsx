@@ -101,7 +101,7 @@ export default function DependenciesContainer(props: {
 
 					<Grid item xs="auto">
 							<IconButton
-								sx={{ display: { xs: 'initial', md: 'none', p: '0.65rem' } }}
+								sx={{ display: { xs: 'initial', md: 'none'}, p: '0.65rem' }}
 								aria-label='Sort and filter'
 								onClick={toggleFilter}
 								>
