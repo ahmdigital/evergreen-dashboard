@@ -7,8 +7,8 @@
 
 This Evergreen Dashboard tracks how outdated your GitHub organisation internal and external dependencies are.
 
-It crawls your GitHub organisation and keeps track of which NPM dependencies you are using.
-It then checks with NPM public registry whether your NPM dependencies are outdated.
+It crawls your GitHub organisation and keeps track of which npm dependencies you are using.
+It then checks with npm public registry whether your npm dependencies are outdated.
 
 It can also listen to [GitHub webhooks](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks) `push` and `repositories` events, which allows the dashboard to silently update the cache results.
 
@@ -18,7 +18,7 @@ It can also listen to [GitHub webhooks](https://docs.github.com/en/developers/we
     - [Skipping pre-commit hooks](#skipping-pre-commit-hooks)
     - [ENV](#env)
     - [Authentication](#authentication)
-    - [Github webhooks](#github-webhooks)
+    - [GitHub webhooks](#github-webhooks)
     - [Configuration](#configuration)
     - [Running](#running)
       - [Docker-compose](#docker-compose)
@@ -74,13 +74,13 @@ If `REQUIRE_AUTHENTICATION` is set to `false`, then the last three variables are
 
 *Note this is only required if you want to enable GitHub authentication*
 
-Setup github [OAuth app](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app) and make sure to record your client id and secret.
+Setup github [OAuth app](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app) and make sure to record your client ID and secret.
 
 When authenticating, we ask for the following privileges:
 * full `repo` scope, used to query GitHub API and access private repositories
 * admin:org-read:org, used to validate whether the user is part of the organisation.
 
-### Github webhooks
+### GitHub webhooks
 
 Go to your webhook `https://github.com/organizations/EXAMPLE_ORG/settings/hooks` and setup a webhook with the following settings:
 * Payload URL: `YOUR_HOSTNAME/api/payload`
@@ -119,9 +119,9 @@ Running as a docker container
 
 ### Querying Internal Endpoints
 
-If Github webhook are setup for the target organisation`/api/payload` endpoint
+If GitHub webhook are setup for the target organisation`/api/payload` endpoint
 
-This Dashboard can listen to Github `push` and `repositories` events.
+This Dashboard can listen to GitHub `push` and `repositories` events.
 
 Refer to GitHub documentations for examples of [push](https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push) and [repositories](https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#repository) events.
 
@@ -168,7 +168,7 @@ A [docker](#docker) container is used to deploy to App Service.
 3. `docker tag evergreendashboard:latest <DOCKERHUB_ACCOUNT_NAME>/evergreendashboard:latest`
 4. Change the local docker variable in the main.tf
 5. `terraform apply`, it will ask you to accept the configuration, enter `yes` once you have read the plan
-6. Wait until terraform finishes applying the plan, once it's done it will output the url of the website
+6. Wait until terraform finishes applying the plan, once it's done it will output the hostname in the terminal
 
 #### AWS Elastic Beanstalk
 
@@ -177,7 +177,7 @@ A [standalone](#standalone) app gets deployed to Elastic Beanstalk:
 1. `terraform init`
 2. `bash bootstrap.sh`, currently works on linux, if on other OSs, simply zip the required files(refer to `bootstrap.sh`)
 3. `terraform apply`, it will ask you to accept the configuration, enter `yes` once you have read the plan
-4. Wait until terraform finishes applying the plan, once it's done it will output the url of the website
+4. Wait until terraform finishes applying the plan, once it's done it will output the hostname in the terminal
 
 
 ## Contributing
