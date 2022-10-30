@@ -74,7 +74,7 @@ If `REQUIRE_AUTHENTICATION` is set to `false`, then the last three variables are
 
 *Note this is only required if you want to enable GitHub authentication*
 
-Setup github [OAuth app](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app) and make sure to record your client ID and secret.
+Setup GitHub [OAuth app](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app) and make sure to record your client ID and secret.
 
 When authenticating, we ask for the following privileges:
 * full `repo` scope, used to query GitHub API and access private repositories
