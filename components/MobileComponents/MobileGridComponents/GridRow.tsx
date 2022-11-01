@@ -7,10 +7,9 @@ import { SemVerFormatter } from '../../SemVerFormatter';
 import { StatusIcon } from '../../icons/StatusIcon';
 import { Box } from '@mui/system';
 import { GridSubRow } from './GridSubRow';
-// import dayjs from 'dayjs';
 
 const dayjs = require('dayjs');
-var relativeTime = require('dayjs/plugin/relativeTime');
+const relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
 const rowTextSX = {
@@ -69,7 +68,7 @@ export function GridRow(props: GridRowProps) {
           >
             <Typography sx={{ ...rowTextSX }}>
               {props.row.oldName
-                ? props.row.oldName.substr(
+                ? props.row.oldName.substring(
                     0,
                     props.row.oldName.lastIndexOf('(')
                   )
