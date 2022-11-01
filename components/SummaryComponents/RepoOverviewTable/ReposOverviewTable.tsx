@@ -76,30 +76,6 @@ export default function ReposOverViewTable(props: {
   };
 
   if (props.showChart) {
-    let data = {
-      labels: [
-        statusLabel[StatusType.RED],
-        statusLabel[StatusType.YELLOW],
-        statusLabel[StatusType.GREEN],
-      ],
-      datasets: [
-        {
-          label: "# of dependencies",
-          data: [
-            props.rankArray.red,
-            props.rankArray.yellow,
-            props.rankArray.green,
-          ],
-          backgroundColor: [
-            getResolved(Colours.redVar),
-            getResolved(Colours.orangeVar),
-            getResolved(Colours.greenVar),
-          ],
-          borderWidth: 1,
-        },
-      ],
-    };
-
     const config = {
       data: {
         labels: [
@@ -130,11 +106,11 @@ export default function ReposOverViewTable(props: {
           tooltip: {
             callbacks: {
               label: function (context: any) {
-                var label = context.label,
+                const label = context.label,
                   currentValue = context.raw,
                   total = context.chart._metasets[context.datasetIndex].total;
 
-                var percentage = parseFloat(
+                const percentage = parseFloat(
                   ((currentValue / total) * 100).toFixed(1)
                 );
 
@@ -165,9 +141,9 @@ export default function ReposOverViewTable(props: {
             borderWidth: 2,
             color: "white",
             display: function (context: any) {
-              var dataset = context.dataset;
-              var count = dataset.data.length;
-              var value = dataset.data[context.dataIndex];
+              const dataset = context.dataset;
+              const count = dataset.data.length;
+              const value = dataset.data[context.dataIndex];
               return value > count * 1.5;
             },
             font: {

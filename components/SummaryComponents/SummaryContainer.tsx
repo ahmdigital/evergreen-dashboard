@@ -26,7 +26,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import { AuxData } from "../../src/dataProcessing";
 
 const dayjs = require('dayjs')
-var relativeTime = require('dayjs/plugin/relativeTime')
+const relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 import Button from '@mui/material/Button';
 
@@ -48,7 +48,6 @@ export default function SummaryContainer(props: {
   let overallPercentStr = overallPercent + "%";
   let overallStyle = styles.summaryOverall;
   let overallColour = styles.summaryOverallGreen;
-  console.log('TARGET', props.targetOrganisation)
 
   if (isNaN(overallPercent)) {
     overallPercentStr = "N/A";
@@ -78,7 +77,7 @@ export default function SummaryContainer(props: {
     PageLoaderSetLoading(true);
     PageLoaderSetData({
       refreshing: true,
-      data: PageLoaderCurrentData as any,
+      data: PageLoaderCurrentData,
     } as any);
 
     refreshing = true;

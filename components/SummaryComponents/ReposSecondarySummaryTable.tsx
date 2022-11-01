@@ -8,11 +8,10 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import styles from "../../styles/ReposSecondarySummaryTable.module.css";
-import { useTheme } from "@mui/material/styles";
+import { useTheme, createTheme, ThemeProvider } from "@mui/material/styles";
 import { PackageData, ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import { compareSemVerDelta, SemVerDelta, semVerToDelta } from "../../src/semVer";
 import { Filter } from "../../src/sortingAndFiltering";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 // Customising the table styling using ThemeProvider
 export const theme = createTheme({
