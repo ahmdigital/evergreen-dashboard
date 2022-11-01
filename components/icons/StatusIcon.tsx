@@ -16,11 +16,10 @@ type StatusIconProps = {
 export function StatusIcon(props: StatusIconProps) {
   // Setting the status
   const statusType = rankToStatusType[props.rank];
-
   const statusIcon = iconImg[statusType];
   const statusText = statusLabel[statusType];
   const iconDefinition = () => {
-    if (props.variant != undefined && props.variant === "small") {
+    if (props.variant === "small") {
       return statusDefinitionsDeps[statusType] }
     else{ return statusDefinitionsRepos[statusType]}
   }

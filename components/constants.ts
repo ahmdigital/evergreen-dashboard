@@ -6,8 +6,7 @@ export enum StatusType {
     RED,
     GREEN,
     YELLOW
-
-};
+}
 
 export const iconAltText: {[key in StatusType]: string} = {
     [StatusType.RED]: "Highly out-of-date red status",
@@ -49,4 +48,4 @@ export const rankToStatusType: {[ rank: number]: StatusType; } = {
     0 : StatusType.RED,
     1 : StatusType.YELLOW,
     2 : StatusType.GREEN
-};
+}

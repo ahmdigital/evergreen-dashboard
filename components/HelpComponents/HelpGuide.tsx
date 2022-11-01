@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import {
   Fab,
   Dialog,
@@ -14,13 +14,12 @@ import {
 } from "@mui/material";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import HelpOutline from "@mui/icons-material/HelpOutline";
-import styles from "../../styles/HelpGuide.module.css";
-import { styled } from "@mui/material/styles";
+import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Divider from "@mui/material/Divider";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { statusDefinitionsHelpGuide, statusLabel, StatusType } from "../constants";
+import styles from "../../styles/HelpGuide.module.css";
 import { LightStatusIconFactory } from "../icons/IconFactory";
 
 // Customising the table styling using ThemeProvider
@@ -71,11 +70,10 @@ const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
 
 export interface DialogTitleProps {
   id: string;
-  children?: React.ReactNode;
   onClose: () => void;
 }
 
-const CustomisedDialogTitle = (props: DialogTitleProps) => {
+const CustomisedDialogTitle = (props: PropsWithChildren<DialogTitleProps>) => {
   const { children, onClose, ...other } = props;
 
   return (
@@ -102,15 +100,6 @@ const CustomisedDialogTitle = (props: DialogTitleProps) => {
     </DialogTitle>
   );
 };
-
-// class created to make linking of descriptions to config easier later on
-class VersionDefinition {
-  description: string;
-
-  constructor(description: string) {
-    this.description = description;
-  }
-}
 
 // creates the table for the status definitions
 function StatusTable() {

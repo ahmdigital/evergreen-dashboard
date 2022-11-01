@@ -1,16 +1,15 @@
 import { Button, Modal, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { Component } from "react";
+import { Component, PropsWithChildren } from "react";
 
 type ErrorBoundaryState = {
 	hasError: boolean;
 }
 
-type ErrorBoundaryProps = {
-	children: React.ReactNode;
+type ErrorBoundaryProps = PropsWithChildren<{
 	//Component to display when there is an error
 	errorComponent: React.ReactNode;
-}
+}>
 
 export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 	state: ErrorBoundaryState
@@ -41,11 +40,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 }
 
 
-type CatchAllErrorsProps = {
-	children: React.ReactNode;
-}
-
-export function CatchAllErrors(props: CatchAllErrorsProps) {
+export function CatchAllErrors(props: PropsWithChildren<{}>) {
 	return (
 		<ErrorBoundary errorComponent={
 			<Modal
