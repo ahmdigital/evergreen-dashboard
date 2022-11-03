@@ -1,4 +1,3 @@
-import { Colours } from './Colours';
 import getConfig from 'next/config'
 const { publicRuntimeConfig: config } = getConfig()
 
@@ -180,16 +179,4 @@ export function findRank(used: SemVer, current: SemVer): number {
 	return 2;
 }
 
-export function rankToDepColour(rank: number): [string, string, number] {
-	const styles: [string, string, number][] = [
-		[Colours.red, Colours.redBorder, 0],
-		[Colours.orange, Colours.orangeBorder, 1],
-		[Colours.green, Colours.greenBorder, 2]
-	];
 
-	return styles[rank];
-}
-
-export function getDepColour(used: SemVer, current: SemVer): [string, string, number] {
-	return rankToDepColour(findRank(used, current));
-}
