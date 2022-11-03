@@ -1,24 +1,31 @@
-import { Collapse, Divider, Grid, IconButton, Typography } from '@mui/material';
-import { useState } from 'react';
-import { ProcessedDependencyData } from '../../../hooks/useProcessDependencyData';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { SemVerFormatter } from '../../SemVerFormatter';
-import { StatusIcon } from '../../icons/StatusIcon';
-import { Box } from '@mui/system';
-import { GridSubRow } from './GridSubRow';
-// import dayjs from 'dayjs';
+import { Collapse, Divider, Grid, IconButton, Typography } from "@mui/material";
+import { useState } from "react";
+import { ProcessedDependencyData } from "../../../hooks/useProcessDependencyData";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { SemVerFormatter } from "../../SemVerFormatter";
+import { StatusIcon } from "../../icons/StatusIcon";
+import { Box } from "@mui/system";
+import { GridSubRow } from "./GridSubRow";
 
-const dayjs = require('dayjs');
-var relativeTime = require('dayjs/plugin/relativeTime');
+// Change cursor and backgroundColor when hovering over the cell
+const gridHover = {
+  "&:hover": {
+    backgroundColor: "#f5f5f5",
+    cursor: 'pointer'
+  },
+  p: { xs: 0.5, md: 1.5 },
+};
+
+const dayjs = require("dayjs");
+var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 const rowTextSX = {
-  fontWeight: 'var(--font-weight-semibold)',
-  fontSize: '18px',
-  fontFamily: 'var(--secondary-font-family)',
-  backgroundColor: 'var(--colour-container-background)',
-  color: 'var(--colour-font)',
+  fontWeight: "var(--font-weight-semibold)",
+  fontSize: "18px",
+  fontFamily: "var(--secondary-font-family)",
+  color: "var(--colour-font)",
 };
 
 type GridRowProps = {
@@ -30,15 +37,15 @@ export function GridRow(props: GridRowProps) {
 
   return (
     <>
-      <Box sx={{ p: { xs: 0.5, md: 1.5 } }}>
+      <Box onClick={() => setIsOpen(!isOpen)} sx={gridHover}>
         <Grid container wrap="nowrap" columnSpacing={2} alignItems="center">
           {/* Arrow icon */}
-          <Grid item xs={'auto'}>
+          <Grid item md={0.7}>
             <IconButton
               aria-label="Expand row"
               size="small"
               onClick={() => setIsOpen(!isOpen)}
-              sx={{ color: 'gray' }}
+              sx={{ color: "gray" }}
             >
               {isOpen ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
             </IconButton>
