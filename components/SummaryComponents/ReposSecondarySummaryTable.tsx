@@ -14,6 +14,8 @@ import { compareSemVerDelta, SemVerDelta, semVerToDelta } from "../../src/semVer
 import { Filter } from "../../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import {topOfRepoBox} from "../Page"
+
 // Customising the table styling using ThemeProvider
 let baseTheme = {
 					fontWeight: "var(--font-weight-semibold)",
@@ -115,7 +117,12 @@ function MostCommonSummaryTable(name: string, usageCounts: { name: string, id: n
 						usageCounts.map(i => {
 							return <div key={i.id + " containingDiv"}>
 								<ThemeProvider theme={innerRowTheme}>
-								<TableRow key={i.id} sx={{ display: "inline-block", width: "100%", ...(filterTerm.mustHaveDependency == i.id && { background: "var(--colour-table-selected)" }) }} onClick={() => setFilterTerm({ ...filterTerm, mustHaveDependency: filterTerm.mustHaveDependency == i.id ? -1 : i.id })}>
+								<TableRow key={i.id} sx={{ display: "inline-block", width: "100%", ...(filterTerm.mustHaveDependency == i.id && { background: "var(--colour-table-selected)" }) }} onClick={() => {
+									setFilterTerm({ ...filterTerm, mustHaveDependency: filterTerm.mustHaveDependency == i.id ? -1 : i.id })
+									// @ts-ignore
+									topOfRepoBox.data.current.scrollIntoView({ behavior: "smooth" });
+									// An ignore is used here as we don't know the exact type the above will be in this file.
+								}}>
 									<TableCell className={styles.tableCellStyle1}>
 										<div className={styles.textContainer}>
 											{i.name}
