@@ -125,7 +125,6 @@ export default function DependenciesContainer(props: {
 			</Grid>
 
 			<GridTable rows={props.finalisedData} emptyRows={props.emptyRows} searchTerm={props.searchTerm} tableRows={props.tableRows}/>
-
 			{/* TODO: Delete this */}
 			{/* <div className={styles.tableStyle}>
 				<CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows} searchAndFilteredData={searchAndFilteredData}></CollapsibleTable>
