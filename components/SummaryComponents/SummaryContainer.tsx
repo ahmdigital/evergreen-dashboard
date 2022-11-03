@@ -40,6 +40,18 @@ import Button from "@mui/material/Button";
 const { publicRuntimeConfig: config } = getConfig();
 let refreshing = false;
 
+function getOverallEvaluation(counts: {red: number, green: number, yellow: number}){
+	const totalRepos = counts.green + counts.yellow + counts.red
+	const goodRepos = counts.green + (config.allowModerateRepos ? counts.yellow : 0)
+	const percent = Math.round((goodRepos / totalRepos) * 100);
+	return {
+		totalRepos: totalRepos,
+		goodRepos: goodRepos,
+		percent: percent,
+		percentString: percent + "%"
+	}
+}
+
 export default function SummaryContainer(props: {
   auxData: AuxData;
   rankArray: any;
@@ -49,18 +61,15 @@ export default function SummaryContainer(props: {
   setFilterTerm: any;
   targetOrganisation: string;
 }) {
-  const totalRepos =
-    props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
-  let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
-  let overallPercentStr = overallPercent + "%";
+  let overallEvaluation = getOverallEvaluation(props.rankArray)
   let overallStyle = styles.summaryOverall;
   let overallColour = styles.summaryOverallGreen;
   console.log("TARGET", props.targetOrganisation);
 
-  if (isNaN(overallPercent)) {
-    overallPercentStr = "N/A";
+  if (isNaN(overallEvaluation.percent)) {
+    overallEvaluation.percentString = "N/A";
     overallColour = styles.summaryOverallGrey;
-  } else if (overallPercent < config.targetPercentage) {
+  } else if (overallEvaluation.percent < config.targetPercentage) {
     overallColour = styles.summaryOverallRed;
   }
 
@@ -179,7 +188,7 @@ export default function SummaryContainer(props: {
               {!closeHeader && (
                 <CondensedSummary
                   statusValues={props.rankArray}
-                  overall={overallPercent}
+                  overall={overallEvaluation.percent}
                   target={config.targetPercentage}
                 ></CondensedSummary>
               )}
@@ -214,9 +223,9 @@ export default function SummaryContainer(props: {
                 className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}
               >
                 <h3 className={styles.overallTitleStyle}>Overall</h3>
-                <h3 className={styles.percentStyle}>{overallPercentStr}</h3>
+                <h3 className={styles.percentStyle}>{overallEvaluation.percentString}</h3>
                 <h3 className={styles.overallCentredTitleStyle}>
-                  {props.rankArray.green}/{totalRepos} repositories up-to-date{" "}
+                  {overallEvaluation.goodRepos}/{overallEvaluation.totalRepos} repositories up-to-date{" "}
                 </h3>
               </div>
             </div>
@@ -228,7 +237,7 @@ export default function SummaryContainer(props: {
             >
               <div className={styles.summaryCompHeader}>
                 <h3 className={styles.summaryStyle}>
-                  Total Repositories ({totalRepos})
+                  Total Repositories ({overallEvaluation.totalRepos})
                 </h3>
                 <div
                   style={{
