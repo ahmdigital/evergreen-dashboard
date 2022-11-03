@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import styles from "../../styles/SummaryContainer.module.css";
 import sharedStyles from "../../styles/TreeView.module.css";
 import ReposOverviewTable from "./RepoOverviewTable/ReposOverviewTable";
@@ -64,6 +64,7 @@ export default function SummaryContainer(props: {
   // State for collapsing the header
   const [closeHeader, setCloseHeader] = useState<boolean>(true);
 
+
   async function callRefresh() {
     if (refreshing) {
       return;
@@ -96,28 +97,73 @@ export default function SummaryContainer(props: {
     //}
   }
 
+  const renderRepoOverviewTable = useMemo(()=>{
+    return (
+      <ReposOverviewTable rankArray={props.rankArray} showChart={showChart} />
+   )
+  } , [props.rankArray, showChart]);
+
   return (
     <Box
-      sx={{ flexGrow: 1, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between' }}
+      sx={{
+        flexGrow: 1,
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        width: '100%',
+        justifyContent: 'space-between',
+      }}
       className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}
     >
       <Grid container spacing={1} className={styles.container}>
         <Grid>
-          <h1 className={styles.noMargins}><ForestIcon /> Evergreen Dashboard</h1>
+          <h1 className={styles.noMargins}>
+            <ForestIcon /> Evergreen Dashboard
+          </h1>
           <p className={styles.subtitle}>
-            Monitoring dependencies for the <span className={styles.orgTitle}><a className={styles.orgLink} href={props.auxData.orgLink}>{props.auxData.orgName}</a></span> Github Organisation
+            Monitoring dependencies for{' '}
+            {props.auxData?.orgName && (
+              <span className={styles.orgTitle}>
+                <a
+                  className={styles.orgLink}
+                  href={props.auxData?.orgLink && props.auxData.orgLink}
+                >
+                  {props.auxData.orgName}
+                </a>
+              </span>
+            )}{' '}
+            Github Organisation
           </p>
           <div className={styles.btnsContainer}>
-            <Tooltip arrow title={<p className={styles.tooltipStyle}>Check for new repository updates</p>}>
-              <Button variant="contained" startIcon={<RefreshIcon />} sx={{
-                backgroundColor: 'var(--colour-black)', borderRadius: 'var(--main-section-border-radius)', '&:hover': {
-                  backgroundColor: 'var(--colour-black-hover)',
-                },
-              }} onClick={callRefresh}>
+            <Tooltip
+              arrow
+              title={
+                <p className={styles.tooltipStyle}>
+                  Check for new repository updates
+                </p>
+              }
+            >
+              <Button
+                variant="contained"
+                startIcon={<RefreshIcon />}
+                sx={{
+                  backgroundColor: 'var(--colour-black)',
+                  borderRadius: 'var(--main-section-border-radius)',
+                  '&:hover': {
+                    backgroundColor: 'var(--colour-black-hover)',
+                  },
+                }}
+                onClick={callRefresh}
+              >
                 Refresh
               </Button>
             </Tooltip>
-		    <h3>Last crawl time: {dayjs(parseInt(props.auxData.crawlStart)).fromNow()}</h3>
+            <span className={styles.lastUpdated}>
+              Last updated:{' '}
+              {props.auxData?.crawlStart
+                ? dayjs(parseInt(props.auxData?.crawlStart)).fromNow()
+                : 'N/A'}
+            </span>
           </div>
         </Grid>
 
@@ -135,36 +181,82 @@ export default function SummaryContainer(props: {
           </Grow>
         </Grid>
       </Grid>
-      <div>
-        {props.loadingSnackbar}
-      </div>
+      <div>{props.loadingSnackbar}</div>
       <Collapse in={closeHeader} timeout="auto" unmountOnExit>
-        <Grid container spacing={1} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between', marginTop: '0rem', marginBottom: '0rem' }} className={`${styles.container} ${styles.margins}`}>
+        <Grid
+          container
+          spacing={1}
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            width: '100%',
+            justifyContent: 'space-between',
+            marginTop: '0rem',
+            marginBottom: '0rem',
+          }}
+          className={`${styles.container} ${styles.margins}`}
+        >
           <Grid xs={12} sm={12} md={6} lg={4}>
-            <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-              <h3 className={styles.summaryStylePercent}>Target ({config.targetPercentage}%)</h3>
-              <div className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}>
+            <div
+              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
+            >
+              <h3 className={styles.summaryStylePercent}>
+                Target ({config.targetPercentage}%)
+              </h3>
+              <div
+                className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}
+              >
                 <h3 className={styles.overallTitleStyle}>Overall</h3>
-                <h3 className={styles.percentStyle} >{overallPercentStr}</h3>
-                <h3 className={styles.overallCentredTitleStyle}>{props.rankArray.green}/{totalRepos} repositories up-to-date </h3>
+                <h3 className={styles.percentStyle}>{overallPercentStr}</h3>
+                <h3 className={styles.overallCentredTitleStyle}>
+                  {props.rankArray.green}/{totalRepos} repositories up-to-date{' '}
+                </h3>
               </div>
             </div>
           </Grid>
 
           <Grid xs={12} sm={12} md={6} lg={4}>
-            <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+            <div
+              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
+            >
               <div className={styles.summaryCompHeader}>
-                <h3 className={styles.summaryStyle}>Total Repositories ({totalRepos})</h3>
-                <div style={{ display: "flex", width: "70px", justifyContent: "space-between" }}>
-                  <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Toggle Pie Chart</p>}>
+                <h3 className={styles.summaryStyle}>
+                  Total Repositories ({totalRepos})
+                </h3>
+                <div
+                  style={{
+                    display: 'flex',
+                    width: '70px',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <Tooltip
+                    placement="top"
+                    arrow
+                    title={
+                      <p className={styles.tooltipStyle}>Toggle Pie Chart</p>
+                    }
+                  >
                     <IconButton
                       className={styles.helpBtn}
                       aria-label="Chart button"
                       onClick={() => {
                         setShowChart(!showChart);
                       }}
-                    ><BarChartIcon className={styles.chartButton} /></IconButton></Tooltip>
-                  <Tooltip placement="top" arrow title={<p className={styles.tooltipStyle}>Status Icon Meanings</p>}>
+                    >
+                      <BarChartIcon className={styles.chartButton} />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip
+                    placement="top"
+                    arrow
+                    title={
+                      <p className={styles.tooltipStyle}>
+                        Status Icon Meanings
+                      </p>
+                    }
+                  >
                     <IconButton
                       className={styles.helpBtn}
                       aria-label="Help button"
@@ -185,16 +277,22 @@ export default function SummaryContainer(props: {
               {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
               <div>
                 <div className={styles.summaryComponent2}>
-                  <ReposOverviewTable rankArray={props.rankArray} showChart={showChart} />
+                  {renderRepoOverviewTable}
                 </div>
               </div>
             </div>
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={4}>
-            <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
-		      <h3 className={styles.summaryStylePercent}>Most Common:</h3>
+            <div
+              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
+            >
+              <h3 className={styles.summaryStylePercent}>Most Common:</h3>
               <div className={styles.summaryComponent3}>
-                <ReposSecondarySummaryTable rows={props.rows} filterTerm={props.filterTerm} setFilterTerm={props.setFilterTerm} />
+                <ReposSecondarySummaryTable
+                  rows={props.rows}
+                  filterTerm={props.filterTerm}
+                  setFilterTerm={props.setFilterTerm}
+                />
               </div>
             </div>
           </Grid>
@@ -203,16 +301,25 @@ export default function SummaryContainer(props: {
       </Collapse>
       <div className={styles.expandButton}>
         <Button
-		  variant="text"
-          aria-label="expand row"
+          variant="text"
+          aria-label={
+            closeHeader ? 'expand summary section' : 'collapse summary section'
+          }
           size="small"
           onClick={() => setCloseHeader(!closeHeader)}
-		  className={styles.expandButton}
+          className={styles.expandButton}
         >
-          {closeHeader ? <>
-            <KeyboardArrowUpIcon /><p className={styles.expandText}>Show Less</p></> : <>
-            <KeyboardArrowDownIcon /><p className={styles.expandText}>Show More</p></>
-          }
+          {closeHeader ? (
+            <>
+              <KeyboardArrowUpIcon />
+              <p className={styles.expandText}>Show Less</p>
+            </>
+          ) : (
+            <>
+              <KeyboardArrowDownIcon />
+              <p className={styles.expandText}>Show More</p>
+            </>
+          )}
         </Button>
       </div>
     </Box>

@@ -38,7 +38,7 @@ const theme = createTheme({
 })
 
 // Creates the whole table
-export default function CollapsibleTable(props: { tableRows: any, setTableRows: any, searchAndFilteredData: any }) {
+export default function CollapsibleTable(props: { rows: any}) {
   return (
     <ThemeProvider theme={theme}>
       <TableContainer
@@ -52,21 +52,22 @@ export default function CollapsibleTable(props: { tableRows: any, setTableRows: 
             <col className={styles.col3} />
             <col className={styles.col4} />
             <col className={styles.col5} />
-			<col className={styles.col6} />
+			      <col className={styles.col6} />
           </colgroup>
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
               <TableCell>status</TableCell>
               <TableCell>name</TableCell>
-			  <TableCell>repo</TableCell>
+			  <TableCell>repository</TableCell>
               <TableCell>version</TableCell>
               <TableCell>last push</TableCell>
             </TableRow>
           </TableHead>
           <TableBody id={"mainTableBody"}>
-            {props.searchAndFilteredData.map((row: any) => (
-              <Row
+            {
+              props.rows.map((row: any) => (
+                <Row
                 key={row.name}
                 rank={row.minRank}
                 row={row}
@@ -77,7 +78,7 @@ export default function CollapsibleTable(props: { tableRows: any, setTableRows: 
                   final: row.userSubRows.length === 0
                 }}
               />
-            ))
+              ))
             }
           </TableBody>
         </Table>

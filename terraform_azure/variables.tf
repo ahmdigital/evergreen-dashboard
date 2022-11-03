@@ -2,7 +2,7 @@
 
 variable "github_token_scope_read_org" {
   type        = string
-  description = "Github token that has a scope read organisation repositories"
+  description = "Github token that has full repo scope and admin:org-read:org"
   sensitive   = true
 }
 
