@@ -5,6 +5,7 @@
 	},
 	"timeUntilRefresh": 60,
 	"targetPercentage": 80,
+	"allowModerateRepos": false,
 	"npmURL": "",
 	"pipURL": "",
 	"rubygemsURL": ""
