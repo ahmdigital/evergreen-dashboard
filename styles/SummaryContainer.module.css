@@ -356,17 +356,14 @@ h1.noMargins {
     margin-bottom: 0.5rem !important;
   }
 
-  h3.overallCentredTitleStyle {
-    font-size: 1.75rem;
-  }
-
   h3.summaryStylePercent {
     font-size: 1.75rem;
   }
 
   h3.summaryStyle {
     font-size: 1.75rem;
-    margin-bottom: 0.8rem;
+	margin-top: 0.6rem;
+	margin-bottom: 0.81rem;
   }
 
   .subtitle {
