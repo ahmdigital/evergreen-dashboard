@@ -1,5 +1,12 @@
 // testing file for the dataProcessing component
-import { semVerToString, semVerFromString, findRank } from '../src/semVer';
+import { 
+    semVerToString,
+    semVerFromString,
+    findRank,
+    SemVer,
+    SemVerDelta,
+    semVerToDelta,
+} from '../src/semVer';
 
 /*
 Tests:
@@ -25,7 +32,6 @@ describe('tests for semVerToString function', function () {
             skipBug: false,
         }
         const semVerString = semVerToString(firstReleaseSemVer);
-        console.log(semVerString);
         expect(semVerString).toBe('1.0.0');
     });
 
@@ -39,7 +45,6 @@ describe('tests for semVerToString function', function () {
             skipBug: true,
         }
         const semVerString = semVerToString(patchReleaseSemVer);
-        console.log(semVerString);
         expect(semVerString).toBe('^1.1.0');
     });
 
@@ -53,7 +58,6 @@ describe('tests for semVerToString function', function () {
             skipBug: true,
         }
         const semVerString = semVerToString(patchReleaseSemVer);
-        console.log(semVerString);
         expect(semVerString).toBe('~1.0.1');
     });
 
@@ -68,7 +72,6 @@ describe('tests for semVerFromString function', function () {
     test('semantic versioning from string initial release', () => {
         const firstReleaseSemVerStr = '1.0.0';
         const semVer = semVerFromString(firstReleaseSemVerStr);
-        console.log(semVer);
         expect(semVer).toStrictEqual({
             major: 1,
             minor: 0,
@@ -82,7 +85,6 @@ describe('tests for semVerFromString function', function () {
     test('semantic versioning from string rest component', () => {
         const restComponentSemVerStr = '0.0.0-development';
         const semVer = semVerFromString(restComponentSemVerStr);
-        console.log(semVer);
         expect(semVer).toStrictEqual({
             major: 0,
             minor: 0,
@@ -96,7 +98,6 @@ describe('tests for semVerFromString function', function () {
     test('semantic versioning from string minor release', () => {
         const firstReleaseSemVerStr = '^1.1.0';
         const semVer = semVerFromString(firstReleaseSemVerStr);
-        console.log(semVer);
         expect(semVer).toStrictEqual({
             major: 1,
             minor: 1,
@@ -110,7 +111,6 @@ describe('tests for semVerFromString function', function () {
     test('semantic versioning from string patch release', () => {
         const patchReleaseSemVerStr = '^1.0.1';
         const semVer = semVerFromString(patchReleaseSemVerStr);
-        console.log(semVer);
         expect(semVer).toStrictEqual({
             major: 1,
             minor: 0,
@@ -124,7 +124,6 @@ describe('tests for semVerFromString function', function () {
     test('semantic versioning from string bug release', () => {
         const bugReleaseSemVerStr = '~2.4.1';
         const semVer = semVerFromString(bugReleaseSemVerStr);
-        console.log(semVer);
         expect(semVer).toStrictEqual({
             major: 2,
             minor: 4,
@@ -138,7 +137,6 @@ describe('tests for semVerFromString function', function () {
     test('semantic versioning from string bug release with space', () => {
         const bugReleaseSemVerStr = '~ 2.4.1';
         const semVer = semVerFromString(bugReleaseSemVerStr);
-        console.log(semVer);
         expect(semVer).toStrictEqual({
             major: 2,
             minor: 4,
@@ -152,7 +150,6 @@ describe('tests for semVerFromString function', function () {
     test('semantic versioning from string patch release with equality sign', () => {
         const equalitySemVerStr = '= 2.4.1';
         const semVer = semVerFromString(equalitySemVerStr);
-        console.log(semVer);
         expect(semVer).toStrictEqual({
             major: 2,
             minor: 4,
@@ -304,4 +301,44 @@ describe('tests for findRank function', function () {
     });
 
 
+});
+
+
+/*
+    *******************************************************
+    unit tests for semVerToDelta function
+    *******************************************************
+*/
+
+describe('tests for semVerToDelta function', function () {
+    // Testing for Rank 0: 1 > Majors behind
+    test('Testing for random current and random case', () => {
+        const current: SemVer = {
+            major: 2,
+            minor: 4,
+            bug: 3,
+            rest: "",
+            skipMinor: false,
+            skipBug: false,
+        };
+
+        const latest: SemVer = {
+            major: 3,
+            minor: 0,
+            bug: 1,
+            rest: "",
+            skipMinor: false,
+            skipBug: false,
+        };
+
+        const semVerDeltaExpected: SemVerDelta = {
+            major: 1,
+            minor: 0,
+            bug: 0,
+            skipMinor: false,
+            skipBug: false,
+        };
+
+        expect(semVerToDelta(current, latest)).toStrictEqual(semVerDeltaExpected);
+    });
 });
