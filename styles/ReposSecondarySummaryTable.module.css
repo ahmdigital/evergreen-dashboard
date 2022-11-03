@@ -22,7 +22,7 @@
 
 .textContainer {
 	width: 100%;
-	display: inline-block;
+	display: block;
 	/* /width: 175px; */
 	white-space: nowrap;
 	overflow: hidden;
