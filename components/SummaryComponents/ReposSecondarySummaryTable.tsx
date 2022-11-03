@@ -75,10 +75,10 @@ function MostCommonSummaryTable(name: string, usageCounts: { name: string, id: n
 				<Table sx={{ width: "100%", tableLayout: "fixed" }}>
 				<Box sx={{ maxHeight: "160px", paddingLeft: "2px"}}>
 					<TableRow>
-						<TableCell className={styles.totalsCellStyle}>
+						<TableCell sx={{padding: '4px', borderColor: 'black', lineHeight: '0.5rem + var(--font-size-large)', fontSize: 'var(--font-size-large)', fontWeight: 'bold', fontFamily: 'var(--primary-font-family)' }}>
 							<h3>{name}</h3>
 						</TableCell>
-						<TableCell className={styles.totalsCellStyle}>
+						<TableCell sx={{padding: '4px', borderColor: 'black', lineHeight: '0.5rem + var(--font-size-large)', fontSize: 'var(--font-size-large)', fontWeight: 'bold', fontFamily: 'var(--primary-font-family)' }}>
 						</TableCell>
 					</TableRow>
 				</Box>
@@ -87,12 +87,12 @@ function MostCommonSummaryTable(name: string, usageCounts: { name: string, id: n
 					usageCounts.map(i => {
 						return <div key={i.id + " containingDiv"}>
 							<TableRow key={i.id} sx={{ display: "inline-block", width: "100%", ...(filterTerm.mustHaveDependency == i.id && { background: "var(--colour-table-selected)" }) }} onClick={() => setFilterTerm({ ...filterTerm, mustHaveDependency: filterTerm.mustHaveDependency == i.id ? -1 : i.id })}>
-								<TableCell className={styles.tableCellStyle1}>
+								<TableCell sx={{display: 'inline-flex', padding: '0px', paddingTop: '4px', paddingBottom: '4px', fontSize: 'medium', fontWeight: 'bold', width: 'calc(100% - 2rem)', maxWidth: 'calc(100% - 2rem);'}}>
 									<div className={styles.textContainer}>
 										{i.name}
 									</div>
 								</TableCell>
-								<TableCell className={styles.tableCellStyle2}>
+								<TableCell sx={{display: 'inline-flex', padding: '0px', paddingTop: '4px', paddingBottom: '4px', fontSize: 'medium', fontWeight: 'bold', maxWidth: '1rem', paddingLeft: '1rem'}}>
 									<div className={styles.countContainer}>
 										{i.count}
 									</div>
