@@ -87,7 +87,7 @@ export function Page(props: PageProps) {
   );
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [sortSetting, setSortSetting] = useState<SortSettings>({
-    type: 'rank',
+    type: 'status',
     direction: true,
   });
   const [filterSetting, setFilterSetting] = useState<Filter>({
