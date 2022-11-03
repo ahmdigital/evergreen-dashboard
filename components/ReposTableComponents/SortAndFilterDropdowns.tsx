@@ -10,8 +10,6 @@ import { Filter } from "../../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styles from "../../styles/SortAndFilterDropdowns.module.css";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { iconImg } from "../icons/IconFactory";
-import Image from "next/image";
 import { iconAltText, StatusType } from "../constants";
 import RedIconImg from "../images/redLight.svg";
 import YellowIconImg from "../images/yellowLight.svg";
