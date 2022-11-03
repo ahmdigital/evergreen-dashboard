@@ -62,7 +62,7 @@ export type SortSettings = {
   type:
     | "name"
     | "repo"
-    | "rank"
+    | "status"
     | "time"
     | "internal"
     | "external"
@@ -103,7 +103,7 @@ export function SortBox(sortSetting: SortSettings, handleSortChange: any) {
           </MenuItem>
           <MenuItem value={"name"}>Name</MenuItem>
           <MenuItem value={"repo"}>Repository</MenuItem>
-          <MenuItem value={"rank"}>Rank</MenuItem>
+          <MenuItem value={"status"}>Status</MenuItem>
           <MenuItem value={"time"}>Time</MenuItem>
           <MenuItem value={"internal"}>Internal count</MenuItem>
           <MenuItem value={"external"}>External count</MenuItem>

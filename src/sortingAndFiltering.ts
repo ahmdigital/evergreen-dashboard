@@ -2,7 +2,7 @@ import { ProcessedDependencyData } from "../hooks/useProcessDependencyData";
 import dayjs from "dayjs";
 import { compareSemVerDelta, SemVerDelta, semVerToDelta } from "./semVer";
 
-export type SortSettings = { type: "name" | "repo" | "rank" | "time" | "internal" | "external" | "total" | "users" | "mostOutdated", direction: boolean }
+export type SortSettings = { type: "name" | "repo" | "status" | "time" | "internal" | "external" | "total" | "users" | "mostOutdated", direction: boolean }
 export type Filter = { type: "" | "time", level: any, direction: boolean, mustHaveDependency: number, showRed: boolean, showYellow: boolean, showGreen: boolean }
 
 function findMostOutdated(rows: ProcessedDependencyData) {
@@ -49,7 +49,7 @@ export function applySort(rows: ProcessedDependencyData, sortSetting: SortSettin
 		case ("repo"):
 			rows.sort((a, b) => a.oldName?.localeCompare(b.oldName))
 			break
-		case ("rank"):
+		case ("status"):
 			rows.sort((a, b) => a.minRank - b.minRank)
 
 			// Sort the internal, external dependencies & users
