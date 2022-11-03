@@ -131,22 +131,3 @@ export function applyFilter(row: ProcessedDependencyData[0], filter: Filter): bo
 	}
 	return true
 }
-
-export function searchAndFilter(rows: ProcessedDependencyData, jsxRows: JSX.Element[], filterSetting: Filter, searchTerm: string) {
-	let diplayedRows = []
-	for (let i = 0; i < rows.length; i++) {
-		let row = rows[i]
-		let jsx = jsxRows[i]
-
-		if (
-			applyFilter(row, filterSetting) && (
-				searchTerm.length == 0 ||
-				row.name.toLowerCase().includes(searchTerm.toLowerCase())
-				|| row.oldName?.toLowerCase().includes(searchTerm.toLowerCase())
-			)
-		) {
-			diplayedRows.push(jsx)
-		}
-	}
-	return diplayedRows
-}
