@@ -19,6 +19,38 @@ import RedFailIcon from "../components/images/redLight.svg";
 
 const SCOPE = "repo";
 
+// Sign In with GitHub button
+const signInButtonStyling = {
+  backgroundColor: "black",
+  width: "100%",
+  "&:hover": {
+    backgroundColor: "#2e2e2e",
+  },
+};
+
+// Sign in box styling
+const signInContainer = {
+  width: "100%",
+  maxWidth: "400px",
+  minHeight: "200px",
+  padding: "1.5rem",
+  backgroundColor: "var(--colour-white)",
+  boxShadow: "var(--main-section-boxshadow)",
+  borderRadius: "var(--main-section-border-radius)",
+  fontFamily: "var(--primary-font-family)",
+  boxSizing: "content-box",
+  justifyContent: "center",
+};
+
+// Continue to dashboard button
+const continueToButton = {
+  backgroundColor: "var(--colour-green)",
+  width: "100%",
+  "&:hover": {
+    backgroundColor: "rgb(45, 210, 36);",
+  },
+};
+
 export async function getServerSideProps() {
   return {
     props: {
@@ -189,7 +221,7 @@ export default function SignIn(props: {
         justifyContent="center"
         alignContent="center"
       >
-        <Paper className={styles.signinContainer}>
+        <Paper sx={signInContainer}>
           <Typography
             variant="h4"
             sx={{ marginBottom: "1.5rem", marginLeft: "1rem" }}
@@ -216,7 +248,7 @@ export default function SignIn(props: {
                 <Button
                   variant="contained"
                   size="large"
-                  className={styles.signinWithGithubButton}
+                  sx={signInButtonStyling}
                   onClick={() => redirect(props.clientID, props.redirectURI)}
                   startIcon={<GitHubIcon />}
                 >
@@ -316,9 +348,7 @@ export default function SignIn(props: {
                   variant="contained"
                   size="large"
                   endIcon={<TrafficIcon />}
-                  sx={{
-                    backgroundColor: "var(--colour-green)",
-                  }}
+                  sx={continueToButton}
                   href="/"
                 >
                   Continue to Dashboard
