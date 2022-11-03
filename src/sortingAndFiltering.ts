@@ -33,12 +33,35 @@ export function applySort(rows: ProcessedDependencyData, sortSetting: SortSettin
 
 	switch (sortSetting.type) {
 		case ("name"):
+			rows.sort((a, b) => a.name.localeCompare(b.name))
+			
+			// Sort the internal, external dependencies & users
+			rows.map((row, i) => {
+				row.internalSubRows.sort((a, b) => a.name.localeCompare(b.name))
+			})
+			rows.map((row, i) => {
+				row.externalSubRows.sort((a, b) => a.name.localeCompare(b.name))
+			})
+			rows.map((row, i) => {
+				row.userSubRows.sort((a, b) => a.name.localeCompare(b.name))
+			})
 			break
 		case ("repo"):
 			rows.sort((a, b) => a.oldName?.localeCompare(b.oldName))
 			break
 		case ("rank"):
 			rows.sort((a, b) => a.minRank - b.minRank)
+
+			// Sort the internal, external dependencies & users
+			rows.map((row, i) => {
+				row.internalSubRows.sort((a, b) => a.rank - b.rank)
+			})
+			rows.map((row, i) => {
+				row.externalSubRows.sort((a, b) => a.rank - b.rank)
+			})
+			rows.map((row, i) => {
+				row.userSubRows.sort((a, b) => a.rank - b.rank)
+			})
 			break
 		case ("time"):
 			rows.sort((a, b) => dayjs(b.lastUpdated).diff(dayjs(a.lastUpdated)))
@@ -70,7 +93,20 @@ export function applySort(rows: ProcessedDependencyData, sortSetting: SortSettin
 			break
 	}
 
-	if (!sortSetting.direction) { rows.reverse() }
+	if (!sortSetting.direction) { 
+		rows.reverse();
+		
+		// Reverse the internal, external, and subrows
+		rows.map((row, i) => {
+			row.internalSubRows.reverse()
+		})
+		rows.map((row, i) => {
+			row.externalSubRows.reverse()
+		})
+		rows.map((row, i) => {
+			row.userSubRows.reverse()
+		})
+	}
 }
 
 export function rankCounts(rows: ProcessedDependencyData) {
