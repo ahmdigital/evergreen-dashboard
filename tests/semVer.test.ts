@@ -1,6 +1,12 @@
 // testing file for the dataProcessing component
 import { semVerToString, semVerFromString, findRank } from '../src/semVer';
 
+/*
+Tests:
+- lowerLimit is less than upperLimit
+- test semVerToDelta
+
+*/
 
 /*
     *****************************************************
@@ -158,122 +164,144 @@ describe('tests for semVerFromString function', function () {
     });
 });
 
-// Find rank cannot be properly tested without some sort of config override
-// /*
-//     *******************************************************
-//     unit tests for findRank function
-//     *******************************************************
-// */
-// describe('tests for findRank function', function () {
-//     // Testing for Rank 0: 1 > Majors behind
-//     test('Testing for rank 0 (More than 1 major behind)', () => {
-//         const used = {
-//             major: 2,
-//             minor: 0,
-//             bug: 0,
-//             rest: "",
-//             skipMinor: false,
-//             skipBug: false,
-//         }
-//         const curr = {
-//             major: 3,
-//             minor: 0,
-//             bug: 0,
-//             rest: "",
-//             skipMinor: false,
-//             skipBug: false,
-//         }
-//         const rank = findRank(used, curr)
-//         expect(rank).toStrictEqual(0)
-//     });
 
-//     // Testing for rank 0: red  5 = minors behind
-//     test('Testing for rank 0: red  >5 = minors behind', () => {
-//         const used = {
-//             major: 3,
-//             minor: 0,
-//             bug: 0,
-//             rest: "",
-//             skipMinor: false,
-//             skipBug: false,
-//         }
-//         const curr = {
-//             major: 3,
-//             minor: 6,
-//             bug: 0,
-//             rest: "",
-//             skipMinor: false,
-//             skipBug: false,
-//         }
-//         const rank = findRank(used, curr)
-//         expect(rank).toStrictEqual(0);
-//     });
+/*
+    *******************************************************
+    unit tests for findRank function
+    *******************************************************
+*/
+describe('tests for findRank function', function () {
+    // Testing for Rank 0: 1 > Majors behind
+    test('Testing for rank 0 (More than 1 major behind)', () => {
+        const used = {
+            major: 2,
+            minor: 0,
+            bug: 0,
+            rest: "",
+            skipMinor: false,
+            skipBug: false,
+        }
+        const curr = {
+            major: 3,
+            minor: 0,
+            bug: 0,
+            rest: "",
+            skipMinor: false,
+            skipBug: false,
+        }
+        const rank = findRank(used, curr)
+        expect(rank).toStrictEqual(0)
+    });
 
-//     // Testing for rank 0: red  5 > minors behind
-//     test('Testing for rank 0: red  5 > minors behind', () => {
-//         const used = {
-//             major: 3,
-//             minor: 0,
-//             bug: 0,
-//             rest: "",
-//             skipMinor: false,
-//             skipBug: false,
-//         }
-//         const curr = {
-//             major: 3,
-//             minor: 15,
-//             bug: 0,
-//             rest: "",
-//             skipMinor: false,
-//             skipBug: false,
-//         }
-//         const rank = findRank(used, curr)
-//         expect(rank).toStrictEqual(0);
-//     });
+    // Testing for rank 0: red  5 > minors behind
+    test('Testing for rank 0: red  5 > minors behind', () => {
+        const used = {
+            major: 3,
+            minor: 0,
+            bug: 0,
+            rest: "",
+            skipMinor: false,
+            skipBug: false,
+        }
+        const curr = {
+            major: 3,
+            minor: 15,
+            bug: 0,
+            rest: "",
+            skipMinor: false,
+            skipBug: false,
+        }
+        const rank = findRank(used, curr)
+        expect(rank).toStrictEqual(0);
+    });
 
-//     // Testing for rank 1: yellow - <5 minors behind
-//     test('Testing for rank 1: yellow - <5 minors behind', () => {
-//         const used = {
-//             major: 3,
-//             minor: 0,
-//             bug: 0,
-//             rest: "",
-//             skipMinor: false,
-//             skipBug: false,
-//         }
-//         const curr = {
-//             major: 3,
-//             minor: 4,
-//             bug: 0,
-//             rest: "",
-//             skipMinor: false,
-//             skipBug: false,
-//         }
-//         const rank = findRank(used, curr)
-//         expect(rank).toStrictEqual(1);
-//     });
+    // // Testing for rank 1: yellow =  5 minors behind
+    // test('Testing for rank 1: yellow = 5 minors behind', () => {
+    //     const used = {
+    //         major: 3,
+    //         minor: 0,
+    //         bug: 0,
+    //         rest: "",
+    //         skipMinor: false,
+    //         skipBug: false,
+    //     }
+    //     const curr = {
+    //         major: 3,
+    //         minor: 5,
+    //         bug: 0,
+    //         rest: "",
+    //         skipMinor: false,
+    //         skipBug: false,
+    //     }
+    //     const rank = findRank(used, curr)
+    //     expect(rank).toStrictEqual(1);
+    // });
 
-//      // Testing for rank 2: green up to date
-//      test('Testing for rank 2: green up to date', () => {
-//         const used = {
-//             major: 3,
-//             minor: 15,
-//             bug: 0,
-//             rest: "",
-//             skipMinor: false,
-//             skipBug: false,
-//         }
-//         const curr = {
-//             major: 3,
-//             minor: 15,
-//             bug: 0,
-//             rest: "",
-//             skipMinor: false,
-//             skipBug: false,
-//         }
-//         const rank = findRank(used, curr)
-//         expect(rank).toBe(2);
-//     });
+    // Testing for rank 1: yellow =  6 minors behind
+    test('Testing for rank 1: yellow = 6 minors behind', () => {
+        const used = {
+            major: 3,
+            minor: 0,
+            bug: 0,
+            rest: "",
+            skipMinor: false,
+            skipBug: false,
+        }
+        const curr = {
+            major: 3,
+            minor: 6,
+            bug: 0,
+            rest: "",
+            skipMinor: false,
+            skipBug: false,
+        }
+        const rank = findRank(used, curr)
+        expect(rank).toStrictEqual(1);
+    });
+
+    // Testing for rank 2: green = <5 minors behind
+    test('Testing for rank 2: green = <5 minors behind', () => {
+        const used = {
+            major: 3,
+            minor: 0,
+            bug: 0,
+            rest: "",
+            skipMinor: false,
+            skipBug: false,
+        }
+        const curr = {
+            major: 3,
+            minor: 4,
+            bug: 0,
+            rest: "",
+            skipMinor: false,
+            skipBug: false,
+        }
+        const rank = findRank(used, curr)
+        expect(rank).toStrictEqual(2);
+    });
+
+     // Testing for rank 2: green = up to date
+     test('Testing for rank 2: green = up to date', () => {
+        const used = {
+            major: 3,
+            minor: 15,
+            bug: 0,
+            rest: "",
+            skipMinor: false,
+            skipBug: false,
+        }
+        const curr = {
+            major: 3,
+            minor: 15,
+            bug: 0,
+            rest: "",
+            skipMinor: false,
+            skipBug: false,
+        }
+        const rank = findRank(used, curr)
+        expect(rank).toBe(2);
+    });
 
 
-// });
+});
