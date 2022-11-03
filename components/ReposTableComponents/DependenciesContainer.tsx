@@ -2,12 +2,12 @@ import React from "react";
 import styles from "../../styles/DependenciesContainer.module.css";
 import sharedStyles from "../../styles/TreeView.module.css";
 import SearchBar from "./SearchBar";
-import { DependencyData } from "../../src/dataProcessing";
+import { DependencyData, ID } from "../../src/dataProcessing";
 import { Filter } from "../../src/sortingAndFiltering";
 import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import { GridTable } from "../MobileComponents/GridTable";
 import FilterListIcon from '@mui/icons-material/FilterList';
-import { Box, Grid, IconButton } from "@mui/material";
+import { Box, Chip, Grid, IconButton } from "@mui/material";
 import {
 	PageLoaderCurrentData,
 	forceNewVersion,
@@ -16,6 +16,9 @@ import {
 	PageLoaderSetData,
 	PageLoaderSetLoading,
 } from "../PageLoader";
+
+import {topOfRepoBox} from "../Page"
+
 let refreshing = false;
 
 /* Container includes  Search, Filter, Dependencies Table */
@@ -30,6 +33,7 @@ export default function DependenciesContainer(props: {
 	emptyRows: boolean;
 	sortDirection: JSX.Element;
 	filterSetting: Filter;
+	setFilterSetting: React.Dispatch<React.SetStateAction<Filter>>;
 	targetOrganisation: string;
 	finalisedData: ProcessedDependencyData;
 }) {
@@ -71,6 +75,10 @@ export default function DependenciesContainer(props: {
 		setFilterOpen(!filterOpen);
 	};
 
+	const deleteChip = () => {
+		props.setFilterSetting({...props.filterSetting, mustHaveDependency: -1})
+	};
+
 	const filterSelectGridDisplay = {
 		display: {
 			xs: filterOpen ? "block" : "none",
@@ -79,7 +87,7 @@ export default function DependenciesContainer(props: {
 	};
 
 	return (
-		<Box className={styles.sectionContainer} sx={{
+		<Box ref={topOfRepoBox.data} className={styles.sectionContainer} sx={{
 			padding: {
 				xs: 2,
 				md: '2.5rem 3.125rem 3.75rem 3.125rem',
@@ -98,7 +106,6 @@ export default function DependenciesContainer(props: {
 								repoNames={(props.tableRows.map((row: any) => row.name))}
 								/>
 					</Grid>
-
 					<Grid item xs="auto">
 							<IconButton
 								sx={{ display: { xs: 'initial', md: 'none' } }}
@@ -123,6 +130,13 @@ export default function DependenciesContainer(props: {
 					{props.rankSelection}
 				</Grid>
 			</Grid>
+
+			{
+				props.filterSetting.mustHaveDependency != -1 ?
+				<Grid item xs="auto" sx={{paddingTop: "1rem"}}>
+					<Chip variant="outlined" sx={{color: "var(--colour-font)"}} label={"Depends on: " + props.JSObject.depMap.get(props.filterSetting.mustHaveDependency as ID)!.name} onDelete={deleteChip} />
+				</Grid> : <></>
+			}
 
 			<GridTable rows={props.finalisedData} emptyRows={props.emptyRows} searchTerm={props.searchTerm} tableRows={props.tableRows}/>
 			{/* TODO: Delete this */}
