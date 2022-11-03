@@ -20,7 +20,11 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Divider from "@mui/material/Divider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { statusDefinitionsHelpGuide, statusLabel, StatusType } from "../constants";
+import {
+  statusDefinitionsHelpGuide,
+  statusLabel,
+  StatusType,
+} from "../constants";
 import { LightStatusIconFactory } from "../icons/IconFactory";
 
 // Customising the table styling using ThemeProvider
@@ -80,7 +84,14 @@ const CustomisedDialogTitle = (props: DialogTitleProps) => {
 
   return (
     <DialogTitle
-    sx={{fontSize: 'var(--font-size-xlarge)', fontFamily: 'var(--primary-font-family)', fontWeight: 'var(--font-weight-bold)', alignSelf: 'center', m: 0, p: 2}}
+      sx={{
+        fontSize: "var(--font-size-xlarge)",
+        fontFamily: "var(--primary-font-family)",
+        fontWeight: "var(--font-weight-bold)",
+        alignSelf: "center",
+        m: 0,
+        p: 2,
+      }}
       {...other}
     >
       {children}
@@ -120,8 +131,26 @@ function StatusTable() {
         <TableHead>
           <TableRow>
             <ThemeProvider theme={theme}>
-              <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem', fontWeight: 'bold'}}>Status</TableCell>
-              <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem', fontWeight: 'bold'}}>
+              <TableCell
+                sx={{
+                  fontSize: "var(--font-size-normal)",
+                  fontFamily: "var(--primary-font-family)",
+                  color: "var(--colour-font)",
+                  paddingBottom: "1rem",
+                  fontWeight: "bold",
+                }}
+              >
+                Status
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "var(--font-size-normal)",
+                  fontFamily: "var(--primary-font-family)",
+                  color: "var(--colour-font)",
+                  paddingBottom: "1rem",
+                  fontWeight: "bold",
+                }}
+              >
                 Definition
               </TableCell>
             </ThemeProvider>
@@ -136,7 +165,14 @@ function StatusTable() {
                 iconSize={ICON_SIZE}
               />
             </TableCell>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               <p>{`${statusLabel[StatusType.RED]}`}</p>
               <p>{statusDefinitionsHelpGuide[StatusType.RED]}</p>
             </TableCell>
@@ -149,7 +185,14 @@ function StatusTable() {
                 iconSize={ICON_SIZE}
               />
             </TableCell>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               <p>{`${statusLabel[StatusType.YELLOW]}`}</p>
               <p>{statusDefinitionsHelpGuide[StatusType.YELLOW]}</p>
             </TableCell>
@@ -162,7 +205,14 @@ function StatusTable() {
                 iconSize={ICON_SIZE}
               />
             </TableCell>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               <p>{`${statusLabel[StatusType.GREEN]}`}</p>
               <p>{statusDefinitionsHelpGuide[StatusType.GREEN]}</p>
             </TableCell>
@@ -179,41 +229,141 @@ function FieldsTable() {
       <Table>
         <TableBody>
           <TableRow>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem', fontWeight: 'bold'}}>Status:</TableCell>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+                fontWeight: "bold",
+              }}
+            >
+              Status:
+            </TableCell>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               The status icon represents how up-to-date the repository is
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem', fontWeight: 'bold'}}>Name:</TableCell>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+                fontWeight: "bold",
+              }}
+            >
+              Name:
+            </TableCell>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               The name of the repository
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem', fontWeight: 'bold'}}>Version:</TableCell>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+                fontWeight: "bold",
+              }}
+            >
+              Version:
+            </TableCell>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               Is represented using the semantic versioning standard
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem', fontWeight: 'bold'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+                fontWeight: "bold",
+              }}
+            >
               Last Updated:
             </TableCell>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               The time of when the repository was last updated
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem', fontWeight: 'bold'}}>Current:</TableCell>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+                fontWeight: "bold",
+              }}
+            >
+              Current:
+            </TableCell>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               The version of the internal/external library currently used in the
               repository
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem', fontWeight: 'bold'}}>Latest:</TableCell>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+                fontWeight: "bold",
+              }}
+            >
+              Latest:
+            </TableCell>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               The most recent version of the internal/external library.
             </TableCell>
           </TableRow>
@@ -229,28 +379,75 @@ function TabsTable() {
       <Table className={styles.tableStyle}>
         <TableBody>
           <TableRow>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem', fontWeight: 'bold'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+                fontWeight: "bold",
+              }}
+            >
               Internal:
             </TableCell>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               Displays list of internal libraries used by the main repository,
               and their properties including status, library, used version and
               the latest version of the library
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem', fontWeight: 'bold'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+                fontWeight: "bold",
+              }}
+            >
               External:
             </TableCell>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               Displays list of external libraries used by main repository, and
               their properties including status, library, used version and the
               latest version of the library
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem', fontWeight: 'bold'}}>Users:</TableCell>
-            <TableCell sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+                fontWeight: "bold",
+              }}
+            >
+              Users:
+            </TableCell>
+            <TableCell
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               Displays list of libraries that uses the main repository, and
               their properties including status, library, used version and the
               latest version of the library
@@ -288,7 +485,7 @@ export default function HelpGuide() {
         </ThemeProvider>
       </LightTooltip>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="lg">
-        <CustomisedDialogTitle 
+        <CustomisedDialogTitle
           id="customised-dialog-title"
           onClose={handleClose}
         >
@@ -296,56 +493,150 @@ export default function HelpGuide() {
         </CustomisedDialogTitle>
         <DialogContent dividers>
           <div className={styles.componentStyle}>
-              <DialogContentText sx={{fontSize: 'var(--font-size-xlarge)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', fontWeight: 'var(--font-weight-bold)', paddingTop: '0.5rem', paddingBottom: '0.25rem'}}>
-                Summary
-              </DialogContentText>
+            <DialogContentText
+              sx={{
+                fontSize: "var(--font-size-xlarge)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                fontWeight: "var(--font-weight-bold)",
+                paddingTop: "0.5rem",
+                paddingBottom: "0.25rem",
+              }}
+            >
+              Summary
+            </DialogContentText>
             <Divider />
-            <DialogContentText sx={{fontSize: 'var(--font-size-large)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', fontWeight: 'var(--font-weight-bold)', paddingTop: '1rem'}}>
+            <DialogContentText
+              sx={{
+                fontSize: "var(--font-size-large)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                fontWeight: "var(--font-weight-bold)",
+                paddingTop: "1rem",
+              }}
+            >
               What do the light status icons represent?
             </DialogContentText>
-            <DialogContentText sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <DialogContentText
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               The application uses 3 types of icons to represent how up-to-date
               a repository is. The status icon is generated based on the
               semantic versioning of the libraries. Below is a more detailed
               descripton of each icon:
             </DialogContentText>
             <StatusTable />
-            <DialogContentText sx={{fontSize: 'var(--font-size-large)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', fontWeight: 'var(--font-weight-bold)', paddingTop: '1rem'}}>
+            <DialogContentText
+              sx={{
+                fontSize: "var(--font-size-large)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                fontWeight: "var(--font-weight-bold)",
+                paddingTop: "1rem",
+              }}
+            >
               What is Overall Percentage?
             </DialogContentText>
-            <DialogContentText sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <DialogContentText
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               The overall percentage represents the number of repositories with
               a green light status over the total repositories in the
               organisation as a percentage.
             </DialogContentText>
-            <DialogContentText sx={{fontSize: 'var(--font-size-large)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', fontWeight: 'var(--font-weight-bold)', paddingTop: '1rem'}}>
+            <DialogContentText
+              sx={{
+                fontSize: "var(--font-size-large)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                fontWeight: "var(--font-weight-bold)",
+                paddingTop: "1rem",
+              }}
+            >
               How to read the Total Repositories breakdown card?
             </DialogContentText>
-            <DialogContentText sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <DialogContentText
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               The Total Repos card simply displays the number of repositories
               defined by each light status type; red, yellow, and green.
             </DialogContentText>
           </div>
           <div className={styles.componentStyle}>
-            <DialogContentText sx={{fontSize: 'var(--font-size-xlarge)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', fontWeight: 'var(--font-weight-bold)', paddingTop: '0.5rem', paddingBottom: '0.25rem'}}>
+            <DialogContentText
+              sx={{
+                fontSize: "var(--font-size-xlarge)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                fontWeight: "var(--font-weight-bold)",
+                paddingTop: "0.5rem",
+                paddingBottom: "0.25rem",
+              }}
+            >
               Repositories{" "}
             </DialogContentText>
             <Divider />
-            <DialogContentText sx={{fontSize: 'var(--font-size-large)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', fontWeight: 'var(--font-weight-bold)', paddingTop: '1rem'}}>
+            <DialogContentText
+              sx={{
+                fontSize: "var(--font-size-large)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                fontWeight: "var(--font-weight-bold)",
+                paddingTop: "1rem",
+              }}
+            >
               Introduction
             </DialogContentText>
-            <DialogContentText sx={{fontSize: 'var(--font-size-normal)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', paddingBottom: '1rem'}}>
+            <DialogContentText
+              sx={{
+                fontSize: "var(--font-size-normal)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                paddingBottom: "1rem",
+              }}
+            >
               The core feature of the application is to keep track of
               repositories and how-up-to date the internal libraries are. The
               repositories section displays a table of collapsible rows, where
               each row represents a repository can be expanded to view its
               internal libraries.
             </DialogContentText>
-            <DialogContentText sx={{fontSize: 'var(--font-size-large)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', fontWeight: 'var(--font-weight-bold)', paddingTop: '1rem'}}>
+            <DialogContentText
+              sx={{
+                fontSize: "var(--font-size-large)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                fontWeight: "var(--font-weight-bold)",
+                paddingTop: "1rem",
+              }}
+            >
               Repository Table Fields
             </DialogContentText>
             <FieldsTable />
-            <DialogContentText sx={{fontSize: 'var(--font-size-large)', fontFamily: 'var(--primary-font-family)', color: 'var(--colour-font)', fontWeight: 'var(--font-weight-bold)', paddingTop: '1rem'}}>
+            <DialogContentText
+              sx={{
+                fontSize: "var(--font-size-large)",
+                fontFamily: "var(--primary-font-family)",
+                color: "var(--colour-font)",
+                fontWeight: "var(--font-weight-bold)",
+                paddingTop: "1rem",
+              }}
+            >
               What are the Internal, External and Users tabs?
             </DialogContentText>
             <TabsTable />
