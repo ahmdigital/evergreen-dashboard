@@ -188,7 +188,7 @@ export default function ReposOverViewTable(props: {
     };
 
     return (
-      <div className={styles.repoOverviewTable}>
+      <div className={styles.pieChartView}>
         <div
           style={{
             height: "100%",
