@@ -34,7 +34,7 @@ export function applySort(rows: ProcessedDependencyData, sortSetting: SortSettin
 	switch (sortSetting.type) {
 		case ("name"):
 			rows.sort((a, b) => a.name.localeCompare(b.name))
-			
+
 			// Sort the internal, external dependencies & users
 			rows.map((row, i) => {
 				row.internalSubRows.sort((a, b) => a.name.localeCompare(b.name))
@@ -93,9 +93,9 @@ export function applySort(rows: ProcessedDependencyData, sortSetting: SortSettin
 			break
 	}
 
-	if (!sortSetting.direction) { 
+	if (!sortSetting.direction) {
 		rows.reverse();
-		
+
 		// Reverse the internal, external, and subrows
 		rows.map((row, i) => {
 			row.internalSubRows.reverse()
