@@ -27,6 +27,30 @@ p.countText{
   font-size: 1.25rem;
 }
 
+div.pieChartView {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: var(--colour-white);
+  border-radius: var(--main-section-border-radius);
+  box-sizing: border-box;
+  font-size: 10px;
+  padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+}
+
+div.repoOverviewTable {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: var(--colour-white);
+  border-radius: var(--main-section-border-radius);
+  box-sizing: border-box;
+  font-size: 10px;
+  padding: 1rem 1rem 1rem 1rem;
+}
+
 @media only screen and (min-width: 1920px){
   p.countText {
     font-size: var(--font-size-xlarge);

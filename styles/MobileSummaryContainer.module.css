@@ -2,6 +2,9 @@
     font-size: var(--font-size-medium);
     margin-top: 3px;
     font-weight: var(--font-weight-semibold); /*500*/
+	padding: 1rem 0;
+	line-height: 36px;
+	padding: 0.79rem 0.65rem;
 }
 
 p.subtitle {

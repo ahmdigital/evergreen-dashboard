@@ -70,13 +70,20 @@ a:active {
 
 :root {
 	font-size: 16px;
-	--rank-green: green;
+
+	/*Customise light status colours by modifying '--rank-[color]:' property */
+	--rank-green: rgba(31, 162, 25, 1);
+	--rank-orange: rgb(235, 158, 17);
+	--rank-red: rgb(230, 62, 24);
+
+	/* Colours for Sign-in page login & success icons */
+	--login-success: rgba(31, 162, 25, 1);
+	--login-failed: rgb(230, 62, 24);
+
 	--rank-light-green: #cfc;
 	--rank-green-border: 1px solid green;
-	--rank-orange: orange;
 	--rank-light-orange: #ffc;
 	--rank-orange-border: 1px solid orange;
-	--rank-red: red;
 	--rank-light-red: #fcc;
 	--rank-red-border: 1px solid red;
 
