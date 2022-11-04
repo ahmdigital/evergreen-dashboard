@@ -7,6 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "../../styles/CollapsibleTable.module.css";
 import Row from "./Row";
+import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 // Customising the table styling using ThemeProvider
@@ -17,57 +18,64 @@ const theme = createTheme({
         root: {
           fontWeight: "var(--font-weight-semibolder)",
           fontSize: "var(--font-size-large)",
-          fontFamily: 'var(--primary-font-family)',
+          fontFamily: "var(--primary-font-family)",
           backgroundColor: "var(--table-cell-background)",
           color: "var(--colour-font)",
-          marginTop: '1rem',
-          lineHeight: '3rem',
+          marginTop: "1rem",
+          lineHeight: "3rem",
           borderColor: "var(--table-cell-border)",
-          borderWidth: '0.2rem'
-        }
-      }
+          borderWidth: "0.2rem",
+        },
+      },
     },
     MuiTableContainer: {
       styleOverrides: {
         root: {
-          boxShadow: 'none',
-        }
-      }
-    }
-  }
-})
+          boxShadow: "none",
+        },
+      },
+    },
+  },
+});
+
+type CollapsibleTableProps = {
+  rows: ProcessedDependencyData;
+  emptyRows: boolean;
+  searchTerm: string;
+  tableRows: ProcessedDependencyData;
+};
 
 // Creates the whole table
-export default function CollapsibleTable(props: { rows: any}) {
+export default function CollapsibleTable(props: CollapsibleTableProps) {
   return (
     <ThemeProvider theme={theme}>
-      <TableContainer
-        component={Paper}
-        className={styles.tableComponent}
-      >
-        <Table size="small" aria-label="collapsible table" className={styles.tableFixedWidth}>
+      <TableContainer component={Paper} className={styles.tableComponent}>
+        <Table
+          size="small"
+          aria-label="collapsible table"
+          className={styles.tableFixedWidth}
+        >
           <colgroup>
             <col className={styles.col1} />
             <col className={styles.col2} />
             <col className={styles.col3} />
             <col className={styles.col4} />
             <col className={styles.col5} />
-			      <col className={styles.col6} />
+            <col className={styles.col6} />
           </colgroup>
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
               <TableCell>status</TableCell>
               <TableCell>name</TableCell>
-			  <TableCell>repository</TableCell>
+              <TableCell>repository</TableCell>
               <TableCell>version</TableCell>
               <TableCell>last push</TableCell>
             </TableRow>
           </TableHead>
           <TableBody id={"mainTableBody"}>
-            {
-              props.rows.map((row: any) => (
-                <Row
+            {props.rows.map((row: any) => (
+              <Row
                 key={row.name}
                 rank={row.minRank}
                 row={row}
@@ -75,11 +83,10 @@ export default function CollapsibleTable(props: { rows: any}) {
                   internal: row.internalSubRows,
                   external: row.externalSubRows,
                   user: row.userSubRows,
-                  final: row.userSubRows.length === 0
+                  final: row.userSubRows.length === 0,
                 }}
               />
-              ))
-            }
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

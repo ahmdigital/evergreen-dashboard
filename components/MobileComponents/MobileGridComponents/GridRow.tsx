@@ -8,8 +8,6 @@ import { StatusIcon } from "../../icons/StatusIcon";
 import { Box } from "@mui/system";
 import { GridSubRow } from "./GridSubRow";
 
-
-
 // Change cursor and backgroundColor when hovering over the cell
 const gridHover = {
   "&:hover": {

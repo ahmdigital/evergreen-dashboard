@@ -1,25 +1,27 @@
-import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import { Tooltip, TableRow, TableHead, TableCell, Table } from '@mui/material';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
-import Image from 'next/image';
-import { semVerToString } from '../../src/semVer';
-import styles from '../../styles/Row.module.css';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import QuestionMark from '@mui/icons-material/QuestionMark';
+import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import { Tooltip, TableRow, TableHead, TableCell, Table } from "@mui/material";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import Image from "next/image";
+import { semVerToString } from "../../src/semVer";
+import styles from "../../styles/Row.module.css";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import QuestionMark from "@mui/icons-material/QuestionMark";
 import {
   rankToStatusType,
   statusDefinitionsRepos,
   statusLabel,
-} from '../constants';
-import { iconImg } from '../icons/IconFactory';
+} from "../constants";
+import { iconImg } from "../icons/IconFactory";
+import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
+import { StatusIcon } from "../icons/StatusIcon";
+import { SemVerFormatter } from "../SemVerFormatter";
 
-const dayjs = require('dayjs');
-var relativeTime = require('dayjs/plugin/relativeTime');
+const dayjs = require("dayjs");
+var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 export type Props = {
@@ -37,11 +39,23 @@ const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          fontWeight: 'var(--font-weight-semibold)',
-          fontSize: '18px',
-          fontFamily: 'var(--secondary-font-family)',
-          backgroundColor: 'var(--colour-container-background)',
-          color: 'var(--colour-font)',
+          fontWeight: "var(--font-weight-semibold)",
+          fontSize: "18px",
+          fontFamily: "var(--secondary-font-family)",
+          // backgroundColor: "var(--colour-container-background)",
+          // color: "var(--colour-font)",
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        // Even though there is a hover rule we have to override it here. Don't ask.
+        root: {
+          "&.MuiTableRow-hover:hover": {
+            backgroundColor: "blue",
+            cursor: 'pointer',
+          },
+          backgroundColor: "var(--colour-container-background)",
         },
       },
     },
@@ -54,34 +68,37 @@ const collapsibleTheme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          fontWeight: 'bold',
-          fontSize: '1.1rem',
-          fontFamily: 'var(--primary-font-family)',
-          backgroundColor: '#f5f5f5',
-          color: 'var(--colour-font)',
+          fontWeight: "bold",
+          fontSize: "1.1rem",
+          fontFamily: "var(--primary-font-family)",
+          backgroundColor: "#f5f5f5",
+          color: "var(--colour-font)",
         },
       },
     },
   },
 });
 
-// Creates each individual row
-export default function Row(props: { rank: number; row: any } & Props) {
-  const { rank, row, subRows } = props;
+type RowProps = {
+  row: ProcessedDependencyData[0];
+};
 
+// Creates each individual row
+export default function Row(props: RowProps) {
   const [open, setOpen] = useState(false);
 
-  const statusType = rankToStatusType[rank];
+  // const statusType = rankToStatusType[rank];
 
-  const statusIcon = iconImg[statusType];
-  const statusText = statusLabel[statusType];
-  const iconDefinition = statusDefinitionsRepos[statusType];
-  const ICON_SIZE = '40px';
+  // const statusIcon = iconImg[statusType];
+  // const statusText = statusLabel[statusType];
+  // const iconDefinition = statusDefinitionsRepos[statusType];
+  // const ICON_SIZE = "40px";
 
   return (
     <React.Fragment>
-      <TableRow>
-        <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <TableRow onClick={() => setOpen(!open)}>
+          {/* ARROW ICON */}
           <TableCell>
             <IconButton
               aria-label="Expand row"
@@ -92,52 +109,39 @@ export default function Row(props: { rank: number; row: any } & Props) {
               {open ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
             </IconButton>
           </TableCell>
+
+          {/* STATUS */}
           <TableCell>
-            <Tooltip
-              arrow
-              title={<p className={styles.tooltipStyle}>{iconDefinition}</p>}
-            >
-              <div className={styles.iconContainer}>
-                <Image
-                  layout="fixed"
-                  src={statusIcon}
-                  alt={statusText}
-                  width={ICON_SIZE}
-                  height={ICON_SIZE}
-                  className={styles.statusIcon}
-                />
-              </div>
-            </Tooltip>
+            <div className={styles.iconContainer}>
+              <StatusIcon rank={props.row.minRank} />
+            </div>
           </TableCell>
+
+          {/* NAME */}
           <TableCell component="th" scope="row">
-            <a href={row.link} rel="noreferrer" target="_blank">
-              {row.name}
+            <a href={props.row.link} rel="noreferrer" target="_blank">
+              {props.row.name}
             </a>
           </TableCell>
+
+          {/* REPOSITORY NAME */}
           <TableCell component="th" scope="row">
-            {row.oldName
-              ? row.oldName.substr(0, row.oldName.lastIndexOf('('))
-              : ''}
+            {props.row.oldName
+              ? props.row.oldName.substr(0, props.row.oldName.lastIndexOf("("))
+              : ""}
           </TableCell>
+
+          {/* VERSION */}
           <TableCell align="left">
-            {semVerToString(row.version)}
-            {(semVerToString(row.version) === '0.0.0-development' ||
-              semVerToString(row.version) === '0.0.0') && (
-              <Tooltip
-                arrow
-                title={
-                  <p className={styles.tooltipStyle}>
-                    This repository was defined with a default version of 0.0.0
-                  </p>
-                }
-              >
-                <QuestionMark sx={{ width: '1.125rem', height: '1.125rem' }} />
-              </Tooltip>
-            )}
+            <SemVerFormatter semver={props.row.version} />
           </TableCell>
-          <TableCell align="left">{dayjs(row.lastUpdated).fromNow()}</TableCell>
-        </ThemeProvider>
-      </TableRow>
+
+          {/* LAST UPDATED TIME */}
+          <TableCell align="left">
+            {dayjs(props.row.lastUpdated).fromNow()}
+          </TableCell>
+        </TableRow>
+      </ThemeProvider>
       <TableRow>
         <ThemeProvider theme={collapsibleTheme}>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

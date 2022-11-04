@@ -15,12 +15,7 @@
 }
 
 .col3 {
-	width: 30%;
-	background-color: var(--colour-background);
-}
-
-.col3 {
-	width: 30%;
+	width: 28%;
 	background-color: var(--colour-background);
 }
 
@@ -34,7 +29,7 @@
 	background-color: var(--colour-background);
 }
 
-.col5 {
+.col6 {
 	width: 15%;
 	background-color: var(--colour-background);
 }

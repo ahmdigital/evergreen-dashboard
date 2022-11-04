@@ -8,6 +8,7 @@ import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import { GridTable } from "../MobileComponents/GridTable";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { Box, Chip, Grid, IconButton } from "@mui/material";
+import CollapsibleTable from "./CollapsibleTable";
 import {
   PageLoaderCurrentData,
   forceNewVersion,
@@ -141,8 +142,8 @@ export default function DependenciesContainer(props: {
             sx={{
               "& .MuiChip-label": {
                 fontFamily: "var(--primary-font-family)",
-				fontWeight: "var(--font-weight-semibold)",
-          		fontSize: "var(--font-size-large)",
+                fontWeight: "var(--font-weight-semibold)",
+                fontSize: "var(--font-size-large)",
               },
               color: "var(--colour-font)",
             }}
@@ -166,9 +167,14 @@ export default function DependenciesContainer(props: {
         tableRows={props.tableRows}
       />
       {/* TODO: Delete this */}
-      {/* <div className={styles.tableStyle}>
-				<CollapsibleTable tableRows={props.tableRows} setTableRows={props.setTableRows} searchAndFilteredData={searchAndFilteredData}></CollapsibleTable>
-			</div> */}
+      <div className={styles.tableStyle}>
+        <CollapsibleTable
+          rows={props.finalisedData}
+          emptyRows={props.emptyRows}
+          searchTerm={props.searchTerm}
+          tableRows={props.tableRows}
+        ></CollapsibleTable>
+      </div>
     </Box>
   );
 }
