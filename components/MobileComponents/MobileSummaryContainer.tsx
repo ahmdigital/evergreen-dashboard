@@ -317,7 +317,7 @@ export default function MobileSummaryContainer(props: {
             onClick={() => setCloseHeader(!closeHeader)}
             className={styles.expandButton}
 			sx={{
-				padding: '0.6rem 0rem' 
+				padding: '0.6rem 0rem'
 			}}
           >
             {closeHeader ? (

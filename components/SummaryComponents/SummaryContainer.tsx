@@ -219,7 +219,7 @@ export default function SummaryContainer(props: {
 			  <h3 style={{marginTop: '18px', marginBottom: '25px'}} className={styles.summaryStylePercent}>
 				Target ({config.targetPercentage}%)
 			  </h3>
-			  
+
               <div
                 className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}
               >
