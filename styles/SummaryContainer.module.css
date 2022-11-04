@@ -175,18 +175,6 @@ h3.summaryStylePercent {
   margin-bottom: 1.5rem;
 }
 
-div.summaryComponent2 {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 100%;
-  background-color: var(--colour-white);
-  border-radius: var(--main-section-border-radius);
-  box-sizing: border-box;
-  font-size: 10px;
-  padding: 1rem 1rem 1rem 1rem;
-}
-
 div.summaryComponent3 {
   display: inline-block;
   flex-direction: column;

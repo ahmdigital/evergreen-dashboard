@@ -14,20 +14,49 @@ import { compareSemVerDelta, SemVerDelta, semVerToDelta } from "../../src/semVer
 import { Filter } from "../../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { topOfRepoBox } from "../Page"
+
 // Customising the table styling using ThemeProvider
+let baseTheme = {
+	fontWeight: "var(--font-weight-semibold)",
+	fontSize: "var(--font-size-normal)", //16px
+	fontFamily: "var(--secondary-font-family)",
+	padding: "4px",
+	lineHeight: "inherit",
+	"&:hover": {
+		cursor: "pointer"
+	}
+}
 export const theme = createTheme({
 	components: {
 		MuiTableCell: {
 			styleOverrides: {
+				root: baseTheme
+			}
+		}
+	}
+})
+
+export const innerBoxTheme = createTheme({
+	components: {
+		MuiTableCell: {
+			styleOverrides: {
 				root: {
-					fontWeight: "var(--font-weight-semibold)",
-					fontSize: "var(--font-size-normal)", //16px
-					fontFamily: "var(--secondary-font-family)",
-					padding: "4px",
-					lineHeight: "inherit",
-					"&:hover": {
-						cursor: "pointer"
-					}
+					...baseTheme,
+					maxHeight: "160px", px: 2, paddingRight: "2px", paddingLeft: "2px", overflowX: "hidden", overflowY: "scroll", boxSizing: "border-box", display: "block"
+				},
+			}
+		}
+	}
+})
+
+export const innerRowTheme = createTheme({
+	components: {
+		MuiTableCell: {
+			styleOverrides: {
+				root: {
+					...baseTheme,
+					display: "inline-block", width: "100%"
 				},
 			}
 		}
@@ -82,26 +111,35 @@ function MostCommonSummaryTable(name: string, usageCounts: { name: string, id: n
 						</TableCell>
 					</TableRow>
 				</Box>
-				<Box sx={{ maxHeight: "145px", px: 2, paddingRight: "2px", paddingLeft: "2px", overflowX: "hidden", overflowY: "scroll", boxSizing: "border-box", display: "block" }}>
-					{
-						usageCounts.map(i => {
-							return <div key={i.id + " containingDiv"}>
-								<TableRow key={i.id} sx={{ display: "inline-block", width: "100%", ...(filterTerm.mustHaveDependency == i.id && { background: "var(--colour-table-selected)" }) }} onClick={() => setFilterTerm({ ...filterTerm, mustHaveDependency: filterTerm.mustHaveDependency == i.id ? -1 : i.id })}>
-									<TableCell className={styles.tableCellStyle1}>
-										<div className={styles.textContainer}>
-											{i.name}
-										</div>
-									</TableCell>
-									<TableCell className={styles.tableCellStyle2}>
-										<div className={styles.countContainer}>
-											{i.count}
-										</div>
-									</TableCell>
-								</TableRow>
-							</div>
-						})
-					}
-				</Box>
+				<ThemeProvider theme={innerBoxTheme}>
+					<Box sx={{ maxHeight: "145px", px: 2, paddingRight: "2px", paddingLeft: "2px", overflowX: "hidden", overflowY: "scroll", boxSizing: "border-box", display: "block" }}>
+						{
+							usageCounts.map(i => {
+								return <div key={i.id + " containingDiv"}>
+									<ThemeProvider theme={innerRowTheme}>
+										<TableRow key={i.id} sx={{ display: "inline-block", width: "100%", ...(filterTerm.mustHaveDependency == i.id && { background: "var(--colour-table-selected)" }) }} onClick={() => {
+											setFilterTerm({ ...filterTerm, mustHaveDependency: filterTerm.mustHaveDependency == i.id ? -1 : i.id })
+											// @ts-ignore
+											topOfRepoBox.data.current.scrollIntoView({ behavior: "smooth" });
+											// An ignore is used here as we don't know the exact type the above will be in this file.
+										}}>
+											<TableCell className={styles.tableCellStyle1}>
+												<div className={styles.textContainer}>
+													{i.name}
+												</div>
+											</TableCell>
+											<TableCell className={styles.tableCellStyle2}>
+												<div className={styles.countContainer}>
+													{i.count}
+												</div>
+											</TableCell>
+										</TableRow>
+									</ThemeProvider>
+								</div>
+							})
+						}
+					</Box>
+				</ThemeProvider>
 			</Table>
 
 		</ThemeProvider>
