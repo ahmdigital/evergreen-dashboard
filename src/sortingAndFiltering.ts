@@ -36,13 +36,13 @@ export function applySort(rows: ProcessedDependencyData, sortSetting: SortSettin
 			rows.sort((a, b) => a.name.localeCompare(b.name))
 
 			// Sort the internal, external dependencies & users
-			rows.map((row, i) => {
+			rows.forEach((row) => {
 				row.internalSubRows.sort((a, b) => a.name.localeCompare(b.name))
 			})
-			rows.map((row, i) => {
+			rows.forEach((row) => {
 				row.externalSubRows.sort((a, b) => a.name.localeCompare(b.name))
 			})
-			rows.map((row, i) => {
+			rows.forEach((row) => {
 				row.userSubRows.sort((a, b) => a.name.localeCompare(b.name))
 			})
 			break
@@ -53,13 +53,13 @@ export function applySort(rows: ProcessedDependencyData, sortSetting: SortSettin
 			rows.sort((a, b) => a.minRank - b.minRank)
 
 			// Sort the internal, external dependencies & users
-			rows.map((row, i) => {
+			rows.forEach((row) => {
 				row.internalSubRows.sort((a, b) => a.rank - b.rank)
 			})
-			rows.map((row, i) => {
+			rows.forEach((row) => {
 				row.externalSubRows.sort((a, b) => a.rank - b.rank)
 			})
-			rows.map((row, i) => {
+			rows.forEach((row) => {
 				row.userSubRows.sort((a, b) => a.rank - b.rank)
 			})
 			break
@@ -97,13 +97,13 @@ export function applySort(rows: ProcessedDependencyData, sortSetting: SortSettin
 		rows.reverse();
 
 		// Reverse the internal, external, and subrows
-		rows.map((row, i) => {
+		rows.forEach((row) => {
 			row.internalSubRows.reverse()
 		})
-		rows.map((row, i) => {
+		rows.forEach((row) => {
 			row.externalSubRows.reverse()
 		})
-		rows.map((row, i) => {
+		rows.forEach((row) => {
 			row.userSubRows.reverse()
 		})
 	}
@@ -113,14 +113,14 @@ export function rankCounts(rows: ProcessedDependencyData) {
 	//Find counts of each rank
 	const rankArray = { green: 0, red: 0, yellow: 0 }
 
-	for (let i = 0; i < rows.length; i++) {
-		if (rows[i].minRank == 2) {
+	for (const row of rows) {
+		if (row.minRank == 2) {
 			rankArray.green += 1
 		}
-		if (rows[i].minRank == 1) {
+		if (row.minRank == 1) {
 			rankArray.yellow += 1
 		}
-		if (rows[i].minRank == 0) {
+		if (row.minRank == 0) {
 			rankArray.red += 1
 		}
 	}
@@ -158,9 +158,6 @@ export function applyFilter(row: ProcessedDependencyData[0], filter: Filter): bo
 		case 2: if (!filter.showGreen) { return false } break
 	}
 	switch (filter.type) {
-		//case "rank":
-		//return filter.direction ? (row.minRank >= filter.level) : (row.minRank <= filter.level)
-		//break
 		case "time":
 
 			break
