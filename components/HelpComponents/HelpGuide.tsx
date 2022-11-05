@@ -271,9 +271,11 @@ function FieldsTable() {
     <TableContainer>
       <Table>
         <TableBody>
-          {fieldsAndDefinitions.map((entry) => (
-            <FieldsTableRow name={entry.field} definition={entry.definition} />
-          ))}
+          {fieldsAndDefinitions.map((elem, i) => {
+            return (
+              <FieldsTableRow key={i} name={elem.field} definition={elem.definition} />
+            )
+          })}
         </TableBody>
       </Table>
     </TableContainer>
@@ -302,12 +304,19 @@ const tabDefinitions = [
 
 ]
 
+
 function TabsTable() {
   return (
     <TableContainer className={styles.tableStyle}>
       <Table className={styles.tableStyle}>
         <TableBody>
-          {tabDefinitions.map((tab) => <FieldsTableRow name={tab.name} definition={tab.definition} />)}
+          {tabDefinitions.map((tab, i) => (
+            <FieldsTableRow
+              key={i}
+              name={tab.name}
+              definition={tab.definition}
+            />
+          ))}
         </TableBody>
       </Table>
     </TableContainer>
