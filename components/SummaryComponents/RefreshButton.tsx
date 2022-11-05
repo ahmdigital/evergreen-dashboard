@@ -3,7 +3,6 @@ import refreshIcon from "components/images/refresh.svg";
 import Image from "next/image";
 import styles from "../styles/SummaryContainer.module.css";
 
-
 type RefreshButtonProps = {
     handler?: React.MouseEventHandler<HTMLButtonElement>;
     iconSize: string;
