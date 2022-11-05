@@ -2,7 +2,6 @@ import { PackageData } from "../../../hooks/useProcessDependencyData"
 import { Box } from "@mui/system";
 import Tabs from "../../ReposTableComponents/Tabs";
 import { SubRow } from "./MobileSubRow";
-import { ReactNode, useMemo } from "react";
 import React from "react";
 
 type GridSubRowProps = {

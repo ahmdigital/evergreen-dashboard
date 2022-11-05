@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState, ReactNode } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import Tabss from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
@@ -138,9 +138,9 @@ const Tabs = (
   // Creates the tab menu & displays the internal/external data
   const {internal, external, user} = props.subRows;
 
-  const internalTable = <GridInternalTable variant='dependency' children={internal} />;
-  const externalTable = <GridInternalTable variant='dependency' children={external} />;
-  const userTable = <GridInternalTable variant='user' children={user} />;
+  const internalTable = <GridInternalTable variant='dependency'>{internal}</GridInternalTable>;
+  const externalTable = <GridInternalTable variant='dependency'>{external}</GridInternalTable>;
+  const userTable = <GridInternalTable variant='user'>{user}</GridInternalTable>;
 
   const [tabVal, setTabVal] = useState(0);
   const classes = useStyles();

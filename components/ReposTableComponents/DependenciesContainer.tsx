@@ -8,18 +8,7 @@ import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import { GridTable } from "../MobileComponents/GridTable";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { Box, Chip, Grid, IconButton } from "@mui/material";
-import {
-  PageLoaderCurrentData,
-  forceNewVersion,
-  PageLoaderIsLoading,
-  lastRequest,
-  PageLoaderSetData,
-  PageLoaderSetLoading,
-} from "../PageLoader";
-
 import { topOfRepoBox } from "../Page";
-
-let refreshing = false;
 
 /* Container includes  Search, Filter, Dependencies Table */
 export default function DependenciesContainer(props: {
