@@ -12,7 +12,11 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 ChartJS.register(ChartDataLabels);
 
 import { Colours, getResolved } from "../../../src/Colours";
-import { statusDefinitionsRepos, statusLabel, StatusType } from "../../constants";
+import {
+  statusDefinitionsRepos,
+  statusLabel,
+  StatusType,
+} from "../../constants";
 import { LightStatusIconFactory } from "../../icons/IconFactory";
 import { RankArray } from "../../Page";
 
@@ -184,47 +188,51 @@ export default function ReposOverViewTable(props: {
     };
 
     return (
-      <div
-        style={{
-          height: "100%",
-          width: "100%",
-          position: "relative",
-          padding: "-1rem 0rem -1rem 0rem",
-        }}
-      >
-        <Pie
-          style={{ height: "27em" }}
-          data={config.data}
-          options={{
-            ...config.options,
+      <div className={styles.pieChartView}>
+        <div
+          style={{
+            height: "100%",
+            width: "100%",
+            position: "relative",
+            padding: "-1rem 0rem -1rem 0rem",
           }}
-        />
+        >
+          <Pie
+            style={{ height: "27em" }}
+            data={config.data}
+            options={{
+              ...config.options,
+            }}
+          />
+        </div>
       </div>
     );
   } else {
     return (
-      <Table
-        sx={{
-          [`& .${tableCellClasses.root}`]: {
-            borderBottom: "none",
-          },
-        }}
-      >
-        <TableBody>
-          <Row
-            statusType={StatusType.RED}
-            statusCount={statusCount[StatusType.RED]}
-          />
-          <Row
-            statusType={StatusType.YELLOW}
-            statusCount={statusCount[StatusType.YELLOW]}
-          />
-          <Row
-            statusType={StatusType.GREEN}
-            statusCount={statusCount[StatusType.GREEN]}
-          />
-        </TableBody>
-      </Table>
+      <div className={styles.repoOverviewTable}>
+        <Table
+          sx={{
+            [`& .${tableCellClasses.root}`]: {
+              borderBottom: "none",
+            },
+          }}
+        >
+          <TableBody>
+            <Row
+              statusType={StatusType.RED}
+              statusCount={statusCount[StatusType.RED]}
+            />
+            <Row
+              statusType={StatusType.YELLOW}
+              statusCount={statusCount[StatusType.YELLOW]}
+            />
+            <Row
+              statusType={StatusType.GREEN}
+              statusCount={statusCount[StatusType.GREEN]}
+            />
+          </TableBody>
+        </Table>
+      </div>
     );
   }
 }

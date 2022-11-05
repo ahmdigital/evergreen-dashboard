@@ -16,7 +16,6 @@
 
 .modalContainer {
   width: 31.25rem;
-  height: 20.00rem;
   border-radius: var(--main-section-border-radius);
   background-color: var(--colour-container-background);
   box-shadow: var(--main-section-boxshadow);

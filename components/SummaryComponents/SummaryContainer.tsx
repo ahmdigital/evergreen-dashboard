@@ -7,31 +7,50 @@ import Image from "next/image";
 import HelpScreen from "../HelpComponents/LightStatus";
 import ForestIcon from "@mui/icons-material/Forest";
 import Tooltip from "@mui/material/Tooltip";
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Unstable_Grid2';
-import RefreshIcon from '@mui/icons-material/Refresh';
-import { PageLoaderCurrentData, forceNewVersion, PageLoaderIsLoading, lastRequest, PageLoaderSetData, PageLoaderSetLoading } from "../PageLoader";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Unstable_Grid2";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import {
+  PageLoaderCurrentData,
+  forceNewVersion,
+  PageLoaderIsLoading,
+  lastRequest,
+  PageLoaderSetData,
+  PageLoaderSetLoading,
+} from "../PageLoader";
 import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import ReposSecondarySummaryTable from "./ReposSecondarySummaryTable";
 import { Filter } from "../../src/sortingAndFiltering";
 import Collapse from "@mui/material/Collapse";
-import Grow from '@mui/material/Grow';
+import Grow from "@mui/material/Grow";
 import IconButton from "@mui/material/IconButton";
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import getConfig from 'next/config'
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import getConfig from "next/config";
 
 import CondensedSummary from "./CondensedSummary/CondensedSummary";
-import BarChartIcon from '@mui/icons-material/BarChart';
+import BarChartIcon from "@mui/icons-material/BarChart";
 import { AuxData } from "../../src/dataProcessing";
 
-const dayjs = require('dayjs')
-var relativeTime = require('dayjs/plugin/relativeTime')
-dayjs.extend(relativeTime)
-import Button from '@mui/material/Button';
+const dayjs = require("dayjs");
+var relativeTime = require("dayjs/plugin/relativeTime");
+dayjs.extend(relativeTime);
+import Button from "@mui/material/Button";
 
 const { publicRuntimeConfig: config } = getConfig();
-let refreshing = false
+let refreshing = false;
+
+function getOverallEvaluation(counts: {red: number, green: number, yellow: number}){
+	const totalRepos = counts.green + counts.yellow + counts.red
+	const goodRepos = counts.green + (config.allowModerateRepos ? counts.yellow : 0)
+	const percent = Math.round((goodRepos / totalRepos) * 100);
+	return {
+		totalRepos: totalRepos,
+		goodRepos: goodRepos,
+		percent: percent,
+		percentString: percent + "%"
+	}
+}
 
 export default function SummaryContainer(props: {
   auxData: AuxData;
@@ -42,18 +61,15 @@ export default function SummaryContainer(props: {
   setFilterTerm: any;
   targetOrganisation: string;
 }) {
-  const totalRepos =
-  props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
-  let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
-  let overallPercentStr = overallPercent + "%";
+  let overallEvaluation = getOverallEvaluation(props.rankArray)
   let overallStyle = styles.summaryOverall;
   let overallColour = styles.summaryOverallGreen;
-  console.log('TARGET', props.targetOrganisation)
+  console.log("TARGET", props.targetOrganisation);
 
-  if (isNaN(overallPercent)) {
-    overallPercentStr = "N/A";
+  if (isNaN(overallEvaluation.percent)) {
+    overallEvaluation.percentString = "N/A";
     overallColour = styles.summaryOverallGrey;
-  } else if (overallPercent < config.targetPercentage) {
+  } else if (overallEvaluation.percent < config.targetPercentage) {
     overallColour = styles.summaryOverallRed;
   }
 
@@ -63,7 +79,6 @@ export default function SummaryContainer(props: {
 
   // State for collapsing the header
   const [closeHeader, setCloseHeader] = useState<boolean>(true);
-
 
   async function callRefresh() {
     if (refreshing) {
@@ -97,21 +112,21 @@ export default function SummaryContainer(props: {
     //}
   }
 
-  const renderRepoOverviewTable = useMemo(()=>{
+  const renderRepoOverviewTable = useMemo(() => {
     return (
       <ReposOverviewTable rankArray={props.rankArray} showChart={showChart} />
-   )
-  } , [props.rankArray, showChart]);
+    );
+  }, [props.rankArray, showChart]);
 
   return (
     <Box
       sx={{
         flexGrow: 1,
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        width: '100%',
-        justifyContent: 'space-between',
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        width: "100%",
+        justifyContent: "space-between",
       }}
       className={`${styles.summaryStyle} ${sharedStyles.sectionContainer}`}
     >
@@ -121,7 +136,7 @@ export default function SummaryContainer(props: {
             <ForestIcon /> Evergreen Dashboard
           </h1>
           <p className={styles.subtitle}>
-            Monitoring dependencies for{' '}
+            Monitoring dependencies for{" "}
             {props.auxData?.orgName && (
               <span className={styles.orgTitle}>
                 <a
@@ -131,7 +146,7 @@ export default function SummaryContainer(props: {
                   {props.auxData.orgName}
                 </a>
               </span>
-            )}{' '}
+            )}{" "}
             Github Organisation
           </p>
           <div className={styles.btnsContainer}>
@@ -147,10 +162,10 @@ export default function SummaryContainer(props: {
                 variant="contained"
                 startIcon={<RefreshIcon />}
                 sx={{
-                  backgroundColor: 'var(--colour-black)',
-                  borderRadius: 'var(--main-section-border-radius)',
-                  '&:hover': {
-                    backgroundColor: 'var(--colour-black-hover)',
+                  backgroundColor: "var(--colour-black)",
+                  borderRadius: "var(--main-section-border-radius)",
+                  "&:hover": {
+                    backgroundColor: "var(--colour-black-hover)",
                   },
                 }}
                 onClick={callRefresh}
@@ -159,10 +174,10 @@ export default function SummaryContainer(props: {
               </Button>
             </Tooltip>
             <span className={styles.lastUpdated}>
-              Last updated:{' '}
+              Last updated:{" "}
               {props.auxData?.crawlStart
                 ? dayjs(parseInt(props.auxData?.crawlStart)).fromNow()
-                : 'N/A'}
+                : "N/A"}
             </span>
           </div>
         </Grid>
@@ -173,7 +188,7 @@ export default function SummaryContainer(props: {
               {!closeHeader && (
                 <CondensedSummary
                   statusValues={props.rankArray}
-                  overall={overallPercent}
+                  overall={overallEvaluation.percent}
                   target={config.targetPercentage}
                 ></CondensedSummary>
               )}
@@ -187,13 +202,13 @@ export default function SummaryContainer(props: {
           container
           spacing={1}
           sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            width: '100%',
-            justifyContent: 'space-between',
-            marginTop: '0rem',
-            marginBottom: '0rem',
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            width: "100%",
+            justifyContent: "space-between",
+            marginTop: "0rem",
+            marginBottom: "0rem",
           }}
           className={`${styles.container} ${styles.margins}`}
         >
@@ -201,16 +216,17 @@ export default function SummaryContainer(props: {
             <div
               className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
             >
-              <h3 className={styles.summaryStylePercent}>
-                Target ({config.targetPercentage}%)
-              </h3>
+			  <h3 style={{marginTop: '18px', marginBottom: '25px'}} className={styles.summaryStylePercent}>
+				Target ({config.targetPercentage}%)
+			  </h3>
+
               <div
                 className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}
               >
                 <h3 className={styles.overallTitleStyle}>Overall</h3>
-                <h3 className={styles.percentStyle}>{overallPercentStr}</h3>
+                <h3 className={styles.percentStyle}>{overallEvaluation.percentString}</h3>
                 <h3 className={styles.overallCentredTitleStyle}>
-                  {props.rankArray.green}/{totalRepos} repositories up-to-date{' '}
+                  {overallEvaluation.goodRepos}/{overallEvaluation.totalRepos} repositories up-to-date{" "}
                 </h3>
               </div>
             </div>
@@ -222,12 +238,11 @@ export default function SummaryContainer(props: {
             >
               <div className={styles.summaryCompHeader}>
                 <h3 className={styles.summaryStyle}>
-                  Total Repositories ({totalRepos})
+                  Total Repositories ({overallEvaluation.totalRepos})
                 </h3>
                 <div
                   style={{
                     display: 'flex',
-                    width: '70px',
                     justifyContent: 'space-between',
                   }}
                 >
@@ -275,18 +290,14 @@ export default function SummaryContainer(props: {
                 </div>
               </div>
               {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
-              <div>
-                <div className={styles.summaryComponent2}>
-                  {renderRepoOverviewTable}
-                </div>
-              </div>
+              <div>{renderRepoOverviewTable}</div>
             </div>
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={4}>
             <div
               className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
             >
-              <h3 className={styles.summaryStylePercent}>Most Common:</h3>
+              <h3 style={{marginTop: '18px', marginBottom: '25px'}} className={styles.summaryStylePercent}>Most Common:</h3>
               <div className={styles.summaryComponent3}>
                 <ReposSecondarySummaryTable
                   rows={props.rows}
@@ -303,7 +314,7 @@ export default function SummaryContainer(props: {
         <Button
           variant="text"
           aria-label={
-            closeHeader ? 'expand summary section' : 'collapse summary section'
+            closeHeader ? "expand summary section" : "collapse summary section"
           }
           size="small"
           onClick={() => setCloseHeader(!closeHeader)}

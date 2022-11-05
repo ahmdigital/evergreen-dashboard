@@ -8,14 +8,6 @@ export type TokenCookie = {
 	accessToken: string
 }
 
-function encodeBase64(input: string): string {
-	return Buffer.from(input).toString("base64")
-}
-
-function decodeBase64(input: string): string {
-	return Buffer.from(input, "base64").toString("ascii")
-}
-
 export function encodeTokenCookie(token: TokenCookie): string {
 	return token.accessToken
 }
@@ -86,7 +78,6 @@ export async function checkAuthorisation(req: NextApiRequest, res: NextApiRespon
 
 		if (!isMember) {
 			console.log(`User ${username} is not a member of ${process.env.NEXT_PUBLIC_TARGET_ORGANISATION}`)
-			//return NextResponse.redirect("localhost:3000/signin?error=Not a member")
 			res.status(403).json({ message: `not_a_member` })
 			return false
 		}

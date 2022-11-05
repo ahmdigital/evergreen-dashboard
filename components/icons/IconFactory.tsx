@@ -2,10 +2,10 @@ import { Tooltip } from "@mui/material";
 import { PropsWithChildren } from "react";
 import styles from "../../styles/Row.module.css";
 import { iconAltText, statusDefinitionsDeps, StatusType } from "../constants";
-import RedIconImg from "../images/redIcon.svg";
-import YellowIconImg from "../images/yellowIcon.svg";
-import GreenIconImg from "../images/greenIcon.svg";
-import Image, { ImageProps } from "next/image";
+import RedIconImg from "../images/redLight.svg";
+import YellowIconImg from "../images/yellowLight.svg";
+import GreenIconImg from "../images/greenLight.svg";
+import { ImageProps } from "next/image";
 
 type IconDefProps = {
   iconDefinition: string;
@@ -35,16 +35,43 @@ type IconImgGeneratorProps = IconGeneratorProps & Partial<ImageProps>;
 export const IconImgGenerator = (props: IconImgGeneratorProps) => {
   const { type, iconSize } = props;
 
-  return (
-    <Image
-      src={iconImg[type]}
+  const outDatedIcon = (
+    <RedIconImg
       alt={iconAltText[type]}
       width={iconSize}
       height={iconSize}
+      fill={"var(--rank-red)"}
       layout={props.layout}
-      className={props.className}
     />
   );
+  const midDatedIcon = (
+    <YellowIconImg
+      alt={iconAltText[type]}
+      width={iconSize}
+      height={iconSize}
+      fill={"var(--rank-orange)"}
+      layout={props.layout}
+    />
+  );
+  const upDatedIcon = (
+    <GreenIconImg
+      alt={iconAltText[type]}
+      width={iconSize}
+      height={iconSize}
+      fill={"var(--rank-green)"}
+      layout={props.layout}
+    />
+  );
+  var displayedIcon = outDatedIcon;
+
+  // Choose what to display based on type
+  if (type == 2) {
+    displayedIcon = midDatedIcon;
+  } else if (type == 1) {
+    displayedIcon = upDatedIcon;
+  }
+
+  return <>{displayedIcon}</>;
 };
 
 type IconToolTipGeneratorProps = {
