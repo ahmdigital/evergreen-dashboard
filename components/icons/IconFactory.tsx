@@ -24,7 +24,7 @@ type IconGeneratorProps = {
   iconSize: string;
 };
 
-export const iconImg: { [key in StatusType]: any } = {
+export const iconImg: { [_key in StatusType]: any } = {
   [StatusType.GREEN]: GreenIconImg,
   [StatusType.RED]: RedIconImg,
   [StatusType.YELLOW]: YellowIconImg,
