@@ -36,13 +36,13 @@ export function applySort(rows: ProcessedDependencyData, sortSetting: SortSettin
 			rows.sort((a, b) => a.name.localeCompare(b.name))
 
 			// Sort the internal, external dependencies & users
-			rows.map((row, i) => {
+			rows.forEach((row) => {
 				row.internalSubRows.sort((a, b) => a.name.localeCompare(b.name))
 			})
-			rows.map((row, i) => {
+			rows.forEach((row) => {
 				row.externalSubRows.sort((a, b) => a.name.localeCompare(b.name))
 			})
-			rows.map((row, i) => {
+			rows.forEach((row) => {
 				row.userSubRows.sort((a, b) => a.name.localeCompare(b.name))
 			})
 			break
@@ -53,13 +53,13 @@ export function applySort(rows: ProcessedDependencyData, sortSetting: SortSettin
 			rows.sort((a, b) => a.minRank - b.minRank)
 
 			// Sort the internal, external dependencies & users
-			rows.map((row, i) => {
+			rows.forEach((row) => {
 				row.internalSubRows.sort((a, b) => a.rank - b.rank)
 			})
-			rows.map((row, i) => {
+			rows.forEach((row) => {
 				row.externalSubRows.sort((a, b) => a.rank - b.rank)
 			})
-			rows.map((row, i) => {
+			rows.forEach((row) => {
 				row.userSubRows.sort((a, b) => a.rank - b.rank)
 			})
 			break
@@ -97,13 +97,13 @@ export function applySort(rows: ProcessedDependencyData, sortSetting: SortSettin
 		rows.reverse();
 
 		// Reverse the internal, external, and subrows
-		rows.map((row, i) => {
+		rows.forEach((row) => {
 			row.internalSubRows.reverse()
 		})
-		rows.map((row, i) => {
+		rows.forEach((row) => {
 			row.externalSubRows.reverse()
 		})
-		rows.map((row, i) => {
+		rows.forEach((row) => {
 			row.userSubRows.reverse()
 		})
 	}
