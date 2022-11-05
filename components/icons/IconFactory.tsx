@@ -45,6 +45,7 @@ export const IconImgGenerator = (props: IconImgGeneratorProps) => {
     alt: iconAltText[type],
     width: iconSize,
     height: iconSize,
+    layout: props.layout
   });
   return <>{displayedIcon}</>;
 };
