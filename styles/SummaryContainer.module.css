@@ -8,7 +8,9 @@ div.summaryStyle {
   background-color: var(--colour-black);
   color: var(--colour-inv-font);
   padding: 0.2rem 0.3rem 0.2rem 0.3rem;
+  padding: 0.65rem 0.55rem;
   border-radius: 0.3rem;
+  white-space: nowrap;
 }
 
 .orgTitle:hover {
@@ -36,6 +38,7 @@ a.orgLink:active {
 }
 
 .subtitle {
+  padding: 0.5rem 0;
   font-size: var(--font-size-large);
   margin-top: 6px;
   font-weight: var(--font-weight-semibold); /*500*/
@@ -172,18 +175,6 @@ h3.summaryStylePercent {
   margin-bottom: 1.5rem;
 }
 
-div.summaryComponent2 {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 100%;
-  background-color: var(--colour-white);
-  border-radius: var(--main-section-border-radius);
-  box-sizing: border-box;
-  font-size: 10px;
-  padding: 1rem 1rem 1rem 1rem;
-}
-
 div.summaryComponent3 {
   display: inline-block;
   flex-direction: column;
@@ -202,7 +193,7 @@ div.summaryComponent div.summaryCompHeader {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-top: 0.5rem;
   margin-bottom: 0.813rem;
   width: 100%;
@@ -278,9 +269,7 @@ div.loadingWheelBox {
 
 .helpBtn {
   cursor: pointer;
-  padding: 0;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding: 7px;
 }
 
 .chartButton {
@@ -355,17 +344,14 @@ h1.noMargins {
     margin-bottom: 0.5rem !important;
   }
 
-  h3.overallCentredTitleStyle {
-    font-size: 1.75rem;
-  }
-
   h3.summaryStylePercent {
     font-size: 1.75rem;
   }
 
   h3.summaryStyle {
     font-size: 1.75rem;
-    margin-bottom: 0.8rem;
+	margin-top: 0.6rem;
+	margin-bottom: 0.81rem;
   }
 
   .subtitle {

@@ -77,6 +77,8 @@ const theme2 = createTheme({
   },
 });
 
+export let topOfRepoBox = {data: React.createRef()}
+
 export function Page(props: PageProps) {
   // Using react state for table data
   const rows = useProcessDependencyData(props.JSObject);
@@ -85,7 +87,7 @@ export function Page(props: PageProps) {
   );
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [sortSetting, setSortSetting] = useState<SortSettings>({
-    type: 'rank',
+    type: 'status',
     direction: true,
   });
   const [filterSetting, setFilterSetting] = useState<Filter>({
@@ -311,6 +313,7 @@ export function Page(props: PageProps) {
             rankSelection={rankSelectionList}
             emptyRows={emptyRows}
             filterSetting={filterSetting}
+            setFilterSetting={setFilterSetting}
             targetOrganisation={props.targetOrganisation}
             finalisedData={finalisedData}
           />

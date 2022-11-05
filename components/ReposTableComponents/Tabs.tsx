@@ -211,6 +211,7 @@ const Tabs = (
             variant='scrollable'
             scrollButtons='auto'
             TabIndicatorProps={{ className: classes.indicator }}
+            sx={{"& button:hover": { backgroundColor: "#cecece" },}}
           >
             {tabLabels}
           </Tabss>
