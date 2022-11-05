@@ -18,12 +18,12 @@ import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Divider from "@mui/material/Divider";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   statusDefinitionsHelpGuide,
   statusLabel,
   StatusType,
 } from "../constants";
+import styles from "../../styles/HelpGuide.module.css";
 import { LightStatusIconFactory } from "../icons/IconFactory";
 
 // Customising the table styling using ThemeProvider
