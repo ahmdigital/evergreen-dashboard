@@ -73,7 +73,7 @@ export default function ReposOverViewTable(props: {
 }) {
   const { rankArray } = props;
 
-  const statusCount: { [key in StatusType]: number } = {
+  const statusCount: { [_key in StatusType]: number } = {
     [StatusType.RED]: rankArray.red,
     [StatusType.GREEN]: rankArray.green,
     [StatusType.YELLOW]: rankArray.yellow,
