@@ -30,12 +30,12 @@ export function GridTable(props: GridTableProps) {
           <Typography
             sx={{
               width: {
-                xs: '96px',
-                sm: '76px',
+                xs: '102px',
+                sm: '78px',
               },
               paddingLeft: {
                 xs: '0px',
-                sm: '20px',
+                sm: '31px',
               },
               ...tableHeaderTextSX,
             }}

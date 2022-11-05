@@ -1,23 +1,23 @@
-import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import MobileStepper from '@mui/material/MobileStepper';
-import Button from '@mui/material/Button';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import SwipeableViews from 'react-swipeable-views';
-import ForestIcon from '@mui/icons-material/Forest';
-import RefreshIcon from '@mui/icons-material/Refresh';
-import helpIcon from '../images/helpIcon.png';
-import mobileStyles from '../../styles/MobileSummaryContainer.module.css';
-import config from '../../config.json';
-import Tooltip from '@mui/material/Tooltip';
-import Image from 'next/image';
-import IconButton from '@mui/material/IconButton';
-import HelpScreen from '../HelpComponents/LightStatus';
-import ReposOverviewTable from '../SummaryComponents/RepoOverviewTable/ReposOverviewTable';
-import ReposSecondarySummaryTable from '../SummaryComponents/ReposSecondarySummaryTable';
-import { ProcessedDependencyData } from '../../hooks/useProcessDependencyData';
+import * as React from "react";
+import { useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import MobileStepper from "@mui/material/MobileStepper";
+import Button from "@mui/material/Button";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import SwipeableViews from "react-swipeable-views";
+import ForestIcon from "@mui/icons-material/Forest";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import helpIcon from "../images/helpIcon.png";
+import mobileStyles from "../../styles/MobileSummaryContainer.module.css";
+import config from "../../config.json";
+import Tooltip from "@mui/material/Tooltip";
+import Image from "next/image";
+import IconButton from "@mui/material/IconButton";
+import HelpScreen from "../HelpComponents/LightStatus";
+import ReposOverviewTable from "../SummaryComponents/RepoOverviewTable/ReposOverviewTable";
+import ReposSecondarySummaryTable from "../SummaryComponents/ReposSecondarySummaryTable";
+import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
 import {
   PageLoaderCurrentData,
   forceNewVersion,
@@ -25,21 +25,21 @@ import {
   lastRequest,
   PageLoaderSetData,
   PageLoaderSetLoading,
-} from '../PageLoader';
-import { Filter } from '../../src/sortingAndFiltering';
-import styles from '../../styles/SummaryContainer.module.css';
-import { useState } from 'react';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import Collapse from '@mui/material/Collapse';
-import Grow from '@mui/material/Grow';
-import CondensedSummary from '../SummaryComponents/CondensedSummary/CondensedSummary';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Grid from '@mui/material/Unstable_Grid2';
-import { AuxData } from '../../src/dataProcessing';
+} from "../PageLoader";
+import { Filter } from "../../src/sortingAndFiltering";
+import styles from "../../styles/SummaryContainer.module.css";
+import { useState } from "react";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import Collapse from "@mui/material/Collapse";
+import Grow from "@mui/material/Grow";
+import CondensedSummary from "../SummaryComponents/CondensedSummary/CondensedSummary";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import Grid from "@mui/material/Unstable_Grid2";
+import { AuxData } from "../../src/dataProcessing";
 
-const dayjs = require('dayjs');
-var relativeTime = require('dayjs/plugin/relativeTime');
+const dayjs = require("dayjs");
+var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 let refreshing = false;
@@ -56,12 +56,12 @@ export default function MobileSummaryContainer(props: {
   const totalRepos =
     props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
   let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
-  let overallPercentStr = overallPercent + '%';
+  let overallPercentStr = overallPercent + "%";
   let overallStyle = styles.summaryOverall;
   let overallColour = styles.summaryOverallGreen;
 
   if (isNaN(overallPercent)) {
-    overallPercentStr = 'N/A';
+    overallPercentStr = "N/A";
     overallColour = styles.summaryOverallGrey;
   } else if (overallPercent < config.targetPercentage) {
     overallColour = styles.summaryOverallRed;
@@ -122,26 +122,26 @@ export default function MobileSummaryContainer(props: {
           <ForestIcon /> Evergreen Dashboard
         </h2>
         <p className={mobileStyles.subtitle}>
-          Monitoring dependencies for the{' '}
+          Monitoring dependencies for the{" "}
           {props.auxData?.orgName && (
             <b className={styles.orgTitle}>
               <a
                 className={styles.orgLink}
-                href={props.auxData?.orgLink ? props.auxData.orgLink : ''}
+                href={props.auxData?.orgLink ? props.auxData.orgLink : ""}
               >
                 {props.auxData.orgName}
               </a>
             </b>
-          )}{' '}
+          )}{" "}
           Github Organisation
         </p>
 
         <div className={mobileStyles.refresh}>
           <p className={mobileStyles.subtitle2}>
-            Last updated:{' '}
+            Last updated:{" "}
             {props.auxData?.crawlStart
               ? dayjs(parseInt(props.auxData?.crawlStart)).fromNow()
-              : 'N/A'}{' '}
+              : "N/A"}{" "}
           </p>
           <Tooltip
             arrow
@@ -155,12 +155,14 @@ export default function MobileSummaryContainer(props: {
               variant="contained"
               startIcon={<RefreshIcon />}
               sx={{
-                backgroundColor: 'var(--colour-black)',
-                borderRadius: 'var(--main-section-border-radius)',
-                '&:hover': {
-                  backgroundColor: '#424242',
+                backgroundColor: "var(--colour-black)",
+                borderRadius: "var(--main-section-border-radius)",
+                "&:hover": {
+                  backgroundColor: "#424242",
                 },
+				padding: '0.6rem 1rem'
               }}
+			  size='large'
               onClick={callRefresh}
             >
               Refresh
@@ -181,7 +183,7 @@ export default function MobileSummaryContainer(props: {
         </Grow>
         <Collapse in={closeHeader} timeout="auto" unmountOnExit>
           <SwipeableViews
-            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+            axis={theme.direction === "rtl" ? "x-reverse" : "x"}
             index={activeStep}
             onChangeIndex={handleStepChange}
             enableMouseEvents
@@ -208,9 +210,9 @@ export default function MobileSummaryContainer(props: {
                 })`}</h3>
                 <div
                   style={{
-                    display: 'flex',
-                    width: '70px',
-                    justifyContent: 'space-between',
+                    display: "flex",
+                    width: "70px",
+                    justifyContent: "space-between",
                   }}
                 >
                   <Tooltip
@@ -275,11 +277,12 @@ export default function MobileSummaryContainer(props: {
             activeStep={activeStep}
             nextButton={
               <Button
-                size="small"
+                size="large"
                 onClick={handleNext}
                 disabled={activeStep === 2}
+				sx={{padding: '0.65rem 0.2rem'}}
               >
-                {theme.direction === 'rtl' ? (
+                {theme.direction === "rtl" ? (
                   <KeyboardArrowLeft />
                 ) : (
                   <KeyboardArrowRight />
@@ -288,11 +291,12 @@ export default function MobileSummaryContainer(props: {
             }
             backButton={
               <Button
-                size="small"
+                size="large"
                 onClick={handleBack}
                 disabled={activeStep === 0}
+				sx={{padding: '0.65rem 0.2rem'}}
               >
-                {theme.direction === 'rtl' ? (
+                {theme.direction === "rtl" ? (
                   <KeyboardArrowRight />
                 ) : (
                   <KeyboardArrowLeft />
@@ -304,10 +308,17 @@ export default function MobileSummaryContainer(props: {
         <div className={styles.expandButton}>
           <Button
             variant="text"
-            aria-label={ closeHeader ? 'expand summary section' : 'collapse summary section' }
+            aria-label={
+              closeHeader
+                ? "expand summary section"
+                : "collapse summary section"
+            }
             size="small"
             onClick={() => setCloseHeader(!closeHeader)}
             className={styles.expandButton}
+			sx={{
+				padding: '0.6rem 0rem'
+			}}
           >
             {closeHeader ? (
               <>

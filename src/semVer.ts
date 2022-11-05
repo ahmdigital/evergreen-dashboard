@@ -178,5 +178,3 @@ export function findRank(used: SemVer, current: SemVer): number {
 	}
 	return 2;
 }
-
-
