@@ -32,45 +32,20 @@ export const iconImg: { [key in StatusType]: any } = {
 
 type IconImgGeneratorProps = IconGeneratorProps & Partial<ImageProps>;
 
+const iconColour = {
+  [StatusType.GREEN] : "var(--rank-green)",
+  [StatusType.RED] : "var(--rank-red)",
+  [StatusType.YELLOW] : "var(--rank-orange)"
+};
+
 export const IconImgGenerator = (props: IconImgGeneratorProps) => {
   const { type, iconSize } = props;
-
-  const outDatedIcon = (
-    <RedIconImg
-      alt={iconAltText[type]}
-      width={iconSize}
-      height={iconSize}
-      fill={"var(--rank-red)"}
-      layout={props.layout}
-    />
-  );
-  const midDatedIcon = (
-    <YellowIconImg
-      alt={iconAltText[type]}
-      width={iconSize}
-      height={iconSize}
-      fill={"var(--rank-orange)"}
-      layout={props.layout}
-    />
-  );
-  const upDatedIcon = (
-    <GreenIconImg
-      alt={iconAltText[type]}
-      width={iconSize}
-      height={iconSize}
-      fill={"var(--rank-green)"}
-      layout={props.layout}
-    />
-  );
-  var displayedIcon = outDatedIcon;
-
-  // Choose what to display based on type
-  if (type == 2) {
-    displayedIcon = midDatedIcon;
-  } else if (type == 1) {
-    displayedIcon = upDatedIcon;
-  }
-
+  const displayedIcon = iconImg[type]({
+    fill: iconColour[type],
+    alt: iconAltText[type],
+    width: iconSize,
+    height: iconSize,
+  });
   return <>{displayedIcon}</>;
 };
 
