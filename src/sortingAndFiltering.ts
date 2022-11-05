@@ -77,14 +77,14 @@ export function rankCounts(rows: ProcessedDependencyData) {
 	//Find counts of each rank
 	const rankArray = { green: 0, red: 0, yellow: 0 }
 
-	for (let i = 0; i < rows.length; i++) {
-		if (rows[i].minRank == 2) {
+	for (const row of rows) {
+		if (row.minRank == 2) {
 			rankArray.green += 1
 		}
-		if (rows[i].minRank == 1) {
+		if (row.minRank == 1) {
 			rankArray.yellow += 1
 		}
-		if (rows[i].minRank == 0) {
+		if (row.minRank == 0) {
 			rankArray.red += 1
 		}
 	}
@@ -122,9 +122,6 @@ export function applyFilter(row: ProcessedDependencyData[0], filter: Filter): bo
 		case 2: if (!filter.showGreen) { return false } break
 	}
 	switch (filter.type) {
-		//case "rank":
-		//return filter.direction ? (row.minRank >= filter.level) : (row.minRank <= filter.level)
-		//break
 		case "time":
 
 			break
