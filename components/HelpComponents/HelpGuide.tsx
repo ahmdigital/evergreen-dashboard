@@ -111,6 +111,37 @@ const CustomisedDialogTitle = (props: PropsWithChildren<DialogTitleProps>) => {
   );
 };
 
+const ColumnHeading = (props: PropsWithChildren<{}>) => {
+  return (
+    <TableCell
+      sx={{
+        fontSize: "var(--font-size-normal)",
+        fontFamily: "var(--primary-font-family)",
+        color: "var(--colour-font)",
+        paddingBottom: "1rem",
+        fontWeight: "bold",
+      }}
+    >
+      {props.children}
+    </TableCell>
+  );
+}
+
+const DefinitionTableCell = (props: PropsWithChildren<{}>) => {
+  return (
+    <TableCell
+      sx={{
+        fontSize: "var(--font-size-normal)",
+        fontFamily: "var(--primary-font-family)",
+        color: "var(--colour-font)",
+        paddingBottom: "1rem",
+      }}
+    >
+      {props.children}
+    </TableCell>
+  );
+}
+
 // creates the table for the status definitions
 function StatusTable() {
   const ICON_SIZE = "40px";
@@ -120,28 +151,8 @@ function StatusTable() {
         <TableHead>
           <TableRow>
             <ThemeProvider theme={theme}>
-              <TableCell
-                sx={{
-                  fontSize: "var(--font-size-normal)",
-                  fontFamily: "var(--primary-font-family)",
-                  color: "var(--colour-font)",
-                  paddingBottom: "1rem",
-                  fontWeight: "bold",
-                }}
-              >
-                Status
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontSize: "var(--font-size-normal)",
-                  fontFamily: "var(--primary-font-family)",
-                  color: "var(--colour-font)",
-                  paddingBottom: "1rem",
-                  fontWeight: "bold",
-                }}
-              >
-                Definition
-              </TableCell>
+              <ColumnHeading>Status</ColumnHeading>
+              <ColumnHeading>Definition</ColumnHeading>
             </ThemeProvider>
           </TableRow>
         </TableHead>
@@ -154,17 +165,10 @@ function StatusTable() {
                 iconSize={ICON_SIZE}
               />
             </TableCell>
-            <TableCell
-              sx={{
-                fontSize: "var(--font-size-normal)",
-                fontFamily: "var(--primary-font-family)",
-                color: "var(--colour-font)",
-                paddingBottom: "1rem",
-              }}
-            >
+            <DefinitionTableCell>
               <p>{`${statusLabel[StatusType.RED]}`}</p>
               <p>{statusDefinitionsHelpGuide[StatusType.RED]}</p>
-            </TableCell>
+            </DefinitionTableCell>
           </TableRow>
           <TableRow>
             <TableCell>
@@ -174,17 +178,10 @@ function StatusTable() {
                 iconSize={ICON_SIZE}
               />
             </TableCell>
-            <TableCell
-              sx={{
-                fontSize: "var(--font-size-normal)",
-                fontFamily: "var(--primary-font-family)",
-                color: "var(--colour-font)",
-                paddingBottom: "1rem",
-              }}
-            >
+            <DefinitionTableCell>
               <p>{`${statusLabel[StatusType.YELLOW]}`}</p>
               <p>{statusDefinitionsHelpGuide[StatusType.YELLOW]}</p>
-            </TableCell>
+            </DefinitionTableCell>
           </TableRow>
           <TableRow>
             <TableCell>
@@ -194,17 +191,10 @@ function StatusTable() {
                 iconSize={ICON_SIZE}
               />
             </TableCell>
-            <TableCell
-              sx={{
-                fontSize: "var(--font-size-normal)",
-                fontFamily: "var(--primary-font-family)",
-                color: "var(--colour-font)",
-                paddingBottom: "1rem",
-              }}
-            >
+            <DefinitionTableCell>
               <p>{`${statusLabel[StatusType.GREEN]}`}</p>
               <p>{statusDefinitionsHelpGuide[StatusType.GREEN]}</p>
-            </TableCell>
+            </DefinitionTableCell>
           </TableRow>
         </TableBody>
       </Table>
@@ -242,29 +232,29 @@ const fieldsAndDefinitions = [
 const FieldsTableRow = (props: {name:string; definition:string}) => {
   return (
     <TableRow>
-                <TableCell
-                  sx={{
-                    fontSize: "var(--font-size-normal)",
-                    fontFamily: "var(--primary-font-family)",
-                    color: "var(--colour-font)",
-                    paddingBottom: "1rem",
-                    fontWeight: "bold",
-                  }}
-                >
-                  {props.name}
-                </TableCell>
-                <TableCell
-                  sx={{
-                    fontSize: "var(--font-size-normal)",
-                    fontFamily: "var(--primary-font-family)",
-                    color: "var(--colour-font)",
-                    paddingBottom: "1rem",
-                  }}
-                >
-                  {props.definition}
-                </TableCell>
-              </TableRow>
-  )
+      <TableCell
+        sx={{
+          fontSize: "var(--font-size-normal)",
+          fontFamily: "var(--primary-font-family)",
+          color: "var(--colour-font)",
+          paddingBottom: "1rem",
+          fontWeight: "bold",
+        }}
+      >
+        {props.name}
+      </TableCell>
+      <TableCell
+        sx={{
+          fontSize: "var(--font-size-normal)",
+          fontFamily: "var(--primary-font-family)",
+          color: "var(--colour-font)",
+          paddingBottom: "1rem",
+        }}
+      >
+        {props.definition}
+      </TableCell>
+    </TableRow>
+  );
 }
 function FieldsTable() {
   return (
