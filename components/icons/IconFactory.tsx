@@ -7,17 +7,10 @@ import YellowIconImg from "../images/yellowLight.svg";
 import GreenIconImg from "../images/greenLight.svg";
 import { ImageProps } from "next/image";
 
-type IconDefProps = {
-  iconDefinition: string;
-};
-export const IconDefinition = (props: IconDefProps) => {
-  return <p className={styles.tooltipStyle}>{props.iconDefinition}</p>;
-};
-
 type IconFactoryProps = {
   toolTip: boolean;
 } & IconGeneratorProps &
-  IconToolTipGeneratorProps;
+IconToolTipGeneratorProps;
 
 type IconGeneratorProps = {
   type: StatusType;
@@ -61,9 +54,9 @@ const IconToolTipGenerator = (
   const { type, toolTipLabel } = props;
   const definition = () => statusDefinitionsDeps[type];
   const title = (
-    <IconDefinition
-      iconDefinition={toolTipLabel ? toolTipLabel : definition()}
-    />
+    <p className={styles.tooltipStyle}>
+      {toolTipLabel ? toolTipLabel : definition()}
+    </p>
   );
 
   return (
