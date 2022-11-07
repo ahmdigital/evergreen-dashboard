@@ -13,7 +13,7 @@ export default function ErrorSnackbar( props: {
     open: boolean;
 })
 {
-    // click elsewhere to remove
+    // click elsewhere to close snackbar
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return;

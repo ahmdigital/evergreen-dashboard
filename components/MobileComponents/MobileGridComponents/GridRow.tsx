@@ -1,4 +1,4 @@
-import { Collapse, Divider, Grid, IconButton, Typography } from "@mui/material";
+import { Collapse, Divider, Grid, IconButton, Typography, useMediaQuery } from "@mui/material";
 import { useState } from "react";
 import { ProcessedDependencyData } from "../../../hooks/useProcessDependencyData";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -7,6 +7,8 @@ import { SemVerFormatter } from "../../SemVerFormatter";
 import { StatusIcon } from "../../icons/StatusIcon";
 import { Box } from "@mui/system";
 import { GridSubRow } from "./GridSubRow";
+
+
 
 // Change cursor and backgroundColor when hovering over the cell
 const gridHover = {
@@ -17,8 +19,8 @@ const gridHover = {
   p: { xs: 0.5, md: 1.5 },
 };
 
-const dayjs = require("dayjs");
-var relativeTime = require("dayjs/plugin/relativeTime");
+const dayjs = require('dayjs');
+const relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
 const rowTextSX = {
@@ -35,6 +37,8 @@ type GridRowProps = {
 export function GridRow(props: GridRowProps) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const matches = useMediaQuery("(min-width:600px)");
+
   return (
     <>
       <Box onClick={() => setIsOpen(!isOpen)} sx={gridHover}>
@@ -43,7 +47,7 @@ export function GridRow(props: GridRowProps) {
           <Grid item md={0.7}>
             <IconButton
               aria-label="Expand row"
-              size="small"
+              size={matches ? "medium" : "large"}
               onClick={() => setIsOpen(!isOpen)}
               sx={{ color: "gray" }}
             >
@@ -76,7 +80,7 @@ export function GridRow(props: GridRowProps) {
           >
             <Typography sx={{ ...rowTextSX }}>
               {props.row.oldName
-                ? props.row.oldName.substr(
+                ? props.row.oldName.substring(
                     0,
                     props.row.oldName.lastIndexOf('(')
                   )

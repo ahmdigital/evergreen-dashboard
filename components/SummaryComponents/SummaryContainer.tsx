@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { PropsWithChildren, useMemo, useState } from "react";
 import styles from "../../styles/SummaryContainer.module.css";
 import sharedStyles from "../../styles/TreeView.module.css";
 import ReposOverviewTable from "./RepoOverviewTable/ReposOverviewTable";
@@ -32,13 +32,25 @@ import CondensedSummary from "./CondensedSummary/CondensedSummary";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import { AuxData } from "../../src/dataProcessing";
 
-const dayjs = require("dayjs");
-var relativeTime = require("dayjs/plugin/relativeTime");
-dayjs.extend(relativeTime);
-import Button from "@mui/material/Button";
+const dayjs = require('dayjs')
+const relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
+import Button from '@mui/material/Button';
 
 const { publicRuntimeConfig: config } = getConfig();
 let refreshing = false;
+
+function getOverallEvaluation(counts: {red: number, green: number, yellow: number}){
+	const totalRepos = counts.green + counts.yellow + counts.red
+	const goodRepos = counts.green + (config.allowModerateRepos ? counts.yellow : 0)
+	const percent = Math.round((goodRepos / totalRepos) * 100);
+	return {
+		totalRepos: totalRepos,
+		goodRepos: goodRepos,
+		percent: percent,
+		percentString: percent + "%"
+	}
+}
 
 export default function SummaryContainer(props: {
   auxData: AuxData;
@@ -49,18 +61,14 @@ export default function SummaryContainer(props: {
   setFilterTerm: any;
   targetOrganisation: string;
 }) {
-  const totalRepos =
-    props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
-  let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
-  let overallPercentStr = overallPercent + "%";
+  let overallEvaluation = getOverallEvaluation(props.rankArray)
   let overallStyle = styles.summaryOverall;
   let overallColour = styles.summaryOverallGreen;
-  console.log("TARGET", props.targetOrganisation);
 
-  if (isNaN(overallPercent)) {
-    overallPercentStr = "N/A";
+  if (isNaN(overallEvaluation.percent)) {
+    overallEvaluation.percentString = "N/A";
     overallColour = styles.summaryOverallGrey;
-  } else if (overallPercent < config.targetPercentage) {
+  } else if (overallEvaluation.percent < config.targetPercentage) {
     overallColour = styles.summaryOverallRed;
   }
 
@@ -84,7 +92,7 @@ export default function SummaryContainer(props: {
     PageLoaderSetLoading(true);
     PageLoaderSetData({
       refreshing: true,
-      data: PageLoaderCurrentData as any,
+      data: PageLoaderCurrentData,
     } as any);
 
     refreshing = true;
@@ -101,6 +109,16 @@ export default function SummaryContainer(props: {
     });
     //	} break;
     //}
+  }
+
+  const SummaryCard = (props: PropsWithChildren<{}>) => {
+    return (
+      <Grid xs={12} sm={12} md={6} lg={4}>
+        <div className={`${styles.summaryComponent} ${styles.sharedCompProps}`}>
+          {props.children}
+        </div>
+      </Grid>
+    );
   }
 
   const renderRepoOverviewTable = useMemo(() => {
@@ -179,7 +197,7 @@ export default function SummaryContainer(props: {
               {!closeHeader && (
                 <CondensedSummary
                   statusValues={props.rankArray}
-                  overall={overallPercent}
+                  overall={overallEvaluation.percent}
                   target={config.targetPercentage}
                 ></CondensedSummary>
               )}
@@ -203,37 +221,35 @@ export default function SummaryContainer(props: {
           }}
           className={`${styles.container} ${styles.margins}`}
         >
-          <Grid xs={12} sm={12} md={6} lg={4}>
-            <div
-              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
-            >
-              <h3 className={styles.summaryStylePercent}>
+            <SummaryCard>
+              <h3
+                style={{ marginTop: "18px", marginBottom: "25px" }}
+                className={styles.summaryStylePercent}
+              >
                 Target ({config.targetPercentage}%)
               </h3>
+
               <div
                 className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}
               >
                 <h3 className={styles.overallTitleStyle}>Overall</h3>
-                <h3 className={styles.percentStyle}>{overallPercentStr}</h3>
+                <h3 className={styles.percentStyle}>
+                  {overallEvaluation.percentString}
+                </h3>
                 <h3 className={styles.overallCentredTitleStyle}>
-                  {props.rankArray.green}/{totalRepos} repositories up-to-date{" "}
+                  {overallEvaluation.goodRepos}/{overallEvaluation.totalRepos}{" "}
+                  repositories up-to-date{" "}
                 </h3>
               </div>
-            </div>
-          </Grid>
-
-          <Grid xs={12} sm={12} md={6} lg={4}>
-            <div
-              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
-            >
+            </SummaryCard>
+            <SummaryCard>
               <div className={styles.summaryCompHeader}>
                 <h3 className={styles.summaryStyle}>
-                  Total Repositories ({totalRepos})
+                  Total Repositories ({overallEvaluation.totalRepos})
                 </h3>
                 <div
                   style={{
                     display: "flex",
-                    width: "70px",
                     justifyContent: "space-between",
                   }}
                 >
@@ -282,13 +298,14 @@ export default function SummaryContainer(props: {
               </div>
               {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
               <div>{renderRepoOverviewTable}</div>
-            </div>
-          </Grid>
-          <Grid xs={12} sm={12} md={6} lg={4}>
-            <div
-              className={`${styles.summaryComponent} ${styles.sharedCompProps}`}
-            >
-              <h3 className={styles.summaryStylePercent}>Most Common:</h3>
+            </SummaryCard>
+            <SummaryCard>
+              <h3
+                style={{ marginTop: "18px", marginBottom: "25px" }}
+                className={styles.summaryStylePercent}
+              >
+                Most Common:
+              </h3>
               <div className={styles.summaryComponent3}>
                 <ReposSecondarySummaryTable
                   rows={props.rows}
@@ -296,8 +313,8 @@ export default function SummaryContainer(props: {
                   setFilterTerm={props.setFilterTerm}
                 />
               </div>
-            </div>
-          </Grid>
+            </SummaryCard>
+
         </Grid>
         <div>{props.loadingSnackbar}</div>
       </Collapse>

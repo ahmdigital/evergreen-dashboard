@@ -79,7 +79,7 @@ a:active {
 	/* Colours for Sign-in page login & success icons */
 	--login-success: rgba(31, 162, 25, 1);
 	--login-failed: rgb(230, 62, 24);
-	
+
 	--rank-light-green: #cfc;
 	--rank-green-border: 1px solid green;
 	--rank-light-orange: #ffc;

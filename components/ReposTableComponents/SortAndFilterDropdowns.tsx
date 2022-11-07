@@ -10,10 +10,8 @@ import { Filter } from "../../src/sortingAndFiltering";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styles from "../../styles/SortAndFilterDropdowns.module.css";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { iconAltText, StatusType } from "../constants";
-import RedIconImg from "../images/redLight.svg";
-import YellowIconImg from "../images/yellowLight.svg";
-import GreenIconImg from "../images/greenLight.svg";
+import { StatusType } from "../constants";
+import { IconImgGenerator } from "../icons/IconFactory";
 
 // Customising the table styling using ThemeProvider
 export const theme = createTheme({
@@ -156,13 +154,7 @@ export function RankSelectionList(
             {[
               <MenuItem value={"Highly-Outdated"} key={"Highly-Outdated"}>
                 <Checkbox checked={filterSetting.showRed} />
-                <RedIconImg
-                  layout="fixed"
-                  alt={iconAltText[StatusType.RED]}
-                  width={ICON_SIZE}
-                  height={ICON_SIZE}
-                  fill={"var(--rank-red)"}
-                />
+                <IconImgGenerator type={StatusType.RED} iconSize={ICON_SIZE} layout="fixed" />
                 <ListItemText primary={"Highly-Outdated"} />
               </MenuItem>,
               <MenuItem
@@ -170,24 +162,12 @@ export function RankSelectionList(
                 key={"Moderately-Outdated"}
               >
                 <Checkbox checked={filterSetting.showYellow} />
-                <YellowIconImg
-                  layout="fixed"
-                  alt={iconAltText[StatusType.YELLOW]}
-                  width={ICON_SIZE}
-                  height={ICON_SIZE}
-                  fill={"var(--rank-orange)"}
-                />
+                <IconImgGenerator type={StatusType.YELLOW} iconSize={ICON_SIZE} layout="fixed" />
                 <ListItemText primary={"Moderately-Outdated"} />
               </MenuItem>,
               <MenuItem value={"Up-To-Date"} key={"Up-To-Date"}>
                 <Checkbox checked={filterSetting.showGreen} />
-                <GreenIconImg
-                  layout="fixed"
-                  alt={iconAltText[StatusType.GREEN]}
-                  width={ICON_SIZE}
-                  height={ICON_SIZE}
-                  fill={"var(--rank-green)"}
-                />
+                <IconImgGenerator type={StatusType.GREEN} iconSize={ICON_SIZE} layout="fixed" />
                 <ListItemText primary={"Up-To-Date"} />
               </MenuItem>,
             ]}

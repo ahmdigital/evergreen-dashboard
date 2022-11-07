@@ -1,15 +1,14 @@
-import React, { SyntheticEvent, useState, ReactNode } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import Tabss from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Badge from '@mui/material/Badge';
-import InternalTable from './InternalTable';
-import UsersTable from './UsersTable';
 
 import { makeStyles } from '@mui/styles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Props } from './Row';
+import { GridInternalTable } from '../MobileComponents/MobileGridComponents/GridInternalTable';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -134,38 +133,22 @@ const HeaderLabel = (props: HeaderLabelProps) => {
 };
 
 const Tabs = (
-  props: Props & {
-    tableFunc?: (elem: ReactNode, variant: 'dependency' | 'user') => ReactNode;
-  }
+  props: Props
 ) => {
   // Creates the tab menu & displays the internal/external data
-  const internal = props.subRows.internal;
-  const external = props.subRows.external;
-  const user = props.subRows.user;
+  const {internal, external, user} = props.subRows;
 
-  const internalTable = props.tableFunc ? (
-    props.tableFunc(internal, 'dependency')
-  ) : (
-    <InternalTable tableRows={internal}></InternalTable>
-  );
-  const externalTable = props.tableFunc ? (
-    props.tableFunc(external, 'dependency')
-  ) : (
-    <InternalTable tableRows={external}></InternalTable>
-  );
-  const userTable = props.tableFunc ? (
-    props.tableFunc(user, 'user')
-  ) : (
-    <UsersTable tableRows={user}></UsersTable>
-  );
+  const internalTable = <GridInternalTable variant='dependency'>{internal}</GridInternalTable>;
+  const externalTable = <GridInternalTable variant='dependency'>{external}</GridInternalTable>;
+  const userTable = <GridInternalTable variant='user'>{user}</GridInternalTable>;
 
   const [tabVal, setTabVal] = useState(0);
   const classes = useStyles();
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: SyntheticEvent, newValue: number) => {
     setTabVal(newValue);
   };
 
-  let tabLabels = [
+  const tabLabels = [
     <Tab
       key='internal'
       label={
@@ -195,14 +178,14 @@ const Tabs = (
     />,
   ];
 
-  let tabPanels = [
+  const tabPanels = [
     <TabPanel
       key='internal'
       value={tabVal}
       index={0}
       isEmpty={internal.length === 0}
     >
-      {internal.length > 0 ? internalTable : 'No depedencies found'}
+      {internal.length > 0 ? internalTable : 'No dependencies found'}
     </TabPanel>,
     <TabPanel
       key='external'
@@ -210,13 +193,13 @@ const Tabs = (
       index={1}
       isEmpty={external.length === 0}
     >
-      {external.length > 0 ? externalTable : 'No depedencies found'}
+      {external.length > 0 ? externalTable : 'No dependencies found'}
     </TabPanel>,
     <TabPanel key='users' value={tabVal} index={2} isEmpty={user.length === 0}>
       {user.length > 0 ? userTable : 'No dependent repositories found'}
     </TabPanel>,
   ];
-
+  
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1 }}>
