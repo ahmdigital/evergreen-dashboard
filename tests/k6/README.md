@@ -13,7 +13,7 @@ Finally, the command to run the test is:
 
 `k6 run .\concurrent.js`
 
-This test will use all 3 apis, and is manually evaluated by observing the server console.
+This test will use all 3 APIs, and is manually evaluated by observing the server console.
 Initially, a single acquisition
 of the data should occur, intermixed with calls to retrieve the data. This should then be followed by a stream of "Served cache".
 If, later in the test, a new data acquisition begins, then the test has failed.

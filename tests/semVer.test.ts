@@ -280,7 +280,7 @@ describe('tests for findRank function', function () {
 
      // Testing for rank 2: green = up to date
      test('Testing for rank 2: green = up to date', () => {
-        const used = {
+        const same = {
             major: 3,
             minor: 15,
             bug: 0,
@@ -288,15 +288,7 @@ describe('tests for findRank function', function () {
             skipMinor: false,
             skipBug: false,
         }
-        const curr = {
-            major: 3,
-            minor: 15,
-            bug: 0,
-            rest: "",
-            skipMinor: false,
-            skipBug: false,
-        }
-        const rank = findRank(used, curr)
+        const rank = findRank(same, same)
         expect(rank).toBe(2);
     });
 
