@@ -19,8 +19,8 @@ const gridHover = {
   p: { xs: 0.5, md: 1.5 },
 };
 
-const dayjs = require("dayjs");
-var relativeTime = require("dayjs/plugin/relativeTime");
+const dayjs = require('dayjs');
+const relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
 const rowTextSX = {
@@ -80,7 +80,7 @@ export function GridRow(props: GridRowProps) {
           >
             <Typography sx={{ ...rowTextSX }}>
               {props.row.oldName
-                ? props.row.oldName.substr(
+                ? props.row.oldName.substring(
                     0,
                     props.row.oldName.lastIndexOf('(')
                   )
