@@ -3,7 +3,6 @@ import styles from "../../../styles/CondensedSummary.module.css";
 import Box from "@mui/material/Box";
 import { LightStatusIconFactory } from "../../icons/IconFactory";
 import { statusLabel, StatusType } from "../../constants";
-// import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export type RepoOverviewCondensedProps = {
   readonly red: number | string;

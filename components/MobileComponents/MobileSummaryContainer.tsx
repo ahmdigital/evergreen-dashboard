@@ -38,8 +38,8 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Grid from "@mui/material/Unstable_Grid2";
 import { AuxData } from "../../src/dataProcessing";
 
-const dayjs = require("dayjs");
-var relativeTime = require("dayjs/plugin/relativeTime");
+const dayjs = require('dayjs');
+const relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
 let refreshing = false;
@@ -87,7 +87,7 @@ export default function MobileSummaryContainer(props: {
     PageLoaderSetLoading(true);
     PageLoaderSetData({
       refreshing: true,
-      data: PageLoaderCurrentData as any,
+      data: PageLoaderCurrentData,
     } as any);
 
     refreshing = true;
