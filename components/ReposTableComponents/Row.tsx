@@ -19,14 +19,14 @@ import {
 import { iconImg } from '../icons/IconFactory';
 
 const dayjs = require('dayjs');
-var relativeTime = require('dayjs/plugin/relativeTime');
+const relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
 export type Props = {
   subRows: {
-    internal: any;
-    external: any;
-    user: any;
+    internal: JSX.Element[];
+    external: JSX.Element[];
+    user: JSX.Element[];
     final: boolean;
   };
 };
@@ -66,8 +66,8 @@ const collapsibleTheme = createTheme({
 });
 
 // Creates each individual row
-export default function Row(props: { rank: number; row: any } & Props) {
-  const { rank, row, subRows } = props;
+export default function Row(props: { rank: number; row: any } ) {
+  const { rank, row } = props;
 
   const [open, setOpen] = useState(false);
 

@@ -7,24 +7,17 @@ import YellowIconImg from "../images/yellowLight.svg";
 import GreenIconImg from "../images/greenLight.svg";
 import { ImageProps } from "next/image";
 
-type IconDefProps = {
-  iconDefinition: string;
-};
-export const IconDefinition = (props: IconDefProps) => {
-  return <p className={styles.tooltipStyle}>{props.iconDefinition}</p>;
-};
-
 type IconFactoryProps = {
   toolTip: boolean;
 } & IconGeneratorProps &
-  IconToolTipGeneratorProps;
+IconToolTipGeneratorProps;
 
 type IconGeneratorProps = {
   type: StatusType;
   iconSize: string;
 };
 
-export const iconImg: { [key in StatusType]: any } = {
+export const iconImg: { [_key in StatusType]: any } = {
   [StatusType.GREEN]: GreenIconImg,
   [StatusType.RED]: RedIconImg,
   [StatusType.YELLOW]: YellowIconImg,
@@ -32,45 +25,21 @@ export const iconImg: { [key in StatusType]: any } = {
 
 type IconImgGeneratorProps = IconGeneratorProps & Partial<ImageProps>;
 
+const iconColour = {
+  [StatusType.GREEN] : "var(--rank-green)",
+  [StatusType.RED] : "var(--rank-red)",
+  [StatusType.YELLOW] : "var(--rank-orange)"
+};
+
 export const IconImgGenerator = (props: IconImgGeneratorProps) => {
   const { type, iconSize } = props;
-
-  const outDatedIcon = (
-    <RedIconImg
-      alt={iconAltText[type]}
-      width={iconSize}
-      height={iconSize}
-      fill={"var(--rank-red)"}
-      layout={props.layout}
-    />
-  );
-  const midDatedIcon = (
-    <YellowIconImg
-      alt={iconAltText[type]}
-      width={iconSize}
-      height={iconSize}
-      fill={"var(--rank-orange)"}
-      layout={props.layout}
-    />
-  );
-  const upDatedIcon = (
-    <GreenIconImg
-      alt={iconAltText[type]}
-      width={iconSize}
-      height={iconSize}
-      fill={"var(--rank-green)"}
-      layout={props.layout}
-    />
-  );
-  var displayedIcon = outDatedIcon;
-
-  // Choose what to display based on type
-  if (type == 2) {
-    displayedIcon = midDatedIcon;
-  } else if (type == 1) {
-    displayedIcon = upDatedIcon;
-  }
-
+  const displayedIcon = iconImg[type]({
+    fill: iconColour[type],
+    alt: iconAltText[type],
+    width: iconSize,
+    height: iconSize,
+    layout: props.layout
+  });
   return <>{displayedIcon}</>;
 };
 
@@ -85,9 +54,9 @@ const IconToolTipGenerator = (
   const { type, toolTipLabel } = props;
   const definition = () => statusDefinitionsDeps[type];
   const title = (
-    <IconDefinition
-      iconDefinition={toolTipLabel ? toolTipLabel : definition()}
-    />
+    <p className={styles.tooltipStyle}>
+      {toolTipLabel ? toolTipLabel : definition()}
+    </p>
   );
 
   return (
