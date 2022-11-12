@@ -50,31 +50,10 @@ COPY --from=builder --chown=nextjs:nodejs /app/defaultDynamicCache.json ./dynami
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Install OpenSSH and set the password for root to "Docker!". In this example, "apk add" is the install instruction for an Alpine Linux-based image.
-RUN apk add openssh \
-     && echo "root:Docker!" | chpasswd \
-     && cd /etc/ssh/ \
-     && ssh-keygen -A
-
-# Copy the sshd_config file to the /etc/ssh/ directory
-COPY ./sshd_config /etc/ssh/
-
-# Copy and configure the ssh_setup file
-RUN mkdir -p /tmp
-COPY ./ssh_setup.sh /tmp
-RUN chmod +x /tmp/ssh_setup.sh \
-    && (sleep 1;/tmp/ssh_setup.sh 2>&1 > /dev/null)
-
-COPY run.sh ./
-RUN chmod +x ./run.sh
-# Open port 2222 for SSH access
-EXPOSE 80 2222
-
-
-# USER nextjs
+USER nextjs
 
 EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ./run.sh
+CMD ["node", "server.js"]
