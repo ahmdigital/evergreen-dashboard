@@ -1,16 +1,19 @@
-### Testing
-To run testing suite use the following commands in terminal:
+# Unit Testing
+We use the Jest JavaScript Testing Framework for writing tests, for more information see https://jestjs.io/ .
+
+## Running the Test Suite
+To run the test suites use the command:
 ```
 npm test
 ```
-To get more testing data in tabulated format run the commands:
+To get coverage testing info in a tabulated format use the command:
 ```
 npm test -- --coverage
 ```
-*Note that this will take longer than the other test command.
 
+## Test Cases
 Currently tests are included for:
-* semantic versioning file functions
-* Collapsible Table rendering
+* semantic versioning functions
+* configuration parameters types and values
 
-More to be added.
+This can be improved on in the future to test components and rendering. 
