@@ -10,7 +10,6 @@ import ForestIcon from "@mui/icons-material/Forest";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import helpIcon from "../images/helpIcon.png";
 import mobileStyles from "../../styles/MobileSummaryContainer.module.css";
-import config from "../../config.json";
 import Tooltip from "@mui/material/Tooltip";
 import Image from "next/image";
 import IconButton from "@mui/material/IconButton";
@@ -37,12 +36,15 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Grid from "@mui/material/Unstable_Grid2";
 import { AuxData } from "../../src/dataProcessing";
+import getConfig from "next/config";
+import {getOverallEvaluation} from "../SummaryComponents/SummaryContainer"
 
-const dayjs = require('dayjs');
-const relativeTime = require('dayjs/plugin/relativeTime');
+const dayjs = require("dayjs");
+const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 let refreshing = false;
+const { publicRuntimeConfig: config } = getConfig();
 
 export default function MobileSummaryContainer(props: {
   auxData: AuxData;
@@ -53,17 +55,15 @@ export default function MobileSummaryContainer(props: {
   setFilterTerm: any;
   targetOrganisation: string;
 }) {
-  const totalRepos =
-    props.rankArray.green + props.rankArray.yellow + props.rankArray.red;
-  let overallPercent = Math.round((props.rankArray.green / totalRepos) * 100);
-  let overallPercentStr = overallPercent + "%";
+
+  let overallEvaluation = getOverallEvaluation(props.rankArray);
   let overallStyle = styles.summaryOverall;
   let overallColour = styles.summaryOverallGreen;
 
-  if (isNaN(overallPercent)) {
-    overallPercentStr = "N/A";
+  if (isNaN(overallEvaluation.percent)) {
+    overallEvaluation.percentString = "N/A";
     overallColour = styles.summaryOverallGrey;
-  } else if (overallPercent < config.targetPercentage) {
+  } else if (overallEvaluation.percent < config.targetPercentage) {
     overallColour = styles.summaryOverallRed;
   }
 
@@ -160,9 +160,9 @@ export default function MobileSummaryContainer(props: {
                 "&:hover": {
                   backgroundColor: "#424242",
                 },
-				padding: '0.6rem 1rem'
+                padding: "0.6rem 1rem",
               }}
-			  size='large'
+              size="large"
               onClick={callRefresh}
             >
               Refresh
@@ -175,7 +175,7 @@ export default function MobileSummaryContainer(props: {
             {!closeHeader && (
               <CondensedSummary
                 statusValues={props.rankArray}
-                overall={overallPercent}
+                overall={overallEvaluation.percent}
                 target={config.targetPercentage}
               ></CondensedSummary>
             )}
@@ -196,8 +196,13 @@ export default function MobileSummaryContainer(props: {
                 className={`${overallStyle} ${overallColour} ${styles.smallSharedCompProps} ${styles.summaryOverall}`}
               >
                 <h3 className={styles.overallTitleStyle}>Overall</h3>
-                <h3 className={styles.percentStyle}>{overallPercentStr}</h3>
-                <h3 className={styles.overallCentredTitleStyle}>up-to-date</h3>
+                <h3 className={styles.percentStyle}>
+                  {overallEvaluation.percentString}
+                </h3>
+                <h3 className={styles.overallCentredTitleStyle}>
+                  {overallEvaluation.goodRepos}/{overallEvaluation.totalRepos}{" "}
+                  repositories up-to-date{" "}
+                </h3>
               </div>
             </div>
 
@@ -280,7 +285,7 @@ export default function MobileSummaryContainer(props: {
                 size="large"
                 onClick={handleNext}
                 disabled={activeStep === 2}
-				sx={{padding: '0.65rem 0.2rem'}}
+                sx={{ padding: "0.65rem 0.2rem" }}
               >
                 {theme.direction === "rtl" ? (
                   <KeyboardArrowLeft />
@@ -294,7 +299,7 @@ export default function MobileSummaryContainer(props: {
                 size="large"
                 onClick={handleBack}
                 disabled={activeStep === 0}
-				sx={{padding: '0.65rem 0.2rem'}}
+                sx={{ padding: "0.65rem 0.2rem" }}
               >
                 {theme.direction === "rtl" ? (
                   <KeyboardArrowRight />
@@ -316,9 +321,9 @@ export default function MobileSummaryContainer(props: {
             size="small"
             onClick={() => setCloseHeader(!closeHeader)}
             className={styles.expandButton}
-			sx={{
-				padding: '0.6rem 0rem'
-			}}
+            sx={{
+              padding: "0.6rem 0rem",
+            }}
           >
             {closeHeader ? (
               <>

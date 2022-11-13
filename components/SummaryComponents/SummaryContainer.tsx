@@ -40,7 +40,7 @@ import Button from '@mui/material/Button';
 const { publicRuntimeConfig: config } = getConfig();
 let refreshing = false;
 
-function getOverallEvaluation(counts: {red: number, green: number, yellow: number}){
+export function getOverallEvaluation(counts: {red: number, green: number, yellow: number}){
 	const totalRepos = counts.green + counts.yellow + counts.red
 	const goodRepos = counts.green + (config.allowModerateRepos ? counts.yellow : 0)
 	const percent = Math.round((goodRepos / totalRepos) * 100);
