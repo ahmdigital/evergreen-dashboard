@@ -8,12 +8,9 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import ForestIcon from "@mui/icons-material/Forest";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import helpIcon from "../images/helpIcon.png";
 import mobileStyles from "../../styles/MobileSummaryContainer.module.css";
 import Tooltip from "@mui/material/Tooltip";
-import Image from "next/image";
 import IconButton from "@mui/material/IconButton";
-import HelpScreen from "../HelpComponents/LightStatus";
 import ReposOverviewTable from "../SummaryComponents/RepoOverviewTable/ReposOverviewTable";
 import ReposSecondarySummaryTable from "../SummaryComponents/ReposSecondarySummaryTable";
 import { ProcessedDependencyData } from "../../hooks/useProcessDependencyData";
@@ -37,7 +34,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Grid from "@mui/material/Unstable_Grid2";
 import { AuxData } from "../../src/dataProcessing";
 import getConfig from "next/config";
-import {getOverallEvaluation} from "../SummaryComponents/SummaryContainer"
+import { getOverallEvaluation } from "../SummaryComponents/SummaryContainer";
 
 const dayjs = require("dayjs");
 const relativeTime = require("dayjs/plugin/relativeTime");
@@ -55,7 +52,6 @@ export default function MobileSummaryContainer(props: {
   setFilterTerm: any;
   targetOrganisation: string;
 }) {
-
   let overallEvaluation = getOverallEvaluation(props.rankArray);
   let overallStyle = styles.summaryOverall;
   let overallColour = styles.summaryOverallGreen;
@@ -67,8 +63,7 @@ export default function MobileSummaryContainer(props: {
     overallColour = styles.summaryOverallRed;
   }
 
-  // State for opening the helpLegend
-  const [openHelp, setOpenHelp] = useState<boolean>(false);
+  // State for toggling pie chart
   const [showChart, setShowChart] = useState<boolean>(false);
 
   // State for collapsing the header
@@ -237,23 +232,8 @@ export default function MobileSummaryContainer(props: {
                       <BarChartIcon className={styles.chartButton} />
                     </IconButton>
                   </Tooltip>
-                  <IconButton
-                    aria-label="Help button"
-                    onClick={() => {
-                      setOpenHelp(true);
-                    }}
-                  >
-                    <Image
-                      className={styles.helpBtn}
-                      width="30px"
-                      height="30px"
-                      alt="Help Icon"
-                      src={helpIcon}
-                    />
-                  </IconButton>
                 </div>
               </div>
-              {openHelp && <HelpScreen closeHelp={setOpenHelp} />}
               <div>
                 <div className={styles.summaryComponent2}>
                   <ReposOverviewTable
