@@ -37,6 +37,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Grid from "@mui/material/Unstable_Grid2";
 import { AuxData } from "../../src/dataProcessing";
 import getConfig from "next/config";
+import {getOverallEvaluation} from "../SummaryComponents/SummaryContainer"
 
 const dayjs = require("dayjs");
 const relativeTime = require("dayjs/plugin/relativeTime");
@@ -44,23 +45,6 @@ dayjs.extend(relativeTime);
 
 let refreshing = false;
 const { publicRuntimeConfig: config } = getConfig();
-
-function getOverallEvaluation(counts: {
-  red: number;
-  green: number;
-  yellow: number;
-}) {
-  const totalRepos = counts.green + counts.yellow + counts.red;
-  const goodRepos =
-    counts.green + (config.allowModerateRepos ? counts.yellow : 0);
-  const percent = Math.round((goodRepos / totalRepos) * 100);
-  return {
-    totalRepos: totalRepos,
-    goodRepos: goodRepos,
-    percent: percent,
-    percentString: percent + "%",
-  };
-}
 
 export default function MobileSummaryContainer(props: {
   auxData: AuxData;
@@ -71,7 +55,7 @@ export default function MobileSummaryContainer(props: {
   setFilterTerm: any;
   targetOrganisation: string;
 }) {
-  // New data
+
   let overallEvaluation = getOverallEvaluation(props.rankArray);
   let overallStyle = styles.summaryOverall;
   let overallColour = styles.summaryOverallGreen;
