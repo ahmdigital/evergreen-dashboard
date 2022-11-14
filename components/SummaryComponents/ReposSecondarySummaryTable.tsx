@@ -145,6 +145,11 @@ function MostCommonSummaryTable(name: string, usageCounts: { name: string, id: n
 	);
 }
 
+//TODO: There is currently a bug with the desktop view that causes this element to be recreated instead of updated
+var activeStepCache = 0
+var outdatedUsageCache: ReturnType<typeof countUsage> | null = null
+var dependenciesUsageCache: ReturnType<typeof countUsage> | null = null
+
 /* Create a stepper contatining multiple summary tables of the data */
 export default function ReposSecondarySummaryTable(props: {
 	rows: ProcessedDependencyData;
@@ -152,23 +157,30 @@ export default function ReposSecondarySummaryTable(props: {
 	setFilterTerm: any;
 }) {
 	const theme = useTheme();
-	const [activeStep, setActiveStep] = React.useState(0);
+	const [activeStep, setActiveStep] = React.useState(activeStepCache);
 
-	//TODO: Move outside of function, as these can be constant
-	let options = [
-		MostCommonSummaryTable("Outdated", countUsage(props.rows, true), props.filterTerm, props.setFilterTerm),
-		MostCommonSummaryTable("Dependencies", countUsage(props.rows, false), props.filterTerm, props.setFilterTerm),
-	]
+	if(outdatedUsageCache === null || dependenciesUsageCache === null){
+		outdatedUsageCache = countUsage(props.rows, true)
+		dependenciesUsageCache = countUsage(props.rows, false)
+	}
+
+	//TODO: Move outside of function (or make memo work), as these can be constant (except for the colour of the selected element)
+	let options = React.useMemo(() => { return [
+		MostCommonSummaryTable("Outdated", outdatedUsageCache!, props.filterTerm, props.setFilterTerm),
+		MostCommonSummaryTable("Dependencies", dependenciesUsageCache!, props.filterTerm, props.setFilterTerm),
+	]}, props.filterTerm)
 
 	let maxSteps = options.length;
 
 	const handleNext = () => {
-		setActiveStep((prevActiveStep) => prevActiveStep + 1)
+		activeStepCache = Math.min(activeStepCache + 1, maxSteps-1)
+		setActiveStep(activeStepCache)
 		props.setFilterTerm({ ...props.filterTerm, mustHaveDependency: -1 })
 	};
 
 	const handleBack = () => {
-		setActiveStep((prevActiveStep) => prevActiveStep - 1)
+		activeStepCache = Math.max(activeStepCache - 1, 0)
+		setActiveStep(activeStepCache)
 		props.setFilterTerm({ ...props.filterTerm, mustHaveDependency: -1 })
 	};
 
