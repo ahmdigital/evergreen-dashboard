@@ -17,7 +17,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/lab": "^5.0.0-alpha.115",
     "@mui/material": "^5.10.16",
-    "@mui/styles": "^5.10.10",
+    "@mui/styles": "^5.11.2",
     "@svgr/webpack": "^6.5.0",
     "@types/node": "^18.11.13",
     "chart.js": "^3.9.1",
