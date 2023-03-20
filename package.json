@@ -15,7 +15,7 @@
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.11",
-    "@mui/lab": "^5.0.0-alpha.119",
+    "@mui/lab": "^5.0.0-alpha.123",
     "@mui/material": "^5.11.13",
     "@mui/styles": "^5.11.12",
     "@svgr/webpack": "^6.5.0",
